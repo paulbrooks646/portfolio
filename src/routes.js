@@ -1,11 +1,11 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import { App } from "./App";
+import { Main } from "./Main";
 import { Auth } from "./Melvin/Auth/Auth";
 
 export default (
   <Switch>
-    <Route exact path="/" component={App} />
-    <Route path="/main" component={Auth} />
+    <Route exact path="/" component={Main} />
+    <Route path="/Auth" component={Auth} />
   </Switch>
 );

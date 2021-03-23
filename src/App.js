@@ -1,5 +1,6 @@
 
 import "./App.scss";
+import {Link} from "react-router-dom"
 
 function App() {
   return (
@@ -15,11 +16,21 @@ function App() {
           <a className="simpsons" href="http://theandroidsdungeon.co">
             <h5>The Androids Dungeon: The Simpsons Fan Page</h5>
           </a>
-          <a href="http://disneylandtripplanner.co" className="disneyland"><h5>Micksamize: Disneyland Trip Planning Website</h5>
+          <a href="http://disneylandtripplanner.co" className="disneyland">
+            <h5>Micksamize: Disneyland Trip Planning Website</h5>
           </a>
-          <a href="http://csstutorials.co" className="css"><h5>Tutorial Website to Learn Basic CSS</h5></a>
-          <a href="http://thecodepound.com" className="codepound"><h5>The Code Pound Social Media Site For Developers</h5></a>
+          <a href="http://csstutorials.co" className="css">
+            <h5>Tutorial Website to Learn Basic CSS</h5>
+          </a>
+          <a href="http://thecodepound.com" className="codepound">
+            <h5>The Code Pound Social Media Site For Developers</h5>
+          </a>
         </div>
+      </div>
+      <div className="melvins-div">
+        <Link to="/Auth" className="melvins">
+          <h5>Melvin's Adventure</h5>
+        </Link>
       </div>
       <div className="portfolio-contact">
         <h3 className="portfolio-h3">CONTACT INFORMATION:</h3>
