@@ -1,11 +1,11 @@
 require("dotenv").config({ path: __dirname + "/../.env" });
 const express = require("express");
-const massive = require("massive")
-const session = require("express-session")
-const controller = require("./controller")
+const massive = require("massive");
+const session = require("express-session");
+const controller = require("./controller");
 const path = require("path");
-const { SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
- 
+const { SERVER_PORT, SESSION_SECRET, CONNECTION_STRING } = process.env;
+
 const app = express();
 
 app.use(express.json());
@@ -18,6 +18,11 @@ app.use(
     secret: SESSION_SECRET,
   })
 );
+
+app.post("/api/register", controller.register);
+app.post("/api/login", controller.login);
+app.delete("/api/logout", controller.logout);
+app.get("/api/user", controller.getUser);
 
 app.use(express.static(__dirname + "/../build"));
 
@@ -37,4 +42,3 @@ massive({
     );
   })
   .catch((err) => console.log(err));
-

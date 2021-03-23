@@ -1,7 +1,7 @@
 module.exports = {
   register: async (req, res) => {
     const db = req.app.get("db");
-    const { newUsername, newPassword} = req.body;
+    const { newUsername, newPassword } = req.body;
 
     const existingUser = await db.check_user(newUsername);
     if (existingUser[0]) {
