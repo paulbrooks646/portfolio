@@ -1,0 +1,105 @@
+.auth-main {
+background-image: url("../../Images/Castle.png");
+height: 100vh;
+width: 100vw;
+background-size: cover;
+background-repeat: no-repeat;
+opacity: 0.7;
+display: flex;
+flex-direction: column;
+align-items: center;
+
+.auth-title {
+    color: red;
+}
+
+.auth-subtitle {
+    color: blue;
+}
+
+.login-card {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .auth-card {
+      width: 500px;
+      height: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      position: relative;
+      top: 100px;
+
+      .login-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 60%;
+      }
+    }
+  }
+
+ .register-card {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .auth-card {
+    width: 500px;
+    height: 500px;
+    position: relative;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    .register-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      height: 70%;
+    }
+  }
+}
+
+.register-card-closed {
+  display: none;
+}
+
+.login-card-closed {
+  display: none;
+} 
+
+
+}
+@media (max-width: 665px) {
+  .auth-main {
+    .auth-title {
+      font-size: 25px;
+    }
+
+    .auth-subtitle {
+      font-size: 20px;
+    }
+
+    .login-card {
+      .auth-card {
+        width: 300px;
+        height: 400px;
+      }
+    }
+  }
+
+  .register-card {
+    .auth-card {
+      width: 300px;
+      height: 400px;
+    }
+    .register-text {
+      font-size: 15px;
+    }
+  }
+}
