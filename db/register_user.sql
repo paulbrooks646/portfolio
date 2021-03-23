@@ -1,5 +1,5 @@
-insert into users (username, password)
+insert into players (name, password)
 values ($1, $2);
 
-select * from users
-where username = $1;
+select * from players
+where name = $1;

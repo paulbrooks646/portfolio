@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios"
+import { connect } from "react-redux"
+import { loginUser, registerUser } from "../../redux/userReducer"
+import { withRouter } from "react-router-dom"
 import "./Auth.scss";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
@@ -8,7 +11,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import LockIcon from "@material-ui/icons/Lock";
-import EmailIcon from "@material-ui/icons/Email";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import PersonIcon from "@material-ui/icons/Person";
 import FormHelperText from "@material-ui/core/FormHelperText";
@@ -16,7 +18,7 @@ import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import Link from "@material-ui/core/Link";
 
-export default function Auth(props) {
+function Auth(props) {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -196,3 +198,9 @@ export default function Auth(props) {
     </div>
   );
 }
+
+const mapStateToProps = (reduxState) => reduxState;
+
+const mapDispatchToProps = { loginUser, registerUser };
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Auth));
