@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import { Main } from "./Main";
-import { Auth } from "./Melvin/Auth/Auth";
+import  Main  from "./Components/Main/Main";
+import  Auth  from "./Components/Auth/Auth";
 
 export default (
   <Switch>
