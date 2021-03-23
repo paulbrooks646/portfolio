@@ -22,13 +22,12 @@ export default function Auth(props) {
     const [password, setPassword] = useState("");
     const [newUsername, setNewUsername] = useState("");
     const [newPassword, setNewPassword] = useState("");
-    const [newEmail, setNewEmail] = useState("");
     const [account, setAccount] = useState(true);
     const [confirmPassword, setConfirmPassword] = useState("");
     const passwordsMatch = true;
 
     const login = (event) => {
-      console.log("login");
+      
       axios
         .post("/api/login", { username, password })
         .then((res) => {
@@ -50,7 +49,7 @@ export default function Auth(props) {
 
     const register = (event) => {
       axios
-        .post("/api/register", { newUsername, newPassword, newEmail })
+        .post("/api/register", { newUsername, newPassword})
         .then((res) => {
           props.registerUser(res.data);
           props.history.push("/Dashboard");
@@ -69,15 +68,15 @@ export default function Auth(props) {
       </Typography>
       <div className={`${account ? "login-card" : "login-card-closed"}`}>
         <Card variant="outlined" className="auth-card">
-          <Typography variant="h4">Login</Typography>
+          <Typography variant="h4">Continue Game</Typography>
           <form onSubmit={login} className="login-form">
             <FormControl>
-              <InputLabel htmlFor="username">Username or Email</InputLabel>
+              <InputLabel htmlFor="username">Name</InputLabel>
               <Input
                 required
                 value={username}
                 id="username"
-                placeholder="Enter username or email"
+                placeholder="Enter name"
                 startAdornment={
                   <InputAdornment position="start">
                     <AccountCircle />
@@ -107,24 +106,24 @@ export default function Auth(props) {
             </Button>
           </form>
           <Typography variant="h6">
-            No account?{" "}
+            Haven't started a game?{" "}
             <Link href="#" onClick={toggleAccount}>
-              Register Here
+              Start one here.
             </Link>
           </Typography>
         </Card>
       </div>
       <div className={`${account ? "register-card-closed" : "register-card"}`}>
         <Card variant="outlined" className="auth-card">
-          <Typography variant="h4">Register</Typography>
+          <Typography variant="h4">Start new game</Typography>
           <form onSubmit={register} className="register-form">
             <FormControl>
-              <InputLabel htmlFor="newUsername">Username</InputLabel>
+              <InputLabel htmlFor="newUsername">Name</InputLabel>
               <Input
                 required
                 value={newUsername}
                 id="newUsername"
-                placeholder="Enter username"
+                placeholder="Enter name"
                 startAdornment={
                   <InputAdornment position="start">
                     <PersonIcon />
@@ -133,22 +132,7 @@ export default function Auth(props) {
                 onChange={(e) => setNewUsername(e.target.value)}
               />
             </FormControl>
-            <FormControl>
-              <InputLabel htmlFor="email">Email</InputLabel>
-              <Input
-                type="email"
-                required
-                value={newEmail}
-                id="email"
-                placeholder="Enter email"
-                startAdornment={
-                  <InputAdornment position="start">
-                    <EmailIcon />
-                  </InputAdornment>
-                }
-                onChange={(e) => setNewEmail(e.target.value)}
-              />
-            </FormControl>
+            
             <FormControl error={!passwordsMatch}>
               <InputLabel htmlFor="newPassword">Password</InputLabel>
               <Input
@@ -202,9 +186,9 @@ export default function Auth(props) {
             </Button>
           </form>
           <Typography variant="h6" className="register-text">
-            Already have an account?{" "}
+            Already started a game?{" "}
             <Link href="#" onClick={toggleAccount}>
-              Login Here
+              Continue Here
             </Link>
           </Typography>
         </Card>
