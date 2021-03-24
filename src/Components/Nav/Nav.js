@@ -21,7 +21,7 @@ const logout = () => {
 
     return (
         <div className="nav-main">
-            <h2 className="nav-welcome">Welcome </h2>
+            <h2 className="nav-welcome">Welcome { props.user.user.name}</h2>
             <button className="nav-logout" onClick={logout}>Logout</button>
         </div>
     )

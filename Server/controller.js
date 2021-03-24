@@ -17,8 +17,8 @@ module.exports = {
 
     const newUser = await db.register_user([newUsername, hash]);
     req.session.user = {
-      id: newUser[0].user_id,
-      username: newUser[0].username,
+      id: newUser[0].id,
+      name: newUser[0].name,
     };
     res.status(200).send(req.session.user);
   },
@@ -34,12 +34,12 @@ module.exports = {
       const authenticated = bcrypt.compareSync(password, user[0].password);
       if (authenticated) {
         req.session.user = {
-          id: user[0].user_id,
-          username: user[0].username,
+          id: user[0].id,
+          name: user[0].name,
         };
         res.status(200).send(req.session.user);
       } else {
-        res.status(403).send("Username or password incorrect!");
+        res.status(403).send("Name or password incorrect!");
       }
     }
   },

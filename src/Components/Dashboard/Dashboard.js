@@ -1,4 +1,3 @@
-import { FaceRounded } from "@material-ui/icons";
 import React from "react";
 import Nav from "../Nav/Nav"
 import { connect } from "react-redux"
