@@ -1,5 +1,11 @@
 import React from "react";
+import Nav from "../Nav/Nav"
 
 export default function Dashboard() {
-  return <h1>Dashboard</h1>;
+  return (
+    <div>
+      <Nav/>
+      <h1>Dashboard</h1>
+    </div>
+  )
 }
