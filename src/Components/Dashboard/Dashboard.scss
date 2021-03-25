@@ -2,13 +2,34 @@
 
 height: 100vh;
 width: 100vw;
-border: solid;
+
 
 .dashboard-image {
 
-    background-image: url(../../Images/goblin.gif);
+    background-image: url(../../Images/wolf.gif);
     height:100px;
-    width: 70px;
+    width: 100px;
     background-repeat: no-repeat;
     background-size: contain;
+    animation-name: move;
+    animation-delay: 1s;
+    position: relative;
+    animation-direction: normal;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+    animation-duration: 8s;
+    animation-fill-mode: forwards;
+    left: -100px;
 }}
+
+@keyframes move {
+
+    99% {
+        left: 100%
+    }
+
+    100% {
+
+        display: none;
+    }
+}

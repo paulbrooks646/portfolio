@@ -11,7 +11,7 @@ function Dashboard(props) {
   return (
     <div className="dashboard-main">
       <Nav/>
-      <h1>Dashboard</h1>
+      <h1></h1>
       <div className="dashboard-image" alt="goblin"/>
     </div>
   )
