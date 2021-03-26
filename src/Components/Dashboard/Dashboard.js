@@ -13,19 +13,19 @@ function Dashboard(props) {
       <Nav />
       <div className="dashboard-body">
         <div className="dashboard-top">
-          <div className="dashboard-top-right"></div>
+          <div className="dashboard-top-left"></div>
           <div className="dashboard-top-middle"></div>
           <div className="dashboard-top-right"></div>
         </div>
         <div className="dashboard-middle">
-          <div className="dashboard-middle-right"></div>
+          <div className="dashboard-middle-left"></div>
           <div className="dashboard-middle-middle"></div>
           <div className="dashboard-middle-right"></div>
         </div>
         <div className="dashboard-bottom">
           <div className="dashboard-bottom-left"></div>
           <div className="dashboard-bottom-middle"></div>
-          <div className="dashboard-middle-right"></div>
+          <div className="dashboard-bottom-right"></div>
         </div>
       </div>
     </div>

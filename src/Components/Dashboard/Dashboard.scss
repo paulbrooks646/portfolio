@@ -11,52 +11,70 @@ display: flex;
 width: 100vw;
 
         .dashboard-top-left {
-
+background-color: green;
+width: 40%;
+height: 100%;
         }
 
         .dashboard-top-middle {
-
+background-color: brown;
+width: 20%;
+height: 100%;
         }
 
         .dashboard-top-right {
-
+background-color: green;
+width: 40%;
+height: 100%;
         }
     }
 
     .dashboard-middle {
 height: 20vh;
-background-color: brown;
+display: flex;
 width: 100vw;
 
 .dashboard-middle-left {
-
+background-color: brown;
+width: 40%;
+height: 100%;
 }
 
 .dashboard-middle-middle {
-
+background-color: brown;
+width: 20%;
+height: 100%;
 }    
 
 .dashboard-middle-right {
-
+background-color: brown;
+width: 40%;
+height: 100%;
 }
 
 }
 
     .dashboard-bottom {
 height: 35vh;
-background-color: green;
+display: flex;
 width: 100vw;
 
 .dashboard-bottom-left {
-
+background-color: green;
+height: 100%;
+width: 40%;
 }
 
 .dashboard-bottom-middle {
-
+background-color: brown;
+height: 100%;
+width: 20%;
 }
 
 .dashboard-bottom-right {
-
+background-color: green;
+height: 100%;
+width: 40%;
 }
 
     }
