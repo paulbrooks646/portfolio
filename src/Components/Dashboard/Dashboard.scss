@@ -3,33 +3,64 @@
 height: 100vh;
 width: 100vw;
 
+.dashboard-body {
 
-.dashboard-image {
+    .dashboard-top {
+height: 35vh;
+display: flex;
+width: 100vw;
 
-    background-image: url(../../Images/wolf.gif);
-    height:100px;
-    width: 100px;
-    background-repeat: no-repeat;
-    background-size: contain;
-    animation-name: move;
-    animation-delay: 1s;
-    position: relative;
-    animation-direction: normal;
-    animation-timing-function: linear;
-    animation-iteration-count: 1;
-    animation-duration: 8s;
-    animation-fill-mode: forwards;
-    left: -100px;
-}}
+        .dashboard-top-left {
 
-@keyframes move {
+        }
 
-    99% {
-        left: 100%
+        .dashboard-top-middle {
+
+        }
+
+        .dashboard-top-right {
+
+        }
     }
 
-    100% {
+    .dashboard-middle {
+height: 20vh;
+background-color: brown;
+width: 100vw;
 
-        display: none;
+.dashboard-middle-left {
+
+}
+
+.dashboard-middle-middle {
+
+}    
+
+.dashboard-middle-right {
+
+}
+
+}
+
+    .dashboard-bottom {
+height: 35vh;
+background-color: green;
+width: 100vw;
+
+.dashboard-bottom-left {
+
+}
+
+.dashboard-bottom-middle {
+
+}
+
+.dashboard-bottom-right {
+
+}
+
     }
+}
+
+
 }
