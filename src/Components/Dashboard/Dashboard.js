@@ -5,6 +5,10 @@ import { getUser } from "../../redux/userReducer"
 import axios from "axios"
 import "./Dashboard.scss"
 import { Link } from "react-redux"
+import ArrowDownward from "@material-ui/icons/ArrowDownward"
+import ArrowForward from "@material-ui/icons/ArrowForward"
+import ArrowBack from "@material-ui/icons/ArrowBack"
+import ArrowUpward from "@material-ui/icons/ArrowUpward"
 
 
 function Dashboard(props) {
@@ -14,13 +18,28 @@ function Dashboard(props) {
       <div className="dashboard-body">
         <div className="dashboard-top">
           <div className="dashboard-top-left"></div>
-          <div className="dashboard-top-middle"></div>
+          <div className="dashboard-top-middle">
+            <div className="dashboard-town">
+              <ArrowUpward />
+              <h2>Town</h2>
+            </div>
+          </div>
           <div className="dashboard-top-right"></div>
         </div>
         <div className="dashboard-middle">
-          <div className="dashboard-middle-left"></div>
+          <div className="dashboard-middle-left">
+            <div className="dashboard-mountains">
+              <ArrowBack />
+              <h2>Mountains</h2>
+            </div>
+          </div>
           <div className="dashboard-middle-middle"></div>
-          <div className="dashboard-middle-right"></div>
+          <div className="dashboard-middle-right">
+            <div className="dashboard-forest">
+              <h2>Forest</h2>
+              <ArrowForward />
+            </div>
+          </div>
         </div>
         <div className="dashboard-bottom">
           <div className="dashboard-bottom-left"></div>
