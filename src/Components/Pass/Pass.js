@@ -10,7 +10,7 @@ import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 
-function Mountain(props) {
+function Pass(props) {
   return (
     <div className="pass-main">
       <Nav />
