@@ -1,17 +1,23 @@
-import React from "react";
-import Nav from "../Nav/Nav"
-import { connect } from "react-redux"
-import { getUser } from "../../redux/userReducer"
-import axios from "axios"
-import "./Dashboard.scss"
-import { Link } from "react-redux"
-import ArrowDownward from "@material-ui/icons/ArrowDownward"
-import ArrowForward from "@material-ui/icons/ArrowForward"
-import ArrowBack from "@material-ui/icons/ArrowBack"
-import ArrowUpward from "@material-ui/icons/ArrowUpward"
-
+import React, { useState } from "react";
+import Nav from "../Nav/Nav";
+import { connect } from "react-redux";
+import { getUser } from "../../redux/userReducer";
+import axios from "axios";
+import "./Dashboard.scss";
+import { Link } from "react-redux";
+import ArrowDownward from "@material-ui/icons/ArrowDownward";
+import ArrowForward from "@material-ui/icons/ArrowForward";
+import ArrowBack from "@material-ui/icons/ArrowBack";
+import ArrowUpward from "@material-ui/icons/ArrowUpward";
 
 function Dashboard(props) {
+  const [left, setLeft] = useState(false);
+
+  const toggleLeft = () => {
+    setLeft(!left);
+    props.history.push("/Mountain")
+  };
+
   return (
     <div className="dashboard-main">
       <Nav />
@@ -28,7 +34,7 @@ function Dashboard(props) {
         </div>
         <div className="dashboard-middle">
           <div className="dashboard-middle-left">
-            <div className="dashboard-mountains">
+            <div className="dashboard-mountains" onClick={toggleLeft}>
               <ArrowBack />
               <h2>Mountains</h2>
             </div>
@@ -47,7 +53,7 @@ function Dashboard(props) {
           <div className="dashboard-bottom-right"></div>
         </div>
       </div>
-      <div className="character">
+      <div className={`${left ? "character-moving" : "character"}`}>
         <div className="face">
           <div className="eyes">
             <div className="eye"></div>
