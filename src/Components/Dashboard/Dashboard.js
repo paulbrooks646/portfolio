@@ -12,12 +12,23 @@ import ArrowUpward from "@material-ui/icons/ArrowUpward";
 
 function Dashboard(props) {
   const [left, setLeft] = useState(false);
+  const [right, setRight] = useState(false)
+  const [up, setUp] = useState(false)
+
+  const toggleRight = () => {
+    setRight(!right);
+    props.history.push("/Forest")
+  };
 
   const toggleLeft = () => {
     setLeft(!left);
-    props.history.push("/Mountain")
+    props.history.push("/Mountain");
   };
 
+const toggleUp = () => {
+  setUp(!up);
+  props.history.push("/Town");
+};
   return (
     <div className="dashboard-main">
       <Nav />
@@ -25,7 +36,7 @@ function Dashboard(props) {
         <div className="dashboard-top">
           <div className="dashboard-top-left"></div>
           <div className="dashboard-top-middle">
-            <div className="dashboard-town">
+            <div className="dashboard-town" onClick={toggleUp}>
               <ArrowUpward />
               <h2>Town</h2>
             </div>
@@ -41,7 +52,7 @@ function Dashboard(props) {
           </div>
           <div className="dashboard-middle-middle"></div>
           <div className="dashboard-middle-right">
-            <div className="dashboard-forest">
+            <div className="dashboard-forest" onClick={toggleRight}>
               <h2>Forest</h2>
               <ArrowForward />
             </div>

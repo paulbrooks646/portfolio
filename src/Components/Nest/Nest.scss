@@ -1,0 +1,510 @@
+.nest-main {
+
+height: 100vh;
+width: 100vw;
+overflow: hidden;
+
+.nest-body {
+
+    .nest-top {
+height: 35vh;
+display: flex;
+width: 100vw;
+background-color: white;
+
+.nest-top-left {
+
+    .griffin-open {
+        background-image: url("../../Images/griffin.gif");
+        width: 200px;
+        height: 200px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        animation-name: griffin;
+        animation-duration: 5s;
+        animation-timing-function: linear;
+        animation-direction: normal;
+        animation-fill-mode: forwards;
+    }
+    .griffin-closed {
+        
+        
+    }
+}
+
+
+    }
+
+    .nest-middle {
+height: 20vh;
+display: flex;
+width: 100vw;
+transform: rotate(10deg);
+position: relative;
+left: 25px;
+
+
+
+.nest-middle-left {
+background-image: url("../../Images/Nest.png");
+width: 40%;
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+background-size: contain;
+background-repeat: no-repeat;
+transform: rotate(-10deg);
+background-position: center;
+
+.nest-coin {
+    background-color: gold;
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+    cursor: pointer;
+    margin-right: 15px;
+
+}
+
+.nest-ribbon {
+    width: 70px;
+    height: 8px;
+    background-color: aqua;
+    cursor: pointer;
+    margin-left: 15px;
+    border-radius: 30px 170px;
+
+}
+
+}
+
+.nest-middle-middle {
+background-color: brown;
+width: 20%;
+height: 100%;
+}    
+
+.nest-middle-right {
+background-color: brown;
+width: 40%;
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: flex-end;
+
+.nest-mountains {
+    display: flex;
+width: 100px;
+justify-content: space-evenly;
+align-items: center;
+cursor: pointer;
+position: relative;
+width: 100px;
+transform: rotate(-10deg);
+
+}
+}
+
+}
+
+    .nest-bottom {
+height: 35vh;
+display: flex;
+width: 100vw;
+
+.nest-bottom-left {
+background-color: white;
+height: 100%;
+width: 40%;
+background-size: contain;
+background-repeat: no-repeat;
+position: relative;
+background-position: center;
+
+}
+
+.nest-bottom-middle {
+background-color: white;
+height: 100%;
+width: 20%;
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+align-items: center;
+
+
+}
+
+.nest-bottom-right {
+background-color: white;
+height: 100%;
+width: 40%;
+}
+
+    }
+}
+
+.character {
+    position: relative;
+    display: flex;
+    right: 200px;
+    flex-direction: column;
+    align-items: center;
+
+.face {
+    
+    border-radius: 50%;
+    width: 40px;
+    height: 45px;
+    background-color: peachpuff;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-top: solid yellow 5px;
+
+    .eyes {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+        
+
+        .eye {
+            border-radius: 50%;
+        background-color: blue;
+        height: 3px;
+        width: 5px;
+        }
+    }
+
+    .nose {
+        border-radius: 50%;
+        background-color: black;
+        height: 3px;
+        width: 2px;
+    }
+
+    .mouth {
+        border-radius: 50%;
+        background-color: red;
+        width: 20px;
+        height: 3px;
+    }
+}
+.body {
+    
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .neck {
+        background-color: black;
+        height: 5px;
+        width: 10px;
+    }
+
+    .arms {
+        display: flex;
+
+        .left-arm {
+        background-color: black;
+        width: 25px;
+        height: 5px;
+        transform: rotate(-2deg);
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        .hand {
+            border-radius:  50%;
+               height: 8px;
+               width: 8px;
+               background-color: peachpuff;
+        }
+        }
+
+        .right-arm {
+        background-color: black;
+        width: 25px;
+        height: 5px;
+        transform: rotate(2deg);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        .hand {
+            border-radius:  50%;
+               height: 8px;
+               width: 8px;
+               background-color: peachpuff;
+        }
+        }
+
+
+    }
+
+    .torso {
+        background-color: black;
+        height: 20px;
+        width: 10px;
+    }
+
+    .legs {
+        display: flex;
+
+        .left-leg {
+            background-color: black;
+            height: 30px;
+            width: 5px;
+            transform: rotate(10deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+
+            .foot {
+               border-radius:  50%;
+               height: 8px;
+               width: 8px;
+               background-color: black; 
+            }
+        }
+
+        .right-leg {
+            background-color: black;
+            height: 30px;
+            width: 5px;
+            transform: rotate(-10deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+
+            .foot {
+               border-radius:  50%;
+               height: 8px;
+               width: 8px;
+               background-color: black; 
+            }
+        }
+    }
+}
+}
+
+.character-moving {
+    position: relative;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation-name: motion;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+
+.face {
+    
+    border-radius: 50%;
+    width: 40px;
+    height: 45px;
+    background-color: peachpuff;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-top: solid yellow 5px;
+
+    .eyes {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+        
+
+        .eye {
+            border-radius: 50%;
+        background-color: blue;
+        height: 3px;
+        width: 5px;
+        }
+    }
+
+    .nose {
+        border-radius: 50%;
+        background-color: black;
+        height: 3px;
+        width: 2px;
+    }
+
+    .mouth {
+        border-radius: 50%;
+        background-color: red;
+        width: 20px;
+        height: 3px;
+    }
+}
+.body {
+    
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .neck {
+        background-color: black;
+        height: 5px;
+        width: 10px;
+    }
+
+    .arms {
+        display: flex;
+
+        .left-arm {
+        background-color: black;
+        width: 25px;
+        height: 5px;
+        transform: rotate(-2deg);
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        .hand {
+            border-radius:  50%;
+               height: 8px;
+               width: 8px;
+               background-color: peachpuff;
+        }
+        }
+
+        .right-arm {
+        background-color: black;
+        width: 25px;
+        height: 5px;
+        transform: rotate(2deg);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        .hand {
+            border-radius:  50%;
+               height: 8px;
+               width: 8px;
+               background-color: peachpuff;
+        }
+        }
+
+
+    }
+
+    .torso {
+        background-color: black;
+        height: 20px;
+        width: 10px;
+    }
+
+    .legs {
+        display: flex;
+
+        .left-leg {
+            background-color: black;
+            height: 30px;
+            width: 5px;
+            transform: rotate(10deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+
+            .foot {
+               border-radius:  50%;
+               height: 8px;
+               width: 8px;
+               background-color: black; 
+            }
+        }
+
+        .right-leg {
+            background-color: black;
+            height: 30px;
+            width: 5px;
+            transform: rotate(-10deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+
+            .foot {
+               border-radius:  50%;
+               height: 8px;
+               width: 8px;
+               background-color: black; 
+            }
+        }
+    }
+}
+}
+
+.failure-card {
+width: 500px;
+height: 500px;
+border: solid;
+box-shadow: 2px 2px 2px 2px;
+position: relative;
+bottom: 80%;
+left: 30%;
+border-radius: 5px;
+background-color: white;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-evenly;
+text-align: center;
+
+.card-title {
+    color: red;
+}
+
+.card-paragraph {
+    width: 80%;
+}
+
+.card-subtitle {
+    color: blue;
+}
+
+.card-button {
+width: 100px;
+height: 50px;
+border-radius: 5%;
+box-shadow: 2px 2px 2px 2px;
+color: black;
+background-color: white;
+}
+}
+
+.failure-card-closed {
+display: none;
+}
+
+.success-card {
+width: 500px;
+height: 500px;
+border: solid;
+box-shadow: 2px 2px 2px 2px;
+position: relative;
+bottom: 500px;
+}
+
+.success-card-closed {
+display: none;
+}
+}
+
+
+@keyframes griffin {
+    0% {bottom: 100px; left: 100px;}
+    50% {bottom: 200px; left: 200px;}
+    100% {left: 300px; bottom: 300px;}
+}

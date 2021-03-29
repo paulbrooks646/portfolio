@@ -9,36 +9,12 @@ width: 100vw;
 height: 35vh;
 display: flex;
 width: 100vw;
-
-        .mountain-top-left {
 background-image: url("../../Images/Mountain.png");
-width: 40%;
-height: 100%;
-background-position: center;
-background-size: contain;
 background-repeat: no-repeat;
-        }
+background-position: center;
+background-size: cover;
 
-        .mountain-top-middle {
-background-color: brown;
-width: 20%;
-height: 100%;
-display: flex;
-justify-content: center;
 
-.mountain-town {
-display: flex;
-flex-direction: column;
-align-items: center;
-cursor: pointer;
-}
-        }
-
-        .mountain-top-right {
-background-color: white;
-width: 40%;
-height: 100%;
-        }
     }
 
     .mountain-middle {
@@ -47,11 +23,17 @@ display: flex;
 width: 100vw;
 
 .mountain-middle-left {
-background-color: white;
+background-color: brown;
 width: 40%;
 height: 100%;
 display: flex;
 align-items: center;
+
+.mountain-nest {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
 
 }
 
@@ -69,14 +51,14 @@ display: flex;
 align-items: center;
 justify-content: flex-end;
 
-.mountain-entrance {
+.mountain-home {
     display: flex;
 width: 100px;
 justify-content: space-evenly;
 align-items: center;
 cursor: pointer;
 position: relative;
-width: 130px;
+width: 100px;
 left: 30px;
 }
 }
@@ -89,7 +71,7 @@ display: flex;
 width: 100vw;
 
 .mountain-bottom-left {
-background-image: url("../../Images/Mountain.png");
+background-color: white;
 height: 100%;
 width: 40%;
 background-size: contain;

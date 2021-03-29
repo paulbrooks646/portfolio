@@ -13,6 +13,25 @@ import ArrowUpward from "@material-ui/icons/ArrowUpward";
 
 function Mountain(props) {
 
+    const [left, setLeft] = useState(false);
+    const [right, setRight] = useState(false);
+    const [down, setDown] = useState(false);
+
+    const toggleRight = () => {
+      setRight(!right);
+      props.history.push("/Dashboard");
+    };
+
+    const toggleLeft = () => {
+      setLeft(!left);
+      props.history.push("/Nest");
+    };
+
+    const toggleDown = () => {
+      setDown(!down);
+      props.history.push("/Pass");
+    };
+
 
     return (
       <div className="mountain-main">
@@ -20,22 +39,22 @@ function Mountain(props) {
         <div className="mountain-body">
           <div className="mountain-top">
             <div className="mountain-top-left"></div>
-            <div className="mountain-top-middle">
-              <div className="mountain-town">
-                <ArrowUpward />
-                <h2>Nest</h2>
-              </div>
-            </div>
+            <div className="mountain-top-middle"></div>
             <div className="mountain-top-right"></div>
           </div>
           <div className="mountain-middle">
-            <div className="mountain-middle-left"></div>
+            <div className="mountain-middle-left">
+              <div className="mountain-nest" onClick={toggleLeft}>
+                <ArrowBack />
+                <h2>Nest</h2>
+              </div>
+            </div>
             <div className="mountain-middle-middle"></div>
-                    <div className="mountain-middle-right">
-                        <div className="mountain-entrance">
-                            <h2>Entrance</h2>
-                            <ArrowForward/>
-                        </div>
+            <div className="mountain-middle-right">
+              <div className="mountain-home" onClick={toggleRight}>
+                <h2>Home</h2>
+                <ArrowForward />
+              </div>
               <div className="character">
                 <div className="face">
                   <div className="eyes">
@@ -71,11 +90,11 @@ function Mountain(props) {
           </div>
           <div className="mountain-bottom">
             <div className="mountain-bottom-left"></div>
-                    <div className="mountain-bottom-middle">
-                        <div className="mountain-crag">
-                            <h2>Crag</h2>
-                            <ArrowDownward/>
-                        </div>
+            <div className="mountain-bottom-middle">
+              <div className="mountain-crag" onClick={toggleDown}>
+                <h2>Crag</h2>
+                <ArrowDownward />
+              </div>
             </div>
             <div className="mountain-bottom-right"></div>
           </div>

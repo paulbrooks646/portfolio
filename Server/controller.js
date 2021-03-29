@@ -19,6 +19,7 @@ module.exports = {
     req.session.user = {
       id: newUser[0].id,
       name: newUser[0].name,
+      rope: newUser[0].rope
     };
     res.status(200).send(req.session.user);
   },
@@ -36,6 +37,7 @@ module.exports = {
         req.session.user = {
           id: user[0].id,
           name: user[0].name,
+          rope: user[0].rope
         };
         res.status(200).send(req.session.user);
       } else {
