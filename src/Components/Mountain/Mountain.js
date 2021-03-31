@@ -91,8 +91,8 @@ function Mountain(props) {
           <div className="mountain-bottom">
             <div className="mountain-bottom-left"></div>
             <div className="mountain-bottom-middle">
-              <div className="mountain-crag" onClick={toggleDown}>
-                <h2>Crag</h2>
+              <div className="mountain-pass" onClick={toggleDown}>
+                <h2>Pass</h2>
                 <ArrowDownward />
               </div>
             </div>

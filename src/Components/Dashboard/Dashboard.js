@@ -21,9 +21,12 @@ function Dashboard(props) {
   };
 
   const toggleLeft = () => {
-    setLeft(!left);
-    props.history.push("/Mountain");
+    setLeft(!left)
+    
+    props.history.push("/Mountain")
   };
+
+
 
 const toggleUp = () => {
   setUp(!up);

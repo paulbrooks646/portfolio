@@ -9,8 +9,16 @@ import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
+import Ogre from "../../Images/Ogre.png";
 
 function Pass(props) {
+
+  const [up, setUp] = useState(false);
+
+  const toggleUp = () => {
+    setUp(!up)
+    props.history.push("/Mountain")
+  }
   return (
     <div className="pass-main">
       <Nav />
@@ -18,20 +26,9 @@ function Pass(props) {
         <div className="pass-top">
           <div className="pass-top-left"></div>
           <div className="pass-top-middle">
-            <div className="pass-town">
+            <div className="pass-mountain" onClick={toggleUp}>
               <ArrowUpward />
-              <h2>Nest</h2>
-            </div>
-          </div>
-          <div className="pass-top-right"></div>
-        </div>
-        <div className="pass-middle">
-          <div className="pass-middle-left"></div>
-          <div className="pass-middle-middle"></div>
-          <div className="pass-middle-right">
-            <div className="pass-entrance">
-              <h2>Entrance</h2>
-              <ArrowForward />
+              <h2>Mountains</h2>
             </div>
             <div className="character">
               <div className="face">
@@ -65,15 +62,18 @@ function Pass(props) {
               </div>
             </div>
           </div>
+          <div className="pass-top-right"></div>
+        </div>
+        <div className="pass-middle">
+          <div className="pass-middle-left"></div>
+          <div className="pass-middle-middle">
+            <img src={Ogre} className="pass-ogre" alt="ogre" />
+          </div>
+          <div className="pass-middle-right"></div>
         </div>
         <div className="pass-bottom">
           <div className="pass-bottom-left"></div>
-          <div className="pass-bottom-middle">
-            <div className="pass-crag">
-              <h2>Crag</h2>
-              <ArrowDownward />
-            </div>
-          </div>
+          <div className="pass-bottom-middle"></div>
           <div className="pass-bottom-right"></div>
         </div>
       </div>

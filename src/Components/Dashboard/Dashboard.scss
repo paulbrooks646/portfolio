@@ -2,6 +2,7 @@
 
 height: 100vh;
 width: 100vw;
+overflow: hidden;
 
 .dashboard-body {
 
@@ -267,7 +268,7 @@ width: 40%;
     flex-direction: column;
     align-items: center;
     animation-name: motion;
-    animation-duration: 2s;
+    animation-duration: 1s;
     animation-timing-function: linear;
 
 .face {
