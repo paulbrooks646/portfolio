@@ -32,6 +32,7 @@ export default (
     <Route path="/Forest" component={Forest} />
     <Route path="/Garden" component={Garden} />
     <Route path="/Job" component={Job} />
+    <Route path="/Market" component={Market}/>
     <Route path="/Mountain" component={Mountain} />
     <Route path="/Nest" component={Nest} />
     <Route path="/Pass" component={Pass} />
