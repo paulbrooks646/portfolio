@@ -11,6 +11,13 @@ import ArrowBack from "@material-ui/icons/ArrowBack";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 
 function Cave(props) {
+  const [up, setUp] = useState(false);
+
+  const toggleUp = () => {
+    setUp(!up);
+    props.history.push("/Forest");
+  };
+
   return (
     <div className="cave-main">
       <Nav />
@@ -18,20 +25,9 @@ function Cave(props) {
         <div className="cave-top">
           <div className="cave-top-left"></div>
           <div className="cave-top-middle">
-            <div className="cave-town">
+            <div className="cave-forest" onClick={toggleUp}>
               <ArrowUpward />
-              <h2>Nest</h2>
-            </div>
-          </div>
-          <div className="cave-top-right"></div>
-        </div>
-        <div className="cave-middle">
-          <div className="cave-middle-left"></div>
-          <div className="cave-middle-middle"></div>
-          <div className="cave-middle-right">
-            <div className="cave-entrance">
-              <h2>Entrance</h2>
-              <ArrowForward />
+              <h2>Forest</h2>
             </div>
             <div className="character">
               <div className="face">
@@ -65,15 +61,14 @@ function Cave(props) {
               </div>
             </div>
           </div>
+          <div className="cave-top-right"></div>
         </div>
+
         <div className="cave-bottom">
-          <div className="cave-bottom-left"></div>
-          <div className="cave-bottom-middle">
-            <div className="cave-crag">
-              <h2>Crag</h2>
-              <ArrowDownward />
-            </div>
+          <div className="cave-bottom-left">
+            <div className="cave-wolf"></div>
           </div>
+          <div className="cave-bottom-middle"></div>
           <div className="cave-bottom-right"></div>
         </div>
       </div>
