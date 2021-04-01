@@ -3,33 +3,33 @@ import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import axios from "axios";
-import "./Job.scss";
+import "./Throne.scss";
 import { Link } from "react-redux";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 
-function Job(props) {
+function Throne(props) {
   return (
-    <div className="job-main">
+    <div className="throne-main">
       <Nav />
-      <div className="job-body">
-        <div className="job-top">
-          <div className="job-top-left"></div>
-          <div className="job-top-middle">
-            <div className="job-town">
+      <div className="throne-body">
+        <div className="throne-top">
+          <div className="throne-top-left"></div>
+          <div className="throne-top-middle">
+            <div className="throne-town">
               <ArrowUpward />
               <h2>Nest</h2>
             </div>
           </div>
-          <div className="job-top-right"></div>
+          <div className="throne-top-right"></div>
         </div>
-        <div className="job-middle">
-          <div className="job-middle-left"></div>
-          <div className="job-middle-middle"></div>
-          <div className="job-middle-right">
-            <div className="job-entrance">
+        <div className="throne-middle">
+          <div className="throne-middle-left"></div>
+          <div className="throne-middle-middle"></div>
+          <div className="throne-middle-right">
+            <div className="throne-entrance">
               <h2>Entrance</h2>
               <ArrowForward />
             </div>
@@ -66,15 +66,15 @@ function Job(props) {
             </div>
           </div>
         </div>
-        <div className="job-bottom">
-          <div className="job-bottom-left"></div>
-          <div className="job-bottom-middle">
-            <div className="job-crag">
+        <div className="throne-bottom">
+          <div className="throne-bottom-left"></div>
+          <div className="throne-bottom-middle">
+            <div className="throne-crag">
               <h2>Crag</h2>
               <ArrowDownward />
             </div>
           </div>
-          <div className="job-bottom-right"></div>
+          <div className="throne-bottom-right"></div>
         </div>
       </div>
     </div>
@@ -82,4 +82,4 @@ function Job(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser })(Job);
+export default connect(mapStateToProps, { getUser })(Throne);

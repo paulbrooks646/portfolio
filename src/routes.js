@@ -10,7 +10,7 @@ import Castle from "./Components/Castle/Castle";
 import Cave from "./Components/Cave/Cave";
 import Forest from "./Components/Forest/Forest";
 import Garden from "./Components/Garden/Garden";
-import Job from "./Components/Job/Job";
+import Throne from "./Components/Throne/Throne";
 import Market from "./Components/Market/Market";
 import Nest from "./Components/Nest/Nest";
 import Pass from "./Components/Pass/Pass";
@@ -32,7 +32,7 @@ export default (
     <Route path="/Dashboard" component={Dashboard} />
     <Route path="/Forest" component={Forest} />
     <Route path="/Garden" component={Garden} />
-    <Route path="/Job" component={Job} />
+    <Route path="/Throne" component={Throne} />
     <Route path="/Market" component={Market}/>
     <Route path="/Mountain" component={Mountain} />
     <Route path="/Nest" component={Nest} />

@@ -4,6 +4,111 @@
     overflow: hidden;
 
     .castle-body {
-        
+
+        .castle-top {
+            width: 100vw;
+            height: 35vh;
+            background-image: url("../../Images/CastleTwo.jpg");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            display: flex;
+
+            .castle-top-left {
+                width: 40vw;
+            }
+
+            .castle-top-middle {
+                width: 20vw;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-end;
+
+                .castle-throne {
+                    
+                    display: flex;
+                    flex-direction: column;
+                align-items: center;  
+            cursor: pointer;             }
+            }
+.castle-top-right {
+    width: 40vw;
+}
+        }
+
+        .castle-middle {
+            width: 100vw;
+            height: 20vh;
+            background-color: brown;
+            display: flex;
+
+            .castle-middle-left {
+                display: flex;
+                height: 100%;
+                width: 40vw;
+                .castle-garden {
+display: flex;
+                    
+                align-items: center;  
+            cursor: pointer;
+                }
+
+            }
+
+            .castle-middle-middle {
+                height: 100%;
+                width: 20vw;
+            }
+
+            .castle-middle-right {
+                height: 100%;
+                width: 40vw;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+
+                .castle-tower {
+display: flex;
+align-items: center;
+width: 120px;
+justify-content: space-evenly;
+                }
+            }
+        }
+        .castle-bottom {
+            height: 35vh;
+            width: 100vw;
+            display: flex;
+
+            .castle-bottom-left {
+                background-color: green;
+                width: 40vw;
+                height: 100%;
+            }
+
+            .castle-bottom-middle {
+                background-color: brown;
+                width: 20vw;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-end;
+
+                .castle-town {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    cursor: pointer;
+                }
+            }
+
+            .castle-bottom-right {
+                background-color: green;
+                width: 40vw;
+                height: 100%;
+            }
+        }
+
     }
 }
