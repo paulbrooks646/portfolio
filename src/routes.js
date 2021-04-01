@@ -19,6 +19,7 @@ import Store from "./Components/Store/Store";
 import Swamp from "./Components/Swamp/Swamp";
 import Tower from "./Components/Tower/Tower";
 import Town from "./Components/Town/Town";
+import Valley from "./Components/Valley/Valley"
 
 export default (
   <Switch>
@@ -41,5 +42,6 @@ export default (
     <Route path="/Swamp" component={Swamp} />
     <Route path="/Tower" component={Tower} />
     <Route path="/Town" component={Town} />
+    <Route path="/Valley" component={Valley}/>
   </Switch>
 );

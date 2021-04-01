@@ -22,7 +22,7 @@ function Stables(props) {
     props.history.push("/Valley");
   };
 
-  const toogleRight = () => {
+  const toggleRight = () => {
     setRight(!right);
     props.history.push("/Town");
   };
@@ -81,7 +81,7 @@ function Stables(props) {
                 <h3>{props.user.user.name}</h3>
               </div>
             </div>
-            <div className="stables-town">
+            <div className="stables-town" onClick={toggleRight}>
               <h2>Town</h2>
               <ArrowForward />
             </div>
