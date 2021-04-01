@@ -9,29 +9,33 @@ import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
+import Blacksmith from "../../Images/Blacksmith.jpg";
+import Store from "../../Images/General.jpg";
 
 function Market(props) {
+
+  const toggleBlack = () => {
+    props.history.push("/Blacksmith")
+  }
+
+  const toggleGeneral = () => {
+    props.history.push("/Store")
+  }
+
   return (
     <div className="market-main">
       <Nav />
       <div className="market-body">
         <div className="market-top">
           <div className="market-top-left"></div>
-          <div className="market-top-middle">
-            <div className="market-town">
-              <ArrowUpward />
-              <h2>Nest</h2>
-            </div>
-          </div>
+          <div className="market-top-middle"></div>
           <div className="market-top-right"></div>
         </div>
         <div className="market-middle">
-          <div className="market-middle-left"></div>
-          <div className="market-middle-middle"></div>
-          <div className="market-middle-right">
-            <div className="market-entrance">
-              <h2>Entrance</h2>
-              <ArrowForward />
+          <div className="market-middle-left">
+            <div className="market-town">
+              <ArrowBack />
+              <h2>Town</h2>
             </div>
             <div className="character">
               <div className="face">
@@ -65,16 +69,27 @@ function Market(props) {
               </div>
             </div>
           </div>
+          <div className="market-middle-middle"></div>
+          <div className="market-middle-right"></div>
         </div>
         <div className="market-bottom">
-          <div className="market-bottom-left"></div>
-          <div className="market-bottom-middle">
-            <div className="market-crag">
-              <h2>Crag</h2>
-              <ArrowDownward />
+          <div className="market-bottom-left">
+            <div className="blacksmith-div" onClick={toggleBlack}>
+              <img
+                src={Blacksmith}
+                alt="Blacksmith Shop"
+                className="market-blacksmith"
+              />
+              <h2>Blacksmith</h2>
             </div>
           </div>
-          <div className="market-bottom-right"></div>
+          <div className="market-bottom-middle"></div>
+          <div className="market-bottom-right">
+            <div className="store-div" onClick={toggleGeneral}>
+              <img src={Store} alt="general store" className="market-store" />
+              <h2>General Store</h2>
+            </div>
+          </div>
         </div>
       </div>
     </div>
