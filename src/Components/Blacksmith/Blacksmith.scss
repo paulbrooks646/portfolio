@@ -16,7 +16,7 @@ overflow: hidden;
     align-items: center;
 
     .blacksmith-card {
-        animation-name: shopcard;
+        animation-name: blacksmithcard;
         animation-duration: 3s;
         animation-direction: normal;
         animation-timing-function: linear;
@@ -45,7 +45,7 @@ overflow: hidden;
 }
 }
 
-@keyframes shopcard {
+@keyframes blacksmithcard {
     0% {
         right: 50%
     }

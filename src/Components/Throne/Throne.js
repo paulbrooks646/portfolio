@@ -9,68 +9,31 @@ import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
+import Character from "../Character/Character"
 
 function Throne(props) {
+
+  const [down, setDown] = useState(false)
+
+  const toggleDown = () => {
+    setDown(!down)
+    props.history.push("/Castle")
+  }
   return (
     <div className="throne-main">
       <Nav />
       <div className="throne-body">
         <div className="throne-top">
-          <div className="throne-top-left"></div>
-          <div className="throne-top-middle">
-            <div className="throne-town">
-              <ArrowUpward />
-              <h2>Nest</h2>
-            </div>
-          </div>
-          <div className="throne-top-right"></div>
+          
         </div>
-        <div className="throne-middle">
-          <div className="throne-middle-left"></div>
-          <div className="throne-middle-middle"></div>
-          <div className="throne-middle-right">
-            <div className="throne-entrance">
-              <h2>Entrance</h2>
-              <ArrowForward />
-            </div>
-            <div className="character">
-              <div className="face">
-                <div className="eyes">
-                  <div className="eye"></div>
-                  <div className="eye"></div>
-                </div>
-                <div className="nose"></div>
-                <div className="mouth"></div>
-              </div>
-              <div className="body">
-                <div className="neck"></div>
-                <div className="arms">
-                  <div className="left-arm">
-                    <div className="hand"></div>
-                  </div>
-                  <div className="right-arm">
-                    <div className="hand"></div>
-                  </div>
-                </div>
-                <div className="torso"></div>
-                <div className="legs">
-                  <div className="left-leg">
-                    <div className="foot"></div>
-                  </div>
-                  <div className="right-leg">
-                    <div className="foot"></div>
-                  </div>
-                </div>
-                <h3>{props.user.user.name}</h3>
-              </div>
-            </div>
-          </div>
-        </div>
+        
         <div className="throne-bottom">
           <div className="throne-bottom-left"></div>
           <div className="throne-bottom-middle">
-            <div className="throne-crag">
-              <h2>Crag</h2>
+            <Character />
+            <div className="throne-castle"
+            onClick={toggleDown}>
+              <h2>Castle</h2>
               <ArrowDownward />
             </div>
           </div>

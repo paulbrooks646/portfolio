@@ -9,6 +9,7 @@ import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
+import Character from "../Character/Character"
 
 function Dashboard(props) {
   const [left, setLeft] = useState(false);
@@ -53,7 +54,7 @@ const toggleUp = () => {
               <h2>Mountains</h2>
             </div>
           </div>
-          <div className="dashboard-middle-middle"></div>
+          <div className="dashboard-middle-middle"><Character/></div>
           <div className="dashboard-middle-right">
             <div className="dashboard-forest" onClick={toggleRight}>
               <h2>Forest</h2>
