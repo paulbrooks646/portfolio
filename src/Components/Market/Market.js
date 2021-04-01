@@ -15,6 +15,12 @@ import Store from "../../Images/General.jpg";
 function Market(props) {
 
   const [left, setLeft] = useState(false)
+  const [right, setRight] = useState(false)
+
+  const toggleRight = () => {
+    setRight(!right)
+    props.history.push("/Alley")
+  }
 
   const toggleLeft = () => {
     setLeft(!left)
@@ -76,7 +82,12 @@ function Market(props) {
             </div>
           </div>
           <div className="market-middle-middle"></div>
-          <div className="market-middle-right"></div>
+          <div className="market-middle-right">
+            <div className="market-alley" onClick={toggleRight}>
+              <h2>Alley</h2>
+              <ArrowForward />
+            </div>
+          </div>
         </div>
         <div className="market-bottom">
           <div className="market-bottom-left">

@@ -187,6 +187,18 @@
         background-color: brown;
         width: 40%;
         height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        
+
+        .market-alley {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          width: 100px;
+          justify-content: space-evenly;
+        }
       }
     }
 

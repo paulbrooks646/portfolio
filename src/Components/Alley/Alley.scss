@@ -1,0 +1,226 @@
+.alley-main {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+  .alley-body {
+    .alley-top {
+      height: 35vh;
+      display: flex;
+      width: 100vw;
+      background-image: url("../../Images/Brick.jpg");
+    background-size: auto 100%;}
+
+    .alley-middle {
+      height: 20vh;
+      display: flex;
+      width: 100vw;
+
+      .alley-middle-left {
+        background-color: brown;
+        width: 40%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        .alley-market {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          width: 120px;
+        }
+
+        
+      }
+
+      .alley-middle-middle {
+        background-color: brown;
+        width: 50%;
+        height: 100%;
+      }
+
+      .alley-middle-right {
+        background-color: #606060;
+        width: 10%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        
+
+
+      }
+    }
+
+    .alley-bottom {
+      height: 35vh;
+      display: flex;
+      width: 100vw;
+      background-image: url("../../Images/Brick.jpg");
+      background-size: auto 100%;
+
+      }
+  }
+
+  .character-moving {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation-name: motion;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+
+    .face {
+      border-radius: 50%;
+      width: 40px;
+      height: 45px;
+      background-color: peachpuff;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      border-top: solid yellow 5px;
+
+      .eyes {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+
+        .eye {
+          border-radius: 50%;
+          background-color: blue;
+          height: 3px;
+          width: 5px;
+        }
+      }
+
+      .nose {
+        border-radius: 50%;
+        background-color: black;
+        height: 3px;
+        width: 2px;
+      }
+
+      .mouth {
+        border-radius: 50%;
+        background-color: red;
+        width: 20px;
+        height: 3px;
+      }
+    }
+    .body {
+      width: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .neck {
+        background-color: black;
+        height: 5px;
+        width: 10px;
+      }
+
+      .arms {
+        display: flex;
+
+        .left-arm {
+          background-color: black;
+          width: 25px;
+          height: 5px;
+          transform: rotate(-2deg);
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+
+          .hand {
+            border-radius: 50%;
+            height: 8px;
+            width: 8px;
+            background-color: peachpuff;
+          }
+        }
+
+        .right-arm {
+          background-color: black;
+          width: 25px;
+          height: 5px;
+          transform: rotate(2deg);
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+
+          .hand {
+            border-radius: 50%;
+            height: 8px;
+            width: 8px;
+            background-color: peachpuff;
+          }
+        }
+      }
+
+      .torso {
+        background-color: black;
+        height: 20px;
+        width: 10px;
+      }
+
+      .legs {
+        display: flex;
+
+        .left-leg {
+          background-color: black;
+          height: 30px;
+          width: 5px;
+          transform: rotate(10deg);
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          align-items: center;
+
+          .foot {
+            border-radius: 50%;
+            height: 8px;
+            width: 8px;
+            background-color: black;
+          }
+        }
+
+        .right-leg {
+          background-color: black;
+          height: 30px;
+          width: 5px;
+          transform: rotate(-10deg);
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          align-items: center;
+
+          .foot {
+            border-radius: 50%;
+            height: 8px;
+            width: 8px;
+            background-color: black;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes motion {
+  0% {
+    bottom: 200px;
+    left: 0px;
+  }
+  50% {
+    bottom: 420px;
+    left: 0px;
+  }
+  100% {
+    left: -470px;
+    bottom: 420px;
+  }
+}

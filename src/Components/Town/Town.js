@@ -11,6 +11,7 @@ import ArrowBack from "@material-ui/icons/ArrowBack";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import { SettingsSystemDaydreamTwoTone } from "@material-ui/icons";
 import House from "../../Images/House.jpg";
+import Character from "../Character/Character"
 
 function Town(props) {
   const [left, setLeft] = useState(false);
@@ -77,37 +78,7 @@ function Town(props) {
             <img src={House} alt="house" className="town-house" />
           </div>
           <div className="town-bottom-middle">
-            <div className="character">
-              <div className="face">
-                <div className="eyes">
-                  <div className="eye"></div>
-                  <div className="eye"></div>
-                </div>
-                <div className="nose"></div>
-                <div className="mouth"></div>
-              </div>
-              <div className="body">
-                <div className="neck"></div>
-                <div className="arms">
-                  <div className="left-arm">
-                    <div className="hand"></div>
-                  </div>
-                  <div className="right-arm">
-                    <div className="hand"></div>
-                  </div>
-                </div>
-                <div className="torso"></div>
-                <div className="legs">
-                  <div className="left-leg">
-                    <div className="foot"></div>
-                  </div>
-                  <div className="right-leg">
-                    <div className="foot"></div>
-                  </div>
-                </div>
-                <h3>{props.user.user.name}</h3>
-              </div>
-            </div>
+            <Character/>
             <div className="town-dashboard" onClick={toggleDown}>
               <h2>Home</h2>
               <ArrowDownward />

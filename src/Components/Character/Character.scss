@@ -1,0 +1,143 @@
+.character {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+
+  .face {
+    border-radius: 50%;
+    width: 40px;
+    height: 45px;
+    background-color: peachpuff;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-top: solid yellow 5px;
+
+    .eyes {
+      display: flex;
+      justify-content: space-evenly;
+      width: 100%;
+
+      .eye {
+        border-radius: 50%;
+        background-color: blue;
+        height: 3px;
+        width: 5px;
+      }
+    }
+
+    .nose {
+      border-radius: 50%;
+      background-color: black;
+      height: 3px;
+      width: 2px;
+    }
+
+    .mouth {
+      border-radius: 50%;
+      background-color: red;
+      width: 20px;
+      height: 3px;
+    }
+  }
+  .body {
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .neck {
+      background-color: black;
+      height: 5px;
+      width: 10px;
+    }
+
+    .arms {
+      display: flex;
+
+      .left-arm {
+        background-color: black;
+        width: 25px;
+        height: 5px;
+        transform: rotate(-2deg);
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        .hand {
+          border-radius: 50%;
+          height: 8px;
+          width: 8px;
+          background-color: peachpuff;
+        }
+      }
+
+      .right-arm {
+        background-color: black;
+        width: 25px;
+        height: 5px;
+        transform: rotate(2deg);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        .hand {
+          border-radius: 50%;
+          height: 8px;
+          width: 8px;
+          background-color: peachpuff;
+        }
+      }
+    }
+
+    .torso {
+      background-color: black;
+      height: 20px;
+      width: 10px;
+    }
+
+    .legs {
+      display: flex;
+
+      .left-leg {
+        background-color: black;
+        height: 30px;
+        width: 5px;
+        transform: rotate(10deg);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+
+        .foot {
+          border-radius: 50%;
+          height: 8px;
+          width: 8px;
+          background-color: black;
+        }
+      }
+
+      .right-leg {
+        background-color: black;
+        height: 30px;
+        width: 5px;
+        transform: rotate(-10deg);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+
+        .foot {
+          border-radius: 50%;
+          height: 8px;
+          width: 8px;
+          background-color: black;
+        }
+      }
+    }
+  }
+}
