@@ -9,72 +9,44 @@ import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
+import Character from "../Character/Character";
 
 function Tower(props) {
+  const [left, setLeft] = useState(false);
+
+  const toggleLeft = () => {
+    setLeft(!left);
+    props.history.push("/Castle");
+  };
   return (
     <div className="tower-main">
       <Nav />
       <div className="tower-body">
         <div className="tower-top">
-          <div className="tower-top-left"></div>
-          <div className="tower-top-middle">
-            <div className="tower-town">
-              <ArrowUpward />
-              <h2>Nest</h2>
+          <div className="tower-top-left">
+            <div className="tower-top-left-up"></div>
+            <div className="tower-top-left-down">
+              <div className="tower-castle" onClick={toggleLeft}>
+                <ArrowBack />
+                <h2>Castle</h2>
+              </div>
+              <Character />
             </div>
           </div>
+
           <div className="tower-top-right"></div>
         </div>
-        <div className="tower-middle">
-          <div className="tower-middle-left"></div>
-          <div className="tower-middle-middle"></div>
-          <div className="tower-middle-right">
-            <div className="tower-entrance">
-              <h2>Entrance</h2>
-              <ArrowForward />
-            </div>
-            <div className="character">
-              <div className="face">
-                <div className="eyes">
-                  <div className="eye"></div>
-                  <div className="eye"></div>
-                </div>
-                <div className="nose"></div>
-                <div className="mouth"></div>
-              </div>
-              <div className="body">
-                <div className="neck"></div>
-                <div className="arms">
-                  <div className="left-arm">
-                    <div className="hand"></div>
-                  </div>
-                  <div className="right-arm">
-                    <div className="hand"></div>
-                  </div>
-                </div>
-                <div className="torso"></div>
-                <div className="legs">
-                  <div className="left-leg">
-                    <div className="foot"></div>
-                  </div>
-                  <div className="right-leg">
-                    <div className="foot"></div>
-                  </div>
-                </div>
-                <h3>{props.user.user.name}</h3>
-              </div>
-            </div>
-          </div>
-        </div>
+
         <div className="tower-bottom">
           <div className="tower-bottom-left"></div>
           <div className="tower-bottom-middle">
-            <div className="tower-crag">
-              <h2>Crag</h2>
-              <ArrowDownward />
-            </div>
+            <div className="tower-bottom-middle-up"></div>
+            <div className="tower-bottom-middle-down"></div>
           </div>
-          <div className="tower-bottom-right"></div>
+          <div className="tower-bottom-right">
+            <div className="tower-bottom-right-up"></div>
+            <div className="tower-bottom-right-down"></div>
+          </div>
         </div>
       </div>
     </div>
