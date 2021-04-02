@@ -226,17 +226,3 @@
   }
 }
 
-@keyframes motion {
-  0% {
-    bottom: 200px;
-    left: 0px;
-  }
-  50% {
-    bottom: 420px;
-    left: 0px;
-  }
-  100% {
-    left: -470px;
-    bottom: 420px;
-  }
-}

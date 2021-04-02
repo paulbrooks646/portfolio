@@ -20,7 +20,9 @@ module.exports = {
       id: newUser[0].id,
       name: newUser[0].name,
       rope: newUser[0].rope,
-      newgame: newUser[0].newgame
+      newgame: newUser[0].newgame,
+      coins: newUser[0].coins,
+      hasWorked: newUser[0].has_worked
     };
     res.status(200).send(req.session.user);
   },
@@ -39,7 +41,9 @@ module.exports = {
           id: user[0].id,
           name: user[0].name,
           rope: user[0].rope,
-          newgame: user[0].newgame
+          newgame: user[0].newgame,
+          coins: user[0].coins,
+          hasWorked: user[0].has_worked
         };
         res.status(200).send(req.session.user);
       } else {
