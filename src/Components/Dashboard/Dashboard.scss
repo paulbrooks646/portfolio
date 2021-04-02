@@ -174,4 +174,27 @@
   .dashboard-card-closed {
     display: none;
   }
+  .answer-card {
+      height: 400px;
+      width: 400px;
+    background-color: white;
+    border: solid black 2px;
+    box-shadow: 2px 2px 2px 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    position: absolute;
+    text-align: center;
+
+    
+
+    .answer-card-description {
+        width: 90%;
+    }
+  }
+
+  .answer-card-closed {
+    display: none;
+  }
 }

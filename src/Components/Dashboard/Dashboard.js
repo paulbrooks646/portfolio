@@ -68,18 +68,22 @@ function Dashboard(props) {
   }
 
   const toggleAnswerOne = () => {
+    toggleOldmanCard()
     setAnswerOne(!answerOne)
   }
 
   const toggleAnswerTwo = () => {
+    toggleOldmanCard();
     setAnswerTwo(!answerTwo);
   };
 
   const toggleAnswerThree = () => {
+    toggleOldmanCard();
     setAnswerThree(!answerThree);
   };
 
   const toggleAnswerFour = () => {
+    toggleOldmanCard();
     setAnswerFour(!answerFour);
   };
 
@@ -175,16 +179,16 @@ function Dashboard(props) {
         </Typography>
         <List className="dashboard-list">
           <ListItem className="dashboard-list-item" onClick={toggleAnswerOne}>
-            Dragon
+            The Dragon
           </ListItem>
           <ListItem className="dashboard-list-item" onClick={toggleAnswerTwo}>
-            Forest
+            The Forest
           </ListItem>
           <ListItem className="dashboard-list-item" onClick={toggleAnswerThree}>
-            Mountains
+            The Mountains
           </ListItem>
           <ListItem className="dashboard-list-item" onClick={toggleAnswerFour}>
-            Town
+            The Town
           </ListItem>
         </List>
         <Button
@@ -196,24 +200,22 @@ function Dashboard(props) {
           Say Goodbye
         </Button>
       </Card>
-      <Card
-        className={`${answerOne ? "dashboard-card" : "dashboard-card-closed"}`}
-      >
+      <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="primary"
           className="dashboard-card-title"
         >
-          What would you like to ask the old man?
+          The Dragon
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
-          className="dashboard-card-description"
+          className="answer-card-description"
         >
-          Tragedy has struck. Your home was burned to the ground by a dragon and
-          everything you owned was destroyed. It is time to start a new life and
-          to hopefully some day slay the dragon who ruined you life.
+          The cursed dragon has plagued this realm for far too long but no one
+          knows how to defeat it. Many have tried but they all ended up the
+          dragon's lunch. If you want my advice, stay away.
         </Typography>
         <Button
           onClick={toggleAnswerOne}
@@ -224,24 +226,21 @@ function Dashboard(props) {
           CLOSE
         </Button>
       </Card>
-      <Card
-        className={`${answerTwo ? "dashboard-card" : "dashboard-card-closed"}`}
-      >
+      <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="primary"
           className="dashboard-card-title"
         >
-          What would you like to ask the old man?
+          The Forest
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
-          className="dashboard-card-description"
+          className="answer-card-description"
         >
-          Tragedy has struck. Your home was burned to the ground by a dragon and
-          everything you owned was destroyed. It is time to start a new life and
-          to hopefully some day slay the dragon who ruined you life.
+          The forest is a scary place full of ravenous beasts and other dangers.
+          You'd be wise to avoid it.
         </Typography>
         <Button
           onClick={toggleAnswerTwo}
@@ -252,29 +251,46 @@ function Dashboard(props) {
           CLOSE
         </Button>
       </Card>
-      <Card
-        className={`${
-          answerThree ? "dashboard-card" : "dashboard-card-closed"
-        }`}
-      >
+      <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="dashboard-card-title"
+        >The Mountains</Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          The Mountains are cold and treacherous. Do not go there unless you are
+          prepared.
+        </Typography>
+        <Button
+          onClick={toggleAnswerThree}
+          className="dashboard-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="primary"
           className="dashboard-card-title"
         >
-          What would you like to ask the old man?
+          The Town
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
-          className="dashboard-card-description"
+          className="answer-card-description"
         >
-          Tragedy has struck. Your home was burned to the ground by a dragon and
-          everything you owned was destroyed. It is time to start a new life and
-          to hopefully some day slay the dragon who ruined you life.
+          The town is as unfriendly as the rest of this realm. If you don't have gold there is no place for you there.
         </Typography>
         <Button
-          onClick={toggleAnswerThree}
+          onClick={toggleAnswerFour}
           className="dashboard-card-button"
           variant="contained"
           color="primary"
