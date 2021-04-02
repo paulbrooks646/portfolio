@@ -2,6 +2,11 @@
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
 
   .town-body {
     .town-top {
@@ -30,12 +35,21 @@
         width: 20%;
         height: 100%;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    
 
         .town-castle {
           display: flex;
           flex-direction: column;
           align-items: center;
+          cursor: pointer;
+        }
+
+        .town-farmer {
+          height: 150px;
+          width: 120px;
           cursor: pointer;
         }
       }
@@ -132,7 +146,7 @@
         align-items: center;
         justify-content: flex-end;
 
-        .town-dashboard {
+        .town-town {
           display: flex;
           flex-direction: column;
 
@@ -157,6 +171,58 @@
         }
       }
     }
+  }
+  .town-card {
+      height: 500px;
+      width: 500px;
+    background-color: white;
+    border: solid black 2px;
+    box-shadow: 2px 2px 2px 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    position: absolute;
+    text-align: center;
+
+    .town-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        color: tomato;
+    }
+
+    .town-card-description {
+        width: 90%;
+    }
+  }
+
+  .town-card-closed {
+    display: none;
+  }
+  .answer-card {
+      height: 400px;
+      width: 400px;
+    background-color: white;
+    border: solid black 2px;
+    box-shadow: 2px 2px 2px 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    position: absolute;
+    text-align: center;
+
+    
+
+    .answer-card-description {
+        width: 90%;
+    }
+  }
+
+  .answer-card-closed {
+    display: none;
   }
 }
 

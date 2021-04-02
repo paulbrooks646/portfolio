@@ -175,7 +175,8 @@ function Dashboard(props) {
           color="primary"
           className="dashboard-card-title"
         >
-          What would you like to ask the old man about?
+          I saw the dragon burn your house poor boy. What would you
+          like to know about?
         </Typography>
         <List className="dashboard-list">
           <ListItem className="dashboard-list-item" onClick={toggleAnswerOne}>
@@ -213,8 +214,7 @@ function Dashboard(props) {
           color="secondary"
           className="answer-card-description"
         >
-          The cursed dragon has plagued this realm for far too long but no one
-          knows how to defeat it. Many have tried but they all ended up the
+          The cursed dragon has plagued this realm for far too long. Many have tried but they all ended up the
           dragon's lunch. If you want my advice, stay away.
         </Typography>
         <Button
@@ -256,7 +256,9 @@ function Dashboard(props) {
           variant="h4"
           color="primary"
           className="dashboard-card-title"
-        >The Mountains</Typography>
+        >
+          The Mountains
+        </Typography>
         <Typography
           variant="h6"
           color="secondary"
@@ -287,7 +289,8 @@ function Dashboard(props) {
           color="secondary"
           className="answer-card-description"
         >
-          The town is as unfriendly as the rest of this realm. If you don't have gold there is no place for you there.
+          The town is as unfriendly as the rest of this realm. If you don't have
+          gold there is no place for you there.
         </Typography>
         <Button
           onClick={toggleAnswerFour}
