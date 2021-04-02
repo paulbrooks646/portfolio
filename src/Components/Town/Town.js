@@ -9,7 +9,6 @@ import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
-import { SettingsSystemDaydreamTwoTone } from "@material-ui/icons";
 import House from "../../Images/House.jpg";
 import Character from "../Character/Character"
 

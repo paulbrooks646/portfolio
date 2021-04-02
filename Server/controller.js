@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt")
 
 module.exports = {
   register: async (req, res) => {
-        const db = req.app.get("db");
+    const db = req.app.get("db");
         
         
     const { newUsername, newPassword } = req.body;
@@ -19,7 +19,8 @@ module.exports = {
     req.session.user = {
       id: newUser[0].id,
       name: newUser[0].name,
-      rope: newUser[0].rope
+      rope: newUser[0].rope,
+      newgame: newUser[0].newgame
     };
     res.status(200).send(req.session.user);
   },
@@ -37,7 +38,8 @@ module.exports = {
         req.session.user = {
           id: user[0].id,
           name: user[0].name,
-          rope: user[0].rope
+          rope: user[0].rope,
+          newgame: user[0].newgame
         };
         res.status(200).send(req.session.user);
       } else {
@@ -57,4 +59,14 @@ module.exports = {
       res.sendStatus(404);
     }
   },
+
+  newgame: (req, res) => {
+    const db = req.app.get("db")
+
+    
+    const { id } = req.session.user
+    db.toggle_newgame(id)
+    res.sendStatus(200)
+    
+  }
 };

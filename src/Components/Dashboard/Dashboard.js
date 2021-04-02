@@ -1,38 +1,89 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import axios from "axios";
 import "./Dashboard.scss";
-import { Link } from "react-redux";
-import ArrowDownward from "@material-ui/icons/ArrowDownward";
+import Card from "@material-ui/core/Card"
+import Button from "@material-ui/core/Button"
+import Typography from "@material-ui/core/Typography"
+import List from "@material-ui/core/List"
+import ListItem from "@material-ui/core/ListItem"
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
-import Character from "../Character/Character"
+import ArrowDownward from "@material-ui/icons/ArrowDownward"
+import Character from "../Character/Character";
+import Oldman from "../../Images/Oldman.jpg";
+
 
 function Dashboard(props) {
   const [left, setLeft] = useState(false);
-  const [right, setRight] = useState(false)
-  const [up, setUp] = useState(false)
+  const [right, setRight] = useState(false);
+  const [up, setUp] = useState(false);
+  const [down, setDown] = useState(false)
+  const [newgameCard, setNewgameCard] = useState(true)
+  const [oldmanCard, setOldmanCard] = useState(false)
+  const [answerOne, setAnswerOne] = useState(false)
+  const [answerTwo, setAnswerTwo] = useState(false)
+  const [answerThree, setAnswerThree] = useState(false)
+  const [answerFour, setAnswerFour] = useState(false)
+  
+  useEffect(() => {
+    if (!props.user.user.newgame) {
+     setNewgameCard(false)
+   }
+  });
 
   const toggleRight = () => {
     setRight(!right);
-    props.history.push("/Forest")
+    props.history.push("/Forest");
   };
 
   const toggleLeft = () => {
-    setLeft(!left)
-    
-    props.history.push("/Mountain")
+    setLeft(!left);
+
+    props.history.push("/Mountain");
+  };
+
+  const toggleUp = () => {
+    setUp(!up);
+    props.history.push("/Town");
+  };
+
+  const toggleDown = () => {
+    setDown(!down)
+    props.history.push("/Dragon")
+  }
+
+  const toggleNewgame = () => {
+    axios.post("/api/newgame")
+    setNewgameCard(false)
+
+  }
+  
+  const toggleOldmanCard = () => {
+    setOldmanCard(!oldmanCard)
+
+  }
+
+  const toggleAnswerOne = () => {
+    setAnswerOne(!answerOne)
+  }
+
+  const toggleAnswerTwo = () => {
+    setAnswerTwo(!answerTwo);
+  };
+
+  const toggleAnswerThree = () => {
+    setAnswerThree(!answerThree);
+  };
+
+  const toggleAnswerFour = () => {
+    setAnswerFour(!answerFour);
   };
 
 
-
-const toggleUp = () => {
-  setUp(!up);
-  props.history.push("/Town");
-};
   return (
     <div className="dashboard-main">
       <Nav />
@@ -45,7 +96,14 @@ const toggleUp = () => {
               <h2>Town</h2>
             </div>
           </div>
-          <div className="dashboard-top-right"></div>
+          <div className="dashboard-top-right">
+            <img
+              src={Oldman}
+              alt="Old man"
+              className="dashboard-old-man"
+              onClick={toggleOldmanCard}
+            />
+          </div>
         </div>
         <div className="dashboard-middle">
           <div className="dashboard-middle-left">
@@ -54,7 +112,7 @@ const toggleUp = () => {
               <h2>Mountains</h2>
             </div>
           </div>
-          <div className="dashboard-middle-middle"><Character/></div>
+          <div className="dashboard-middle-middle"></div>
           <div className="dashboard-middle-right">
             <div className="dashboard-forest" onClick={toggleRight}>
               <h2>Forest</h2>
@@ -64,41 +122,166 @@ const toggleUp = () => {
         </div>
         <div className="dashboard-bottom">
           <div className="dashboard-bottom-left"></div>
-          <div className="dashboard-bottom-middle"></div>
+          <div className="dashboard-bottom-middle">
+            <Character />
+            <div className="dashboard-dragon" onClick={toggleDown}>
+              <h2>Dragon's Lair</h2>
+              <ArrowDownward />
+            </div>
+          </div>
           <div className="dashboard-bottom-right"></div>
         </div>
       </div>
-      <div className={`${left ? "character-moving" : "character"}`}>
-        <div className="face">
-          <div className="eyes">
-            <div className="eye"></div>
-            <div className="eye"></div>
-          </div>
-          <div className="nose"></div>
-          <div className="mouth"></div>
-        </div>
-        <div className="body">
-          <div className="neck"></div>
-          <div className="arms">
-            <div className="left-arm">
-              <div className="hand"></div>
-            </div>
-            <div className="right-arm">
-              <div className="hand"></div>
-            </div>
-          </div>
-          <div className="torso"></div>
-          <div className="legs">
-            <div className="left-leg">
-              <div className="foot"></div>
-            </div>
-            <div className="right-leg">
-              <div className="foot"></div>
-            </div>
-          </div>
-          <h3>{props.user.user.name}</h3>
-        </div>
-      </div>
+      <Card
+        className={`${
+          newgameCard ? "dashboard-card" : "dashboard-card-closed"
+        }`}
+      >
+        <Typography
+          variant="h4"
+          color="primary"
+          className="dashboard-card-title"
+        >
+          Welcome to {props.user.user.name}'s Quest
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="dashboard-card-description"
+        >
+          Tragedy has struck. Your home was burned to the ground by a dragon and
+          everything you owned was destroyed. It is time to start a new life and
+          to hopefully some day slay the dragon who ruined you life.
+        </Typography>
+        <Button
+          onClick={toggleNewgame}
+          className="dashboard-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+
+      <Card
+        className={`${oldmanCard ? "dashboard-card" : "dashboard-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="primary"
+          className="dashboard-card-title"
+        >
+          What would you like to ask the old man about?
+        </Typography>
+        <List className="dashboard-list">
+          <ListItem className="dashboard-list-item" onClick={toggleAnswerOne}>
+            Dragon
+          </ListItem>
+          <ListItem className="dashboard-list-item" onClick={toggleAnswerTwo}>
+            Forest
+          </ListItem>
+          <ListItem className="dashboard-list-item" onClick={toggleAnswerThree}>
+            Mountains
+          </ListItem>
+          <ListItem className="dashboard-list-item" onClick={toggleAnswerFour}>
+            Town
+          </ListItem>
+        </List>
+        <Button
+          onClick={toggleOldmanCard}
+          className="dashboard-card-button"
+          variant="contained"
+          color="primary"
+        >
+          Say Goodbye
+        </Button>
+      </Card>
+      <Card
+        className={`${answerOne ? "dashboard-card" : "dashboard-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="primary"
+          className="dashboard-card-title"
+        >
+          What would you like to ask the old man?
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="dashboard-card-description"
+        >
+          Tragedy has struck. Your home was burned to the ground by a dragon and
+          everything you owned was destroyed. It is time to start a new life and
+          to hopefully some day slay the dragon who ruined you life.
+        </Typography>
+        <Button
+          onClick={toggleAnswerOne}
+          className="dashboard-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${answerTwo ? "dashboard-card" : "dashboard-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="primary"
+          className="dashboard-card-title"
+        >
+          What would you like to ask the old man?
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="dashboard-card-description"
+        >
+          Tragedy has struck. Your home was burned to the ground by a dragon and
+          everything you owned was destroyed. It is time to start a new life and
+          to hopefully some day slay the dragon who ruined you life.
+        </Typography>
+        <Button
+          onClick={toggleAnswerTwo}
+          className="dashboard-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${
+          answerThree ? "dashboard-card" : "dashboard-card-closed"
+        }`}
+      >
+        <Typography
+          variant="h4"
+          color="primary"
+          className="dashboard-card-title"
+        >
+          What would you like to ask the old man?
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="dashboard-card-description"
+        >
+          Tragedy has struck. Your home was burned to the ground by a dragon and
+          everything you owned was destroyed. It is time to start a new life and
+          to hopefully some day slay the dragon who ruined you life.
+        </Typography>
+        <Button
+          onClick={toggleAnswerThree}
+          className="dashboard-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }

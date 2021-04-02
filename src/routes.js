@@ -3,15 +3,16 @@ import { Switch, Route } from "react-router-dom";
 import Main from "./Components/Main/Main";
 import Auth from "./Components/Auth/Auth";
 import Dashboard from "./Components/Dashboard/Dashboard";
-import Mountain from "./Components/Mountain/Mountain";
 import Alley from "./Components/Alley/Alley";
 import Blacksmith from "./Components/Blacksmith/Blacksmith";
 import Castle from "./Components/Castle/Castle";
 import Cave from "./Components/Cave/Cave";
+import Dragon from "./Components/Dragon/Dragon"
 import Forest from "./Components/Forest/Forest";
 import Garden from "./Components/Garden/Garden";
 import Throne from "./Components/Throne/Throne";
 import Market from "./Components/Market/Market";
+import Mountain from "./Components/Mountain/Mountain";
 import Nest from "./Components/Nest/Nest";
 import Pass from "./Components/Pass/Pass";
 import Stables from "./Components/Stables/Stables";
@@ -30,6 +31,7 @@ export default (
     <Route path="/Castle" component={Castle} />
     <Route path="/Cave" component={Cave} />
     <Route path="/Dashboard" component={Dashboard} />
+    <Route path="/Dragon" component={Dragon}/>
     <Route path="/Forest" component={Forest} />
     <Route path="/Garden" component={Garden} />
     <Route path="/Throne" component={Throne} />

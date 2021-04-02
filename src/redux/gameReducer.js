@@ -1,3 +1,5 @@
+import axios from "axios"
+
 const initialState = {
   game: [],
 };
@@ -5,6 +7,7 @@ const initialState = {
 const GET_GAME = "GET_GAME";
 
 export function getGame(data) {
+  
   return {
     type: GET_GAME,
     payload: data,

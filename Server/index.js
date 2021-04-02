@@ -23,6 +23,7 @@ app.post("/api/register", controller.register);
 app.post("/api/login", controller.login);
 app.delete("/api/logout", controller.logout);
 app.get("/api/user", controller.getUser);
+app.post("/api/newgame", controller.newgame)
 
 app.use(express.static(__dirname + "/../build"));
 
