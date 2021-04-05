@@ -15,10 +15,9 @@ import ArrowBack from "@material-ui/icons/ArrowBack";
 import Horse from "../../Images/Horse.jpg";
 import Stable from "../../Images/Stables.jpg";
 import Cowboy from "../../Images/Cowboy.jpg";
+import Loading from "../Loading/Loading";
 
 function Stables(props) {
-
-  
   const [left, setLeft] = useState(false);
   const [right, setRight] = useState(false);
   const [oldmanCard, setOldmanCard] = useState(false);
@@ -31,12 +30,16 @@ function Stables(props) {
   const [answerFourNo, setAnswerFourNo] = useState(false);
   const [horseCard, setHorseCard] = useState(false);
   const [manureCleaned, setManureCleaned] = useState(false);
-  const [manureCleanPermission, setManureCleanPermission] = useState(false)
-  const [stablesProps, setStablesProps] = useState()
+  const [stablesProps, setStablesProps] = useState({ "has_cleaned": true });
+  const [goodReason, setGoodReason] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
-   useEffect(() => {
-     axios.get("/api/stables").then(res => setStablesProps(res.data))
-   }, []);
+  useEffect(() => {
+    axios.get("/api/stables").then((res) => {
+      setStablesProps(res.data[0])
+      setIsLoading(false);
+    })
+  }, []);
 
   const toggleLeft = () => {
     setLeft(!left);
@@ -53,9 +56,9 @@ function Stables(props) {
   };
 
   const toggleAnswerOne = () => {
-    axios.post("/api/manureCleanPermission").then(() => {
-
-    })
+    axios
+      .post("/api/manureTakePermission")
+      .then((res) => setStablesProps(res.data));
     toggleOldmanCard();
     setAnswerOne(!answerOne);
   };
@@ -63,7 +66,6 @@ function Stables(props) {
   const toggleAnswerTwo = () => {
     toggleOldmanCard();
     setAnswerTwo(!answerTwo);
-    axios.post("/api/manureTakePermission").then(() => {});
   };
 
   const toggleAnswerThree = () => {
@@ -72,14 +74,18 @@ function Stables(props) {
   };
 
   const toggleAnswerFour = () => {
-    toggleOldmanCard();
-    setAnswerFour(!answerFour);
+    axios.post("/api/manureCleanPermission").then((res) => {
+      setStablesProps(res.data);
+      toggleOldmanCard();
+      setAnswerFour(!answerFour);
+    });
   };
 
   const toggleAnswerFourYes = () => {
+    
     setOldmanCard(false);
     setAnswerFour(false);
-    if (props.user.user.hasWorked) {
+    if (stablesProps[0].has_cleaned) {
       toggleAnswerFourYesB();
     } else {
       toggleAnswerFourYesA();
@@ -98,9 +104,24 @@ function Stables(props) {
 
   const toggleHorseCard = () => setHorseCard(!horseCard);
 
-  const toggleManureCleaned = () => setManureCleaned(!manureCleaned);
+  const toggleManureCleaned = () => {
+
+    if (stablesProps.clean_permission) {
+      axios.post("/api/manureHasCleaned").then((res) => {
+        setStablesProps(res.data);
+
+        setManureCleaned(!manureCleaned);
+      })
+    } else {
+      toggleGoodReason()
+    }
+  }
+
+  const toggleGoodReason = () => setGoodReason(!goodReason)
 
   return (
+
+    (isLoading) ? <Loading/> :
     <div className="stables-main">
       <Nav />
       <div className="stables-body">
@@ -142,9 +163,12 @@ function Stables(props) {
         </div>
         <div className="stables-bottom">
           <div className="stables-bottom-left">
-            <div onClick={toggleManureCleaned}
+            <div
+              onClick={toggleManureCleaned}
               className={`${
-                manureCleaned ? "manure-piles-closed" : "manure-piles"
+                stablesProps.has_cleaned
+                  ? "manure-piles-closed"
+                  : "manure-piles"
               }`}
             >
               <div className="manure-top">
@@ -371,6 +395,30 @@ function Stables(props) {
 
         <Button
           onClick={toggleHorseCard}
+          className="stables-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${goodReason ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          Disgusting!
+        </Typography>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          You would have to have a really good reason to pick up this manure!
+        </Typography>
+        <Button
+          onClick={toggleGoodReason}
           className="stables-card-button"
           variant="contained"
           color="primary"

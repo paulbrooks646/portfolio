@@ -92,4 +92,12 @@ module.exports = {
     const stables = await db.manure_take_permission(id);
     res.status(200).send(stables);
   },
+
+  manureHasCleaned: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const stables = await db.manure_has_cleaned(id);
+    res.status(200).send(stables);
+  },
 };
