@@ -53,7 +53,7 @@ function Stables(props) {
   };
 
   const toggleAnswerOne = () => {
-    axios.post("/api/cleanPermission").then(() => {
+    axios.post("/api/manureCleanPermission").then(() => {
 
     })
     toggleOldmanCard();
@@ -63,6 +63,7 @@ function Stables(props) {
   const toggleAnswerTwo = () => {
     toggleOldmanCard();
     setAnswerTwo(!answerTwo);
+    axios.post("/api/manureTakePermission").then(() => {});
   };
 
   const toggleAnswerThree = () => {

@@ -1,11 +1,9 @@
-const bcrypt = require("bcrypt")
-
+const bcrypt = require("bcrypt");
 
 module.exports = {
   register: async (req, res) => {
     const db = req.app.get("db");
-        
-        
+
     const { newUsername, newPassword } = req.body;
 
     const existingUser = await db.check_user(newUsername);
@@ -63,21 +61,35 @@ module.exports = {
   },
 
   newgame: (req, res) => {
-    const db = req.app.get("db")
+    const db = req.app.get("db");
 
-    
-    const { id } = req.session.user
-    db.toggle_newgame(id)
-    res.sendStatus(200)
-    
-  }, 
+    const { id } = req.session.user;
+    db.toggle_newgame(id);
+    res.sendStatus(200);
+  },
 
   getStables: async (req, res) => {
-    const db = req.app.get("db")
-    console.log(req.session.user)
-    const { id } = req.session.user
-    const stables = await db.get_stables(id)
-    console.log(stables)
-    res.status(200).send(stables)
-  }
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const stables = await db.get_stables(id);
+
+    res.status(200).send(stables);
+  },
+
+  manureCleanPermission: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const stables = await db.manure_clean_permission(id);
+    res.status(200).send(stables);
+  },
+
+  manureTakePermission: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const stables = await db.manure_take_permission(id);
+    res.status(200).send(stables);
+  },
 };
