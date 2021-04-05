@@ -27,6 +27,7 @@
           height: 200px;
           width: 200px;
           background-color: green;
+          cursor: pointer;
         }
       }
 
@@ -116,6 +117,57 @@
         background-color: green;
         height: 100%;
         width: 40%;
+        
+
+        .manure-piles {
+
+          display: flex;
+        flex-direction: column;
+        justify-content: space-evenly; 
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+        
+
+          .manure-top {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+
+            .manure {
+              height: 20px;
+              width: 20px;
+              border-radius: 50%;
+              background-color: brown;
+            }
+          }
+
+          .manure-middle {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+
+            .manure {
+              height: 20px;
+              width: 20px;
+              border-radius: 50%;
+              background-color: brown;
+            }}
+
+            .manure-bottom {
+              display: flex;
+              justify-content: space-evenly;
+              align-items: center;
+
+              .manure {
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                background-color: brown;
+              }
+            
+          }
+        }
       }
 
       .stables-bottom-middle {
@@ -128,6 +180,17 @@
         background-color: green;
         height: 100%;
         width: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .manure-mound {
+          height: 200px;
+          width: 200px;
+          border-radius: 50%;
+          background-color: brown;
+          cursor: pointer;
+        }
       }
     }
   }

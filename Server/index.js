@@ -24,6 +24,7 @@ app.post("/api/login", controller.login);
 app.delete("/api/logout", controller.logout);
 app.get("/api/user", controller.getUser);
 app.post("/api/newgame", controller.newgame)
+app.get("/api/stables", controller.getStables)
 
 app.use(express.static(__dirname + "/../build"));
 

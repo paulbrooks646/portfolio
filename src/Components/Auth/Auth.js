@@ -33,7 +33,6 @@ function Auth(props) {
       axios
         .post("/api/login", { username, password })
         .then((res) => {
-          console.log(res.data);
           props.loginUser(res.data);
           props.history.push("/Dashboard");
         })

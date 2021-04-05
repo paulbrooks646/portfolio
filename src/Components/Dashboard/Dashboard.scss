@@ -23,13 +23,17 @@
       
 
       .dashboard-top-left {
-        background-color: green;
+        background-image:url("../../Images/Grass.png");
+        background-size: 100% 100%;
         width: 40%;
         height: 100%;
+
+        
       }
 
       .dashboard-top-middle {
-        background-color: brown;
+        background-image: url("../../Images//Dirt.png");
+        background-size: cover;
         width: 20%;
         height: 100%;
         display: flex;
@@ -44,7 +48,8 @@
       }
 
       .dashboard-top-right {
-        background-color: green;
+         background-image:url("../../Images/Grass.png");
+        background-size: 100% 100%;
         width: 40%;
         height: 100%;
         display: flex;
@@ -69,7 +74,9 @@
       width: 100vw;
 
       .dashboard-middle-left {
-        background-color: brown;
+        background-image: url("../../Images//Dirt.png");
+        
+        background-size: cover;
         width: 40%;
         height: 100%;
         display: flex;
@@ -93,7 +100,8 @@
       }
 
       .dashboard-middle-right {
-        background-color: brown;
+        background-image: url("../../Images/Dirt.png");
+        background-size: cover;
         width: 40%;
         height: 100%;
         display: flex;
@@ -116,13 +124,16 @@
       width: 100vw;
 
       .dashboard-bottom-left {
-        background-color: green;
+         background-image:url("../../Images/Grass.png");
+        background-size: 100% 100%;
         height: 100%;
         width: 40%;
       }
 
       .dashboard-bottom-middle {
-       background-color: brown;
+       background-image: url("../../Images/Dirt.png");
+       background-size: cover;
+       
         height: 100%;
         width: 20%;
         display: flex;
@@ -138,7 +149,8 @@
       }
 
       .dashboard-bottom-right {
-        background-color: green;
+         background-image:url("../../Images/Grass.png");
+        background-size: 100% 100%;
         height: 100%;
         width: 40%;
       }

@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import axios from "axios";
 import "./Stables.scss";
-import { Link } from "react-redux";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 
@@ -19,6 +17,8 @@ import Stable from "../../Images/Stables.jpg";
 import Cowboy from "../../Images/Cowboy.jpg";
 
 function Stables(props) {
+
+  
   const [left, setLeft] = useState(false);
   const [right, setRight] = useState(false);
   const [oldmanCard, setOldmanCard] = useState(false);
@@ -29,6 +29,14 @@ function Stables(props) {
   const [answerFourYesA, setAnswerFourYesA] = useState(false);
   const [answerFourYesB, setAnswerFourYesB] = useState(false);
   const [answerFourNo, setAnswerFourNo] = useState(false);
+  const [horseCard, setHorseCard] = useState(false);
+  const [manureCleaned, setManureCleaned] = useState(false);
+  const [manureCleanPermission, setManureCleanPermission] = useState(false)
+  const [stablesProps, setStablesProps] = useState()
+
+   useEffect(() => {
+     axios.get("/api/stables").then(res => setStablesProps(res.data))
+   }, []);
 
   const toggleLeft = () => {
     setLeft(!left);
@@ -45,6 +53,9 @@ function Stables(props) {
   };
 
   const toggleAnswerOne = () => {
+    axios.post("/api/cleanPermission").then(() => {
+
+    })
     toggleOldmanCard();
     setAnswerOne(!answerOne);
   };
@@ -65,30 +76,28 @@ function Stables(props) {
   };
 
   const toggleAnswerFourYes = () => {
-    setOldmanCard(false)
-    setAnswerFour(false)
+    setOldmanCard(false);
+    setAnswerFour(false);
     if (props.user.user.hasWorked) {
-      toggleAnswerFourYesB()
+      toggleAnswerFourYesB();
     } else {
       toggleAnswerFourYesA();
     }
   };
 
-  const toggleAnswerFourYesA = () => {
-    setAnswerFourYesA(!answerFourYesA);
+  const toggleAnswerFourYesA = () => setAnswerFourYesA(!answerFourYesA);
 
-  };
-
-  const toggleAnswerFourYesB = () => {
-    setAnswerFourYesB(!answerFourYesB);
-
-  };
+  const toggleAnswerFourYesB = () => setAnswerFourYesB(!answerFourYesB);
 
   const toggleAnswerFourNo = () => {
     setAnswerFourNo(!answerFourNo);
-    setOldmanCard(false)
-    setAnswerFour(false)
+    setOldmanCard(false);
+    setAnswerFour(false);
   };
+
+  const toggleHorseCard = () => setHorseCard(!horseCard);
+
+  const toggleManureCleaned = () => setManureCleaned(!manureCleaned);
 
   return (
     <div className="stables-main">
@@ -96,7 +105,12 @@ function Stables(props) {
       <div className="stables-body">
         <div className="stables-top">
           <div className="stables-top-left">
-            <img src={Horse} alt="horse" className="stables-horse" />
+            <img
+              src={Horse}
+              alt="horse"
+              className="stables-horse"
+              onClick={toggleHorseCard}
+            />
           </div>
           <div className="stables-top-middle">
             <img
@@ -126,9 +140,31 @@ function Stables(props) {
           </div>
         </div>
         <div className="stables-bottom">
-          <div className="stables-bottom-left"></div>
+          <div className="stables-bottom-left">
+            <div onClick={toggleManureCleaned}
+              className={`${
+                manureCleaned ? "manure-piles-closed" : "manure-piles"
+              }`}
+            >
+              <div className="manure-top">
+                <div className="manure"></div>
+                <div className="manure"></div>
+              </div>
+              <div className="manure-middle">
+                <div className="manure"></div>
+                <div className="manure"></div>
+                <div className="manure"></div>
+              </div>
+              <div className="manure-bottom">
+                <div className="manure"></div>
+                <div className="manure"></div>
+              </div>
+            </div>
+          </div>
           <div className="stables-bottom-middle"></div>
-          <div className="stables-bottom-right"></div>
+          <div className="stables-bottom-right">
+            <div className="manure-mound"></div>
+          </div>
         </div>
       </div>
       <Card
@@ -266,12 +302,16 @@ function Stables(props) {
       <Card
         className={`${answerFourYesA ? "answer-card" : "answer-card-closed"}`}
       >
-        <Typography variant="h4" color="primary" className="stables-card-title">
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
           Have fun!
         </Typography>
 
         <Button
-          onClick={toggleAnswerFourYesB}
+          onClick={toggleAnswerFourYesA}
           className="stables-card-button"
           variant="contained"
           color="primary"
@@ -282,7 +322,11 @@ function Stables(props) {
       <Card
         className={`${answerFourYesB ? "answer-card" : "answer-card-closed"}`}
       >
-        <Typography variant="h4" color="primary" className="stables-card-title">
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
           Looks like you're out of luck. There is no manure left.
         </Typography>
 
@@ -298,12 +342,34 @@ function Stables(props) {
       <Card
         className={`${answerFourNo ? "answer-card" : "answer-card-closed"}`}
       >
-        <Typography variant="h4" color="primary" className="stables-card-title">
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
           Suit yourself!
         </Typography>
 
         <Button
           onClick={toggleAnswerFourNo}
+          className="stables-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${horseCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          Neigh!!!
+        </Typography>
+
+        <Button
+          onClick={toggleHorseCard}
           className="stables-card-button"
           variant="contained"
           color="primary"

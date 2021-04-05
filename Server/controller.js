@@ -15,14 +15,14 @@ module.exports = {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(newPassword, salt);
 
-    const newUser = await db.register_user([newUsername, hash]);
+    const newUser = await db.register_user([newUsername, hash, 0, true]);
+    const inventory = db.new_inventory(newUser[0].id);
+    const stables = db.new_stables(newUser[0].id);
     req.session.user = {
       id: newUser[0].id,
       name: newUser[0].name,
-      rope: newUser[0].rope,
       newgame: newUser[0].newgame,
       coins: newUser[0].coins,
-      hasWorked: newUser[0].has_worked
     };
     res.status(200).send(req.session.user);
   },
@@ -40,10 +40,8 @@ module.exports = {
         req.session.user = {
           id: user[0].id,
           name: user[0].name,
-          rope: user[0].rope,
           newgame: user[0].newgame,
           coins: user[0].coins,
-          hasWorked: user[0].has_worked
         };
         res.status(200).send(req.session.user);
       } else {
@@ -72,5 +70,14 @@ module.exports = {
     db.toggle_newgame(id)
     res.sendStatus(200)
     
+  }, 
+
+  getStables: async (req, res) => {
+    const db = req.app.get("db")
+    console.log(req.session.user)
+    const { id } = req.session.user
+    const stables = await db.get_stables(id)
+    console.log(stables)
+    res.status(200).send(stables)
   }
 };
