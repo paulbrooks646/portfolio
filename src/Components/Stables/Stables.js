@@ -30,9 +30,11 @@ function Stables(props) {
   const [answerFourNo, setAnswerFourNo] = useState(false);
   const [horseCard, setHorseCard] = useState(false);
   const [manureCleaned, setManureCleaned] = useState(false);
-  const [stablesProps, setStablesProps] = useState({ "has_cleaned": true });
+  const [stablesProps, setStablesProps] = useState();
   const [goodReason, setGoodReason] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [manureMound, setManureMound] = useState(false)
+  const [bottleNeeded, setBottleNeeded] = useState(false)
 
   useEffect(() => {
     axios.get("/api/stables").then((res) => {
@@ -58,7 +60,7 @@ function Stables(props) {
   const toggleAnswerOne = () => {
     axios
       .post("/api/manureTakePermission")
-      .then((res) => setStablesProps(res.data));
+      .then((res) => setStablesProps(res.data[0]));
     toggleOldmanCard();
     setAnswerOne(!answerOne);
   };
@@ -75,7 +77,7 @@ function Stables(props) {
 
   const toggleAnswerFour = () => {
     axios.post("/api/manureCleanPermission").then((res) => {
-      setStablesProps(res.data);
+      setStablesProps(res.data[0]);
       toggleOldmanCard();
       setAnswerFour(!answerFour);
     });
@@ -85,7 +87,7 @@ function Stables(props) {
     
     setOldmanCard(false);
     setAnswerFour(false);
-    if (stablesProps[0].has_cleaned) {
+    if (stablesProps.has_cleaned) {
       toggleAnswerFourYesB();
     } else {
       toggleAnswerFourYesA();
@@ -108,7 +110,7 @@ function Stables(props) {
 
     if (stablesProps.clean_permission) {
       axios.post("/api/manureHasCleaned").then((res) => {
-        setStablesProps(res.data);
+        setStablesProps(res.data[0]);
 
         setManureCleaned(!manureCleaned);
       })
@@ -118,6 +120,16 @@ function Stables(props) {
   }
 
   const toggleGoodReason = () => setGoodReason(!goodReason)
+
+  const toggleManureMound = () => {
+    if (!stablesProps.take_permission) {
+      setManureMound(!manureMound)
+    } else if (!props.inventory.bottle) {
+      setBottleNeeded(!bottleNeeded)
+    } else {
+
+    }
+  }
 
   return (
 
@@ -188,7 +200,7 @@ function Stables(props) {
           </div>
           <div className="stables-bottom-middle"></div>
           <div className="stables-bottom-right">
-            <div className="manure-mound"></div>
+            <div className="manure-mound" onClick={toggleManureMound()}></div>
           </div>
         </div>
       </div>

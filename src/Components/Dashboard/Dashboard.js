@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
+import {getInventory} from "../../redux/inventoryReducer"
 import axios from "axios";
 import "./Dashboard.scss";
 import Card from "@material-ui/core/Card"
@@ -32,7 +33,10 @@ function Dashboard(props) {
   useEffect(() => {
     if (!props.user.user.newgame) {
      setNewgameCard(false)
-   }
+    }
+    axios.get("/api/inventory").then((res) => {
+      props.getInventory(res.data[0]);
+    });
   });
 
   const toggleRight = () => {
@@ -306,4 +310,4 @@ function Dashboard(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser })(Dashboard);
+export default connect(mapStateToProps, { getUser, getInventory })(Dashboard);

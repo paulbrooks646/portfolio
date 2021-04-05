@@ -1,23 +1,23 @@
 import axios from "axios"
 
 const initialState = {
-  game: [],
+  inventory: [],
 };
 
-const GET_GAME = "GET_GAME";
+const GET_INVENTORY = "GET_INVENTORY";
 
-export function getGame(data) {
+export function getInventory(data) {
   
   return {
-    type: GET_GAME,
+    type: GET_INVENTORY,
     payload: data,
   };
 }
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case GET_GAME:
-      return { ...state, game: action.payload };
+    case GET_INVENTORY:
+      return { ...state, inventory: action.payload };
 
     default:
       return state;

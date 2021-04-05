@@ -1,11 +1,11 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import userReducer from "./userReducer";
-import gameReducer from "./gameReducer";
+import inventoryReducer from "./inventoryReducer";
 import promiseMiddleware from "redux-promise-middleware";
 
 const rootReducer = combineReducers({
   user: userReducer,
-  game: gameReducer,
+  inventory: inventoryReducer,
 });
 
 export default createStore(rootReducer, applyMiddleware(promiseMiddleware));

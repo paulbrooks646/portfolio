@@ -100,4 +100,12 @@ module.exports = {
     const stables = await db.manure_has_cleaned(id);
     res.status(200).send(stables);
   },
+
+  getInventory: async (req, res) => {
+    const db = req.app.get("db")
+    const { id } = req.session.user;
+
+    const inventory = await db.get_inventory(id)
+    res.status(200).send(inventory)
+  }
 };
