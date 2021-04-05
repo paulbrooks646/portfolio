@@ -35,6 +35,7 @@ function Stables(props) {
   const [isLoading, setIsLoading] = useState(true)
   const [manureMound, setManureMound] = useState(false)
   const [bottleNeeded, setBottleNeeded] = useState(false)
+  const [manureGotten, setManureGotten] = useState(false)
 
   useEffect(() => {
     axios.get("/api/stables").then((res) => {
@@ -124,16 +125,17 @@ function Stables(props) {
   const toggleManureMound = () => {
     if (!stablesProps.take_permission) {
       setManureMound(!manureMound)
-    } else if (!props.inventory.bottle) {
+    } else if (!props.inventory.inventory.bottle) {
       setBottleNeeded(!bottleNeeded)
     } else {
+      setManureGotten(!manureGotten)
 
     }
   }
 
-  return (
-
-    (isLoading) ? <Loading/> :
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div className="stables-main">
       <Nav />
       <div className="stables-body">
@@ -200,7 +202,7 @@ function Stables(props) {
           </div>
           <div className="stables-bottom-middle"></div>
           <div className="stables-bottom-right">
-            <div className="manure-mound" onClick={toggleManureMound()}></div>
+            <div className="manure-mound" onClick={toggleManureMound}></div>
           </div>
         </div>
       </div>
@@ -431,6 +433,78 @@ function Stables(props) {
         </Typography>
         <Button
           onClick={toggleGoodReason}
+          className="stables-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${manureMound ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          Rank!
+        </Typography>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          IF you are serious, get permission from the farmer before you take any of his precious manure.
+        </Typography>
+        <Button
+          onClick={setManureMound(false)}
+          className="stables-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${bottleNeeded ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          Yuck!
+        </Typography>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          If you seriously want to get some manure, at least find something to put it in first.
+        </Typography>
+        <Button
+          onClick={setBottleNeeded(false)}
+          className="stables-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${manureGotten ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          Gross!
+        </Typography>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          You succeed in filling your jar with smelly, rancid manure. Congratulations?
+        </Typography>
+        <Button
+          onClick={setManureGotten(false)}
           className="stables-card-button"
           variant="contained"
           color="primary"
