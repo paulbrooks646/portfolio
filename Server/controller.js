@@ -60,12 +60,18 @@ module.exports = {
     }
   },
 
-  newgame: (req, res) => {
+  newgame: async (req, res) => {
     const db = req.app.get("db");
 
     const { id } = req.session.user;
-    db.toggle_newgame(id);
-    res.sendStatus(200);
+    const user = await db.toggle_newgame(id);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+    };
+    res.status(200).send(req.session.user)
   },
 
   getStables: async (req, res) => {

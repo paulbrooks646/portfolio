@@ -61,9 +61,12 @@ function Dashboard(props) {
   }
 
   const toggleNewgame = () => {
-    axios.post("/api/newgame")
+    axios.post("/api/newgame").then(res => {
+      
+      props.getUser(res.data)
+    })
+    
     setNewgameCard(false)
-
   }
   
   const toggleOldmanCard = () => {
