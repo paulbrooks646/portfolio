@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
+import {getInventory} from "../../redux/inventoryReducer"
 import axios from "axios";
 import "./Stables.scss";
 import Card from "@material-ui/core/Card";
@@ -11,7 +12,6 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
-
 import Horse from "../../Images/Horse.jpg";
 import Stable from "../../Images/Stables.jpg";
 import Cowboy from "../../Images/Cowboy.jpg";
@@ -31,17 +31,18 @@ function Stables(props) {
   const [horseCard, setHorseCard] = useState(false);
   const [manureCleaned, setManureCleaned] = useState(false);
   const [stablesProps, setStablesProps] = useState();
-  const [goodReason, setGoodReason] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
-  const [manureMound, setManureMound] = useState(false)
-  const [bottleNeeded, setBottleNeeded] = useState(false)
-  const [manureGotten, setManureGotten] = useState(false)
+  const [goodReason, setGoodReason] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [bottleNeeded, setBottleNeeded] = useState(false);
+  const [manureGotten, setManureGotten] = useState(false);
+  const [needPermission, setNeedPermission] = useState(false);
+  const [alreadyTaken, setAlreadyTaken] = useState(false)
 
   useEffect(() => {
     axios.get("/api/stables").then((res) => {
-      setStablesProps(res.data[0])
+      setStablesProps(res.data[0]);
       setIsLoading(false);
-    })
+    });
   }, []);
 
   const toggleLeft = () => {
@@ -85,7 +86,6 @@ function Stables(props) {
   };
 
   const toggleAnswerFourYes = () => {
-    
     setOldmanCard(false);
     setAnswerFour(false);
     if (stablesProps.has_cleaned) {
@@ -108,29 +108,51 @@ function Stables(props) {
   const toggleHorseCard = () => setHorseCard(!horseCard);
 
   const toggleManureCleaned = () => {
-
     if (stablesProps.clean_permission) {
       axios.post("/api/manureHasCleaned").then((res) => {
         setStablesProps(res.data[0]);
 
         setManureCleaned(!manureCleaned);
-      })
+      });
     } else {
-      toggleGoodReason()
+      toggleGoodReason();
     }
-  }
+  };
 
-  const toggleGoodReason = () => setGoodReason(!goodReason)
+  const toggleGoodReason = () => setGoodReason(!goodReason);
 
-  const toggleManureMound = () => {
+  const manureMound = () => {
     if (!stablesProps.take_permission) {
-      setManureMound(!manureMound)
+      toggleNeedPermission()
     } else if (!props.inventory.inventory.bottle) {
-      setBottleNeeded(!bottleNeeded)
+      toggleBottleNeeded()
+    } else if (stablesProps.has_taken) {
+      toggleAlreadyTaken();
     } else {
-      setManureGotten(!manureGotten)
-
+      toggleManureGotten();
     }
+  };
+
+  const toggleAlreadyTaken = () => setAlreadyTaken(!alreadyTaken)
+
+  const toggleNeedPermission = () => 
+    setNeedPermission(!needPermission)
+  
+
+  const toggleBottleNeeded = () => 
+    setBottleNeeded(!bottleNeeded)
+  
+
+  const toggleManureGotten = () => {
+    axios.post("/api/manure").then((res) => {
+      getInventory(res.data[0]);
+      setManureGotten(!manureGotten);
+    });
+    axios.post("/api/manureHasTaken").then((res) => {
+      setStablesProps(res.data[0]);
+
+    });
+
   }
 
   return isLoading ? (
@@ -202,7 +224,7 @@ function Stables(props) {
           </div>
           <div className="stables-bottom-middle"></div>
           <div className="stables-bottom-right">
-            <div className="manure-mound" onClick={toggleManureMound}></div>
+            <div className="manure-mound" onClick={manureMound}></div>
           </div>
         </div>
       </div>
@@ -429,7 +451,7 @@ function Stables(props) {
           color="primary"
           className="answer-card-description"
         >
-          You would have to have a really good reason to pick up this manure!
+          You would have to have a really good reason to pick up this dung!
         </Typography>
         <Button
           onClick={toggleGoodReason}
@@ -440,7 +462,9 @@ function Stables(props) {
           CLOSE
         </Button>
       </Card>
-      <Card className={`${manureMound ? "answer-card" : "answer-card-closed"}`}>
+      <Card
+        className={`${needPermission ? "answer-card" : "answer-card-closed"}`}
+      >
         <Typography
           variant="h4"
           color="primary"
@@ -453,10 +477,11 @@ function Stables(props) {
           color="primary"
           className="answer-card-description"
         >
-          IF you are serious, get permission from the farmer before you take any of his precious manure.
+          If you are serious, get permission from the farmer before you take his
+          precious manure.
         </Typography>
         <Button
-          onClick={setManureMound(false)}
+          onClick={toggleNeedPermission}
           className="stables-card-button"
           variant="contained"
           color="primary"
@@ -464,7 +489,9 @@ function Stables(props) {
           CLOSE
         </Button>
       </Card>
-      <Card className={`${bottleNeeded ? "answer-card" : "answer-card-closed"}`}>
+      <Card
+        className={`${bottleNeeded ? "answer-card" : "answer-card-closed"}`}
+      >
         <Typography
           variant="h4"
           color="primary"
@@ -477,10 +504,11 @@ function Stables(props) {
           color="primary"
           className="answer-card-description"
         >
-          If you seriously want to get some manure, at least find something to put it in first.
+          If you seriously want some manure, at least find something to put it
+          in.
         </Typography>
         <Button
-          onClick={setBottleNeeded(false)}
+          onClick={toggleBottleNeeded}
           className="stables-card-button"
           variant="contained"
           color="primary"
@@ -488,7 +516,9 @@ function Stables(props) {
           CLOSE
         </Button>
       </Card>
-      <Card className={`${manureGotten ? "answer-card" : "answer-card-closed"}`}>
+      <Card
+        className={`${manureGotten ? "answer-card" : "answer-card-closed"}`}
+      >
         <Typography
           variant="h4"
           color="primary"
@@ -501,10 +531,37 @@ function Stables(props) {
           color="primary"
           className="answer-card-description"
         >
-          You succeed in filling your jar with smelly, rancid manure. Congratulations?
+          You succeed in filling your jar with smelly, rancid manure.
+          Congratulations?
         </Typography>
         <Button
-          onClick={setManureGotten(false)}
+          onClick={toggleManureGotten}
+          className="stables-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${alreadyTaken ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          No way!
+        </Typography>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          You have taken as much manure as you will ever need.
+        </Typography>
+        <Button
+          onClick={toggleAlreadyTaken}
           className="stables-card-button"
           variant="contained"
           color="primary"
@@ -517,4 +574,4 @@ function Stables(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser })(Stables);
+export default connect(mapStateToProps, { getUser, getInventory })(Stables);
