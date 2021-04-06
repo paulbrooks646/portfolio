@@ -35,12 +35,14 @@
       height: 20vh;
       display: flex;
       width: 100vw;
+      background-image: url("../../Images/Dirt.png");
+      background-size: 100% 100%;
 
       .valley-middle-left {
-        background-image: url("../../Images/Dirt.png");
+        
         width: 40vw;
         height: 100%;
-        background-size: 100% 100%;
+        
       }
 
       .valley-middle-middle {
@@ -51,8 +53,7 @@
       }
 
       .valley-middle-right {
-        background-image: url("../../Images//Dirt.png");
-        background-size: 100% 100%;
+        
         width: 40%;
         height: 100%;
         display: flex;

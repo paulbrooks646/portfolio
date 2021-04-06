@@ -13,11 +13,12 @@
       height: 35vh;
       display: flex;
       width: 100vw;
+      background-image: url("../../Images/Grass.png");
+      background-size: 100% 100%;
 
       .stables-top-left {
         width: 40%;
         height: 100%;
-        background-color: green;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -32,7 +33,7 @@
       }
 
       .stables-top-middle {
-        background-color: green;
+        
         width: 20%;
         height: 100%;
         display: flex;
@@ -47,7 +48,7 @@
       }
 
       .stables-top-right {
-        background-color: green;
+        
         width: 40%;
         height: 100%;
         display: flex;
@@ -67,9 +68,11 @@
       height: 20vh;
       display: flex;
       width: 100vw;
+      background-image: url("../../Images/Dirt.png");
+      background-size: 100% 100%;
 
       .stables-middle-left {
-        background-color: brown;
+        
         width: 40%;
         height: 100%;
         display: flex;
@@ -85,13 +88,13 @@
       }
 
       .stables-middle-middle {
-        background-color: brown;
+        
         width: 20%;
         height: 100%;
       }
 
       .stables-middle-right {
-        background-color: brown;
+        
         width: 40%;
         height: 100%;
         display: flex;
@@ -112,9 +115,11 @@
       height: 35vh;
       display: flex;
       width: 100vw;
+      background-image: url("../../Images/Grass.png");
+      background-size: 100% 100%;
 
       .stables-bottom-left {
-        background-color: green;
+        
         height: 100%;
         width: 40%;
 
@@ -168,13 +173,12 @@
       }
 
       .stables-bottom-middle {
-        background-color: green;
+        
         height: 100%;
         width: 20%;
       }
 
       .stables-bottom-right {
-        background-color: green;
         height: 100%;
         width: 40%;
         display: flex;
