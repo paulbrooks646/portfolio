@@ -16,6 +16,7 @@ import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import ArrowDownward from "@material-ui/icons/ArrowDownward"
 import Character from "../Character/Character";
 import Oldman from "../../Images/Oldman.jpg";
+import Loading from "../Loading/Loading";
 
 
 function Dashboard(props) {
@@ -29,6 +30,7 @@ function Dashboard(props) {
   const [answerTwo, setAnswerTwo] = useState(false)
   const [answerThree, setAnswerThree] = useState(false)
   const [answerFour, setAnswerFour] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   
   useEffect(() => {
     if (!props.user.user.newgame) {
@@ -36,6 +38,8 @@ function Dashboard(props) {
     }
     axios.get("/api/inventory").then((res) => {
       props.getInventory(res.data[0]);
+      setIsLoading(false)
+
     });
   });
 
@@ -96,6 +100,8 @@ function Dashboard(props) {
 
 
   return (
+
+    isLoading  ? <Loading/> :
     <div className="dashboard-main">
       <Nav />
       <div className="dashboard-body">
