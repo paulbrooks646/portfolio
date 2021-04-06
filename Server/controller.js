@@ -124,4 +124,19 @@ module.exports = {
     const stables = await db.manure_has_taken(id);
     res.status(200).send(stables);
   },
+
+  coin: async (req, res) => {
+    const db = req.app.get("db")
+    const { id, coins} = req.session.user;
+    const newCoins = (coins + 1)
+    const user = await db.coin(id, newCoins)
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+    };
+    
+    res.status(200).send(req.session.user)
+  }
 };

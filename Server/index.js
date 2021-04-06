@@ -30,6 +30,7 @@ app.post("/api/manureTakePermission", controller.manureTakePermission)
 app.post("/api/manureHasCleaned", controller.manureHasCleaned)
 app.post("/api/manureHasTaken", controller.manureHasTaken)
 app.post("/api/manure", controller.manure)
+app.post("/api/coin", controller.coin)
 app.get("/api/inventory", controller.getInventory)
 
 app.use(express.static(__dirname + "/../build"));

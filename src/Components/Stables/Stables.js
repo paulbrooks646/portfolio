@@ -112,8 +112,14 @@ function Stables(props) {
       axios.post("/api/manureHasCleaned").then((res) => {
         setStablesProps(res.data[0]);
 
+      });
+      axios.post("/api/coin").then((res) => {
+        
+        props.getUser(res.data);
+
         setManureCleaned(!manureCleaned);
       });
+
     } else {
       toggleGoodReason();
     }
@@ -331,8 +337,7 @@ function Stables(props) {
           className="answer-card-description"
         >
           I don't have a lot of work these days but I suppose I could give you a
-          coin if you put all the little manure pieces into the manure pile over
-          there.
+          coin if you put all the little dung pieces into the manure pile.
         </Typography>
         <Typography
           variant="h6"
