@@ -26,6 +26,7 @@ function Town(props) {
   const [answerTwo, setAnswerTwo] = useState(false);
   const [answerThree, setAnswerThree] = useState(false);
   const [answerFour, setAnswerFour] = useState(false);
+  const [answerFive, setAnswerFive] = useState(false)
 
   const toggleRight = () => {
     setRight(!right);
@@ -71,6 +72,11 @@ function Town(props) {
     toggleOldmanCard();
     setAnswerFour(!answerFour);
   };
+
+   const toggleAnswerFive = () => {
+     toggleOldmanCard();
+     setAnswerFive(!answerFive);
+   };
 
   return (
     <div className="town-main">
@@ -128,15 +134,10 @@ function Town(props) {
         </div>
       </div>
 
-      <Card
-        className={`${oldmanCard ? "town-card" : "town-card-closed"}`}
-      >
-        <Typography
-          variant="h4"
-          color="primary"
-          className="town-card-title"
-        >
-          I don't have time to waste talking to you. Aaargh! Fine. What do you want to know?
+      <Card className={`${oldmanCard ? "town-card" : "town-card-closed"}`}>
+        <Typography variant="h4" color="primary" className="town-card-title">
+          I don't have time to waste talking to you. Aaargh! Fine. What do you
+          want to know?
         </Typography>
         <List className="town-list">
           <ListItem className="town-list-item" onClick={toggleAnswerOne}>
@@ -144,6 +145,9 @@ function Town(props) {
           </ListItem>
           <ListItem className="town-list-item" onClick={toggleAnswerTwo}>
             The Dragon
+          </ListItem>
+          <ListItem className="town-list-item" onClick={toggleAnswerFive}>
+            The Guard
           </ListItem>
           <ListItem className="town-list-item" onClick={toggleAnswerThree}>
             The Market
@@ -162,11 +166,7 @@ function Town(props) {
         </Button>
       </Card>
       <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="town-card-title"
-        >
+        <Typography variant="h4" color="primary" className="town-card-title">
           The Castle
         </Typography>
         <Typography
@@ -174,7 +174,8 @@ function Town(props) {
           color="secondary"
           className="answer-card-description"
         >
-          Bah! Don't waste your time at the castle. The king won't even see you. He has no use for his subjects except for our taxes.
+          Bah! Don't waste your time at the castle. The king won't even see you.
+          He has no use for his subjects except for our taxes.
         </Typography>
         <Button
           onClick={toggleAnswerOne}
@@ -186,11 +187,7 @@ function Town(props) {
         </Button>
       </Card>
       <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="town-card-title"
-        >
+        <Typography variant="h4" color="primary" className="town-card-title">
           The Dragon
         </Typography>
         <Typography
@@ -198,7 +195,9 @@ function Town(props) {
           color="secondary"
           className="answer-card-description"
         >
-          Don't get me started on that wretched dragon. I imagine it would take magic to slay him but good luck getting a magical creature to help you.
+          Don't get me started on that wretched dragon. I imagine it would take
+          magic to slay him but good luck getting a magical creature to help
+          you.
         </Typography>
         <Button
           onClick={toggleAnswerTwo}
@@ -210,11 +209,7 @@ function Town(props) {
         </Button>
       </Card>
       <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="town-card-title"
-        >
+        <Typography variant="h4" color="primary" className="town-card-title">
           The Market
         </Typography>
         <Typography
@@ -222,7 +217,8 @@ function Town(props) {
           color="secondary"
           className="answer-card-description"
         >
-          It's a typical market. If you have gold it's a good place to get supplies.
+          It's a typical market. If you have gold it's a good place to get
+          supplies.
         </Typography>
         <Button
           onClick={toggleAnswerThree}
@@ -234,11 +230,7 @@ function Town(props) {
         </Button>
       </Card>
       <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="town-card-title"
-        >
+        <Typography variant="h4" color="primary" className="town-card-title">
           Employment
         </Typography>
         <Typography
@@ -246,10 +238,31 @@ function Town(props) {
           color="secondary"
           className="answer-card-description"
         >
-          Hah! You look lazy, I wouldn't waste my time on you. You could try the stables. I hope you like manure. Hehehe!
+          Hah! You look lazy, I wouldn't waste my time on you. You could try the
+          stables. I hope you like manure. Hehehe!
         </Typography>
         <Button
           onClick={toggleAnswerFour}
+          className="town-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerFive ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary" className="town-card-title">
+          The Guard
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          I know little about the guard aside from the fact that he eats nuts constantly. He considers himself above us townspeople. 
+        </Typography>
+        <Button
+          onClick={toggleAnswerFive}
           className="town-card-button"
           variant="contained"
           color="primary"

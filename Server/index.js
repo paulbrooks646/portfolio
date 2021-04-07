@@ -25,6 +25,7 @@ app.delete("/api/logout", controller.logout);
 app.get("/api/user", controller.getUser);
 app.post("/api/newgame", controller.newgame)
 app.get("/api/stables", controller.getStables)
+app.get("/api/castle", controller.getCastle);
 app.post("/api/manureCleanPermission", controller.manureCleanPermission)
 app.post("/api/manureTakePermission", controller.manureTakePermission)
 app.post("/api/manureHasCleaned", controller.manureHasCleaned)

@@ -16,6 +16,7 @@ module.exports = {
     const newUser = await db.register_user([newUsername, hash, 0, true]);
     const inventory = db.new_inventory(newUser[0].id);
     const stables = db.new_stables(newUser[0].id);
+    const castle = db.new_castle(newUser[0].id)
     req.session.user = {
       id: newUser[0].id,
       name: newUser[0].name,
@@ -71,7 +72,7 @@ module.exports = {
       newgame: user[0].newgame,
       coins: user[0].coins,
     };
-    res.status(200).send(req.session.user)
+    res.status(200).send(req.session.user);
   },
 
   getStables: async (req, res) => {
@@ -81,6 +82,15 @@ module.exports = {
     const stables = await db.get_stables(id);
 
     res.status(200).send(stables);
+  },
+
+  getCastle: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const castle = await db.get_castle(id);
+
+    res.status(200).send(castle);
   },
 
   manureCleanPermission: async (req, res) => {
@@ -132,17 +142,17 @@ module.exports = {
   },
 
   coin: async (req, res) => {
-    const db = req.app.get("db")
-    const { id, coins} = req.session.user;
-    const newCoins = (coins + 1)
-    const user = await db.coin(id, newCoins)
+    const db = req.app.get("db");
+    const { id, coins } = req.session.user;
+    const newCoins = coins + 1;
+    const user = await db.coin(id, newCoins);
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
       newgame: user[0].newgame,
       coins: user[0].coins,
     };
-    
-    res.status(200).send(req.session.user)
-  }
+
+    res.status(200).send(req.session.user);
+  },
 };
