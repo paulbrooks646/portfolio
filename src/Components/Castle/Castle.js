@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
+import {getCastle} from "../../redux/castleReducer"
 import axios from "axios";
 import "./Castle.scss";
 import Card from "@material-ui/core/Card";
@@ -13,55 +14,61 @@ import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
-import Character from "../Character/Character"
-import Guard from "../../Images/Guard.png"
+import Character from "../Character/Character";
+import Guard from "../../Images/Guard.png";
 import Loading from "../Loading/Loading";
 
-
 function Castle(props) {
-
-  const [up, setUp] = useState(false)
-  const [left, setLeft] = useState(false)
-  const [right, setRight] = useState(false)
-  const [down, setDown] = useState(false)
-  const [guard, setGuard] = useState(false)
+  const [up, setUp] = useState(false);
+  const [left, setLeft] = useState(false);
+  const [right, setRight] = useState(false);
+  const [down, setDown] = useState(false);
+  const [guard, setGuard] = useState(false);
   const [answerOne, setAnswerOne] = useState(false);
   const [answerTwo, setAnswerTwo] = useState(false);
   const [answerThree, setAnswerThree] = useState(false);
   const [answerFour, setAnswerFour] = useState(false);
   const [answerFive, setAnswerFive] = useState(false);
   const [castleProps, setCastleProps] = useState(false);
-  const [isLoading, setIsLoading] = useState(false)
-
+  const [isLoading, setIsLoading] = useState(true);
+  const [rejectionCard, setRejectionCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/castle").then((res) => {
-      setCastleProps(res.data[0]);
+      props.getCastle(res.data[0]);
       setIsLoading(false);
     });
   }, []);
 
   const toggleUp = () => {
-    setUp(!up)
-    props.history.push("/Throne")
-  }
+    setUp(!up);
+    props.history.push("/Throne");
+  };
   const toggleLeft = () => {
-    setLeft(!left)
-    props.history.push("/Garden")
-  }
+    setLeft(!left);
+    props.history.push("/Garden");
+  };
 
   const toggleRight = () => {
-    setRight(!right)
-    props.history.push("/Tower")
-  }
+    setRight(!right);
+    props.history.push("/Tower");
+  };
   const toggleDown = () => {
-    setDown(!down)
-    props.history.push("/Town")
-  }
+    setDown(!down);
+    props.history.push("/Town");
+  };
 
   const toggleGuard = () => {
-    setGuard(!guard)
-  }
+    
+      if (props.castle.castle.nuts_given === true) {
+        
+        setGuard(!guard);
+      } else {
+        setRejectionCard(true);
+        console.log("false")
+      }
+    
+  };
 
   const toggleAnswerOne = () => {
     toggleGuard();
@@ -88,9 +95,9 @@ function Castle(props) {
     setAnswerFive(!answerFive);
   };
 
-  return (
-
-    isLoading ? <Loading/> :
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div className="castle-main">
       <Nav />
       <div className="castle-body">
@@ -130,7 +137,7 @@ function Castle(props) {
           <div className="castle-bottom-left"></div>
           <div className="castle-bottom-middle">
             <Character />
-            <div className="castle-castle" onClick={toggleDown}>
+            <div className="castle-town" onClick={toggleDown}>
               <h2>Town</h2>
               <ArrowDownward />
             </div>
@@ -275,9 +282,28 @@ function Castle(props) {
           CLOSE
         </Button>
       </Card>
+      <Card
+        className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          I don't talk to peasants!!!
+        </Typography>
+        <Button
+          onClick={() => setRejectionCard(false)}
+          className="castle-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser })(Castle);
+export default connect(mapStateToProps, { getUser, getCastle })(Castle);

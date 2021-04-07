@@ -16,7 +16,7 @@ module.exports = {
     const newUser = await db.register_user([newUsername, hash, 0, true]);
     const inventory = db.new_inventory(newUser[0].id);
     const stables = db.new_stables(newUser[0].id);
-    const castle = db.new_castle(newUser[0].id)
+    const castle = db.new_castle(newUser[0].id);
     req.session.user = {
       id: newUser[0].id,
       name: newUser[0].name,
@@ -117,12 +117,21 @@ module.exports = {
     res.status(200).send(stables);
   },
 
-  getInventory: async (req, res) => {
+  getInventory: (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
 
-    const inventory = await db.get_inventory(id);
-    res.status(200).send(inventory);
+    db.get_inventory(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
   },
 
   manure: async (req, res) => {
@@ -154,5 +163,22 @@ module.exports = {
     };
 
     res.status(200).send(req.session.user);
+  },
+
+  giveNuts: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+     db.give_nuts(id).then((inventory) => {
+       let newArr = [];
+
+       for (let key in inventory[0]) {
+         if (inventory[0][key] === true) {
+           newArr.push(key);
+         }
+       }
+
+       res.status(200).send(newArr);
+     });
   },
 };

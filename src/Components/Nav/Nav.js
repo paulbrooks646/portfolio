@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { logoutUser, getUser } from "../../redux/userReducer";
+import { logoutUser, getUser} from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
+import {getCastle} from "../../redux/castleReducer"
 import axios from "axios";
 import "./Nav.scss";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
@@ -12,12 +13,11 @@ import Button from "@material-ui/core/Button";
 
 function Nav(props) {
   const [inventoryOpen, setInentoryOpen] = useState(false);
-  const [inventoryArray, setInventoryArray] = useState([]);
   const [rejectionCard, setRejectionCard] = useState(false);
+  const [nutCard, setNutCard] = useState(false);
 
   useEffect(() => {
     getUser();
-    inventoryToArray();
   }, []);
 
   const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
@@ -29,17 +29,7 @@ function Nav(props) {
     });
   };
 
-  const inventoryToArray = () => {
-    let arr = [];
-    for (let key in props.inventory.inventory) {
-      if (props.inventory.inventory[key] === true) {
-        arr.push(key);
-      }
-    }
-    setInventoryArray(arr);
-  };
-
-  const inventoryList = inventoryArray.map((e, index) => {
+  const inventoryList = props.inventory.inventory.map((e, index) => {
     return (
       <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
         {e}
@@ -125,6 +115,36 @@ function Nav(props) {
         setRejectionCard(true);
       }
     }
+    if (item === "nuts") {
+      if (props.location.pathname === "/Castle") {
+        axios.post("/api/giveNuts").then((res) => {
+          props.getInventory(res.data);
+          axios.post("/api/coin").then((res) => {
+            props.getUser(res.data);
+            axios.get("/api/castle").then((res) => {
+              props.getCastle(res.data[0])
+              setNutCard(true);
+            })
+          });
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+    if (item === "hat") {
+      if (props.location.pathname === "/Castle") {
+        alert("blah blah blah");
+      } else {
+        setRejectionCard(true);
+      }
+    }
+    if (item === "letter") {
+      if (props.location.pathname === "/Castle") {
+        alert("blah blah blah");
+      } else {
+        setRejectionCard(true);
+      }
+    }
   };
 
   return (
@@ -165,6 +185,24 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
+      <Card id={`${nutCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You give the guard the nuts. In exchange he gives you a coin and is
+          willing to talk to you.
+        </Typography>
+        <Button
+          onClick={() => setNutCard(false)}
+          className="stables-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
@@ -172,5 +210,5 @@ function Nav(props) {
 const mapStateToProps = (reduxState) => reduxState;
 
 export default withRouter(
-  connect(mapStateToProps, { logoutUser, getUser, getInventory })(Nav)
+  connect(mapStateToProps, { logoutUser, getUser, getInventory, getCastle })(Nav)
 );

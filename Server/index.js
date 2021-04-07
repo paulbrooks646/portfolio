@@ -28,6 +28,7 @@ app.get("/api/stables", controller.getStables)
 app.get("/api/castle", controller.getCastle);
 app.post("/api/manureCleanPermission", controller.manureCleanPermission)
 app.post("/api/manureTakePermission", controller.manureTakePermission)
+app.post("/api/giveNuts", controller.giveNuts)
 app.post("/api/manureHasCleaned", controller.manureHasCleaned)
 app.post("/api/manureHasTaken", controller.manureHasTaken)
 app.post("/api/manure", controller.manure)
