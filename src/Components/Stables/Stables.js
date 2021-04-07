@@ -16,6 +16,7 @@ import Horse from "../../Images/Horse.jpg";
 import Stable from "../../Images/Stables.jpg";
 import Cowboy from "../../Images/Cowboy.jpg";
 import Loading from "../Loading/Loading";
+import Character from "../Character/Character"
 
 function Stables(props) {
   const [left, setLeft] = useState(false);
@@ -196,7 +197,8 @@ function Stables(props) {
             </div>
           </div>
           <div className="stables-middle-middle"></div>
-          <div className="stables-middle-right">
+            <div className="stables-middle-right">
+              <Character/>
             <div className="stables-stables" onClick={toggleRight}>
               <h2>Town</h2>
               <ArrowForward />
