@@ -17,7 +17,8 @@ module.exports = {
     const inventory = db.new_inventory(newUser[0].id);
     const stables = db.new_stables(newUser[0].id);
     const castle = db.new_castle(newUser[0].id);
-    const garden = db.new_garden(newUser[0].id)
+    const garden = db.new_garden(newUser[0].id);
+    const tower = db.new_tower(newUser[0].id)
     req.session.user = {
       id: newUser[0].id,
       name: newUser[0].name,
@@ -103,6 +104,15 @@ module.exports = {
     res.status(200).send(garden);
   },
 
+  getTower: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const tower = await db.get_tower(id);
+
+    res.status(200).send(tower);
+  },
+
   manureCleanPermission: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -127,6 +137,23 @@ module.exports = {
     res.status(200).send(stables);
   },
 
+  manureGiven: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.manure_given(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
   getInventory: (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -149,6 +176,23 @@ module.exports = {
     const { id } = req.session.user;
 
     db.manure(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  flowers: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.flowers(id).then((inventory) => {
       let newArr = [];
 
       for (let key in inventory[0]) {

@@ -62,7 +62,7 @@
 }
 #answer-card {
     height: 50vh;
-    width: 33vw;
+    width: 50vw;
     background-color: white;
     box-shadow: 2px 2px 2px 2px;
     display: flex;
@@ -73,7 +73,7 @@
     text-align: center;
     z-index: 3;
     top: 33vh;
-    left: 33vw;
+    left: 25vw;
 
     .answer-card-description {
       width: 90%;

@@ -5,6 +5,7 @@ import { logoutUser, getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import { getCastle } from "../../redux/castleReducer";
 import { getStables } from "../../redux/stablesReducer";
+import {getGarden} from "../../redux/gardenReducer"
 import axios from "axios";
 import "./Nav.scss";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
@@ -19,6 +20,7 @@ function Nav(props) {
   const [hatCard, setHatCard] = useState(false);
   const [showLetterCard, setShowLetterCard] = useState(false);
   const [bottleCard, setBottleCard] = useState(false);
+  const [manureCard, setManureCard] = useState(false);
 
   useEffect(() => {
     getUser();
@@ -120,7 +122,16 @@ function Nav(props) {
     }
     if (item === "manure") {
       if (props.location.pathname === "/Garden") {
-        alert("blah blah blah");
+         axios.post("/api/manureGiven").then((res) => {
+           props.getInventory(res.data);
+           axios.get("/api/garden").then((res) => {
+             props.getGarden(res.data[0])
+             axios.post("/api/coin").then((res) => {
+               props.getUser(res.data);
+               setManureCard(true);
+             })
+           })
+         });
       } else {
         setRejectionCard(true);
       }
@@ -277,6 +288,25 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
+      <Card id={`${manureCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          You give the fairy the bottle of manure. "Ooh, this is fresh," she
+          says as she sniffs it excitedly. For this manure I'll give you a coin
+          and just once let you have some flowers.
+        </Typography>
+        <Button
+          onClick={() => setManureCard(false)}
+          className="stables-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
@@ -290,5 +320,6 @@ export default withRouter(
     getInventory,
     getCastle,
     getStables,
+    getGarden
   })(Nav)
 );

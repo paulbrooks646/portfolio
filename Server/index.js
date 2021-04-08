@@ -27,14 +27,17 @@ app.post("/api/newgame", controller.newgame)
 app.get("/api/stables", controller.getStables)
 app.get("/api/castle", controller.getCastle);
 app.get("/api/garden", controller.getGarden);
+app.get("/api/tower", controller.getTower);
 app.post("/api/manureCleanPermission", controller.manureCleanPermission)
 app.post("/api/manureTakePermission", controller.manureTakePermission)
 app.post("/api/giveNuts", controller.giveNuts)
 app.post("/api/giveHat", controller.giveHat);
 app.post("/api/showLetter", controller.showLetter);
+app.post("/api/manureGiven", controller.manureGiven)
 app.post("/api/manureHasCleaned", controller.manureHasCleaned)
 app.post("/api/manureHasTaken", controller.manureHasTaken)
 app.post("/api/manure", controller.manure)
+app.post("/api/flowers", controller.flowers);
 app.post("/api/coin", controller.coin)
 app.get("/api/inventory", controller.getInventory)
 

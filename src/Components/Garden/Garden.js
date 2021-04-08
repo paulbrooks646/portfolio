@@ -3,6 +3,7 @@ import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import { getGarden } from "../../redux/gardenReducer";
+import {getInventory} from "../../redux/inventoryReducer"
 import axios from "axios";
 import "./Garden.scss";
 import Card from "@material-ui/core/Card";
@@ -24,6 +25,8 @@ function Garden(props) {
   const [answerThree, setAnswerThree] = useState(false);
   const [answerFour, setAnswerFour] = useState(false);
   const [rejectionCard, setRejectionCard] = useState(false);
+  const [rejectionCardTwo, setRejectionCardTwo] = useState(false)
+  const [flowerRetrievalCard, setFlowerRetrievalCard] = useState(false)
 
   useEffect(() => {
     axios.get("/api/garden").then((res) => {
@@ -38,7 +41,11 @@ function Garden(props) {
   };
 
   const toggleFairy = () => {
-    setFairy(!fairy);
+    if (props.garden.garden.manure_given === true) {
+      setFairy(!fairy)
+    } else {
+      setRejectionCardTwo(true)
+    }
   };
 
   const toggleAnswerOne = () => {
@@ -61,13 +68,27 @@ function Garden(props) {
     setAnswerFour(!answerFour);
   };
 
+  const toggleRejectionCard = () => {
+    if (props.garden.garden.manure_given === true && props.garden.garden.flowers_taken === false) {
+      axios.post("/api/flowers").then((res) => {
+        props.getInventory(res.data)
+        axios.get("/api/garden").then((res) => {
+          props.getGarden(res.data[0])
+          setFlowerRetrievalCard(true);
+        })
+      })
+    } else {
+      setRejectionCard(true)
+    }
+  }
+
   return isLoading ? (
     <Loading />
   ) : (
     <div className="garden-main">
       <Nav />
       <div className="garden-body">
-        <div className="garden-top" onClick={() => setRejectionCard(true)}>
+        <div className="garden-top" onClick={toggleRejectionCard}>
           <div className="garden-top-left"></div>
           <div className="garden-top-middle"></div>
           <div className="garden-top-right"></div>
@@ -90,7 +111,7 @@ function Garden(props) {
             </div>
           </div>
         </div>
-        <div className="garden-bottom" onClick={() => setRejectionCard(true)}>
+        <div className="garden-bottom" onClick={toggleRejectionCard}>
           <div className="garden-bottom-left"></div>
           <div className="garden-bottom-middle"></div>
           <div className="garden-bottom-right"></div>
@@ -105,13 +126,13 @@ function Garden(props) {
             The Dragon
           </ListItem>
           <ListItem className="garden-list-item" onClick={toggleAnswerTwo}>
-            The Garden
+            Faeries
           </ListItem>
           <ListItem className="garden-list-item" onClick={toggleAnswerThree}>
-            The King
+            Flowers
           </ListItem>
           <ListItem className="garden-list-item" onClick={toggleAnswerFour}>
-            Permission
+            Magical Creatures
           </ListItem>
         </List>
         <Button
@@ -132,8 +153,7 @@ function Garden(props) {
           color="secondary"
           className="answer-card-description"
         >
-          You want to slay the dragon? Don't be a fool! It is said that only the
-          Ultimate Axe is sharp enough to penetrate its scales.
+          Unlike most magical creatures, dragons are destructive.
         </Typography>
         <Button
           onClick={toggleAnswerOne}
@@ -146,16 +166,14 @@ function Garden(props) {
       </Card>
       <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary" className="garden-card-title">
-          The Garden
+          Fairies
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          A beautiful place to look at. I tried to get a flower for my wife once
-          but the royal gardener wouldn't let me. She is very protective of her
-          garden.
+          Unlike humans, fairies take care of nature.
         </Typography>
         <Button
           onClick={toggleAnswerTwo}
@@ -168,16 +186,14 @@ function Garden(props) {
       </Card>
       <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary" className="garden-card-title">
-          The King
+          The Flowers
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          The king doesn't like to be disturbed. He has been particularly
-          irritable since he and the princess got into an argument and the
-          princess took up residence in the tower.
+          I'm warning you. These flowers are to look at, not to touch!
         </Typography>
         <Button
           onClick={toggleAnswerThree}
@@ -190,15 +206,15 @@ function Garden(props) {
       </Card>
       <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary" className="garden-card-title">
-          Permission
+          Magical Creatures
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          I'll tell you what if can convince me you have a legitimate reason to
-          see the King and do me a favor I will let you pass.
+          There are many magical creatures. If you want to meet more of them go
+          to the magical glade.
         </Typography>
         <Button
           onClick={toggleAnswerFour}
@@ -228,9 +244,50 @@ function Garden(props) {
           CLOSE
         </Button>
       </Card>
+      <Card
+        className={`${rejectionCardTwo ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          In case you hadn't noticed, I am far too busy to talk to you.
+        </Typography>
+        <Button
+          onClick={() => setRejectionCardTwo(false)}
+          className="castle-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${
+          flowerRetrievalCard ? "answer-card" : "answer-card-closed"
+        }`}
+      >
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You quickly pick the most beautiful flowers you can find before the
+          fairy changes her mind.
+        </Typography>
+        <Button
+          onClick={() => setFlowerRetrievalCard(false)}
+          className="castle-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getGarden })(Garden);
+export default connect(mapStateToProps, { getUser, getGarden, getInventory })(Garden);
