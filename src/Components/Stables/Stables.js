@@ -32,11 +32,9 @@ function Stables(props) {
   const [answerFourNo, setAnswerFourNo] = useState(false);
   const [horseCard, setHorseCard] = useState(false);
   const [manureCleaned, setManureCleaned] = useState(false);
-  const [stablesProps, setStablesProps] = useState();
   const [goodReason, setGoodReason] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [bottleNeeded, setBottleNeeded] = useState(false);
-  const [manureGotten, setManureGotten] = useState(false);
   const [needPermission, setNeedPermission] = useState(false);
   const [alreadyTaken, setAlreadyTaken] = useState(false);
 
@@ -140,16 +138,6 @@ function Stables(props) {
   const toggleNeedPermission = () => setNeedPermission(!needPermission);
 
   const toggleBottleNeeded = () => setBottleNeeded(!bottleNeeded);
-
-  const toggleManureGotten = () => {
-    axios.post("/api/manure").then((res) => {
-      getInventory(res.data[0]);
-      setManureGotten(!manureGotten);
-    });
-    axios.post("/api/manureHasTaken").then((res) => {
-      props.getStables(res.data[0]);
-    });
-  };
 
   return isLoading ? (
     <Loading />
@@ -512,7 +500,7 @@ function Stables(props) {
           CLOSE
         </Button>
       </Card>
-      
+
       <Card
         className={`${alreadyTaken ? "answer-card" : "answer-card-closed"}`}
       >

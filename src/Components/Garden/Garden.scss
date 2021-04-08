@@ -2,6 +2,11 @@
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
 
   .garden-body {
     .garden-top {
@@ -9,10 +14,8 @@
       display: flex;
       width: 100vw;
       background-image: url("../../Images/Garden.jpg");
-      background-size: auto 100%;
-
-      .garden-top-left {
-      }
+      background-size: 100% 100%;
+      cursor: pointer;
     }
 
     .garden-middle {
@@ -21,17 +24,26 @@
       width: 100vw;
 
       .garden-middle-left {
-        background-image: url("../../Images/Garden.jpg");
-        background-size: 100% 100%;
-        width: 20%;
+        background-color: pink;
+        width: 10%;
         height: 100%;
-        background-repeat: no-repeat;
       }
 
       .garden-middle-middle {
         background-color: brown;
-        width: 40%;
+        width: 50%;
         height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .garden-fairy {
+          height: 150px;
+          width: 100px;
+
+          cursor: pointer;
+        }
       }
 
       .garden-middle-right {
@@ -49,7 +61,6 @@
           align-items: center;
           cursor: pointer;
           position: relative;
-          
         }
       }
     }
@@ -59,21 +70,60 @@
       display: flex;
       width: 100vw;
       background-image: url("../../Images/Garden.jpg");
-      background-size: auto 100%;
+      background-size: 100% 100%;
+      cursor: pointer;
+    }
+  }
+   .garden-card {
+      height: 500px;
+      width: 500px;
+    background-color: white;
+    border: solid black 2px;
+    box-shadow: 2px 2px 2px 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    position: absolute;
+    text-align: center;
 
-      .garden-bottom-left {
-        
-        
-      }
+    .garden-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        color: tomato;
+    }
 
-      .garden-bottom-middle {
-        
-      }
-
-      .garden-bottom-right {
-       
-      }
+    .garden-card-description {
+        width: 90%;
     }
   }
 
+  .garden-card-closed {
+    display: none;
+  }
+  .answer-card {
+      height: 400px;
+      width: 400px;
+    background-color: white;
+    border: solid black 2px;
+    box-shadow: 2px 2px 2px 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    position: absolute;
+    text-align: center;
+
+    
+
+    .answer-card-description {
+        width: 90%;
+    }
+  }
+
+  .answer-card-closed {
+    display: none;
+  }
 }

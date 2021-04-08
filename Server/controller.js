@@ -17,6 +17,7 @@ module.exports = {
     const inventory = db.new_inventory(newUser[0].id);
     const stables = db.new_stables(newUser[0].id);
     const castle = db.new_castle(newUser[0].id);
+    const garden = db.new_garden(newUser[0].id)
     req.session.user = {
       id: newUser[0].id,
       name: newUser[0].name,
@@ -91,6 +92,15 @@ module.exports = {
     const castle = await db.get_castle(id);
 
     res.status(200).send(castle);
+  },
+
+  getGarden: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const garden = await db.get_garden(id);
+
+    res.status(200).send(garden);
   },
 
   manureCleanPermission: async (req, res) => {
@@ -214,6 +224,6 @@ module.exports = {
 
     db.show_letter(id);
 
-    res.sendStatus(200)
+    res.sendStatus(200);
   },
 };
