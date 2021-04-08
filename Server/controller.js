@@ -169,16 +169,42 @@ module.exports = {
     const db = req.app.get("db");
     const { id } = req.session.user;
 
-     db.give_nuts(id).then((inventory) => {
-       let newArr = [];
+    db.give_nuts(id).then((inventory) => {
+      let newArr = [];
 
-       for (let key in inventory[0]) {
-         if (inventory[0][key] === true) {
-           newArr.push(key);
-         }
-       }
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
 
-       res.status(200).send(newArr);
-     });
+      res.status(200).send(newArr);
+    });
+  },
+
+  giveHat: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.give_hat(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  showLetter: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.show_letter(id);
+
+    res.sendStatus(200)
   },
 };

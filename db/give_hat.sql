@@ -1,10 +1,10 @@
 update inventory
-set manure = true
+set hat = false
 where user_id = $1;
 
-update inventory
-set bottle = false
+update castle
+set hat_given = true
 where user_id = $1;
 
 select * from inventory
-where user_id = $1
+where user_id = $1;
