@@ -3,7 +3,7 @@ import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
-import {getStables} from "../../redux/stablesReducer"
+import { getStables } from "../../redux/stablesReducer";
 import axios from "axios";
 import "./Stables.scss";
 import Card from "@material-ui/core/Card";
@@ -112,7 +112,7 @@ function Stables(props) {
   const toggleManureCleaned = () => {
     if (props.stables.stables.clean_permission) {
       axios.post("/api/manureHasCleaned").then((res) => {
-        setStablesProps(res.data[0]);
+        props.getStables(res.data[0]);
       });
       axios.post("/api/coin").then((res) => {
         props.getUser(res.data);
@@ -128,12 +128,10 @@ function Stables(props) {
   const manureMound = () => {
     if (!props.stables.stables.take_permission) {
       toggleNeedPermission();
-    } else if (!props.inventory.inventory.bottle) {
-      toggleBottleNeeded();
     } else if (props.stables.stables.has_taken) {
       toggleAlreadyTaken();
     } else {
-      toggleManureGotten();
+      toggleBottleNeeded();
     }
   };
 
@@ -386,7 +384,7 @@ function Stables(props) {
           color="primary"
           className="answer-card-description"
         >
-          Looks like you're out of luck. There is no manure left.
+          Looks like you're out of luck. There is no dung left.
         </Typography>
 
         <Button
@@ -514,33 +512,7 @@ function Stables(props) {
           CLOSE
         </Button>
       </Card>
-      <Card
-        className={`${manureGotten ? "answer-card" : "answer-card-closed"}`}
-      >
-        <Typography
-          variant="h4"
-          color="primary"
-          className="answer-card-description"
-        >
-          Gross!
-        </Typography>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="answer-card-description"
-        >
-          You succeed in filling your jar with smelly, rancid manure.
-          Congratulations?
-        </Typography>
-        <Button
-          onClick={toggleManureGotten}
-          className="stables-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
+      
       <Card
         className={`${alreadyTaken ? "answer-card" : "answer-card-closed"}`}
       >
@@ -572,4 +544,6 @@ function Stables(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory, getStables })(Stables);
+export default connect(mapStateToProps, { getUser, getInventory, getStables })(
+  Stables
+);

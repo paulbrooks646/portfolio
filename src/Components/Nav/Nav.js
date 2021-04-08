@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { logoutUser, getUser} from "../../redux/userReducer";
+import { logoutUser, getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
-import { getCastle } from "../../redux/castleReducer"
-import {getStables} from "../../redux/stablesReducer"
+import { getCastle } from "../../redux/castleReducer";
+import { getStables } from "../../redux/stablesReducer";
 import axios from "axios";
 import "./Nav.scss";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
@@ -17,7 +17,8 @@ function Nav(props) {
   const [rejectionCard, setRejectionCard] = useState(false);
   const [nutCard, setNutCard] = useState(false);
   const [hatCard, setHatCard] = useState(false);
-  const [showLetterCard, setShowLetterCard] = useState(false)
+  const [showLetterCard, setShowLetterCard] = useState(false);
+  const [bottleCard, setBottleCard] = useState(false);
 
   useEffect(() => {
     getUser();
@@ -43,13 +44,13 @@ function Nav(props) {
   const toggleItem = (item) => {
     if (item === "bottle") {
       if (props.location.pathname === "/Stables") {
-         axios.post("/api/manure").then((res) => {
-           getInventory(res.data[0]);
-           
-         });
-         axios.post("/api/manureHasTaken").then((res) => {
-           getStables(res.data[0]);
-         });
+        axios.post("/api/manure").then((res) => {
+          props.getInventory(res.data);
+        });
+        axios.post("/api/manureHasTaken").then((res) => {
+          props.getStables(res.data[0]);
+          setBottleCard(true);
+        });
       } else {
         setRejectionCard(true);
       }
@@ -131,9 +132,9 @@ function Nav(props) {
           axios.post("/api/coin").then((res) => {
             props.getUser(res.data);
             axios.get("/api/castle").then((res) => {
-              props.getCastle(res.data[0])
+              props.getCastle(res.data[0]);
               setNutCard(true);
-            })
+            });
           });
         });
       } else {
@@ -142,14 +143,13 @@ function Nav(props) {
     }
     if (item === "hat") {
       if (props.location.pathname === "/Castle") {
-         axios.post("/api/giveHat").then((res) => {
-           props.getInventory(res.data);
-             axios.get("/api/castle").then((res) => {
-               props.getCastle(res.data[0]);
-               setHatCard(true);
-             });
-           ;
-         });
+        axios.post("/api/giveHat").then((res) => {
+          props.getInventory(res.data);
+          axios.get("/api/castle").then((res) => {
+            props.getCastle(res.data[0]);
+            setHatCard(true);
+          });
+        });
       } else {
         setRejectionCard(true);
       }
@@ -247,10 +247,29 @@ function Nav(props) {
           color="secondary"
           className="answer-card-description"
         >
-          Great! Delivering a letter from the Princess is a legitimate reason to see the King.
+          Great! Delivering a letter from the Princess is a legitimate reason to
+          see the King.
         </Typography>
         <Button
           onClick={() => setShowLetterCard(false)}
+          className="stables-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card id={`${bottleCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          You succeed in filling your bottle with smelly, rancid manure.
+          Congratulations?
+        </Typography>
+        <Button
+          onClick={() => setBottleCard(false)}
           className="stables-card-button"
           variant="contained"
           color="primary"
@@ -265,5 +284,11 @@ function Nav(props) {
 const mapStateToProps = (reduxState) => reduxState;
 
 export default withRouter(
-  connect(mapStateToProps, { logoutUser, getUser, getInventory, getCastle, getStables })(Nav)
+  connect(mapStateToProps, {
+    logoutUser,
+    getUser,
+    getInventory,
+    getCastle,
+    getStables,
+  })(Nav)
 );
