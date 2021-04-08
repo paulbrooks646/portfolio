@@ -29,7 +29,11 @@ function Castle(props) {
   const [answerThree, setAnswerThree] = useState(false);
   const [answerFour, setAnswerFour] = useState(false);
   const [answerFive, setAnswerFive] = useState(false);
-  const [castleProps, setCastleProps] = useState(false);
+  const [answerSix, setAnswerSix] = useState(false);
+  const [answerSeven, setAnswerSeven] = useState(false);
+  const [answerEight, setAnswerEight] = useState(false);
+  const [answerNine, setAnswerNine] = useState(false);
+  const [notAChance, setNotAChance] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [rejectionCard, setRejectionCard] = useState(false);
 
@@ -41,8 +45,12 @@ function Castle(props) {
   }, []);
 
   const toggleUp = () => {
-    setUp(!up);
-    props.history.push("/Throne");
+    if (props.castle.castle.nuts_given === true && props.castle.castle.hat_given === true && props.castle.castle.letter_given === true) {
+      setUp(!up);
+      props.history.push("/Throne")
+    } else {
+    setNotAChance(true)
+    }
   };
   const toggleLeft = () => {
     setLeft(!left);
@@ -93,6 +101,26 @@ function Castle(props) {
   const toggleAnswerFive = () => {
     toggleGuard();
     setAnswerFive(!answerFive);
+  };
+
+  const toggleAnswerSix = () => {
+    toggleGuard();
+    setAnswerSix(!answerSix);
+  };
+
+  const toggleAnswerSeven = () => {
+    toggleGuard();
+    setAnswerSeven(!answerSeven);
+  };
+
+  const toggleAnswerEight = () => {
+    toggleGuard();
+    setAnswerEight(!answerEight);
+  };
+
+  const toggleAnswerNine = () => {
+    toggleGuard();
+    setAnswerNine(!answerNine);
   };
 
   return isLoading ? (
@@ -146,25 +174,36 @@ function Castle(props) {
         </div>
       </div>
       <Card className={`${guard ? "castle-card" : "castle-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="castle-card-title">
-          I don't have time to waste talking to you. Aaargh! Fine. What do you
-          want to know?
+        <Typography variant="h5" color="primary" className="castle-card-title">
+          What would you like to know about?
         </Typography>
         <List className="castle-list">
           <ListItem className="castle-list-item" onClick={toggleAnswerOne}>
-            The Castle
-          </ListItem>
-          <ListItem className="castle-list-item" onClick={toggleAnswerTwo}>
             The Dragon
           </ListItem>
+          <ListItem className="castle-list-item" onClick={toggleAnswerNine}>
+            Favor
+          </ListItem>
+          <ListItem className="castle-list-item" onClick={toggleAnswerTwo}>
+            The Garden
+          </ListItem>
           <ListItem className="castle-list-item" onClick={toggleAnswerThree}>
-            The Market
+            The King
           </ListItem>
           <ListItem className="castle-list-item" onClick={toggleAnswerFour}>
-            Employment
+            Permission
           </ListItem>
           <ListItem className="castle-list-item" onClick={toggleAnswerFive}>
-            The Guard
+            The Princess
+          </ListItem>
+          <ListItem className="castle-list-item" onClick={toggleAnswerSix}>
+            The Tower
+          </ListItem>
+          <ListItem className="castle-list-item" onClick={toggleAnswerSeven}>
+            The Throne Room
+          </ListItem>
+          <ListItem className="castle-list-item" onClick={toggleAnswerEight}>
+            The Ultimate Axe
           </ListItem>
         </List>
         <Button
@@ -178,15 +217,15 @@ function Castle(props) {
       </Card>
       <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary" className="castle-card-title">
-          The Castle
+          The Dragon
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          Bah! Don't waste your time at the castle. The king won't even see you.
-          He has no use for his subjects except for our taxes.
+          You want to slay the dragon? Don't be a fool! It is said that only the
+          Ultimate Axe is sharp enough to penetrate its scales.
         </Typography>
         <Button
           onClick={toggleAnswerOne}
@@ -199,16 +238,16 @@ function Castle(props) {
       </Card>
       <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary" className="castle-card-title">
-          The Dragon
+          The Garden
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          Don't get me started on that wretched dragon. I imagine it would take
-          magic to slay him but good luck getting a magical creature to help
-          you.
+          A beautiful place to look at. I tried to get a flower for my wife once
+          but the royal gardener wouldn't let me. She is very protective of her
+          garden.
         </Typography>
         <Button
           onClick={toggleAnswerTwo}
@@ -221,15 +260,16 @@ function Castle(props) {
       </Card>
       <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary" className="castle-card-title">
-          The Market
+          The King
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          It's a typical market. If you have gold it's a good place to get
-          supplies.
+          The king doesn't like to be disturbed. He has been particularly
+          irritable since he and the princess got into an argument and the
+          princess took up residence in the tower.
         </Typography>
         <Button
           onClick={toggleAnswerThree}
@@ -242,15 +282,16 @@ function Castle(props) {
       </Card>
       <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary" className="castle-card-title">
-          Employment
+          Permission
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          Hah! You look lazy, I wouldn't waste my time on you. You could try the
-          stables. I hope you like manure. Hehehe!
+          I'll tell you
+          what if can convince me you have a legitimate reason to see the King
+          and do me a favor I will let you pass.
         </Typography>
         <Button
           onClick={toggleAnswerFour}
@@ -263,18 +304,97 @@ function Castle(props) {
       </Card>
       <Card className={`${answerFive ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary" className="castle-card-title">
-          The Guard
+          The Princess
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          I know little about the guard aside from the fact that he eats nuts
-          constantly. He considers himself above us castlespeople.
+          The Princess is very tempermental. Sometimes she is as warm as a summer day. Other times she is as frigid as winter. She is currently living in the tower.
         </Typography>
         <Button
           onClick={toggleAnswerFive}
+          className="castle-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerSix ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary" className="castle-card-title">
+          The Tower
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          If you go there be careful. The princess doesn't want to disturbed. Her vicious pet weasel is attacking anyone who goes there.
+        </Typography>
+        <Button
+          onClick={toggleAnswerSix}
+          className="castle-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerSeven ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary" className="castle-card-title">
+          The Throne Room
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          No one crosses the drawbridge and enters the throne room with out my permission.
+        </Typography>
+        <Button
+          onClick={toggleAnswerSeven}
+          className="castle-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerEight ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary" className="castle-card-title">
+          The Ultimate Axe
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          The Ultimate Axe is said to be the sharpest most powerful weapon ever created. It is in the King's posession and I can't imagine he will ever part with it.
+        </Typography>
+        <Button
+          onClick={toggleAnswerEight}
+          className="castle-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerNine ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary" className="castle-card-title">
+          Favor
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          While I was hunting in the forest I lost my favorite hat. If you find it for me, I would be very grateful.
+        </Typography>
+        <Button
+          onClick={toggleAnswerNine}
           className="castle-card-button"
           variant="contained"
           color="primary"
@@ -294,6 +414,26 @@ function Castle(props) {
         </Typography>
         <Button
           onClick={() => setRejectionCard(false)}
+          className="castle-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${notAChance ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary" className="castle-card-title">
+          NOT A CHANCE!!!
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          No one crosses the drawbridge without my permission.
+        </Typography>
+        <Button
+          onClick={() => setNotAChance(false)}
           className="castle-card-button"
           variant="contained"
           color="primary"
