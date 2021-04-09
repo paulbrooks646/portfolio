@@ -129,6 +129,14 @@ module.exports = {
     res.status(200).send(stables);
   },
 
+  useFlute: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const tower = await db.use_flute(id);
+    res.status(200).send(tower);
+  },
+
   towerFirstTime: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -150,6 +158,40 @@ module.exports = {
     const { id } = req.session.user;
 
     db.manure_given(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  giveFlowers: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.give_flowers(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  giveRibbon: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.give_ribbon(id).then((inventory) => {
       let newArr = [];
 
       for (let key in inventory[0]) {

@@ -30,9 +30,12 @@ app.get("/api/garden", controller.getGarden);
 app.get("/api/tower", controller.getTower);
 app.post("/api/towerFirstTime", controller.towerFirstTime)
 app.post("/api/manureCleanPermission", controller.manureCleanPermission)
+app.post("/api/useFlute", controller.useFlute);
 app.post("/api/manureTakePermission", controller.manureTakePermission)
 app.post("/api/giveNuts", controller.giveNuts)
 app.post("/api/giveHat", controller.giveHat);
+app.post("/api/giveFlowers", controller.giveFlowers)
+app.post("/api/giveRibbon", controller.giveRibbon)
 app.post("/api/showLetter", controller.showLetter);
 app.post("/api/manureGiven", controller.manureGiven)
 app.post("/api/manureHasCleaned", controller.manureHasCleaned)

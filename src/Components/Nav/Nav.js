@@ -5,7 +5,8 @@ import { logoutUser, getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import { getCastle } from "../../redux/castleReducer";
 import { getStables } from "../../redux/stablesReducer";
-import {getGarden} from "../../redux/gardenReducer"
+import { getGarden } from "../../redux/gardenReducer";
+import { getTower } from "../../redux/towerReducer";
 import axios from "axios";
 import "./Nav.scss";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
@@ -21,6 +22,9 @@ function Nav(props) {
   const [showLetterCard, setShowLetterCard] = useState(false);
   const [bottleCard, setBottleCard] = useState(false);
   const [manureCard, setManureCard] = useState(false);
+  const [fluteCard, setFluteCard] = useState(false);
+  const [flowerCard, setFlowerCard] = useState(false);
+  const [ribbonCard, setRibbonCard] = useState(false);
 
   useEffect(() => {
     getUser();
@@ -59,7 +63,10 @@ function Nav(props) {
     }
     if (item === "flute") {
       if (props.location.pathname === "/Tower") {
-        alert("blah blah blah");
+        axios.post("/api/useFlute").then((res) => {
+          props.getTower(res.data[0]);
+          setFluteCard(true);
+        });
       } else {
         setRejectionCard(true);
       }
@@ -87,14 +94,29 @@ function Nav(props) {
     }
     if (item === "ribbon") {
       if (props.location.pathname === "/Tower") {
-        alert("blah blah blah");
+        axios.post("/api/giveRibbon").then((res) => {
+          props.getInventory(res.data)
+          axios.get("/api/tower").then((res) => {
+            props.getTower(res.data[0]);
+            setRibbonCard(true);
+          });
+        });
       } else {
         setRejectionCard(true);
       }
     }
     if (item === "flowers") {
       if (props.location.pathname === "/Tower") {
-        alert("blah blah blah");
+        axios.post("/api/giveFlowers").then((res) => {
+          props.getInventory(res.data);
+          axios.post("/api/coin").then((res) => {
+            props.getUser(res.data);
+            axios.get("/api/tower").then((res) => {
+              props.getTower(res.data[0]);
+              setFlowerCard(true);
+            });
+          });
+        });
       } else {
         setRejectionCard(true);
       }
@@ -122,16 +144,16 @@ function Nav(props) {
     }
     if (item === "manure") {
       if (props.location.pathname === "/Garden") {
-         axios.post("/api/manureGiven").then((res) => {
-           props.getInventory(res.data);
-           axios.get("/api/garden").then((res) => {
-             props.getGarden(res.data[0])
-             axios.post("/api/coin").then((res) => {
-               props.getUser(res.data);
-               setManureCard(true);
-             })
-           })
-         });
+        axios.post("/api/manureGiven").then((res) => {
+          props.getInventory(res.data);
+          axios.get("/api/garden").then((res) => {
+            props.getGarden(res.data[0]);
+            axios.post("/api/coin").then((res) => {
+              props.getUser(res.data);
+              setManureCard(true);
+            });
+          });
+        });
       } else {
         setRejectionCard(true);
       }
@@ -307,6 +329,58 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
+      <Card id={`${fluteCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          The weasel dances as you play the flute. Even after you stop the
+          weasel seems calmer than before.
+        </Typography>
+        <Button
+          onClick={() => setFluteCard(false)}
+          className="stables-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card id={`${flowerCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          Flowers for me? How quaint! She tosses a coin to the ground for you.
+          You quickly pick it up. Despite her response she seems to like the
+          flowers.
+        </Typography>
+        <Button
+          onClick={() => setFlowerCard(false)}
+          className="stables-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card id={`${ribbonCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >It would seem you have located my ribbon. Here is the letter as promised.</Typography>
+        <Button
+          onClick={() => setRibbonCard(false)}
+          className="stables-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
@@ -320,6 +394,7 @@ export default withRouter(
     getInventory,
     getCastle,
     getStables,
-    getGarden
+    getGarden,
+    getTower,
   })(Nav)
 );
