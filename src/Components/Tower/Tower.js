@@ -3,7 +3,7 @@ import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
-import { getTower} from "../../redux/towerReducer"
+import { getTower } from "../../redux/towerReducer";
 import axios from "axios";
 import "./Tower.scss";
 import Card from "@material-ui/core/Card";
@@ -15,25 +15,33 @@ import ArrowBack from "@material-ui/icons/ArrowBack";
 import Character from "../Character/Character";
 import Weasel from "../../Images/Weasel.png";
 import Princess from "../../Images/Princess.png";
-import Loading from "../Loading/Loading"
+import Loading from "../Loading/Loading";
 
 function Tower(props) {
   const [left, setLeft] = useState(false);
   const [weaselHiss, setWeaselHiss] = useState(false);
-  const [weaselPurr, setWeaselPurr] = useState(false)
+  const [weaselPurr, setWeaselPurr] = useState(false);
   const [princess, setPrincess] = useState(false);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const [answerOne, setAnswerOne] = useState(false);
   const [answerTwo, setAnswerTwo] = useState(false);
   const [answerThree, setAnswerThree] = useState(false);
   const [answerFour, setAnswerFour] = useState(false);
   const [rejectionCard, setRejectionCard] = useState(false);
+  const [firstTime, setFirstTime] = useState(false);
+  const [rejectionCardTwo, setRejectionCardTwo] = useState(false);
 
   useEffect(() => {
     axios.get("/api/tower").then((res) => {
       props.getTower(res.data[0]);
       setIsLoading(false);
     });
+    if (props.tower.tower.first_time) {
+      axios.post("/api/towerFirstTime").then((res) => {
+        getTower(res.data[0]);
+        setFirstTime(true);
+      });
+    }
   }, []);
 
   const toggleLeft = () => {
@@ -42,45 +50,48 @@ function Tower(props) {
   };
 
   const togglePrincess = () => {
+    if (!props.tower.tower.weasel_soothed) {
+    }
     setPrincess(!princess);
   };
 
   const toggleWeasel = () => {
     if (props.tower.tower.weasel_soothed) {
-      setWeaselPurr(true)
+      setWeaselPurr(true);
     } else {
-      setWeaselHiss(true)
+      setWeaselHiss(true);
     }
-  }
+  };
 
-   const toggleAnswerOne = () => {
-     togglePrincess();
-     setAnswerOne(!answerOne);
-   };
+  const toggleAnswerOne = () => {
+    togglePrincess();
+    setAnswerOne(!answerOne);
+  };
 
-   const toggleAnswerTwo = () => {
-     togglePrincess();
-     setAnswerTwo(!answerTwo);
-   };
+  const toggleAnswerTwo = () => {
+    togglePrincess();
+    setAnswerTwo(!answerTwo);
+  };
 
-   const toggleAnswerThree = () => {
-     togglePrincess();
-     setAnswerThree(!answerThree);
-   };
+  const toggleAnswerThree = () => {
+    togglePrincess();
+    setAnswerThree(!answerThree);
+  };
 
-   const toggleAnswerFour = () => {
-     togglePrincess();
-     setAnswerFour(!answerFour);
-   };
+  const toggleAnswerFour = () => {
+    togglePrincess();
+    setAnswerFour(!answerFour);
+  };
 
-   const toggleRejectionCard = () => {
-     if (
-       props.tower.tower.flowers_given === true) {
-       setPrincess(true)
-     } else {
-       setRejectionCard(true);
-     }
-   };
+  const toggleRejectionCard = () => {
+    if (!props.tower.tower.weasel_soothed) {
+      setRejectionCardTwo(true);
+    } else if (props.tower.tower.flowers_given === true) {
+      setPrincess(true);
+    } else {
+      setRejectionCard(true);
+    }
+  };
 
   return isLoading ? (
     <Loading />
@@ -121,34 +132,34 @@ function Tower(props) {
                 src={Princess}
                 className="tower-princess"
                 alt="princess"
-                onClick={togglePrincess}
+                onClick={toggleRejectionCard}
               />
             </div>
             <div className="tower-bottom-right-down"></div>
           </div>
         </div>
       </div>
-      <Card className={`${princess ? "garden-card" : "garden-card-closed"}`}>
-        <Typography variant="h5" color="primary" className="garden-card-title">
-          What would you like to know about?
+      <Card className={`${princess ? "tower-card" : "tower-card-closed"}`}>
+        <Typography variant="h5" color="primary" className="tower-card-title">
+          What knowledge shall I bestow upon you?
         </Typography>
-        <List className="garden-list">
-          <ListItem className="garden-list-item" onClick={toggleAnswerOne}>
-            The Dragon
+        <List className="tower-list">
+          <ListItem className="tower-list-item" onClick={toggleAnswerOne}>
+            The King
           </ListItem>
-          <ListItem className="garden-list-item" onClick={toggleAnswerTwo}>
-            Faeries
+          <ListItem className="tower-list-item" onClick={toggleAnswerTwo}>
+            The Ribbon
           </ListItem>
-          <ListItem className="garden-list-item" onClick={toggleAnswerThree}>
-            Flowers
+          <ListItem className="tower-list-item" onClick={toggleAnswerThree}>
+            The Tower
           </ListItem>
-          <ListItem className="garden-list-item" onClick={toggleAnswerFour}>
-            Magical Creatures
+          <ListItem className="tower-list-item" onClick={toggleAnswerFour}>
+            The Weasel
           </ListItem>
         </List>
         <Button
           onClick={togglePrincess}
-          className="garden-card-button"
+          className="tower-card-button"
           variant="contained"
           color="primary"
         >
@@ -156,19 +167,21 @@ function Tower(props) {
         </Button>
       </Card>
       <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="garden-card-title">
-          The Dragon
+        <Typography variant="h4" color="primary" className="tower-card-title">
+          The King
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          Unlike most magical creatures, dragons are destructive.
+          You want to see the King? It would be too funny if I sent someone of
+          your ignorance to speak with him. I will present you with a letter to
+          be delivered to the King if you find my lost ribbon.
         </Typography>
         <Button
           onClick={toggleAnswerOne}
-          className="garden-card-button"
+          className="tower-card-button"
           variant="contained"
           color="primary"
         >
@@ -176,19 +189,21 @@ function Tower(props) {
         </Button>
       </Card>
       <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="garden-card-title">
-          Fairies
+        <Typography variant="h4" color="primary" className="tower-card-title">
+          Ribbon
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          Unlike humans, fairies take care of nature.
+          One day while I was lounging in the shade a giant bird swooped down
+          and stole my favorite ribbon from the line where my servants had hung
+          it to dry. Such carelessness is peeving.
         </Typography>
         <Button
           onClick={toggleAnswerTwo}
-          className="garden-card-button"
+          className="tower-card-button"
           variant="contained"
           color="primary"
         >
@@ -196,19 +211,20 @@ function Tower(props) {
         </Button>
       </Card>
       <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="garden-card-title">
-          The Flowers
+        <Typography variant="h4" color="primary" className="tower-card-title">
+          The Tower
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          I'm warning you. These flowers are to look at, not to touch!
+          The tower is where I go to when the King forgets what a beautiful,
+          mature, intelligent young lady I am. I also come here to escape associating with boorish people like yourself.
         </Typography>
         <Button
           onClick={toggleAnswerThree}
-          className="garden-card-button"
+          className="tower-card-button"
           variant="contained"
           color="primary"
         >
@@ -216,20 +232,19 @@ function Tower(props) {
         </Button>
       </Card>
       <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="garden-card-title">
-          Magical Creatures
+        <Typography variant="h4" color="primary" className="tower-card-title">
+          The Weasel
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          There are many magical creatures. If you want to meet more of them go
-          to the magical glade.
+          Pop is far more intelligent and loyal than you will ever be.
         </Typography>
         <Button
           onClick={toggleAnswerFour}
-          className="garden-card-button"
+          className="tower-card-button"
           variant="contained"
           color="primary"
         >
@@ -244,10 +259,10 @@ function Tower(props) {
           color="secondary"
           className="answer-card-description"
         >
-          Don't touch the flowers!!!
+          How droll! The peasant thinks I would talk to him.
         </Typography>
         <Button
-          onClick={toggleRejectionCard}
+          onClick={() => setRejectionCard(false)}
           className="castle-card-button"
           variant="contained"
           color="primary"
@@ -256,8 +271,26 @@ function Tower(props) {
         </Button>
       </Card>
       <Card
-        className={`${weaselHiss ? "answer-card" : "answer-card-closed"}`}
+        className={`${rejectionCardTwo ? "answer-card" : "answer-card-closed"}`}
       >
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You should figure out how to deal with that weasel before you even
+          think about talking to the princess
+        </Typography>
+        <Button
+          onClick={() => setRejectionCardTwo(false)}
+          className="castle-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${weaselHiss ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h6"
           color="secondary"
@@ -274,9 +307,7 @@ function Tower(props) {
           CLOSE
         </Button>
       </Card>
-      <Card
-        className={`${weaselPurr ? "answer-card" : "answer-card-closed"}`}
-      >
+      <Card className={`${weaselPurr ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h6"
           color="secondary"
@@ -293,9 +324,31 @@ function Tower(props) {
           CLOSE
         </Button>
       </Card>
+      <Card className={`${firstTime ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You follow the castle around towards the tower. You stop abruptly as
+          you see a ferocious weasel on the path in front of you. It hisses and
+          darts at you. You back away. You'll have to figure out how to get past
+          the weasel if you want to go any further.
+        </Typography>
+        <Button
+          onClick={() => setFirstTime(false)}
+          className="castle-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory, getTower })(Tower);
+export default connect(mapStateToProps, { getUser, getInventory, getTower })(
+  Tower
+);

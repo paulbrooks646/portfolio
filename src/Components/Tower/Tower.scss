@@ -49,6 +49,11 @@
             width: 100px;
             cursor: pointer;
             position: relative;
+            animation-name: weasel;
+            animation-iteration-count: 1;
+            animation-timing-function: linear;
+            animation-direction: normal;
+            animation-duration: 1s;
             right: 10%;
           }
         }
@@ -173,4 +178,10 @@
   .answer-card-closed {
     display: none;
   }
+}
+
+@keyframes weasel {
+  0% {right: 10%}
+  50% {right: 30%}
+  100% {right: 10%}
 }

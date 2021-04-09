@@ -28,6 +28,7 @@ app.get("/api/stables", controller.getStables)
 app.get("/api/castle", controller.getCastle);
 app.get("/api/garden", controller.getGarden);
 app.get("/api/tower", controller.getTower);
+app.post("/api/towerFirstTime", controller.towerFirstTime)
 app.post("/api/manureCleanPermission", controller.manureCleanPermission)
 app.post("/api/manureTakePermission", controller.manureTakePermission)
 app.post("/api/giveNuts", controller.giveNuts)

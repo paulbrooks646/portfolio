@@ -18,7 +18,7 @@ module.exports = {
     const stables = db.new_stables(newUser[0].id);
     const castle = db.new_castle(newUser[0].id);
     const garden = db.new_garden(newUser[0].id);
-    const tower = db.new_tower(newUser[0].id)
+    const tower = db.new_tower(newUser[0].id);
     req.session.user = {
       id: newUser[0].id,
       name: newUser[0].name,
@@ -127,6 +127,14 @@ module.exports = {
 
     const stables = await db.manure_take_permission(id);
     res.status(200).send(stables);
+  },
+
+  towerFirstTime: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const tower = await db.tower_first_time(id);
+    res.status(200).send(tower);
   },
 
   manureHasCleaned: async (req, res) => {
