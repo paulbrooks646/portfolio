@@ -19,13 +19,13 @@ module.exports = {
     const castle = db.new_castle(newUser[0].id);
     const garden = db.new_garden(newUser[0].id);
     const tower = db.new_tower(newUser[0].id);
-  
+
     req.session.user = {
       id: newUser[0].id,
       name: newUser[0].name,
       newgame: newUser[0].newgame,
       coins: newUser[0].coins,
-      forest: newUser[0].forest_first
+      forest: newUser[0].forest_first,
     };
     res.status(200).send(req.session.user);
   },
@@ -45,7 +45,7 @@ module.exports = {
           name: user[0].name,
           newgame: user[0].newgame,
           coins: user[0].coins,
-          forest: user[0].forest_first
+          forest: user[0].forest_first,
         };
         res.status(200).send(req.session.user);
       } else {
@@ -76,6 +76,22 @@ module.exports = {
       name: user[0].name,
       newgame: user[0].newgame,
       coins: user[0].coins,
+      forest: user[0].forest_first
+    };
+    res.status(200).send(req.session.user);
+  },
+
+  forestFirst: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const user = await db.forest_first(id);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first
     };
     res.status(200).send(req.session.user);
   },

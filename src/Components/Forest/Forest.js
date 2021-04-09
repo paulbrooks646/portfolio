@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
@@ -13,14 +13,12 @@ import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import Character from "../Character/Character"
-import Loading from "../Loading/Loading";
 import Elf from "../../Images/Elf.gif"
 
 function Forest(props) {
   const [left, setLeft] = useState(false);
   const [right, setRight] = useState(false);
   const [down, setDown] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const [forestFirst, setForestFirst] = useState(props.user.user.forest);
   const [answerOne, setAnswerOne] = useState(false);
   const [answerTwo, setAnswerTwo] = useState(false);
@@ -67,6 +65,12 @@ function Forest(props) {
 
   const toggleRanger = () => {
     setRanger(!ranger)
+  }
+
+  const toggleForestFirst = () => {
+    axios.post("/api/forestFirst").then((res) =>
+      props.getUser(res.data))
+    setForestFirst(false)
   }
 
   return (
@@ -203,6 +207,23 @@ function Forest(props) {
         </Typography>
         <Button
           onClick={toggleAnswerFour}
+          className="forest-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${forestFirst ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+        After you travel in the forest for a little while you come across a ranger enjoying his lunch at a fork in the road. He may be a good source of information about the surrounding area.
+        </Typography>
+        <Button
+          onClick={toggleForestFirst}
           className="forest-card-button"
           variant="contained"
           color="primary"

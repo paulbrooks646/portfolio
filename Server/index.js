@@ -24,6 +24,7 @@ app.post("/api/login", controller.login);
 app.delete("/api/logout", controller.logout);
 app.get("/api/user", controller.getUser);
 app.post("/api/newgame", controller.newgame)
+app.post("/api/forestFirst", controller.forestFirst);
 app.get("/api/stables", controller.getStables)
 app.get("/api/castle", controller.getCastle);
 app.get("/api/garden", controller.getGarden);
