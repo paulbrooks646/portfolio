@@ -1,19 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import axios from "axios";
 import "./Forest.scss";
-import { Link } from "react-redux";
+import Card from "@material-ui/core/Card";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
-import ArrowUpward from "@material-ui/icons/ArrowUpward";
+import Character from "../Character/Character"
+import Loading from "../Loading/Loading";
+import Elf from "../../Images/Elf.gif"
 
 function Forest(props) {
   const [left, setLeft] = useState(false);
   const [right, setRight] = useState(false);
   const [down, setDown] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [forestFirst, setForestFirst] = useState(props.user.user.forest);
+  const [answerOne, setAnswerOne] = useState(false);
+  const [answerTwo, setAnswerTwo] = useState(false);
+  const [answerThree, setAnswerThree] = useState(false);
+  const [answerFour, setAnswerFour] = useState(false);
+  const [ranger, setRanger] = useState(false)
+
+
 
   const toggleLeft = () => {
     setLeft(!left);
@@ -30,6 +45,30 @@ function Forest(props) {
     props.history.push("/Cave");
   };
 
+  const toggleAnswerOne = () => {
+    toggleRanger();
+    setAnswerOne(!answerOne);
+  };
+
+  const toggleAnswerTwo = () => {
+    toggleRanger();
+    setAnswerTwo(!answerTwo);
+  };
+
+  const toggleAnswerThree = () => {
+    toggleRanger();
+    setAnswerThree(!answerThree);
+  };
+
+  const toggleAnswerFour = () => {
+    toggleRanger();
+    setAnswerFour(!answerFour);
+  };
+
+  const toggleRanger = () => {
+    setRanger(!ranger)
+  }
+
   return (
     <div className="forest-main">
       <Nav />
@@ -45,39 +84,9 @@ function Forest(props) {
               <ArrowBack />
               <h2>Home</h2>
             </div>
-            <div className="character">
-              <div className="face">
-                <div className="eyes">
-                  <div className="eye"></div>
-                  <div className="eye"></div>
-                </div>
-                <div className="nose"></div>
-                <div className="mouth"></div>
-              </div>
-              <div className="body">
-                <div className="neck"></div>
-                <div className="arms">
-                  <div className="left-arm">
-                    <div className="hand"></div>
-                  </div>
-                  <div className="right-arm">
-                    <div className="hand"></div>
-                  </div>
-                </div>
-                <div className="torso"></div>
-                <div className="legs">
-                  <div className="left-leg">
-                    <div className="foot"></div>
-                  </div>
-                  <div className="right-leg">
-                    <div className="foot"></div>
-                  </div>
-                </div>
-                <h3>{props.user.user.name}</h3>
-              </div>
-            </div>
+            <Character />
           </div>
-          <div className="forest-middle-middle"></div>
+          <div className="forest-middle-middle"><img src={Elf} onClick={ toggleRanger} className="forest-ranger" alt="forest ranger"/></div>
           <div className="forest-middle-right">
             <div className="forest-swamp" onClick={toggleRight}>
               <h2>Swamp</h2>
@@ -96,6 +105,111 @@ function Forest(props) {
           <div className="forest-bottom-right"></div>
         </div>
       </div>
+      <Card className={`${ranger ? "forest-card" : "forest-card-closed"}`}>
+        <Typography variant="h5" color="primary" className="forest-card-title">
+          What brings you into the forest?
+        </Typography>
+        <List className="forest-list">
+          <ListItem className="forest-list-item" onClick={toggleAnswerOne}>
+            Caves
+          </ListItem>
+          <ListItem className="forest-list-item" onClick={toggleAnswerTwo}>
+            Goblins
+          </ListItem>
+          <ListItem className="forest-list-item" onClick={toggleAnswerThree}>
+            The Swamp
+          </ListItem>
+          <ListItem className="forest-list-item" onClick={toggleAnswerFour}>
+            Wolves
+          </ListItem>
+        </List>
+        <Button
+          onClick={toggleRanger}
+          className="forest-card-button"
+          variant="contained"
+          color="primary"
+        >
+          Say Goodbye
+        </Button>
+      </Card>
+      <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary" className="forest-card-title">
+          Caves
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Caves are often used as homes by dangerous woodland creatures. This area has a particularly large population of wolves.
+        </Typography>
+        <Button
+          onClick={toggleAnswerOne}
+          className="forest-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary" className="forest-card-title">
+          Goblins
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >Goblins are tough. More than a match for you, I reckon. They are also cowards. Come at them with a big enough weapon and they're likely to run off.
+        </Typography>
+        <Button
+          onClick={toggleAnswerTwo}
+          className="forest-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary" className="forest-card-title">
+          The Swamp
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >The swamp is home to any number of foul creatures. Lately it seems to be overrun with goblins.
+        </Typography>
+        <Button
+          onClick={toggleAnswerThree}
+          className="forest-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary" className="forest-card-title">
+          Wolves
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+         Wolves are dangerous especially if they're hungry. They're far quicker than we are. If you come across one, your best bet is to distract them.
+        </Typography>
+        <Button
+          onClick={toggleAnswerFour}
+          className="forest-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
