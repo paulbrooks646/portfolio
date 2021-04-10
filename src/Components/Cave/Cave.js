@@ -9,9 +9,12 @@ import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
+import Loading from "../Loading/Loading";
+import Character from "../Character/Character";
 
 function Cave(props) {
   const [up, setUp] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const toggleUp = () => {
     setUp(!up);
@@ -28,37 +31,7 @@ function Cave(props) {
             <div className="cave-forest" onClick={toggleUp}>
               <ArrowUpward />
               <h2>Forest</h2>
-            </div>
-            <div className="character">
-              <div className="face">
-                <div className="eyes">
-                  <div className="eye"></div>
-                  <div className="eye"></div>
-                </div>
-                <div className="nose"></div>
-                <div className="mouth"></div>
-              </div>
-              <div className="body">
-                <div className="neck"></div>
-                <div className="arms">
-                  <div className="left-arm">
-                    <div className="hand"></div>
-                  </div>
-                  <div className="right-arm">
-                    <div className="hand"></div>
-                  </div>
-                </div>
-                <div className="torso"></div>
-                <div className="legs">
-                  <div className="left-leg">
-                    <div className="foot"></div>
-                  </div>
-                  <div className="right-leg">
-                    <div className="foot"></div>
-                  </div>
-                </div>
-                <h3>{props.user.user.name}</h3>
-              </div>
+              <Character/>
             </div>
           </div>
           <div className="cave-top-right"></div>

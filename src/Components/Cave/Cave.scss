@@ -2,8 +2,16 @@
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
 
   .cave-body {
+    background-image: url("../../Images/Dirt.png");
+    background-size: 100% 100%;
+
     .cave-top {
       height: 50vh;
       display: flex;
@@ -13,13 +21,10 @@
         background-image: url("../../Images/Forest2.png");
         height: 100%;
         width: 40%;
-        background-position: center;
         background-size: 100% 100%;
-        background-repeat: no-repeat;
       }
 
       .cave-top-middle {
-        background-color: brown;
         height: 100%;
         width: 20%;
 
@@ -35,9 +40,7 @@
         background-image: url("../../Images/Forest2.png");
         height: 100%;
         width: 40%;
-        background-position: center;
         background-size: 100% 100%;
-        background-repeat: no-repeat;
       }
     }
 
@@ -47,7 +50,8 @@
       width: 100vw;
 
       .cave-bottom-left {
-        background-color: forestgreen;
+        background-image: url("../../Images//Grass.png");
+        background-size: 100% 100%;
         height: 100%;
         width: 40%;
         display: flex;
@@ -66,325 +70,66 @@
       }
 
       .cave-bottom-middle {
-        background-color: brown;
         height: 100%;
         width: 20%;
       }
 
       .cave-bottom-right {
-        background-image: url("../../Images//Cave.png");
+        background-image: url("../../Images/Cave.png");
+        background-size: 100% 100%;
         height: 100%;
         width: 40%;
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
       }
     }
   }
-
-  .character {
-    position: relative;
+  .cave-card {
+    height: 500px;
+    width: 500px;
+    background-color: white;
+    border: solid black 2px;
+    box-shadow: 2px 2px 2px 2px;
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
     align-items: center;
-    top: 10px;
+    position: absolute;
+    text-align: center;
 
-    .face {
-      border-radius: 50%;
-      width: 40px;
-      height: 45px;
-      background-color: peachpuff;
-
+    .cave-list {
       display: flex;
       flex-direction: column;
-      justify-content: space-evenly;
       align-items: center;
-      border-top: solid yellow 5px;
-
-      .eyes {
-        display: flex;
-        justify-content: space-evenly;
-        width: 100%;
-
-        .eye {
-          border-radius: 50%;
-          background-color: blue;
-          height: 3px;
-          width: 5px;
-        }
-      }
-
-      .nose {
-        border-radius: 50%;
-        background-color: black;
-        height: 3px;
-        width: 2px;
-      }
-
-      .mouth {
-        border-radius: 50%;
-        background-color: red;
-        width: 20px;
-        height: 3px;
-      }
+      cursor: pointer;
+      color: tomato;
     }
-    .body {
-      width: 50px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
 
-      .neck {
-        background-color: black;
-        height: 5px;
-        width: 10px;
-      }
-
-      .arms {
-        display: flex;
-
-        .left-arm {
-          background-color: black;
-          width: 25px;
-          height: 5px;
-          transform: rotate(-2deg);
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-
-          .hand {
-            border-radius: 50%;
-            height: 8px;
-            width: 8px;
-            background-color: peachpuff;
-          }
-        }
-
-        .right-arm {
-          background-color: black;
-          width: 25px;
-          height: 5px;
-          transform: rotate(2deg);
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-
-          .hand {
-            border-radius: 50%;
-            height: 8px;
-            width: 8px;
-            background-color: peachpuff;
-          }
-        }
-      }
-
-      .torso {
-        background-color: black;
-        height: 20px;
-        width: 10px;
-      }
-
-      .legs {
-        display: flex;
-
-        .left-leg {
-          background-color: black;
-          height: 30px;
-          width: 5px;
-          transform: rotate(10deg);
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          align-items: center;
-
-          .foot {
-            border-radius: 50%;
-            height: 8px;
-            width: 8px;
-            background-color: black;
-          }
-        }
-
-        .right-leg {
-          background-color: black;
-          height: 30px;
-          width: 5px;
-          transform: rotate(-10deg);
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          align-items: center;
-
-          .foot {
-            border-radius: 50%;
-            height: 8px;
-            width: 8px;
-            background-color: black;
-          }
-        }
-      }
+    .cave-card-description {
+      width: 90%;
     }
   }
 
-  .character-moving {
-    position: relative;
-
+  .cave-card-closed {
+    display: none;
+  }
+  .answer-card {
+    height: 400px;
+    width: 400px;
+    background-color: white;
+    border: solid black 2px;
+    box-shadow: 2px 2px 2px 2px;
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
     align-items: center;
-    animation-name: motion;
-    animation-duration: 2s;
-    animation-timing-function: linear;
+    position: absolute;
+    text-align: center;
 
-    .face {
-      border-radius: 50%;
-      width: 40px;
-      height: 45px;
-      background-color: peachpuff;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-      align-items: center;
-      border-top: solid yellow 5px;
-
-      .eyes {
-        display: flex;
-        justify-content: space-evenly;
-        width: 100%;
-
-        .eye {
-          border-radius: 50%;
-          background-color: blue;
-          height: 3px;
-          width: 5px;
-        }
-      }
-
-      .nose {
-        border-radius: 50%;
-        background-color: black;
-        height: 3px;
-        width: 2px;
-      }
-
-      .mouth {
-        border-radius: 50%;
-        background-color: red;
-        width: 20px;
-        height: 3px;
-      }
-    }
-    .body {
-      width: 50px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      .neck {
-        background-color: black;
-        height: 5px;
-        width: 10px;
-      }
-
-      .arms {
-        display: flex;
-
-        .left-arm {
-          background-color: black;
-          width: 25px;
-          height: 5px;
-          transform: rotate(-2deg);
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-
-          .hand {
-            border-radius: 50%;
-            height: 8px;
-            width: 8px;
-            background-color: peachpuff;
-          }
-        }
-
-        .right-arm {
-          background-color: black;
-          width: 25px;
-          height: 5px;
-          transform: rotate(2deg);
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-
-          .hand {
-            border-radius: 50%;
-            height: 8px;
-            width: 8px;
-            background-color: peachpuff;
-          }
-        }
-      }
-
-      .torso {
-        background-color: black;
-        height: 20px;
-        width: 10px;
-      }
-
-      .legs {
-        display: flex;
-
-        .left-leg {
-          background-color: black;
-          height: 30px;
-          width: 5px;
-          transform: rotate(10deg);
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          align-items: center;
-
-          .foot {
-            border-radius: 50%;
-            height: 8px;
-            width: 8px;
-            background-color: black;
-          }
-        }
-
-        .right-leg {
-          background-color: black;
-          height: 30px;
-          width: 5px;
-          transform: rotate(-10deg);
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          align-items: center;
-
-          .foot {
-            border-radius: 50%;
-            height: 8px;
-            width: 8px;
-            background-color: black;
-          }
-        }
-      }
+    .answer-card-description {
+      width: 90%;
     }
   }
-}
 
-@keyframes motion {
-  0% {
-    bottom: 200px;
-    left: 0px;
-  }
-  50% {
-    bottom: 420px;
-    left: 0px;
-  }
-  100% {
-    left: -470px;
-    bottom: 420px;
+  .answer-card-closed {
+    display: none;
   }
 }

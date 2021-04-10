@@ -3,6 +3,7 @@ const express = require("express");
 const massive = require("massive");
 const session = require("express-session");
 const controller = require("./controller");
+const userController = require('./userController')
 const path = require("path");
 const { SERVER_PORT, SESSION_SECRET, CONNECTION_STRING } = process.env;
 
@@ -19,12 +20,15 @@ app.use(
   })
 );
 
-app.post("/api/register", controller.register);
-app.post("/api/login", controller.login);
-app.delete("/api/logout", controller.logout);
-app.get("/api/user", controller.getUser);
-app.post("/api/newgame", controller.newgame)
-app.post("/api/forestFirst", controller.forestFirst);
+app.post("/api/register", userController.register);
+app.post("/api/login", userController.login);
+app.delete("/api/logout", userController.logout);
+app.get("/api/user", userController.getUser);
+app.post("/api/newgame", userController.newgame)
+app.post("/api/forestFirst", userController.forestFirst);
+app.post("/api/coin", userController.coin);
+
+
 app.get("/api/stables", controller.getStables)
 app.get("/api/castle", controller.getCastle);
 app.get("/api/garden", controller.getGarden);
@@ -43,7 +47,7 @@ app.post("/api/manureHasCleaned", controller.manureHasCleaned)
 app.post("/api/manureHasTaken", controller.manureHasTaken)
 app.post("/api/manure", controller.manure)
 app.post("/api/flowers", controller.flowers);
-app.post("/api/coin", controller.coin)
+
 app.get("/api/inventory", controller.getInventory)
 
 app.use(express.static(__dirname + "/../build"));
