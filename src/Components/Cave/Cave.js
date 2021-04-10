@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
+import { getInventory } from "../../redux/inventoryReducer";
+import { getCave } from "../../redux/caveReducer";
 import axios from "axios";
 import "./Cave.scss";
-import { Link } from "react-redux";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
-import ArrowForward from "@material-ui/icons/ArrowForward";
-import ArrowBack from "@material-ui/icons/ArrowBack";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import Loading from "../Loading/Loading";
 import Character from "../Character/Character";
@@ -16,12 +15,21 @@ function Cave(props) {
   const [up, setUp] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    axios.get("/api/cave").then((res) => {
+      props.getCave(res.data[0]);
+      setIsLoading(false);
+    });
+  }, []);
+
   const toggleUp = () => {
     setUp(!up);
     props.history.push("/Forest");
   };
 
   return (
+
+    isLoading ? <Loading/> :
     <div className="cave-main">
       <Nav />
       <div className="cave-body">
@@ -50,4 +58,4 @@ function Cave(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser })(Cave);
+export default connect(mapStateToProps, { getUser, getInventory, getCave })(Cave);

@@ -33,6 +33,7 @@ app.get("/api/stables", controller.getStables)
 app.get("/api/castle", controller.getCastle);
 app.get("/api/garden", controller.getGarden);
 app.get("/api/tower", controller.getTower);
+app.get("/api/cave", controller.getCave);
 app.post("/api/towerFirstTime", controller.towerFirstTime)
 app.post("/api/manureCleanPermission", controller.manureCleanPermission)
 app.post("/api/useFlute", controller.useFlute);

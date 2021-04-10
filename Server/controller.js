@@ -19,6 +19,15 @@ module.exports = {
     res.status(200).send(castle);
   },
 
+  getCave: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const cave = await db.get_cave(id);
+
+    res.status(200).send(cave);
+  },
+
   getGarden: async (req, res) => {
     const db = req.app.get("db");
 
