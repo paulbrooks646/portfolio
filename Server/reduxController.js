@@ -44,6 +44,15 @@ module.exports = {
     res.status(200).send(tower);
   },
 
+  getNest: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const nest = await db.get_nest(id);
+
+    res.status(200).send(nest);
+  },
+
   getInventory: (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;

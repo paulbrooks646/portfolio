@@ -37,6 +37,7 @@ app.get("/api/garden", reduxController.getGarden);
 app.get("/api/tower", reduxController.getTower);
 app.get("/api/cave", reduxController.getCave);
 app.get("/api/inventory", reduxController.getInventory);
+app.get("/api/nest", reduxController.getNest)
 
 
 app.post("/api/towerFirstTime", controller.towerFirstTime)
