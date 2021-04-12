@@ -106,6 +106,23 @@ module.exports = {
     });
   },
 
+  giveMeat: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.give_meat(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
   manure: (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;

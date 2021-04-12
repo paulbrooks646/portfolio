@@ -46,6 +46,7 @@ app.post("/api/useFlute", controller.useFlute);
 app.post("/api/manureTakePermission", controller.manureTakePermission)
 app.post("/api/giveNuts", controller.giveNuts)
 app.post("/api/giveHat", controller.giveHat);
+app.post("/api/giveMeat", controller.giveMeat);
 app.post("/api/giveFlowers", controller.giveFlowers)
 app.post("/api/giveRibbon", controller.giveRibbon)
 app.post("/api/showLetter", controller.showLetter);

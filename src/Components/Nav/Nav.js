@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser, getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
+import {getCave} from "../../redux/caveReducer"
 import { getCastle } from "../../redux/castleReducer";
 import { getStables } from "../../redux/stablesReducer";
 import { getGarden } from "../../redux/gardenReducer";
@@ -25,6 +26,7 @@ function Nav(props) {
   const [fluteCard, setFluteCard] = useState(false);
   const [flowerCard, setFlowerCard] = useState(false);
   const [ribbonCard, setRibbonCard] = useState(false);
+  const [meatCard, setMeatCard] = useState(false);
 
   useEffect(() => {
     getUser();
@@ -80,14 +82,20 @@ function Nav(props) {
     }
     if (item === "meat") {
       if (props.location.pathname === "/Cave") {
-        alert("blah blah blah");
+        axios.post("/api/giveMeat").then((res) => {
+          props.getInventory(res.data);
+          axios.get("/api/cave").then((res) => {
+            props.getCave(res.data[0]);
+            setMeatCard(true);
+          });
+        });
       } else {
         setRejectionCard(true);
       }
     }
     if (item === "cake") {
       if (props.location.pathname === "/Pass") {
-        alert("blah blah blah");
+        ;
       } else {
         setRejectionCard(true);
       }
@@ -371,9 +379,28 @@ function Nav(props) {
           variant="h4"
           color="primary"
           className="answer-card-description"
-        >It would seem you have located my ribbon. Here is the letter as promised.</Typography>
+        >
+          It would seem you have located my ribbon. Here is the letter as
+          promised.
+        </Typography>
         <Button
           onClick={() => setRibbonCard(false)}
+          className="stables-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card id={`${meatCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          You hurl the hunk of meat to the wolf. It eyes the meat suspiciously, walks over, smells it, drags it to the side of the path, then starts to devour it.</Typography>
+        <Button
+          onClick={() => setMeatCard(false)}
           className="stables-card-button"
           variant="contained"
           color="primary"
@@ -396,5 +423,6 @@ export default withRouter(
     getStables,
     getGarden,
     getTower,
+    getCave
   })(Nav)
 );
