@@ -2,8 +2,17 @@
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
 
   .swamp-body {
+
+    background-image: url("../../Images//Dirt.png");
+    background-size: 100% 100%;
+
     .swamp-top {
       height: 35vh;
       display: flex;
@@ -18,7 +27,6 @@
       position: relative;
 
       .swamp-middle-left {
-        background-color: brown;
         width: 40%;
         height: 100%;
         display: flex;
@@ -36,18 +44,8 @@
       }
 
       .swamp-middle-middle {
-        background-color: brown;
         width: 20%;
         height: 100%;
-      }
-
-      .swamp-middle-right {
-        background-color: brown;
-        width: 40%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
 
         .goblin-open {
           background-image: url("../../Images/goblin.gif");
@@ -62,6 +60,27 @@
         }
         .goblin-closed {
         }
+      }
+
+      .swamp-middle-right {
+       
+        width: 40%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        .swamp-bog {
+          display: flex;
+          width: 100px;
+          justify-content: space-evenly;
+          align-items: center;
+          cursor: pointer;
+          position: relative;
+          width: 100px;
+        }
+
+        
       }
     }
 

@@ -27,6 +27,7 @@ app.delete("/api/logout", userController.logout);
 app.get("/api/user", userController.getUser);
 app.post("/api/newgame", userController.newgame)
 app.post("/api/forestFirst", userController.forestFirst);
+app.post("/api/mountainFirst", userController.mountainFirst);
 app.post("/api/coin", userController.coin);
 
 

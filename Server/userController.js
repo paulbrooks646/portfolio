@@ -27,6 +27,7 @@ module.exports = {
       newgame: newUser[0].newgame,
       coins: newUser[0].coins,
       forest: newUser[0].forest_first,
+      mountain: newUser[0].mountain_first,
     };
     res.status(200).send(req.session.user);
   },
@@ -47,6 +48,7 @@ module.exports = {
           newgame: user[0].newgame,
           coins: user[0].coins,
           forest: user[0].forest_first,
+          mountain: user[0].mountain_first,
         };
         res.status(200).send(req.session.user);
       } else {
@@ -78,6 +80,7 @@ module.exports = {
       newgame: user[0].newgame,
       coins: user[0].coins,
       forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
     };
     res.status(200).send(req.session.user);
   },
@@ -93,6 +96,23 @@ module.exports = {
       newgame: user[0].newgame,
       coins: user[0].coins,
       forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
+    res.status(200).send(req.session.user);
+  },
+
+  mountainFirst: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const user = await db.mountain_first(id);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
     };
     res.status(200).send(req.session.user);
   },
@@ -108,6 +128,7 @@ module.exports = {
       newgame: user[0].newgame,
       coins: user[0].coins,
       forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
     };
 
     res.status(200).send(req.session.user);

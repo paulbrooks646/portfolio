@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import axios from "axios";
 import "./Swamp.scss";
-import { Link } from "react-redux";
-import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
-import ArrowUpward from "@material-ui/icons/ArrowUpward";
+import Character from "../Character/Character"
+import Loading from "../Loading/Loading"
 
 function Swamp(props) {
   const [left, setLeft] = useState(false);
+  const [right, setRight] = useState(false);
+  const [isLoading, setIsLoading] = useState(true)
 
   const toggleLeft = () => {
     setLeft(!left);
@@ -33,41 +34,16 @@ function Swamp(props) {
               <ArrowBack />
               <h2>Forest</h2>
             </div>
-            <div className="character">
-              <div className="face">
-                <div className="eyes">
-                  <div className="eye"></div>
-                  <div className="eye"></div>
-                </div>
-                <div className="nose"></div>
-                <div className="mouth"></div>
-              </div>
-              <div className="body">
-                <div className="neck"></div>
-                <div className="arms">
-                  <div className="left-arm">
-                    <div className="hand"></div>
-                  </div>
-                  <div className="right-arm">
-                    <div className="hand"></div>
-                  </div>
-                </div>
-                <div className="torso"></div>
-                <div className="legs">
-                  <div className="left-leg">
-                    <div className="foot"></div>
-                  </div>
-                  <div className="right-leg">
-                    <div className="foot"></div>
-                  </div>
-                </div>
-                <h3>{props.user.user.name}</h3>
-              </div>
-            </div>
+            <Character />
           </div>
-          <div className="swamp-middle-middle"></div>
-          <div className="swamp-middle-right">
+          <div className="swamp-middle-middle">
             <div className="goblin-open"></div>
+          </div>
+          <div className="swamp-middle-right">
+            <div className="swamp-bog" onClick={toggleLeft}>
+              <h2>Bog</h2>
+              <ArrowForward />
+            </div>
           </div>
         </div>
         <div className="swamp-bottom">
