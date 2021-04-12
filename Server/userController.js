@@ -107,7 +107,7 @@ module.exports = {
       name: user[0].name,
       newgame: user[0].newgame,
       coins: user[0].coins,
-      forest: newUser[0].forest_first,
+      forest: user[0].forest_first,
     };
 
     res.status(200).send(req.session.user);

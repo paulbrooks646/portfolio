@@ -4,6 +4,7 @@ const massive = require("massive");
 const session = require("express-session");
 const controller = require("./controller");
 const userController = require('./userController')
+const reduxController = require('./reduxController')
 const path = require("path");
 const { SERVER_PORT, SESSION_SECRET, CONNECTION_STRING } = process.env;
 
@@ -29,13 +30,18 @@ app.post("/api/forestFirst", userController.forestFirst);
 app.post("/api/coin", userController.coin);
 
 
-app.get("/api/stables", controller.getStables)
-app.get("/api/castle", controller.getCastle);
-app.get("/api/garden", controller.getGarden);
-app.get("/api/tower", controller.getTower);
-app.get("/api/cave", controller.getCave);
+app.get("/api/stables", reduxController.getStables)
+app.get("/api/castle", reduxController.getCastle);
+app.get("/api/garden", reduxController.getGarden);
+app.get("/api/tower", reduxController.getTower);
+app.get("/api/cave", reduxController.getCave);
+app.get("/api/inventory", reduxController.getInventory);
+
+
 app.post("/api/towerFirstTime", controller.towerFirstTime)
-app.post("/api/manureCleanPermission", controller.manureCleanPermission)
+app.post("/api/caveFirst", controller.caveFirst)
+app.post("/api/manureCleanPermission", controller.manureCleanPermission);
+app.post("/api/caveCoin", controller.caveCoin);
 app.post("/api/useFlute", controller.useFlute);
 app.post("/api/manureTakePermission", controller.manureTakePermission)
 app.post("/api/giveNuts", controller.giveNuts)
@@ -48,8 +54,9 @@ app.post("/api/manureHasCleaned", controller.manureHasCleaned)
 app.post("/api/manureHasTaken", controller.manureHasTaken)
 app.post("/api/manure", controller.manure)
 app.post("/api/flowers", controller.flowers);
+app.post("/api/hat", controller.hat);
+app.post("/api/bone", controller.bone);
 
-app.get("/api/inventory", controller.getInventory)
 
 app.use(express.static(__dirname + "/../build"));
 

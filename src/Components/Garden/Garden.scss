@@ -22,15 +22,16 @@
       height: 20vh;
       display: flex;
       width: 100vw;
+      background-image: url("../../Images/Dirt.png");
+      background-size: 100% 100%;
+      border-left: solid pink 20px;
 
       .garden-middle-left {
-        background-color: pink;
         width: 10%;
         height: 100%;
       }
 
       .garden-middle-middle {
-        background-color: brown;
         width: 50%;
         height: 100%;
         display: flex;
@@ -47,7 +48,6 @@
       }
 
       .garden-middle-right {
-        background-color: brown;
         width: 40%;
         height: 100%;
         display: flex;
