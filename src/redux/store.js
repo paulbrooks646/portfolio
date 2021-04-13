@@ -7,6 +7,7 @@ import nestReducer from "./nestReducer"
 import stablesReducer from "./stablesReducer"
 import gardenReducer from "./gardenReducer"
 import towerReducer from "./towerReducer"
+import passReducer from "./passReducer"
 import promiseMiddleware from "redux-promise-middleware";
 
 
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
   garden: gardenReducer,
   tower: towerReducer,
   cave: caveReducer,
-  nest: nestReducer
+  nest: nestReducer,
+  pass: passReducer
 });
 
 export default createStore(rootReducer, applyMiddleware(promiseMiddleware));

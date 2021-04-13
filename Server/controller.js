@@ -63,6 +63,14 @@ module.exports = {
     res.status(200).send(nest);
   },
 
+  passFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const pass = await db.pass_first(id);
+    res.status(200).send(pass);
+  },
+
   manureHasCleaned: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;

@@ -21,6 +21,7 @@ module.exports = {
     const tower = db.new_tower(newUser[0].id);
     const cave = db.new_cave(newUser[0].id);
     const nest = db.new_nest(newUser[0].id)
+    const pass = db.new_pass(newUser[0].id)
 
     req.session.user = {
       id: newUser[0].id,

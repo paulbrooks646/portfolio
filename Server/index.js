@@ -38,11 +38,13 @@ app.get("/api/tower", reduxController.getTower);
 app.get("/api/cave", reduxController.getCave);
 app.get("/api/inventory", reduxController.getInventory);
 app.get("/api/nest", reduxController.getNest)
+app.get("/api/pass", reduxController.getPass);
 
 
 app.post("/api/towerFirstTime", controller.towerFirstTime)
 app.post("/api/caveFirst", controller.caveFirst)
 app.post("/api/nestFirst", controller.nestFirst);
+app.post("/api/passFirst", controller.passFirst)
 app.post("/api/manureCleanPermission", controller.manureCleanPermission);
 app.post("/api/caveCoin", controller.caveCoin);
 app.post("/api/nestCoin", controller.nestCoin);

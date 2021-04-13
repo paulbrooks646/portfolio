@@ -53,6 +53,15 @@ module.exports = {
     res.status(200).send(nest);
   },
 
+  getPass: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const pass = await db.get_pass(id);
+
+    res.status(200).send(pass);
+  },
+
   getInventory: (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
