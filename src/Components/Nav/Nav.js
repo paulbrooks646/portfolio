@@ -8,7 +8,8 @@ import { getCastle } from "../../redux/castleReducer";
 import { getStables } from "../../redux/stablesReducer";
 import { getGarden } from "../../redux/gardenReducer";
 import { getTower } from "../../redux/towerReducer";
-import {getNest} from "../../redux/nestReducer"
+import { getNest } from "../../redux/nestReducer";
+import {getPass} from "../../redux/passReducer"
 import axios from "axios";
 import "./Nav.scss";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
@@ -29,6 +30,7 @@ function Nav(props) {
   const [ribbonCard, setRibbonCard] = useState(false);
   const [meatCard, setMeatCard] = useState(false);
   const [ropeCard, setRopeCard] = useState(false);
+  const [cakeCard, setCakeCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/getUser").then((res) => {
@@ -105,7 +107,13 @@ function Nav(props) {
     }
     if (item === "cake") {
       if (props.location.pathname === "/Pass") {
-        ;
+        axios.post("/api/giveCake").then((res) => {
+          props.getInventory(res.data);
+          axios.get("/api/pass").then((res) => {
+            props.getPass(res.data[0]);
+            setCakeCard(true);
+          });
+        });
       } else {
         setRejectionCard(true);
       }
@@ -427,10 +435,29 @@ function Nav(props) {
           color="primary"
           className="answer-card-description"
         >
-          You tie one end of your rope into a knot and hurl it at the nest. The knot gets wedged amid the branches. Using the rope you might be able to get to the nest before the griffin can attack. 
+          You tie one end of your rope into a knot and hurl it at the nest. The
+          knot gets wedged amid the branches. Using the rope you might be able
+          to get to the nest before the griffin can attack.
         </Typography>
         <Button
           onClick={() => setRopeCard(false)}
+          className="stables-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card id={`${cakeCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          As you pull the cake out of your pack, the ogre starts to stir. You hurry over and place the cake next to him. The ogre fully wakes up, grabs the cake and lumbers up the mountain.
+        </Typography>
+        <Button
+          onClick={() => setCakeCard(false)}
           className="stables-card-button"
           variant="contained"
           color="primary"
@@ -454,6 +481,7 @@ export default withRouter(
     getGarden,
     getTower,
     getCave,
-    getNest
+    getNest,
+    getPass
   })(Nav)
 );

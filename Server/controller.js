@@ -130,6 +130,23 @@ module.exports = {
     });
   },
 
+  giveCake: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.give_cake(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
   giveRibbon: (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;

@@ -18,9 +18,10 @@
       height: 20vh;
       display: flex;
       width: 100vw;
+      background-image: url("../../Images//Dirt.png");
+      background-size: 100% 100%;
 
       .market-middle-left {
-        background-color: brown;
         width: 40%;
         height: 100%;
         display: flex;
@@ -31,166 +32,19 @@
           align-items: center;
           cursor: pointer;
         }
-
-        .character {
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          left: 20px;
-
-          .face {
-            border-radius: 50%;
-            width: 40px;
-            height: 45px;
-            background-color: peachpuff;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            align-items: center;
-            border-top: solid yellow 5px;
-
-            .eyes {
-              display: flex;
-              justify-content: space-evenly;
-              width: 100%;
-
-              .eye {
-                border-radius: 50%;
-                background-color: blue;
-                height: 3px;
-                width: 5px;
-              }
-            }
-
-            .nose {
-              border-radius: 50%;
-              background-color: black;
-              height: 3px;
-              width: 2px;
-            }
-
-            .mouth {
-              border-radius: 50%;
-              background-color: red;
-              width: 20px;
-              height: 3px;
-            }
-          }
-          .body {
-            width: 50px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            .neck {
-              background-color: black;
-              height: 5px;
-              width: 10px;
-            }
-
-            .arms {
-              display: flex;
-
-              .left-arm {
-                background-color: black;
-                width: 25px;
-                height: 5px;
-                transform: rotate(-2deg);
-                display: flex;
-                justify-content: flex-start;
-                align-items: center;
-
-                .hand {
-                  border-radius: 50%;
-                  height: 8px;
-                  width: 8px;
-                  background-color: peachpuff;
-                }
-              }
-
-              .right-arm {
-                background-color: black;
-                width: 25px;
-                height: 5px;
-                transform: rotate(2deg);
-                display: flex;
-                align-items: center;
-                justify-content: flex-end;
-
-                .hand {
-                  border-radius: 50%;
-                  height: 8px;
-                  width: 8px;
-                  background-color: peachpuff;
-                }
-              }
-            }
-
-            .torso {
-              background-color: black;
-              height: 20px;
-              width: 10px;
-            }
-
-            .legs {
-              display: flex;
-
-              .left-leg {
-                background-color: black;
-                height: 30px;
-                width: 5px;
-                transform: rotate(10deg);
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
-                align-items: center;
-
-                .foot {
-                  border-radius: 50%;
-                  height: 8px;
-                  width: 8px;
-                  background-color: black;
-                }
-              }
-
-              .right-leg {
-                background-color: black;
-                height: 30px;
-                width: 5px;
-                transform: rotate(-10deg);
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
-                align-items: center;
-
-                .foot {
-                  border-radius: 50%;
-                  height: 8px;
-                  width: 8px;
-                  background-color: black;
-                }
-              }
-            }
-          }
-        }
       }
 
       .market-middle-middle {
-        background-color: brown;
         width: 20%;
         height: 100%;
       }
 
       .market-middle-right {
-        background-color: brown;
         width: 40%;
         height: 100%;
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        
 
         .market-alley {
           display: flex;
@@ -205,60 +59,60 @@
     .market-bottom {
       height: 35vh;
       display: flex;
+      justify-content: space-evenly;
+      align-items: center;
       width: 100vw;
+      background-image: url("../../Images/Grass.png");
+      background-size: 100% 100%;
 
-      .market-bottom-left {
-        background-color: green;
-        height: 100%;
-        width: 40%;
+      .blacksmith-div {
+        cursor: pointer;
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
         align-items: center;
-
-        .blacksmith-div {
-            cursor: pointer;
-            height: 200px;
-            width: 200px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
 
         .market-blacksmith {
-            height: 200px;
-            width: 200px;
+          height: 200px;
+          width: 200px;
         }
-      }}
-
-      .market-bottom-middle {
-        background-color: green;
-        height: 100%;
-        width: 20%;
       }
 
-      .market-bottom-right {
-        background-color: green;
-        height: 100%;
-        width: 40%;
+      .magic-store-div {
+        cursor: pointer;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: space-evenly;
 
-        .store-div {
-            cursor: pointer;
-            height: 200px;
-            width: 200px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-        .market-store {
-            height: 200px;
-            width: 200px;
+        .market-magic {
+           height: 200px;
+          width: 200px;
         }
       }
-      }}
+
+      .grocer-div {
+         cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .market-grocer {
+           height: 200px;
+          width: 200px;
+        }
+      }
+
+      .store-div {
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .market-store {
+          height: 200px;
+          width: 200px;
+        }
+      }
+    }
   }
 
   .character-moving {
