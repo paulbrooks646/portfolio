@@ -11,12 +11,14 @@ import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import ArrowForward from "@material-ui/icons/ArrowForward";
+import { getInventory } from "../../redux/inventoryReducer";
 
 function Nest(props) {
   const [right, setRight] = useState(false);
   const [failure, setFailure] = useState(false);
   const [coinSuccess, setCoinSuccess] = useState(false);
   const [ribbonSuccess, setRibbonSuccess] = useState(false);
+  const [featherSuccess, setFeatherSuccess] = useState(false);
   const [griffin, setGriffin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -32,44 +34,58 @@ function Nest(props) {
     props.history.push("/Mountain");
   };
 
-  const toggleCoinSuccess = () => {
-    setCoinSuccess(!coinSuccess);
-  };
-
-  const toggleRibbonSuccess = () => {
-    setRibbonSuccess(!ribbonSuccess);
-    
-  };
-
-  const toggleFailure = () => {
-    setFailure(!failure);
+  const toggleFirst = () => {
+    axios.post("/api/nestFirst").then((res) => {
+      props.getNest(res.data[0]);
+    });
   };
 
   const toggleCoin = () => {
-    if (props.user.user.rope) {
-      toggleCoinSuccess();
+    if (props.nest.nest.rope_used) {
+      axios.post("/api/coin").then((res) => {
+        props.getUser(res.data);
+        axios.post("/api/nestCoin").then((res) => {
+          props.getNest(res.data[0])
+          setCoinSuccess(true)
+        })
+      });
     } else {
-      toggleFailure();
+      setGriffin(true);
     }
   };
 
   const toggleRibbon = () => {
-    setGriffin(true);
-    // if (props.user.user.rope) {
-    //   toggleRibbonSuccess();
-    // } else {
-    //   toggleFailure();
-    // }
+    if (props.nest.nest.rope_used) {
+      axios.post("/api/ribbon").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/nest").then((res) => {
+          props.getNest(res.data[0]);
+          setRibbonSuccess(true);
+        });
+      });
+    } else {
+      setGriffin(true);
+    }
   };
 
-  const toggleFailureEvent = () => {
-    setFailure(!failure);
-    setGriffin(!griffin);
+  const toggleFeather = () => {
+    if (props.nest.nest.rope_used) {
+      axios.post("/api/feather").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/nest").then((res) => {
+          props.getNest(res.data[0]);
+          setFeatherSuccess(true);
+        });
+      });
+    } else {
+      setGriffin(true);
+    }
   };
 
-  const toggleHello = () => {
-
-  }
+  const toggleAnimationEnd = () => {
+    setGriffin(false);
+    setFailure(true);
+  };
 
   return isLoading ? (
     <Loading />
@@ -81,6 +97,7 @@ function Nest(props) {
           <div className="nest-top-left">
             <div
               className={`${griffin ? "griffin-open" : "griffin-closed"}`}
+              onAnimationEnd={toggleAnimationEnd}
             ></div>
           </div>
           <div className="nest-top-middle"></div>
@@ -88,19 +105,38 @@ function Nest(props) {
         </div>
         <div className="nest-middle">
           <div className="nest-middle-left">
-            <div className="egg-div">
-              <div className="nest-egg"></div>
+            <div className="feather-div">
+              <div
+                className={`${
+                  props.nest.nest.feather_taken
+                    ? "nest-feather-closed"
+                    : "nest-feather"
+                }`}
+                onClick={toggleFeather}
+              ></div>
             </div>
             <div className="coin-div">
-              <div className="nest-coin" onClick={toggleCoin}></div>
+              <div
+                className={`${
+                  props.nest.nest.coin_taken ? "nest-coin-closed" : "nest-coin"
+                }`}
+                onClick={toggleCoin}
+              ></div>
             </div>
             <div className="ribbon-div">
-              <div className="nest-ribbon" onClick={toggleRibbon}></div>
+              <div
+                className={`${
+                  props.nest.nest.ribbon_taken
+                    ? "nest-ribbon-closed"
+                    : "nest-ribbon"
+                }`}
+                onClick={toggleRibbon}
+              ></div>
             </div>
           </div>
-          <div className="nest-middle-middle"><div className="animation-test" onAnimationEnd={toggleHello}></div></div>
+          <div className="nest-middle-middle"></div>
           <div className="nest-middle-right">
-              <Character/>
+            <Character />
             <div className="nest-mountains" onClick={toggleRight}>
               <h2>Mountains</h2>
               <ArrowForward />
@@ -113,32 +149,122 @@ function Nest(props) {
           <div className="nest-bottom-right"></div>
         </div>
       </div>
-      <div className={`${failure ? "failure-card" : "failure-card-closed"}`}>
-        <h1 className="card-title">Uh oh!</h1>
-        <p className="card-paragraph">
-          As you try to climb the moutain to the nest you hear a loud screech.
-          You look up to see a griffin flying straight towards you. You'll need
-          to find something to help you climb to the nest more quickly next
-          time.
-        </p>
-        <h2 className="card-subtitle">Run away!</h2>
-        <button className="card-button" onClick={toggleFailureEvent}>
+      <Card
+        className={`${
+          props.nest.nest.first_time ? "answer-card" : "answer-card-closed"
+        }`}
+      >
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You climb the steep cliff. Up ahead you see the massive Griffin's
+          nest. You look around tenatively for the owner of the nest.
+        </Typography>
+        <Button
+          onClick={toggleFirst}
+          className="forest-card-button"
+          variant="contained"
+          color="primary"
+        >
           CLOSE
-        </button>
-      </div>
-      <div
-        className={`${
-          coinSuccess ? "coin-success-card" : "coin-success-card-closed"
-        }`}
-      ></div>
-      <div
-        className={`${
-          ribbonSuccess ? "ribbon-success-card" : "ribbon-success-card-closed"
-        }`}
-      ></div>
+        </Button>
+      </Card>
+      <Card className={`${failure ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Are you serious? Their is a ravenous wolf blocking the path.
+        </Typography>
+        <Button
+          onClick={() => setFailure(false)}
+          className="forest-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${coinSuccess ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You pick up the shiny gold coin.
+        </Typography>
+        <Button
+          onClick={() => setCoinSuccess(false)}
+          className="forest-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${ribbonSuccess ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You pick up the beautiful blue ribbon.
+        </Typography>
+        <Button
+          onClick={() => setRibbonSuccess(false)}
+          className="forest-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${featherSuccess ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You pick up the large griffin feather.
+        </Typography>
+        <Button
+          onClick={() => setFeatherSuccess(false)}
+          className="forest-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${failure ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          A huge Griffin swoops out of the air. You barely manage to dodge its
+          attack. You need to find something to help you climb to the nest more
+          quickly.
+        </Typography>
+        <Button
+          onClick={() => setFailure(false)}
+          className="forest-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getNest })(Nest);
+export default connect(mapStateToProps, { getUser, getNest, getInventory })(Nest);

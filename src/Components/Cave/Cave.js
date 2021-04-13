@@ -46,10 +46,6 @@ function Cave(props) {
     }
   };
 
-  const toggleWolf = () => {
-    setWolf(!wolf);
-  };
-
   const toggleFirst = () => {
     axios.post("/api/caveFirst").then((res) => {
       props.getCave(res.data[0]);

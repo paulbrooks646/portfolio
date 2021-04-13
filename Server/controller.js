@@ -23,6 +23,14 @@ module.exports = {
     res.status(200).send(cave);
   },
 
+  nestCoin: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const nest = await db.nest_coin(id);
+    res.status(200).send(nest);
+  },
+
   useFlute: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -43,8 +51,16 @@ module.exports = {
     const db = req.app.get("db");
     const { id } = req.session.user;
 
-    const tower = await db.cave_first(id);
-    res.status(200).send(tower);
+    const cave = await db.cave_first(id);
+    res.status(200).send(cave);
+  },
+
+  nestFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const nest = await db.nest_first(id);
+    res.status(200).send(nest);
   },
 
   manureHasCleaned: async (req, res) => {
@@ -60,6 +76,23 @@ module.exports = {
     const { id } = req.session.user;
 
     db.manure_given(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  useRope: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.rope_used(id).then((inventory) => {
       let newArr = [];
 
       for (let key in inventory[0]) {
@@ -145,6 +178,40 @@ module.exports = {
     const { id } = req.session.user;
 
     db.flowers(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  ribbon: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.ribbon(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  feather: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.feather(id).then((inventory) => {
       let newArr = [];
 
       for (let key in inventory[0]) {

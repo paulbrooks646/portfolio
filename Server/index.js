@@ -42,9 +42,12 @@ app.get("/api/nest", reduxController.getNest)
 
 app.post("/api/towerFirstTime", controller.towerFirstTime)
 app.post("/api/caveFirst", controller.caveFirst)
+app.post("/api/nestFirst", controller.nestFirst);
 app.post("/api/manureCleanPermission", controller.manureCleanPermission);
 app.post("/api/caveCoin", controller.caveCoin);
+app.post("/api/nestCoin", controller.nestCoin);
 app.post("/api/useFlute", controller.useFlute);
+app.post("/api/useRope", controller.useRope)
 app.post("/api/manureTakePermission", controller.manureTakePermission)
 app.post("/api/giveNuts", controller.giveNuts)
 app.post("/api/giveHat", controller.giveHat);
@@ -59,6 +62,8 @@ app.post("/api/manure", controller.manure)
 app.post("/api/flowers", controller.flowers);
 app.post("/api/hat", controller.hat);
 app.post("/api/bone", controller.bone);
+app.post("/api/ribbon", controller.ribbon);
+app.post("/api/feather", controller.feather)
 
 
 app.use(express.static(__dirname + "/../build"));

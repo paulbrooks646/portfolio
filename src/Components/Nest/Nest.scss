@@ -2,6 +2,11 @@
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
 
   .nest-body {
     background-image: url("../../Images/Snow.png");
@@ -18,22 +23,22 @@
           width: 200px;
           height: 200px;
           background-size: 100% 100%;
-          animation-name: cow;
-          animation-duration: 2s;
+          animation-name: swoop;
+          animation-duration: 1.5s;
           animation-timing-function: linear;
           animation-direction: normal;
           position: relative;
           z-index: 1;
         }
         .griffin-closed {
-            display: none;
+          display: none;
         }
       }
     }
 
     .nest-middle {
-        background-image: url("../../Images/Dirt.png");
-        background-size: 100% 100%;
+      background-image: url("../../Images/Dirt.png");
+      background-size: 100% 100%;
       height: 20vh;
       display: flex;
       width: 100vw;
@@ -48,55 +53,66 @@
         background-size: 100% 100%;
 
         .coin-div {
-            width: 33%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+          width: 33%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
 
-        .nest-coin {
-          background-color: gold;
-          border-radius: 50%;
-          height: 10px;
-          width: 10px;
-          cursor: pointer;
+          .nest-coin {
+            background-color: gold;
+            border-radius: 50%;
+            height: 10px;
+            width: 10px;
+            cursor: pointer;
+          }
 
-        }}
+          .nest-coin-closed {
+              display: none;
+          }
+        }
 
         .ribbon-div {
-            width: 33%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+          width: 33%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
 
-        .nest-ribbon {
-          width: 70px;
-          height: 8px;
-          background-color: aqua;
-          cursor: pointer;
-          border-radius: 30px 170px;
-        }}
+          .nest-ribbon {
+            width: 70px;
+            height: 8px;
+            background-color: aqua;
+            cursor: pointer;
+            border-radius: 30px 170px;
+          }
 
-        .egg-div {
-            width: 33%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+          .nest-ribbon-closed {
+              display: none;
+          }
+        }
 
-        .nest-egg {
-            background-color: white;
+        .feather-div {
+          width: 33%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .nest-feather {
+            background-image: url("../../Images//Feather.png");
+            background-size: 100% 100%;
             height: 40px;
             width: 30px;
-            border-radius: 50% / 60% 60% 40% 40%;
             cursor: pointer;
+          }
+
+          .nest-feather-closed {
+              display: none;
+          }
         }
-      }}
+      }
 
       .nest-middle-middle {
-
         width: 20vw;
         height: 100%;
-
-       
       }
 
       .nest-middle-right {
@@ -142,22 +158,72 @@
       }
     }
   }
+
+   .nest-card {
+    height: 500px;
+    width: 500px;
+    background-color: white;
+    border: solid black 2px;
+    box-shadow: 2px 2px 2px 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    position: absolute;
+    text-align: center;
+
+    .nest-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      color: tomato;
+    }
+
+    .nest-card-description {
+      width: 90%;
+    }
+  }
+
+  .nest-card-closed {
+    display: none;
+  }
+  .answer-card {
+    height: 400px;
+    width: 400px;
+    background-color: white;
+    border: solid black 2px;
+    box-shadow: 2px 2px 2px 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    position: absolute;
+    text-align: center;
+
+    .answer-card-description {
+      width: 90%;
+    }
+  }
+
+  .answer-card-closed {
+    display: none;
+  }
 }
 
+@keyframes swoop {
+  0% {
+    left: -20vw;
+    top: -20vh;
+  }
 
-@keyframes cow {
-    0% {
-        left: -20vw;
-        top: -20vh;
-    }
+  50% {
+    left: 55vw;
+    top: 25vh;
+  }
 
-    50% {
-        left: 55vw;
-        top: 25vh;
-    }
-
-    100% {
-        left: -20vw;
-        top: -20vh;
-    }
+  100% {
+    left: -20vw;
+    top: -20vh;
+  }
 }

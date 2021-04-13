@@ -8,6 +8,7 @@ import { getCastle } from "../../redux/castleReducer";
 import { getStables } from "../../redux/stablesReducer";
 import { getGarden } from "../../redux/gardenReducer";
 import { getTower } from "../../redux/towerReducer";
+import {getNest} from "../../redux/nestReducer"
 import axios from "axios";
 import "./Nav.scss";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
@@ -27,9 +28,12 @@ function Nav(props) {
   const [flowerCard, setFlowerCard] = useState(false);
   const [ribbonCard, setRibbonCard] = useState(false);
   const [meatCard, setMeatCard] = useState(false);
+  const [ropeCard, setRopeCard] = useState(false);
 
   useEffect(() => {
-    getUser();
+    axios.get("/api/getUser").then((res) => {
+      getUser(res.data)
+    })
   }, []);
 
   const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
@@ -75,7 +79,13 @@ function Nav(props) {
     }
     if (item === "rope") {
       if (props.location.pathname === "/Nest") {
-        alert("blah blah blah");
+        axios.post("/api/useRope").then((res) => {
+          props.getInventory(res.data);
+        });
+        axios.get("/api/nest").then((res) => {
+          props.getNest(res.data[0]);
+          setRopeCard(true);
+        });
       } else {
         setRejectionCard(true);
       }
@@ -398,9 +408,29 @@ function Nav(props) {
           color="primary"
           className="answer-card-description"
         >
-          You hurl the hunk of meat to the wolf. It eyes the meat suspiciously, walks over, smells it, drags it to the side of the path, then starts to devour it.</Typography>
+          You hurl the hunk of meat to the wolf. It eyes the meat suspiciously,
+          walks over, smells it, drags it to the side of the path, then starts
+          to devour it.
+        </Typography>
         <Button
           onClick={() => setMeatCard(false)}
+          className="stables-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card id={`${ropeCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          You tie one end of your rope into a knot and hurl it at the nest. The knot gets wedged amid the branches. Using the rope you might be able to get to the nest before the griffin can attack. 
+        </Typography>
+        <Button
+          onClick={() => setRopeCard(false)}
           className="stables-card-button"
           variant="contained"
           color="primary"
@@ -423,6 +453,7 @@ export default withRouter(
     getStables,
     getGarden,
     getTower,
-    getCave
+    getCave,
+    getNest
   })(Nav)
 );
