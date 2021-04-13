@@ -16,6 +16,11 @@ import Forest from "./Components/Forest/Forest";
 import Garden from "./Components/Garden/Garden";
 import Glade from "./Components/Glade/Glade"
 import Grocer from "./Components/Grocer/Grocer"
+import HouseFive from "./Components/HouseFive/HouseFive"
+import HouseFour from "./Components/HouseFour/HouseFour"
+import HouseOne from "./Components/HouseOne/HouseOne"
+import HouseThree from "./Components/HouseThree/HouseThree"
+import HouseTwo from "./Components/HouseTwo/HouseTwo"
 import Magic from "./Components/Magic/Magic"
 import Market from "./Components/Market/Market";
 import Maze from "./Components/Maze/Maze"
@@ -49,6 +54,11 @@ export default (
     <Route path="/Garden" component={Garden} />
     <Route path="/Glade" component={Glade}/>
     <Route path="/Grocer" component={Grocer} />
+    <Route path="/HouseFive" component={HouseFive} />
+    <Route path="/HouseFour" component={HouseFour} />
+    <Route path="/HouseOne" component={HouseOne} />
+    <Route path="/HouseThree" component={HouseThree} />
+    <Route path="/HouseTwo" component={HouseTwo}/>
     <Route path="/Magic" component={Magic}/>
     <Route path="/Market" component={Market} />
     <Route path="/Maze" component={Maze}/>
