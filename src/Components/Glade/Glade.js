@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getGlade } from "../../redux/nestReducer";
+import { getGlade } from "../../redux/gladeReducer";
 import axios from "axios";
 import "./Glade.scss";
 import Character from "../Character/Character";
@@ -23,7 +23,7 @@ function Glade(props) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    axios.get("/api/nest").then((res) => {
+    axios.get("/api/glade").then((res) => {
       props.getGlade(res.data[0]);
       setIsLoading(false);
     });
@@ -35,16 +35,16 @@ function Glade(props) {
   };
 
   const toggleFirst = () => {
-    axios.post("/api/nestFirst").then((res) => {
+    axios.post("/api/gladeFirst").then((res) => {
       props.getGlade(res.data[0]);
     });
   };
 
   const toggleCoin = () => {
-    if (props.nest.nest.rope_used) {
+    if (props.glade.glade.rope_used) {
       axios.post("/api/coin").then((res) => {
         props.getUser(res.data);
-        axios.post("/api/nestCoin").then((res) => {
+        axios.post("/api/gladeCoin").then((res) => {
           props.getGlade(res.data[0]);
           setCoinSuccess(true);
         });
@@ -55,10 +55,10 @@ function Glade(props) {
   };
 
   const toggleRibbon = () => {
-    if (props.nest.nest.rope_used) {
+    if (props.glade.glade.rope_used) {
       axios.post("/api/ribbon").then((res) => {
         props.getInventory(res.data);
-        axios.get("/api/nest").then((res) => {
+        axios.get("/api/glade").then((res) => {
           props.getGlade(res.data[0]);
           setRibbonSuccess(true);
         });
@@ -69,10 +69,10 @@ function Glade(props) {
   };
 
   const toggleFeather = () => {
-    if (props.nest.nest.rope_used) {
+    if (props.glade.glade.rope_used) {
       axios.post("/api/feather").then((res) => {
         props.getInventory(res.data);
-        axios.get("/api/nest").then((res) => {
+        axios.get("/api/glade").then((res) => {
           props.getGlade(res.data[0]);
           setFeatherSuccess(true);
         });
@@ -90,27 +90,27 @@ function Glade(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="nest-main">
+    <div className="glade-main">
       <Nav />
-      <div className="nest-body">
-        <div className="nest-top">
-          <div className="nest-top-left">
+      <div className="glade-body">
+        <div className="glade-top">
+          <div className="glade-top-left">
             <div
               className={`${griffin ? "griffin-open" : "griffin-closed"}`}
               onAnimationEnd={toggleAnimationEnd}
             ></div>
           </div>
-          <div className="nest-top-middle"></div>
-          <div className="nest-top-right"></div>
+          <div className="glade-top-middle"></div>
+          <div className="glade-top-right"></div>
         </div>
-        <div className="nest-middle">
-          <div className="nest-middle-left">
+        <div className="glade-middle">
+          <div className="glade-middle-left">
             <div className="feather-div">
               <div
                 className={`${
-                  props.nest.nest.feather_taken
-                    ? "nest-feather-closed"
-                    : "nest-feather"
+                  props.glade.glade.feather_taken
+                    ? "glade-feather-closed"
+                    : "glade-feather"
                 }`}
                 onClick={toggleFeather}
               ></div>
@@ -118,7 +118,7 @@ function Glade(props) {
             <div className="coin-div">
               <div
                 className={`${
-                  props.nest.nest.coin_taken ? "nest-coin-closed" : "nest-coin"
+                  props.glade.glade.coin_taken ? "glade-coin-closed" : "glade-coin"
                 }`}
                 onClick={toggleCoin}
               ></div>
@@ -126,32 +126,32 @@ function Glade(props) {
             <div className="ribbon-div">
               <div
                 className={`${
-                  props.nest.nest.ribbon_taken
-                    ? "nest-ribbon-closed"
-                    : "nest-ribbon"
+                  props.glade.glade.ribbon_taken
+                    ? "glade-ribbon-closed"
+                    : "glade-ribbon"
                 }`}
                 onClick={toggleRibbon}
               ></div>
             </div>
           </div>
-          <div className="nest-middle-middle"></div>
-          <div className="nest-middle-right">
+          <div className="glade-middle-middle"></div>
+          <div className="glade-middle-right">
             <Character />
-            <div className="nest-mountains" onClick={toggleRight}>
+            <div className="glade-mountains" onClick={toggleRight}>
               <h2>Mountains</h2>
               <ArrowForward />
             </div>
           </div>
         </div>
-        <div className="nest-bottom">
-          <div className="nest-bottom-left"></div>
-          <div className="nest-bottom-middle"></div>
-          <div className="nest-bottom-right"></div>
+        <div className="glade-bottom">
+          <div className="glade-bottom-left"></div>
+          <div className="glade-bottom-middle"></div>
+          <div className="glade-bottom-right"></div>
         </div>
       </div>
       <Card
         className={`${
-          props.nest.nest.first_time ? "answer-card" : "answer-card-closed"
+          props.glade.glade.first_time ? "answer-card" : "answer-card-closed"
         }`}
       >
         <Typography
@@ -160,7 +160,7 @@ function Glade(props) {
           className="answer-card-description"
         >
           You climb the steep cliff. Up ahead you see the massive Griffin's
-          nest. You look around tenatively for the owner of the nest.
+          glade. You look around tenatively for the owner of the glade.
         </Typography>
         <Button
           onClick={toggleFirst}
@@ -250,7 +250,7 @@ function Glade(props) {
           className="answer-card-description"
         >
           A huge Griffin swoops out of the air. You barely manage to dodge its
-          attack. You need to find something to help you climb to the nest more
+          attack. You need to find something to help you climb to the glade more
           quickly.
         </Typography>
         <Button

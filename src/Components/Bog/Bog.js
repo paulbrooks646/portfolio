@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getBog } from "../../redux/nestReducer";
+import { getBog } from "../../redux/bogReducer";
 import axios from "axios";
 import "./Bog.scss";
 import Character from "../Character/Character";
@@ -23,7 +23,7 @@ function Bog(props) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    axios.get("/api/nest").then((res) => {
+    axios.get("/api/bog").then((res) => {
       props.getBog(res.data[0]);
       setIsLoading(false);
     });
@@ -35,16 +35,16 @@ function Bog(props) {
   };
 
   const toggleFirst = () => {
-    axios.post("/api/nestFirst").then((res) => {
+    axios.post("/api/bogFirst").then((res) => {
       props.getBog(res.data[0]);
     });
   };
 
   const toggleCoin = () => {
-    if (props.nest.nest.rope_used) {
+    if (props.bog.bog.rope_used) {
       axios.post("/api/coin").then((res) => {
         props.getUser(res.data);
-        axios.post("/api/nestCoin").then((res) => {
+        axios.post("/api/bogCoin").then((res) => {
           props.getBog(res.data[0]);
           setCoinSuccess(true);
         });
@@ -55,10 +55,10 @@ function Bog(props) {
   };
 
   const toggleRibbon = () => {
-    if (props.nest.nest.rope_used) {
+    if (props.bog.bog.rope_used) {
       axios.post("/api/ribbon").then((res) => {
         props.getInventory(res.data);
-        axios.get("/api/nest").then((res) => {
+        axios.get("/api/bog").then((res) => {
           props.getBog(res.data[0]);
           setRibbonSuccess(true);
         });
@@ -69,10 +69,10 @@ function Bog(props) {
   };
 
   const toggleFeather = () => {
-    if (props.nest.nest.rope_used) {
+    if (props.bog.bog.rope_used) {
       axios.post("/api/feather").then((res) => {
         props.getInventory(res.data);
-        axios.get("/api/nest").then((res) => {
+        axios.get("/api/bog").then((res) => {
           props.getBog(res.data[0]);
           setFeatherSuccess(true);
         });
@@ -90,27 +90,27 @@ function Bog(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="nest-main">
+    <div className="bog-main">
       <Nav />
-      <div className="nest-body">
-        <div className="nest-top">
-          <div className="nest-top-left">
+      <div className="bog-body">
+        <div className="bog-top">
+          <div className="bog-top-left">
             <div
               className={`${griffin ? "griffin-open" : "griffin-closed"}`}
               onAnimationEnd={toggleAnimationEnd}
             ></div>
           </div>
-          <div className="nest-top-middle"></div>
-          <div className="nest-top-right"></div>
+          <div className="bog-top-middle"></div>
+          <div className="bog-top-right"></div>
         </div>
-        <div className="nest-middle">
-          <div className="nest-middle-left">
+        <div className="bog-middle">
+          <div className="bog-middle-left">
             <div className="feather-div">
               <div
                 className={`${
-                  props.nest.nest.feather_taken
-                    ? "nest-feather-closed"
-                    : "nest-feather"
+                  props.bog.bog.feather_taken
+                    ? "bog-feather-closed"
+                    : "bog-feather"
                 }`}
                 onClick={toggleFeather}
               ></div>
@@ -118,7 +118,7 @@ function Bog(props) {
             <div className="coin-div">
               <div
                 className={`${
-                  props.nest.nest.coin_taken ? "nest-coin-closed" : "nest-coin"
+                  props.bog.bog.coin_taken ? "bog-coin-closed" : "bog-coin"
                 }`}
                 onClick={toggleCoin}
               ></div>
@@ -126,32 +126,32 @@ function Bog(props) {
             <div className="ribbon-div">
               <div
                 className={`${
-                  props.nest.nest.ribbon_taken
-                    ? "nest-ribbon-closed"
-                    : "nest-ribbon"
+                  props.bog.bog.ribbon_taken
+                    ? "bog-ribbon-closed"
+                    : "bog-ribbon"
                 }`}
                 onClick={toggleRibbon}
               ></div>
             </div>
           </div>
-          <div className="nest-middle-middle"></div>
-          <div className="nest-middle-right">
+          <div className="bog-middle-middle"></div>
+          <div className="bog-middle-right">
             <Character />
-            <div className="nest-mountains" onClick={toggleRight}>
+            <div className="bog-mountains" onClick={toggleRight}>
               <h2>Mountains</h2>
               <ArrowForward />
             </div>
           </div>
         </div>
-        <div className="nest-bottom">
-          <div className="nest-bottom-left"></div>
-          <div className="nest-bottom-middle"></div>
-          <div className="nest-bottom-right"></div>
+        <div className="bog-bottom">
+          <div className="bog-bottom-left"></div>
+          <div className="bog-bottom-middle"></div>
+          <div className="bog-bottom-right"></div>
         </div>
       </div>
       <Card
         className={`${
-          props.nest.nest.first_time ? "answer-card" : "answer-card-closed"
+          props.bog.bog.first_time ? "answer-card" : "answer-card-closed"
         }`}
       >
         <Typography
@@ -160,7 +160,7 @@ function Bog(props) {
           className="answer-card-description"
         >
           You climb the steep cliff. Up ahead you see the massive Griffin's
-          nest. You look around tenatively for the owner of the nest.
+          bog. You look around tenatively for the owner of the bog.
         </Typography>
         <Button
           onClick={toggleFirst}
@@ -250,7 +250,7 @@ function Bog(props) {
           className="answer-card-description"
         >
           A huge Griffin swoops out of the air. You barely manage to dodge its
-          attack. You need to find something to help you climb to the nest more
+          attack. You need to find something to help you climb to the bog more
           quickly.
         </Typography>
         <Button

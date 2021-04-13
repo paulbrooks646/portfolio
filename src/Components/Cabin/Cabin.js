@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getCabin } from "../../redux/nestReducer";
+import { getCabin } from "../../redux/cabinReducer";
 import axios from "axios";
 import "./Cabin.scss";
 import Character from "../Character/Character";
@@ -23,7 +23,7 @@ function Cabin(props) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    axios.get("/api/nest").then((res) => {
+    axios.get("/api/cabin").then((res) => {
       props.getCabin(res.data[0]);
       setIsLoading(false);
     });
@@ -35,16 +35,16 @@ function Cabin(props) {
   };
 
   const toggleFirst = () => {
-    axios.post("/api/nestFirst").then((res) => {
+    axios.post("/api/cabinFirst").then((res) => {
       props.getCabin(res.data[0]);
     });
   };
 
   const toggleCoin = () => {
-    if (props.nest.nest.rope_used) {
+    if (props.cabin.cabin.rope_used) {
       axios.post("/api/coin").then((res) => {
         props.getUser(res.data);
-        axios.post("/api/nestCoin").then((res) => {
+        axios.post("/api/cabinCoin").then((res) => {
           props.getCabin(res.data[0]);
           setCoinSuccess(true);
         });
@@ -55,10 +55,10 @@ function Cabin(props) {
   };
 
   const toggleRibbon = () => {
-    if (props.nest.nest.rope_used) {
+    if (props.cabin.cabin.rope_used) {
       axios.post("/api/ribbon").then((res) => {
         props.getInventory(res.data);
-        axios.get("/api/nest").then((res) => {
+        axios.get("/api/cabin").then((res) => {
           props.getCabin(res.data[0]);
           setRibbonSuccess(true);
         });
@@ -69,10 +69,10 @@ function Cabin(props) {
   };
 
   const toggleFeather = () => {
-    if (props.nest.nest.rope_used) {
+    if (props.cabin.cabin.rope_used) {
       axios.post("/api/feather").then((res) => {
         props.getInventory(res.data);
-        axios.get("/api/nest").then((res) => {
+        axios.get("/api/cabin").then((res) => {
           props.getCabin(res.data[0]);
           setFeatherSuccess(true);
         });
@@ -90,27 +90,27 @@ function Cabin(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="nest-main">
+    <div className="cabin-main">
       <Nav />
-      <div className="nest-body">
-        <div className="nest-top">
-          <div className="nest-top-left">
+      <div className="cabin-body">
+        <div className="cabin-top">
+          <div className="cabin-top-left">
             <div
               className={`${griffin ? "griffin-open" : "griffin-closed"}`}
               onAnimationEnd={toggleAnimationEnd}
             ></div>
           </div>
-          <div className="nest-top-middle"></div>
-          <div className="nest-top-right"></div>
+          <div className="cabin-top-middle"></div>
+          <div className="cabin-top-right"></div>
         </div>
-        <div className="nest-middle">
-          <div className="nest-middle-left">
+        <div className="cabin-middle">
+          <div className="cabin-middle-left">
             <div className="feather-div">
               <div
                 className={`${
-                  props.nest.nest.feather_taken
-                    ? "nest-feather-closed"
-                    : "nest-feather"
+                  props.cabin.cabin.feather_taken
+                    ? "cabin-feather-closed"
+                    : "cabin-feather"
                 }`}
                 onClick={toggleFeather}
               ></div>
@@ -118,7 +118,7 @@ function Cabin(props) {
             <div className="coin-div">
               <div
                 className={`${
-                  props.nest.nest.coin_taken ? "nest-coin-closed" : "nest-coin"
+                  props.cabin.cabin.coin_taken ? "cabin-coin-closed" : "cabin-coin"
                 }`}
                 onClick={toggleCoin}
               ></div>
@@ -126,32 +126,32 @@ function Cabin(props) {
             <div className="ribbon-div">
               <div
                 className={`${
-                  props.nest.nest.ribbon_taken
-                    ? "nest-ribbon-closed"
-                    : "nest-ribbon"
+                  props.cabin.cabin.ribbon_taken
+                    ? "cabin-ribbon-closed"
+                    : "cabin-ribbon"
                 }`}
                 onClick={toggleRibbon}
               ></div>
             </div>
           </div>
-          <div className="nest-middle-middle"></div>
-          <div className="nest-middle-right">
+          <div className="cabin-middle-middle"></div>
+          <div className="cabin-middle-right">
             <Character />
-            <div className="nest-mountains" onClick={toggleRight}>
+            <div className="cabin-mountains" onClick={toggleRight}>
               <h2>Mountains</h2>
               <ArrowForward />
             </div>
           </div>
         </div>
-        <div className="nest-bottom">
-          <div className="nest-bottom-left"></div>
-          <div className="nest-bottom-middle"></div>
-          <div className="nest-bottom-right"></div>
+        <div className="cabin-bottom">
+          <div className="cabin-bottom-left"></div>
+          <div className="cabin-bottom-middle"></div>
+          <div className="cabin-bottom-right"></div>
         </div>
       </div>
       <Card
         className={`${
-          props.nest.nest.first_time ? "answer-card" : "answer-card-closed"
+          props.cabin.cabin.first_time ? "answer-card" : "answer-card-closed"
         }`}
       >
         <Typography
@@ -160,7 +160,7 @@ function Cabin(props) {
           className="answer-card-description"
         >
           You climb the steep cliff. Up ahead you see the massive Griffin's
-          nest. You look around tenatively for the owner of the nest.
+          cabin. You look around tenatively for the owner of the cabin.
         </Typography>
         <Button
           onClick={toggleFirst}
@@ -250,7 +250,7 @@ function Cabin(props) {
           className="answer-card-description"
         >
           A huge Griffin swoops out of the air. You barely manage to dodge its
-          attack. You need to find something to help you climb to the nest more
+          attack. You need to find something to help you climb to the cabin more
           quickly.
         </Typography>
         <Button

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getClearing } from "../../redux/nestReducer";
+import { getClearing } from "../../redux/clearingReducer";
 import axios from "axios";
 import "./Clearing.scss";
 import Character from "../Character/Character";
@@ -23,7 +23,7 @@ function Clearing(props) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    axios.get("/api/nest").then((res) => {
+    axios.get("/api/clearing").then((res) => {
       props.getClearing(res.data[0]);
       setIsLoading(false);
     });
@@ -35,16 +35,16 @@ function Clearing(props) {
   };
 
   const toggleFirst = () => {
-    axios.post("/api/nestFirst").then((res) => {
+    axios.post("/api/clearingFirst").then((res) => {
       props.getClearing(res.data[0]);
     });
   };
 
   const toggleCoin = () => {
-    if (props.nest.nest.rope_used) {
+    if (props.clearing.clearing.rope_used) {
       axios.post("/api/coin").then((res) => {
         props.getUser(res.data);
-        axios.post("/api/nestCoin").then((res) => {
+        axios.post("/api/clearingCoin").then((res) => {
           props.getClearing(res.data[0]);
           setCoinSuccess(true);
         });
@@ -55,10 +55,10 @@ function Clearing(props) {
   };
 
   const toggleRibbon = () => {
-    if (props.nest.nest.rope_used) {
+    if (props.clearing.clearing.rope_used) {
       axios.post("/api/ribbon").then((res) => {
         props.getInventory(res.data);
-        axios.get("/api/nest").then((res) => {
+        axios.get("/api/clearing").then((res) => {
           props.getClearing(res.data[0]);
           setRibbonSuccess(true);
         });
@@ -69,10 +69,10 @@ function Clearing(props) {
   };
 
   const toggleFeather = () => {
-    if (props.nest.nest.rope_used) {
+    if (props.clearing.clearing.rope_used) {
       axios.post("/api/feather").then((res) => {
         props.getInventory(res.data);
-        axios.get("/api/nest").then((res) => {
+        axios.get("/api/clearing").then((res) => {
           props.getClearing(res.data[0]);
           setFeatherSuccess(true);
         });
@@ -90,27 +90,27 @@ function Clearing(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="nest-main">
+    <div className="clearing-main">
       <Nav />
-      <div className="nest-body">
-        <div className="nest-top">
-          <div className="nest-top-left">
+      <div className="clearing-body">
+        <div className="clearing-top">
+          <div className="clearing-top-left">
             <div
               className={`${griffin ? "griffin-open" : "griffin-closed"}`}
               onAnimationEnd={toggleAnimationEnd}
             ></div>
           </div>
-          <div className="nest-top-middle"></div>
-          <div className="nest-top-right"></div>
+          <div className="clearing-top-middle"></div>
+          <div className="clearing-top-right"></div>
         </div>
-        <div className="nest-middle">
-          <div className="nest-middle-left">
+        <div className="clearing-middle">
+          <div className="clearing-middle-left">
             <div className="feather-div">
               <div
                 className={`${
-                  props.nest.nest.feather_taken
-                    ? "nest-feather-closed"
-                    : "nest-feather"
+                  props.clearing.clearing.feather_taken
+                    ? "clearing-feather-closed"
+                    : "clearing-feather"
                 }`}
                 onClick={toggleFeather}
               ></div>
@@ -118,7 +118,7 @@ function Clearing(props) {
             <div className="coin-div">
               <div
                 className={`${
-                  props.nest.nest.coin_taken ? "nest-coin-closed" : "nest-coin"
+                  props.clearing.clearing.coin_taken ? "clearing-coin-closed" : "clearing-coin"
                 }`}
                 onClick={toggleCoin}
               ></div>
@@ -126,32 +126,32 @@ function Clearing(props) {
             <div className="ribbon-div">
               <div
                 className={`${
-                  props.nest.nest.ribbon_taken
-                    ? "nest-ribbon-closed"
-                    : "nest-ribbon"
+                  props.clearing.clearing.ribbon_taken
+                    ? "clearing-ribbon-closed"
+                    : "clearing-ribbon"
                 }`}
                 onClick={toggleRibbon}
               ></div>
             </div>
           </div>
-          <div className="nest-middle-middle"></div>
-          <div className="nest-middle-right">
+          <div className="clearing-middle-middle"></div>
+          <div className="clearing-middle-right">
             <Character />
-            <div className="nest-mountains" onClick={toggleRight}>
+            <div className="clearing-mountains" onClick={toggleRight}>
               <h2>Mountains</h2>
               <ArrowForward />
             </div>
           </div>
         </div>
-        <div className="nest-bottom">
-          <div className="nest-bottom-left"></div>
-          <div className="nest-bottom-middle"></div>
-          <div className="nest-bottom-right"></div>
+        <div className="clearing-bottom">
+          <div className="clearing-bottom-left"></div>
+          <div className="clearing-bottom-middle"></div>
+          <div className="clearing-bottom-right"></div>
         </div>
       </div>
       <Card
         className={`${
-          props.nest.nest.first_time ? "answer-card" : "answer-card-closed"
+          props.clearing.clearing.first_time ? "answer-card" : "answer-card-closed"
         }`}
       >
         <Typography
@@ -160,7 +160,7 @@ function Clearing(props) {
           className="answer-card-description"
         >
           You climb the steep cliff. Up ahead you see the massive Griffin's
-          nest. You look around tenatively for the owner of the nest.
+          clearing. You look around tenatively for the owner of the clearing.
         </Typography>
         <Button
           onClick={toggleFirst}
@@ -250,7 +250,7 @@ function Clearing(props) {
           className="answer-card-description"
         >
           A huge Griffin swoops out of the air. You barely manage to dodge its
-          attack. You need to find something to help you climb to the nest more
+          attack. You need to find something to help you climb to the clearing more
           quickly.
         </Typography>
         <Button
