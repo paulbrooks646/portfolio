@@ -1,27 +1,55 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
-import userReducer from "./userReducer";
+import blacksmithReducer from "./blacksmithReducer";
+import bogReducer from "./bogReducer";
+import cabinReducer from "./cabinReducer";
+import caveReducer from "./caveReducer";
+import castleReducer from "./castleReducer";
+import clearingReducer from "./clearingReducer";
+import cottageReducer from "./cottageReducer";
+import gardenReducer from "./gardenReducer";
+import gladeReducer from "./gladeReducer";
+import grocerReducer from "./grocerReducer";
+import houseFiveReducer from "./houseFiveReducer";
+import houseFourReducer from "./houseFourReducer";
+import houseOneReducer from "./houseOneReducer";
+import houseThreeReducer from "./houseThreeReducer";
+import houseTwoReducer from "./houseTwoReducer";
 import inventoryReducer from "./inventoryReducer";
-import caveReducer from "./caveReducer"
-import castleReducer from "./castleReducer"
-import nestReducer from "./nestReducer"
-import stablesReducer from "./stablesReducer"
-import gardenReducer from "./gardenReducer"
-import towerReducer from "./towerReducer"
-import passReducer from "./passReducer"
+import magicReducer from "./magicReducer";
+import nestReducer from "./nestReducer";
+import passReducer from "./passReducer";
+import stablesReducer from "./stablesReducer";
+import storeReducer from "./storeReducer";
+import thievesReducer from "./thievesReducer";
+import towerReducer from "./towerReducer";
+import userReducer from "./userReducer";
 import promiseMiddleware from "redux-promise-middleware";
 
-
-
 const rootReducer = combineReducers({
-  user: userReducer,
-  inventory: inventoryReducer,
+  blacksmith: blacksmithReducer,
+  bog: bogReducer,
+  cabin: cabinReducer,
   castle: castleReducer,
-  stables: stablesReducer,
-  garden: gardenReducer,
-  tower: towerReducer,
   cave: caveReducer,
+  clearing: clearingReducer,
+  cottage: cottageReducer,
+  garden: gardenReducer,
+  glade: gladeReducer,
+  grocer: grocerReducer,
+  houseFive: houseFiveReducer,
+  houseFour: houseFourReducer,
+  houseOne: houseOneReducer,
+  houseThree: houseThreeReducer,
+  houseTwo: houseTwoReducer,
+  inventory: inventoryReducer,
+  magic: magicReducer,
   nest: nestReducer,
-  pass: passReducer
+  pass: passReducer,
+  stables: stablesReducer,
+  store: storeReducer,
+  thieves: thievesReducer,
+  tower: towerReducer,
+  user: userReducer,
 });
 
 export default createStore(rootReducer, applyMiddleware(promiseMiddleware));

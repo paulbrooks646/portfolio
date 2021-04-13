@@ -1,20 +1,20 @@
 const initialState = {
-  thieves: [],
+  store: [],
 };
 
-const GET_THIEVES = "GET_THIEVES";
+const GET_STORE = "GET_STORE";
 
-export function getThieves(data) {
+export function getStore(data) {
   return {
-    type: GET_THIEVES,
+    type: GET_STORE,
     payload: data,
   };
 }
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case GET_THIEVES:
-      return { ...state, thieves: action.payload };
+    case GET_STORE:
+      return { ...state, store: action.payload };
 
     default:
       return state;
