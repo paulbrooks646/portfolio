@@ -2,6 +2,11 @@
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
 
   .alley-body {
     .alley-top {
@@ -9,16 +14,18 @@
       display: flex;
       width: 100vw;
       background-image: url("../../Images/Brick.jpg");
-    background-size: auto 100%;}
+      background-size: auto 100%;
+    }
 
     .alley-middle {
       height: 20vh;
       display: flex;
       width: 100vw;
+      background-image: url("../../Images/Dirt.png");
+      background-size: 100% 100%;
 
       .alley-middle-left {
-        background-color: brown;
-        width: 40%;
+        width: 45%;
         height: 100%;
         display: flex;
         align-items: center;
@@ -29,26 +36,64 @@
           cursor: pointer;
           width: 120px;
         }
-
-        
       }
 
       .alley-middle-middle {
-        background-color: brown;
         width: 50%;
         height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .cat {
+          background-image: url("../../Images/Cat.png");
+          background-size: 100% 100%;
+          height: 75px;
+          width: 75px;
+          transform: scaleX(-1);
+        }
+
+        .beggar-div {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-evenly;
+          height: 100%;
+
+          .beggar {
+            background-image: url("../../Images/Beggar.png");
+            background-size: 100% 100%;
+            height: 75px;
+            width: 75px;
+            cursor: pointer;
+          }
+
+          .mouse {
+            background-image: url("../../Images/Mouse.png");
+            background-size: 100% 100%;
+            height: 30px;
+            width: 30px;
+            cursor: pointer;
+          }
+        }
+
+        .thieves-guild-div {
+          width: 185px;
+          .alley-thieves-guild {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+          }
+        }
       }
 
       .alley-middle-right {
         background-color: #606060;
-        width: 10%;
+        width: 5%;
         height: 100%;
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        
-
-
       }
     }
 
@@ -58,8 +103,7 @@
       width: 100vw;
       background-image: url("../../Images/Brick.jpg");
       background-size: auto 100%;
-
-      }
+    }
   }
 
   .character-moving {

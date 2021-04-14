@@ -283,6 +283,23 @@ module.exports = {
     });
   },
 
+  Cake: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.cake(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
   manureHasTaken: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;

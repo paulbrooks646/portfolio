@@ -67,6 +67,7 @@ app.post("/api/hat", controller.hat);
 app.post("/api/bone", controller.bone);
 app.post("/api/ribbon", controller.ribbon);
 app.post("/api/feather", controller.feather)
+app.post("/api/Cake", controller.Cake)
 
 
 app.use(express.static(__dirname + "/../build"));
