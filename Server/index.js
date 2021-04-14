@@ -39,6 +39,7 @@ app.get("/api/cave", reduxController.getCave);
 app.get("/api/inventory", reduxController.getInventory);
 app.get("/api/nest", reduxController.getNest)
 app.get("/api/pass", reduxController.getPass);
+app.get("/api/store", reduxController.getStore)
 
 
 app.post("/api/towerFirstTime", controller.towerFirstTime)
@@ -67,8 +68,30 @@ app.post("/api/hat", controller.hat);
 app.post("/api/bone", controller.bone);
 app.post("/api/ribbon", controller.ribbon);
 app.post("/api/feather", controller.feather)
-app.post("/api/Cake", controller.Cake)
-
+app.post("/api/cake", controller.cake)
+app.post("/api/candy", controller.candy)
+app.post("/api/cheese", controller.cheese)
+app.post("/api/meat", controller.meat)
+app.post("/api/nuts", controller.nuts)
+app.post("/api/potatoes", controller.potatoes)
+app.post("/api/bottle", controller.bottle)
+app.post("/api/flute", controller.flute)
+app.post("/api/oil", controller.oil)
+app.post("/api/rope", controller.rope)
+app.post("/api/shoes", controller.shoes)
+app.post("/api/wood", controller.wood)
+app.post("/api/fire", controller.fire)
+app.post("/api/ice", controller.ice)
+app.post("/api/heal", controller.heal)
+app.post("/api/protection", controller.protection)
+app.post("/api/strength", controller.strength)
+app.post("/api/open", controller.open)
+app.post("/api/armor", controller.armor)
+app.post("/api/shield", controller.shield)
+app.post("/api/sword", controller.sword)
+app.post("/api/dagger", controller.dagger)
+app.post("/api/knife", controller.knife)
+app.post("/api/bow", controller.bow)
 
 app.use(express.static(__dirname + "/../build"));
 

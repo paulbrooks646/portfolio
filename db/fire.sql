@@ -1,9 +1,9 @@
 update inventory
-set cake = true
+set fire = true
 where user_id = $1;
 
-update grocer
-set cake_bought = true
+update magic
+set fire_bought = true
 where user_id = $1;
 
 select * from inventory

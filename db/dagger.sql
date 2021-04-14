@@ -1,9 +1,9 @@
 update inventory
-set cake = true
+set dagger = true
 where user_id = $1;
 
-update grocer
-set cake_bought = true
+update blacksmith
+set dagger_bought = true
 where user_id = $1;
 
 select * from inventory

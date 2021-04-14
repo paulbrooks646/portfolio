@@ -1,9 +1,9 @@
 update inventory
-set cake = true
+set candy = true
 where user_id = $1;
 
 update grocer
-set cake_bought = true
+set candy_bought = true
 where user_id = $1;
 
 select * from inventory

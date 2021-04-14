@@ -35,6 +35,14 @@ module.exports = {
     res.status(200).send(garden);
   },
 
+  getStore: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const store = await db.get_store(id);
+    res.status(200).send(store);
+  },
+
   getTower: async (req, res) => {
     const db = req.app.get("db");
 
