@@ -11,10 +11,16 @@ import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import ArrowForward from "@material-ui/icons/ArrowForward";
+import ArrowUpward from "@material-ui/icons/ArrowUpward";
+import ArrowDownward from "@material-ui/icons/ArrowDownward";
+import ArrowBack from "@material-ui/icons/ArrowBack";
 import { getInventory } from "../../redux/inventoryReducer";
 
 function Maze(props) {
   const [right, setRight] = useState(false);
+  const [left, setLeft] = useState(false)
+  const [up, setUp] = useState(false);
+  const [down, setDown] = useState(false)
   const [failure, setFailure] = useState(false);
   const [coinSuccess, setCoinSuccess] = useState(false);
   const [ribbonSuccess, setRibbonSuccess] = useState(false);
@@ -31,7 +37,22 @@ function Maze(props) {
 
   const toggleRight = () => {
     setRight(!right);
-    props.history.push("/Mountain");
+    props.history.push("/Maze");
+  };
+
+  const toggleLeft = () => {
+    setLeft(!left);
+    props.history.push("/Maze");
+  };
+
+  const toggleUp = () => {
+    setUp(!up);
+    props.history.push("/Clearing");
+  };
+
+  const toggleDown = () => {
+    setDown(!down);
+    props.history.push("/Glade");
   };
 
   const toggleFirst = () => {
@@ -100,52 +121,39 @@ function Maze(props) {
               onAnimationEnd={toggleAnimationEnd}
             ></div>
           </div>
-          <div className="maze-top-middle"></div>
+          <div className="maze-top-middle">
+            <div className="maze-up" onClick={toggleUp}>
+              <ArrowUpward />
+              <h2>Up</h2>
+            </div>
+          </div>
           <div className="maze-top-right"></div>
         </div>
         <div className="maze-middle">
           <div className="maze-middle-left">
-            <div className="feather-div">
-              <div
-                className={`${
-                  props.maze.maze.feather_taken
-                    ? "maze-feather-closed"
-                    : "maze-feather"
-                }`}
-                onClick={toggleFeather}
-              ></div>
-            </div>
-            <div className="coin-div">
-              <div
-                className={`${
-                  props.maze.maze.coin_taken ? "maze-coin-closed" : "maze-coin"
-                }`}
-                onClick={toggleCoin}
-              ></div>
-            </div>
-            <div className="ribbon-div">
-              <div
-                className={`${
-                  props.maze.maze.ribbon_taken
-                    ? "maze-ribbon-closed"
-                    : "maze-ribbon"
-                }`}
-                onClick={toggleRibbon}
-              ></div>
+            <div className="maze-left" onClick={toggleLeft}>
+              <ArrowBack />
+              <h2>Left</h2>
             </div>
           </div>
           <div className="maze-middle-middle"></div>
           <div className="maze-middle-right">
             <Character />
-            <div className="maze-mountains" onClick={toggleRight}>
-              <h2>Mountains</h2>
+            <div className="maze-right" onClick={toggleRight}>
+              <h2>Right</h2>
               <ArrowForward />
             </div>
           </div>
         </div>
         <div className="maze-bottom">
           <div className="maze-bottom-left"></div>
-          <div className="maze-bottom-middle"></div>
+          <div className="maze-bottom-middle">
+          
+            <div className="maze-down" onClick={toggleDown}>
+              <h2>Down</h2>
+              <ArrowDownward />
+            </div>
+          </div>
           <div className="maze-bottom-right"></div>
         </div>
       </div>

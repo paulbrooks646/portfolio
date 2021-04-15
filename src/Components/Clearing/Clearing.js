@@ -10,11 +10,11 @@ import Loading from "../Loading/Loading";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import ArrowForward from "@material-ui/icons/ArrowForward";
+import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import { getInventory } from "../../redux/inventoryReducer";
 
 function Clearing(props) {
-  const [right, setRight] = useState(false);
+  const [down, setDown] = useState(false);
   const [failure, setFailure] = useState(false);
   const [coinSuccess, setCoinSuccess] = useState(false);
   const [ribbonSuccess, setRibbonSuccess] = useState(false);
@@ -29,9 +29,9 @@ function Clearing(props) {
     });
   }, []);
 
-  const toggleRight = () => {
-    setRight(!right);
-    props.history.push("/Mountain");
+  const toggleDown = () => {
+    setDown(!down);
+    props.history.push("/Maze");
   };
 
   const toggleFirst = () => {
@@ -104,54 +104,27 @@ function Clearing(props) {
           <div className="clearing-top-right"></div>
         </div>
         <div className="clearing-middle">
-          <div className="clearing-middle-left">
-            <div className="feather-div">
-              <div
-                className={`${
-                  props.clearing.clearing.feather_taken
-                    ? "clearing-feather-closed"
-                    : "clearing-feather"
-                }`}
-                onClick={toggleFeather}
-              ></div>
-            </div>
-            <div className="coin-div">
-              <div
-                className={`${
-                  props.clearing.clearing.coin_taken ? "clearing-coin-closed" : "clearing-coin"
-                }`}
-                onClick={toggleCoin}
-              ></div>
-            </div>
-            <div className="ribbon-div">
-              <div
-                className={`${
-                  props.clearing.clearing.ribbon_taken
-                    ? "clearing-ribbon-closed"
-                    : "clearing-ribbon"
-                }`}
-                onClick={toggleRibbon}
-              ></div>
-            </div>
-          </div>
+          <div className="clearing-middle-left"></div>
           <div className="clearing-middle-middle"></div>
-          <div className="clearing-middle-right">
-            <Character />
-            <div className="clearing-mountains" onClick={toggleRight}>
-              <h2>Mountains</h2>
-              <ArrowForward />
-            </div>
-          </div>
+          <div className="clearing-middle-right"></div>
         </div>
         <div className="clearing-bottom">
           <div className="clearing-bottom-left"></div>
-          <div className="clearing-bottom-middle"></div>
+          <div className="clearing-bottom-middle">
+            <Character />
+            <div className="clearing-maze" onClick={toggleDown}>
+              <h2>Maze</h2>
+              <ArrowDownward />
+            </div>
+          </div>
           <div className="clearing-bottom-right"></div>
         </div>
       </div>
       <Card
         className={`${
-          props.clearing.clearing.first_time ? "answer-card" : "answer-card-closed"
+          props.clearing.clearing.first_time
+            ? "answer-card"
+            : "answer-card-closed"
         }`}
       >
         <Typography
@@ -250,8 +223,8 @@ function Clearing(props) {
           className="answer-card-description"
         >
           A huge Griffin swoops out of the air. You barely manage to dodge its
-          attack. You need to find something to help you climb to the clearing more
-          quickly.
+          attack. You need to find something to help you climb to the clearing
+          more quickly.
         </Typography>
         <Button
           onClick={() => setFailure(false)}
