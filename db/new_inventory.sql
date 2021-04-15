@@ -1,3 +1,0 @@
-insert into inventory (user_id, flute, bottle, rope, meat, cake, ribbon, flowers, manure, dagger, sword, shield, nuts, letter, hat, bone, feather, potatoes, candy, cheese, shoes, oil, wood, armor, knife, bow, fire, ice, heal, strength, open, protection)
-
-values ($1, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);

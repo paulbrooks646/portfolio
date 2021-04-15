@@ -2,11 +2,14 @@ const bcrypt = require("bcrypt");
 
 module.exports = {
   register: async (req, res) => {
+   
     const db = req.app.get("db");
 
     const { newUsername, newPassword } = req.body;
 
     const existingUser = await db.check_user(newUsername);
+
+    
     if (existingUser[0]) {
       return res.status(409).send("User already exists!");
     }
@@ -14,14 +17,8 @@ module.exports = {
     const hash = bcrypt.hashSync(newPassword, salt);
 
     const newUser = await db.register_user([newUsername, hash, 0, true]);
-    const inventory = db.new_inventory(newUser[0].id);
-    const stables = db.new_stables(newUser[0].id);
-    const castle = db.new_castle(newUser[0].id);
-    const garden = db.new_garden(newUser[0].id);
-    const tower = db.new_tower(newUser[0].id);
-    const cave = db.new_cave(newUser[0].id);
-    const nest = db.new_nest(newUser[0].id)
-    const pass = db.new_pass(newUser[0].id)
+
+   db.database_setup(newUser[0].id)
 
     req.session.user = {
       id: newUser[0].id,

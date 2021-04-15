@@ -48,10 +48,12 @@ function Auth(props) {
       setAccount(!account);
     }
 
-    const register = (event) => {
+  const register = (event) => {
+      
       axios
         .post("/api/register", { newUsername, newPassword})
         .then((res) => {
+          console.log(res.data)
           props.registerUser(res.data);
           props.history.push("/Dashboard");
         })
