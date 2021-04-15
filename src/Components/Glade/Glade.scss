@@ -1,0 +1,181 @@
+.glade-main {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
+
+  .glade-body {
+    background-image: url("../../Images/Grass.png");
+    background-size: 100% 100%;
+
+    .glade-top {
+      height: 35vh;
+      display: flex;
+      width: 100vw;
+
+      .glade-top-left {
+        height: 100%;
+        width: 40%;
+      }
+
+      .glade-top-middle {
+        height: 100%;
+        width: 20%;
+        background-image: url("../../Images/Dirt.png");
+        background-size: 100% 100%;
+        display: flex;
+        justify-content: center;
+
+        .glade-maze {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+
+        }
+      }
+
+      .glade-top-right {
+        height: 100%;
+        width: 40%;
+      }
+    }
+
+    .glade-middle {
+      height: 20vh;
+      display: flex;
+      width: 100vw;
+      position: relative;
+
+      .glade-middle-left {
+        width: 40vw;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        .unicorn {
+            background-image: url("../../Images/Unicorn.gif");
+            background-size: 100% 100%;
+            height: 150px;
+            width: 200px;
+        }
+      }
+
+      .glade-middle-right {
+        width: 60vw;
+        background-image: url("../../Images/Dirt.png");
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        .glade-mountains {
+          display: flex;
+          justify-content: space-evenly;
+          align-items: center;
+          cursor: pointer;
+          position: relative;
+        }
+      }
+    }
+
+    .glade-bottom {
+      height: 35vh;
+      display: flex;
+      width: 100vw;
+
+      .glade-bottom-left {
+        height: 100%;
+        width: 40%;
+        position: relative;
+      }
+
+      .glade-bottom-middle {
+        height: 100%;
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+      }
+
+      .glade-bottom-right {
+        height: 100%;
+        width: 40%;
+      }
+    }
+  }
+
+  .glade-card {
+    height: 500px;
+    width: 500px;
+    background-color: white;
+    border: solid black 2px;
+    box-shadow: 2px 2px 2px 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    position: absolute;
+    text-align: center;
+
+    .glade-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      color: tomato;
+    }
+
+    .glade-card-description {
+      width: 90%;
+    }
+  }
+
+  .glade-card-closed {
+    display: none;
+  }
+  .answer-card {
+    height: 400px;
+    width: 400px;
+    background-color: white;
+    border: solid black 2px;
+    box-shadow: 2px 2px 2px 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    position: absolute;
+    text-align: center;
+
+    .answer-card-description {
+      width: 90%;
+    }
+  }
+
+  .answer-card-closed {
+    display: none;
+  }
+}
+
+@keyframes swoop {
+  0% {
+    left: -20vw;
+    top: -20vh;
+  }
+
+  50% {
+    left: 55vw;
+    top: 25vh;
+  }
+
+  100% {
+    left: -20vw;
+    top: -20vh;
+  }
+}

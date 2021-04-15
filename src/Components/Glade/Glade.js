@@ -11,10 +11,12 @@ import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import ArrowForward from "@material-ui/icons/ArrowForward";
+import ArrowUpward from "@material-ui/icons/ArrowUpward"
 import { getInventory } from "../../redux/inventoryReducer";
 
 function Glade(props) {
   const [right, setRight] = useState(false);
+  const [up, setUp] = useState(false);
   const [failure, setFailure] = useState(false);
   const [coinSuccess, setCoinSuccess] = useState(false);
   const [ribbonSuccess, setRibbonSuccess] = useState(false);
@@ -33,6 +35,11 @@ function Glade(props) {
     setRight(!right);
     props.history.push("/Mountain");
   };
+
+   const toggleUp = () => {
+     setUp(!up);
+     props.history.push("/Maze");
+   };
 
   const toggleFirst = () => {
     axios.post("/api/gladeFirst").then((res) => {
@@ -94,47 +101,17 @@ function Glade(props) {
       <Nav />
       <div className="glade-body">
         <div className="glade-top">
-          <div className="glade-top-left">
-            <div
-              className={`${griffin ? "griffin-open" : "griffin-closed"}`}
-              onAnimationEnd={toggleAnimationEnd}
-            ></div>
+          <div className="glade-top-left"></div>
+          <div className="glade-top-middle">
+            <div className="glade-maze" onClick={toggleUp}>
+              <ArrowUpward />
+              <h2>Maze</h2>
+            </div>
           </div>
-          <div className="glade-top-middle"></div>
           <div className="glade-top-right"></div>
         </div>
         <div className="glade-middle">
-          <div className="glade-middle-left">
-            <div className="feather-div">
-              <div
-                className={`${
-                  props.glade.glade.feather_taken
-                    ? "glade-feather-closed"
-                    : "glade-feather"
-                }`}
-                onClick={toggleFeather}
-              ></div>
-            </div>
-            <div className="coin-div">
-              <div
-                className={`${
-                  props.glade.glade.coin_taken ? "glade-coin-closed" : "glade-coin"
-                }`}
-                onClick={toggleCoin}
-              ></div>
-            </div>
-            <div className="ribbon-div">
-              <div
-                className={`${
-                  props.glade.glade.ribbon_taken
-                    ? "glade-ribbon-closed"
-                    : "glade-ribbon"
-                }`}
-                onClick={toggleRibbon}
-              ></div>
-            </div>
-          </div>
-          <div className="glade-middle-middle"></div>
+          <div className="glade-middle-left"><div className="unicorn"></div></div>
           <div className="glade-middle-right">
             <Character />
             <div className="glade-mountains" onClick={toggleRight}>
