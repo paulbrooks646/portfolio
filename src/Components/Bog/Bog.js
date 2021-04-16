@@ -2,89 +2,95 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
+import { getInventory } from "../../redux/inventoryReducer";
 import { getBog } from "../../redux/bogReducer";
 import axios from "axios";
 import "./Bog.scss";
-import Character from "../Character/Character";
-import Loading from "../Loading/Loading";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import ArrowForward from "@material-ui/icons/ArrowForward";
-import { getInventory } from "../../redux/inventoryReducer";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ArrowBack from "@material-ui/icons/ArrowBack";
+import Character from "../Character/Character";
+import Weasel from "../../Images/Weasel.png";
+import Princess from "../../Images/Princess.png";
+import Loading from "../Loading/Loading";
 
 function Bog(props) {
-  const [right, setRight] = useState(false);
-  const [failure, setFailure] = useState(false);
-  const [coinSuccess, setCoinSuccess] = useState(false);
-  const [ribbonSuccess, setRibbonSuccess] = useState(false);
-  const [featherSuccess, setFeatherSuccess] = useState(false);
-  const [griffin, setGriffin] = useState(false);
+  const [left, setLeft] = useState(false);
+  const [weaselHiss, setWeaselHiss] = useState(false);
+  const [weaselPurr, setWeaselPurr] = useState(false);
+  const [princess, setPrincess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [answerOne, setAnswerOne] = useState(false);
+  const [answerTwo, setAnswerTwo] = useState(false);
+  const [answerThree, setAnswerThree] = useState(false);
+  const [answerFour, setAnswerFour] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false);
+  const [firstTime, setFirstTime] = useState(false);
+  const [rejectionCardTwo, setRejectionCardTwo] = useState(false);
 
   useEffect(() => {
     axios.get("/api/bog").then((res) => {
       props.getBog(res.data[0]);
       setIsLoading(false);
     });
+    if (props.bog.bog.first_time) {
+      axios.post("/api/bogFirstTime").then((res) => {
+        getBog(res.data[0]);
+        setFirstTime(true);
+      });
+    }
   }, []);
 
-  const toggleRight = () => {
-    setRight(!right);
-    props.history.push("/Mountain");
+  const toggleLeft = () => {
+    setLeft(!left);
+    props.history.push("/Swamp");
   };
 
-  const toggleFirst = () => {
-    axios.post("/api/bogFirst").then((res) => {
-      props.getBog(res.data[0]);
-    });
+  const togglePrincess = () => {
+    if (!props.bog.bog.weasel_soothed) {
+    }
+    setPrincess(!princess);
   };
 
-  const toggleCoin = () => {
-    if (props.bog.bog.rope_used) {
-      axios.post("/api/coin").then((res) => {
-        props.getUser(res.data);
-        axios.post("/api/bogCoin").then((res) => {
-          props.getBog(res.data[0]);
-          setCoinSuccess(true);
-        });
-      });
+  const toggleWeasel = () => {
+    if (props.bog.bog.weasel_soothed) {
+      setWeaselPurr(true);
     } else {
-      setGriffin(true);
+      setWeaselHiss(true);
     }
   };
 
-  const toggleRibbon = () => {
-    if (props.bog.bog.rope_used) {
-      axios.post("/api/ribbon").then((res) => {
-        props.getInventory(res.data);
-        axios.get("/api/bog").then((res) => {
-          props.getBog(res.data[0]);
-          setRibbonSuccess(true);
-        });
-      });
-    } else {
-      setGriffin(true);
-    }
+  const toggleAnswerOne = () => {
+    togglePrincess();
+    setAnswerOne(!answerOne);
   };
 
-  const toggleFeather = () => {
-    if (props.bog.bog.rope_used) {
-      axios.post("/api/feather").then((res) => {
-        props.getInventory(res.data);
-        axios.get("/api/bog").then((res) => {
-          props.getBog(res.data[0]);
-          setFeatherSuccess(true);
-        });
-      });
-    } else {
-      setGriffin(true);
-    }
+  const toggleAnswerTwo = () => {
+    togglePrincess();
+    setAnswerTwo(!answerTwo);
   };
 
-  const toggleAnimationEnd = () => {
-    setGriffin(false);
-    setFailure(true);
+  const toggleAnswerThree = () => {
+    togglePrincess();
+    setAnswerThree(!answerThree);
+  };
+
+  const toggleAnswerFour = () => {
+    togglePrincess();
+    setAnswerFour(!answerFour);
+  };
+
+  const toggleRejectionCard = () => {
+    if (!props.bog.bog.weasel_soothed) {
+      setRejectionCardTwo(true);
+    } else if (props.bog.bog.flowers_given === true) {
+      setPrincess(true);
+    } else {
+      setRejectionCard(true);
+    }
   };
 
   return isLoading ? (
@@ -93,112 +99,150 @@ function Bog(props) {
     <div className="bog-main">
       <Nav />
       <div className="bog-body">
-        <div className="bog-top">
-          <div className="bog-top-left">
-            <div
-              className={`${griffin ? "griffin-open" : "griffin-closed"}`}
-              onAnimationEnd={toggleAnimationEnd}
-            ></div>
-          </div>
-          <div className="bog-top-middle"></div>
-          <div className="bog-top-right"></div>
-        </div>
+        <div className="bog-top"></div>
         <div className="bog-middle">
           <div className="bog-middle-left">
-            <div className="feather-div">
-              <div
-                className={`${
-                  props.bog.bog.feather_taken
-                    ? "bog-feather-closed"
-                    : "bog-feather"
-                }`}
-                onClick={toggleFeather}
-              ></div>
+            <div className="bog-swamp" onClick={toggleLeft}>
+              <ArrowBack />
+              <h2>Swamp</h2>
             </div>
-            <div className="coin-div">
-              <div
-                className={`${
-                  props.bog.bog.coin_taken ? "bog-coin-closed" : "bog-coin"
-                }`}
-                onClick={toggleCoin}
-              ></div>
-            </div>
-            <div className="ribbon-div">
-              <div
-                className={`${
-                  props.bog.bog.ribbon_taken
-                    ? "bog-ribbon-closed"
-                    : "bog-ribbon"
-                }`}
-                onClick={toggleRibbon}
-              ></div>
-            </div>
-          </div>
-          <div className="bog-middle-middle"></div>
-          <div className="bog-middle-right">
             <Character />
-            <div className="bog-mountains" onClick={toggleRight}>
-              <h2>Mountains</h2>
-              <ArrowForward />
             </div>
-          </div>
+            <div className="bog-middle-right"><div className="bog-hydra"></div></div>
         </div>
+
         <div className="bog-bottom">
           <div className="bog-bottom-left"></div>
           <div className="bog-bottom-middle"></div>
           <div className="bog-bottom-right"></div>
         </div>
       </div>
+      <Card className={`${princess ? "bog-card" : "bog-card-closed"}`}>
+        <Typography variant="h5" color="primary" className="bog-card-title">
+          What knowledge shall I bestow upon you?
+        </Typography>
+        <List className="bog-list">
+          <ListItem className="bog-list-item" onClick={toggleAnswerOne}>
+            The King
+          </ListItem>
+          <ListItem className="bog-list-item" onClick={toggleAnswerTwo}>
+            The Ribbon
+          </ListItem>
+          <ListItem className="bog-list-item" onClick={toggleAnswerThree}>
+            The Bog
+          </ListItem>
+          <ListItem className="bog-list-item" onClick={toggleAnswerFour}>
+            The Weasel
+          </ListItem>
+        </List>
+        <Button
+          onClick={togglePrincess}
+          className="bog-card-button"
+          variant="contained"
+          color="primary"
+        >
+          Say Goodbye
+        </Button>
+      </Card>
+      <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary" className="bog-card-title">
+          The King
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You want to see the King? It would be too funny if I sent someone of
+          your ignorance to speak with him. I will present you with a letter to
+          be delivered to the King if you find my lost ribbon.
+        </Typography>
+        <Button
+          onClick={toggleAnswerOne}
+          className="bog-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary" className="bog-card-title">
+          Ribbon
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          One day while I was lounging in the shade a giant bird swooped down
+          and stole my favorite ribbon from the line where my servants had hung
+          it to dry. Such carelessness is peeving.
+        </Typography>
+        <Button
+          onClick={toggleAnswerTwo}
+          className="bog-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary" className="bog-card-title">
+          The Bog
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          The bog is where I go to when the King forgets what a beautiful,
+          mature, intelligent young lady I am. I also come here to escape
+          associating with boorish people like yourself.
+        </Typography>
+        <Button
+          onClick={toggleAnswerThree}
+          className="bog-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary" className="bog-card-title">
+          The Weasel
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Pop is far more intelligent and loyal than you will ever be.
+        </Typography>
+        <Button
+          onClick={toggleAnswerFour}
+          className="bog-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
       <Card
-        className={`${
-          props.bog.bog.first_time ? "answer-card" : "answer-card-closed"
-        }`}
+        className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
       >
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          You climb the steep cliff. Up ahead you see the massive Griffin's
-          bog. You look around tenatively for the owner of the bog.
+          How droll! The peasant thinks I would talk to him.
         </Typography>
         <Button
-          onClick={toggleFirst}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${failure ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          Are you serious? Their is a ravenous wolf blocking the path.
-        </Typography>
-        <Button
-          onClick={() => setFailure(false)}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${coinSuccess ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          You pick up the shiny gold coin.
-        </Typography>
-        <Button
-          onClick={() => setCoinSuccess(false)}
-          className="forest-card-button"
+          onClick={() => setRejectionCard(false)}
+          className="castle-card-button"
           variant="contained"
           color="primary"
         >
@@ -206,56 +250,73 @@ function Bog(props) {
         </Button>
       </Card>
       <Card
-        className={`${ribbonSuccess ? "answer-card" : "answer-card-closed"}`}
+        className={`${rejectionCardTwo ? "answer-card" : "answer-card-closed"}`}
       >
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          You pick up the beautiful blue ribbon.
+          You should figure out how to deal with that weasel before you even
+          think about talking to the princess
         </Typography>
         <Button
-          onClick={() => setRibbonSuccess(false)}
-          className="forest-card-button"
+          onClick={() => setRejectionCardTwo(false)}
+          className="castle-card-button"
           variant="contained"
           color="primary"
         >
           CLOSE
         </Button>
       </Card>
-      <Card
-        className={`${featherSuccess ? "answer-card" : "answer-card-closed"}`}
-      >
+      <Card className={`${weaselHiss ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          You pick up the large griffin feather.
+          Hiiiisssssss!
         </Typography>
         <Button
-          onClick={() => setFeatherSuccess(false)}
-          className="forest-card-button"
+          onClick={() => setWeaselHiss(false)}
+          className="castle-card-button"
           variant="contained"
           color="primary"
         >
           CLOSE
         </Button>
       </Card>
-      <Card className={`${failure ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${weaselPurr ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          A huge Griffin swoops out of the air. You barely manage to dodge its
-          attack. You need to find something to help you climb to the bog more
-          quickly.
+          Nem nem!
         </Typography>
         <Button
-          onClick={() => setFailure(false)}
-          className="forest-card-button"
+          onClick={() => setWeaselPurr(false)}
+          className="castle-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${firstTime ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You follow the castle around towards the bog. You stop abruptly as you
+          see a ferocious weasel on the path in front of you. It hisses and
+          darts at you. You back away. You'll have to figure out how to get past
+          the weasel if you want to go any further.
+        </Typography>
+        <Button
+          onClick={() => setFirstTime(false)}
+          className="castle-card-button"
           variant="contained"
           color="primary"
         >
@@ -267,6 +328,6 @@ function Bog(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getBog, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory, getBog })(
   Bog
 );

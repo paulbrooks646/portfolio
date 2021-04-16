@@ -1,0 +1,141 @@
+.cottage-main {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+  .cottage-body {
+background-image: url("../../Images/Dirt.png");
+
+    .cottage-top {
+      height: 35vh;
+      display: flex;
+      width: 100vw;
+
+      .cottage-top-left {
+        width: 40%;
+        height: 100%;
+        background-image: url("../../Images//Cinders.png");
+        background-size: 100% 100%;
+      }
+
+      .cottage-top-middle {
+        width: 20%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        .cottage-home {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          cursor: pointer;
+        }
+      }
+
+      .cottage-top-right {
+        width: 40%;
+        height: 100%;
+        background-image: url("../../Images//Cinders.png");
+        background-size: 100% 100%;
+      }
+    }
+
+    .cottage-middle {
+      height: 35vh;
+      display: flex;
+      width: 100vw;
+
+      .cottage-middle-left {
+        
+        width: 40%;
+        height: 100%;
+        background-image: url("../../Images//Cinders.png");
+        background-size: 100% 100%;
+
+        
+      }
+
+      .cottage-middle-middle {
+        width: 20%;
+        height: 100%;
+      }
+
+      .cottage-middle-right {
+        width: 40%;
+        height: 100%;
+        background-image: url("../../Images/Hut.jpg");
+        background-size: 100% 100%;
+
+        
+      }
+    }
+
+    .cottage-bottom {
+      height: 20vh;
+      display: flex;
+      width: 100vw;
+
+      .cottage-bottom-left {
+        
+        height: 100%;
+        width: 40%;
+        background-image: url("../../Images//Cinders.png");
+        background-size: 100% 100%;
+
+        
+      }
+
+      .cottage-bottom-middle {
+        height: 100%;
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+
+
+        .cottage-cottage {
+            height: 200px;
+            width: 300px;
+            z-index: 1;
+        }
+
+        
+      }
+
+      .cottage-bottom-right {
+        
+        height: 100%;
+        width: 40%;
+        display: flex;
+        justify-content: center;
+        
+
+        
+      }
+    }
+  }
+}
+
+@keyframes motion {
+  0% {
+    bottom: 200px;
+    left: 0px;
+  }
+  50% {
+    bottom: 420px;
+    left: 0px;
+  }
+  100% {
+    left: -470px;
+    bottom: 420px;
+  }
+}
+
+#arrow-up {
+color: red;
+width: 50px;
+height: 50px;
+cursor: pointer;
+}

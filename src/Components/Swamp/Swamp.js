@@ -19,6 +19,10 @@ function Swamp(props) {
     props.history.push("/Forest");
   };
 
+  const toggleRight = () => {
+    props.history.push("/Bog")
+  }
+
   return (
     <div className="swamp-main">
       <Nav />
@@ -40,7 +44,7 @@ function Swamp(props) {
             <div className="goblin-open"></div>
           </div>
           <div className="swamp-middle-right">
-            <div className="swamp-bog" onClick={toggleLeft}>
+            <div className="swamp-bog" onClick={toggleRight}>
               <h2>Bog</h2>
               <ArrowForward />
             </div>
