@@ -33,7 +33,7 @@ function Glade(props) {
 
   const toggleRight = () => {
     setRight(!right);
-    props.history.push("/Mountain");
+    props.history.push("/Valley");
   };
 
    const toggleUp = () => {
@@ -114,8 +114,8 @@ function Glade(props) {
           <div className="glade-middle-left"><div className="unicorn"></div></div>
           <div className="glade-middle-right">
             <Character />
-            <div className="glade-mountains" onClick={toggleRight}>
-              <h2>Mountains</h2>
+            <div className="glade-valley" onClick={toggleRight}>
+              <h2>Valley</h2>
               <ArrowForward />
             </div>
           </div>

@@ -10,11 +10,11 @@ import Loading from "../Loading/Loading";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import ArrowForward from "@material-ui/icons/ArrowForward";
+import ArrowBack from "@material-ui/icons/ArrowBack";
 import { getInventory } from "../../redux/inventoryReducer";
 
 function Thieves(props) {
-  const [right, setRight] = useState(false);
+  const [left, setLeft] = useState(false);
   const [failure, setFailure] = useState(false);
   const [coinSuccess, setCoinSuccess] = useState(false);
   const [ribbonSuccess, setRibbonSuccess] = useState(false);
@@ -29,9 +29,9 @@ function Thieves(props) {
     });
   }, []);
 
-  const toggleRight = () => {
-    setRight(!right);
-    props.history.push("/Mountain");
+  const toggleLeft = () => {
+    setLeft(!left);
+    props.history.push("/Alley");
   };
 
   const toggleFirst = () => {
@@ -94,55 +94,21 @@ function Thieves(props) {
       <Nav />
       <div className="thieves-body">
         <div className="thieves-top">
-          <div className="thieves-top-left">
-            <div
-              className={`${griffin ? "griffin-open" : "griffin-closed"}`}
-              onAnimationEnd={toggleAnimationEnd}
-            ></div>
-          </div>
+          <div className="thieves-top-left"></div>
           <div className="thieves-top-middle"></div>
           <div className="thieves-top-right"></div>
         </div>
         <div className="thieves-middle">
           <div className="thieves-middle-left">
-            <div className="feather-div">
-              <div
-                className={`${
-                  props.thieves.thieves.feather_taken
-                    ? "thieves-feather-closed"
-                    : "thieves-feather"
-                }`}
-                onClick={toggleFeather}
-              ></div>
+            <div className="thieves-alley" onClick={toggleLeft}>
+              <ArrowBack />
+              <h2>Alley</h2>
             </div>
-            <div className="coin-div">
-              <div
-                className={`${
-                  props.thieves.thieves.coin_taken ? "thieves-coin-closed" : "thieves-coin"
-                }`}
-                onClick={toggleCoin}
-              ></div>
-            </div>
-            <div className="ribbon-div">
-              <div
-                className={`${
-                  props.thieves.thieves.ribbon_taken
-                    ? "thieves-ribbon-closed"
-                    : "thieves-ribbon"
-                }`}
-                onClick={toggleRibbon}
-              ></div>
-            </div>
-          </div>
-          <div className="thieves-middle-middle"></div>
-          <div className="thieves-middle-right">
             <Character />
-            <div className="thieves-mountains" onClick={toggleRight}>
-              <h2>Mountains</h2>
-              <ArrowForward />
-            </div>
           </div>
         </div>
+        <div className="thieves-middle-middle"></div>
+        <div className="thieves-middle-right"></div>
         <div className="thieves-bottom">
           <div className="thieves-bottom-left"></div>
           <div className="thieves-bottom-middle"></div>
@@ -151,7 +117,9 @@ function Thieves(props) {
       </div>
       <Card
         className={`${
-          props.thieves.thieves.first_time ? "answer-card" : "answer-card-closed"
+          props.thieves.thieves.first_time
+            ? "answer-card"
+            : "answer-card-closed"
         }`}
       >
         <Typography
@@ -250,8 +218,8 @@ function Thieves(props) {
           className="answer-card-description"
         >
           A huge Griffin swoops out of the air. You barely manage to dodge its
-          attack. You need to find something to help you climb to the thieves more
-          quickly.
+          attack. You need to find something to help you climb to the thieves
+          more quickly.
         </Typography>
         <Button
           onClick={() => setFailure(false)}
