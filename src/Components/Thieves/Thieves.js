@@ -94,9 +94,9 @@ function Thieves(props) {
       <Nav />
       <div className="thieves-body">
         <div className="thieves-top">
-          <div className="thieves-top-left"></div>
-          <div className="thieves-top-middle"></div>
-          <div className="thieves-top-right"></div>
+          <div className="thieves-sign">
+            THIEVES GUILD<h2 className="thieves-anti">ANTI</h2>
+          </div>
         </div>
         <div className="thieves-middle">
           <div className="thieves-middle-left">
@@ -106,13 +106,22 @@ function Thieves(props) {
             </div>
             <Character />
           </div>
+
+          <div className="thieves-middle-middle"></div>
+          <div className="thieves-middle-right">
+            <div className="thieves-thief"></div>
+          </div>
         </div>
-        <div className="thieves-middle-middle"></div>
-        <div className="thieves-middle-right"></div>
         <div className="thieves-bottom">
-          <div className="thieves-bottom-left"></div>
-          <div className="thieves-bottom-middle"></div>
-          <div className="thieves-bottom-right"></div>
+          <div className="thieves-bottom-left">
+            <div className="thieves-dining"></div>
+          </div>
+          <div className="thieves-bottom-middle">
+            <div className="thieves-rocks"></div>
+          </div>
+          <div className="thieves-bottom-right">
+            <div className="thieves-table"></div>
+          </div>
         </div>
       </div>
       <Card

@@ -76,7 +76,23 @@ function Town(props) {
    const toggleAnswerFive = () => {
      toggleOldmanCard();
      setAnswerFive(!answerFive);
-   };
+  };
+  
+  const toggleHouseOne = () => {
+    props.history.push("/HouseOne")
+  }
+
+  const toggleHouseTwo = () => {
+    props.history.push("/HouseTwo")
+  }
+
+  const toggleHouseThree = () => {
+    props.history.push("/HouseThree")
+  }
+
+  const toggleHouseFour = () => {
+    props.history.push("/HouseFour")
+  }
 
   return (
     <div className="town-main">
@@ -85,6 +101,7 @@ function Town(props) {
         <div className="town-top">
           <div className="town-top-left">
             <img src={House} alt="house" className="town-house" />
+            <ArrowUpward id="up-arrow" onClick={toggleHouseOne} />
           </div>
           <div className="town-top-middle">
             <div className="town-castle" onClick={toggleUp}>
@@ -100,6 +117,7 @@ function Town(props) {
           </div>
           <div className="town-top-right">
             <img src={House} alt="house" className="town-house" />
+            <ArrowUpward id="up-arrow" onClick={toggleHouseTwo} />
           </div>
         </div>
         <div className="town-middle">
@@ -120,6 +138,7 @@ function Town(props) {
         <div className="town-bottom">
           <div className="town-bottom-left">
             <img src={House} alt="house" className="town-house" />
+            <ArrowUpward id="up-arrow" onClick={toggleHouseThree} />
           </div>
           <div className="town-bottom-middle">
             <Character />
@@ -130,6 +149,7 @@ function Town(props) {
           </div>
           <div className="town-bottom-right">
             <img src={House} alt="house" className="town-house" />
+            <ArrowUpward id="up-arrow" onClick={toggleHouseFour} />
           </div>
         </div>
       </div>
@@ -259,7 +279,8 @@ function Town(props) {
           color="secondary"
           className="answer-card-description"
         >
-          I know little about the guard aside from the fact that he eats nuts constantly. He considers himself above us townspeople. 
+          I know little about the guard aside from the fact that he eats nuts
+          constantly. He considers himself above us townspeople.
         </Typography>
         <Button
           onClick={toggleAnswerFive}
