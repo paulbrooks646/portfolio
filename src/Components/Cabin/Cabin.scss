@@ -4,6 +4,9 @@
   overflow: hidden;
 
   .cabin-body {
+background-image: url("../../Images/Grass.png");
+background-size: 100% 100%;
+
     .cabin-top {
       height: 35vh;
       display: flex;
@@ -12,12 +15,12 @@
       .cabin-top-left {
         width: 40%;
         height: 100%;
-        background-image: url("../../Images//Cinders.png");
-        background-size: 100% 100%;
+       
       }
 
       .cabin-top-middle {
-        background-color: brown;
+        background-image: url("../../Images/Dirt.png");
+        background-size: 100% 100%;
         width: 20%;
         height: 100%;
         display: flex;
@@ -35,13 +38,12 @@
       .cabin-top-right {
         width: 40%;
         height: 100%;
-        background-image: url("../../Images//Cinders.png");
-        background-size: 100% 100%;
+        
       }
     }
 
     .cabin-middle {
-      height: 20vh;
+      height: 35vh;
       display: flex;
       width: 100vw;
 
@@ -49,14 +51,23 @@
         
         width: 40%;
         height: 100%;
-        background-image: url("../../Images//Cinders.png");
-        background-size: 100% 100%;
-
+        display: flex;
+        justify-content: center;
+        align-items: center;
         
+       
+
+        .cabin-cabin {
+ background-image: url("../../Images/Cabin.png");
+        background-size: 100% 100%;
+        height: 250px;
+        width: 300px;
+        }
       }
 
       .cabin-middle-middle {
-        background-color: brown;
+        background-image: url("../../Images/Dirt.png");
+        background-size: 100% 100%;
         width: 20%;
         height: 100%;
       }
@@ -64,15 +75,15 @@
       .cabin-middle-right {
         width: 40%;
         height: 100%;
-        background-image: url("../../Images//Cinders.png");
-        background-size: 100% 100%;
+       
+       
 
         
       }
     }
 
     .cabin-bottom {
-      height: 35vh;
+      height: 20vh;
       display: flex;
       width: 100vw;
 
@@ -80,27 +91,36 @@
         
         height: 100%;
         width: 40%;
-        background-image: url("../../Images//Cinders.png");
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-image: url("../../Images/Dirt.png");
         background-size: 100% 100%;
+
+        .woodsman {
+            background-image: url("../../Images/Woodsman.png");
+            background-size: 100% 100%;
+            height: 120px;
+            width: 150px;
+        }
+        
 
         
       }
 
       .cabin-bottom-middle {
-        background-color: brown;
+        background-image: url("../../Images/Dirt.png");
+        background-size: 100% 100%;
         height: 100%;
         width: 20%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-end;
-        border-bottom: solid black 40px;
+       
 
-        .cabin-cabin {
-            height: 200px;
-            width: 300px;
-            z-index: 1;
-        }
+       
 
         
       }
@@ -109,8 +129,7 @@
         
         height: 100%;
         width: 40%;
-        background-image: url("../../Images/Cinders.png");
-        background-size: 100% 100%;
+        
 
         
       }

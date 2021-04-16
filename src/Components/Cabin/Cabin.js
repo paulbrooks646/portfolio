@@ -56,12 +56,12 @@ function Cabin(props) {
           <div className="cabin-top-right"></div>
         </div>
         <div className="cabin-middle">
-          <div className="cabin-middle-left"></div>
+          <div className="cabin-middle-left"><div className="cabin-cabin"></div></div>
           <div className="cabin-middle-middle"></div>
           <div className="cabin-middle-right"></div>
         </div>
         <div className="cabin-bottom">
-          <div className="cabin-bottom-left"></div>
+          <div className="cabin-bottom-left"><div className="woodsman"></div></div>
           <div className="cabin-bottom-middle">
           </div>
           <div className="cabin-bottom-right"></div>
