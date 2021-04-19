@@ -16,12 +16,12 @@ overflow: hidden;
     align-items: center;
 
     .store-card {
-        // animation-name: storecard;
-        // animation-duration: 3s;
-        // animation-direction: normal;
-        // animation-timing-function: linear;
-        // animation-iteration-count: 1;
-        // animation-fill-mode: forwards;
+        animation-name: storecard;
+        animation-duration: 3s;
+        animation-direction: normal;
+        animation-timing-function: linear;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
         position: relative;
         height: 500px;
         width: 500px;
@@ -61,12 +61,12 @@ overflow: hidden;
 }
 }
 
-// @keyframes storecard {
-//     0% {
-//         left: 50%
-//     }
+@keyframes storecard {
+    0% {
+        left: 100%
+    }
 
-//     100% {
-//         left: 0%
-//     }
-// }
+    100% {
+        left: 0%
+    }
+}

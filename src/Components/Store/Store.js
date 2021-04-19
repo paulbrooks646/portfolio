@@ -219,43 +219,31 @@ function Store(props) {
     <div className="store-main">
       <Nav />
       <div className="store-body">
-        <Card
-          className={`${!storeCard ? "store-card" : "store-card-closed"}`}
-        >
-          <Typography
-            variant="h4"
-            color="primary"
-            className="store-card-title"
-          >
+        <Card className={`${!storeCard ? "store-card" : "store-card-closed"}`}>
+          <Typography variant="h4" color="primary" className="store-card-title">
             Good day! Can I help you?
           </Typography>
           <List className="store-list">
-            <ListItem className="store-list-item" onClick={togglePurchaseShoes}>
-              Shoes
-            </ListItem>
-            <ListItem
-              className="store-list-item"
-              onClick={togglePurchaseRope}
-            >
-              Rope
-            </ListItem>
-            <ListItem
-              className="store-list-item"
-              onClick={togglePurchaseFlute}
-            >
-              Flute
-            </ListItem>
-            <ListItem className="store-list-item" onClick={togglePurchaseOil}>
-              Oil
-            </ListItem>
-            <ListItem className="store-list-item" onClick={togglePurchaseWood}>
-              Wood
-            </ListItem>
             <ListItem
               className="store-list-item"
               onClick={togglePurchaseBottle}
             >
               Bottle
+            </ListItem>
+            <ListItem className="store-list-item" onClick={togglePurchaseFlute}>
+              Flute
+            </ListItem>
+            <ListItem className="store-list-item" onClick={togglePurchaseOil}>
+              Oil
+            </ListItem>
+            <ListItem className="store-list-item" onClick={togglePurchaseRope}>
+              Rope
+            </ListItem>
+            <ListItem className="store-list-item" onClick={togglePurchaseShoes}>
+              Shoes
+            </ListItem>
+            <ListItem className="store-list-item" onClick={togglePurchaseWood}>
+              Wood
             </ListItem>
           </List>
           <Button
@@ -294,9 +282,7 @@ function Store(props) {
             </Button>
           </div>
         </Card>
-        <Card
-          className={`${fluteCard ? "store-card" : "store-card-closed"}`}
-        >
+        <Card className={`${fluteCard ? "store-card" : "store-card-closed"}`}>
           <Typography
             variant="h4"
             color="secondary"
@@ -404,9 +390,7 @@ function Store(props) {
             </Button>
           </div>
         </Card>
-        <Card
-          className={`${bottleCard ? "store-card" : "store-card-closed"}`}
-        >
+        <Card className={`${bottleCard ? "store-card" : "store-card-closed"}`}>
           <Typography
             variant="h4"
             color="secondary"
@@ -452,9 +436,7 @@ function Store(props) {
             </Button>
           </div>
         </Card>
-        <Card
-          className={`${boughtCard ? "store-card" : "store-card-closed"}`}
-        >
+        <Card className={`${boughtCard ? "store-card" : "store-card-closed"}`}>
           <Typography
             variant="h4"
             color="secondary"
@@ -474,9 +456,7 @@ function Store(props) {
             </Button>
           </div>
         </Card>
-        <Card
-          className={`${thanksCard ? "store-card" : "store-card-closed"}`}
-        >
+        <Card className={`${thanksCard ? "store-card" : "store-card-closed"}`}>
           <Typography
             variant="h4"
             color="secondary"
