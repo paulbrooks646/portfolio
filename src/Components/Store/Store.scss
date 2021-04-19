@@ -1,9 +1,9 @@
 .store-main {
-height: 100vh;
-width: 100vw;
-overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 
-.store-body {
+  .store-body {
     background-image: url("../../Images/GeneralStore.jpg");
 
     background-repeat: no-repeat;
@@ -16,57 +16,38 @@ overflow: hidden;
     align-items: center;
 
     .store-card {
-        animation-name: storecard;
-        animation-duration: 3s;
-        animation-direction: normal;
-        animation-timing-function: linear;
-        animation-iteration-count: 1;
-        animation-fill-mode: forwards;
-        position: relative;
-        height: 500px;
-        width: 500px;
-        background-color: white;
-        border: solid;
-        box-shadow: 2px 2px 2px 2px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-evenly;
-        text-align: center;
+      position: relative;
+      height: 500px;
+      width: 500px;
+      background-color: white;
+      border: solid;
+      box-shadow: 2px 2px 2px 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      text-align: center;
 
-        .store-list {
+      .store-list {
         display: flex;
         flex-direction: column;
         align-items: center;
         cursor: pointer;
         color: tomato;
-    }
+      }
 
-    .store-card-description {
+      .store-card-description {
         width: 90%;
-    }
+      }
 
-    .button-div {
+      .button-div {
         display: flex;
         width: 100%;
         justify-content: space-evenly;
+      }
     }
-
-    
-}
-.store-card-closed {
-    display: none;
-}
-
-}
-}
-
-@keyframes storecard {
-    0% {
-        left: 100%
+    .store-card-closed {
+      display: none;
     }
-
-    100% {
-        left: 0%
-    }
+  }
 }

@@ -1,9 +1,9 @@
 .blacksmith-main {
-height: 100vh;
-width: 100vw;
-overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 
-.blacksmith-body {
+  .blacksmith-body {
     background-image: url("../../Images/BlacksmithShop.jpg");
 
     background-repeat: no-repeat;
@@ -16,41 +16,38 @@ overflow: hidden;
     align-items: center;
 
     .blacksmith-card {
-        animation-name: blacksmithcard;
-        animation-duration: 3s;
-        animation-direction: normal;
-        animation-timing-function: linear;
-        animation-iteration-count: 1;
-        animation-fill-mode: forwards;
-        position: relative;
-        height: 500px;
-        width: 500px;
-        background-color: white;
-        border: solid;
-        box-shadow: 2px 2px 2px 2px;
+      position: relative;
+      height: 500px;
+      width: 500px;
+      background-color: white;
+      border: solid;
+      box-shadow: 2px 2px 2px 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      text-align: center;
+
+      .blacksmith-list {
         display: flex;
         flex-direction: column;
         align-items: center;
+        cursor: pointer;
+        color: tomato;
+      }
+
+      .blacksmith-card-description {
+        width: 90%;
+      }
+
+      .button-div {
+        display: flex;
+        width: 100%;
         justify-content: space-evenly;
-
-        .blacksmith-button {
-            width: 100px;
-            height: 50px;
-            background-color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+      }
     }
-
-}
-}
-
-@keyframes blacksmithcard {
-    0% {
-        right: 50%
+    .blacksmith-card-closed {
+      display: none;
     }
-
-    100% {
-        right: 0%
-    }
+  }
 }
