@@ -45,7 +45,9 @@ function Cabin(props) {
       <Nav />
       <div className="cabin-body">
         <div className="cabin-top">
-          <div className="cabin-top-left"></div>
+          <div className="cabin-top-left">
+            <div className="pine-tree"></div>
+          </div>
           <div className="cabin-top-middle">
             <div className="cabin-home" onClick={toggleUp}>
               <ArrowUpward />
@@ -53,17 +55,24 @@ function Cabin(props) {
             </div>
             <Character />
           </div>
-          <div className="cabin-top-right"></div>
+          <div className="cabin-top-right">
+            <div className="pine-tree"></div>
+          </div>
         </div>
         <div className="cabin-middle">
-          <div className="cabin-middle-left"><div className="cabin-cabin"></div></div>
+          <div className="cabin-middle-left">
+            <div className="cabin-cabin"></div>
+          </div>
           <div className="cabin-middle-middle"></div>
-          <div className="cabin-middle-right"></div>
+          <div className="cabin-middle-right">
+            <div className="pine-tree"></div>
+          </div>
         </div>
         <div className="cabin-bottom">
-          <div className="cabin-bottom-left"><div className="woodsman"></div></div>
-          <div className="cabin-bottom-middle">
+          <div className="cabin-bottom-left">
+            <div className="woodsman"></div>
           </div>
+          <div className="cabin-bottom-middle"></div>
           <div className="cabin-bottom-right"></div>
         </div>
       </div>

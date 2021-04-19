@@ -96,21 +96,18 @@ function HouseOne(props) {
       <div className="houseOne-body">
         <div className="houseOne-top">
           <div className="houseOne-top-left">
-            <div
-              className={`${griffin ? "griffin-open" : "griffin-closed"}`}
-              onAnimationEnd={toggleAnimationEnd}
-            ></div>
+            <div className="table"><div className="paper"></div></div>
           </div>
           <div className="houseOne-top-middle"></div>
-          <div className="houseOne-top-right"></div>
+          <div className="houseOne-top-right"><div className="cupboard"></div></div>
         </div>
         <div className="houseOne-middle">
           <div className="houseOne-middle-left"></div>
-          <div className="houseOne-middle-middle"></div>
+          <div className="houseOne-middle-middle"><div className="dog"></div></div>
           <div className="houseOne-middle-right"></div>
         </div>
         <div className="houseOne-bottom">
-          <div className="houseOne-bottom-left"></div>
+          <div className="houseOne-bottom-left"><div className="rug"></div></div>
           <div className="houseOne-bottom-middle">
             <Character />
             <div className="houseOne-maze" onClick={toggleDown}>
@@ -118,7 +115,7 @@ function HouseOne(props) {
               <ArrowDownward />
             </div>
           </div>
-          <div className="houseOne-bottom-right"></div>
+          <div className="houseOne-bottom-right"><div className="shovel"></div></div>
         </div>
       </div>
       <Card
