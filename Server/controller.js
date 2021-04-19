@@ -283,9 +283,20 @@ module.exports = {
     });
   },
 
-  cake: (req, res) => {
+  cake: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1
+    const user = await db.coin(id, payCoin)
+     req.session.user = {
+       id: user[0].id,
+       name: user[0].name,
+       newgame: user[0].newgame,
+       coins: user[0].coins,
+       forest: user[0].forest_first,
+       mountain: user[0].mountain_first,
+     };
 
     db.cake(id).then((inventory) => {
       let newArr = [];
@@ -351,9 +362,20 @@ module.exports = {
     res.sendStatus(200);
   },
 
-  potatoes: (req, res) => {
+  potatoes: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.potatoes(id).then((inventory) => {
       let newArr = [];
@@ -367,9 +389,20 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  cheese: (req, res) => {
+  cheese: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.cheese(id).then((inventory) => {
       let newArr = [];
@@ -383,9 +416,20 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  candy: (req, res) => {
+  candy: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.candy(id).then((inventory) => {
       let newArr = [];
@@ -399,9 +443,20 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  meat: (req, res) => {
+  meat: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.meat(id).then((inventory) => {
       let newArr = [];
@@ -415,9 +470,20 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  nuts: (req, res) => {
+  nuts: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.nuts(id).then((inventory) => {
       let newArr = [];
@@ -431,9 +497,20 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  shoes: (req, res) => {
+  shoes: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.shoes(id).then((inventory) => {
       let newArr = [];
@@ -447,9 +524,20 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  rope: (req, res) => {
+  rope: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.rope(id).then((inventory) => {
       let newArr = [];
@@ -463,9 +551,20 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  flute: (req, res) => {
+  flute: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.flute(id).then((inventory) => {
       let newArr = [];
@@ -479,9 +578,20 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  bottle: (req, res) => {
+  bottle: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.bottle(id).then((inventory) => {
       let newArr = [];
@@ -495,9 +605,20 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  oil: (req, res) => {
+  oil: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.oil(id).then((inventory) => {
       let newArr = [];
@@ -511,9 +632,20 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  wood: (req, res) => {
+  wood: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.wood(id).then((inventory) => {
       let newArr = [];
@@ -527,9 +659,20 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  armor: (req, res) => {
+  armor: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.armor(id).then((inventory) => {
       let newArr = [];
@@ -543,9 +686,20 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  knife: (req, res) => {
+  knife: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.knife(id).then((inventory) => {
       let newArr = [];
@@ -559,9 +713,20 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  dagger: (req, res) => {
+  dagger: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.dagger(id).then((inventory) => {
       let newArr = [];
@@ -575,9 +740,20 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  shield: (req, res) => {
+  shield: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.shield(id).then((inventory) => {
       let newArr = [];
@@ -591,9 +767,20 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  sword: (req, res) => {
+  sword: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.sword(id).then((inventory) => {
       let newArr = [];
@@ -607,9 +794,20 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  bow: (req, res) => {
+  bow: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.bow(id).then((inventory) => {
       let newArr = [];
@@ -623,9 +821,20 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  heal: (req, res) => {
+  heal: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.heal(id).then((inventory) => {
       let newArr = [];
@@ -639,9 +848,20 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  fire: (req, res) => {
+  fire: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.fire(id).then((inventory) => {
       let newArr = [];
@@ -655,9 +875,20 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  ice: (req, res) => {
+  ice: async(req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.ice(id).then((inventory) => {
       let newArr = [];
@@ -671,9 +902,20 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  protection: (req, res) => {
+  protection: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.protection(id).then((inventory) => {
       let newArr = [];
@@ -687,9 +929,20 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  strength: (req, res) => {
+  strength: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.strength(id).then((inventory) => {
       let newArr = [];
@@ -703,9 +956,20 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  open: (req, res) => {
+  open: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
+    const { coins } = req.session.user;
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      newgame: user[0].newgame,
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+    };
 
     db.open(id).then((inventory) => {
       let newArr = [];

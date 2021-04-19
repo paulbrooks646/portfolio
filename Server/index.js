@@ -40,6 +40,9 @@ app.get("/api/inventory", reduxController.getInventory);
 app.get("/api/nest", reduxController.getNest)
 app.get("/api/pass", reduxController.getPass);
 app.get("/api/store", reduxController.getStore)
+app.get("/api/grocer", reduxController.getGrocer);
+app.get("/api/magic", reduxController.getMagic);
+app.get("/api/blacksmith", reduxController.getBlacksmith);
 
 
 app.post("/api/towerFirstTime", controller.towerFirstTime)

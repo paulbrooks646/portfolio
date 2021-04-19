@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getInventory } from "../../redux/inventoryReducer";
 import { getStore } from "../../redux/storeReducer";
+import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Store.scss";
 import Card from "@material-ui/core/Card";
@@ -14,9 +14,16 @@ import ListItem from "@material-ui/core/ListItem";
 
 function Store(props) {
   const [exit, setExit] = useState(false);
-  const [item, setItem] = useState("");
   const [storeCard, setStoreCard] = useState(false);
-  const [candy, setCandy] = useState("")
+  const [ropeCard, setRopeCard] = useState(false);
+  const [shoesCard, setShoesCard] = useState(false);
+  const [fluteCard, setFluteCard] = useState(false);
+  const [woodCard, setWoodCard] = useState(false);
+  const [oilCard, setOilCard] = useState(false);
+  const [bottleCard, setBottleCard] = useState(false);
+  const [poorCard, setPoorCard] = useState(false);
+  const [boughtCard, setBoughtCard] = useState(false);
+  const [thanksCard, setThanksCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/store").then((res) => {
@@ -29,87 +36,226 @@ function Store(props) {
     props.history.push("/Market");
   };
 
-  const togglePurchaseCake = () => {};
-
-  const togglePurchaseCandy = () => {};
-
-  const togglePurchaseCheese = () => {};
-
-  const togglePurchaseMeat = () => {};
-
-  const togglePurchaseNuts = () => {};
-
-  const togglePurchasePotatoes = () => {};
-
-  const togglePurchase = product => {
-    setItem(product);
+  const togglePurchaseShoes = () => {
+    setShoesCard(!shoesCard);
     setStoreCard(!storeCard);
   };
 
-  const toggleBuy = product => {
-    
+  const togglePurchaseRope = () => {
+    setRopeCard(!ropeCard);
+    setStoreCard(!storeCard);
+  };
 
-    if (!product ) {
-console.log(false)
-      // axios.post(`/api/${item.toLowerCase()}`).then((res) => {
-      //   props.getInventory(res.data);
-      //   axios.post(`/api/giveCoin`).then((res) => {
-      //     props.getUser(res.data);
-      //     axios.get("/api/store").then((res) => {
-      //       props.getStore(res.data[0]);
-      //     });
-      //   });
-      //   setStoreCard(false);
-      // });
+  const togglePurchaseFlute = () => {
+    setFluteCard(!fluteCard);
+    setStoreCard(!storeCard);
+  };
+
+  const togglePurchaseOil = () => {
+    setOilCard(!oilCard);
+    setStoreCard(!storeCard);
+  };
+
+  const togglePurchaseWood = () => {
+    setWoodCard(!woodCard);
+    setStoreCard(!storeCard);
+  };
+
+  const togglePurchaseBottle = () => {
+    setBottleCard(!bottleCard);
+    setStoreCard(!storeCard);
+  };
+
+  const toggleBuyShoes = () => {
+    if (props.store.store.shoes_bought) {
+      setShoesCard(!shoesCard);
+      setBoughtCard(!boughtCard);
+    } else if (props.user.user.coins < 1) {
+      setShoesCard(!shoesCard);
+      setPoorCard(!poorCard);
     } else {
-      alert("already bought");
+      axios.post("/api/shoes").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/user").then((res) => {
+          props.getUser(res.data);
+          axios.get("/api/store").then((res) => {
+            props.getStore(res.data[0]);
+            setShoesCard(!shoesCard);
+            toggleThanksCard();
+          });
+        });
+      });
     }
+  };
+
+  const toggleBuyRope = () => {
+    if (props.store.store.rope_bought) {
+      setRopeCard(!ropeCard);
+      setBoughtCard(!boughtCard);
+    } else if (props.user.user.coins < 1) {
+      setRopeCard(!ropeCard);
+      setPoorCard(!poorCard);
+    } else {
+      axios.post("/api/rope").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/user").then((res) => {
+          props.getUser(res.data);
+          axios.get("/api/store").then((res) => {
+            props.getStore(res.data[0]);
+            setRopeCard(!ropeCard);
+            toggleThanksCard();
+          });
+        });
+      });
+    }
+  };
+
+  const toggleBuyFlute = () => {
+    if (props.store.store.flute_bought) {
+      setFluteCard(!fluteCard);
+      setBoughtCard(!boughtCard);
+    } else if (props.user.user.coins < 1) {
+      setFluteCard(!fluteCard);
+      setPoorCard(!poorCard);
+    } else {
+      axios.post("/api/flute").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/user").then((res) => {
+          props.getUser(res.data);
+          axios.get("/api/store").then((res) => {
+            props.getStore(res.data[0]);
+            setFluteCard(!fluteCard);
+            toggleThanksCard();
+          });
+        });
+      });
+    }
+  };
+
+  const toggleBuyOil = () => {
+    if (props.store.store.oil_bought) {
+      setOilCard(!oilCard);
+      setBoughtCard(!boughtCard);
+    } else if (props.user.user.coins < 1) {
+      setOilCard(!oilCard);
+      setPoorCard(!poorCard);
+    } else {
+      axios.post("/api/oil").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/user").then((res) => {
+          props.getUser(res.data);
+          axios.get("/api/store").then((res) => {
+            props.getStore(res.data[0]);
+            setOilCard(!oilCard);
+            toggleThanksCard();
+          });
+        });
+      });
+    }
+  };
+
+  const toggleBuyWood = () => {
+    if (props.store.store.wood_bought) {
+      setWoodCard(!woodCard);
+      setBoughtCard(!boughtCard);
+    } else if (props.user.user.coins < 1) {
+      setWoodCard(!woodCard);
+      setPoorCard(!poorCard);
+    } else {
+      axios.post("/api/wood").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/user").then((res) => {
+          props.getUser(res.data);
+          axios.get("/api/store").then((res) => {
+            props.getStore(res.data[0]);
+            setWoodCard(!woodCard);
+            toggleThanksCard();
+          });
+        });
+      });
+    }
+  };
+
+  const toggleBuyBottle = () => {
+    if (props.store.store.bottle_bought) {
+      setBottleCard(!bottleCard);
+      setBoughtCard(!boughtCard);
+    } else if (props.user.user.coins < 1) {
+      setBottleCard(!bottleCard);
+      setPoorCard(!poorCard);
+    } else {
+      axios.post("/api/bottle").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/user").then((res) => {
+          props.getUser(res.data);
+          axios.get("/api/store").then((res) => {
+            props.getStore(res.data[0]);
+            setBottleCard(!bottleCard);
+            toggleThanksCard();
+          });
+        });
+      });
+    }
+  };
+
+  const toggleBoughtCard = () => {
+    setBoughtCard(!boughtCard);
+    setStoreCard(!storeCard);
+  };
+
+  const togglePoorCard = () => {
+    setPoorCard(!poorCard);
+    setStoreCard(!storeCard);
+  };
+
+  const toggleThanksCard = () => setThanksCard(!thanksCard);
+
+  const toggleThanksCardClosed = () => {
+    setThanksCard(!thanksCard);
+    setStoreCard(!storeCard);
   };
 
   return (
     <div className="store-main">
       <Nav />
       <div className="store-body">
-        <Card className={`${!storeCard ? "store-card" : "store-card-closed"}`}>
-          <Typography variant="h4" color="primary" className="store-card-title">
+        <Card
+          className={`${!storeCard ? "store-card" : "store-card-closed"}`}
+        >
+          <Typography
+            variant="h4"
+            color="primary"
+            className="store-card-title"
+          >
             Good day! Can I help you?
           </Typography>
           <List className="store-list">
-            <ListItem
-              className="store-list-item"
-              onClick={() => togglePurchase("Cake")}
-            >
-              Cake
+            <ListItem className="store-list-item" onClick={togglePurchaseShoes}>
+              Shoes
             </ListItem>
             <ListItem
               className="store-list-item"
-              onClick={() => togglePurchase("Candy")}
+              onClick={togglePurchaseRope}
             >
-              Candy
+              Rope
             </ListItem>
             <ListItem
               className="store-list-item"
-              onClick={() => togglePurchase("Cheese")}
+              onClick={togglePurchaseFlute}
             >
-              Cheese
+              Flute
+            </ListItem>
+            <ListItem className="store-list-item" onClick={togglePurchaseOil}>
+              Oil
+            </ListItem>
+            <ListItem className="store-list-item" onClick={togglePurchaseWood}>
+              Wood
             </ListItem>
             <ListItem
               className="store-list-item"
-              onClick={() => togglePurchase("Meat")}
+              onClick={togglePurchaseBottle}
             >
-              Meat
-            </ListItem>
-            <ListItem
-              className="store-list-item"
-              onClick={() => togglePurchase("Nuts")}
-            >
-              Nuts
-            </ListItem>
-            <ListItem
-              className="store-list-item"
-              onClick={() => togglePurchase("Potatoes")}
-            >
-              Potatoes
+              Bottle
             </ListItem>
           </List>
           <Button
@@ -121,17 +267,17 @@ console.log(false)
             EXIT SHOP
           </Button>
         </Card>
-        <Card className={`${storeCard ? "store-card" : "store-card-closed"}`}>
+        <Card className={`${shoesCard ? "store-card" : "store-card-closed"}`}>
           <Typography
             variant="h4"
             color="secondary"
             className="store-card-description"
           >
-            Would you like to buy {item} for 1 coin?
+            Would you like to buy shoes for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
-              onClick={() => toggleBuy(item.toLowerCase())}
+              onClick={toggleBuyShoes}
               className="store-card-button"
               variant="contained"
               color="primary"
@@ -139,12 +285,213 @@ console.log(false)
               YES
             </Button>
             <Button
-              onClick={() => setStoreCard(false)}
+              onClick={togglePurchaseShoes}
               className="store-card-button"
               variant="contained"
               color="primary"
             >
               NO
+            </Button>
+          </div>
+        </Card>
+        <Card
+          className={`${fluteCard ? "store-card" : "store-card-closed"}`}
+        >
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="store-card-description"
+          >
+            Would you like to buy flute for 1 coin?
+          </Typography>
+          <div className="button-div">
+            <Button
+              onClick={toggleBuyFlute}
+              className="store-card-button"
+              variant="contained"
+              color="primary"
+            >
+              YES
+            </Button>
+            <Button
+              onClick={togglePurchaseFlute}
+              className="store-card-button"
+              variant="contained"
+              color="primary"
+            >
+              NO
+            </Button>
+          </div>
+        </Card>
+        <Card className={`${ropeCard ? "store-card" : "store-card-closed"}`}>
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="store-card-description"
+          >
+            Would you like to buy rope for 1 coin?
+          </Typography>
+          <div className="button-div">
+            <Button
+              onClick={toggleBuyRope}
+              className="store-card-button"
+              variant="contained"
+              color="primary"
+            >
+              YES
+            </Button>
+            <Button
+              onClick={togglePurchaseRope}
+              className="store-card-button"
+              variant="contained"
+              color="primary"
+            >
+              NO
+            </Button>
+          </div>
+        </Card>
+        <Card className={`${oilCard ? "store-card" : "store-card-closed"}`}>
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="store-card-description"
+          >
+            Would you like to buy oil for 1 coin?
+          </Typography>
+          <div className="button-div">
+            <Button
+              onClick={toggleBuyOil}
+              className="store-card-button"
+              variant="contained"
+              color="primary"
+            >
+              YES
+            </Button>
+            <Button
+              onClick={togglePurchaseOil}
+              className="store-card-button"
+              variant="contained"
+              color="primary"
+            >
+              NO
+            </Button>
+          </div>
+        </Card>
+        <Card className={`${woodCard ? "store-card" : "store-card-closed"}`}>
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="store-card-description"
+          >
+            Would you like to buy wood for 1 coin?
+          </Typography>
+          <div className="button-div">
+            <Button
+              onClick={toggleBuyWood}
+              className="store-card-button"
+              variant="contained"
+              color="primary"
+            >
+              YES
+            </Button>
+            <Button
+              onClick={togglePurchaseWood}
+              className="store-card-button"
+              variant="contained"
+              color="primary"
+            >
+              NO
+            </Button>
+          </div>
+        </Card>
+        <Card
+          className={`${bottleCard ? "store-card" : "store-card-closed"}`}
+        >
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="store-card-description"
+          >
+            Would you like to buy bottle for 1 coin?
+          </Typography>
+          <div className="button-div">
+            <Button
+              onClick={toggleBuyBottle}
+              className="store-card-button"
+              variant="contained"
+              color="primary"
+            >
+              YES
+            </Button>
+            <Button
+              onClick={togglePurchaseBottle}
+              className="store-card-button"
+              variant="contained"
+              color="primary"
+            >
+              NO
+            </Button>
+          </div>
+        </Card>
+        <Card className={`${poorCard ? "store-card" : "store-card-closed"}`}>
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="store-card-description"
+          >
+            I'm sorry. You appear not to have enough coins to buy this item.
+          </Typography>
+          <div className="button-div">
+            <Button
+              onClick={togglePoorCard}
+              className="store-card-button"
+              variant="contained"
+              color="primary"
+            >
+              NO
+            </Button>
+          </div>
+        </Card>
+        <Card
+          className={`${boughtCard ? "store-card" : "store-card-closed"}`}
+        >
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="store-card-description"
+          >
+            I'm sorry. I appear to be out of stock of that item. You must have
+            bought my last one.
+          </Typography>
+          <div className="button-div">
+            <Button
+              onClick={toggleBoughtCard}
+              className="store-card-button"
+              variant="contained"
+              color="primary"
+            >
+              CLOSE
+            </Button>
+          </div>
+        </Card>
+        <Card
+          className={`${thanksCard ? "store-card" : "store-card-closed"}`}
+        >
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="store-card-description"
+          >
+            Here you go. Thanks for your business!
+          </Typography>
+          <div className="button-div">
+            <Button
+              onClick={toggleThanksCardClosed}
+              className="store-card-button"
+              variant="contained"
+              color="primary"
+            >
+              CLOSE
             </Button>
           </div>
         </Card>
@@ -154,6 +501,6 @@ console.log(false)
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory, getStore })(
+export default connect(mapStateToProps, { getUser, getStore, getInventory })(
   Store
 );

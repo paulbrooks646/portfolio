@@ -86,4 +86,31 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
+
+  getGrocer: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const grocer = await db.get_grocer(id);
+
+    res.status(200).send(grocer);
+  },
+
+  getMagic: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const magic = await db.get_magic(id);
+
+    res.status(200).send(magic);
+  },
+
+  getBlacksmith: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const blacksmith = await db.get_blacksmith(id);
+
+    res.status(200).send(blacksmith);
+  },
 };
