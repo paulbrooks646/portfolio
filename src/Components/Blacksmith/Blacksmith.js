@@ -302,7 +302,7 @@ function Blacksmith(props) {
             color="secondary"
             className="blacksmith-card-description"
           >
-            Would you like to buy dagger for 1 coin?
+            Would you like to buy a dagger for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
@@ -329,7 +329,7 @@ function Blacksmith(props) {
             color="secondary"
             className="blacksmith-card-description"
           >
-            Would you like to buy bow for 1 coin?
+            Would you like to buy a bow with my last arrow for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
@@ -356,7 +356,7 @@ function Blacksmith(props) {
             color="secondary"
             className="blacksmith-card-description"
           >
-            Would you like to buy knife for 1 coin?
+            Would you like to buy a knife for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
@@ -383,7 +383,7 @@ function Blacksmith(props) {
             color="secondary"
             className="blacksmith-card-description"
           >
-            Would you like to buy shield for 1 coin?
+            Would you like to buy a shield for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
@@ -412,7 +412,7 @@ function Blacksmith(props) {
             color="secondary"
             className="blacksmith-card-description"
           >
-            Would you like to buy sword for 1 coin?
+            Would you like to buy a sword for 1 coin?
           </Typography>
           <div className="button-div">
             <Button

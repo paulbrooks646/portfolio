@@ -27,6 +27,7 @@ module.exports = {
       coins: newUser[0].coins,
       forest: newUser[0].forest_first,
       mountain: newUser[0].mountain_first,
+      magic: newUser[0].magic_user
     };
     res.status(200).send(req.session.user);
   },
@@ -48,6 +49,7 @@ module.exports = {
           coins: user[0].coins,
           forest: user[0].forest_first,
           mountain: user[0].mountain_first,
+          magic: user[0].magic_user,
         };
         res.status(200).send(req.session.user);
       } else {
@@ -80,6 +82,7 @@ module.exports = {
       coins: user[0].coins,
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
+      magic: user[0].magic_user,
     };
     res.status(200).send(req.session.user);
   },
@@ -96,6 +99,7 @@ module.exports = {
       coins: user[0].coins,
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
+      magic: user[0].magic_user,
     };
     res.status(200).send(req.session.user);
   },
@@ -112,6 +116,7 @@ module.exports = {
       coins: user[0].coins,
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
+      magic: user[0].magic_user,
     };
     res.status(200).send(req.session.user);
   },
@@ -128,6 +133,7 @@ module.exports = {
       coins: user[0].coins,
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
+      magic: user[0].magic_user,
     };
 
     res.status(200).send(req.session.user);

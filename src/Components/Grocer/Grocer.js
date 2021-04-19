@@ -272,7 +272,7 @@ function Grocer(props) {
             color="secondary"
             className="grocer-card-description"
           >
-            Would you like to buy cake for 1 coin?
+            Would you like to buy a cake for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
@@ -301,7 +301,7 @@ function Grocer(props) {
             color="secondary"
             className="grocer-card-description"
           >
-            Would you like to buy cheese for 1 coin?
+            Would you like to buy some cheese for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
@@ -328,7 +328,7 @@ function Grocer(props) {
             color="secondary"
             className="grocer-card-description"
           >
-            Would you like to buy candy for 1 coin?
+            Would you like to buy some candy for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
@@ -355,7 +355,7 @@ function Grocer(props) {
             color="secondary"
             className="grocer-card-description"
           >
-            Would you like to buy meat for 1 coin?
+            Would you like to buy some meat for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
@@ -382,7 +382,7 @@ function Grocer(props) {
             color="secondary"
             className="grocer-card-description"
           >
-            Would you like to buy nuts for 1 coin?
+            Would you like to buy some nuts for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
@@ -411,7 +411,7 @@ function Grocer(props) {
             color="secondary"
             className="grocer-card-description"
           >
-            Would you like to buy potatoes for 1 coin?
+            Would you like to buy some potatoes for 1 coin?
           </Typography>
           <div className="button-div">
             <Button

@@ -261,7 +261,7 @@ function Store(props) {
             color="secondary"
             className="store-card-description"
           >
-            Would you like to buy shoes for 1 coin?
+            Would you like to buy some shoes for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
@@ -288,7 +288,7 @@ function Store(props) {
             color="secondary"
             className="store-card-description"
           >
-            Would you like to buy flute for 1 coin?
+            Would you like to buy a flute for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
@@ -315,7 +315,7 @@ function Store(props) {
             color="secondary"
             className="store-card-description"
           >
-            Would you like to buy rope for 1 coin?
+            Would you like to buy a rope for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
@@ -342,7 +342,7 @@ function Store(props) {
             color="secondary"
             className="store-card-description"
           >
-            Would you like to buy oil for 1 coin?
+            Would you like to buy some oil for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
@@ -369,7 +369,7 @@ function Store(props) {
             color="secondary"
             className="store-card-description"
           >
-            Would you like to buy wood for 1 coin?
+            Would you like to buy a block of wood for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
@@ -396,7 +396,7 @@ function Store(props) {
             color="secondary"
             className="store-card-description"
           >
-            Would you like to buy bottle for 1 coin?
+            Would you like to buy a bottle for 1 coin?
           </Typography>
           <div className="button-div">
             <Button

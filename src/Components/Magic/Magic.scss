@@ -1,0 +1,53 @@
+.magic-main {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+  .magic-body {
+    background-image: url("../../Images/Magic.png");
+
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 90vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .magic-card {
+      position: relative;
+      height: 500px;
+      width: 500px;
+      background-color: white;
+      border: solid;
+      box-shadow: 2px 2px 2px 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      text-align: center;
+
+      .magic-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        color: tomato;
+      }
+
+      .magic-card-description {
+        width: 90%;
+      }
+
+      .button-div {
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+      }
+    }
+    .magic-card-closed {
+      display: none;
+    }
+  }
+}
