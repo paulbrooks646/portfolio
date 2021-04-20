@@ -25,6 +25,7 @@ function Forest(props) {
   const [answerThree, setAnswerThree] = useState(false);
   const [answerFour, setAnswerFour] = useState(false);
   const [ranger, setRanger] = useState(false)
+  const [direction, setDirection] = useState("")
 
 
 
@@ -34,8 +35,9 @@ function Forest(props) {
   };
 
   const toggleRight = () => {
-    setRight(!right);
-    props.history.push("/Swamp");
+    // setRight(!right);
+    // props.history.push("/Swamp");
+    setDirection("right")
   };
 
   const toggleDown = () => {
@@ -88,7 +90,7 @@ function Forest(props) {
               <ArrowBack />
               <h2>Home</h2>
             </div>
-            <Character />
+            <Character/>
           </div>
           <div className="forest-middle-middle"><img src={Elf} onClick={ toggleRanger} className="forest-ranger" alt="forest ranger"/></div>
           <div className="forest-middle-right">

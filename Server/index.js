@@ -28,6 +28,7 @@ app.get("/api/user", userController.getUser);
 app.post("/api/newgame", userController.newgame)
 app.post("/api/forestFirst", userController.forestFirst);
 app.post("/api/mountainFirst", userController.mountainFirst);
+app.post("/api/changeLast", userController.changeLast);
 app.post("/api/coin", userController.coin);
 
 
@@ -95,6 +96,7 @@ app.post("/api/sword", controller.sword)
 app.post("/api/dagger", controller.dagger)
 app.post("/api/knife", controller.knife)
 app.post("/api/bow", controller.bow)
+
 
 app.use(express.static(__dirname + "/../build"));
 

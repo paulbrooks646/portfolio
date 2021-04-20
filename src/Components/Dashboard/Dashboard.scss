@@ -1,7 +1,3 @@
-
-
-
-
 .dashboard-main {
   height: 100vh;
   width: 100vw;
@@ -12,23 +8,17 @@
   justify-content: space-evenly;
   position: relative;
 
-
   .dashboard-body {
-
-
     .dashboard-top {
       height: 35vh;
       display: flex;
       width: 100vw;
-      
 
       .dashboard-top-left {
-        background-image:url("../../Images/Grass.png");
+        background-image: url("../../Images/Grass.png");
         background-size: 100% 100%;
         width: 40%;
         height: 100%;
-
-        
       }
 
       .dashboard-top-middle {
@@ -48,7 +38,7 @@
       }
 
       .dashboard-top-right {
-         background-image:url("../../Images/Grass.png");
+        background-image: url("../../Images/Grass.png");
         background-size: 100% 100%;
         width: 40%;
         height: 100%;
@@ -76,11 +66,11 @@
       background-size: 100% 100%;
 
       .dashboard-middle-left {
-        
         width: 40vw;
         height: 100%;
         display: flex;
         align-items: center;
+        position: relative;
 
         .dashboard-mountains {
           display: flex;
@@ -89,18 +79,25 @@
           align-items: center;
           cursor: pointer;
         }
+
+       
       }
 
-      .dashboard-middle-middle {
-         background-image: url("../../Images/Home.png");
+      .burned-house {
+        background-image: url("../../Images/Home.png");
         background-size: 100% 100%;
         width: 20vw;
         height: 100%;
-        
+      }
+
+      .house {
+        background-image: url("../../Images/House.jpg");
+        background-size: 100% 100%;
+        width: 20vw;
+        height: 100%;
       }
 
       .dashboard-middle-right {
-        
         width: 40vw;
         height: 100%;
         display: flex;
@@ -123,21 +120,59 @@
       width: 100vw;
 
       .dashboard-bottom-left {
-         background-image:url("../../Images/Grass.png");
+        background-image: url("../../Images/Grass.png");
         background-size: 100% 100%;
         height: 100%;
         width: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+
+        .dragon {
+          background-image: url("../../Images/dragon.gif");
+          background-size: 100% 100%;
+          height: 200px;
+          width: 200px;
+          animation: dragon;
+          animation-duration: 4s;
+          animation-iteration-count: 1;
+        animation-timing-function: linear;
+          position: relative;
+
+           .fireball {
+          position: absolute;
+          border-radius: 50%;
+          background-color: red;
+          border: solid orange 2px;
+          right: -20px;
+          top: 30px;
+          height: 25px;
+          width: 25px;
+          animation-name: fireball;
+          animation-timing-function: linear;
+          animation-duration: 4s;
+
+        }
+
+        .fireball-closed {
+display: none;
+        }
+        }
+
+        .dragon-closed {
+display: none;
+        }
       }
 
       .dashboard-bottom-middle {
-       background-image: url("../../Images/Dirt.png");
-       background-size: cover;
-       
+        background-image: url("../../Images/Dirt.png");
+        background-size: cover;
+
         height: 100%;
         width: 20%;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: flex-end;
 
         .dashboard-dragon {
           display: flex;
@@ -148,7 +183,7 @@
       }
 
       .dashboard-bottom-right {
-         background-image:url("../../Images/Grass.png");
+        background-image: url("../../Images/Grass.png");
         background-size: 100% 100%;
         height: 100%;
         width: 40%;
@@ -157,8 +192,8 @@
   }
 
   .dashboard-card {
-      height: 500px;
-      width: 500px;
+    height: 500px;
+    width: 500px;
     background-color: white;
     border: solid black 2px;
     box-shadow: 2px 2px 2px 2px;
@@ -170,15 +205,15 @@
     text-align: center;
 
     .dashboard-list {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        cursor: pointer;
-        color: tomato;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      color: tomato;
     }
 
     .dashboard-card-description {
-        width: 90%;
+      width: 90%;
     }
   }
 
@@ -186,8 +221,8 @@
     display: none;
   }
   .answer-card {
-      height: 400px;
-      width: 400px;
+    height: 400px;
+    width: 400px;
     background-color: white;
     border: solid black 2px;
     box-shadow: 2px 2px 2px 2px;
@@ -198,14 +233,99 @@
     position: absolute;
     text-align: center;
 
-    
-
     .answer-card-description {
-        width: 90%;
+      width: 90%;
     }
   }
 
   .answer-card-closed {
     display: none;
   }
+}
+
+.character-up {
+  display: initial;
+}
+
+.character-up-closed {
+  display: none;
+}
+
+.character-right {
+  display: initial;
+}
+
+.character-right-closed {
+  display: none;
+}.character-left {
+  display: initial;
+}
+
+.character-left-closed {
+  display: none;
+}.character-down {
+  display: initial;
+}
+
+.character-down-closed {
+  display: none;
+}
+
+@keyframes dragon {
+  0% {
+    top: 60%;
+    
+  }
+
+  25% {
+    top: -80%;
+
+  }
+  75% {
+    top: -80%;
+  }
+
+  100% {
+    
+    top: 60%;
+  }
+}
+
+@keyframes fireball {
+  0% {
+    background-color: transparent;
+    border: none;
+    
+  }
+  24% {
+    background-color: transparent;
+    border: none;
+  }
+
+  25% {
+    background-color: red;
+    border: solid orange 2px;
+    right: -20px;
+    
+
+  }
+  75% {
+    background-color: red;
+    border: solid orange 2px;
+    right: -20vw;
+  }
+  76% {
+    background-color: transparent;
+    border: none;
+  }
+
+  100% {
+    
+    background-color: transparent;
+    border: none;
+  }
+}
+
+.character-div {
+  display: none;
 }

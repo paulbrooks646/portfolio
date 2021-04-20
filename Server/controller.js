@@ -297,6 +297,7 @@ module.exports = {
        forest: user[0].forest_first,
        mountain: user[0].mountain_first,
        magic: user[0].magic_user,
+       last: user[0].last
      };
 
     db.cake(id).then((inventory) => {
@@ -377,6 +378,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+       last: user[0].last
     };
 
     db.potatoes(id).then((inventory) => {
@@ -405,6 +407,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+      last: user[0].last,
     };
 
     db.cheese(id).then((inventory) => {
@@ -433,6 +436,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+      last: user[0].last,
     };
 
     db.candy(id).then((inventory) => {
@@ -461,6 +465,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+      last: user[0].last,
     };
 
     db.meat(id).then((inventory) => {
@@ -489,6 +494,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+      last: user[0].last,
     };
 
     db.nuts(id).then((inventory) => {
@@ -517,6 +523,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+      last: user[0].last,
     };
 
     db.shoes(id).then((inventory) => {
@@ -545,6 +552,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+       last: user[0].last
     };
 
     db.rope(id).then((inventory) => {
@@ -573,6 +581,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+      last: user[0].last,
     };
 
     db.flute(id).then((inventory) => {
@@ -601,6 +610,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+      last: user[0].last,
     };
 
     db.bottle(id).then((inventory) => {
@@ -629,6 +639,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+      last: user[0].last,
     };
 
     db.oil(id).then((inventory) => {
@@ -657,6 +668,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+      last: user[0].last,
     };
 
     db.wood(id).then((inventory) => {
@@ -685,6 +697,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+       last: user[0].last
     };
 
     db.armor(id).then((inventory) => {
@@ -713,6 +726,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+       last: user[0].last
     };
 
     db.knife(id).then((inventory) => {
@@ -741,6 +755,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+       last: user[0].last
     };
 
     db.dagger(id).then((inventory) => {
@@ -769,6 +784,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+       last: user[0].last
     };
 
     db.shield(id).then((inventory) => {
@@ -797,6 +813,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+       last: user[0].last
     };
 
     db.sword(id).then((inventory) => {
@@ -825,6 +842,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+      last: user[0].last,
     };
 
     db.bow(id).then((inventory) => {
@@ -853,6 +871,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+       last: user[0].last
     };
 
     db.heal(id).then((inventory) => {
@@ -881,6 +900,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+      last: user[0].last,
     };
 
     db.fire(id).then((inventory) => {
@@ -909,6 +929,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+       last: user[0].last
     };
 
     db.ice(id).then((inventory) => {
@@ -937,6 +958,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+       last: user[0].last
     };
 
     db.protection(id).then((inventory) => {
@@ -965,6 +987,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+       last: user[0].last
     };
 
     db.strength(id).then((inventory) => {
@@ -993,6 +1016,7 @@ module.exports = {
       forest: user[0].forest_first,
       mountain: user[0].mountain_first,
       magic: user[0].magic_user,
+       last: user[0].last
     };
 
     db.open(id).then((inventory) => {

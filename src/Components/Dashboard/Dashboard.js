@@ -25,12 +25,20 @@ function Dashboard(props) {
   const [up, setUp] = useState(false);
   const [down, setDown] = useState(false)
   const [newgameCard, setNewgameCard] = useState(true)
+  const [newGameCardTwo, setNewGameCardTwo] = useState(false)
   const [oldmanCard, setOldmanCard] = useState(false)
   const [answerOne, setAnswerOne] = useState(false)
   const [answerTwo, setAnswerTwo] = useState(false)
   const [answerThree, setAnswerThree] = useState(false)
   const [answerFour, setAnswerFour] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [dragonAnimation, setDragonAnimation] = useState(false)
+  const [fireballAnimation, setFireballAnimation] = useState(false)
+  const [burnt, setBurnt] = useState(false)
+  const [downCharacter, setDownCharacter] = useState(false)
+  const [upCharacter, setUpCharacter] = useState(false)
+  const [leftCharacter, setLeftCharacter] = useState(false)
+  const [rightCharacter, setRightCharacter] = useState(false)
   
   useEffect(() => {
     if (!props.user.user.newgame) {
@@ -40,8 +48,24 @@ function Dashboard(props) {
       
       props.getInventory(res.data);
       setIsLoading(false)
+       if (props.user.user.last === "login") {
+         setDownCharacter(true);
+       } else if (props.user.user.last === "dragon") {
+         setDownCharacter(true);
+       } else if (props.user.user.last === "mountains") {
+         setLeftCharacter(true);
+       } else if (props.user.user.last === "forest") {
+         setRightCharacter(true);
+       } else if (props.user.user.last === "town") {
+         setUpCharacter(true);
+       } else {
+         axios.post("/api/changeLast", { last: "login" }).then((res) => {
+           props.getUser(res.data);
+         });
+       }
 
     });
+   
   }, []);
 
   const toggleRight = () => {
@@ -50,6 +74,9 @@ function Dashboard(props) {
   };
 
   const toggleLeft = () => {
+    axios.post("/api/changeLast", { last: "home" }).then(res => {
+      props.getUser(res.data)
+    })
     setLeft(!left);
 
     props.history.push("/Mountain");
@@ -72,6 +99,8 @@ function Dashboard(props) {
     })
     
     setNewgameCard(false)
+    setDragonAnimation(true)
+    setFireballAnimation(true)
   }
   
   const toggleOldmanCard = () => {
@@ -99,10 +128,18 @@ function Dashboard(props) {
     setAnswerFour(!answerFour);
   };
 
+  const toggleDragonAnimationEnd = () => {
+    setDragonAnimation(false)
+    setFireballAnimation(false)
+    setBurnt(true);
+    setNewGameCardTwo(true)
 
-  return (
+  }
 
-    isLoading  ? <Loading/> :
+
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div className="dashboard-main">
       <Nav />
       <div className="dashboard-body">
@@ -112,6 +149,13 @@ function Dashboard(props) {
             <div className="dashboard-town" onClick={toggleUp}>
               <ArrowUpward />
               <h2>Town</h2>
+            </div>
+            <div
+              className={`${
+                upCharacter ? "character-up" : "character-up-closed"
+              }`}
+            >
+              <Character />
             </div>
           </div>
           <div className="dashboard-top-right">
@@ -129,9 +173,23 @@ function Dashboard(props) {
               <ArrowBack />
               <h2>Mountains</h2>
             </div>
+            <div
+              className={`${
+                leftCharacter ? "character-left" : "character-left-closed"
+              }`}
+            >
+              <Character />
+            </div>
           </div>
-          <div className="dashboard-middle-middle"></div>
+          <div className={`${burnt ? "burned-house" : "house"}`}></div>
           <div className="dashboard-middle-right">
+            <div
+              className={`${
+                rightCharacter ? "character-right" : "character-right-closed"
+              }`}
+            >
+              <Character />
+            </div>
             <div className="dashboard-forest" onClick={toggleRight}>
               <h2>Forest</h2>
               <ArrowForward />
@@ -139,9 +197,26 @@ function Dashboard(props) {
           </div>
         </div>
         <div className="dashboard-bottom">
-          <div className="dashboard-bottom-left"></div>
+          <div className="dashboard-bottom-left">
+            <div
+              className={`${dragonAnimation ? "dragon" : "dragon-closed"}`}
+              onAnimationEnd={toggleDragonAnimationEnd}
+            >
+              <div
+                className={`${
+                  fireballAnimation ? "fireball" : "fireball-closed"
+                }`}
+              ></div>
+            </div>
+          </div>
           <div className="dashboard-bottom-middle">
-            <Character />
+            <div
+              className={`${
+                downCharacter ? "character-down" : "character-down-closed"
+              }`}
+            >
+              <Character />
+            </div>
             <div className="dashboard-dragon" onClick={toggleDown}>
               <h2>Dragon's Lair</h2>
               <ArrowDownward />
@@ -167,12 +242,43 @@ function Dashboard(props) {
           color="secondary"
           className="dashboard-card-description"
         >
-          Tragedy has struck. Your home was burned to the ground by a dragon and
-          everything you owned was destroyed. It is time to start a new life and
-          to hopefully some day slay the dragon who ruined you life.
+          {props.user.user.name}, you have recently come of age and have
+          ventured far from your parents and the home of your youth to make a
+          name for yourself. Using all the coins you have saved up in life you
+          have bought a surprisingly cheap home. Everything seems perfect.
         </Typography>
         <Button
           onClick={toggleNewgame}
+          className="dashboard-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${
+          newGameCardTwo ? "dashboard-card" : "dashboard-card-closed"
+        }`}
+      >
+        <Typography
+          variant="h4"
+          color="primary"
+          className="dashboard-card-title"
+        >
+          Oh boy!!!
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="dashboard-card-description"
+        >
+          What are you supposed to do now? You have no home, no coins, and no
+          friends. How will you survive? More importantly, how will you slay the
+          cursed dragon that ruined your life?
+        </Typography>
+        <Button
+          onClick={() => setNewGameCardTwo(false)}
           className="dashboard-card-button"
           variant="contained"
           color="primary"
@@ -189,8 +295,8 @@ function Dashboard(props) {
           color="primary"
           className="dashboard-card-title"
         >
-          I saw the dragon burn your house poor boy. What would you
-          like to know about?
+          I saw the dragon burn your house poor boy. What would you like to know
+          about?
         </Typography>
         <List className="dashboard-list">
           <ListItem className="dashboard-list-item" onClick={toggleAnswerOne}>
@@ -228,8 +334,9 @@ function Dashboard(props) {
           color="secondary"
           className="answer-card-description"
         >
-          The cursed dragon has plagued this realm for far too long. Many have tried but they all ended up the
-          dragon's lunch. If you want my advice, stay away.
+          The cursed dragon has plagued this realm for far too long. Many have
+          tried but they all ended up the dragon's lunch. If you want my advice,
+          stay away.
         </Typography>
         <Button
           onClick={toggleAnswerOne}
