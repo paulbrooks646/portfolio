@@ -31,8 +31,12 @@ function Dragon(props) {
   };
 
   const toggleUp = () => {
+    axios.post("/api/changeLast", { last: "dragon" }).then((res) => {
+      console.log(res.data)
+      props.getUser(res.data);
+      props.history.push("/Dashboard");
+    });
     setUp(!up);
-    props.history.push("/Dashboard");
   };
 
   const toggleDown = () => {
@@ -62,13 +66,10 @@ function Dragon(props) {
         </div>
         <div className="dragon-bottom">
           <div className="dragon-bottom-left"></div>
-                  <div className="dragon-bottom-middle">
-                      <img src={DragonPic} alt="dragon" className="dragon-dragon"/>
-            
+          <div className="dragon-bottom-middle">
+            <img src={DragonPic} alt="dragon" className="dragon-dragon" />
           </div>
-          <div className="dragon-bottom-right">
-            
-          </div>
+          <div className="dragon-bottom-right"></div>
         </div>
       </div>
     </div>

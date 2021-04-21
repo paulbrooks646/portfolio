@@ -130,7 +130,7 @@ module.exports = {
     const db = req.app.get("db");
     const { id, coins } = req.session.user;
     const newCoins = coins + 1;
-    const user = await db.coin(id, newCoins);
+    const user = await db.coin([id, newCoins]);
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
@@ -148,10 +148,11 @@ module.exports = {
 
   changeLast: async (req, res) => {
     const db = req.app.get("db")
-    const { last } = req.body
-    const {id} = req.session.user
-    console.log(req.body)
-    const user = db.change_last(id, last)
+    
+    const { last } = req.body;
+    const { id } = req.session.user;
+    const user = await db.change_last([id, last])
+ 
     req.session.user = {
       id: user[0].id,
       name: user[0].name,

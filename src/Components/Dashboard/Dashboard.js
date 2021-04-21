@@ -39,6 +39,7 @@ function Dashboard(props) {
   const [upCharacter, setUpCharacter] = useState(false)
   const [leftCharacter, setLeftCharacter] = useState(false)
   const [rightCharacter, setRightCharacter] = useState(false)
+  const [initialCharacter, setInitialCharacter] = useState(false)
   
   useEffect(() => {
     if (!props.user.user.newgame) {
@@ -49,7 +50,7 @@ function Dashboard(props) {
       props.getInventory(res.data);
       setIsLoading(false)
        if (props.user.user.last === "login") {
-         setDownCharacter(true);
+         setInitialCharacter(true);
        } else if (props.user.user.last === "dragon") {
          setDownCharacter(true);
        } else if (props.user.user.last === "mountains") {
@@ -213,6 +214,13 @@ function Dashboard(props) {
             <div
               className={`${
                 downCharacter ? "character-down" : "character-down-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${
+                initialCharacter ? "character-initial" : "character-initial-closed"
               }`}
             >
               <Character />

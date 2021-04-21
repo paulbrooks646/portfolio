@@ -79,8 +79,6 @@
           align-items: center;
           cursor: pointer;
         }
-
-       
       }
 
       .burned-house {
@@ -136,31 +134,30 @@
           animation: dragon;
           animation-duration: 4s;
           animation-iteration-count: 1;
-        animation-timing-function: linear;
+          animation-timing-function: linear;
           position: relative;
 
-           .fireball {
-          position: absolute;
-          border-radius: 50%;
-          background-color: red;
-          border: solid orange 2px;
-          right: -20px;
-          top: 30px;
-          height: 25px;
-          width: 25px;
-          animation-name: fireball;
-          animation-timing-function: linear;
-          animation-duration: 4s;
+          .fireball {
+            position: absolute;
+            border-radius: 50%;
+            background-color: red;
+            border: solid orange 2px;
+            right: -20px;
+            top: 30px;
+            height: 25px;
+            width: 25px;
+            animation-name: fireball;
+            animation-timing-function: linear;
+            animation-duration: 4s;
+          }
 
-        }
-
-        .fireball-closed {
-display: none;
-        }
+          .fireball-closed {
+            display: none;
+          }
         }
 
         .dragon-closed {
-display: none;
+          display: none;
         }
       }
 
@@ -257,36 +254,50 @@ display: none;
 
 .character-right-closed {
   display: none;
-}.character-left {
+}
+.character-left {
   display: initial;
 }
 
 .character-left-closed {
   display: none;
-}.character-down {
+}
+.character-down {
   display: initial;
+  animation-name: downStart;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-direction: normal;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  position: relative;
 }
 
 .character-down-closed {
   display: none;
 }
 
+.character-initial {
+  display: initial;
+}
+
+.character-initial-closed {
+  display: none;
+}
+
 @keyframes dragon {
   0% {
     top: 60%;
-    
   }
 
   25% {
     top: -80%;
-
   }
   75% {
     top: -80%;
   }
 
   100% {
-    
     top: 60%;
   }
 }
@@ -295,7 +306,6 @@ display: none;
   0% {
     background-color: transparent;
     border: none;
-    
   }
   24% {
     background-color: transparent;
@@ -306,8 +316,6 @@ display: none;
     background-color: red;
     border: solid orange 2px;
     right: -20px;
-    
-
   }
   75% {
     background-color: red;
@@ -320,7 +328,6 @@ display: none;
   }
 
   100% {
-    
     background-color: transparent;
     border: none;
   }
@@ -328,4 +335,14 @@ display: none;
 
 .character-div {
   display: none;
+}
+
+@keyframes downStart {
+  0% {
+    top: 50px;
+  }
+
+  100% {
+    top: 0px;
+  }
 }
