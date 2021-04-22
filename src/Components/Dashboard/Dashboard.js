@@ -82,33 +82,41 @@ function Dashboard(props) {
 
   const toggleRight = () => {
     axios.post("/api/changeLast", { last: "home" }).then((res) => {
-      props.getUser(res.data);
-      props.history.push("/Forest");
+      props.getUser(res.data).then(() => {
+
+        props.history.push("/Forest");
+      })
     });
   };
 
   const toggleLeft = () => {
     axios.post("/api/changeLast", { last: "home" }).then((res) => {
-      props.getUser(res.data);
+      props.getUser(res.data).then(() => {
+
+        props.history.push("/Mountain");
+      })
     });
 
-    props.history.push("/Mountain");
   };
 
   const toggleUp = () => {
     axios.post("/api/changeLast", { last: "home" }).then((res) => {
-      props.getUser(res.data);
+      props.getUser(res.data).then(() => {
+
+        props.history.push("/Town");
+      })
     });
 
-    props.history.push("/Town");
   };
 
   const toggleDown = () => {
     axios.post("/api/changeLast", { last: "home" }).then((res) => {
-      props.getUser(res.data);
+      props.getUser(res.data).then(() => {
+
+        props.history.push("/Dragon");
+      })
     });
 
-    props.history.push("/Dragon");
   };
 
   const toggleNewgame = () => {

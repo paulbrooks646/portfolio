@@ -23,6 +23,7 @@ import stablesReducer from "./stablesReducer";
 import storeReducer from "./storeReducer";
 import thievesReducer from "./thievesReducer";
 import towerReducer from "./towerReducer";
+import townReducer from "./townReducer"
 import userReducer from "./userReducer";
 import promiseMiddleware from "redux-promise-middleware";
 
@@ -51,6 +52,7 @@ const rootReducer = combineReducers({
   store: storeReducer,
   thieves: thievesReducer,
   tower: towerReducer,
+  town: townReducer,
   user: userReducer,
 });
 

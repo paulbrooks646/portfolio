@@ -157,13 +157,13 @@
   display: none;
 }
 
-@keyframes UpDown {
+@keyframes upDown {
   0% {
-    bottom: 0%;
+    top: 0%;
   }
 
   100% {
-    bottom: 200%;
+    top: 200%;
   }
 }
 
@@ -182,11 +182,11 @@
 
 @keyframes upUp {
   0% {
-    top: 0%;
+    bottom: 0%;
   }
 
   100% {
-    top: 20%;
+    bottom: 20%;
   }
 }
 

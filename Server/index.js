@@ -44,6 +44,7 @@ app.get("/api/store", reduxController.getStore)
 app.get("/api/grocer", reduxController.getGrocer);
 app.get("/api/magic", reduxController.getMagic);
 app.get("/api/blacksmith", reduxController.getBlacksmith);
+app.get("/api/town", reduxController.getTown)
 
 
 app.post("/api/towerFirstTime", controller.towerFirstTime)

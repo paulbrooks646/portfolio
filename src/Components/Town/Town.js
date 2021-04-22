@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
+import { getInventory } from "../../redux/inventoryReducer"
+import {getTown} from "../../redux/townReducer"
 import "./Town.scss";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
@@ -15,38 +17,89 @@ import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import House from "../../Images/House.jpg";
 import Character from "../Character/Character";
 import Farmer from "../../Images/Farmer.png";
+import axios from "axios"
 
 function Town(props) {
-  const [left, setLeft] = useState(false);
-  const [right, setRight] = useState(false);
-  const [up, setUp] = useState(false);
-  const [down, setDown] = useState(false);
   const [oldmanCard, setOldmanCard] = useState(false);
   const [answerOne, setAnswerOne] = useState(false);
   const [answerTwo, setAnswerTwo] = useState(false);
   const [answerThree, setAnswerThree] = useState(false);
   const [answerFour, setAnswerFour] = useState(false);
-  const [answerFive, setAnswerFive] = useState(false)
+  const [answerFive, setAnswerFive] = useState(false);
+  const [downCharacter, setDownCharacter] = useState(false);
+  const [upCharacter, setUpCharacter] = useState(false);
+  const [leftCharacter, setLeftCharacter] = useState(false);
+  const [rightCharacter, setRightCharacter] = useState(false);
+  const [downLeft, setDownLeft] = useState(false);
+  const [upLeft, setUpLeft] = useState(false);
+  const [rightLeft, setRightLeft] = useState(false);
+  const [leftLeft, setLeftLeft] = useState(false);
+  const [downUp, setDownUp] = useState(false);
+  const [downDown, setDownDown] = useState(false);
+  const [downRight, setDownRight] = useState(false);
+  const [upUp, setUpUp] = useState(false);
+  const [upRight, setUpRight] = useState(false);
+  const [upDown, setUpDown] = useState(false);
+  const [rightUp, setRightUp] = useState(false);
+  const [rightRight, setRightRight] = useState(false);
+  const [rightDown, setRightDown] = useState(false);
+  const [leftUp, setLeftUp] = useState(false);
+  const [leftRight, setLeftRight] = useState(false);
+  const [leftDown, setLeftDown] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    // if (!props.user.user.newgame) {
+    //   setNewgameCard(false);
+  
+    // }
+    axios.get("/api/inventory").then((res) => {
+      props.getInventory(res.data);
+
+      if  (props.user.user.last === "home") {
+        setDownCharacter(true);
+      } else if (props.user.user.last === "stables") {
+        setLeftCharacter(true);
+      } else if (props.user.user.last === "market") {
+        setRightCharacter(true);
+      } else if (props.user.user.last === "castle") {
+        setUpCharacter(true);
+      } 
+      setIsLoading(false);
+    });
+  }, []);
 
   const toggleRight = () => {
-    setRight(!right);
-    props.history.push("/Market");
+    axios.post("/api/changeLast", { last: "town" }).then((res) => {
+      props.getUser(res.data).then(() => {
+
+        props.history.push("/Market");
+      })
+    });
   };
 
   const toggleLeft = () => {
-    setLeft(!left);
-
-    props.history.push("/Stables");
+    axios.post("/api/changeLast", { last: "town" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Stables");
+      });
+    });
   };
 
   const toggleUp = () => {
-    setUp(!up);
-    props.history.push("/Castle");
+    axios.post("/api/changeLast", { last: "town" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Castle");
+      });
+    });
   };
 
   const toggleDown = () => {
-    setDown(!down);
-    props.history.push("/Dashboard");
+   axios.post("/api/changeLast", { last: "town" }).then((res) => {
+     props.getUser(res.data).then(() => {
+       props.history.push("/Dashboard");
+     });
+   });
   };
 
   const toggleOldmanCard = () => {
@@ -94,6 +147,78 @@ function Town(props) {
     props.history.push("/HouseFour")
   }
 
+   const toggleGoLeft = () => {
+     if (
+       props.user.user.last === "home"
+     ) {
+       setDownLeft(true);
+       setDownCharacter(false);
+     } else if (props.user.user.last === "stables") {
+       setLeftCharacter(false);
+       setLeftLeft(true);
+     } else if (props.user.user.last === "market") {
+       setRightCharacter(false);
+       setRightLeft(true);
+     } else if (props.user.user.last === "castle") {
+       setUpCharacter(false);
+       setUpLeft(true);
+     }
+   };
+
+   const toggleGoRight = () => {
+     if (
+       props.user.user.last === "home"
+     ) {
+       setDownRight(true);
+       setDownCharacter(false);
+     } else if (props.user.user.last === "stables") {
+       setLeftCharacter(false);
+       setLeftRight(true);
+     } else if (props.user.user.last === "market") {
+       setRightCharacter(false);
+       setRightRight(true);
+     } else if (props.user.user.last === "castle") {
+       setUpCharacter(false);
+       setUpRight(true);
+     }
+   };
+
+   const toggleGoUp = () => {
+     if (
+       props.user.user.last === "home"
+     ) {
+       setDownUp(true);
+       setDownCharacter(false);
+     } else if (props.user.user.last === "stables") {
+       setLeftCharacter(false);
+       setLeftUp(true);
+     } else if (props.user.user.last === "market") {
+       setRightCharacter(false);
+       setRightUp(true);
+     } else if (props.user.user.last === "castle") {
+       setUpCharacter(false);
+       setUpUp(true);
+     }
+   };
+
+   const toggleGoDown = () => {
+     if (
+       props.user.user.last === "home"
+     ) {
+       setDownDown(true);
+       setDownCharacter(false);
+     } else if (props.user.user.last === "stables") {
+       setLeftCharacter(false);
+       setLeftDown(true);
+     } else if (props.user.user.last === "market") {
+       setRightCharacter(false);
+       setRightDown(true);
+     } else if (props.user.user.last === "castle") {
+       setUpCharacter(false);
+       setUpDown(true);
+     }
+   };
+
   return (
     <div className="town-main">
       <Nav />
@@ -104,9 +229,40 @@ function Town(props) {
             <ArrowUpward id="up-arrow" onClick={toggleHouseOne} />
           </div>
           <div className="town-top-middle">
-            <div className="town-castle" onClick={toggleUp}>
+            <div className="town-castle" onClick={toggleGoUp}>
               <ArrowUpward />
               <h2>Castle</h2>
+            </div>
+            <div
+              className={`${
+                upCharacter ? "character-up" : "character-up-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${upLeft ? "up-left" : "up-left-closed"}`}
+              onAnimationEnd={toggleLeft}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${upUp ? "up-up" : "up-up-closed"}`}
+              onAnimationEnd={toggleUp}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${upRight ? "up-right" : "up-right-closed"}`}
+              onAnimationEnd={toggleRight}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${upDown ? "up-down" : "up-down-closed"}`}
+              onAnimationEnd={toggleDown}
+            >
+              <Character />
             </div>
             <img
               src={Farmer}
@@ -122,14 +278,76 @@ function Town(props) {
         </div>
         <div className="town-middle">
           <div className="town-middle-left">
-            <div className="town-stables" onClick={toggleLeft}>
+            <div className="town-stables" onClick={toggleGoLeft}>
               <ArrowBack />
               <h2>Stables</h2>
+            </div>
+            <div
+              className={`${
+                leftCharacter ? "character-left" : "character-left-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${leftLeft ? "left-left" : "left-left-closed"}`}
+              onAnimationEnd={toggleLeft}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${leftUp ? "left-up" : "left-up-closed"}`}
+              onAnimationEnd={toggleUp}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${leftRight ? "left-right" : "left-right-closed"}`}
+              onAnimationEnd={toggleRight}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${leftDown ? "left-down" : "left-down-closed"}`}
+              onAnimationEnd={toggleDown}
+            >
+              <Character />
             </div>
           </div>
           <div className="town-middle-middle"></div>
           <div className="town-middle-right">
-            <div className="town-market" onClick={toggleRight}>
+            <div
+              className={`${
+                rightCharacter ? "character-right" : "character-right-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${rightLeft ? "right-left" : "right-left-closed"}`}
+              onAnimationEnd={toggleLeft}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${rightUp ? "right-up" : "right-up-closed"}`}
+              onAnimationEnd={toggleUp}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${rightRight ? "right-right" : "right-right-closed"}`}
+              onAnimationEnd={toggleRight}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${rightDown ? "right-down" : "right-down-closed"}`}
+              onAnimationEnd={toggleDown}
+            >
+              <Character />
+            </div>
+            <div className="town-market" onClick={toggleGoRight}>
               <h2>Market</h2>
               <ArrowForward />
             </div>
@@ -141,8 +359,39 @@ function Town(props) {
             <ArrowUpward id="up-arrow" onClick={toggleHouseThree} />
           </div>
           <div className="town-bottom-middle">
-            <Character />
-            <div className="town-town" onClick={toggleDown}>
+           
+            <div
+              className={`${
+                downCharacter ? "character-down" : "character-down-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${downLeft ? "down-left" : "down-left-closed"}`}
+              onAnimationEnd={toggleLeft}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${downUp ? "down-up" : "down-up-closed"}`}
+              onAnimationEnd={toggleUp}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${downRight ? "down-right" : "down-right-closed"}`}
+              onAnimationEnd={toggleRight}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${downDown ? "down-down" : "down-down-closed"}`}
+              onAnimationEnd={toggleDown}
+            >
+              <Character />
+            </div>
+            <div className="town-town" onClick={toggleGoDown}>
               <h2>Home</h2>
               <ArrowDownward />
             </div>
@@ -296,4 +545,4 @@ function Town(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser })(Town);
+export default connect(mapStateToProps, { getUser, getInventory, getTown })(Town);
