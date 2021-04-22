@@ -7,6 +7,14 @@ module.exports = {
 
     res.status(200).send(stables);
   },
+  getMountain: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const mountain = await db.get_mountain(id);
+
+    res.status(200).send(mountain);
+  },
   getTown: async (req, res) => {
     const db = req.app.get("db");
 

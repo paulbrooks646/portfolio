@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
+import { getInventory } from "../../redux/inventoryReducer"
+import {getMountain} from "../../redux/mountainReducer"
 import axios from "axios";
 import "./Mountain.scss";
 import Card from "@material-ui/core/Card";
@@ -13,17 +15,48 @@ import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import Character from "../Character/Character";
+import Loading from "../Loading/Loading";
 
 function Mountain(props) {
-  const [left, setLeft] = useState(false);
-  const [right, setRight] = useState(false);
-  const [down, setDown] = useState(false);
+ 
   const [mountaineer, setMountaineer] = useState(false);
-  const [mountainFirst, setMountainFirst] = useState(props.user.user.mountain);
   const [answerOne, setAnswerOne] = useState(false);
   const [answerTwo, setAnswerTwo] = useState(false);
   const [answerThree, setAnswerThree] = useState(false);
   const [answerFour, setAnswerFour] = useState(false);
+  const [downCharacter, setDownCharacter] = useState(false);
+  const [leftCharacter, setLeftCharacter] = useState(false);
+  const [rightCharacter, setRightCharacter] = useState(false);
+  const [downLeft, setDownLeft] = useState(false);
+  const [rightLeft, setRightLeft] = useState(false);
+  const [leftLeft, setLeftLeft] = useState(false);
+  const [downDown, setDownDown] = useState(false);
+  const [downRight, setDownRight] = useState(false);
+  const [rightRight, setRightRight] = useState(false);
+  const [rightDown, setRightDown] = useState(false);
+  const [leftRight, setLeftRight] = useState(false);
+  const [leftDown, setLeftDown] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // if (!props.user.user.newgame) {
+    //   setNewgameCard(false);
+
+    // }
+    axios.get("/api/inventory").then((res) => {
+      props.getInventory(res.data);
+
+      if (props.user.user.last === "pass") {
+        setDownCharacter(true);
+      } else if (props.user.user.last === "nest") {
+        setLeftCharacter(true);
+      } else if (props.user.user.last === "home") {
+        setRightCharacter(true);
+      
+      }
+      setIsLoading(false);
+    });
+  }, []);
 
   const toggleRight = () => {
     axios.post("/api/changeLast", { last: "mountain" }).then((res) => {
@@ -34,13 +67,19 @@ function Mountain(props) {
   };
 
   const toggleLeft = () => {
-    setLeft(!left);
-    props.history.push("/Nest");
+     axios.post("/api/changeLast", { last: "mountain" }).then((res) => {
+       props.getUser(res.data).then(() => {
+         props.history.push("/Nest");
+       });
+     });
   };
 
   const toggleDown = () => {
-    setDown(!down);
-    props.history.push("/Pass");
+   axios.post("/api/changeLast", { last: "town" }).then((res) => {
+     props.getUser(res.data).then(() => {
+       props.history.push("/Pass");
+     });
+   });
   };
 
   const toggleMountaineer = () => {
@@ -71,7 +110,48 @@ function Mountain(props) {
     axios.post("/api/mountainFirst").then((res) => props.getUser(res.data));
   };
 
-  return (
+   const toggleGoLeft = () => {
+     if (props.user.user.last === "pass") {
+       setDownLeft(true);
+       setDownCharacter(false);
+     } else if (props.user.user.last === "nest") {
+       setLeftCharacter(false);
+       setLeftLeft(true);
+     } else if (props.user.user.last === "home") {
+       setRightCharacter(false);
+       setRightLeft(true);
+     } 
+   };
+
+   const toggleGoRight = () => {
+     if (props.user.user.last === "pass") {
+       setDownRight(true);
+       setDownCharacter(false);
+     } else if (props.user.user.last === "nest") {
+       setLeftCharacter(false);
+       setLeftRight(true);
+     } else if (props.user.user.last === "home") {
+       setRightCharacter(false);
+       setRightRight(true);
+     } 
+  };
+  
+   const toggleGoDown = () => {
+     if (props.user.user.last === "pass") {
+       setDownDown(true);
+       setDownCharacter(false);
+     } else if (props.user.user.last === "nest") {
+       setLeftCharacter(false);
+       setLeftDown(true);
+     } else if (props.user.user.last === "home") {
+       setRightCharacter(false);
+       setRightDown(true);
+     } 
+   };
+
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div className="mountain-main">
       <Nav />
       <div className="mountain-body">
@@ -82,17 +162,67 @@ function Mountain(props) {
         </div>
         <div className="mountain-middle">
           <div className="mountain-middle-left">
-            <div className="mountain-nest" onClick={toggleLeft}>
+            <div className="mountain-nest" onClick={toggleGoLeft}>
               <ArrowBack />
               <h2>Nest</h2>
+            </div>
+            <div
+              className={`${
+                leftCharacter ? "character-left" : "character-left-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${leftLeft ? "left-left" : "left-left-closed"}`}
+              onAnimationEnd={toggleLeft}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${leftRight ? "left-right" : "left-right-closed"}`}
+              onAnimationEnd={toggleRight}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${leftDown ? "left-down" : "left-down-closed"}`}
+              onAnimationEnd={toggleDown}
+            >
+              <Character />
             </div>
           </div>
           <div className="mountain-middle-middle">
             <div className="mountaineer" onClick={toggleMountaineer}></div>
           </div>
           <div className="mountain-middle-right">
-            <Character />
-            <div className="mountain-home" onClick={toggleRight}>
+            <div
+              className={`${
+                rightCharacter ? "character-right" : "character-right-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${rightLeft ? "right-left" : "right-left-closed"}`}
+              onAnimationEnd={toggleLeft}
+            >
+              <Character />
+            </div>
+
+            <div
+              className={`${rightRight ? "right-right" : "right-right-closed"}`}
+              onAnimationEnd={toggleRight}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${rightDown ? "right-down" : "right-down-closed"}`}
+              onAnimationEnd={toggleDown}
+            >
+              <Character />
+            </div>
+            <div className="mountain-home" onClick={toggleGoRight}>
               <h2>Home</h2>
               <ArrowForward />
             </div>
@@ -101,7 +231,32 @@ function Mountain(props) {
         <div className="mountain-bottom">
           <div className="mountain-bottom-left"></div>
           <div className="mountain-bottom-middle">
-            <div className="mountain-pass" onClick={toggleDown}>
+            <div
+              className={`${
+                downCharacter ? "character-down" : "character-down-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${downLeft ? "down-left" : "down-left-closed"}`}
+              onAnimationEnd={toggleLeft}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${downRight ? "down-right" : "down-right-closed"}`}
+              onAnimationEnd={toggleRight}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${downDown ? "down-down" : "down-down-closed"}`}
+              onAnimationEnd={toggleDown}
+            >
+              <Character />
+            </div>
+            <div className="mountain-pass" onClick={toggleGoDown}>
               <h2>Pass</h2>
               <ArrowDownward />
             </div>
@@ -275,4 +430,4 @@ function Mountain(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser })(Mountain);
+export default connect(mapStateToProps, { getUser, getInventory, getMountain })(Mountain);

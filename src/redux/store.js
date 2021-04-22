@@ -18,6 +18,7 @@ import houseTwoReducer from "./houseTwoReducer";
 import inventoryReducer from "./inventoryReducer";
 import magicReducer from "./magicReducer";
 import mazeReducer from "./mazeReducer";
+import mountainReducer from "./mountainReducer"
 import nestReducer from "./nestReducer";
 import passReducer from "./passReducer";
 import stablesReducer from "./stablesReducer";
@@ -55,7 +56,8 @@ const rootReducer = combineReducers({
   tower: towerReducer,
   town: townReducer,
   user: userReducer,
-  dragon: dragonReducer
+  dragon: dragonReducer,
+  mountain: mountainReducer
 });
 
 export default createStore(rootReducer, applyMiddleware(promiseMiddleware));
