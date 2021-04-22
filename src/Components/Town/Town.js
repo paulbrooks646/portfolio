@@ -18,6 +18,7 @@ import House from "../../Images/House.jpg";
 import Character from "../Character/Character";
 import Farmer from "../../Images/Farmer.png";
 import axios from "axios"
+import Loading from "../Loading/Loading"
 
 function Town(props) {
   const [oldmanCard, setOldmanCard] = useState(false);
@@ -46,7 +47,7 @@ function Town(props) {
   const [leftUp, setLeftUp] = useState(false);
   const [leftRight, setLeftRight] = useState(false);
   const [leftDown, setLeftDown] = useState(false);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     // if (!props.user.user.newgame) {
@@ -220,6 +221,8 @@ function Town(props) {
    };
 
   return (
+
+    isLoading ? <Loading/> :
     <div className="town-main">
       <Nav />
       <div className="town-body">

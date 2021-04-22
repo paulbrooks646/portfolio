@@ -121,4 +121,13 @@ module.exports = {
 
     res.status(200).send(blacksmith);
   },
+
+  getDragon: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const dragon = await db.get_dragon(id);
+
+    res.status(200).send(dragon);
+  },
 };

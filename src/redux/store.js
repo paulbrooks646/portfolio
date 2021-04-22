@@ -6,6 +6,7 @@ import caveReducer from "./caveReducer";
 import castleReducer from "./castleReducer";
 import clearingReducer from "./clearingReducer";
 import cottageReducer from "./cottageReducer";
+import dragonReducer from "./dragonReducer"
 import gardenReducer from "./gardenReducer";
 import gladeReducer from "./gladeReducer";
 import grocerReducer from "./grocerReducer";
@@ -54,6 +55,7 @@ const rootReducer = combineReducers({
   tower: towerReducer,
   town: townReducer,
   user: userReducer,
+  dragon: dragonReducer
 });
 
 export default createStore(rootReducer, applyMiddleware(promiseMiddleware));

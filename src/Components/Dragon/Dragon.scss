@@ -4,6 +4,8 @@
   overflow: hidden;
 
   .dragon-body {
+    background-image: url("../../Images/Cinders.png");
+    background-size: 100% 100%;
     .dragon-top {
       height: 35vh;
       display: flex;
@@ -17,7 +19,7 @@
       }
 
       .dragon-top-middle {
-        background-color: brown;
+        background-image: url("../../Images/Dirt.png");
         width: 20%;
         height: 100%;
         display: flex;
@@ -35,8 +37,6 @@
       .dragon-top-right {
         width: 40%;
         height: 100%;
-        background-image: url("../../Images//Cinders.png");
-        background-size: 100% 100%;
       }
     }
 
@@ -46,17 +46,12 @@
       width: 100vw;
 
       .dragon-middle-left {
-        
         width: 40%;
         height: 100%;
-        background-image: url("../../Images//Cinders.png");
-        background-size: 100% 100%;
-
-        
       }
 
       .dragon-middle-middle {
-        background-color: brown;
+        background-image: url("../../Images/Dirt.png");
         width: 20%;
         height: 100%;
       }
@@ -64,10 +59,6 @@
       .dragon-middle-right {
         width: 40%;
         height: 100%;
-        background-image: url("../../Images//Cinders.png");
-        background-size: 100% 100%;
-
-        
       }
     }
 
@@ -77,17 +68,12 @@
       width: 100vw;
 
       .dragon-bottom-left {
-        
         height: 100%;
         width: 40%;
-        background-image: url("../../Images//Cinders.png");
-        background-size: 100% 100%;
-
-        
       }
 
       .dragon-bottom-middle {
-        background-color: brown;
+        background-image: url("../../Images/Dirt.png");
         height: 100%;
         width: 20%;
         display: flex;
@@ -97,38 +83,16 @@
         border-bottom: solid black 40px;
 
         .dragon-dragon {
-            height: 200px;
-            width: 300px;
-            z-index: 1;
+          height: 200px;
+          width: 300px;
+          z-index: 1;
         }
-
-        
       }
 
       .dragon-bottom-right {
-        
         height: 100%;
         width: 40%;
-        background-image: url("../../Images/Cinders.png");
-        background-size: 100% 100%;
-
-        
       }
     }
-  }
-}
-
-@keyframes motion {
-  0% {
-    bottom: 200px;
-    left: 0px;
-  }
-  50% {
-    bottom: 420px;
-    left: 0px;
-  }
-  100% {
-    left: -470px;
-    bottom: 420px;
   }
 }
