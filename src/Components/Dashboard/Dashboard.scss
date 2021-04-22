@@ -265,7 +265,7 @@
 .character-down {
   display: initial;
   animation-name: downStart;
-  animation-duration: 2s;
+  animation-duration: 500ms;
   animation-timing-function: linear;
   animation-direction: normal;
   animation-iteration-count: 1;
@@ -282,6 +282,18 @@
 }
 
 .character-initial-closed {
+  display: none;
+}
+
+.down-left {
+  animation-name: downLeft;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  position: relative;
+}
+
+.down-left-closed {
   display: none;
 }
 
@@ -344,5 +356,22 @@
 
   100% {
     top: 0px;
+  }
+}
+@keyframes downLeft {
+  0% {
+    bottom: 0%;
+    right: 0%;
+
+  }
+
+  50% {
+    bottom: 90%;
+    right: 0%
+  }
+
+  100% {
+    bottom: 90%;
+    right: 250%;
   }
 }

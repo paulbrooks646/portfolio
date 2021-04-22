@@ -40,6 +40,10 @@ function Dashboard(props) {
   const [leftCharacter, setLeftCharacter] = useState(false)
   const [rightCharacter, setRightCharacter] = useState(false)
   const [initialCharacter, setInitialCharacter] = useState(false)
+  const [downLeft, setDownLeft] = useState(false)
+  const [upLeft, setUpLeft] = useState(false)
+  const [rightLeft, setRightLeft] = useState(false)
+
   
   useEffect(() => {
     if (!props.user.user.newgame) {
@@ -70,6 +74,7 @@ function Dashboard(props) {
   }, []);
 
   const toggleRight = () => {
+    
     setRight(!right);
     props.history.push("/Forest");
   };
@@ -137,6 +142,14 @@ function Dashboard(props) {
 
   }
 
+  const toggleGoLeft = () => {
+    if (props.user.user.last === "login" || props.user.user.last === "dragon") {
+      setDownLeft(true)
+      setInitialCharacter(false)
+      setDownCharacter(false)
+    }
+  }
+
 
   return isLoading ? (
     <Loading />
@@ -170,7 +183,7 @@ function Dashboard(props) {
         </div>
         <div className="dashboard-middle">
           <div className="dashboard-middle-left">
-            <div className="dashboard-mountains" onClick={toggleLeft}>
+            <div className="dashboard-mountains" onClick={toggleGoLeft}>
               <ArrowBack />
               <h2>Mountains</h2>
             </div>
@@ -220,8 +233,19 @@ function Dashboard(props) {
             </div>
             <div
               className={`${
-                initialCharacter ? "character-initial" : "character-initial-closed"
+                initialCharacter
+                  ? "character-initial"
+                  : "character-initial-closed"
               }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${
+                downLeft
+                  ? "down-left"
+                  : "down-left-closed"
+              }`} onAnimationEnd={toggleLeft}
             >
               <Character />
             </div>
