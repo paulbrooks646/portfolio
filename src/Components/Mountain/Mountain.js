@@ -43,8 +43,8 @@ function Mountain(props) {
     //   setNewgameCard(false);
 
     // }
-    axios.get("/api/inventory").then((res) => {
-      props.getInventory(res.data);
+    axios.get("/api/nest").then((res) => {
+      props.getMountain(res.data[0]);
 
       if (props.user.user.last === "pass") {
         setDownCharacter(true);

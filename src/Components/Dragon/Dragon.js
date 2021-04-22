@@ -22,8 +22,8 @@ function Dragon(props) {
     //   setNewgameCard(false);
 
     // }
-    axios.get("/api/inventory").then((res) => {
-      props.getInventory(res.data);
+    axios.get("/api/dragon").then((res) => {
+      props.getDragon(res.data[0]);
       setUpCharacter(true)
       setIsLoading(false);
     });

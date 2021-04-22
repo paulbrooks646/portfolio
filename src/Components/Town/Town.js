@@ -54,8 +54,8 @@ function Town(props) {
     //   setNewgameCard(false);
   
     // }
-    axios.get("/api/inventory").then((res) => {
-      props.getInventory(res.data);
+    axios.get("/api/town").then((res) => {
+      props.getTown(res.data[0]);
 
       if  (props.user.user.last === "home") {
         setDownCharacter(true);

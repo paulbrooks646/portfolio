@@ -14,24 +14,29 @@ import ArrowForward from "@material-ui/icons/ArrowForward";
 import { getInventory } from "../../redux/inventoryReducer";
 
 function Nest(props) {
-  const [right, setRight] = useState(false);
   const [failure, setFailure] = useState(false);
   const [coinSuccess, setCoinSuccess] = useState(false);
   const [ribbonSuccess, setRibbonSuccess] = useState(false);
   const [featherSuccess, setFeatherSuccess] = useState(false);
   const [griffin, setGriffin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [rightCharacter, setRightCharacter] = useState(false);
+  const [rightRight, setRightRight] = useState(false);
 
   useEffect(() => {
     axios.get("/api/nest").then((res) => {
       props.getNest(res.data[0]);
       setIsLoading(false);
+      setRightCharacter(true)
     });
   }, []);
 
   const toggleRight = () => {
-    setRight(!right);
-    props.history.push("/Mountain");
+   axios.post("/api/changeLast", { last: "nest" }).then((res) => {
+     props.getUser(res.data).then(() => {
+       props.history.push("/Mountain");
+     });
+   });
   };
 
   const toggleFirst = () => {
@@ -87,6 +92,12 @@ function Nest(props) {
     setFailure(true);
   };
 
+  const toggleGoRight = () => {
+     setRightCharacter(false);
+     setRightRight(true);
+    
+  };
+
   return isLoading ? (
     <Loading />
   ) : (
@@ -136,8 +147,20 @@ function Nest(props) {
           </div>
           <div className="nest-middle-middle"></div>
           <div className="nest-middle-right">
-            <Character />
-            <div className="nest-mountains" onClick={toggleRight}>
+            <div
+              className={`${
+                rightCharacter ? "character-right" : "character-right-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${rightRight ? "right-right" : "right-right-closed"}`}
+              onAnimationEnd={toggleRight}
+            >
+              <Character />
+            </div>
+            <div className="nest-mountains" onClick={toggleGoRight}>
               <h2>Mountains</h2>
               <ArrowForward />
             </div>
