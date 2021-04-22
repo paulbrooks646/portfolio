@@ -4,44 +4,18 @@ import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import axios from "axios";
 import "./Dragon.scss";
-import { Link } from "react-redux";
-import ArrowDownward from "@material-ui/icons/ArrowDownward";
-import ArrowForward from "@material-ui/icons/ArrowForward";
-import ArrowBack from "@material-ui/icons/ArrowBack";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
-import House from "../../Images/House.jpg";
+
 import Character from "../Character/Character";
 import DragonPic from "../../Images/dragon.gif";
 
 function Dragon(props) {
-  const [left, setLeft] = useState(false);
-  const [right, setRight] = useState(false);
-  const [up, setUp] = useState(false);
-  const [down, setDown] = useState(false);
-
-  const toggleRight = () => {
-    setRight(!right);
-    props.history.push("/Market");
-  };
-
-  const toggleLeft = () => {
-    setLeft(!left);
-
-    props.history.push("/Stables");
-  };
-
   const toggleUp = () => {
     axios.post("/api/changeLast", { last: "dragon" }).then((res) => {
-      console.log(res.data)
-      props.getUser(res.data);
-      props.history.push("/Dashboard");
+      props.getUser(res.data).then(() => {
+        props.history.push("/Dashboard");
+      });
     });
-    setUp(!up);
-  };
-
-  const toggleDown = () => {
-    setDown(!down);
-    props.history.push("/Dashboard");
   };
 
   return (

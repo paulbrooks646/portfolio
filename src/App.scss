@@ -4,3 +4,543 @@
   margin: 0px;
 }
 
+/////////DOWN//////////
+
+.down-left {
+  animation-name: downLeft;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  position: relative;
+  animation-fill-mode: forwards;
+}
+
+.down-left-closed {
+  display: none;
+}
+
+@keyframes downLeft {
+  0% {
+    bottom: 0%;
+    right: 0%;
+  }
+
+  50% {
+    bottom: 90%;
+    right: 0%;
+  }
+
+  100% {
+    bottom: 90%;
+    right: 250%;
+  }
+}
+
+.down-up {
+  animation-name: downUp;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  position: relative;
+  animation-fill-mode: forwards;
+}
+
+.down-up-closed {
+  display: none;
+}
+
+@keyframes downUp {
+  0% {
+    bottom: 0%;
+  }
+
+  100% {
+    bottom: 200%;
+  }
+}
+
+.down-down {
+  animation-name: downDown;
+  animation-duration: 200ms;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  position: relative;
+  animation-fill-mode: forwards;
+}
+
+.down-down-closed {
+  display: none;
+}
+
+@keyframes downDown {
+  0% {
+    top: 0%;
+  }
+
+  100% {
+    top: 20%;
+  }
+}
+
+.down-right {
+  animation-name: downRight;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  position: relative;
+  animation-fill-mode: forwards;
+}
+
+.down-right-closed {
+  display: none;
+}
+
+@keyframes downRight {
+  0% {
+    bottom: 0%;
+    left: 0%;
+  }
+
+  50% {
+    bottom: 90%;
+    left: 0%;
+  }
+
+  100% {
+    bottom: 90%;
+    left: 250%;
+  }
+}
+
+/////////UP//////////
+
+.up-left {
+  animation-name: upLeft;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  position: relative;
+  animation-fill-mode: forwards;
+}
+
+.up-left-closed {
+  display: none;
+}
+
+@keyframes upLeft {
+  0% {
+    top: 0%;
+    right: 0%;
+  }
+
+  50% {
+    top: 90%;
+    right: 0%;
+  }
+
+  100% {
+    top: 90%;
+    right: 250%;
+  }
+}
+
+.up-down {
+  animation-name: upDown;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  position: relative;
+  animation-fill-mode: forwards;
+}
+
+.up-down-closed {
+  display: none;
+}
+
+@keyframes UpDown {
+  0% {
+    bottom: 0%;
+  }
+
+  100% {
+    bottom: 200%;
+  }
+}
+
+.up-up {
+  animation-name: upUp;
+  animation-duration: 200ms;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  position: relative;
+  animation-fill-mode: forwards;
+}
+
+.up-up-closed {
+  display: none;
+}
+
+@keyframes upUp {
+  0% {
+    top: 0%;
+  }
+
+  100% {
+    top: 20%;
+  }
+}
+
+.up-right {
+  animation-name: upRight;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  position: relative;
+  animation-fill-mode: forwards;
+}
+
+.up-right-closed {
+  display: none;
+}
+
+@keyframes upRight {
+  0% {
+    top: 0%;
+    left: 0%;
+  }
+
+  50% {
+    top: 90%;
+    left: 0%;
+  }
+
+  100% {
+    top: 90%;
+    left: 250%;
+  }
+}
+
+/////////Left//////////
+
+.left-up {
+  animation-name: leftUp;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  position: relative;
+  animation-fill-mode: forwards;
+}
+
+.left-up-closed {
+  display: none;
+}
+
+@keyframes leftUp {
+  0% {
+    left: 0%;
+    bottom: 0%;
+  }
+
+  50% {
+    left: 85%;
+    bottom: 0%;
+  }
+
+  100% {
+    left: 85%;
+    bottom: 180%;
+  }
+}
+
+.left-right {
+  animation-name: leftRight;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  position: relative;
+  animation-fill-mode: forwards;
+}
+
+.left-right-closed {
+  display: none;
+}
+
+@keyframes leftRight {
+  0% {
+    left: 0%;
+  }
+
+  100% {
+    left: 250%;
+  }
+}
+
+.left-left {
+  animation-name: leftLeft;
+  animation-duration: 200ms;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-direction: normal;
+  position: relative;
+  animation-fill-mode: forwards;
+}
+
+.left-left-closed {
+  display: none;
+}
+
+@keyframes leftLeft {
+  0% {
+    right: 0%;
+  }
+
+  100% {
+    right: 20%;
+  }
+}
+
+.left-down {
+  animation-name: leftDown;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  position: relative;
+  animation-fill-mode: forwards;
+}
+
+.left-down-closed {
+  display: none;
+}
+
+@keyframes leftDown {
+  0% {
+    top: 0%;
+    left: 0%;
+  }
+
+  50% {
+    top: 0%;
+    left: 85%;
+  }
+
+  100% {
+    top: 180%;
+    left: 85%;
+  }
+}
+
+/////////Right//////////
+
+.right-up {
+  animation-name: rightUp;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  position: relative;
+  animation-fill-mode: forwards;
+}
+
+.right-up-closed {
+  display: none;
+}
+
+@keyframes rightUp {
+  0% {
+    right: 0%;
+    bottom: 0%;
+  }
+
+  50% {
+    right: 250%;
+    bottom: 0%;
+  }
+
+  100% {
+    right: 250%;
+    bottom: 90%;
+  }
+}
+
+.right-left {
+  animation-name: rightLeft;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  position: relative;
+  animation-fill-mode: forwards;
+}
+
+.right-left-closed {
+  display: none;
+}
+
+@keyframes rightLeft {
+  0% {
+    right: 0%;
+  }
+
+  100% {
+    right: 500%;
+  }
+}
+
+.right-right {
+  animation-name: rightRight;
+  animation-duration: 200ms;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  position: relative;
+  animation-fill-mode: forwards;
+}
+
+.right-right-closed {
+  display: none;
+}
+
+@keyframes rightRight {
+  0% {
+    left: 0%;
+  }
+
+  100% {
+    left: 20%;
+  }
+}
+
+.right-down {
+  animation-name: rightDown;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  position: relative;
+}
+
+.right-down-closed {
+  display: none;
+}
+
+@keyframes rightDown {
+  0% {
+    top: 0%;
+    right: 0%;
+  }
+
+  50% {
+    top: 0%;
+    right: 250%;
+  }
+
+  100% {
+    top: 90%;
+    left: 250%;
+  }
+}
+
+///////OTHER///////
+
+.character-initial {
+  display: initial;
+}
+
+.character-initial-closed {
+  display: none;
+}
+
+@keyframes downStart {
+  0% {
+    top: 50px;
+  }
+
+  100% {
+    top: 0px;
+  }
+}
+
+@keyframes upStart {
+  0% {
+    bottom: 50px;
+  }
+
+  100% {
+    bottom: 0px;
+  }
+}
+
+@keyframes leftStart {
+  0% {
+    right: 50px;
+  }
+
+  100% {
+    right: 0px;
+  }
+}
+
+@keyframes rightStart {
+  0% {
+    left: 50px;
+  }
+
+  100% {
+    left: 0px;
+  }
+}
+
+.character-up {
+  display: initial;
+  animation-name: upStart;
+  animation-duration: 300ms;
+  animation-timing-function: linear;
+  animation-direction: normal;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  position: relative;
+}
+
+.character-up-closed {
+  display: none;
+}
+
+.character-right {
+  display: initial;
+  animation-name: rightStart;
+  animation-duration: 300ms;
+  animation-timing-function: linear;
+  animation-direction: normal;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  position: relative;
+}
+
+.character-right-closed {
+  display: none;
+}
+.character-left {
+  display: initial;
+  animation-name: leftStart;
+  animation-duration: 300ms;
+  animation-timing-function: linear;
+  animation-direction: normal;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  position: relative;
+}
+
+.character-left-closed {
+  display: none;
+}
+.character-down {
+  display: initial;
+  animation-name: downStart;
+  animation-duration: 300ms;
+  animation-timing-function: linear;
+  animation-direction: normal;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  position: relative;
+}
+
+.character-down-closed {
+  display: none;
+}

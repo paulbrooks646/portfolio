@@ -60,6 +60,7 @@ module.exports = {
     }
   },
   logout: async (req, res) => {
+    
     req.session.destroy();
     res.sendStatus(200);
   },
@@ -152,7 +153,7 @@ module.exports = {
     const { last } = req.body;
     const { id } = req.session.user;
     const user = await db.change_last([id, last])
- 
+
     req.session.user = {
       id: user[0].id,
       name: user[0].name,

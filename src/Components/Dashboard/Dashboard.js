@@ -2,122 +2,133 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getInventory } from "../../redux/inventoryReducer"
+import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Dashboard.scss";
-import Card from "@material-ui/core/Card"
-import Button from "@material-ui/core/Button"
-import Typography from "@material-ui/core/Typography"
-import List from "@material-ui/core/List"
-import ListItem from "@material-ui/core/ListItem"
+import Card from "@material-ui/core/Card";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
-import ArrowDownward from "@material-ui/icons/ArrowDownward"
+import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import Character from "../Character/Character";
 import Oldman from "../../Images/Oldman.jpg";
 import Loading from "../Loading/Loading";
 
-
 function Dashboard(props) {
-  const [left, setLeft] = useState(false);
-  const [right, setRight] = useState(false);
-  const [up, setUp] = useState(false);
-  const [down, setDown] = useState(false)
-  const [newgameCard, setNewgameCard] = useState(true)
-  const [newGameCardTwo, setNewGameCardTwo] = useState(false)
-  const [oldmanCard, setOldmanCard] = useState(false)
-  const [answerOne, setAnswerOne] = useState(false)
-  const [answerTwo, setAnswerTwo] = useState(false)
-  const [answerThree, setAnswerThree] = useState(false)
-  const [answerFour, setAnswerFour] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
-  const [dragonAnimation, setDragonAnimation] = useState(false)
-  const [fireballAnimation, setFireballAnimation] = useState(false)
-  const [burnt, setBurnt] = useState(false)
-  const [downCharacter, setDownCharacter] = useState(false)
-  const [upCharacter, setUpCharacter] = useState(false)
-  const [leftCharacter, setLeftCharacter] = useState(false)
-  const [rightCharacter, setRightCharacter] = useState(false)
-  const [initialCharacter, setInitialCharacter] = useState(false)
-  const [downLeft, setDownLeft] = useState(false)
-  const [upLeft, setUpLeft] = useState(false)
-  const [rightLeft, setRightLeft] = useState(false)
+  const [newgameCard, setNewgameCard] = useState(true);
+  const [newGameCardTwo, setNewGameCardTwo] = useState(false);
+  const [oldmanCard, setOldmanCard] = useState(false);
+  const [answerOne, setAnswerOne] = useState(false);
+  const [answerTwo, setAnswerTwo] = useState(false);
+  const [answerThree, setAnswerThree] = useState(false);
+  const [answerFour, setAnswerFour] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [dragonAnimation, setDragonAnimation] = useState(false);
+  const [fireballAnimation, setFireballAnimation] = useState(false);
+  const [burnt, setBurnt] = useState(false);
+  const [downCharacter, setDownCharacter] = useState(false);
+  const [upCharacter, setUpCharacter] = useState(false);
+  const [leftCharacter, setLeftCharacter] = useState(false);
+  const [rightCharacter, setRightCharacter] = useState(false);
+  const [initialCharacter, setInitialCharacter] = useState(false);
+  const [downLeft, setDownLeft] = useState(false);
+  const [upLeft, setUpLeft] = useState(false);
+  const [rightLeft, setRightLeft] = useState(false);
+  const [leftLeft, setLeftLeft] = useState(false);
+  const [downUp, setDownUp] = useState(false);
+  const [downDown, setDownDown] = useState(false);
+  const [downRight, setDownRight] = useState(false);
+  const [upUp, setUpUp] = useState(false);
+  const [upRight, setUpRight] = useState(false);
+  const [upDown, setUpDown] = useState(false);
+  const [rightUp, setRightUp] = useState(false);
+  const [rightRight, setRightRight] = useState(false);
+  const [rightDown, setRightDown] = useState(false);
+  const [leftUp, setLeftUp] = useState(false);
+  const [leftRight, setLeftRight] = useState(false);
+  const [leftDown, setLeftDown] = useState(false);
 
-  
   useEffect(() => {
     if (!props.user.user.newgame) {
-     setNewgameCard(false)
+      setNewgameCard(false);
+      setBurnt(true)
     }
     axios.get("/api/inventory").then((res) => {
-      
       props.getInventory(res.data);
-      setIsLoading(false)
-       if (props.user.user.last === "login") {
-         setInitialCharacter(true);
-       } else if (props.user.user.last === "dragon") {
-         setDownCharacter(true);
-       } else if (props.user.user.last === "mountains") {
-         setLeftCharacter(true);
-       } else if (props.user.user.last === "forest") {
-         setRightCharacter(true);
-       } else if (props.user.user.last === "town") {
-         setUpCharacter(true);
-       } else {
-         axios.post("/api/changeLast", { last: "login" }).then((res) => {
-           props.getUser(res.data);
-         });
-       }
 
+      if (props.user.user.last === "login") {
+        setInitialCharacter(true);
+      } else if (props.user.user.last === "dragon") {
+        setDownCharacter(true);
+      } else if (props.user.user.last === "mountain") {
+        setLeftCharacter(true);
+      } else if (props.user.user.last === "forest") {
+        setRightCharacter(true);
+      } else if (props.user.user.last === "town") {
+        setUpCharacter(true);
+      } else {
+        axios.post("/api/changeLast", { last: "login" }).then((res) => {
+          props.getUser(res.data);
+          setInitialCharacter(true);
+        });
+      }
+      setIsLoading(false);
     });
-   
   }, []);
 
   const toggleRight = () => {
-    
-    setRight(!right);
-    props.history.push("/Forest");
+    axios.post("/api/changeLast", { last: "home" }).then((res) => {
+      props.getUser(res.data);
+      props.history.push("/Forest");
+    });
   };
 
   const toggleLeft = () => {
-    axios.post("/api/changeLast", { last: "home" }).then(res => {
-      props.getUser(res.data)
-    })
-    setLeft(!left);
+    axios.post("/api/changeLast", { last: "home" }).then((res) => {
+      props.getUser(res.data);
+    });
 
     props.history.push("/Mountain");
   };
 
   const toggleUp = () => {
-    setUp(!up);
+    axios.post("/api/changeLast", { last: "home" }).then((res) => {
+      props.getUser(res.data);
+    });
+
     props.history.push("/Town");
   };
 
   const toggleDown = () => {
-    setDown(!down)
-    props.history.push("/Dragon")
-  }
+    axios.post("/api/changeLast", { last: "home" }).then((res) => {
+      props.getUser(res.data);
+    });
+
+    props.history.push("/Dragon");
+  };
 
   const toggleNewgame = () => {
-    axios.post("/api/newgame").then(res => {
-      
-      props.getUser(res.data)
-    })
-    
-    setNewgameCard(false)
-    setDragonAnimation(true)
-    setFireballAnimation(true)
-  }
-  
-  const toggleOldmanCard = () => {
-    setOldmanCard(!oldmanCard)
+    axios.post("/api/newgame").then((res) => {
+      props.getUser(res.data);
+    });
 
-  }
+    setNewgameCard(false);
+    setDragonAnimation(true);
+    setFireballAnimation(true);
+  };
+
+  const toggleOldmanCard = () => {
+    setOldmanCard(!oldmanCard);
+  };
 
   const toggleAnswerOne = () => {
-    toggleOldmanCard()
-    setAnswerOne(!answerOne)
-  }
+    toggleOldmanCard();
+    setAnswerOne(!answerOne);
+  };
 
   const toggleAnswerTwo = () => {
     toggleOldmanCard();
@@ -135,21 +146,79 @@ function Dashboard(props) {
   };
 
   const toggleDragonAnimationEnd = () => {
-    setDragonAnimation(false)
-    setFireballAnimation(false)
+    setDragonAnimation(false);
+    setFireballAnimation(false);
     setBurnt(true);
-    setNewGameCardTwo(true)
-
-  }
+    setNewGameCardTwo(true);
+  };
 
   const toggleGoLeft = () => {
     if (props.user.user.last === "login" || props.user.user.last === "dragon") {
-      setDownLeft(true)
-      setInitialCharacter(false)
-      setDownCharacter(false)
+      setDownLeft(true);
+      setInitialCharacter(false);
+      setDownCharacter(false);
+    } else if (props.user.user.last === "mountain") {
+      setLeftCharacter(false);
+      setLeftLeft(true);
+    } else if (props.user.user.last === "forest") {
+      setRightCharacter(false);
+      setRightLeft(true);
+    } else if (props.user.user.last === "town") {
+      setUpCharacter(false);
+      setUpLeft(true);
     }
-  }
+  };
 
+  const toggleGoRight = () => {
+    if (props.user.user.last === "login" || props.user.user.last === "dragon") {
+      setDownRight(true);
+      setInitialCharacter(false);
+      setDownCharacter(false);
+    } else if (props.user.user.last === "mountain") {
+      setLeftCharacter(false);
+      setLeftRight(true);
+    } else if (props.user.user.last === "forest") {
+      setRightCharacter(false);
+      setRightRight(true);
+    } else if (props.user.user.last === "town") {
+      setUpCharacter(false);
+      setUpRight(true);
+    }
+  };
+
+  const toggleGoUp = () => {
+    if (props.user.user.last === "login" || props.user.user.last === "dragon") {
+      setDownUp(true);
+      setInitialCharacter(false);
+      setDownCharacter(false);
+    } else if (props.user.user.last === "mountain") {
+      setLeftCharacter(false);
+      setLeftUp(true);
+    } else if (props.user.user.last === "forest") {
+      setRightCharacter(false);
+      setRightUp(true);
+    } else if (props.user.user.last === "town") {
+      setUpCharacter(false);
+      setUpUp(true);
+    }
+  };
+
+  const toggleGoDown = () => {
+    if (props.user.user.last === "login" || props.user.user.last === "dragon") {
+      setDownDown(true);
+      setInitialCharacter(false);
+      setDownCharacter(false);
+    } else if (props.user.user.last === "mountain") {
+      setLeftCharacter(false);
+      setLeftDown(true);
+    } else if (props.user.user.last === "forest") {
+      setRightCharacter(false);
+      setRightDown(true);
+    } else if (props.user.user.last === "town") {
+      setUpCharacter(false);
+      setUpDown(true);
+    }
+  };
 
   return isLoading ? (
     <Loading />
@@ -160,7 +229,7 @@ function Dashboard(props) {
         <div className="dashboard-top">
           <div className="dashboard-top-left"></div>
           <div className="dashboard-top-middle">
-            <div className="dashboard-town" onClick={toggleUp}>
+            <div className="dashboard-town" onClick={toggleGoUp}>
               <ArrowUpward />
               <h2>Town</h2>
             </div>
@@ -168,6 +237,30 @@ function Dashboard(props) {
               className={`${
                 upCharacter ? "character-up" : "character-up-closed"
               }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${upLeft ? "up-left" : "up-left-closed"}`}
+              onAnimationEnd={toggleLeft}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${upUp ? "up-up" : "up-up-closed"}`}
+              onAnimationEnd={toggleUp}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${upRight ? "up-right" : "up-right-closed"}`}
+              onAnimationEnd={toggleRight}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${upDown ? "up-down" : "up-down-closed"}`}
+              onAnimationEnd={toggleDown}
             >
               <Character />
             </div>
@@ -194,6 +287,30 @@ function Dashboard(props) {
             >
               <Character />
             </div>
+            <div
+              className={`${leftLeft ? "left-left" : "left-left-closed"}`}
+              onAnimationEnd={toggleLeft}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${leftUp ? "left-up" : "left-up-closed"}`}
+              onAnimationEnd={toggleUp}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${leftRight ? "left-right" : "left-right-closed"}`}
+              onAnimationEnd={toggleRight}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${leftDown ? "left-down" : "left-down-closed"}`}
+              onAnimationEnd={toggleDown}
+            >
+              <Character />
+            </div>
           </div>
           <div className={`${burnt ? "burned-house" : "house"}`}></div>
           <div className="dashboard-middle-right">
@@ -204,7 +321,31 @@ function Dashboard(props) {
             >
               <Character />
             </div>
-            <div className="dashboard-forest" onClick={toggleRight}>
+            <div
+              className={`${rightLeft ? "right-left" : "right-left-closed"}`}
+              onAnimationEnd={toggleLeft}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${rightUp ? "right-up" : "right-up-closed"}`}
+              onAnimationEnd={toggleUp}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${rightRight ? "right-right" : "right-right-closed"}`}
+              onAnimationEnd={toggleRight}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${rightDown ? "right-down" : "right-down-closed"}`}
+              onAnimationEnd={toggleDown}
+            >
+              <Character />
+            </div>
+            <div className="dashboard-forest" onClick={toggleGoRight}>
               <h2>Forest</h2>
               <ArrowForward />
             </div>
@@ -241,15 +382,30 @@ function Dashboard(props) {
               <Character />
             </div>
             <div
-              className={`${
-                downLeft
-                  ? "down-left"
-                  : "down-left-closed"
-              }`} onAnimationEnd={toggleLeft}
+              className={`${downLeft ? "down-left" : "down-left-closed"}`}
+              onAnimationEnd={toggleLeft}
             >
               <Character />
             </div>
-            <div className="dashboard-dragon" onClick={toggleDown}>
+            <div
+              className={`${downUp ? "down-up" : "down-up-closed"}`}
+              onAnimationEnd={toggleUp}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${downRight ? "down-right" : "down-right-closed"}`}
+              onAnimationEnd={toggleRight}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${downDown ? "down-down" : "down-down-closed"}`}
+              onAnimationEnd={toggleDown}
+            >
+              <Character />
+            </div>
+            <div className="dashboard-dragon" onClick={toggleGoDown}>
               <h2>Dragon's Lair</h2>
               <ArrowDownward />
             </div>
@@ -367,7 +523,7 @@ function Dashboard(props) {
           className="answer-card-description"
         >
           The cursed dragon has plagued this realm for far too long. Many have
-          tried but they all ended up the dragon's lunch. If you want my advice,
+          tried to slay him but they all ended up the dragon's lunch. If you want my advice,
           stay away.
         </Typography>
         <Button
@@ -443,7 +599,7 @@ function Dashboard(props) {
           className="answer-card-description"
         >
           The town is as unfriendly as the rest of this realm. If you don't have
-          gold there is no place for you there.
+          coins there is no place for you there.
         </Typography>
         <Button
           onClick={toggleAnswerFour}
