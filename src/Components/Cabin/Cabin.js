@@ -1,44 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
+import {getCabin} from "../../redux/cabinReducer"
 import axios from "axios";
 import "./Cabin.scss";
-import { Link } from "react-redux";
-import ArrowDownward from "@material-ui/icons/ArrowDownward";
-import ArrowForward from "@material-ui/icons/ArrowForward";
-import ArrowBack from "@material-ui/icons/ArrowBack";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
-import House from "../../Images/House.jpg";
+import Loading from "../Loading/Loading"
 import Character from "../Character/Character";
 
 
 function Cabin(props) {
-  const [left, setLeft] = useState(false);
-  const [right, setRight] = useState(false);
-  const [up, setUp] = useState(false);
-  const [down, setDown] = useState(false);
 
-  const toggleRight = () => {
-    setRight(!right);
-    props.history.push("/Market");
-  };
+  const [upCharacter, setUpCharacter] = useState(false);
+  const [upUp, setUpUp] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
-  const toggleLeft = () => {
-    setLeft(!left);
+   useEffect(() => {
+     // if (!props.user.user.newgame) {
+     //   setNewgameCard(false);
 
-    props.history.push("/Stables");
-  };
+     // }
+     axios.get("/api/cabin").then((res) => {
+       props.getCabin(res.data[0]);
+ setUpCharacter(true);
+       
+       setIsLoading(false);
+     });
+   }, []);
+
 
   const toggleUp = () => {
-    setUp(!up);
-    props.history.push("/Pass");
+     axios.post("/api/changeLast", { last: "cabin" }).then((res) => {
+       props.getUser(res.data).then(() => {
+         props.history.push("/Pass");
+       });
+     });
   };
 
-  const toggleDown = () => {
-    setDown(!down);
-    props.history.push("/Dashboard");
+  const toggleGoUp = () => {
+    setUpCharacter(false);
+    setUpUp(true);
+   
   };
+
 
   return (
     <div className="cabin-main">
@@ -49,11 +54,23 @@ function Cabin(props) {
             <div className="pine-tree"></div>
           </div>
           <div className="cabin-top-middle">
-            <div className="cabin-home" onClick={toggleUp}>
+            <div className="cabin-home" onClick={toggleGoUp}>
               <ArrowUpward />
               <h2>Pass</h2>
             </div>
-            <Character />
+            <div
+              className={`${
+                upCharacter ? "character-up" : "character-up-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${upUp ? "up-up" : "up-up-closed"}`}
+              onAnimationEnd={toggleUp}
+            >
+              <Character />
+            </div>
           </div>
           <div className="cabin-top-right">
             <div className="pine-tree"></div>
@@ -81,4 +98,4 @@ function Cabin(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser })(Cabin);
+export default connect(mapStateToProps, { getUser, getCabin })(Cabin);

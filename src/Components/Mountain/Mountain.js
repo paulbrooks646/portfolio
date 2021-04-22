@@ -75,7 +75,7 @@ function Mountain(props) {
   };
 
   const toggleDown = () => {
-   axios.post("/api/changeLast", { last: "town" }).then((res) => {
+   axios.post("/api/changeLast", { last: "mountain" }).then((res) => {
      props.getUser(res.data).then(() => {
        props.history.push("/Pass");
      });

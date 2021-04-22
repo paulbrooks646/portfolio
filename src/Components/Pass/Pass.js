@@ -16,31 +16,43 @@ import Typography from "@material-ui/core/Typography";
 
 function Pass(props) {
 
-  const [up, setUp] = useState(false);
-  const [down, setDown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [downRejection, setDownRejection] = useState(false);
   const [ogre, setOgre] = useState(false)
+  const [upCharacter, setUpCharacter] = useState(false);
+  const [downCharacter, setDownCharacter] = useState(false);
+  const [downUp, setDownUp] = useState(false);
+  const [downDown, setDownDown] = useState(false);
+  const [upUp, setUpUp] = useState(false);
+  const [upDown, setUpDown] = useState(false);
+  
 
   useEffect(() => {
     axios.get("/api/pass").then((res) => {
       props.getPass(res.data[0]);
+       if (props.user.user.last === "cabin") {
+         setDownCharacter(true);
+       }  else if (props.user.user.last === "mountain") {
+         setUpCharacter(true);
+       } 
       setIsLoading(false);
     });
   }, []);
 
   const toggleUp = () => {
-    setUp(!up)
-    props.history.push("/Mountain")
+    axios.post("/api/changeLast", { last: "pass" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Mountain");
+      });
+    });
   }
 
   const toggleDown = () => {
-    if (props.pass.pass.cake_given) {
-setDown(!down);
-props.history.push("/Cabin");
-    } else {
-      setDownRejection(true)
-    }
+   axios.post("/api/changeLast", { last: "pass" }).then((res) => {
+     props.getUser(res.data).then(() => {
+       props.history.push("/Cabin");
+     });
+   });
     
   }
 
@@ -48,6 +60,29 @@ props.history.push("/Cabin");
     axios.post("/api/passFirst").then((res) => {
       props.getPass(res.data[0]);
     });
+  };
+
+  const toggleGoUp = () => {
+    if (props.user.user.last === "cabin") {
+      setDownUp(true);
+      setDownCharacter(false);
+    } else if (props.user.user.last === "mountain") {
+      setUpCharacter(false);
+      setUpUp(true);
+    }
+  };
+
+  const toggleGoDown = () => {
+    if (!props.pass.pass.cake_given) {
+      setDownRejection(true)
+    }
+   else if (props.user.user.last === "cabin") {
+      setDownDown(true);
+      setDownCharacter(false);
+    } else if (props.user.user.last === "mountain") {
+      setUpCharacter(false);
+      setUpDown(true);
+    }
   };
 
   return isLoading ? (
@@ -59,11 +94,29 @@ props.history.push("/Cabin");
         <div className="pass-top">
           <div className="pass-top-left"></div>
           <div className="pass-top-middle">
-            <div className="pass-mountain" onClick={toggleUp}>
+            <div className="pass-mountain" onClick={toggleGoUp}>
               <ArrowUpward />
               <h2>Mountains</h2>
             </div>
-            <Character />
+            <div
+              className={`${
+                upCharacter ? "character-up" : "character-up-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${upUp ? "up-up" : "up-up-closed"}`}
+              onAnimationEnd={toggleUp}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${upDown ? "up-down" : "up-down-closed"}`}
+              onAnimationEnd={toggleDown}
+            >
+              <Character />
+            </div>
           </div>
           <div
             className={`${
@@ -94,7 +147,26 @@ props.history.push("/Cabin");
         <div className="pass-bottom">
           <div className="pass-bottom-left"></div>
           <div className="pass-bottom-middle">
-            <div className="pass-cabin" onClick={toggleDown}>
+            <div
+              className={`${
+                downCharacter ? "character-down" : "character-down-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${downUp ? "down-up" : "down-up-closed"}`}
+              onAnimationEnd={toggleUp}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${downDown ? "down-down" : "down-down-closed"}`}
+              onAnimationEnd={toggleDown}
+            >
+              <Character />
+            </div>
+            <div className="pass-cabin" onClick={toggleGoDown}>
               <h2>Cabin</h2>
               <ArrowDownward />
             </div>
@@ -152,15 +224,15 @@ props.history.push("/Cabin");
           CLOSE
         </Button>
       </Card>
-      <Card
-        className={`${ogre ? "answer-card" : "answer-card-closed"}`}
-      >
+      <Card className={`${ogre ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          Against your better judgement you poke the ogre. Nothing happens. You scream as loud as you can. The ogre doesn't even stir. There has to be some way to get this ogre to move.
+          Against your better judgement you poke the ogre. Nothing happens. You
+          scream as loud as you can. The ogre doesn't even stir. There has to be
+          some way to get this ogre to move.
         </Typography>
         <Button
           onClick={() => setOgre(false)}
