@@ -14,24 +14,26 @@ import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import { getInventory } from "../../redux/inventoryReducer";
 
 function Clearing(props) {
-  const [down, setDown] = useState(false);
-  const [failure, setFailure] = useState(false);
-  const [coinSuccess, setCoinSuccess] = useState(false);
-  const [ribbonSuccess, setRibbonSuccess] = useState(false);
-  const [featherSuccess, setFeatherSuccess] = useState(false);
-  const [griffin, setGriffin] = useState(false);
+  const [downCharacter, setDownCharacter] = useState(false);
+  const [downDown, setDownDown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     axios.get("/api/clearing").then((res) => {
       props.getClearing(res.data[0]);
+
+      setDownCharacter(true);
+
       setIsLoading(false);
     });
   }, []);
 
   const toggleDown = () => {
-    setDown(!down);
-    props.history.push("/Maze");
+    axios.post("/api/changeLast", { last: "clearing" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Maze");
+      });
+    });
   };
 
   const toggleFirst = () => {
@@ -40,51 +42,9 @@ function Clearing(props) {
     });
   };
 
-  const toggleCoin = () => {
-    if (props.clearing.clearing.rope_used) {
-      axios.post("/api/coin").then((res) => {
-        props.getUser(res.data);
-        axios.post("/api/clearingCoin").then((res) => {
-          props.getClearing(res.data[0]);
-          setCoinSuccess(true);
-        });
-      });
-    } else {
-      setGriffin(true);
-    }
-  };
-
-  const toggleRibbon = () => {
-    if (props.clearing.clearing.rope_used) {
-      axios.post("/api/ribbon").then((res) => {
-        props.getInventory(res.data);
-        axios.get("/api/clearing").then((res) => {
-          props.getClearing(res.data[0]);
-          setRibbonSuccess(true);
-        });
-      });
-    } else {
-      setGriffin(true);
-    }
-  };
-
-  const toggleFeather = () => {
-    if (props.clearing.clearing.rope_used) {
-      axios.post("/api/feather").then((res) => {
-        props.getInventory(res.data);
-        axios.get("/api/clearing").then((res) => {
-          props.getClearing(res.data[0]);
-          setFeatherSuccess(true);
-        });
-      });
-    } else {
-      setGriffin(true);
-    }
-  };
-
-  const toggleAnimationEnd = () => {
-    setGriffin(false);
-    setFailure(true);
+  const toggleGoDown = () => {
+    setDownDown(true);
+    setDownCharacter(false);
   };
 
   return isLoading ? (
@@ -94,12 +54,7 @@ function Clearing(props) {
       <Nav />
       <div className="clearing-body">
         <div className="clearing-top">
-          <div className="clearing-top-left">
-            <div
-              className={`${griffin ? "griffin-open" : "griffin-closed"}`}
-              onAnimationEnd={toggleAnimationEnd}
-            ></div>
-          </div>
+          <div className="clearing-top-left"></div>
           <div className="clearing-top-middle"></div>
           <div className="clearing-top-right"></div>
         </div>
@@ -111,8 +66,20 @@ function Clearing(props) {
         <div className="clearing-bottom">
           <div className="clearing-bottom-left"></div>
           <div className="clearing-bottom-middle">
-            <Character />
-            <div className="clearing-maze" onClick={toggleDown}>
+            <div
+              className={`${
+                downCharacter ? "character-down" : "character-down-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${downDown ? "down-down" : "down-down-closed"}`}
+              onAnimationEnd={toggleDown}
+            >
+              <Character />
+            </div>
+            <div className="clearing-maze" onClick={toggleGoDown}>
               <h2>Maze</h2>
               <ArrowDownward />
             </div>
@@ -120,121 +87,6 @@ function Clearing(props) {
           <div className="clearing-bottom-right"></div>
         </div>
       </div>
-      <Card
-        className={`${
-          props.clearing.clearing.first_time
-            ? "answer-card"
-            : "answer-card-closed"
-        }`}
-      >
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          You climb the steep cliff. Up ahead you see the massive Griffin's
-          clearing. You look around tenatively for the owner of the clearing.
-        </Typography>
-        <Button
-          onClick={toggleFirst}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${failure ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          Are you serious? Their is a ravenous wolf blocking the path.
-        </Typography>
-        <Button
-          onClick={() => setFailure(false)}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${coinSuccess ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          You pick up the shiny gold coin.
-        </Typography>
-        <Button
-          onClick={() => setCoinSuccess(false)}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card
-        className={`${ribbonSuccess ? "answer-card" : "answer-card-closed"}`}
-      >
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          You pick up the beautiful blue ribbon.
-        </Typography>
-        <Button
-          onClick={() => setRibbonSuccess(false)}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card
-        className={`${featherSuccess ? "answer-card" : "answer-card-closed"}`}
-      >
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          You pick up the large griffin feather.
-        </Typography>
-        <Button
-          onClick={() => setFeatherSuccess(false)}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${failure ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          A huge Griffin swoops out of the air. You barely manage to dodge its
-          attack. You need to find something to help you climb to the clearing
-          more quickly.
-        </Typography>
-        <Button
-          onClick={() => setFailure(false)}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
     </div>
   );
 }
