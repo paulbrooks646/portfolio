@@ -123,7 +123,8 @@ const toggleGoUp = () => {
         <div className="glade-middle">
           <div className="glade-middle-left">
             <div className="unicorn"></div>
-          </div>
+            </div>
+            <div className="glade-middle-middle"></div>
           <div className="glade-middle-right">
             <div
               className={`${
