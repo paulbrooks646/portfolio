@@ -16,6 +16,7 @@ import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import Character from "../Character/Character"
 import Elf from "../../Images/Elf.gif"
+import Loading from "../Loading/Loading"
 
 function Forest(props) {
   const [forestFirst, setForestFirst] = useState(props.user.user.forest);
@@ -153,6 +154,8 @@ function Forest(props) {
    };
 
   return (
+
+    isLoading ? <Loading/> :
     <div className="forest-main">
       <Nav />
       <div className="forest-body">
