@@ -20,8 +20,12 @@ import Loading from "../Loading/Loading";
 import Character from "../Character/Character";
 
 function Stables(props) {
-  const [left, setLeft] = useState(false);
-  const [right, setRight] = useState(false);
+ const [rightLeft, setRightLeft] = useState(false);
+ const [leftLeft, setLeftLeft] = useState(false);
+ const [rightRight, setRightRight] = useState(false);
+ const [leftRight, setLeftRight] = useState(false);
+ const [leftCharacter, setLeftCharacter] = useState(false);
+ const [rightCharacter, setRightCharacter] = useState(false);
   const [oldmanCard, setOldmanCard] = useState(false);
   const [answerOne, setAnswerOne] = useState(false);
   const [answerTwo, setAnswerTwo] = useState(false);
@@ -38,21 +42,57 @@ function Stables(props) {
   const [needPermission, setNeedPermission] = useState(false);
   const [alreadyTaken, setAlreadyTaken] = useState(false);
 
-  useEffect(() => {
-    axios.get("/api/stables").then((res) => {
-      props.getStables(res.data[0]);
-      setIsLoading(false);
-    });
-  }, []);
+ useEffect(() => {
+   // if (!props.user.user.newgame) {
+   //   setNewgameCard(false);
+
+   // }
+   axios.get("/api/stables").then((res) => {
+     props.getStables(res.data[0]);
+
+     if (props.user.user.last === "valley") {
+       setLeftCharacter(true);
+     } else if (props.user.user.last === "town") {
+       setRightCharacter(true);
+     }
+     setIsLoading(false);
+   });
+ }, []);
 
   const toggleLeft = () => {
-    setLeft(!left);
-    props.history.push("/Valley");
+    axios.post("/api/changeLast", { last: "stables" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Valley");
+      });
+    });
   };
 
   const toggleRight = () => {
-    setRight(!right);
-    props.history.push("/Town");
+    axios.post("/api/changeLast", { last: "stables" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Town");
+      });
+    });
+  };
+
+  const toggleGoLeft = () => {
+    if (props.user.user.last === "valley") {
+      setLeftCharacter(false);
+      setLeftLeft(true);
+    } else if (props.user.user.last === "town") {
+      setRightCharacter(false);
+      setRightLeft(true);
+    }
+  };
+
+  const toggleGoRight = () => {
+    if (props.user.user.last === "valley") {
+      setLeftCharacter(false);
+      setLeftRight(true);
+    } else if (props.user.user.last === "town") {
+      setRightCharacter(false);
+      setRightRight(true);
+    }
   };
 
   const toggleOldmanCard = () => {
@@ -168,15 +208,53 @@ function Stables(props) {
         </div>
         <div className="stables-middle">
           <div className="stables-middle-left">
-            <div className="stables-valley" onClick={toggleLeft}>
+            <div className="stables-valley" onClick={toggleGoLeft}>
               <ArrowBack />
               <h2>Valley</h2>
+            </div>
+            <div
+              className={`${
+                leftCharacter ? "character-left" : "character-left-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${leftLeft ? "left-left" : "left-left-closed"}`}
+              onAnimationEnd={toggleLeft}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${leftRight ? "left-right" : "left-right-closed"}`}
+              onAnimationEnd={toggleRight}
+            >
+              <Character />
             </div>
           </div>
           <div className="stables-middle-middle"></div>
           <div className="stables-middle-right">
-            <Character />
-            <div className="stables-stables" onClick={toggleRight}>
+            <div
+              className={`${
+                rightCharacter ? "character-right" : "character-right-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${rightLeft ? "right-left" : "right-left-closed"}`}
+              onAnimationEnd={toggleLeft}
+            >
+              <Character />
+            </div>
+
+            <div
+              className={`${rightRight ? "right-right" : "right-right-closed"}`}
+              onAnimationEnd={toggleRight}
+            >
+              <Character />
+            </div>
+            <div className="stables-stables" onClick={toggleGoRight}>
               <h2>Town</h2>
               <ArrowForward />
             </div>

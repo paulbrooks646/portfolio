@@ -31,6 +31,7 @@ import thievesReducer from "./thievesReducer";
 import towerReducer from "./towerReducer";
 import townReducer from "./townReducer"
 import userReducer from "./userReducer";
+import valleyReducer from "./valleyReducer";
 import promiseMiddleware from "redux-promise-middleware";
 
 const rootReducer = combineReducers({
@@ -66,6 +67,7 @@ const rootReducer = combineReducers({
   tower: towerReducer,
   town: townReducer,
   user: userReducer,
+  valley: valleyReducer
 });
 
 export default createStore(rootReducer, applyMiddleware(promiseMiddleware));
