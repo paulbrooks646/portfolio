@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getInventory } from "../../redux/inventoryReducer"
-import {getMountain} from "../../redux/mountainReducer"
+import { getInventory } from "../../redux/inventoryReducer";
+import { getMountain } from "../../redux/mountainReducer";
 import axios from "axios";
 import "./Mountain.scss";
 import Card from "@material-ui/core/Card";
@@ -18,7 +18,6 @@ import Character from "../Character/Character";
 import Loading from "../Loading/Loading";
 
 function Mountain(props) {
- 
   const [mountaineer, setMountaineer] = useState(false);
   const [answerOne, setAnswerOne] = useState(false);
   const [answerTwo, setAnswerTwo] = useState(false);
@@ -52,7 +51,6 @@ function Mountain(props) {
         setLeftCharacter(true);
       } else if (props.user.user.last === "home") {
         setRightCharacter(true);
-      
       }
       setIsLoading(false);
     });
@@ -67,19 +65,19 @@ function Mountain(props) {
   };
 
   const toggleLeft = () => {
-     axios.post("/api/changeLast", { last: "mountain" }).then((res) => {
-       props.getUser(res.data).then(() => {
-         props.history.push("/Nest");
-       });
-     });
+    axios.post("/api/changeLast", { last: "mountain" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Nest");
+      });
+    });
   };
 
   const toggleDown = () => {
-   axios.post("/api/changeLast", { last: "mountain" }).then((res) => {
-     props.getUser(res.data).then(() => {
-       props.history.push("/Pass");
-     });
-   });
+    axios.post("/api/changeLast", { last: "mountain" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Pass");
+      });
+    });
   };
 
   const toggleMountaineer = () => {
@@ -110,44 +108,44 @@ function Mountain(props) {
     axios.post("/api/mountainFirst").then((res) => props.getUser(res.data));
   };
 
-   const toggleGoLeft = () => {
-     if (props.user.user.last === "pass") {
-       setDownLeft(true);
-       setDownCharacter(false);
-     } else if (props.user.user.last === "nest") {
-       setLeftCharacter(false);
-       setLeftLeft(true);
-     } else if (props.user.user.last === "home") {
-       setRightCharacter(false);
-       setRightLeft(true);
-     } 
-   };
-
-   const toggleGoRight = () => {
-     if (props.user.user.last === "pass") {
-       setDownRight(true);
-       setDownCharacter(false);
-     } else if (props.user.user.last === "nest") {
-       setLeftCharacter(false);
-       setLeftRight(true);
-     } else if (props.user.user.last === "home") {
-       setRightCharacter(false);
-       setRightRight(true);
-     } 
+  const toggleGoLeft = () => {
+    if (props.user.user.last === "pass") {
+      setDownLeft(true);
+      setDownCharacter(false);
+    } else if (props.user.user.last === "nest") {
+      setLeftCharacter(false);
+      setLeftLeft(true);
+    } else if (props.user.user.last === "home") {
+      setRightCharacter(false);
+      setRightLeft(true);
+    }
   };
-  
-   const toggleGoDown = () => {
-     if (props.user.user.last === "pass") {
-       setDownDown(true);
-       setDownCharacter(false);
-     } else if (props.user.user.last === "nest") {
-       setLeftCharacter(false);
-       setLeftDown(true);
-     } else if (props.user.user.last === "home") {
-       setRightCharacter(false);
-       setRightDown(true);
-     } 
-   };
+
+  const toggleGoRight = () => {
+    if (props.user.user.last === "pass") {
+      setDownRight(true);
+      setDownCharacter(false);
+    } else if (props.user.user.last === "nest") {
+      setLeftCharacter(false);
+      setLeftRight(true);
+    } else if (props.user.user.last === "home") {
+      setRightCharacter(false);
+      setRightRight(true);
+    }
+  };
+
+  const toggleGoDown = () => {
+    if (props.user.user.last === "pass") {
+      setDownDown(true);
+      setDownCharacter(false);
+    } else if (props.user.user.last === "nest") {
+      setLeftCharacter(false);
+      setLeftDown(true);
+    } else if (props.user.user.last === "home") {
+      setRightCharacter(false);
+      setRightDown(true);
+    }
+  };
 
   return isLoading ? (
     <Loading />
@@ -430,4 +428,6 @@ function Mountain(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory, getMountain })(Mountain);
+export default connect(mapStateToProps, { getUser, getInventory, getMountain })(
+  Mountain
+);

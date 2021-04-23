@@ -15,35 +15,45 @@ import Loading from "../Loading/Loading";
 import Character from "../Character/Character";
 
 function Cave(props) {
-  const [up, setUp] = useState(false);
-  const [down, setDown] = useState(false);
+  const [upCharacter, setUpCharacter] = useState(false);
+  const [downCharacter, setDownCharacter] = useState(false);
+  const [downUp, setDownUp] = useState(false);
+  const [downDown, setDownDown] = useState(false);
+  const [upUp, setUpUp] = useState(false);
+  const [upDown, setUpDown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [wolf, setWolf] = useState(false);
   const [wolfCard, setWolfCard] = useState(false);
   const [coinCard, setCoinCard] = useState(false);
   const [boneCard, setBoneCard] = useState(false);
   const [hatCard, setHatCard] = useState(false);
   const [rejectionCard, setRejectionCard] = useState(false);
 
-  useEffect(() => {
-    axios.get("/api/cave").then((res) => {
-      props.getCave(res.data[0]);
-      setIsLoading(false);
-    });
-  }, []);
+   useEffect(() => {
+     axios.get("/api/cave").then((res) => {
+       props.getCave(res.data[0]);
+       if (props.user.user.last === "cottage") {
+         setDownCharacter(true);
+       } else if (props.user.user.last === "forest") {
+         setUpCharacter(true);
+       }
+       setIsLoading(false);
+     });
+   }, []);
 
   const toggleUp = () => {
-    setUp(!up);
-    props.history.push("/Forest");
+   axios.post("/api/changeLast", { last: "cave" }).then((res) => {
+     props.getUser(res.data).then(() => {
+       props.history.push("/Forest");
+     });
+   });
   };
 
   const toggleDown = () => {
-    if (props.cave.cave.meat_given) {
-      setDown(!down);
-      props.history.push("/Cottage");
-    } else {
-      toggleRejectionCard();
-    }
+   axios.post("/api/changeLast", { last: "pass" }).then((res) => {
+     props.getUser(res.data).then(() => {
+       props.history.push("/Cottage");
+     });
+   });
   };
 
   const toggleFirst = () => {
@@ -114,6 +124,28 @@ function Cave(props) {
     setRejectionCard(!rejectionCard);
   };
 
+   const toggleGoUp = () => {
+     if (props.user.user.last === "cottage") {
+       setDownUp(true);
+       setDownCharacter(false);
+     } else if (props.user.user.last === "forest") {
+       setUpCharacter(false);
+       setUpUp(true);
+     }
+   };
+
+   const toggleGoDown = () => {
+     if (!props.cave.cave.meat_given) {
+       setRejectionCard(true);
+     } else if (props.user.user.last === "cottage") {
+       setDownDown(true);
+       setDownCharacter(false);
+     } else if (props.user.user.last === "forest") {
+       setUpCharacter(false);
+       setUpDown(true);
+     }
+   };
+
   return isLoading ? (
     <Loading />
   ) : (
@@ -123,15 +155,37 @@ function Cave(props) {
         <div className="cave-top">
           <div className="cave-top-left"></div>
           <div className="cave-top-middle">
-            <div className="cave-forest" onClick={toggleUp}>
+            <div className="cave-forest" onClick={toggleGoUp}>
               <ArrowUpward />
               <h2>Forest</h2>
+            </div>
+            <div
+              className={`${
+                upCharacter ? "character-up" : "character-up-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${upUp ? "up-up" : "up-up-closed"}`}
+              onAnimationEnd={toggleUp}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${upDown ? "up-down" : "up-down-closed"}`}
+              onAnimationEnd={toggleDown}
+            >
               <Character />
             </div>
           </div>
           <div className="cave-top-right"></div>
         </div>
-
+        <div className="cave-middle">
+          <div className="cave-middle-left"></div>
+            <div className="cave-middle-middle"></div>
+            <div className="cave-middle-right"></div>
+        </div>
         <div className="cave-bottom">
           <div className="cave-bottom-left">
             <div
@@ -177,7 +231,26 @@ function Cave(props) {
                 onClick={toggleHat}
               ></div>
             </div>
-            <div className="cave-cottage" onClick={toggleDown}>
+            <div
+              className={`${
+                downCharacter ? "character-down" : "character-down-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${downUp ? "down-up" : "down-up-closed"}`}
+              onAnimationEnd={toggleUp}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${downDown ? "down-down" : "down-down-closed"}`}
+              onAnimationEnd={toggleDown}
+            >
+              <Character />
+            </div>
+            <div className="cave-cottage" onClick={toggleGoDown}>
               <h2>Cottage</h2>
               <ArrowDownward />
             </div>

@@ -46,6 +46,9 @@ function Cabin(props) {
 
 
   return (
+
+    isLoading ? <Loading /> :
+      
     <div className="cabin-main">
       <Nav />
       <div className="cabin-body">

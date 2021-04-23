@@ -54,7 +54,7 @@ function Town(props) {
     //   setNewgameCard(false);
   
     // }
-    axios.get("/api/town").then((res) => {
+    axios.get("/api/nest").then((res) => {
       props.getTown(res.data[0]);
 
       if  (props.user.user.last === "home") {

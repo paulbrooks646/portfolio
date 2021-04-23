@@ -1,61 +1,79 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
+import { getCottage } from "../../redux/cottageReducer"
+import {getInventory} from "../../redux/inventoryReducer"
 import axios from "axios";
 import "./Cottage.scss";
-import { Link } from "react-redux";
-import ArrowDownward from "@material-ui/icons/ArrowDownward";
-import ArrowForward from "@material-ui/icons/ArrowForward";
-import ArrowBack from "@material-ui/icons/ArrowBack";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
-import House from "../../Images/House.jpg";
 import Character from "../Character/Character";
+import Loading from "../Loading/Loading";
 
 
 function Cottage(props) {
-  const [left, setLeft] = useState(false);
-  const [right, setRight] = useState(false);
-  const [up, setUp] = useState(false);
-  const [down, setDown] = useState(false);
+  
+   const [upCharacter, setUpCharacter] = useState(false);
+   const [upUp, setUpUp] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  
+  useEffect(() => {
+    // if (!props.user.user.newgame) {
+    //   setNewgameCard(false);
 
-  const toggleRight = () => {
-    setRight(!right);
-    props.history.push("/Market");
-  };
+    // }
+    axios.get("/api/cottage").then((res) => {
+      props.getCottage(res.data[0]);
+      setUpCharacter(true);
 
-  const toggleLeft = () => {
-    setLeft(!left);
+      setIsLoading(false);
+    });
+  }, []);
 
-    props.history.push("/Stables");
-  };
 
   const toggleUp = () => {
-    setUp(!up);
-    props.history.push("/Cave");
+    axios.post("/api/changeLast", { last: "cottage" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Cave");
+      });
+    });
   };
 
-  const toggleDown = () => {
-    setDown(!down);
-    props.history.push("/Dashboard");
-  };
+   const toggleGoUp = () => {
+     setUpCharacter(false);
+     setUpUp(true);
+   };
 
   const toggleHouseFive = () => {
     props.history.push("/HouseFive")
   }
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div className="cottage-main">
       <Nav />
       <div className="cottage-body">
         <div className="cottage-top">
           <div className="cottage-top-left"></div>
           <div className="cottage-top-middle">
-            <div className="cottage-home" onClick={toggleUp}>
+            <div className="cottage-home" onClick={toggleGoUp}>
               <ArrowUpward />
               <h2>Cave</h2>
             </div>
-            <Character />
+            <div
+              className={`${
+                upCharacter ? "character-up" : "character-up-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${upUp ? "up-up" : "up-up-closed"}`}
+              onAnimationEnd={toggleUp}
+            >
+              <Character />
+            </div>
           </div>
           <div className="cottage-top-right"></div>
         </div>
@@ -68,7 +86,7 @@ function Cottage(props) {
           <div className="cottage-bottom-left"></div>
           <div className="cottage-bottom-middle"></div>
           <div className="cottage-bottom-right">
-            <ArrowUpward id="arrow-up" onClick={toggleHouseFive}/>
+            <ArrowUpward id="arrow-up" onClick={toggleHouseFive} />
           </div>
         </div>
       </div>
@@ -77,4 +95,4 @@ function Cottage(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser })(Cottage);
+export default connect(mapStateToProps, { getUser, getCottage, getInventory })(Cottage);
