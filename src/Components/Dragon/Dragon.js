@@ -22,7 +22,7 @@ function Dragon(props) {
     //   setNewgameCard(false);
 
     // }
-    axios.get("/api/dragon").then((res) => {
+    axios.get("/api/nest").then((res) => {
       props.getDragon(res.data[0]);
       setUpCharacter(true)
       setIsLoading(false);
