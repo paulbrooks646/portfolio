@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
+import alleyReducer from "./alleyReducer"
 import blacksmithReducer from "./blacksmithReducer";
 import bogReducer from "./bogReducer";
 import cabinReducer from "./cabinReducer";
@@ -33,6 +34,7 @@ import userReducer from "./userReducer";
 import promiseMiddleware from "redux-promise-middleware";
 
 const rootReducer = combineReducers({
+  alley: alleyReducer,
   blacksmith: blacksmithReducer,
   bog: bogReducer,
   cabin: cabinReducer,
@@ -40,6 +42,8 @@ const rootReducer = combineReducers({
   cave: caveReducer,
   clearing: clearingReducer,
   cottage: cottageReducer,
+  dragon: dragonReducer,
+  forest: forestReducer,
   garden: gardenReducer,
   glade: gladeReducer,
   grocer: grocerReducer,
@@ -52,18 +56,16 @@ const rootReducer = combineReducers({
   magic: magicReducer,
   market: marketReducer,
   maze: mazeReducer,
+  mountain: mountainReducer,
   nest: nestReducer,
   pass: passReducer,
   stables: stablesReducer,
   store: storeReducer,
+  swamp: swampReducer,
   thieves: thievesReducer,
   tower: towerReducer,
   town: townReducer,
   user: userReducer,
-  dragon: dragonReducer,
-  mountain: mountainReducer,
-  forest: forestReducer,
-  swamp: swampReducer
 });
 
 export default createStore(rootReducer, applyMiddleware(promiseMiddleware));
