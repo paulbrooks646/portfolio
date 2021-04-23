@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
+import { getMarket } from "../../redux/marketReducer";
+import {getInventory} from "../../redux/inventoryReducer"
 import axios from "axios";
 import "./Market.scss";
 import ArrowForward from "@material-ui/icons/ArrowForward";
@@ -10,19 +12,49 @@ import Blacksmith from "../../Images/Blacksmith.jpg";
 import Store from "../../Images/General.jpg";
 import Magic from "../../Images/MagicOutside.png";
 import Grocer from "../../Images/Grocer.png";
+import Loading from "../Loading/Loading";
+import Character from "../Character/Character"
 
 function Market(props) {
-  const [left, setLeft] = useState(false);
-  const [right, setRight] = useState(false);
+ const [isLoading, setIsLoading] = useState(true);
+ const [rightLeft, setRightLeft] = useState(false);
+ const [leftLeft, setLeftLeft] = useState(false);
+ const [rightRight, setRightRight] = useState(false);
+ const [leftRight, setLeftRight] = useState(false);
+ const [leftCharacter, setLeftCharacter] = useState(false);
+  const [rightCharacter, setRightCharacter] = useState(false);
+  
+  useEffect(() => {
+    // if (!props.user.user.newgame) {
+    //   setNewgameCard(false);
+
+    // }
+    axios.get("/api/nest").then((res) => {
+      props.getMarket(res.data[0]);
+
+      if (props.user.user.last === "town") {
+        setLeftCharacter(true);
+      } else if (props.user.user.last === "alley") {
+        setRightCharacter(true);
+      }
+      setIsLoading(false);
+    });
+  }, []);
 
   const toggleRight = () => {
-    setRight(!right);
-    props.history.push("/Alley");
+    axios.post("/api/changeLast", { last: "market" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Alley");
+      });
+    });
   };
 
   const toggleLeft = () => {
-    setLeft(!left);
-    props.history.push("/Town");
+   axios.post("/api/changeLast", { last: "market" }).then((res) => {
+     props.getUser(res.data).then(() => {
+       props.history.push("/Town");
+     });
+   });
   };
   const toggleBlack = () => {
     props.history.push("/Blacksmith");
@@ -40,7 +72,29 @@ function Market(props) {
     props.history.push("/Grocer");
   };
 
+  const toggleGoLeft = () => {
+    if (props.user.user.last === "town") {
+      setLeftCharacter(false);
+      setLeftLeft(true);
+    } else if (props.user.user.last === "alley") {
+      setRightCharacter(false);
+      setRightLeft(true);
+    }
+  };
+
+  const toggleGoRight = () => {
+    if (props.user.user.last === "town") {
+      setLeftCharacter(false);
+      setLeftRight(true);
+    } else if (props.user.user.last === "alley") {
+      setRightCharacter(false);
+      setRightRight(true);
+    }
+  };
+
   return (
+
+    isLoading ? <Loading/> :
     <div className="market-main">
       <Nav />
       <div className="market-body">
@@ -51,14 +105,53 @@ function Market(props) {
         </div>
         <div className="market-middle">
           <div className="market-middle-left">
-            <div className="market-town" onClick={toggleLeft}>
+            <div className="market-town" onClick={toggleGoLeft}>
               <ArrowBack />
               <h2>Town</h2>
+            </div>
+            <div
+              className={`${
+                leftCharacter ? "character-left" : "character-left-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${leftLeft ? "left-left" : "left-left-closed"}`}
+              onAnimationEnd={toggleLeft}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${leftRight ? "left-right" : "left-right-closed"}`}
+              onAnimationEnd={toggleRight}
+            >
+              <Character />
             </div>
           </div>
           <div className="market-middle-middle"></div>
           <div className="market-middle-right">
-            <div className="market-alley" onClick={toggleRight}>
+            <div
+              className={`${
+                rightCharacter ? "character-right" : "character-right-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${rightLeft ? "right-left" : "right-left-closed"}`}
+              onAnimationEnd={toggleLeft}
+            >
+              <Character />
+            </div>
+
+            <div
+              className={`${rightRight ? "right-right" : "right-right-closed"}`}
+              onAnimationEnd={toggleRight}
+            >
+              <Character />
+            </div>
+            <div className="market-alley" onClick={toggleGoRight}>
               <h2>Alley</h2>
               <ArrowForward />
             </div>
@@ -93,4 +186,4 @@ function Market(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser })(Market);
+export default connect(mapStateToProps, { getUser, getInventory, getMarket })(Market);

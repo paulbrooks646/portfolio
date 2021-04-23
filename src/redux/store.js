@@ -18,6 +18,7 @@ import houseThreeReducer from "./houseThreeReducer";
 import houseTwoReducer from "./houseTwoReducer";
 import inventoryReducer from "./inventoryReducer";
 import magicReducer from "./magicReducer";
+import marketReducer from "./marketReducer"
 import mazeReducer from "./mazeReducer";
 import mountainReducer from "./mountainReducer"
 import nestReducer from "./nestReducer";
@@ -49,6 +50,7 @@ const rootReducer = combineReducers({
   houseTwo: houseTwoReducer,
   inventory: inventoryReducer,
   magic: magicReducer,
+  market: marketReducer,
   maze: mazeReducer,
   nest: nestReducer,
   pass: passReducer,
