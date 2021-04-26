@@ -3,6 +3,7 @@ import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import { getHouseOne } from "../../redux/houseOneReducer";
+import {getInventory} from "../../redux/inventoryReducer"
 import axios from "axios";
 import "./HouseOne.scss";
 import Character from "../Character/Character";
@@ -11,28 +12,27 @@ import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
-import { getInventory } from "../../redux/inventoryReducer";
 
 function HouseOne(props) {
 
-  const [down, setDown] = useState(false);
-  const [failure, setFailure] = useState(false);
-  const [coinSuccess, setCoinSuccess] = useState(false);
-  const [ribbonSuccess, setRibbonSuccess] = useState(false);
-  const [featherSuccess, setFeatherSuccess] = useState(false);
-  const [griffin, setGriffin] = useState(false);
+  const [downCharacter, setDownCharacter] = useState(false);
+  const [downDown, setDownDown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     axios.get("/api/houseOne").then((res) => {
       props.getHouseOne(res.data[0]);
+      setDownCharacter(true)
       setIsLoading(false);
     });
   }, []);
 
   const toggleDown = () => {
-    setDown(!down);
-    props.history.push("/Town");
+    axios.post("/api/changeLast", { last: "home" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Town");
+      });
+    });
   };
 
   const toggleFirst = () => {
@@ -41,52 +41,10 @@ function HouseOne(props) {
     });
   };
 
-  const toggleCoin = () => {
-    if (props.houseOne.houseOne.rope_used) {
-      axios.post("/api/coin").then((res) => {
-        props.getUser(res.data);
-        axios.post("/api/houseOneCoin").then((res) => {
-          props.getHouseOne(res.data[0]);
-          setCoinSuccess(true);
-        });
-      });
-    } else {
-      setGriffin(true);
-    }
-  };
-
-  const toggleRibbon = () => {
-    if (props.houseOne.houseOne.rope_used) {
-      axios.post("/api/ribbon").then((res) => {
-        props.getInventory(res.data);
-        axios.get("/api/houseOne").then((res) => {
-          props.getHouseOne(res.data[0]);
-          setRibbonSuccess(true);
-        });
-      });
-    } else {
-      setGriffin(true);
-    }
-  };
-
-  const toggleFeather = () => {
-    if (props.houseOne.houseOne.rope_used) {
-      axios.post("/api/feather").then((res) => {
-        props.getInventory(res.data);
-        axios.get("/api/houseOne").then((res) => {
-          props.getHouseOne(res.data[0]);
-          setFeatherSuccess(true);
-        });
-      });
-    } else {
-      setGriffin(true);
-    }
-  };
-
-  const toggleAnimationEnd = () => {
-    setGriffin(false);
-    setFailure(true);
-  };
+   const toggleGoDown = () => {
+     setDownDown(true);
+     setDownCharacter(false);
+   };
 
   return isLoading ? (
     <Loading />
@@ -96,26 +54,48 @@ function HouseOne(props) {
       <div className="houseOne-body">
         <div className="houseOne-top">
           <div className="houseOne-top-left">
-            <div className="table"><div className="paper"></div></div>
+            <div className="table">
+              <div className="paper"></div>
+            </div>
           </div>
           <div className="houseOne-top-middle"></div>
-          <div className="houseOne-top-right"><div className="cupboard"></div></div>
+          <div className="houseOne-top-right">
+            <div className="cupboard"></div>
+          </div>
         </div>
         <div className="houseOne-middle">
           <div className="houseOne-middle-left"></div>
-          <div className="houseOne-middle-middle"><div className="dog"></div></div>
+          <div className="houseOne-middle-middle">
+            <div className="dog"></div>
+          </div>
           <div className="houseOne-middle-right"></div>
         </div>
         <div className="houseOne-bottom">
-          <div className="houseOne-bottom-left"><div className="rug"></div></div>
+          <div className="houseOne-bottom-left">
+            <div className="rug"></div>
+          </div>
           <div className="houseOne-bottom-middle">
-            <Character />
-            <div className="houseOne-maze" onClick={toggleDown}>
+            <div
+              className={`${
+                downCharacter ? "character-down" : "character-down-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${downDown ? "down-down" : "down-down-closed"}`}
+              onAnimationEnd={toggleDown}
+            >
+              <Character />
+            </div>
+            <div className="houseOne-maze" onClick={toggleGoDown}>
               <h2>EXIT</h2>
               <ArrowDownward />
             </div>
           </div>
-          <div className="houseOne-bottom-right"><div className="shovel"></div></div>
+          <div className="houseOne-bottom-right">
+            <div className="shovel"></div>
+          </div>
         </div>
       </div>
       <Card
@@ -135,97 +115,6 @@ function HouseOne(props) {
         </Typography>
         <Button
           onClick={toggleFirst}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${failure ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          Are you serious? Their is a ravenous wolf blocking the path.
-        </Typography>
-        <Button
-          onClick={() => setFailure(false)}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${coinSuccess ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          You pick up the shiny gold coin.
-        </Typography>
-        <Button
-          onClick={() => setCoinSuccess(false)}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card
-        className={`${ribbonSuccess ? "answer-card" : "answer-card-closed"}`}
-      >
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          You pick up the beautiful blue ribbon.
-        </Typography>
-        <Button
-          onClick={() => setRibbonSuccess(false)}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card
-        className={`${featherSuccess ? "answer-card" : "answer-card-closed"}`}
-      >
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          You pick up the large griffin feather.
-        </Typography>
-        <Button
-          onClick={() => setFeatherSuccess(false)}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${failure ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          A huge Griffin swoops out of the air. You barely manage to dodge its
-          attack. You need to find something to help you climb to the houseOne
-          more quickly.
-        </Typography>
-        <Button
-          onClick={() => setFailure(false)}
           className="forest-card-button"
           variant="contained"
           color="primary"
