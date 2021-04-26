@@ -17,7 +17,8 @@ import Loading from "../Loading/Loading";
 import Fairy from "../../Images/Fairy.png";
 
 function Garden(props) {
-  const [right, setRight] = useState(false);
+   const [rightCharacter, setRightCharacter] = useState(false);
+   const [rightRight, setRightRight] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [fairy, setFairy] = useState(false);
   const [answerOne, setAnswerOne] = useState(false);
@@ -31,13 +32,17 @@ function Garden(props) {
   useEffect(() => {
     axios.get("/api/garden").then((res) => {
       props.getGarden(res.data[0]);
+      setRightCharacter(true)
       setIsLoading(false);
     });
   }, []);
 
   const toggleRight = () => {
-    setRight(!right);
-    props.history.push("/Castle");
+    axios.post("/api/changeLast", { last: "garden" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Castle");
+      });
+    });
   };
 
   const toggleFairy = () => {
@@ -82,6 +87,11 @@ function Garden(props) {
     }
   }
 
+   const toggleGoRight = () => {
+     setRightCharacter(false);
+     setRightRight(true);
+   };
+
   return isLoading ? (
     <Loading />
   ) : (
@@ -104,8 +114,20 @@ function Garden(props) {
             />
           </div>
           <div className="garden-middle-right">
-            <Character />
-            <div className="garden-castle" onClick={toggleRight}>
+            <div
+              className={`${
+                rightCharacter ? "character-right" : "character-right-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${rightRight ? "right-right" : "right-right-closed"}`}
+              onAnimationEnd={toggleRight}
+            >
+              <Character />
+            </div>
+            <div className="garden-castle" onClick={toggleGoRight}>
               <h2>Castle</h2>
               <ArrowForward />
             </div>
