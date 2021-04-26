@@ -78,7 +78,7 @@ function Castle(props) {
     if (props.castle.castle.nuts_given === true && props.castle.castle.hat_given === true && props.castle.castle.letter_given === true) {
       axios.post("/api/changeLast", { last: "castle" }).then((res) => {
         props.getUser(res.data).then(() => {
-          props.history.push("/Castle");
+          props.history.push("/Throne");
         });
       });
     } else {
