@@ -18,7 +18,8 @@ import Princess from "../../Images/Princess.png";
 import Loading from "../Loading/Loading";
 
 function Tower(props) {
-  const [left, setLeft] = useState(false);
+   const [leftCharacter, setLeftCharacter] = useState(false);
+   const [leftLeft, setLeftLeft] = useState(false);
   const [weaselHiss, setWeaselHiss] = useState(false);
   const [weaselPurr, setWeaselPurr] = useState(false);
   const [princess, setPrincess] = useState(false);
@@ -34,6 +35,7 @@ function Tower(props) {
   useEffect(() => {
     axios.get("/api/tower").then((res) => {
       props.getTower(res.data[0]);
+      setLeftCharacter(true)
       setIsLoading(false);
     });
     if (props.tower.tower.first_time) {
@@ -45,8 +47,11 @@ function Tower(props) {
   }, []);
 
   const toggleLeft = () => {
-    setLeft(!left);
-    props.history.push("/Castle");
+   axios.post("/api/changeLast", { last: "tower" }).then((res) => {
+     props.getUser(res.data).then(() => {
+       props.history.push("/Castle");
+     });
+   });
   };
 
   const togglePrincess = () => {
@@ -93,6 +98,11 @@ function Tower(props) {
     }
   };
 
+   const toggleGoLeft = () => {
+     setLeftCharacter(false);
+     setLeftLeft(true);
+   };
+
   return isLoading ? (
     <Loading />
   ) : (
@@ -103,11 +113,23 @@ function Tower(props) {
           <div className="tower-top-left">
             <div className="tower-top-left-up"></div>
             <div className="tower-top-left-down">
-              <div className="tower-castle" onClick={toggleLeft}>
+              <div className="tower-castle" onClick={toggleGoLeft}>
                 <ArrowBack />
                 <h2>Castle</h2>
               </div>
-              <Character />
+              <div
+                className={`${
+                  leftCharacter ? "character-left" : "character-left-closed"
+                }`}
+              >
+                <Character />
+              </div>
+              <div
+                className={`${leftLeft ? "left-left" : "left-left-closed"}`}
+                onAnimationEnd={toggleLeft}
+              >
+                <Character />
+              </div>
               <img
                 src={Weasel}
                 className="tower-weasel"
@@ -220,7 +242,8 @@ function Tower(props) {
           className="answer-card-description"
         >
           The tower is where I go to when the King forgets what a beautiful,
-          mature, intelligent young lady I am. I also come here to escape associating with boorish people like yourself.
+          mature, intelligent young lady I am. I also come here to escape
+          associating with boorish people like yourself.
         </Typography>
         <Button
           onClick={toggleAnswerThree}
