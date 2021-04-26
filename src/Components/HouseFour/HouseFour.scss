@@ -9,8 +9,7 @@
   position: relative;
 
   .houseFour-body {
-
-    background-image: url("../../Images/Grass.png");
+    background-image: url("../../Images/Floor.png");
     background-size: 100% 100%;
     .houseFour-top {
       width: 100vw;
@@ -19,19 +18,48 @@
 
       .houseFour-top-left {
         width: 40vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .table {
+          background-image: url("../../Images/TableOne.png");
+          background-size: 100% 100%;
+          height: 150px;
+          width: 150px;
+          display: flex;
+          justify-content: center;
+
+          .paper {
+            background-image: url("../../Images/Scroll.jpg");
+            background-size: 100% 100%;
+            height: 75px;
+            width: 75px;
+          }
+        }
       }
 
       .houseFour-top-middle {
+        background-image: url("../../Images/StairsOne.png");
+        background-size: 100% 100%;
         width: 20vw;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-end;
-
-       
       }
       .houseFour-top-right {
         width: 40vw;
+        display: flex;
+        justify-content: center;
+
+        .cupboard {
+          background-image: url("../../Images/Empty.png");
+          background-size: 100% 100%;
+          height: 150px; 
+          width: 200px;
+
+        }
       }
     }
 
@@ -44,8 +72,6 @@
         display: flex;
         height: 100%;
         width: 40vw;
-
-       
       }
 
       .houseFour-middle-middle {
@@ -54,11 +80,15 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        background-image: url("../../Images/Dirt.png");
-        background-size: 100% 100%;
-        border-radius: 50% 50% 0% 0%;
+        justify-content: flex-end;
 
+        .dog {
+          background-image: url("../../Images/Dog.png");
+          background-size: 100% 100%;
+          height: 100px;
+          width: 100px;
+
+        }
       }
 
       .houseFour-middle-right {
@@ -67,8 +97,6 @@
         display: flex;
         align-items: center;
         justify-content: flex-end;
-
-        
       }
     }
     .houseFour-bottom {
@@ -77,14 +105,21 @@
       display: flex;
 
       .houseFour-bottom-left {
-        
         width: 40vw;
         height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .rug {
+          background-image: url("../../Images/Rug.png");
+          background-size: 100% 100%;
+          height: 250px;
+          width: 150px;
+        }
       }
 
       .houseFour-bottom-middle {
-        background-image: url("../../Images/Dirt.png");
-        background-size: 100% 100%;
         width: 20vw;
         height: 100%;
         display: flex;
@@ -101,16 +136,25 @@
       }
 
       .houseFour-bottom-right {
-       
         width: 40vw;
         height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .shovel {
+           background-image: url("../../Images/Shovel.png");
+          background-size: 100% 100%;
+          height: 100px;
+          width: 150px;
+        }
       }
     }
   }
 
   .houseFour-card {
-      height: 500px;
-      width: 500px;
+    height: 500px;
+    width: 500px;
     background-color: white;
     border: solid black 2px;
     box-shadow: 2px 2px 2px 2px;
@@ -122,24 +166,24 @@
     text-align: center;
 
     .houseFour-list {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        cursor: pointer;
-        color: tomato;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      color: tomato;
     }
 
     .houseFour-card-description {
-        width: 90%;
+      width: 90%;
     }
   }
 
   .houseFour-card-closed {
-    display: none;
+    display: nFour;
   }
   .answer-card {
-      height: 400px;
-      width: 400px;
+    height: 400px;
+    width: 400px;
     background-color: white;
     border: solid black 2px;
     box-shadow: 2px 2px 2px 2px;
@@ -150,14 +194,12 @@
     position: absolute;
     text-align: center;
 
-    
-
     .answer-card-description {
-        width: 90%;
+      width: 90%;
     }
   }
 
   .answer-card-closed {
-    display: none;
+    display: nFour;
   }
 }

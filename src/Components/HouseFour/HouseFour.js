@@ -3,6 +3,7 @@ import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import { getHouseFour } from "../../redux/houseFourReducer";
+import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./HouseFour.scss";
 import Character from "../Character/Character";
@@ -11,27 +12,26 @@ import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
-import { getInventory } from "../../redux/inventoryReducer";
 
 function HouseFour(props) {
-  const [down, setDown] = useState(false);
-  const [failure, setFailure] = useState(false);
-  const [coinSuccess, setCoinSuccess] = useState(false);
-  const [ribbonSuccess, setRibbonSuccess] = useState(false);
-  const [featherSuccess, setFeatherSuccess] = useState(false);
-  const [griffin, setGriffin] = useState(false);
+  const [downCharacter, setDownCharacter] = useState(false);
+  const [downDown, setDownDown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     axios.get("/api/houseFour").then((res) => {
       props.getHouseFour(res.data[0]);
+      setDownCharacter(true);
       setIsLoading(false);
     });
   }, []);
 
   const toggleDown = () => {
-    setDown(!down);
-    props.history.push("/Town");
+    axios.post("/api/changeLast", { last: "home" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Town");
+      });
+    });
   };
 
   const toggleFirst = () => {
@@ -40,51 +40,9 @@ function HouseFour(props) {
     });
   };
 
-  const toggleCoin = () => {
-    if (props.houseFour.houseFour.rope_used) {
-      axios.post("/api/coin").then((res) => {
-        props.getUser(res.data);
-        axios.post("/api/houseFourCoin").then((res) => {
-          props.getHouseFour(res.data[0]);
-          setCoinSuccess(true);
-        });
-      });
-    } else {
-      setGriffin(true);
-    }
-  };
-
-  const toggleRibbon = () => {
-    if (props.houseFour.houseFour.rope_used) {
-      axios.post("/api/ribbon").then((res) => {
-        props.getInventory(res.data);
-        axios.get("/api/houseFour").then((res) => {
-          props.getHouseFour(res.data[0]);
-          setRibbonSuccess(true);
-        });
-      });
-    } else {
-      setGriffin(true);
-    }
-  };
-
-  const toggleFeather = () => {
-    if (props.houseFour.houseFour.rope_used) {
-      axios.post("/api/feather").then((res) => {
-        props.getInventory(res.data);
-        axios.get("/api/houseFour").then((res) => {
-          props.getHouseFour(res.data[0]);
-          setFeatherSuccess(true);
-        });
-      });
-    } else {
-      setGriffin(true);
-    }
-  };
-
-  const toggleAnimationEnd = () => {
-    setGriffin(false);
-    setFailure(true);
+  const toggleGoDown = () => {
+    setDownDown(true);
+    setDownCharacter(false);
   };
 
   return isLoading ? (
@@ -95,32 +53,51 @@ function HouseFour(props) {
       <div className="houseFour-body">
         <div className="houseFour-top">
           <div className="houseFour-top-left">
-            <div
-              className={`${griffin ? "griffin-open" : "griffin-closed"}`}
-              onAnimationEnd={toggleAnimationEnd}
-            ></div>
+            <div className="table">
+              <div className="paper"></div>
+            </div>
           </div>
           <div className="houseFour-top-middle"></div>
-          <div className="houseFour-top-right"></div>
+          <div className="houseFour-top-right">
+            <div className="cupboard"></div>
+          </div>
         </div>
         <div className="houseFour-middle">
           <div className="houseFour-middle-left"></div>
-          <div className="houseFour-middle-middle"></div>
+          <div className="houseFour-middle-middle">
+            <div className="dog"></div>
+          </div>
           <div className="houseFour-middle-right"></div>
         </div>
         <div className="houseFour-bottom">
-          <div className="houseFour-bottom-left"></div>
+          <div className="houseFour-bottom-left">
+            <div className="rug"></div>
+          </div>
           <div className="houseFour-bottom-middle">
-            <Character />
-            <div className="houseFour-maze" onClick={toggleDown}>
+            <div
+              className={`${
+                downCharacter ? "character-down" : "character-down-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${downDown ? "down-down" : "down-down-closed"}`}
+              onAnimationEnd={toggleDown}
+            >
+              <Character />
+            </div>
+            <div className="houseFour-maze" onClick={toggleGoDown}>
               <h2>EXIT</h2>
               <ArrowDownward />
             </div>
           </div>
-          <div className="houseFour-bottom-right"></div>
+          <div className="houseFour-bottom-right">
+            <div className="shovel"></div>
+          </div>
         </div>
       </div>
-      <Card
+      {/* <Card
         className={`${
           props.houseFour.houseFour.first_time
             ? "answer-card"
@@ -143,98 +120,7 @@ function HouseFour(props) {
         >
           CLOSE
         </Button>
-      </Card>
-      <Card className={`${failure ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          Are you serious? Their is a ravenous wolf blocking the path.
-        </Typography>
-        <Button
-          onClick={() => setFailure(false)}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${coinSuccess ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          You pick up the shiny gold coin.
-        </Typography>
-        <Button
-          onClick={() => setCoinSuccess(false)}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card
-        className={`${ribbonSuccess ? "answer-card" : "answer-card-closed"}`}
-      >
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          You pick up the beautiful blue ribbon.
-        </Typography>
-        <Button
-          onClick={() => setRibbonSuccess(false)}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card
-        className={`${featherSuccess ? "answer-card" : "answer-card-closed"}`}
-      >
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          You pick up the large griffin feather.
-        </Typography>
-        <Button
-          onClick={() => setFeatherSuccess(false)}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${failure ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          A huge Griffin swoops out of the air. You barely manage to dodge its
-          attack. You need to find something to help you climb to the houseFour
-          more quickly.
-        </Typography>
-        <Button
-          onClick={() => setFailure(false)}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
+      </Card> */}
     </div>
   );
 }
