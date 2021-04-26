@@ -19,10 +19,26 @@ import Guard from "../../Images/Guard.png";
 import Loading from "../Loading/Loading";
 
 function Castle(props) {
-  const [up, setUp] = useState(false);
-  const [left, setLeft] = useState(false);
-  const [right, setRight] = useState(false);
-  const [down, setDown] = useState(false);
+ const [downCharacter, setDownCharacter] = useState(false);
+ const [upCharacter, setUpCharacter] = useState(false);
+ const [leftCharacter, setLeftCharacter] = useState(false);
+ const [rightCharacter, setRightCharacter] = useState(false);
+ const [downLeft, setDownLeft] = useState(false);
+ const [upLeft, setUpLeft] = useState(false);
+ const [rightLeft, setRightLeft] = useState(false);
+ const [leftLeft, setLeftLeft] = useState(false);
+ const [downUp, setDownUp] = useState(false);
+ const [downDown, setDownDown] = useState(false);
+ const [downRight, setDownRight] = useState(false);
+ const [upUp, setUpUp] = useState(false);
+ const [upRight, setUpRight] = useState(false);
+ const [upDown, setUpDown] = useState(false);
+ const [rightUp, setRightUp] = useState(false);
+ const [rightRight, setRightRight] = useState(false);
+ const [rightDown, setRightDown] = useState(false);
+ const [leftUp, setLeftUp] = useState(false);
+ const [leftRight, setLeftRight] = useState(false);
+ const [leftDown, setLeftDown] = useState(false);
   const [guard, setGuard] = useState(false);
   const [answerOne, setAnswerOne] = useState(false);
   const [answerTwo, setAnswerTwo] = useState(false);
@@ -37,33 +53,59 @@ function Castle(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [rejectionCard, setRejectionCard] = useState(false);
 
-  useEffect(() => {
-    axios.get("/api/castle").then((res) => {
-      props.getCastle(res.data[0]);
-      setIsLoading(false);
-    });
-  }, []);
+ useEffect(() => {
+   // if (!props.user.user.newgame) {
+   //   setNewgameCard(false);
+
+   // }
+   axios.get("/api/castle").then((res) => {
+     props.getCastle(res.data[0]);
+
+     if (props.user.user.last === "town") {
+       setDownCharacter(true);
+     } else if (props.user.user.last === "garden") {
+       setLeftCharacter(true);
+     } else if (props.user.user.last === "tower") {
+       setRightCharacter(true);
+     } else if (props.user.user.last === "throne") {
+       setUpCharacter(true);
+     }
+     setIsLoading(false);
+   });
+ }, []);
 
   const toggleUp = () => {
     if (props.castle.castle.nuts_given === true && props.castle.castle.hat_given === true && props.castle.castle.letter_given === true) {
-      setUp(!up);
-      props.history.push("/Throne")
+      axios.post("/api/changeLast", { last: "castle" }).then((res) => {
+        props.getUser(res.data).then(() => {
+          props.history.push("/Castle");
+        });
+      });
     } else {
     setNotAChance(true)
     }
   };
   const toggleLeft = () => {
-    setLeft(!left);
-    props.history.push("/Garden");
+     axios.post("/api/changeLast", { last: "castle" }).then((res) => {
+       props.getUser(res.data).then(() => {
+         props.history.push("/Garden");
+       });
+     });
   };
 
   const toggleRight = () => {
-    setRight(!right);
-    props.history.push("/Tower");
+    axios.post("/api/changeLast", { last: "castle" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Tower");
+      });
+    });
   };
   const toggleDown = () => {
-    setDown(!down);
-    props.history.push("/Town");
+     axios.post("/api/changeLast", { last: "castle" }).then((res) => {
+       props.getUser(res.data).then(() => {
+         props.history.push("/Town");
+       });
+     });
   };
 
   const toggleGuard = () => {
@@ -123,6 +165,70 @@ function Castle(props) {
     setAnswerNine(!answerNine);
   };
 
+   const toggleGoLeft = () => {
+     if (props.user.user.last === "town") {
+       setDownLeft(true);
+       setDownCharacter(false);
+     } else if (props.user.user.last === "garden") {
+       setLeftCharacter(false);
+       setLeftLeft(true);
+     } else if (props.user.user.last === "tower") {
+       setRightCharacter(false);
+       setRightLeft(true);
+     } else if (props.user.user.last === "throne") {
+       setUpCharacter(false);
+       setUpLeft(true);
+     }
+   };
+
+   const toggleGoRight = () => {
+     if (props.user.user.last === "town") {
+       setDownRight(true);
+       setDownCharacter(false);
+     } else if (props.user.user.last === "garden") {
+       setLeftCharacter(false);
+       setLeftRight(true);
+     } else if (props.user.user.last === "tower") {
+       setRightCharacter(false);
+       setRightRight(true);
+     } else if (props.user.user.last === "throne") {
+       setUpCharacter(false);
+       setUpRight(true);
+     }
+   };
+
+   const toggleGoUp = () => {
+     if (props.user.user.last === "town") {
+       setDownUp(true);
+       setDownCharacter(false);
+     } else if (props.user.user.last === "garden") {
+       setLeftCharacter(false);
+       setLeftUp(true);
+     } else if (props.user.user.last === "tower") {
+       setRightCharacter(false);
+       setRightUp(true);
+     } else if (props.user.user.last === "throne") {
+       setUpCharacter(false);
+       setUpUp(true);
+     }
+   };
+
+   const toggleGoDown = () => {
+     if (props.user.user.last === "town") {
+       setDownDown(true);
+       setDownCharacter(false);
+     } else if (props.user.user.last === "garden") {
+       setLeftCharacter(false);
+       setLeftDown(true);
+     } else if (props.user.user.last === "tower") {
+       setRightCharacter(false);
+       setRightDown(true);
+     } else if (props.user.user.last === "throne") {
+       setUpCharacter(false);
+       setUpDown(true);
+     }
+   };
+
   return isLoading ? (
     <Loading />
   ) : (
@@ -132,18 +238,80 @@ function Castle(props) {
         <div className="castle-top">
           <div className="castle-top-left"></div>
           <div className="castle-top-middle">
-            <div className="castle-throne" onClick={toggleUp}>
+            <div className="castle-throne" onClick={toggleGoUp}>
               <ArrowUpward />
               <h2>Throne Room</h2>
+            </div>
+            <div
+              className={`${
+                upCharacter ? "character-up" : "character-up-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${upLeft ? "up-left" : "up-left-closed"}`}
+              onAnimationEnd={toggleLeft}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${upUp ? "up-up" : "up-up-closed"}`}
+              onAnimationEnd={toggleUp}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${upRight ? "up-right" : "up-right-closed"}`}
+              onAnimationEnd={toggleRight}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${upDown ? "up-down" : "up-down-closed"}`}
+              onAnimationEnd={toggleDown}
+            >
+              <Character />
             </div>
           </div>
           <div className="castle-top-right"></div>
         </div>
         <div className="castle-middle">
           <div className="castle-middle-left">
-            <div className="castle-garden" onClick={toggleLeft}>
+            <div className="castle-garden" onClick={toggleGoLeft}>
               <ArrowBack />
               <h2>Royal Garden</h2>
+            </div>
+            <div
+              className={`${
+                leftCharacter ? "character-left" : "character-left-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${leftLeft ? "left-left" : "left-left-closed"}`}
+              onAnimationEnd={toggleLeft}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${leftUp ? "left-up" : "left-up-closed"}`}
+              onAnimationEnd={toggleUp}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${leftRight ? "left-right" : "left-right-closed"}`}
+              onAnimationEnd={toggleRight}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${leftDown ? "left-down" : "left-down-closed"}`}
+              onAnimationEnd={toggleDown}
+            >
+              <Character />
             </div>
           </div>
           <div className="castle-middle-middle">
@@ -155,7 +323,38 @@ function Castle(props) {
             />
           </div>
           <div className="castle-middle-right">
-            <div className="castle-tower" onClick={toggleRight}>
+            <div
+              className={`${
+                rightCharacter ? "character-right" : "character-right-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${rightLeft ? "right-left" : "right-left-closed"}`}
+              onAnimationEnd={toggleLeft}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${rightUp ? "right-up" : "right-up-closed"}`}
+              onAnimationEnd={toggleUp}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${rightRight ? "right-right" : "right-right-closed"}`}
+              onAnimationEnd={toggleRight}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${rightDown ? "right-down" : "right-down-closed"}`}
+              onAnimationEnd={toggleDown}
+            >
+              <Character />
+            </div>
+            <div className="castle-tower" onClick={toggleGoRight}>
               <h2>Tower</h2>
               <ArrowForward />
             </div>
@@ -164,8 +363,38 @@ function Castle(props) {
         <div className="castle-bottom">
           <div className="castle-bottom-left"></div>
           <div className="castle-bottom-middle">
-            <Character />
-            <div className="castle-town" onClick={toggleDown}>
+            <div
+              className={`${
+                downCharacter ? "character-down" : "character-down-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${downLeft ? "down-left" : "down-left-closed"}`}
+              onAnimationEnd={toggleLeft}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${downUp ? "down-up" : "down-up-closed"}`}
+              onAnimationEnd={toggleUp}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${downRight ? "down-right" : "down-right-closed"}`}
+              onAnimationEnd={toggleRight}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${downDown ? "down-down" : "down-down-closed"}`}
+              onAnimationEnd={toggleDown}
+            >
+              <Character />
+            </div>
+            <div className="castle-town" onClick={toggleGoDown}>
               <h2>Town</h2>
               <ArrowDownward />
             </div>
@@ -289,9 +518,8 @@ function Castle(props) {
           color="secondary"
           className="answer-card-description"
         >
-          I'll tell you
-          what if can convince me you have a legitimate reason to see the King
-          and do me a favor I will let you pass.
+          I'll tell you what if can convince me you have a legitimate reason to
+          see the King and do me a favor I will let you pass.
         </Typography>
         <Button
           onClick={toggleAnswerFour}
@@ -311,7 +539,9 @@ function Castle(props) {
           color="secondary"
           className="answer-card-description"
         >
-          The Princess is very tempermental. Sometimes she is as warm as a summer day. Other times she is as frigid as winter. She is currently living in the tower.
+          The Princess is very tempermental. Sometimes she is as warm as a
+          summer day. Other times she is as frigid as winter. She is currently
+          living in the tower.
         </Typography>
         <Button
           onClick={toggleAnswerFive}
@@ -331,7 +561,8 @@ function Castle(props) {
           color="secondary"
           className="answer-card-description"
         >
-          If you go there be careful. The princess doesn't want to disturbed. Her vicious pet weasel is attacking anyone who goes there.
+          If you go there be careful. The princess doesn't want to disturbed.
+          Her vicious pet weasel is attacking anyone who goes there.
         </Typography>
         <Button
           onClick={toggleAnswerSix}
@@ -351,7 +582,8 @@ function Castle(props) {
           color="secondary"
           className="answer-card-description"
         >
-          No one crosses the drawbridge and enters the throne room with out my permission.
+          No one crosses the drawbridge and enters the throne room with out my
+          permission.
         </Typography>
         <Button
           onClick={toggleAnswerSeven}
@@ -371,7 +603,9 @@ function Castle(props) {
           color="secondary"
           className="answer-card-description"
         >
-          The Ultimate Axe is said to be the sharpest most powerful weapon ever created. It is in the King's posession and I can't imagine he will ever part with it.
+          The Ultimate Axe is said to be the sharpest most powerful weapon ever
+          created. It is in the King's posession and I can't imagine he will
+          ever part with it.
         </Typography>
         <Button
           onClick={toggleAnswerEight}
@@ -391,7 +625,8 @@ function Castle(props) {
           color="secondary"
           className="answer-card-description"
         >
-          While I was hunting in the forest I lost my favorite hat. If you find it for me, I would be very grateful.
+          While I was hunting in the forest I lost my favorite hat. If you find
+          it for me, I would be very grateful.
         </Typography>
         <Button
           onClick={toggleAnswerNine}
