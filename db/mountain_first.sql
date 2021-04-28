@@ -1,6 +1,6 @@
-update players
-set mountain_first = false
+update mountain
+set first_time = false
 where id = $1;
 
-select * from players
+select * from mountain
 where id = $1

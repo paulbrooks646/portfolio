@@ -25,9 +25,7 @@ app.post("/api/register", userController.register);
 app.post("/api/login", userController.login);
 app.delete("/api/logout", userController.logout);
 app.get("/api/user", userController.getUser);
-app.post("/api/newgame", userController.newgame)
-app.post("/api/forestFirst", userController.forestFirst);
-app.post("/api/mountainFirst", userController.mountainFirst);
+
 app.post("/api/changeLast", userController.changeLast);
 app.post("/api/coin", userController.coin);
 
@@ -47,6 +45,7 @@ app.get("/api/blacksmith", reduxController.getBlacksmith);
 app.get("/api/town", reduxController.getTown)
 app.get("/api/dragon", reduxController.getDragon)
 app.get("/api/mountain", reduxController.getMountain)
+app.get("/api/dashboard", reduxController.getDashboard)
 
 
 app.post("/api/towerFirstTime", controller.towerFirstTime)
@@ -99,6 +98,9 @@ app.post("/api/sword", controller.sword)
 app.post("/api/dagger", controller.dagger)
 app.post("/api/knife", controller.knife)
 app.post("/api/bow", controller.bow)
+app.post("/api/dashboardFirst", controller.dashboardFirst);
+app.post("/api/forestFirst", controller.forestFirst);
+app.post("/api/mountainFirst", controller.mountainFirst);
 
 
 app.use(express.static(__dirname + "/../build"));

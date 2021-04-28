@@ -10,9 +10,9 @@ values ($1, false, false, false, false, false, false);
 insert into store (user_id, shoes_bought, rope_bought, flute_bought, bottle_bought, oil_bought, wood_bought)
 values ($1, false, false, false, false, false, false);
 
-insert into inventory (user_id, flute, bottle, rope, meat, cake, ribbon, flowers, manure, dagger, sword, shield, nuts, letter, hat, bone, feather, potatoes, candy, cheese, shoes, oil, wood, armor, knife, bow, fire, ice, heal, strength, open, protection)
+insert into inventory (user_id, flute, bottle, rope, meat, cake, ribbon, flowers, manure, dagger, sword, shield, nuts, letter, hat, bone, feather, potatoes, candy, cheese, shoes, oil, wood, armor, knife, bow, fire, ice, heal, strength, open, protection, seed, axe, cloak, speed, levitation, invisibility, pick, glasses, rag, chest, scales, pod, apple, sulfur, blanket, mirror, hair, picture, charcoal, rock, gem, home, grow, train, mushroom)
 
-values ($1, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
+values ($1, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
 
 insert into stables (user_id, clean_permission, has_cleaned, take_permission, has_taken, first_time)
 values ($1, false, false, false, false, true);
@@ -33,4 +33,7 @@ insert into nest (user_id, rope_used, coin_taken, ribbon_taken, feather_taken, f
 values ($1, false, false, false, false, true);
 
 insert into pass (user_id, cake_given, first_time)
+values ($1, false, true);
+
+insert into dashboard (user_id, home_placed, grow_used, first_time)
 values ($1, false, true);

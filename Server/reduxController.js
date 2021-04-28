@@ -138,4 +138,13 @@ module.exports = {
 
     res.status(200).send(dragon);
   },
+
+  getDashboard: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const dashboard = await db.get_dashboard(id);
+
+    res.status(200).send(dashboard);
+  },
 };

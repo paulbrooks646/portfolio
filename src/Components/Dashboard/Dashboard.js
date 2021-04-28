@@ -3,6 +3,7 @@ import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
+import {getDashboard} from "../../redux/dashboardReducer"
 import axios from "axios";
 import "./Dashboard.scss";
 import Card from "@material-ui/core/Card";
@@ -53,7 +54,7 @@ function Dashboard(props) {
   const [leftDown, setLeftDown] = useState(false);
 
   useEffect(() => {
-    if (!props.user.user.newgame) {
+    if (!props.dashboard.dashboard.first_time) {
       setNewgameCard(false);
       setBurnt(true)
     }
@@ -623,4 +624,4 @@ function Dashboard(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory })(Dashboard);
+export default connect(mapStateToProps, { getUser, getInventory, getDashboard })(Dashboard);

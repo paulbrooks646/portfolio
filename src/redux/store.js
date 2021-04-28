@@ -7,6 +7,7 @@ import caveReducer from "./caveReducer";
 import castleReducer from "./castleReducer";
 import clearingReducer from "./clearingReducer";
 import cottageReducer from "./cottageReducer";
+import dashboardReducer from "./dashboardReducer";
 import dragonReducer from "./dragonReducer"
 import forestReducer from "./forestReducer"
 import gardenReducer from "./gardenReducer";
@@ -43,6 +44,7 @@ const rootReducer = combineReducers({
   cave: caveReducer,
   clearing: clearingReducer,
   cottage: cottageReducer,
+  dashboard: dashboardReducer,
   dragon: dragonReducer,
   forest: forestReducer,
   garden: gardenReducer,

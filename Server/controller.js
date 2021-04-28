@@ -43,7 +43,7 @@ module.exports = {
     const db = req.app.get("db");
     const { id } = req.session.user;
 
-    const tower = await db.tower_first_time(id);
+    const tower = await db.tower_first(id);
     res.status(200).send(tower);
   },
 
@@ -287,18 +287,18 @@ module.exports = {
     const db = req.app.get("db");
     const { id } = req.session.user;
     const { coins } = req.session.user;
-    const payCoin = coins - 1
-    const user = await db.coin(id, payCoin)
-     req.session.user = {
-       id: user[0].id,
-       name: user[0].name,
-       newgame: user[0].newgame,
-       coins: user[0].coins,
-       forest: user[0].forest_first,
-       mountain: user[0].mountain_first,
-       magic: user[0].magic_user,
-       last: user[0].last
-     };
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+
+      coins: user[0].coins,
+      forest: user[0].forest_first,
+      mountain: user[0].mountain_first,
+      magic: user[0].magic_user,
+      last: user[0].last,
+    };
 
     db.cake(id).then((inventory) => {
       let newArr = [];
@@ -373,12 +373,10 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
-       last: user[0].last
+
+      last: user[0].last,
     };
 
     db.potatoes(id).then((inventory) => {
@@ -402,11 +400,9 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
+
       last: user[0].last,
     };
 
@@ -431,11 +427,9 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
+
       last: user[0].last,
     };
 
@@ -460,11 +454,9 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
+
       last: user[0].last,
     };
 
@@ -489,11 +481,9 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
+
       last: user[0].last,
     };
 
@@ -518,11 +508,9 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
+
       last: user[0].last,
     };
 
@@ -547,12 +535,10 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
-       last: user[0].last
+
+      last: user[0].last,
     };
 
     db.rope(id).then((inventory) => {
@@ -576,11 +562,9 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
+
       last: user[0].last,
     };
 
@@ -605,11 +589,9 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
+
       last: user[0].last,
     };
 
@@ -634,11 +616,9 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
+
       last: user[0].last,
     };
 
@@ -663,11 +643,9 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
+
       last: user[0].last,
     };
 
@@ -692,12 +670,10 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
-       last: user[0].last
+
+      last: user[0].last,
     };
 
     db.armor(id).then((inventory) => {
@@ -721,12 +697,10 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
-       last: user[0].last
+
+      last: user[0].last,
     };
 
     db.knife(id).then((inventory) => {
@@ -750,12 +724,10 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
-       last: user[0].last
+
+      last: user[0].last,
     };
 
     db.dagger(id).then((inventory) => {
@@ -779,12 +751,10 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
-       last: user[0].last
+
+      last: user[0].last,
     };
 
     db.shield(id).then((inventory) => {
@@ -808,12 +778,10 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
-       last: user[0].last
+
+      last: user[0].last,
     };
 
     db.sword(id).then((inventory) => {
@@ -837,11 +805,9 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
+
       last: user[0].last,
     };
 
@@ -866,12 +832,10 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
-       last: user[0].last
+
+      last: user[0].last,
     };
 
     db.heal(id).then((inventory) => {
@@ -895,11 +859,9 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
+
       last: user[0].last,
     };
 
@@ -915,7 +877,7 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  ice: async(req, res) => {
+  ice: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
     const { coins } = req.session.user;
@@ -924,12 +886,10 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
-       last: user[0].last
+
+      last: user[0].last,
     };
 
     db.ice(id).then((inventory) => {
@@ -953,12 +913,10 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
-       last: user[0].last
+
+      last: user[0].last,
     };
 
     db.protection(id).then((inventory) => {
@@ -982,12 +940,10 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
-       last: user[0].last
+
+      last: user[0].last,
     };
 
     db.strength(id).then((inventory) => {
@@ -1011,12 +967,10 @@ module.exports = {
     req.session.user = {
       id: user[0].id,
       name: user[0].name,
-      newgame: user[0].newgame,
+
       coins: user[0].coins,
-      forest: user[0].forest_first,
-      mountain: user[0].mountain_first,
-      magic: user[0].magic_user,
-       last: user[0].last
+
+      last: user[0].last,
     };
 
     db.open(id).then((inventory) => {
@@ -1031,5 +985,28 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
-  
-};
+
+  dashboardFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const dashboard = await db.dashboard_first(id);
+    res.status(200).send(dashboard);
+  },
+
+  forestFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const forest = await db.forest_first(id);
+    res.status(200).send(forest);
+  },
+
+  mountainFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const mountain = await db.mountain_first(id);
+    res.status(200).send(mountain);
+  },
+}
