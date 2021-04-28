@@ -1009,4 +1009,12 @@ module.exports = {
     const mountain = await db.mountain_first(id);
     res.status(200).send(mountain);
   },
-}
+
+  placeHome: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const dashboard = await db.place_home(id);
+    res.status(200).send(dashboard);
+  },
+};

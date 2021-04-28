@@ -3,7 +3,8 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser, getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
-import {getCave} from "../../redux/caveReducer"
+import { getCave } from "../../redux/caveReducer"
+import { getDashboard } from "../../redux/dashboardReducer";
 import { getCastle } from "../../redux/castleReducer";
 import { getStables } from "../../redux/stablesReducer";
 import { getGarden } from "../../redux/gardenReducer";
@@ -31,6 +32,7 @@ function Nav(props) {
   const [meatCard, setMeatCard] = useState(false);
   const [ropeCard, setRopeCard] = useState(false);
   const [cakeCard, setCakeCard] = useState(false);
+  const [homeCard, setHomeCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/getUser").then((res) => {
@@ -207,6 +209,33 @@ function Nav(props) {
           axios.get("/api/castle").then((res) => {
             props.getCastle(res.data[0]);
             setHatCard(true);
+          });
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+    if (item === "letter") {
+      if (props.location.pathname === "/Castle") {
+        axios.post("/api/showLetter").then(() => {
+          axios.get("/api/castle").then((res) => {
+            props.getCastle(res.data[0]);
+            setShowLetterCard(true);
+          });
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+    if (item === "home") {
+      if (props.location.pathname === "/Dashboard") {
+        axios.post("/api/placeHome").then(() => {
+          axios.get("/api/dashboard").then((res) => {
+            props.getDashboard(res.data[0])
+            axios.get("/api/inventory").then(res => {
+              props.getInventory(res.data)
+              setHomeCard(true);
+            })
           });
         });
       } else {
@@ -454,10 +483,29 @@ function Nav(props) {
           color="primary"
           className="answer-card-description"
         >
-          As you pull the cake out of your pack, the ogre starts to stir. You hurry over and place the cake next to him. The ogre fully wakes up, grabs the cake and lumbers up the mountain.
+          As you pull the cake out of your pack, the ogre starts to stir. You
+          hurry over and place the cake next to him. The ogre fully wakes up,
+          grabs the cake and lumbers up the mountain.
         </Typography>
         <Button
           onClick={() => setCakeCard(false)}
+          className="stables-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card id={`${homeCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          You place the model of a home where your home used to be. Now what?
+        </Typography>
+        <Button
+          onClick={() => setHomeCard(false)}
           className="stables-card-button"
           variant="contained"
           color="primary"
@@ -482,6 +530,7 @@ export default withRouter(
     getTower,
     getCave,
     getNest,
-    getPass
+    getPass,
+    getDashboard
   })(Nav)
 );

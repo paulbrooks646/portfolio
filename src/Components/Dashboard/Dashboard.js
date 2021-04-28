@@ -54,30 +54,33 @@ function Dashboard(props) {
   const [leftDown, setLeftDown] = useState(false);
 
   useEffect(() => {
+    axios.get("/api/dashboard").then((res) => {
+      props.getDashboard(res.data[0])
     if (!props.dashboard.dashboard.first_time) {
       setNewgameCard(false);
       setBurnt(true)
     }
-    axios.get("/api/inventory").then((res) => {
-      props.getInventory(res.data);
+      axios.get("/api/inventory").then((res) => {
+        props.getInventory(res.data);
 
-      if (props.user.user.last === "login") {
-        setInitialCharacter(true);
-      } else if (props.user.user.last === "dragon") {
-        setDownCharacter(true);
-      } else if (props.user.user.last === "mountain") {
-        setLeftCharacter(true);
-      } else if (props.user.user.last === "forest") {
-        setRightCharacter(true);
-      } else if (props.user.user.last === "town") {
-        setUpCharacter(true);
-      } else {
-        axios.post("/api/changeLast", { last: "login" }).then((res) => {
-          props.getUser(res.data);
+        if (props.user.user.last === "login") {
           setInitialCharacter(true);
-        });
-      }
-      setIsLoading(false);
+        } else if (props.user.user.last === "dragon") {
+          setDownCharacter(true);
+        } else if (props.user.user.last === "mountain") {
+          setLeftCharacter(true);
+        } else if (props.user.user.last === "forest") {
+          setRightCharacter(true);
+        } else if (props.user.user.last === "town") {
+          setUpCharacter(true);
+        } else {
+          axios.post("/api/changeLast", { last: "login" }).then((res) => {
+            props.getUser(res.data);
+            setInitialCharacter(true);
+          });
+        }
+        setIsLoading(false);
+      })
     });
   }, []);
 
@@ -121,8 +124,8 @@ function Dashboard(props) {
   };
 
   const toggleNewgame = () => {
-    axios.post("/api/newgame").then((res) => {
-      props.getUser(res.data);
+    axios.post("/api/dashboardFirst").then((res) => {
+      props.getDashboard(res.data[0]);
     });
 
     setNewgameCard(false);
