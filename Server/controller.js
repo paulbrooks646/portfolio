@@ -1017,4 +1017,12 @@ module.exports = {
     const dashboard = await db.place_home(id);
     res.status(200).send(dashboard);
   },
+
+  castGrow: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const dashboard = await db.cast_grow(id);
+    res.status(200).send(dashboard);
+  },
 };

@@ -30,7 +30,6 @@ function Dashboard(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [dragonAnimation, setDragonAnimation] = useState(false);
   const [fireballAnimation, setFireballAnimation] = useState(false);
-  const [burnt, setBurnt] = useState(false);
   const [downCharacter, setDownCharacter] = useState(false);
   const [upCharacter, setUpCharacter] = useState(false);
   const [leftCharacter, setLeftCharacter] = useState(false);
@@ -52,13 +51,18 @@ function Dashboard(props) {
   const [leftUp, setLeftUp] = useState(false);
   const [leftRight, setLeftRight] = useState(false);
   const [leftDown, setLeftDown] = useState(false);
+  const [growCard, setGrowCard] = useState(false);
+  const [maiden, setMaiden] = useState(false)
+  const [phoenix, setPhoenix] = useState(false)
+  const [miniHome, setMiniHome] = useState(false)
+
 
   useEffect(() => {
     axios.get("/api/dashboard").then((res) => {
       props.getDashboard(res.data[0])
     if (!props.dashboard.dashboard.first_time) {
       setNewgameCard(false);
-      setBurnt(true)
+      
     }
       axios.get("/api/inventory").then((res) => {
         props.getInventory(res.data);
@@ -124,9 +128,7 @@ function Dashboard(props) {
   };
 
   const toggleNewgame = () => {
-    axios.post("/api/dashboardFirst").then((res) => {
-      props.getDashboard(res.data[0]);
-    });
+    
 
     setNewgameCard(false);
     setDragonAnimation(true);
@@ -158,11 +160,20 @@ function Dashboard(props) {
   };
 
   const toggleDragonAnimationEnd = () => {
-    setDragonAnimation(false);
-    setFireballAnimation(false);
-    setBurnt(true);
-    setNewGameCardTwo(true);
+     setDragonAnimation(false);
+
+     setNewGameCardTwo(true);
+   
+   
   };
+
+  const toggleFireballAnimation = () => {
+     axios.post("/api/dashboardFirst").then((res) => {
+       props.getDashboard(res.data[0]);
+       setFireballAnimation(false);
+
+     });
+  }
 
   const toggleGoLeft = () => {
     if (props.user.user.last === "login" || props.user.user.last === "dragon") {
@@ -324,7 +335,35 @@ function Dashboard(props) {
               <Character />
             </div>
           </div>
-          <div className={`${burnt ? "burned-house" : "house"}`}></div>
+          <div
+            className={`${
+              !props.dashboard.dashboard.first_time &&
+              !props.dashboard.dashboard.home_placed
+                ? "burned-house"
+                : "burned-house-closed"
+            }`}
+          ></div>
+          <div
+            className={`${
+              props.dashboard.dashboard.first_time ? "house" : "house-closed"
+            }`}
+          ></div>
+          <div
+            className={`${
+              props.dashboard.dashboard.home_placed &&
+              !props.dashboard.dashboard.grow_used
+                ? "mini-house"
+                : "mini-house-closed"
+            }`}
+          ></div>
+          <div
+            className={`${
+              props.dashboard.dashboard.home_placed &&
+              props.dashboard.dashboard.grow_used
+                ? "house"
+                : "house-closed"
+            }`}
+          ></div>
           <div className="dashboard-middle-right">
             <div
               className={`${
@@ -372,7 +411,7 @@ function Dashboard(props) {
               <div
                 className={`${
                   fireballAnimation ? "fireball" : "fireball-closed"
-                }`}
+                }`} onAnimationEnd={toggleFireballAnimation}
               ></div>
             </div>
           </div>
@@ -535,8 +574,8 @@ function Dashboard(props) {
           className="answer-card-description"
         >
           The cursed dragon has plagued this realm for far too long. Many have
-          tried to slay him but they all ended up the dragon's lunch. If you want my advice,
-          stay away.
+          tried to slay him but they all ended up the dragon's lunch. If you
+          want my advice, stay away.
         </Typography>
         <Button
           onClick={toggleAnswerOne}

@@ -102,6 +102,7 @@ app.post("/api/dashboardFirst", controller.dashboardFirst);
 app.post("/api/forestFirst", controller.forestFirst);
 app.post("/api/mountainFirst", controller.mountainFirst);
 app.post("/api/placeHome", controller.placeHome)
+app.post("/api/castGrow", controller.castGrow)
 
 
 app.use(express.static(__dirname + "/../build"));

@@ -90,11 +90,26 @@
         height: 100%;
       }
 
+      .burned-house-closed {
+        display: none;
+      }
+
       .house {
         background-image: url("../../Images/House.jpg");
         background-size: 100% 100%;
         width: 20vw;
         height: 100%;
+      }
+
+      .house-closed {
+        display: none;
+      }
+
+      .mini-house {
+         background-image: url("../../Images/House.jpg");
+        background-size: 100% 100%;
+        height: 100px;
+        width: 100px;
       }
 
       .dashboard-middle-right {
@@ -137,6 +152,8 @@
           animation-duration: 4s;
           animation-iteration-count: 1;
           animation-timing-function: linear;
+          animation-direction: normal;
+            animation-fill-mode: forwards;
           position: relative;
 
           .fireball {
@@ -151,6 +168,8 @@
             animation-name: fireball;
             animation-timing-function: linear;
             animation-duration: 4s;
+            animation-direction: normal;
+            animation-fill-mode: forwards;
           }
 
           .fireball-closed {
@@ -272,28 +291,26 @@
     background-color: transparent;
     border: none;
   }
-  24% {
+  25% {
     background-color: transparent;
     border: none;
   }
 
-  25% {
+  26% {
     background-color: red;
     border: solid orange 2px;
-    right: -20px;
+
   }
+
   75% {
     background-color: red;
     border: solid orange 2px;
     right: -20vw;
+    transform: scale(6);
   }
+  
   76% {
-    background-color: transparent;
-    border: none;
+   display: none;
   }
-
-  100% {
-    background-color: transparent;
-    border: none;
-  }
+  
 }

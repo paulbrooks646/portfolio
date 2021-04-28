@@ -33,6 +33,7 @@ function Nav(props) {
   const [ropeCard, setRopeCard] = useState(false);
   const [cakeCard, setCakeCard] = useState(false);
   const [homeCard, setHomeCard] = useState(false);
+  
 
   useEffect(() => {
     axios.get("/api/getUser").then((res) => {
@@ -242,12 +243,15 @@ function Nav(props) {
         setRejectionCard(true);
       }
     }
-    if (item === "letter") {
-      if (props.location.pathname === "/Castle") {
-        axios.post("/api/showLetter").then(() => {
-          axios.get("/api/castle").then((res) => {
-            props.getCastle(res.data[0]);
-            setShowLetterCard(true);
+    if (item === "grow") {
+      if (props.location.pathname === "/Dashboard") {
+        axios.post("/api/castGrow").then(() => {
+          axios.get("/api/dashboard").then((res) => {
+            props.getDashboard(res.data[0]);
+            axios.get("/api/inventory").then((res) => {
+              getInventory(res.data)
+              
+            })
           });
         });
       } else {
