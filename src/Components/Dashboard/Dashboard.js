@@ -3,7 +3,7 @@ import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
-import {getDashboard} from "../../redux/dashboardReducer"
+import { getDashboard } from "../../redux/dashboardReducer";
 import axios from "axios";
 import "./Dashboard.scss";
 import Card from "@material-ui/core/Card";
@@ -20,7 +20,7 @@ import Oldman from "../../Images/Oldman.jpg";
 import Loading from "../Loading/Loading";
 
 function Dashboard(props) {
-  const [newgameCard, setNewgameCard] = useState(true);
+  const [newgameCard, setNewgameCard] = useState(false);
   const [newGameCardTwo, setNewGameCardTwo] = useState(false);
   const [oldmanCard, setOldmanCard] = useState(false);
   const [answerOne, setAnswerOne] = useState(false);
@@ -52,21 +52,20 @@ function Dashboard(props) {
   const [leftRight, setLeftRight] = useState(false);
   const [leftDown, setLeftDown] = useState(false);
   const [growCard, setGrowCard] = useState(false);
-  const [maiden, setMaiden] = useState(false)
-  const [phoenix, setPhoenix] = useState(false)
-  const [miniHome, setMiniHome] = useState(false)
-
+  const [maiden, setMaiden] = useState(false);
+  const [phoenix, setPhoenix] = useState(false);
+  const [miniHome, setMiniHome] = useState(false);
 
   useEffect(() => {
+    console.log("useeffect")
     axios.get("/api/dashboard").then((res) => {
-      props.getDashboard(res.data[0])
-    if (!props.dashboard.dashboard.first_time) {
-      setNewgameCard(false);
-      
-    }
-      axios.get("/api/inventory").then((res) => {
-        props.getInventory(res.data);
+      console.log("get dashboard")
+      props.getDashboard(res.data[0]);
 
+      axios.get("/api/inventory").then((res) => {
+        console.log("get inventory")
+        props.getInventory(res.data);
+       
         if (props.user.user.last === "login") {
           setInitialCharacter(true);
         } else if (props.user.user.last === "dragon") {
@@ -84,55 +83,50 @@ function Dashboard(props) {
           });
         }
         setIsLoading(false);
-      })
+      });
     });
   }, []);
 
   const toggleRight = () => {
     axios.post("/api/changeLast", { last: "home" }).then((res) => {
       props.getUser(res.data).then(() => {
-
         props.history.push("/Forest");
-      })
+      });
     });
   };
 
   const toggleLeft = () => {
     axios.post("/api/changeLast", { last: "home" }).then((res) => {
       props.getUser(res.data).then(() => {
-
         props.history.push("/Mountain");
-      })
+      });
     });
-
   };
 
   const toggleUp = () => {
     axios.post("/api/changeLast", { last: "home" }).then((res) => {
       props.getUser(res.data).then(() => {
-
         props.history.push("/Town");
-      })
+      });
     });
-
   };
 
   const toggleDown = () => {
     axios.post("/api/changeLast", { last: "home" }).then((res) => {
       props.getUser(res.data).then(() => {
-
         props.history.push("/Dragon");
-      })
+      });
     });
-
   };
 
   const toggleNewgame = () => {
+     axios.post("/api/dashboardFirst").then((res) => {
+       props.getDashboard(res.data[0]);
+       setDragonAnimation(true);
+       setFireballAnimation(true);
+     });
     
-
-    setNewgameCard(false);
-    setDragonAnimation(true);
-    setFireballAnimation(true);
+    
   };
 
   const toggleOldmanCard = () => {
@@ -160,20 +154,15 @@ function Dashboard(props) {
   };
 
   const toggleDragonAnimationEnd = () => {
-     setDragonAnimation(false);
+    setDragonAnimation(false);
 
-     setNewGameCardTwo(true);
-   
-   
+    setNewGameCardTwo(true);
   };
 
   const toggleFireballAnimation = () => {
-     axios.post("/api/dashboardFirst").then((res) => {
-       props.getDashboard(res.data[0]);
-       setFireballAnimation(false);
-
-     });
-  }
+   
+    setFireballAnimation(false);
+  };
 
   const toggleGoLeft = () => {
     if (props.user.user.last === "login" || props.user.user.last === "dragon") {
@@ -411,7 +400,8 @@ function Dashboard(props) {
               <div
                 className={`${
                   fireballAnimation ? "fireball" : "fireball-closed"
-                }`} onAnimationEnd={toggleFireballAnimation}
+                }`}
+                onAnimationEnd={toggleFireballAnimation}
               ></div>
             </div>
           </div>
@@ -466,7 +456,7 @@ function Dashboard(props) {
       </div>
       <Card
         className={`${
-          newgameCard ? "dashboard-card" : "dashboard-card-closed"
+          props.dashboard.dashboard.first_time ? "dashboard-card" : "dashboard-card-closed"
         }`}
       >
         <Typography
@@ -666,4 +656,8 @@ function Dashboard(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory, getDashboard })(Dashboard);
+export default connect(mapStateToProps, {
+  getUser,
+  getInventory,
+  getDashboard,
+})(Dashboard);
