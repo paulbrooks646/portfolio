@@ -20,7 +20,7 @@ import Oldman from "../../Images/Oldman.jpg";
 import Loading from "../Loading/Loading";
 
 function Dashboard(props) {
-  const [newgameCard, setNewgameCard] = useState(false);
+  const [house, setHouse] = useState(true);
   const [newGameCardTwo, setNewGameCardTwo] = useState(false);
   const [oldmanCard, setOldmanCard] = useState(false);
   const [answerOne, setAnswerOne] = useState(false);
@@ -29,6 +29,7 @@ function Dashboard(props) {
   const [answerFour, setAnswerFour] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [dragonAnimation, setDragonAnimation] = useState(false);
+  const [dragonAnimationTwo, setDragonAnimationTwo] = useState(false)
   const [fireballAnimation, setFireballAnimation] = useState(false);
   const [downCharacter, setDownCharacter] = useState(false);
   const [upCharacter, setUpCharacter] = useState(false);
@@ -55,15 +56,22 @@ function Dashboard(props) {
   const [maiden, setMaiden] = useState(false);
   const [phoenix, setPhoenix] = useState(false);
   const [miniHome, setMiniHome] = useState(false);
+  const [burnt, setBurnt] = useState(false)
 
   useEffect(() => {
-    console.log("useeffect")
+   
+    
     axios.get("/api/dashboard").then((res) => {
-      console.log("get dashboard")
+   
       props.getDashboard(res.data[0]);
 
       axios.get("/api/inventory").then((res) => {
-        console.log("get inventory")
+         if (
+           props.dashboard.dashboard.first_time === true ||
+           props.dashboard.dashboard.home_placed === true
+         ) {
+           setBurnt(false);
+         }
         props.getInventory(res.data);
        
         if (props.user.user.last === "login") {
@@ -120,10 +128,11 @@ function Dashboard(props) {
   };
 
   const toggleNewgame = () => {
+    setBurnt(false)
      axios.post("/api/dashboardFirst").then((res) => {
        props.getDashboard(res.data[0]);
        setDragonAnimation(true);
-       setFireballAnimation(true);
+       
      });
     
     
@@ -154,14 +163,23 @@ function Dashboard(props) {
   };
 
   const toggleDragonAnimationEnd = () => {
-    setDragonAnimation(false);
+    setFireballAnimation(true)
 
-    setNewGameCardTwo(true);
+   
+  };
+
+  const toggleDragonAnimationTwoEnd = () => {
+    setDragonAnimationTwo(false)
+    setNewGameCardTwo(true)
   };
 
   const toggleFireballAnimation = () => {
-   
     setFireballAnimation(false);
+    setDragonAnimationTwo(true)
+    setDragonAnimation(false)
+    
+    setHouse(false)
+    setBurnt(true)
   };
 
   const toggleGoLeft = () => {
@@ -325,18 +343,9 @@ function Dashboard(props) {
             </div>
           </div>
           <div
-            className={`${
-              !props.dashboard.dashboard.first_time &&
-              !props.dashboard.dashboard.home_placed
-                ? "burned-house"
-                : "burned-house-closed"
-            }`}
+            className={`${burnt ? "burned-house" : "burned-house-closed"}`}
           ></div>
-          <div
-            className={`${
-              props.dashboard.dashboard.first_time ? "house" : "house-closed"
-            }`}
-          ></div>
+          <div className={`${house ? "house" : "house-closed"}`}></div>
           <div
             className={`${
               props.dashboard.dashboard.home_placed &&
@@ -404,6 +413,13 @@ function Dashboard(props) {
                 onAnimationEnd={toggleFireballAnimation}
               ></div>
             </div>
+           
+            <div
+              className={`${dragonAnimationTwo ? "dragonTwo" : "dragonTwo-closed"}`}
+              onAnimationEnd={toggleDragonAnimationTwoEnd}
+            >
+              
+            </div>
           </div>
           <div className="dashboard-bottom-middle">
             <div
@@ -456,7 +472,9 @@ function Dashboard(props) {
       </div>
       <Card
         className={`${
-          props.dashboard.dashboard.first_time ? "dashboard-card" : "dashboard-card-closed"
+          props.dashboard.dashboard.first_time
+            ? "dashboard-card"
+            : "dashboard-card-closed"
         }`}
       >
         <Typography

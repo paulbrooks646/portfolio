@@ -29,7 +29,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        
 
         .dashboard-town {
           display: flex;
@@ -106,7 +105,7 @@
       }
 
       .mini-house {
-         background-image: url("../../Images/House.jpg");
+        background-image: url("../../Images/House.jpg");
         background-size: 100% 100%;
         height: 100px;
         width: 100px;
@@ -149,27 +148,29 @@
           height: 200px;
           width: 200px;
           animation: dragon;
-          animation-duration: 4s;
+          animation-duration: 2s;
           animation-iteration-count: 1;
           animation-timing-function: linear;
           animation-direction: normal;
-            animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
           position: relative;
 
           .fireball {
             position: absolute;
             border-radius: 50%;
-            background-color: red;
-            border: solid orange 2px;
+            background-color: transparent;
+            border: none;
             right: -20px;
             top: 30px;
             height: 25px;
             width: 25px;
             animation-name: fireball;
             animation-timing-function: linear;
-            animation-duration: 4s;
+            animation-duration: 2s;
             animation-direction: normal;
             animation-fill-mode: forwards;
+            
+            
           }
 
           .fireball-closed {
@@ -178,6 +179,25 @@
         }
 
         .dragon-closed {
+          display: none;
+        }
+
+                .dragonTwo {
+          background-image: url("../../Images/dragon.gif");
+          background-size: 100% 100%;
+          height: 200px;
+          width: 200px;
+          animation: dragonTwo;
+          animation-duration: 2s;
+          animation-iteration-count: 1;
+          animation-timing-function: linear;
+          animation-direction: normal;
+          animation-fill-mode: forwards;
+          position: relative;
+
+        }
+
+        .dragonTwo-closed {
           display: none;
         }
       }
@@ -271,46 +291,40 @@
 
 @keyframes dragon {
   0% {
-    top: 60%;
-  }
-
-  25% {
-    top: -80%;
-  }
-  75% {
-    top: -80%;
+    top: 65%;
   }
 
   100% {
-    top: 60%;
+    top: -80%;
+  }
+  
+}
+
+@keyframes dragonTwo {
+  0% {
+    top: -80%
+  }
+
+ 
+
+  100% {
+    top: 65%
   }
 }
 
 @keyframes fireball {
   0% {
-    background-color: transparent;
-    border: none;
-  }
-  25% {
-    background-color: transparent;
-    border: none;
-  }
-
-  26% {
+    display: inline;
     background-color: red;
     border: solid orange 2px;
     right: -20px;
   }
 
-  75% {
+  100% {
+    display: inline;
     background-color: red;
     border: solid orange 2px;
     right: -20vw;
     transform: scale(6);
   }
-  
-  76% {
-   display: none;
-  }
-  
 }
