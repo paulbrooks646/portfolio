@@ -20,7 +20,7 @@ import Oldman from "../../Images/Oldman.jpg";
 import Loading from "../Loading/Loading";
 
 function Dashboard(props) {
-  const [house, setHouse] = useState(true);
+  const [house, setHouse] = useState(false);
   const [newGameCardTwo, setNewGameCardTwo] = useState(false);
   const [oldmanCard, setOldmanCard] = useState(false);
   const [answerOne, setAnswerOne] = useState(false);
@@ -29,7 +29,7 @@ function Dashboard(props) {
   const [answerFour, setAnswerFour] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [dragonAnimation, setDragonAnimation] = useState(false);
-  const [dragonAnimationTwo, setDragonAnimationTwo] = useState(false)
+  const [dragonAnimationTwo, setDragonAnimationTwo] = useState(false);
   const [fireballAnimation, setFireballAnimation] = useState(false);
   const [downCharacter, setDownCharacter] = useState(false);
   const [upCharacter, setUpCharacter] = useState(false);
@@ -56,42 +56,52 @@ function Dashboard(props) {
   const [maiden, setMaiden] = useState(false);
   const [phoenix, setPhoenix] = useState(false);
   const [miniHome, setMiniHome] = useState(false);
-  const [burnt, setBurnt] = useState(false)
+  const [burnt, setBurnt] = useState(true);
 
   useEffect(() => {
-   
-    
     axios.get("/api/dashboard").then((res) => {
-   
-      props.getDashboard(res.data[0]);
+      console.log(res.data[0])
+      props.getDashboard(res.data[0])
+       if (res.data[0].first_time) {
+         setHouse(true);
+         setBurnt(false);
+       } else if (res.data[0].home_placed && !res.data[0].grow_used) {
+         setMiniHome(true);
+         setBurnt(false);
+       } else if (res.data[0].grow_used) {
+         setHouse(true);
+         setBurnt(false);
+       }
+        axios.get("/api/inventory").then((res) => {
+          console.log(res.data)
+          console.log(props.dashboard.dashboard.first_time)
+         
+          props.getInventory(res.data);
 
-      axios.get("/api/inventory").then((res) => {
-         if (
-           props.dashboard.dashboard.first_time === true ||
-           props.dashboard.dashboard.home_placed === true
-         ) {
-           setBurnt(false);
-         }
-        props.getInventory(res.data);
-       
-        if (props.user.user.last === "login") {
-          setInitialCharacter(true);
-        } else if (props.user.user.last === "dragon") {
-          setDownCharacter(true);
-        } else if (props.user.user.last === "mountain") {
-          setLeftCharacter(true);
-        } else if (props.user.user.last === "forest") {
-          setRightCharacter(true);
-        } else if (props.user.user.last === "town") {
-          setUpCharacter(true);
-        } else {
-          axios.post("/api/changeLast", { last: "login" }).then((res) => {
-            props.getUser(res.data);
+          if (props.user.user.last === "login") {
             setInitialCharacter(true);
-          });
-        }
-        setIsLoading(false);
-      });
+            setIsLoading(false);
+          } else if (props.user.user.last === "dragon") {
+            setDownCharacter(true);
+            setIsLoading(false);
+          } else if (props.user.user.last === "mountain") {
+            setLeftCharacter(true);
+            setIsLoading(false);
+          } else if (props.user.user.last === "forest") {
+            setRightCharacter(true);
+            setIsLoading(false);
+          } else if (props.user.user.last === "town") {
+            setUpCharacter(true);
+            setIsLoading(false);
+          } else {
+            axios.post("/api/changeLast", { last: "login" }).then((res) => {
+              props.getUser(res.data);
+              setInitialCharacter(true);
+              setIsLoading(false);
+            });
+          }
+        });
+      
     });
   }, []);
 
@@ -128,14 +138,11 @@ function Dashboard(props) {
   };
 
   const toggleNewgame = () => {
-    setBurnt(false)
-     axios.post("/api/dashboardFirst").then((res) => {
-       props.getDashboard(res.data[0]);
-       setDragonAnimation(true);
-       
-     });
-    
-    
+    setBurnt(false);
+    axios.post("/api/dashboardFirst").then((res) => {
+      props.getDashboard(res.data[0]);
+      setDragonAnimation(true);
+    });
   };
 
   const toggleOldmanCard = () => {
@@ -163,23 +170,21 @@ function Dashboard(props) {
   };
 
   const toggleDragonAnimationEnd = () => {
-    setFireballAnimation(true)
-
-   
+    setFireballAnimation(true);
   };
 
   const toggleDragonAnimationTwoEnd = () => {
-    setDragonAnimationTwo(false)
-    setNewGameCardTwo(true)
+    setDragonAnimationTwo(false);
+    setNewGameCardTwo(true);
   };
 
   const toggleFireballAnimation = () => {
     setFireballAnimation(false);
-    setDragonAnimationTwo(true)
-    setDragonAnimation(false)
-    
-    setHouse(false)
-    setBurnt(true)
+    setDragonAnimationTwo(true);
+    setDragonAnimation(false);
+
+    setHouse(false);
+    setBurnt(true);
   };
 
   const toggleGoLeft = () => {
@@ -343,25 +348,17 @@ function Dashboard(props) {
             </div>
           </div>
           <div
-            className={`${burnt ? "burned-house" : "burned-house-closed"}`}
+            className={`${burnt && !props.dashboard.dashboard.home_placed ? "burned-house" : "burned-house-closed"}`}
           ></div>
           <div className={`${house ? "house" : "house-closed"}`}></div>
           <div
             className={`${
-              props.dashboard.dashboard.home_placed &&
-              !props.dashboard.dashboard.grow_used
+              miniHome || props.dashboard.dashboard.home_placed
                 ? "mini-house"
                 : "mini-house-closed"
             }`}
           ></div>
-          <div
-            className={`${
-              props.dashboard.dashboard.home_placed &&
-              props.dashboard.dashboard.grow_used
-                ? "house"
-                : "house-closed"
-            }`}
-          ></div>
+         
           <div className="dashboard-middle-right">
             <div
               className={`${
@@ -413,13 +410,13 @@ function Dashboard(props) {
                 onAnimationEnd={toggleFireballAnimation}
               ></div>
             </div>
-           
+
             <div
-              className={`${dragonAnimationTwo ? "dragonTwo" : "dragonTwo-closed"}`}
+              className={`${
+                dragonAnimationTwo ? "dragonTwo" : "dragonTwo-closed"
+              }`}
               onAnimationEnd={toggleDragonAnimationTwoEnd}
-            >
-              
-            </div>
+            ></div>
           </div>
           <div className="dashboard-bottom-middle">
             <div
