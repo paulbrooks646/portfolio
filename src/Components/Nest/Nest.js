@@ -182,7 +182,7 @@ function Nest(props) {
           color="secondary"
           className="answer-card-description"
         >
-          You climb the steep cliff. Up ahead you see the massive Griffin's
+          You climb the steep cliff. Up ahead you see the massive griffin's
           nest. You look around tenatively for the owner of the nest.
         </Typography>
         <Button
