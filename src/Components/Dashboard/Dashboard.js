@@ -64,7 +64,7 @@ function Dashboard(props) {
 
   useEffect(() => {
     axios.get("/api/dashboard").then((res) => {
-      console.log(res.data[0]);
+      
       props.getDashboard(res.data[0]);
       if (res.data[0].first_time) {
         setHouse(true);

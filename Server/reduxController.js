@@ -147,4 +147,13 @@ module.exports = {
 
     res.status(200).send(dashboard);
   },
+
+  getCabin: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const cabin = await db.get_cabin(id);
+
+    res.status(200).send(cabin);
+  },
 };

@@ -46,12 +46,14 @@ app.get("/api/town", reduxController.getTown)
 app.get("/api/dragon", reduxController.getDragon)
 app.get("/api/mountain", reduxController.getMountain)
 app.get("/api/dashboard", reduxController.getDashboard)
+app.get("/api/cabin", reduxController.getCabin);
 
 
 app.post("/api/towerFirstTime", controller.towerFirstTime)
 app.post("/api/caveFirst", controller.caveFirst)
 app.post("/api/nestFirst", controller.nestFirst);
 app.post("/api/passFirst", controller.passFirst)
+app.post("/api/cabinFirst", controller.cabinFirst)
 app.post("/api/manureCleanPermission", controller.manureCleanPermission);
 app.post("/api/caveCoin", controller.caveCoin);
 app.post("/api/nestCoin", controller.nestCoin);
@@ -72,6 +74,7 @@ app.post("/api/manure", controller.manure)
 app.post("/api/flowers", controller.flowers);
 app.post("/api/hat", controller.hat);
 app.post("/api/bone", controller.bone);
+app.post("/api/mushroom", controller.mushroom)
 app.post("/api/ribbon", controller.ribbon);
 app.post("/api/feather", controller.feather)
 app.post("/api/cake", controller.cake)

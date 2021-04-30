@@ -179,7 +179,8 @@ axios.post("/api/gem").then((res) => {
             <div
               className={`${
                 props.pass.pass.cake_given &&
-                props.pass.pass.ogre_moved &&
+                  props.pass.pass.ogre_moved &&
+                  props.pass.pass.gem_taken &&
                 !props.pass.pass.coin_taken
                   ? "coin"
                   : "coin-closed"

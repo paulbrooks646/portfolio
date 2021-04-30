@@ -55,6 +55,14 @@ module.exports = {
     res.status(200).send(cave);
   },
 
+  cabinFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const cabin = await db.cabin_first(id);
+    res.status(200).send(cabin);
+  },
+
   nestFirst: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -288,6 +296,23 @@ module.exports = {
     const { id } = req.session.user;
 
     db.gem(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  mushroom: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.mushroom(id).then((inventory) => {
       let newArr = [];
 
       for (let key in inventory[0]) {
