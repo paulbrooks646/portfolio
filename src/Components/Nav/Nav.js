@@ -249,7 +249,7 @@ function Nav(props) {
           axios.get("/api/dashboard").then((res) => {
             props.getDashboard(res.data[0]);
             axios.get("/api/inventory").then((res) => {
-              getInventory(res.data)
+              props.getInventory(res.data)
               
             })
           });

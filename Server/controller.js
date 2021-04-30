@@ -1018,6 +1018,14 @@ module.exports = {
     res.status(200).send(dashboard);
   },
 
+  removeHome: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const dashboard = await db.remove_home(id);
+    res.status(200).send(dashboard);
+  },
+
   castGrow: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;

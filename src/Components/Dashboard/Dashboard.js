@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import { getDashboard } from "../../redux/dashboardReducer";
 import axios from "axios";
@@ -52,11 +52,15 @@ function Dashboard(props) {
   const [leftUp, setLeftUp] = useState(false);
   const [leftRight, setLeftRight] = useState(false);
   const [leftDown, setLeftDown] = useState(false);
-  const [growCard, setGrowCard] = useState(false);
+  const [growCard, setGrowCard] = useState(true);
+  const [screamCard, setScreamCard] = useState(false)
   const [maiden, setMaiden] = useState(false);
   const [phoenix, setPhoenix] = useState(false);
   const [miniHome, setMiniHome] = useState(false);
   const [burnt, setBurnt] = useState(true);
+  const [lastCard, setLastCard] = useState(false)
+  const [phoenixAnimationTwo, setPhoenixAnimationTwo] = useState(false)
+  const [fireballAnimationTwo, setFireballAnimationTwo] = useState(false)
 
   useEffect(() => {
     axios.get("/api/dashboard").then((res) => {
@@ -73,8 +77,6 @@ function Dashboard(props) {
          setBurnt(false);
        }
         axios.get("/api/inventory").then((res) => {
-          console.log(res.data)
-          console.log(props.dashboard.dashboard.first_time)
          
           props.getInventory(res.data);
 
@@ -145,6 +147,21 @@ function Dashboard(props) {
     });
   };
 
+  const toggleGrowCard = () => {
+    setGrowCard(false)
+    setScreamCard(true)
+  }
+
+  const toggleScreamCard = () => {
+    setScreamCard(false)
+    setMaiden(true)
+  }
+
+  const toggleMaiden = () => {
+    setMaiden(false)
+    setPhoenix(true)
+  }
+
   const toggleOldmanCard = () => {
     setOldmanCard(!oldmanCard);
   };
@@ -173,6 +190,16 @@ function Dashboard(props) {
     setFireballAnimation(true);
   };
 
+
+  const togglePhoenixOne = () => {
+    setFireballAnimationTwo(true)
+  }
+  
+  const togglePhoenixAnimationTwoEnd = () => {
+    setPhoenixAnimationTwo(false)
+    setLastCard(true)
+  }
+
   const toggleDragonAnimationTwoEnd = () => {
     setDragonAnimationTwo(false);
     setNewGameCardTwo(true);
@@ -186,6 +213,26 @@ function Dashboard(props) {
     setHouse(false);
     setBurnt(true);
   };
+
+  const toggleFireballAnimationTwo = () => {
+    axios.post("/api/removeHome").then(res => {
+      props.getDashboard(res.data[0])
+      setFireballAnimationTwo(false);
+      setPhoenixAnimationTwo(true);
+      setPhoenix(false);
+
+      setHouse(false);
+      setBurnt(true);
+    })
+    
+  }
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  }
 
   const toggleGoLeft = () => {
     if (props.user.user.last === "login" || props.user.user.last === "dragon") {
@@ -348,17 +395,28 @@ function Dashboard(props) {
             </div>
           </div>
           <div
-            className={`${burnt && !props.dashboard.dashboard.home_placed ? "burned-house" : "burned-house-closed"}`}
+            className={`${
+              burnt && !props.dashboard.dashboard.home_placed
+                ? "burned-house"
+                : "burned-house-closed"
+            }`}
           ></div>
-          <div className={`${house ? "house" : "house-closed"}`}></div>
           <div
             className={`${
-              miniHome || props.dashboard.dashboard.home_placed
+              house || (props.dashboard.dashboard.grow_used && props.dashboard.dashboard.home_placed)
+                ? "house"
+                : "house-closed"
+            }`}
+          ></div>
+          <div
+            className={`${
+              (miniHome || props.dashboard.dashboard.home_placed) &&
+              !props.dashboard.dashboard.grow_used
                 ? "mini-house"
                 : "mini-house-closed"
             }`}
           ></div>
-         
+
           <div className="dashboard-middle-right">
             <div
               className={`${
@@ -417,6 +475,23 @@ function Dashboard(props) {
               }`}
               onAnimationEnd={toggleDragonAnimationTwoEnd}
             ></div>
+            <div
+              className={`${phoenix ? "phoenix" : "phoenix-closed"}`}
+              onAnimationEnd={togglePhoenixOne}
+            >
+              <div
+                className={`${
+                  fireballAnimationTwo ? "fireballTwo" : "fireballTwo-closed"
+                }`}
+                onAnimationEnd={toggleFireballAnimationTwo}
+              ></div>
+            </div>
+            <div
+              className={`${
+                phoenixAnimationTwo ? "phoenixTwo" : "phoenixTwo-closed"
+              }`}
+              onAnimationEnd={togglePhoenixAnimationTwoEnd}
+            ></div>
           </div>
           <div className="dashboard-bottom-middle">
             <div
@@ -463,6 +538,10 @@ function Dashboard(props) {
               <h2>Dragon's Lair</h2>
               <ArrowDownward />
             </div>
+            <div
+              className={`${maiden ? "maiden" : "maiden-closed"}`}
+              onAnimationEnd={toggleMaiden}
+            ></div>
           </div>
           <div className="dashboard-bottom-right"></div>
         </div>
@@ -666,6 +745,86 @@ function Dashboard(props) {
           CLOSE
         </Button>
       </Card>
+      <Card
+        className={`${
+          props.dashboard.dashboard.grow_used && growCard
+            ? "answer-card"
+            : "answer-card-closed"
+        }`}
+      >
+        <Typography
+          variant="h4"
+          color="primary"
+          className="dashboard-card-title"
+        >
+          Success!!!
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Not only have you slayed the dragon, you know have a beautiful new
+          home as well. You are now free to start the peaceful life you long
+          for. You win! Right?
+        </Typography>
+        <Button
+          onClick={toggleGrowCard}
+          className="dashboard-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${screamCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="dashboard-card-title"
+        >
+          Aaaaahhh!
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Help!!! Our village has been overrun by phoenixes!
+        </Typography>
+        <Button
+          onClick={toggleScreamCard}
+          className="dashboard-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${lastCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="dashboard-card-title"
+        >
+          Here we go again!
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          The end?
+        </Typography>
+        <Button
+          onClick={logout}
+          className="dashboard-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
@@ -675,4 +834,5 @@ export default connect(mapStateToProps, {
   getUser,
   getInventory,
   getDashboard,
+  logoutUser
 })(Dashboard);

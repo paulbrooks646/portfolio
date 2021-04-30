@@ -96,7 +96,7 @@
       .house {
         background-image: url("../../Images/House.jpg");
         background-size: 100% 100%;
-        
+
         width: 20vw;
         height: 100%;
       }
@@ -172,8 +172,6 @@
             animation-duration: 2s;
             animation-direction: normal;
             animation-fill-mode: forwards;
-            
-            
           }
 
           .fireball-closed {
@@ -185,7 +183,7 @@
           display: none;
         }
 
-                .dragonTwo {
+        .dragonTwo {
           background-image: url("../../Images/dragon.gif");
           background-size: 100% 100%;
           height: 200px;
@@ -197,10 +195,65 @@
           animation-direction: normal;
           animation-fill-mode: forwards;
           position: relative;
-
         }
 
         .dragonTwo-closed {
+          display: none;
+        }
+
+        .phoenix {
+          background-image: url("../../Images/Phoenix.gif");
+          background-size: 100% 100%;
+          height: 200px;
+          width: 200px;
+          animation: phoenix;
+          animation-duration: 2s;
+          animation-iteration-count: 1;
+          animation-timing-function: linear;
+          animation-direction: normal;
+          animation-fill-mode: forwards;
+          position: relative;
+
+          .fireballTwo {
+            position: absolute;
+            border-radius: 50%;
+            background-color: transparent;
+            border: none;
+            right: -20px;
+            top: 30px;
+            height: 25px;
+            width: 25px;
+            animation-name: fireballTwo;
+            animation-timing-function: linear;
+            animation-duration: 2s;
+            animation-direction: normal;
+            animation-fill-mode: forwards;
+          }
+
+          .fireballTwo-closed {
+            display: none;
+          }
+        }
+
+        .phoenix-closed {
+          display: none;
+        }
+
+        .phoenixTwo {
+          background-image: url("../../Images/Phoenix.gif");
+          background-size: 100% 100%;
+          height: 200px;
+          width: 200px;
+          animation: phoenixTwo;
+          animation-duration: 2s;
+          animation-iteration-count: 1;
+          animation-timing-function: linear;
+          animation-direction: normal;
+          animation-fill-mode: forwards;
+          position: relative;
+        }
+
+        .phoenixTwo-closed {
           display: none;
         }
       }
@@ -208,7 +261,7 @@
       .dashboard-bottom-middle {
         background-image: url("../../Images/Dirt.png");
         background-size: cover;
-
+        position: relative;
         height: 100%;
         width: 20%;
         display: flex;
@@ -220,6 +273,26 @@
           flex-direction: column;
           align-items: center;
           cursor: pointer;
+        }
+
+        .maiden {
+          background-image: url("../../Images/Maiden.png");
+          background-size: 100% 100%;
+          height: 150px;
+          width: 100px;
+          top: 20vh;
+          left: 40%;
+          position: absolute;
+          animation-name: maiden;
+          animation-duration: 8s;
+          animation-iteration-count: 1;
+          animation-direction: normal;
+          animation-fill-mode: forwards;
+          animation-timing-function: linear;
+        }
+
+        .maiden-closed {
+          display: none;
         }
       }
 
@@ -300,18 +373,15 @@
   100% {
     top: -80%;
   }
-  
 }
 
 @keyframes dragonTwo {
   0% {
-    top: -80%
+    top: -80%;
   }
 
- 
-
   100% {
-    top: 65%
+    top: 65%;
   }
 }
 
@@ -329,5 +399,52 @@
     border: solid orange 2px;
     right: -20vw;
     transform: scale(6);
+  }
+}
+
+@keyframes maiden {
+  0% {
+    top: 20vh;
+  }
+
+  100% {
+    top: -60vh;
+  }
+}
+
+@keyframes fireballTwo {
+  0% {
+    display: inline;
+    background-color: red;
+    border: solid orange 2px;
+    right: -20px;
+  }
+
+  100% {
+    display: inline;
+    background-color: red;
+    border: solid orange 2px;
+    right: -20vw;
+    transform: scale(6);
+  }
+}
+
+@keyframes phoenix {
+  0% {
+    top: 65%;
+  }
+
+  100% {
+    top: -80%;
+  }
+}
+
+@keyframes phoenixTwo {
+  0% {
+    top: -80%;
+  }
+
+  100% {
+    top: -325%;
   }
 }
