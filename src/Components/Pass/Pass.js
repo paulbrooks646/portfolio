@@ -19,12 +19,15 @@ function Pass(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [downRejection, setDownRejection] = useState(false);
   const [ogre, setOgre] = useState(false)
+  const [ogreAnimation, setOgreAnimation] = useState(false)
   const [upCharacter, setUpCharacter] = useState(false);
   const [downCharacter, setDownCharacter] = useState(false);
   const [downUp, setDownUp] = useState(false);
   const [downDown, setDownDown] = useState(false);
   const [upUp, setUpUp] = useState(false);
   const [upDown, setUpDown] = useState(false);
+  const [coinCard, setCoinCard] = useState(false)
+  const [gemCard, setGemCard] = useState(false)
   
 
   useEffect(() => {
@@ -38,6 +41,38 @@ function Pass(props) {
       setIsLoading(false);
     });
   }, []);
+
+  const toggleCakeGiven = () => {
+    axios.post("/api/ogreMoved").then((res) => {
+      props.getPass(res.data[0]);
+setOgreAnimation(true);
+    });
+    
+  }
+
+  const toggleGem = () => {
+axios.post("/api/gem").then((res) => {
+  props.getInventory(res.data);
+  axios.get("/api/pass").then((res) => {
+    props.getPass(res.data[0]);
+    setGemCard(true);
+  });
+});
+  }
+
+  const toggleCoin = () => {
+     axios.post("/api/passCoin").then((res) => {
+       props.getPass(res.data[0]);
+       axios.post("/api/coin").then((res) => {
+         props.getUser(res.data);
+         setCoinCard(true);
+       });
+     });
+  }
+
+  const toggleOgreAnimationEnd = () => {
+    setOgreAnimation(false)
+  }
 
   const toggleUp = () => {
     axios.post("/api/changeLast", { last: "pass" }).then((res) => {
@@ -85,6 +120,8 @@ function Pass(props) {
     }
   };
 
+
+
   return isLoading ? (
     <Loading />
   ) : (
@@ -131,11 +168,36 @@ function Pass(props) {
           <div className="pass-middle-middle">
             <div
               className={`${
-                props.pass.pass.cake_given ? "pass-ogre-closed" : "pass-ogre"
+                !props.pass.pass.cake_given ? "pass-ogre" : "pass-ogre-closed"
               }`}
               onClick={() => setOgre(true)}
             ></div>
+            <div
+              className={`${ogreAnimation ? "ogre-two" : "ogre-two-closed"}`}
+              onAnimationEnd={toggleOgreAnimationEnd}
+            ></div>
+            <div
+              className={`${
+                props.pass.pass.cake_given &&
+                props.pass.pass.ogre_moved &&
+                !props.pass.pass.coin_taken
+                  ? "coin"
+                  : "coin-closed"
+              }`}
+              onClick={toggleCoin}
+            ></div>
+            <div
+              className={`${
+                props.pass.pass.cake_given &&
+                props.pass.pass.ogre_moved &&
+                !props.pass.pass.gem_taken
+                  ? "gem"
+                  : "gem-closed"
+              }`}
+              onClick={toggleGem}
+            ></div>
           </div>
+
           <div
             className={`${
               props.pass.pass.cake_given
@@ -190,7 +252,7 @@ function Pass(props) {
           color="secondary"
           className="answer-card-description"
         >
-          As you make your way through thye pass, right in the middle of your
+          As you make your way through the pass, right in the middle of your
           path is a giant ogre. Fortunately the ogre is asleep. Unfortunately he
           is blocking your way and stopping the runoff from making its way down
           the mountain.
@@ -236,6 +298,63 @@ function Pass(props) {
         </Typography>
         <Button
           onClick={() => setOgre(false)}
+          className="forest-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        id={`${
+          props.pass.pass.cake_given && !props.pass.pass.ogre_moved ? "answer-card" : "answer-card-closed"
+        }`}
+      >
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          As you pull the cake out of your pack, the ogre starts to stir. You
+          hurry over and place the cake next to him. The ogre fully wakes up,
+          grabs the cake and lumbers up the mountain.
+        </Typography>
+        <Button
+          onClick={toggleCakeGiven}
+          className="stables-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${coinCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You pick up the shiny gold coin.
+        </Typography>
+        <Button
+          onClick={() => setCoinCard(false)}
+          className="forest-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${gemCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You find a beautiful blue gem in the water.
+        </Typography>
+        <Button
+          onClick={() => setGemCard(false)}
           className="forest-card-button"
           variant="contained"
           color="primary"

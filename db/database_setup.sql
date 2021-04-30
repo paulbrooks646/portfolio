@@ -32,8 +32,8 @@ values ($1, true, false, false, false, false);
 insert into nest (user_id, rope_used, coin_taken, ribbon_taken, feather_taken, first_time)
 values ($1, false, false, false, false, true);
 
-insert into pass (user_id, cake_given, first_time)
-values ($1, false, true);
+insert into pass (user_id, cake_given, coin_taken, gem_taken, ogre_moved, first_time)
+values ($1, false, false, false, false, true);
 
 insert into dashboard (user_id, home_placed, grow_used, first_time)
 values ($1, false, false, true);

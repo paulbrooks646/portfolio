@@ -31,7 +31,6 @@ function Nav(props) {
   const [ribbonCard, setRibbonCard] = useState(false);
   const [meatCard, setMeatCard] = useState(false);
   const [ropeCard, setRopeCard] = useState(false);
-  const [cakeCard, setCakeCard] = useState(false);
   const [homeCard, setHomeCard] = useState(false);
   
 
@@ -114,7 +113,7 @@ function Nav(props) {
           props.getInventory(res.data);
           axios.get("/api/pass").then((res) => {
             props.getPass(res.data[0]);
-            setCakeCard(true);
+            
           });
         });
       } else {
@@ -474,25 +473,6 @@ function Nav(props) {
         </Typography>
         <Button
           onClick={() => setRopeCard(false)}
-          className="stables-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card id={`${cakeCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="answer-card-description"
-        >
-          As you pull the cake out of your pack, the ogre starts to stir. You
-          hurry over and place the cake next to him. The ogre fully wakes up,
-          grabs the cake and lumbers up the mountain.
-        </Typography>
-        <Button
-          onClick={() => setCakeCard(false)}
           className="stables-card-button"
           variant="contained"
           color="primary"

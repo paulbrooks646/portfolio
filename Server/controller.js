@@ -283,6 +283,23 @@ module.exports = {
     });
   },
 
+  gem: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.gem(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
   hat: (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -1065,5 +1082,20 @@ module.exports = {
 
     const mountain = await db.mountain_coin(id);
     res.status(200).send(mountain);
+  },
+
+  passCoin: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const pass = await db.pass_coin(id);
+    res.status(200).send(pass);
+  },
+
+  ogreMoved: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const pass = await db.ogre_moved(id);
+    res.status(200).send(pass);
   },
 };

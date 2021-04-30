@@ -106,7 +106,10 @@ app.post("/api/castGrow", controller.castGrow)
 app.post("/api/removeGrow", controller.removeGrow)
 app.post("/api/removeHome", controller.removeHome)
 app.post("/api/mountainCoin", controller.mountainCoin)
+app.post("/api/passCoin", controller.passCoin);
 app.post("/api/rock", controller.rock)
+app.post("/api/gem", controller.gem);
+app.post("/api/ogreMoved", controller.ogreMoved)
 
 
 app.use(express.static(__dirname + "/../build"));
