@@ -53,57 +53,55 @@ function Dashboard(props) {
   const [leftRight, setLeftRight] = useState(false);
   const [leftDown, setLeftDown] = useState(false);
   const [growCard, setGrowCard] = useState(true);
-  const [screamCard, setScreamCard] = useState(false)
+  const [screamCard, setScreamCard] = useState(false);
   const [maiden, setMaiden] = useState(false);
   const [phoenix, setPhoenix] = useState(false);
   const [miniHome, setMiniHome] = useState(false);
   const [burnt, setBurnt] = useState(true);
-  const [lastCard, setLastCard] = useState(false)
-  const [phoenixAnimationTwo, setPhoenixAnimationTwo] = useState(false)
-  const [fireballAnimationTwo, setFireballAnimationTwo] = useState(false)
+  const [lastCard, setLastCard] = useState(false);
+  const [phoenixAnimationTwo, setPhoenixAnimationTwo] = useState(false);
+  const [fireballAnimationTwo, setFireballAnimationTwo] = useState(false);
 
   useEffect(() => {
     axios.get("/api/dashboard").then((res) => {
-      console.log(res.data[0])
-      props.getDashboard(res.data[0])
-       if (res.data[0].first_time) {
-         setHouse(true);
-         setBurnt(false);
-       } else if (res.data[0].home_placed && !res.data[0].grow_used) {
-         setMiniHome(true);
-         setBurnt(false);
-       } else if (res.data[0].grow_used) {
-         setHouse(true);
-         setBurnt(false);
-       }
-        axios.get("/api/inventory").then((res) => {
-         
-          props.getInventory(res.data);
+      console.log(res.data[0]);
+      props.getDashboard(res.data[0]);
+      if (res.data[0].first_time) {
+        setHouse(true);
+        setBurnt(false);
+      } else if (res.data[0].home_placed && !res.data[0].grow_used) {
+        setMiniHome(true);
+        setBurnt(false);
+      } else if (res.data[0].grow_used) {
+        setHouse(true);
+        setBurnt(false);
+      }
+      axios.get("/api/inventory").then((res) => {
+        props.getInventory(res.data);
 
-          if (props.user.user.last === "login") {
+        if (props.user.user.last === "login") {
+          setInitialCharacter(true);
+          setIsLoading(false);
+        } else if (props.user.user.last === "dragon") {
+          setDownCharacter(true);
+          setIsLoading(false);
+        } else if (props.user.user.last === "mountain") {
+          setLeftCharacter(true);
+          setIsLoading(false);
+        } else if (props.user.user.last === "forest") {
+          setRightCharacter(true);
+          setIsLoading(false);
+        } else if (props.user.user.last === "town") {
+          setUpCharacter(true);
+          setIsLoading(false);
+        } else {
+          axios.post("/api/changeLast", { last: "login" }).then((res) => {
+            props.getUser(res.data);
             setInitialCharacter(true);
             setIsLoading(false);
-          } else if (props.user.user.last === "dragon") {
-            setDownCharacter(true);
-            setIsLoading(false);
-          } else if (props.user.user.last === "mountain") {
-            setLeftCharacter(true);
-            setIsLoading(false);
-          } else if (props.user.user.last === "forest") {
-            setRightCharacter(true);
-            setIsLoading(false);
-          } else if (props.user.user.last === "town") {
-            setUpCharacter(true);
-            setIsLoading(false);
-          } else {
-            axios.post("/api/changeLast", { last: "login" }).then((res) => {
-              props.getUser(res.data);
-              setInitialCharacter(true);
-              setIsLoading(false);
-            });
-          }
-        });
-      
+          });
+        }
+      });
     });
   }, []);
 
@@ -148,19 +146,19 @@ function Dashboard(props) {
   };
 
   const toggleGrowCard = () => {
-    setGrowCard(false)
-    setScreamCard(true)
-  }
+    setGrowCard(false);
+    setScreamCard(true);
+  };
 
   const toggleScreamCard = () => {
-    setScreamCard(false)
-    setMaiden(true)
-  }
+    setScreamCard(false);
+    setMaiden(true);
+  };
 
   const toggleMaiden = () => {
-    setMaiden(false)
-    setPhoenix(true)
-  }
+    setMaiden(false);
+    setPhoenix(true);
+  };
 
   const toggleOldmanCard = () => {
     setOldmanCard(!oldmanCard);
@@ -190,15 +188,14 @@ function Dashboard(props) {
     setFireballAnimation(true);
   };
 
-
   const togglePhoenixOne = () => {
-    setFireballAnimationTwo(true)
-  }
-  
+    setFireballAnimationTwo(true);
+  };
+
   const togglePhoenixAnimationTwoEnd = () => {
-    setPhoenixAnimationTwo(false)
-    setLastCard(true)
-  }
+    setPhoenixAnimationTwo(false);
+    setLastCard(true);
+  };
 
   const toggleDragonAnimationTwoEnd = () => {
     setDragonAnimationTwo(false);
@@ -215,24 +212,25 @@ function Dashboard(props) {
   };
 
   const toggleFireballAnimationTwo = () => {
-    axios.post("/api/removeHome").then(res => {
-      props.getDashboard(res.data[0])
+    axios.post("/api/removeHome").then((res) => {
+      props.getDashboard(res.data[0]);
       setFireballAnimationTwo(false);
       setPhoenixAnimationTwo(true);
       setPhoenix(false);
 
       setHouse(false);
       setBurnt(true);
-    })
-    
-  }
+    });
+  };
 
   const logout = () => {
-    axios.delete("/api/logout").then(() => {
-      props.logoutUser();
-      props.history.push("/Auth");
+    axios.post("/api/removeGrow").then(() => {
+      axios.delete("/api/logout").then(() => {
+        props.logoutUser();
+        props.history.push("/Auth");
+      });
     });
-  }
+  };
 
   const toggleGoLeft = () => {
     if (props.user.user.last === "login" || props.user.user.last === "dragon") {
@@ -403,7 +401,9 @@ function Dashboard(props) {
           ></div>
           <div
             className={`${
-              house || (props.dashboard.dashboard.grow_used && props.dashboard.dashboard.home_placed)
+              house ||
+              (props.dashboard.dashboard.grow_used &&
+                props.dashboard.dashboard.home_placed)
                 ? "house"
                 : "house-closed"
             }`}
@@ -834,5 +834,5 @@ export default connect(mapStateToProps, {
   getUser,
   getInventory,
   getDashboard,
-  logoutUser
+  logoutUser,
 })(Dashboard);

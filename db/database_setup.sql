@@ -36,4 +36,7 @@ insert into pass (user_id, cake_given, first_time)
 values ($1, false, true);
 
 insert into dashboard (user_id, home_placed, grow_used, first_time)
-values ($1, false, true);
+values ($1, false, false, true);
+
+insert into mountain (user_id, rock_taken, home_taken, first_time)
+values ($1, false, false, true);

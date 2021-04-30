@@ -103,7 +103,10 @@ app.post("/api/forestFirst", controller.forestFirst);
 app.post("/api/mountainFirst", controller.mountainFirst);
 app.post("/api/placeHome", controller.placeHome)
 app.post("/api/castGrow", controller.castGrow)
+app.post("/api/removeGrow", controller.removeGrow)
 app.post("/api/removeHome", controller.removeHome)
+app.post("/api/mountainCoin", controller.mountainCoin)
+app.post("/api/rock", controller.rock)
 
 
 app.use(express.static(__dirname + "/../build"));

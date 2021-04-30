@@ -249,6 +249,23 @@ module.exports = {
     });
   },
 
+  rock: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.rock(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
   bone: (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -1032,5 +1049,21 @@ module.exports = {
 
     const dashboard = await db.cast_grow(id);
     res.status(200).send(dashboard);
+  },
+
+  removeGrow: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const dashboard = await db.remove_grow(id);
+    res.status(200).send(dashboard);
+  },
+
+  mountainCoin: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const mountain = await db.mountain_coin(id);
+    res.status(200).send(mountain);
   },
 };

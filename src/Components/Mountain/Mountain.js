@@ -36,13 +36,16 @@ function Mountain(props) {
   const [leftRight, setLeftRight] = useState(false);
   const [leftDown, setLeftDown] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [firstTimeCard, setFirstTimeCard] = useState(true)
+  const [rockCard, setRockCard] = useState(false)
+  const [coinCard, setCoinCard] = useState(false)
 
   useEffect(() => {
-    // if (!props.user.user.newgame) {
-    //   setNewgameCard(false);
+    if (!props.mountain.mountain.first_time) {
+      setFirstTimeCard(false);
 
-    // }
-    axios.get("/api/nest").then((res) => {
+    }
+    axios.get("/api/mountain").then((res) => {
       props.getMountain(res.data[0]);
 
       if (props.user.user.last === "pass") {
@@ -55,6 +58,26 @@ function Mountain(props) {
       setIsLoading(false);
     });
   }, []);
+
+  const toggleRock = () => {
+    axios.post("/api/rock").then(res => {
+      props.getInventory(res.data)
+      axios.get("/api/mountain").then(res => {
+        props.getMountain(res.data[0])
+        setRockCard(true)
+      })
+    })
+  }
+
+  const toggleCoin = () => {
+    axios.post("/api/mountainCoin").then(res => {
+      props.getMountain(res.data[0])
+      axios.post("/api/coin").then(res => {
+        props.getUser(res.data)
+        setCoinCard(true)
+      })
+    })
+  }
 
   const toggleRight = () => {
     axios.post("/api/changeLast", { last: "mountain" }).then((res) => {
@@ -104,8 +127,11 @@ function Mountain(props) {
     setAnswerFour(!answerFour);
   };
 
-  const toggleMountainFirst = () => {
-    axios.post("/api/mountainFirst").then((res) => props.getUser(res.data));
+  const toggleFirstTimeCard = () => {
+    axios.post("/api/mountainFirst").then((res) => {
+      props.getMountain(res.data[0])
+      setFirstTimeCard(false)
+    });
   };
 
   const toggleGoLeft = () => {
@@ -227,7 +253,23 @@ function Mountain(props) {
           </div>
         </div>
         <div className="mountain-bottom">
-          <div className="mountain-bottom-left"></div>
+          <div className="mountain-bottom-left">
+            <div
+              className={`${
+                !props.mountain.mountain.rock_taken ? "rock" : "rock-closed"
+              }`}
+              onClick={toggleRock}
+            ></div>
+            <div
+              className={`${
+                props.mountain.mountain.rock_taken &&
+                !props.mountain.mountain.coin_taken
+                  ? "coin"
+                  : "coin-closed"
+              }`}
+              onClick={toggleCoin}
+            ></div>
+          </div>
           <div className="mountain-bottom-middle">
             <div
               className={`${
@@ -262,28 +304,7 @@ function Mountain(props) {
           <div className="mountain-bottom-right"></div>
         </div>
       </div>
-      <Card
-        className={`${
-          props.user.user.mountain ? "answer-card" : "answer-card-closed"
-        }`}
-      >
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          You arduously climb up the snowy mountain and stumble across an old
-          woodsman.
-        </Typography>
-        <Button
-          onClick={toggleMountainFirst}
-          className="mountain-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
+      
       <Card
         className={`${mountaineer ? "mountain-card" : "mountain-card-closed"}`}
       >
@@ -417,6 +438,70 @@ function Mountain(props) {
         <Button
           onClick={toggleAnswerFour}
           className="mountain-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="primary"
+          className="mountain-card-title"
+        >
+          Brrrrrrr!
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          It sure is cold up here. You make you way higher and higher into the
+          mountains. You come across a mountaineer and hope he might be a good
+          source of information about the surrounding area.
+        </Typography>
+        <Button
+          onClick={toggleFirstTimeCard}
+          className="mountain-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${coinCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You pick up the shiny gold coin.
+        </Typography>
+        <Button
+          onClick={() => setCoinCard(false)}
+          className="forest-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${rockCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You take a rock that you find hidden under the snow.
+        </Typography>
+        <Button
+          onClick={() => setRockCard(false)}
+          className="forest-card-button"
           variant="contained"
           color="primary"
         >
