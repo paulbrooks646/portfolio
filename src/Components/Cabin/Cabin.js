@@ -52,7 +52,16 @@ function Cabin(props) {
   };
 
   const toggleOldMan = () => {
-    if (!props.cabin.cabin.potatoes_given) {
+    if (props.cabin.cabin.knife_given && props.cabin.cabin.wood_given && !props.cabin.cabin.toy_received) {
+      axios.post("/api/toy").then(res => {
+        props.getInventory(res.data)
+        axios.get("/api/cabin").then(res => {
+          props.getCabin(res.data[0])
+          setToyCard(true)
+        })
+      })
+    }
+    else if (!props.cabin.cabin.potatoes_given) {
       setRejectionCard(true)
     } else {
       setOldMan(!oldMan)
@@ -179,20 +188,20 @@ function Cabin(props) {
       </Card>
       <Card className={`${oldMan ? "cabin-card" : "cabin-card-closed"}`}>
         <Typography variant="h5" color="primary" className="cabin-card-title">
-          What brings you up the cabin?
+          I suppose since you saved me a trip to civilization I could answer a few questions?
         </Typography>
         <List className="cabin-list">
           <ListItem className="cabin-list-item" onClick={toggleAnswerOne}>
-            Griffins
+            Pass
           </ListItem>
           <ListItem className="cabin-list-item" onClick={toggleAnswerTwo}>
-            Nests
+            Cabin
           </ListItem>
           <ListItem className="cabin-list-item" onClick={toggleAnswerThree}>
-            Ogres
+            Whittling
           </ListItem>
           <ListItem className="cabin-list-item" onClick={toggleAnswerFour}>
-            The Pass
+            Toy
           </ListItem>
         </List>
         <Button
@@ -206,16 +215,14 @@ function Cabin(props) {
       </Card>
       <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary" className="cabin-card-title">
-          Griffins
+          Pass
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          Griffins are massive birds. They are very fast and very protective of
-          their young. Griffins typically won't attack humans unless a human
-          gets too close to the Griffin's nest.
+          I guess you being here means the pass is open. Too bad. Things have been quiet around here since the ogre blocked the pass. I've had plenty of time to whittle in peace.
         </Typography>
         <Button
           onClick={toggleAnswerOne}
@@ -228,16 +235,14 @@ function Cabin(props) {
       </Card>
       <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary" className="cabin-card-title">
-          Nests
+          Cabin
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          There are nests all throughout the cliffs up in the cabins. They are
-          home to giant birds like Rocs and Griffins. Griffins are particularly
-          common in this area.
+          I built this cabin myself so that I could live in peace and quiet. Over the years more people have ventured up this way, at least until the ogre blocked the pass. Every year or so I go into town for food to supplement what I can find in the mountains.
         </Typography>
         <Button
           onClick={toggleAnswerTwo}
@@ -250,18 +255,14 @@ function Cabin(props) {
       </Card>
       <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary" className="cabin-card-title">
-          Ogres
+          Whittling
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          Ogres are massive. Funny creatures, you could hit an Ogre as hard as
-          you like, it wouldn't hurt the Ogre and he wouldn't feel it. You could
-          scream as loud as you want, an Ogre wouldn't even notice. But an
-          Ogre's sense of smell is unrivaled. Ogre's keep to themselves but can
-          get aggressive if they smell something nasty enough.
+          I find whittling relaxing. I can make anything out of wood. Used to be I would chop down a tree and have enough wood to whittle for a long time. I'm old enough now that my tree chopping days are over. I scrounge for wood here and there but it is hard to find good wood.
         </Typography>
         <Button
           onClick={toggleAnswerThree}
@@ -274,16 +275,14 @@ function Cabin(props) {
       </Card>
       <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary" className="cabin-card-title">
-          The Pass
+          Toy
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          As snow in the cabins melt, it flows down the cabin. Many people and
-          creatures depend on that water. The pass is a point this water is
-          shallow enough to cross, it is the only way through the cabins.
+          I suppose I could make a toy for you if you got me some wood and a new knife.
         </Typography>
         <Button
           onClick={toggleAnswerFour}
@@ -327,7 +326,7 @@ function Cabin(props) {
           color="secondary"
           className="answer-card-description"
         >
-          The pass is open? Too bad. I like to be alone. Suppose people will come bumbling around now. If I didn't need occasional vittles and whittling supplies I would go deep into the mountains and no one would ever find me. You best be getting along.
+          If I didn't need the occasional vittles and whittling supplies I would go so deep into the mountains no one could ever find me. You best be getting along.
         </Typography>
         <Button
           onClick={() => setRejectionCard(false)}
