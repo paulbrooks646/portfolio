@@ -10,7 +10,8 @@ import { getStables } from "../../redux/stablesReducer";
 import { getGarden } from "../../redux/gardenReducer";
 import { getTower } from "../../redux/towerReducer";
 import { getNest } from "../../redux/nestReducer";
-import {getPass} from "../../redux/passReducer"
+import { getPass } from "../../redux/passReducer"
+import {getCabin} from "../../redux/cabinReducer"
 import axios from "axios";
 import "./Nav.scss";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
@@ -32,6 +33,9 @@ function Nav(props) {
   const [meatCard, setMeatCard] = useState(false);
   const [ropeCard, setRopeCard] = useState(false);
   const [homeCard, setHomeCard] = useState(false);
+  const [woodCard, setWoodCard] = useState(false)
+  const [knifeCard, setKnifeCard] = useState(false)
+  const [potatoesCard, setPotatoesCard] = useState(false)
   
 
   useEffect(() => {
@@ -257,6 +261,54 @@ function Nav(props) {
         setRejectionCard(true);
       }
     }
+     if (item === "wood") {
+       if (props.location.pathname === "/Cabin" && props.cabin.cabin.potatoes_given) {
+         axios.post("/api/giveWood").then(() => {
+           axios.get("/api/cabin").then((res) => {
+             props.getCabin(res.data[0]);
+             axios.get("/api/inventory").then((res) => {
+               props.getInventory(res.data);
+               setWoodCard(true)
+             });
+           });
+         });
+       } else {
+         setRejectionCard(true);
+       }
+    }
+     if (item === "potatoes") {
+       if (props.location.pathname === "/Cabin") {
+         axios.post("/api/givePotatoes").then(() => {
+           axios.get("/api/cabin").then((res) => {
+             props.getCabin(res.data[0]);
+             axios.get("/api/inventory").then((res) => {
+               props.getInventory(res.data);
+               axios.post("/api/coin").then(res => {
+                 props.getUser(res.data)
+                 setPotatoesCard(true)
+               })
+             });
+           });
+         });
+       } else {
+         setRejectionCard(true);
+       }
+    }
+     if (item === "knife") {
+       if (props.location.pathname === "/Cabin" && props.cabin.cabin.potatoes_given) {
+         axios.post("/api/giveKnife").then(() => {
+           axios.get("/api/cabin").then((res) => {
+             props.getCabin(res.data[0]);
+             axios.get("/api/inventory").then((res) => {
+               props.getInventory(res.data);
+               setKnifeCard(true)
+             });
+           });
+         });
+       } else {
+         setRejectionCard(true);
+       }
+     }
   };
 
   return (
@@ -497,6 +549,57 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
+      <Card id={`${potatoesCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          Thanks for the potatoes. I was running low on vittles. Here is a coin in payment.
+        </Typography>
+        <Button
+          onClick={() => setPotatoesCard(false)}
+          className="stables-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card id={`${knifeCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          Thanks for the new knife!
+        </Typography>
+        <Button
+          onClick={() => setKnifeCard(false)}
+          className="stables-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card id={`${woodCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          Thanks for the wood!
+        </Typography>
+        <Button
+          onClick={() => setWoodCard(false)}
+          className="stables-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
@@ -515,6 +618,7 @@ export default withRouter(
     getCave,
     getNest,
     getPass,
-    getDashboard
+    getDashboard,
+    getCabin
   })(Nav)
 );

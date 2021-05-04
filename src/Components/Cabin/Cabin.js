@@ -25,18 +25,18 @@ function Cabin(props) {
   const [answerThree, setAnswerThree] = useState(false);
   const [answerFour, setAnswerFour] = useState(false);
   const [oldMan, setOldMan] = useState(false);
-  const [firstTimeCard, setFirstTimeCard] = useState(true);
+  const [firstTimeCard, setFirstTimeCard] = useState(false);
   const [rejectionCard, setRejectionCard] = useState(false)
+  const [toyCard, setToyCard] = useState(false)
 
   useEffect(() => {
-     if (!props.cabin.cabin.first_time) {
-       setFirstTimeCard(false);
-     }
+    
     axios.get("/api/cabin").then((res) => {
-     
       props.getCabin(res.data[0]);
       setUpCharacter(true);
-
+ if (res.data[0].first_time) {
+   setFirstTimeCard(true);
+ }
       setIsLoading(false);
     });
   }, []);
@@ -188,7 +188,8 @@ function Cabin(props) {
       </Card>
       <Card className={`${oldMan ? "cabin-card" : "cabin-card-closed"}`}>
         <Typography variant="h5" color="primary" className="cabin-card-title">
-          I suppose since you saved me a trip to civilization I could answer a few questions?
+          I suppose since you saved me a trip to civilization I could answer a
+          few questions?
         </Typography>
         <List className="cabin-list">
           <ListItem className="cabin-list-item" onClick={toggleAnswerOne}>
@@ -222,7 +223,9 @@ function Cabin(props) {
           color="secondary"
           className="answer-card-description"
         >
-          I guess you being here means the pass is open. Too bad. Things have been quiet around here since the ogre blocked the pass. I've had plenty of time to whittle in peace.
+          I guess you being here means the pass is open. Too bad. Things have
+          been quiet around here since the ogre blocked the pass. I've had
+          plenty of time to whittle in peace.
         </Typography>
         <Button
           onClick={toggleAnswerOne}
@@ -242,7 +245,10 @@ function Cabin(props) {
           color="secondary"
           className="answer-card-description"
         >
-          I built this cabin myself so that I could live in peace and quiet. Over the years more people have ventured up this way, at least until the ogre blocked the pass. Every year or so I go into town for food to supplement what I can find in the mountains.
+          I built this cabin myself so that I could live in peace and quiet.
+          Over the years more people have ventured up this way, at least until
+          the ogre blocked the pass. Every year or so I go into town for food to
+          supplement what I can find in the mountains.
         </Typography>
         <Button
           onClick={toggleAnswerTwo}
@@ -262,7 +268,10 @@ function Cabin(props) {
           color="secondary"
           className="answer-card-description"
         >
-          I find whittling relaxing. I can make anything out of wood. Used to be I would chop down a tree and have enough wood to whittle for a long time. I'm old enough now that my tree chopping days are over. I scrounge for wood here and there but it is hard to find good wood.
+          I find whittling relaxing. I can make anything out of wood. Used to be
+          I would chop down a tree and have enough wood to whittle for a long
+          time. I'm old enough now that my tree chopping days are over. I
+          scrounge for wood here and there but it is hard to find good wood.
         </Typography>
         <Button
           onClick={toggleAnswerThree}
@@ -282,7 +291,8 @@ function Cabin(props) {
           color="secondary"
           className="answer-card-description"
         >
-          I suppose I could make a toy for you if you got me some wood and a new knife.
+          I suppose I could make a toy for you if you got me some wood and a new
+          knife.
         </Typography>
         <Button
           onClick={toggleAnswerFour}
@@ -326,10 +336,31 @@ function Cabin(props) {
           color="secondary"
           className="answer-card-description"
         >
-          If I didn't need the occasional vittles and whittling supplies I would go so deep into the mountains no one could ever find me. You best be getting along.
+          If I didn't need the occasional vittles and whittling supplies I would
+          go so deep into the mountains no one could ever find me. You best be
+          getting along.
         </Typography>
         <Button
           onClick={() => setRejectionCard(false)}
+          className="forest-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${toyCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Here is the toy as promised.
+        </Typography>
+        <Button
+          onClick={() => setToyCard(false)}
           className="forest-card-button"
           variant="contained"
           color="primary"

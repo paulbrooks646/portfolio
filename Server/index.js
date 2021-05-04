@@ -25,7 +25,6 @@ app.post("/api/register", userController.register);
 app.post("/api/login", userController.login);
 app.delete("/api/logout", userController.logout);
 app.get("/api/user", userController.getUser);
-
 app.post("/api/changeLast", userController.changeLast);
 app.post("/api/coin", userController.coin);
 
@@ -75,6 +74,7 @@ app.post("/api/flowers", controller.flowers);
 app.post("/api/hat", controller.hat);
 app.post("/api/bone", controller.bone);
 app.post("/api/mushroom", controller.mushroom)
+app.post("/api/toy", controller.toy)
 app.post("/api/ribbon", controller.ribbon);
 app.post("/api/feather", controller.feather)
 app.post("/api/cake", controller.cake)
@@ -113,6 +113,9 @@ app.post("/api/passCoin", controller.passCoin);
 app.post("/api/rock", controller.rock)
 app.post("/api/gem", controller.gem);
 app.post("/api/ogreMoved", controller.ogreMoved)
+app.post("/api/givePotatoes", controller.givePotatoes)
+app.post("/api/giveWood", controller.giveWood)
+app.post("/api/giveKnife", controller.giveKnife)
 
 
 app.use(express.static(__dirname + "/../build"));

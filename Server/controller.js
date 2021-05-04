@@ -206,6 +206,23 @@ module.exports = {
     });
   },
 
+  toy: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.toy(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
   flowers: (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -1122,5 +1139,26 @@ module.exports = {
     const { id } = req.session.user;
     const pass = await db.ogre_moved(id);
     res.status(200).send(pass);
+  },
+
+  givePotatoes: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const cabin = await db.give_potatoes(id);
+    res.status(200).send(cabin);
+  },
+
+  giveKnife: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const cabin = await db.give_knife(id);
+    res.status(200).send(cabin);
+  },
+
+  giveWood: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const cabin = await db.give_wood(id);
+    res.status(200).send(cabin);
   },
 };
