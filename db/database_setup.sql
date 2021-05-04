@@ -38,7 +38,10 @@ values ($1, false, false, false, false, true);
 insert into dashboard (user_id, home_placed, grow_used, first_time)
 values ($1, false, false, true);
 
-insert into mountain (user_id, rock_taken, home_taken, first_time)
+insert into mountain (user_id, rock_taken, coin_taken, first_time)
+values ($1, false, false, true);
+
+insert into forest (user_id, coin_taken, apple_gotten, first_time)
 values ($1, false, false, true);
 
 insert into cabin (user_id, mushroom_taken, knife_given, wood_given, potatoes_given, train_received, first_time)

@@ -156,4 +156,13 @@ module.exports = {
 
     res.status(200).send(cabin);
   },
+
+  getForest: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const forest = await db.get_forest(id);
+
+    res.status(200).send(forest);
+  },
 };

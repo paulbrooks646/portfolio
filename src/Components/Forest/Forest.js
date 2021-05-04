@@ -1,9 +1,9 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getInventory } from "../../redux/inventoryReducer"
-import {getForest} from "../../redux/forestReducer"
+import { getInventory } from "../../redux/inventoryReducer";
+import { getForest } from "../../redux/forestReducer";
 import axios from "axios";
 import "./Forest.scss";
 import Card from "@material-ui/core/Card";
@@ -14,74 +14,74 @@ import ListItem from "@material-ui/core/ListItem";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
-import Character from "../Character/Character"
-import Elf from "../../Images/Elf.gif"
-import Loading from "../Loading/Loading"
+import Character from "../Character/Character";
+import Elf from "../../Images/Elf.gif";
+import Loading from "../Loading/Loading";
 
 function Forest(props) {
-  const [forestFirst, setForestFirst] = useState(props.user.user.forest);
+  const [forestFirst, setForestFirst] = useState(false);
   const [answerOne, setAnswerOne] = useState(false);
   const [answerTwo, setAnswerTwo] = useState(false);
   const [answerThree, setAnswerThree] = useState(false);
   const [answerFour, setAnswerFour] = useState(false);
-  const [ranger, setRanger] = useState(false)
-   const [downCharacter, setDownCharacter] = useState(false);
-   const [leftCharacter, setLeftCharacter] = useState(false);
-   const [rightCharacter, setRightCharacter] = useState(false);
-   const [downLeft, setDownLeft] = useState(false);
-   const [rightLeft, setRightLeft] = useState(false);
-   const [leftLeft, setLeftLeft] = useState(false);
-   const [downDown, setDownDown] = useState(false);
-   const [downRight, setDownRight] = useState(false);
-   const [rightRight, setRightRight] = useState(false);
-   const [rightDown, setRightDown] = useState(false);
-   const [leftRight, setLeftRight] = useState(false);
-   const [leftDown, setLeftDown] = useState(false);
-   const [isLoading, setIsLoading] = useState(true);
+  const [ranger, setRanger] = useState(false);
+  const [downCharacter, setDownCharacter] = useState(false);
+  const [leftCharacter, setLeftCharacter] = useState(false);
+  const [rightCharacter, setRightCharacter] = useState(false);
+  const [downLeft, setDownLeft] = useState(false);
+  const [rightLeft, setRightLeft] = useState(false);
+  const [leftLeft, setLeftLeft] = useState(false);
+  const [downDown, setDownDown] = useState(false);
+  const [downRight, setDownRight] = useState(false);
+  const [rightRight, setRightRight] = useState(false);
+  const [rightDown, setRightDown] = useState(false);
+  const [leftRight, setLeftRight] = useState(false);
+  const [leftDown, setLeftDown] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [trunkRejectionCard, setTrunkRejectionCard] = useState(false);
+  const [holeRejectionCard, setHoleRejectionCard] = useState(false);
+  const [coinCard, setCoinCard] = useState(false);
 
-   useEffect(() => {
-     // if (!props.user.user.newgame) {
-     //   setNewgameCard(false);
+  useEffect(() => {
+    axios.get("/api/forest").then((res) => {
+      props.getForest(res.data[0]);
+      if (res.data[0].first_time) {
+        setForestFirst(true);
+      }
 
-     // }
-     axios.get("/api/nest").then((res) => {
-       props.getForest(res.data[0]);
-
-       if (props.user.user.last === "cave") {
-         setDownCharacter(true);
-       } else if (props.user.user.last === "home") {
-         setLeftCharacter(true);
-       } else if (props.user.user.last === "swamp") {
-         setRightCharacter(true);
-       }
-       setIsLoading(false);
-     });
-   }, []);
-
-
+      if (props.user.user.last === "cave") {
+        setDownCharacter(true);
+      } else if (props.user.user.last === "home") {
+        setLeftCharacter(true);
+      } else if (props.user.user.last === "swamp") {
+        setRightCharacter(true);
+      }
+      setIsLoading(false);
+    });
+  }, []);
 
   const toggleLeft = () => {
-     axios.post("/api/changeLast", { last: "forest" }).then((res) => {
-       props.getUser(res.data).then(() => {
-         props.history.push("/Dashboard");
-       });
-     });
+    axios.post("/api/changeLast", { last: "forest" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Dashboard");
+      });
+    });
   };
 
   const toggleRight = () => {
-   axios.post("/api/changeLast", { last: "forest" }).then((res) => {
-     props.getUser(res.data).then(() => {
-       props.history.push("/Swamp");
-     });
-   });
+    axios.post("/api/changeLast", { last: "forest" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Swamp");
+      });
+    });
   };
 
   const toggleDown = () => {
-   axios.post("/api/changeLast", { last: "forest" }).then((res) => {
-     props.getUser(res.data).then(() => {
-       props.history.push("/Cave");
-     });
-   });
+    axios.post("/api/changeLast", { last: "forest" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Cave");
+      });
+    });
   };
 
   const toggleAnswerOne = () => {
@@ -105,64 +105,80 @@ function Forest(props) {
   };
 
   const toggleRanger = () => {
-    setRanger(!ranger)
-  }
+    setRanger(!ranger);
+  };
 
   const toggleForestFirst = () => {
-    axios.post("/api/forestFirst").then((res) =>
-      props.getUser(res.data))
-    setForestFirst(false)
-  }
+    axios.post("/api/forestFirst").then((res) => props.getUser(res.data));
+    setForestFirst(false);
+  };
 
-   const toggleGoLeft = () => {
-     if (props.user.user.last === "cave") {
-       setDownLeft(true);
-       setDownCharacter(false);
-     } else if (props.user.user.last === "home") {
-       setLeftCharacter(false);
-       setLeftLeft(true);
-     } else if (props.user.user.last === "swamp") {
-       setRightCharacter(false);
-       setRightLeft(true);
-     }
-   };
+  const toggleGoLeft = () => {
+    if (props.user.user.last === "cave") {
+      setDownLeft(true);
+      setDownCharacter(false);
+    } else if (props.user.user.last === "home") {
+      setLeftCharacter(false);
+      setLeftLeft(true);
+    } else if (props.user.user.last === "swamp") {
+      setRightCharacter(false);
+      setRightLeft(true);
+    }
+  };
 
-   const toggleGoRight = () => {
-     if (props.user.user.last === "cave") {
-       setDownRight(true);
-       setDownCharacter(false);
-     } else if (props.user.user.last === "home") {
-       setLeftCharacter(false);
-       setLeftRight(true);
-     } else if (props.user.user.last === "swamp") {
-       setRightCharacter(false);
-       setRightRight(true);
-     }
-   };
+  const toggleGoRight = () => {
+    if (props.user.user.last === "cave") {
+      setDownRight(true);
+      setDownCharacter(false);
+    } else if (props.user.user.last === "home") {
+      setLeftCharacter(false);
+      setLeftRight(true);
+    } else if (props.user.user.last === "swamp") {
+      setRightCharacter(false);
+      setRightRight(true);
+    }
+  };
 
-   const toggleGoDown = () => {
-     if (props.user.user.last === "cave") {
-       setDownDown(true);
-       setDownCharacter(false);
-     } else if (props.user.user.last === "home") {
-       setLeftCharacter(false);
-       setLeftDown(true);
-     } else if (props.user.user.last === "swamp") {
-       setRightCharacter(false);
-       setRightDown(true);
-     }
-   };
+  const toggleGoDown = () => {
+    if (props.user.user.last === "cave") {
+      setDownDown(true);
+      setDownCharacter(false);
+    } else if (props.user.user.last === "home") {
+      setLeftCharacter(false);
+      setLeftDown(true);
+    } else if (props.user.user.last === "swamp") {
+      setRightCharacter(false);
+      setRightDown(true);
+    }
+  };
 
-  return (
+  const tree = () => {
+    setTrunkRejectionCard(true);
+  };
 
-    isLoading ? <Loading/> :
+  const hole = () => {
+    if (props.forest.forest.coin_taken) {
+      setHoleRejectionCard(true);
+    } else {
+      axios.post("/api/forestCoin").then((res) => {
+        props.getForest(res.data[0]);
+        axios.post("/api/coin").then((res) => {
+          props.getUser(res.data);
+          setCoinCard(true);
+        });
+      });
+    }
+  };
+
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div className="forest-main">
       <Nav />
       <div className="forest-body">
         <div className="forest-top">
-          <div className="forest-top-left"></div>
-          <div className="forest-top-middle"></div>
-          <div className="forest-top-right"></div>
+          <div className="trunk" onClick={tree}></div>
+          <div className="hole" onClick={hole}></div>
         </div>
         <div className="forest-middle">
           <div className="forest-middle-left">
@@ -273,7 +289,7 @@ function Forest(props) {
           <div className="forest-bottom-right"></div>
         </div>
       </div>
-      <Card className={`${ranger ? "forest-card" : "forest-card-closed"}`}>
+      <Card id={`${ranger ? "forest-card" : "forest-card-closed"}`}>
         <Typography variant="h5" color="primary" className="forest-card-title">
           What brings you into the forest?
         </Typography>
@@ -300,7 +316,7 @@ function Forest(props) {
           Say Goodbye
         </Button>
       </Card>
-      <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
+      <Card id={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary" className="forest-card-title">
           Caves
         </Typography>
@@ -321,7 +337,7 @@ function Forest(props) {
           CLOSE
         </Button>
       </Card>
-      <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
+      <Card id={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary" className="forest-card-title">
           Goblins
         </Typography>
@@ -343,7 +359,7 @@ function Forest(props) {
           CLOSE
         </Button>
       </Card>
-      <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
+      <Card id={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary" className="forest-card-title">
           The Swamp
         </Typography>
@@ -364,7 +380,7 @@ function Forest(props) {
           CLOSE
         </Button>
       </Card>
-      <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
+      <Card id={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary" className="forest-card-title">
           Wolves
         </Typography>
@@ -386,7 +402,7 @@ function Forest(props) {
           CLOSE
         </Button>
       </Card>
-      <Card className={`${forestFirst ? "answer-card" : "answer-card-closed"}`}>
+      <Card id={`${forestFirst ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h6"
           color="secondary"
@@ -405,9 +421,62 @@ function Forest(props) {
           CLOSE
         </Button>
       </Card>
+      <Card id={`${coinCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You find a shiny gold coin in the hole in the tree.
+        </Typography>
+        <Button
+          onClick={() => setCoinCard(false)}
+          className="forest-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card id={`${trunkRejectionCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You have no way to climb this tree. It is far to tall and slippery.
+        </Typography>
+        <Button
+          onClick={() => setTrunkRejectionCard(false)}
+          className="forest-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card id={`${holeRejectionCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You find nothing else in this hole.
+        </Typography>
+        <Button
+          onClick={() => setHoleRejectionCard(false)}
+          className="forest-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getForest, getInventory })(Forest);
+export default connect(mapStateToProps, { getUser, getForest, getInventory })(
+  Forest
+);

@@ -14,9 +14,35 @@
     .forest-top {
       height: 35vh;
       display: flex;
+      justify-content: center;
+      align-items: flex-end;
       width: 100vw;
       background-image: url("../../Images/Forest.png");
       background-size: 100% 100%;
+      position: relative;
+
+      .trunk {
+        background-image: url("../../Images/Trunk.png");
+        background-size: 100% 100%;
+        height: 100%;
+        width: 10%;
+        z-index: 2;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+      }
+
+      .hole {
+        width: 6%;
+        height: 6%;
+        cursor: pointer;
+        z-index: 3;
+        position: absolute;
+        left: 11%;
+        bottom: 15%;
+      }
     }
 
     .forest-middle {
@@ -38,26 +64,22 @@
       }
 
       .forest-middle-middle {
-        
         width: 20%;
         height: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        
+        justify-content: flex-end;
 
         .forest-ranger {
           height: 150px;
           width: 100px;
           transform: scaleX(-1);
           cursor: pointer;
-          
         }
       }
 
       .forest-middle-right {
-        
         width: 40%;
         height: 100%;
         display: flex;
@@ -82,7 +104,7 @@
       width: 100vw;
 
       .forest-bottom-left {
-        background-image: url("../../Images/Grass.png");
+        background-image: url("../../Images/Forest.jpg");
         background-size: 100% 100%;
         height: 100%;
         width: 40%;
@@ -107,7 +129,7 @@
       }
 
       .forest-bottom-right {
-        background-image: url("../../Images/Grass.png");
+        background-image: url("../../Images/Forest.jpg");
         background-size: 100% 100%;
         height: 100%;
         width: 40%;
@@ -115,9 +137,9 @@
     }
   }
 
-  .forest-card {
-      height: 500px;
-      width: 500px;
+  #forest-card {
+    height: 500px;
+    width: 500px;
     background-color: white;
     border: solid black 2px;
     box-shadow: 2px 2px 2px 2px;
@@ -127,26 +149,27 @@
     align-items: center;
     position: absolute;
     text-align: center;
+    z-index: 4;
 
     .forest-list {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        cursor: pointer;
-        color: tomato;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      color: tomato;
     }
 
     .forest-card-description {
-        width: 90%;
+      width: 90%;
     }
   }
 
-  .forest-card-closed {
+  #forest-card-closed {
     display: none;
   }
-  .answer-card {
-      height: 400px;
-      width: 400px;
+  #answer-card {
+    height: 400px;
+    width: 400px;
     background-color: white;
     border: solid black 2px;
     box-shadow: 2px 2px 2px 2px;
@@ -156,16 +179,14 @@
     align-items: center;
     position: absolute;
     text-align: center;
-
-    
+    z-index: 4;
 
     .answer-card-description {
-        width: 90%;
+      width: 90%;
     }
   }
 
-  .answer-card-closed {
+  #answer-card-closed {
     display: none;
   }
 }
-

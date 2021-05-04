@@ -11,7 +11,8 @@ import { getGarden } from "../../redux/gardenReducer";
 import { getTower } from "../../redux/towerReducer";
 import { getNest } from "../../redux/nestReducer";
 import { getPass } from "../../redux/passReducer"
-import {getCabin} from "../../redux/cabinReducer"
+import { getCabin } from "../../redux/cabinReducer"
+import {getForest} from "../../redux/forestReducer"
 import axios from "axios";
 import "./Nav.scss";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
@@ -36,6 +37,7 @@ function Nav(props) {
   const [woodCard, setWoodCard] = useState(false)
   const [knifeCard, setKnifeCard] = useState(false)
   const [potatoesCard, setPotatoesCard] = useState(false)
+  const [bowCard, setBowCard] = useState(false)
   
 
   useEffect(() => {
@@ -308,7 +310,24 @@ function Nav(props) {
        } else {
          setRejectionCard(true);
        }
-     }
+    }
+    
+    if (item === "bow") {
+      if (
+        props.location.pathname === "/Forest"
+      ) {
+        axios.post("/api/apple").then(res => {
+          props.getInventory(res.data)
+          axios.get("/api/forest").then((res) => {
+            props.getForest(res.data[0]);
+            setBowCard(true);
+            
+          });
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
   };
 
   return (
@@ -555,7 +574,8 @@ function Nav(props) {
           color="primary"
           className="answer-card-description"
         >
-          Thanks for the potatoes. I was running low on vittles. Here is a coin in payment.
+          Thanks for the potatoes. I was running low on vittles. Here is a coin
+          in payment.
         </Typography>
         <Button
           onClick={() => setPotatoesCard(false)}
@@ -600,6 +620,23 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
+      <Card id={`${bowCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          You fire straight up. The arrow sails into the branches and a single apple falls. You dive and catch it but break the bow in the process.
+        </Typography>
+        <Button
+          onClick={() => setBowCard(false)}
+          className="stables-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
@@ -619,6 +656,7 @@ export default withRouter(
     getNest,
     getPass,
     getDashboard,
-    getCabin
+    getCabin,
+    getForest
   })(Nav)
 );
