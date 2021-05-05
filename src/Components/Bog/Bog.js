@@ -28,31 +28,28 @@ function Bog(props) {
     // }
     axios.get("/api/nest").then((res) => {
       props.getBog(res.data[0]);
-      setLeftCharacter(true)
+      setLeftCharacter(true);
       setIsLoading(false);
     });
   }, []);
 
   const toggleLeft = () => {
-     axios.post("/api/changeLast", { last: "bog" }).then((res) => {
-       props.getUser(res.data).then(() => {
-         props.history.push("/Swamp");
-       });
-     });
+    axios.post("/api/changeLast", { last: "bog" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Swamp");
+      });
+    });
   };
 
   const toggleGoLeft = () => {
-     setLeftCharacter(false);
-     setLeftLeft(true);
-    
-   };
-
-
+    setLeftCharacter(false);
+    setLeftLeft(true);
+  };
 
   const toggleRejectionCard = () => {
     if (!props.bog.bog.weasel_soothed) {
       setRejectionCardTwo(true);
-    }  else {
+    } else {
       setRejectionCard(true);
     }
   };
@@ -88,14 +85,12 @@ function Bog(props) {
             <div className="bog-hydra"></div>
           </div>
         </div>
-
         <div className="bog-bottom">
           <div className="bog-bottom-left"></div>
           <div className="bog-bottom-middle"></div>
           <div className="bog-bottom-right"></div>
         </div>
       </div>
-
       <Card
         className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
       >
@@ -127,7 +122,6 @@ function Bog(props) {
         </Typography>
         <Button
           onClick={() => setRejectionCardTwo(false)}
-          
           variant="contained"
           color="primary"
         >
@@ -148,7 +142,6 @@ function Bog(props) {
         </Typography>
         <Button
           onClick={() => setFirstTime(false)}
-          
           variant="contained"
           color="primary"
         >
@@ -160,6 +153,4 @@ function Bog(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory, getBog })(
-  Bog
-);
+export default connect(mapStateToProps, { getUser, getInventory, getBog })(Bog);

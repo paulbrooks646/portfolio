@@ -1,43 +1,36 @@
-
+@import "../mixins";
  
   .bog-body {
     height: 90vh;
     width: 100vw;
 
     .bog-top {
-      height: 35vh;
+      @include row(35vh);
       display: flex;
-      width: 100vw;
       background-image: url("../../Images/Bog.jpg");
       background-size: 100% 100%;
     }
 
     .bog-middle {
-      height: 20vh;
-      width: 100vw;
+      @include row(20vh);
       background-image: url("../../Images/Dirt.png");
       background-size: 100% 100%;
       display: flex;
 
       .bog-middle-left {
-        height: 100%;
-        width: 50vw;
-        display: flex;
-        align-items: center;
+        @include section(50vw);
+          @include center(flex-start);
 
         .bog-swamp {
-          display: flex;
-          align-items: center;
+          @include center(flex-start);
           cursor: pointer;
         }
       }
 
       .bog-middle-right {
-        height: 100%;
-        width: 50vw;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
+        @include section(50vw);
+        @include center(flex-end);
+       
 
         .bog-hydra {
           background-image: url("../../Images/Hydra.gif");
@@ -50,25 +43,21 @@
     }
 
     .bog-bottom {
-      height: 35vh;
+      @include row(35vh);
       display: flex;
-      width: 100vw;
       background-image: url("../../Images/Grass.png");
       background-size: 100% 100%;
 
       .bog-bottom-left {
-        height: 100%;
-        width: 40vw;
+        @include section(40vw);
       }
 
       .bog-bottom-middle {
-        height: 100%;
-        width: 20vw;
+      @include section(20vw);
       }
 
       .bog-bottom-right {
-        height: 100%;
-        width: 40vw;
+        @include section(40vw);
       }
     }
   }
