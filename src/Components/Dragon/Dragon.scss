@@ -1,98 +1,120 @@
-.dragon-main {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
+@import "../mixins";
 
-  .dragon-body {
-    background-image: url("../../Images/Cinders.png");
-    background-size: 100% 100%;
-    .dragon-top {
-      height: 35vh;
-      display: flex;
-      width: 100vw;
+.dragon-body {
+  background-image: url("../../Images/Cinders.png");
+  background-size: 100% 100%;
+  .dragon-top {
+    @include row(35vh);
+    display: flex;
 
-      .dragon-top-left {
-        width: 40%;
-        height: 100%;
-        background-image: url("../../Images//Cinders.png");
-        background-size: 100% 100%;
-      }
+    .dragon-top-left {
+      @include section(40vw);
+      @include flex(space-evenly);
 
-      .dragon-top-middle {
+      .dirt {
         background-image: url("../../Images/Dirt.png");
-        width: 20%;
+        background-size: 100% 100%;
         height: 100%;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
+        width: 50%;
+        @include flex(center);
 
-        .dragon-home {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
+        .seed {
+          background-image: url("../../Images/Seed.jpg");
+          background-size: 100% 100%;
+          height: 50px;
+          width: 50px;
           cursor: pointer;
         }
-      }
 
-      .dragon-top-right {
-        width: 40%;
-        height: 100%;
-      }
-    }
-
-    .dragon-middle {
-      height: 20vh;
-      display: flex;
-      width: 100vw;
-
-      .dragon-middle-left {
-        width: 40%;
-        height: 100%;
-      }
-
-      .dragon-middle-middle {
-        background-image: url("../../Images/Dirt.png");
-        width: 20%;
-        height: 100%;
-      }
-
-      .dragon-middle-right {
-        width: 40%;
-        height: 100%;
-      }
-    }
-
-    .dragon-bottom {
-      height: 35vh;
-      display: flex;
-      width: 100vw;
-
-      .dragon-bottom-left {
-        height: 100%;
-        width: 40%;
-      }
-
-      .dragon-bottom-middle {
-        background-image: url("../../Images/Dirt.png");
-        height: 100%;
-        width: 20%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-end;
-        border-bottom: solid black 40px;
-
-        .dragon-dragon {
-          height: 200px;
-          width: 300px;
-          z-index: 1;
+        .seed-closed {
+          display: none;
         }
       }
 
-      .dragon-bottom-right {
+      .ice {
+        background-color: rgba($color: #bbdefb, $alpha: 0.2);
         height: 100%;
-        width: 40%;
+        width: 50%;
+        cursor: pointer;
       }
+
+      .cinders {
+        height: 100%;
+        width: 50%;
+        background-color: transparent;
+        cursor: pointer;
+      }
+    }
+
+    .dragon-top-middle {
+      background-image: url("../../Images/Dirt.png");
+      @include section(20vw);
+      @include flex(flex-start);
+
+      .dragon-home {
+        @include flex(flex-start);
+        cursor: pointer;
+      }
+    }
+
+    .dragon-top-right {
+      @include section(40vw);
+    }
+  }
+
+  .dragon-middle {
+    @include row(20vh);
+
+    display: flex;
+
+    .dragon-middle-left {
+      @include section(40vw);
+    }
+
+    .dragon-middle-middle {
+      background-image: url("../../Images/Dirt.png");
+      @include section(20vw);
+    }
+
+    .dragon-middle-right {
+      @include section(40vw);
+    }
+  }
+
+  .dragon-bottom {
+    @include row(35vh);
+
+    display: flex;
+
+    .dragon-bottom-left {
+      @include section(40vw);
+    }
+
+    .dragon-bottom-middle {
+      background-image: url("../../Images/Dirt.png");
+      @include section(20vw);
+
+      @include flex(flex-end);
+      border-bottom: solid black 40px;
+
+      .dragon-dragon {
+        height: 200px;
+        width: 300px;
+        z-index: 1;
+        cursor: pointer;
+      }
+
+      .scroll {
+        background-image: url("../../Images/Scroll.jpg");
+        background-size: 100% 100%;
+        height: 50px;
+        width: 50px;
+        cursor: pointer;
+      }
+    }
+
+    .dragon-bottom-right {
+      @include section(40vw);
     }
   }
 }

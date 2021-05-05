@@ -94,6 +94,9 @@ app.post("/api/bow", inventoryController.bow);
 app.post("/api/rock", inventoryController.rock);
 app.post("/api/gem", inventoryController.gem);
 app.post("/api/apple", inventoryController.apple)
+app.post("/api/seed", inventoryController.seed)
+app.post("/api/charcoal", inventoryController.charcoal)
+app.post("/api/grow", inventoryController.grow)
 
 app.post("/api/manureCleanPermission", controller.manureCleanPermission);
 app.post("/api/caveCoin", controller.caveCoin);
@@ -122,6 +125,7 @@ app.post("/api/ogreMoved", controller.ogreMoved)
 app.post("/api/givePotatoes", controller.givePotatoes)
 app.post("/api/giveWood", controller.giveWood)
 app.post("/api/giveKnife", controller.giveKnife)
+app.post("/api/killDragon", controller.killDragon)
 
 
 app.use(express.static(__dirname + "/../build"));

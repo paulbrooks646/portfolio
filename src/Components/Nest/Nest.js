@@ -101,7 +101,7 @@ function Nest(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="nest-main">
+    <div className="main">
       <Nav />
       <div className="nest-body">
         <div className="nest-top">
@@ -187,23 +187,6 @@ function Nest(props) {
         </Typography>
         <Button
           onClick={toggleFirst}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${failure ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          Are you serious? Their is a ravenous wolf blocking the path.
-        </Typography>
-        <Button
-          onClick={() => setFailure(false)}
           className="forest-card-button"
           variant="contained"
           color="primary"

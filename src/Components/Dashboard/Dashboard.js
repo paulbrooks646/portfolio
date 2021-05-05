@@ -303,7 +303,7 @@ function Dashboard(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="dashboard-main">
+    <div className="main">
       <Nav />
       <div className="dashboard-body">
         <div className="dashboard-top">

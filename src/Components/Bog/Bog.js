@@ -60,7 +60,7 @@ function Bog(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="bog-main">
+    <div className="main">
       <Nav />
       <div className="bog-body">
         <div className="bog-top"></div>

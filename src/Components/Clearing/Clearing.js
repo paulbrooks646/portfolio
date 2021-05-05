@@ -50,7 +50,7 @@ function Clearing(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="clearing-main">
+    <div className="main">
       <Nav />
       <div className="clearing-body">
         <div className="clearing-top">

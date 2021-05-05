@@ -125,7 +125,7 @@ axios.post("/api/gem").then((res) => {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="pass-main">
+    <div className="main">
       <Nav />
       <div className="pass-body">
         <div className="pass-top">

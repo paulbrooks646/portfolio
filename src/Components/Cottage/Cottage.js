@@ -51,7 +51,7 @@ function Cottage(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="cottage-main">
+    <div className="main">
       <Nav />
       <div className="cottage-body">
         <div className="cottage-top">

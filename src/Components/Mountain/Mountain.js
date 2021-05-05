@@ -176,7 +176,7 @@ function Mountain(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="mountain-main">
+    <div className="main">
       <Nav />
       <div className="mountain-body">
         <div className="mountain-top">

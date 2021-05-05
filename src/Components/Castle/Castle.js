@@ -232,7 +232,7 @@ function Castle(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="castle-main">
+    <div className="main">
       <Nav />
       <div className="castle-body">
         <div className="castle-top">

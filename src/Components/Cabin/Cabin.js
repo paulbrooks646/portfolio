@@ -111,7 +111,7 @@ function Cabin(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="cabin-main">
+    <div className="main">
       <Nav />
       <div className="cabin-body">
         <div className="cabin-top">

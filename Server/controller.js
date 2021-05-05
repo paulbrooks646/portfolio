@@ -263,6 +263,13 @@ module.exports = {
     res.status(200).send(pass);
   },
 
+  killDragon: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const dragon = await db.kill_dragon(id);
+    res.status(200).send(dragon);
+  },
+
   givePotatoes: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;

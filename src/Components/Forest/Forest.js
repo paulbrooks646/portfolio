@@ -173,7 +173,7 @@ function Forest(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="forest-main">
+    <div className="main">
       <Nav />
       <div className="forest-body">
         <div className="forest-top">

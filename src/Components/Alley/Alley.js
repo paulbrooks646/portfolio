@@ -88,7 +88,7 @@ function Alley(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="alley-main">
+    <div className="main">
       <Nav />
       <div className="alley-body">
         <div className="alley-top"></div>

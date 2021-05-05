@@ -149,7 +149,7 @@ function Cave(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="cave-main">
+    <div className="main">
       <Nav />
       <div className="cave-body">
         <div className="cave-top">

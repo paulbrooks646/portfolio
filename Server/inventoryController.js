@@ -836,4 +836,55 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
+
+  seed: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.seed(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  charcoal: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.charcoal(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  grow: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.grow(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
 };
