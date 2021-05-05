@@ -5,7 +5,6 @@
   background-size: 100% 100%;
   .dragon-top {
     @include row(35vh);
-    display: flex;
 
     .dragon-top-left {
       @include section(40vw);
@@ -65,8 +64,6 @@
   .dragon-middle {
     @include row(20vh);
 
-    display: flex;
-
     .dragon-middle-left {
       @include section(40vw);
     }
@@ -83,8 +80,6 @@
 
   .dragon-bottom {
     @include row(35vh);
-
-    display: flex;
 
     .dragon-bottom-left {
       @include section(40vw);
