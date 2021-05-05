@@ -6,7 +6,6 @@
 
     .bog-top {
       @include row(35vh);
-      display: flex;
       background-image: url("../../Images/Bog.jpg");
       background-size: 100% 100%;
     }
@@ -15,7 +14,6 @@
       @include row(20vh);
       background-image: url("../../Images/Dirt.png");
       background-size: 100% 100%;
-      display: flex;
 
       .bog-middle-left {
         @include section(50vw);
@@ -44,7 +42,6 @@
 
     .bog-bottom {
       @include row(35vh);
-      display: flex;
       background-image: url("../../Images/Grass.png");
       background-size: 100% 100%;
 

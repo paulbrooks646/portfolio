@@ -1,17 +1,15 @@
 @import "../mixins";
 
 .alley-body {
-  
+
   .alley-top {
     @include row(35vh);
-    display: flex;
     background-image: url("../../Images/Brick.jpg");
     background-size: auto 100%;
   }
 
   .alley-middle {
     @include row(20vh);
-    display: flex;
     background-image: url("../../Images/Dirt.png");
     background-size: 100% 100%;
 
@@ -78,7 +76,6 @@
 
   .alley-bottom {
     @include section(35vh);
-    display: flex;
     background-image: url("../../Images/Brick.jpg");
     background-size: auto 100%;
   }

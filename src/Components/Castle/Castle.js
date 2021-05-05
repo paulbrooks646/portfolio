@@ -404,52 +404,26 @@ function Castle(props) {
         </div>
       </div>
       <Card className={`${guard ? "component-card" : "component-card-closed"}`}>
-        <Typography
-          variant="h5"
-          color="primary"
-          className="component-card-title"
-        >
+        <Typography variant="h5" color="primary">
           What would you like to know about?
         </Typography>
         <List className="component-list">
-          <ListItem className="component-list-item" onClick={toggleAnswerOne}>
-            The Dragon
-          </ListItem>
-          <ListItem className="component-list-item" onClick={toggleAnswerNine}>
-            Favor
-          </ListItem>
-          <ListItem className="component-list-item" onClick={toggleAnswerTwo}>
-            The Garden
-          </ListItem>
-          <ListItem className="component-list-item" onClick={toggleAnswerThree}>
-            The King
-          </ListItem>
-          <ListItem className="component-list-item" onClick={toggleAnswerFour}>
-            Permission
-          </ListItem>
-          <ListItem className="component-list-item" onClick={toggleAnswerFive}>
-            The Princess
-          </ListItem>
-          <ListItem className="component-list-item" onClick={toggleAnswerSix}>
-            The Tower
-          </ListItem>
-          <ListItem className="component-list-item" onClick={toggleAnswerSeven}>
-            The Throne Room
-          </ListItem>
-          <ListItem className="component-list-item" onClick={toggleAnswerEight}>
-            The Ultimate Axe
-          </ListItem>
+          <ListItem onClick={toggleAnswerOne}>The Dragon</ListItem>
+          <ListItem onClick={toggleAnswerNine}>Favor</ListItem>
+          <ListItem onClick={toggleAnswerTwo}>The Garden</ListItem>
+          <ListItem onClick={toggleAnswerThree}>The King</ListItem>
+          <ListItem onClick={toggleAnswerFour}>Permission</ListItem>
+          <ListItem onClick={toggleAnswerFive}>The Princess</ListItem>
+          <ListItem onClick={toggleAnswerSix}>The Tower</ListItem>
+          <ListItem onClick={toggleAnswerSeven}>The Throne Room</ListItem>
+          <ListItem onClick={toggleAnswerEight}>The Ultimate Axe</ListItem>
         </List>
         <Button onClick={toggleGuard} variant="contained" color="primary">
           Say Goodbye
         </Button>
       </Card>
       <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="component-card-title"
-        >
+        <Typography variant="h4" color="primary">
           The Dragon
         </Typography>
         <Typography
@@ -465,11 +439,7 @@ function Castle(props) {
         </Button>
       </Card>
       <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="component-card-title"
-        >
+        <Typography variant="h4" color="primary">
           The Garden
         </Typography>
         <Typography
@@ -486,11 +456,7 @@ function Castle(props) {
         </Button>
       </Card>
       <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="component-card-title"
-        >
+        <Typography variant="h4" color="primary">
           The King
         </Typography>
         <Typography
@@ -507,11 +473,7 @@ function Castle(props) {
         </Button>
       </Card>
       <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="component-card-title"
-        >
+        <Typography variant="h4" color="primary">
           Permission
         </Typography>
         <Typography
@@ -527,11 +489,7 @@ function Castle(props) {
         </Button>
       </Card>
       <Card className={`${answerFive ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="component-card-title"
-        >
+        <Typography variant="h4" color="primary">
           The Princess
         </Typography>
         <Typography
@@ -548,11 +506,7 @@ function Castle(props) {
         </Button>
       </Card>
       <Card className={`${answerSix ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="component-card-title"
-        >
+        <Typography variant="h4" color="primary">
           The Tower
         </Typography>
         <Typography
@@ -568,11 +522,7 @@ function Castle(props) {
         </Button>
       </Card>
       <Card className={`${answerSeven ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="component-card-title"
-        >
+        <Typography variant="h4" color="primary">
           The Throne Room
         </Typography>
         <Typography
@@ -588,11 +538,7 @@ function Castle(props) {
         </Button>
       </Card>
       <Card className={`${answerEight ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="component-card-title"
-        >
+        <Typography variant="h4" color="primary">
           The Ultimate Axe
         </Typography>
         <Typography
@@ -609,11 +555,7 @@ function Castle(props) {
         </Button>
       </Card>
       <Card className={`${answerNine ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="component-card-title"
-        >
+        <Typography variant="h4" color="primary">
           Favor
         </Typography>
         <Typography
@@ -647,11 +589,7 @@ function Castle(props) {
         </Button>
       </Card>
       <Card className={`${notAChance ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="component-card-title"
-        >
+        <Typography variant="h4" color="primary">
           NOT A CHANCE!!!
         </Typography>
         <Typography
