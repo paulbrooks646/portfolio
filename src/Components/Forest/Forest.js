@@ -289,35 +289,22 @@ function Forest(props) {
           <div className="forest-bottom-right"></div>
         </div>
       </div>
-      <Card id={`${ranger ? "forest-card" : "forest-card-closed"}`}>
-        <Typography variant="h5" color="primary" className="forest-card-title">
+      <Card id={`${ranger ? "component-card" : "component-card-closed"}`}>
+        <Typography variant="h5" color="primary">
           What brings you into the forest?
         </Typography>
-        <List className="forest-list">
-          <ListItem className="forest-list-item" onClick={toggleAnswerOne}>
-            Caves
-          </ListItem>
-          <ListItem className="forest-list-item" onClick={toggleAnswerTwo}>
-            Goblins
-          </ListItem>
-          <ListItem className="forest-list-item" onClick={toggleAnswerThree}>
-            The Swamp
-          </ListItem>
-          <ListItem className="forest-list-item" onClick={toggleAnswerFour}>
-            Wolves
-          </ListItem>
+        <List className="component-list">
+          <ListItem onClick={toggleAnswerOne}>Caves</ListItem>
+          <ListItem onClick={toggleAnswerTwo}>Goblins</ListItem>
+          <ListItem onClick={toggleAnswerThree}>The Swamp</ListItem>
+          <ListItem onClick={toggleAnswerFour}>Wolves</ListItem>
         </List>
-        <Button
-          onClick={toggleRanger}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleRanger} variant="contained" color="primary">
           Say Goodbye
         </Button>
       </Card>
       <Card id={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="forest-card-title">
+        <Typography variant="h4" color="primary">
           Caves
         </Typography>
         <Typography
@@ -328,17 +315,12 @@ function Forest(props) {
           Caves are often used as homes by dangerous woodland creatures. This
           area has a particularly large population of wolves.
         </Typography>
-        <Button
-          onClick={toggleAnswerOne}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerOne} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card id={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="forest-card-title">
+        <Typography variant="h4" color="primary">
           Goblins
         </Typography>
         <Typography
@@ -350,17 +332,12 @@ function Forest(props) {
           cowards. Come at them with a big enough weapon and they're likely to
           run off.
         </Typography>
-        <Button
-          onClick={toggleAnswerTwo}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerTwo} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card id={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="forest-card-title">
+        <Typography variant="h4" color="primary">
           The Swamp
         </Typography>
         <Typography
@@ -371,17 +348,12 @@ function Forest(props) {
           The swamp is home to any number of foul creatures. Lately it seems to
           be overrun with goblins.
         </Typography>
-        <Button
-          onClick={toggleAnswerThree}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerThree} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card id={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="forest-card-title">
+        <Typography variant="h4" color="primary">
           Wolves
         </Typography>
         <Typography
@@ -393,12 +365,7 @@ function Forest(props) {
           than we are. If you come across one, your best bet is to distract
           them.
         </Typography>
-        <Button
-          onClick={toggleAnswerFour}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerFour} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
@@ -412,12 +379,7 @@ function Forest(props) {
           ranger enjoying his lunch at a fork in the road. He may be a good
           source of information about the surrounding area.
         </Typography>
-        <Button
-          onClick={toggleForestFirst}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleForestFirst} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
@@ -431,7 +393,6 @@ function Forest(props) {
         </Typography>
         <Button
           onClick={() => setCoinCard(false)}
-          className="forest-card-button"
           variant="contained"
           color="primary"
         >
@@ -448,7 +409,6 @@ function Forest(props) {
         </Typography>
         <Button
           onClick={() => setTrunkRejectionCard(false)}
-          className="forest-card-button"
           variant="contained"
           color="primary"
         >
@@ -465,7 +425,6 @@ function Forest(props) {
         </Typography>
         <Button
           onClick={() => setHoleRejectionCard(false)}
-          className="forest-card-button"
           variant="contained"
           color="primary"
         >
