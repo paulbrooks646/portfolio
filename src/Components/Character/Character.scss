@@ -1,8 +1,7 @@
+@import "../mixins";
+
 .character {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include flex(flex-start);
   z-index: 1;
 
   .face {
@@ -10,11 +9,7 @@
     width: 60px;
     height: 70px;
     background-color: peachpuff;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
+    @include flex(space-evenly);
     border-top: solid yellow 5px;
 
     .eyes {
@@ -27,27 +22,21 @@
         background-color: white;
         height: 18px;
         width: 18px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        @include flex(center);
 
         .iris {
           border-radius: 50%;
           background-color: green;
           height: 8px;
           width: 8px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
+          @include flex(center);
 
-          // .pupil {
-          //   border-radius: 50%;
-          //   background-color: black;
-          //   height: 2px;
-          //   width: 2px;
-          // }
+          .pupil {
+            border-radius: 50%;
+            background-color: black;
+            height: 2px;
+            width: 2px;
+          }
         }
       }
     }
@@ -68,9 +57,7 @@
   }
   .body {
     width: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include flex(flex-start);
 
     .neck {
       background-color: black;
@@ -86,9 +73,7 @@
         width: 25px;
         height: 5px;
         transform: rotate(-2deg);
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
+        @include center(flex-start);
 
         .hand {
           border-radius: 50%;
@@ -103,9 +88,7 @@
         width: 25px;
         height: 5px;
         transform: rotate(2deg);
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
+        @include center(flex-end);
 
         .hand {
           border-radius: 50%;
@@ -130,10 +113,7 @@
         height: 30px;
         width: 5px;
         transform: rotate(10deg);
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        align-items: center;
+        @include flex(flex-end);
 
         .foot {
           border-radius: 50%;
@@ -148,10 +128,7 @@
         height: 30px;
         width: 5px;
         transform: rotate(-10deg);
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        align-items: center;
+        @include flex(flex-end);
 
         .foot {
           border-radius: 50%;
