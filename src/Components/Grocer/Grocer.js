@@ -80,8 +80,8 @@ function Grocer(props) {
           props.getUser(res.data);
           axios.get("/api/grocer").then((res) => {
             props.getGrocer(res.data[0]);
-            setCakeCard(!cakeCard)
-            toggleThanksCard()
+            setCakeCard(!cakeCard);
+            toggleThanksCard();
           });
         });
       });
@@ -90,24 +90,25 @@ function Grocer(props) {
 
   const toggleBuyCandy = () => {
     if (props.grocer.grocer.candy_bought) {
-    setCandyCard(!candyCard);
-    setBoughtCard(!boughtCard);
-  } else if (props.user.user.coins < 1) {
-    setCandyCard(!candyCard);
-    setPoorCard(!poorCard);
-  } else {
-    axios.post("/api/candy").then((res) => {
-      props.getInventory(res.data);
-      axios.get("/api/user").then((res) => {
-        props.getUser(res.data);
-        axios.get("/api/grocer").then((res) => {
-          props.getGrocer(res.data[0]);
-          setCandyCard(!candyCard);
-          toggleThanksCard();
+      setCandyCard(!candyCard);
+      setBoughtCard(!boughtCard);
+    } else if (props.user.user.coins < 1) {
+      setCandyCard(!candyCard);
+      setPoorCard(!poorCard);
+    } else {
+      axios.post("/api/candy").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/user").then((res) => {
+          props.getUser(res.data);
+          axios.get("/api/grocer").then((res) => {
+            props.getGrocer(res.data[0]);
+            setCandyCard(!candyCard);
+            toggleThanksCard();
+          });
         });
       });
-    });
-  }};
+    }
+  };
 
   const toggleBuyCheese = () => {
     if (props.grocer.grocer.cheese_bought) {
@@ -195,12 +196,12 @@ function Grocer(props) {
         });
       });
     }
-   };
-  
+  };
+
   const toggleBoughtCard = () => {
-    setBoughtCard(!boughtCard)
-    setGrocerCard(!grocerCard)
-  }
+    setBoughtCard(!boughtCard);
+    setGrocerCard(!grocerCard);
+  };
 
   const togglePoorCard = () => {
     setPoorCard(!poorCard);
@@ -215,77 +216,45 @@ function Grocer(props) {
   };
 
   return (
-    <div className="grocer-main">
+    <div className="main">
       <Nav />
       <div className="grocer-body">
         <Card
-          className={`${!grocerCard ? "grocer-card" : "grocer-card-closed"}`}
+          className={`${
+            !grocerCard ? "component-card" : "component-card-closed"
+          }`}
         >
-          <Typography
-            variant="h4"
-            color="primary"
-            className="grocer-card-title"
-          >
+          <Typography variant="h4" color="primary">
             Good day! Can I help you?
           </Typography>
-          <List className="grocer-list">
-            <ListItem className="grocer-list-item" onClick={togglePurchaseCake}>
-              Cake
-            </ListItem>
-            <ListItem
-              className="grocer-list-item"
-              onClick={togglePurchaseCandy}
-            >
-              Candy
-            </ListItem>
-            <ListItem
-              className="grocer-list-item"
-              onClick={togglePurchaseCheese}
-            >
-              Cheese
-            </ListItem>
-            <ListItem className="grocer-list-item" onClick={togglePurchaseMeat}>
-              Meat
-            </ListItem>
-            <ListItem className="grocer-list-item" onClick={togglePurchaseNuts}>
-              Nuts
-            </ListItem>
-            <ListItem
-              className="grocer-list-item"
-              onClick={togglePurchasePotatoes}
-            >
-              Potatoes
-            </ListItem>
+          <List className="component-list">
+            <ListItem onClick={togglePurchaseCake}>Cake</ListItem>
+            <ListItem onClick={togglePurchaseCandy}>Candy</ListItem>
+            <ListItem onClick={togglePurchaseCheese}>Cheese</ListItem>
+            <ListItem onClick={togglePurchaseMeat}>Meat</ListItem>
+            <ListItem onClick={togglePurchaseNuts}>Nuts</ListItem>
+            <ListItem onClick={togglePurchasePotatoes}>Potatoes</ListItem>
           </List>
-          <Button
-            onClick={toggleExit}
-            className="grocer-card-button"
-            variant="contained"
-            color="primary"
-          >
+          <Button onClick={toggleExit} variant="contained" color="primary">
             EXIT SHOP
           </Button>
         </Card>
-        <Card className={`${cakeCard ? "grocer-card" : "grocer-card-closed"}`}>
+        <Card
+          className={`${cakeCard ? "component-card" : "component-card-closed"}`}
+        >
           <Typography
             variant="h4"
             color="secondary"
-            className="grocer-card-description"
+            className="component-card-description"
           >
             Would you like to buy a cake for 1 coin?
           </Typography>
           <div className="button-div">
-            <Button
-              onClick={toggleBuyCake}
-              className="grocer-card-button"
-              variant="contained"
-              color="primary"
-            >
+            <Button onClick={toggleBuyCake} variant="contained" color="primary">
               YES
             </Button>
             <Button
               onClick={togglePurchaseCake}
-              className="grocer-card-button"
               variant="contained"
               color="primary"
             >
@@ -294,19 +263,20 @@ function Grocer(props) {
           </div>
         </Card>
         <Card
-          className={`${cheeseCard ? "grocer-card" : "grocer-card-closed"}`}
+          className={`${
+            cheeseCard ? "component-card" : "component-card-closed"
+          }`}
         >
           <Typography
             variant="h4"
             color="secondary"
-            className="grocer-card-description"
+            className="component-card-description"
           >
             Would you like to buy some cheese for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
               onClick={toggleBuyCheese}
-              className="grocer-card-button"
               variant="contained"
               color="primary"
             >
@@ -314,7 +284,6 @@ function Grocer(props) {
             </Button>
             <Button
               onClick={togglePurchaseCheese}
-              className="grocer-card-button"
               variant="contained"
               color="primary"
             >
@@ -322,18 +291,21 @@ function Grocer(props) {
             </Button>
           </div>
         </Card>
-        <Card className={`${candyCard ? "grocer-card" : "grocer-card-closed"}`}>
+        <Card
+          className={`${
+            candyCard ? "component-card" : "component-card-closed"
+          }`}
+        >
           <Typography
             variant="h4"
             color="secondary"
-            className="grocer-card-description"
+            className="component-card-description"
           >
             Would you like to buy some candy for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
               onClick={toggleBuyCandy}
-              className="grocer-card-button"
               variant="contained"
               color="primary"
             >
@@ -341,61 +313,6 @@ function Grocer(props) {
             </Button>
             <Button
               onClick={togglePurchaseCandy}
-              className="grocer-card-button"
-              variant="contained"
-              color="primary"
-            >
-              NO
-            </Button>
-          </div>
-        </Card>
-        <Card className={`${meatCard ? "grocer-card" : "grocer-card-closed"}`}>
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="grocer-card-description"
-          >
-            Would you like to buy some meat for 1 coin?
-          </Typography>
-          <div className="button-div">
-            <Button
-              onClick={toggleBuyMeat}
-              className="grocer-card-button"
-              variant="contained"
-              color="primary"
-            >
-              YES
-            </Button>
-            <Button
-              onClick={togglePurchaseMeat}
-              className="grocer-card-button"
-              variant="contained"
-              color="primary"
-            >
-              NO
-            </Button>
-          </div>
-        </Card>
-        <Card className={`${nutsCard ? "grocer-card" : "grocer-card-closed"}`}>
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="grocer-card-description"
-          >
-            Would you like to buy some nuts for 1 coin?
-          </Typography>
-          <div className="button-div">
-            <Button
-              onClick={toggleBuyNuts}
-              className="grocer-card-button"
-              variant="contained"
-              color="primary"
-            >
-              YES
-            </Button>
-            <Button
-              onClick={togglePurchaseNuts}
-              className="grocer-card-button"
               variant="contained"
               color="primary"
             >
@@ -404,19 +321,66 @@ function Grocer(props) {
           </div>
         </Card>
         <Card
-          className={`${potatoesCard ? "grocer-card" : "grocer-card-closed"}`}
+          className={`${meatCard ? "component-card" : "component-card-closed"}`}
         >
           <Typography
             variant="h4"
             color="secondary"
-            className="grocer-card-description"
+            className="component-card-description"
+          >
+            Would you like to buy some meat for 1 coin?
+          </Typography>
+          <div className="button-div">
+            <Button onClick={toggleBuyMeat} variant="contained" color="primary">
+              YES
+            </Button>
+            <Button
+              onClick={togglePurchaseMeat}
+              variant="contained"
+              color="primary"
+            >
+              NO
+            </Button>
+          </div>
+        </Card>
+        <Card
+          className={`${nutsCard ? "component-card" : "component-card-closed"}`}
+        >
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="component-card-description"
+          >
+            Would you like to buy some nuts for 1 coin?
+          </Typography>
+          <div className="button-div">
+            <Button onClick={toggleBuyNuts} variant="contained" color="primary">
+              YES
+            </Button>
+            <Button
+              onClick={togglePurchaseNuts}
+              variant="contained"
+              color="primary"
+            >
+              NO
+            </Button>
+          </div>
+        </Card>
+        <Card
+          className={`${
+            potatoesCard ? "component-card" : "component-card-closed"
+          }`}
+        >
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="component-card-description"
           >
             Would you like to buy some potatoes for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
               onClick={toggleBuyPotatoes}
-              className="grocer-card-button"
               variant="contained"
               color="primary"
             >
@@ -424,26 +388,6 @@ function Grocer(props) {
             </Button>
             <Button
               onClick={togglePurchasePotatoes}
-              className="grocer-card-button"
-              variant="contained"
-              color="primary"
-            >
-              NO
-            </Button>
-          </div>
-        </Card>
-        <Card className={`${poorCard ? "grocer-card" : "grocer-card-closed"}`}>
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="grocer-card-description"
-          >
-            I'm sorry. You appear not to have enough coins to buy this item.
-          </Typography>
-          <div className="button-div">
-            <Button
-              onClick={togglePoorCard}
-              className="grocer-card-button"
               variant="contained"
               color="primary"
             >
@@ -452,12 +396,34 @@ function Grocer(props) {
           </div>
         </Card>
         <Card
-          className={`${boughtCard ? "grocer-card" : "grocer-card-closed"}`}
+          className={`${poorCard ? "component-card" : "component-card-closed"}`}
         >
           <Typography
             variant="h4"
             color="secondary"
-            className="grocer-card-description"
+            className="component-card-description"
+          >
+            I'm sorry. You appear not to have enough coins to buy this item.
+          </Typography>
+          <div className="button-div">
+            <Button
+              onClick={togglePoorCard}
+              variant="contained"
+              color="primary"
+            >
+              NO
+            </Button>
+          </div>
+        </Card>
+        <Card
+          className={`${
+            boughtCard ? "component-card" : "component-card-closed"
+          }`}
+        >
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="component-card-description"
           >
             I'm sorry. I appear to be out of stock of that item. You must have
             bought my last one.
@@ -465,7 +431,6 @@ function Grocer(props) {
           <div className="button-div">
             <Button
               onClick={toggleBoughtCard}
-              className="grocer-card-button"
               variant="contained"
               color="primary"
             >
@@ -474,19 +439,20 @@ function Grocer(props) {
           </div>
         </Card>
         <Card
-          className={`${thanksCard ? "grocer-card" : "grocer-card-closed"}`}
+          className={`${
+            thanksCard ? "component-card" : "component-card-closed"
+          }`}
         >
           <Typography
             variant="h4"
             color="secondary"
-            className="grocer-card-description"
+            className="component-card-description"
           >
             Here you go. Thanks for your business!
           </Typography>
           <div className="button-div">
             <Button
               onClick={toggleThanksCardClosed}
-              className="grocer-card-button"
               variant="contained"
               color="primary"
             >
