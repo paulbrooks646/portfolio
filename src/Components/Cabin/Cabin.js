@@ -26,17 +26,16 @@ function Cabin(props) {
   const [answerFour, setAnswerFour] = useState(false);
   const [oldMan, setOldMan] = useState(false);
   const [firstTimeCard, setFirstTimeCard] = useState(false);
-  const [rejectionCard, setRejectionCard] = useState(false)
-  const [toyCard, setToyCard] = useState(false)
+  const [rejectionCard, setRejectionCard] = useState(false);
+  const [toyCard, setToyCard] = useState(false);
 
   useEffect(() => {
-    
     axios.get("/api/cabin").then((res) => {
       props.getCabin(res.data[0]);
       setUpCharacter(true);
- if (res.data[0].first_time) {
-   setFirstTimeCard(true);
- }
+      if (res.data[0].first_time) {
+        setFirstTimeCard(true);
+      }
       setIsLoading(false);
     });
   }, []);
@@ -44,27 +43,30 @@ function Cabin(props) {
   const toggleMushroom = () => {
     axios.post("/api/mushroom").then((res) => {
       props.getInventory(res.data);
-      axios.get("/api/cabin").then(res => {
-        props.getCabin(res.data[0])
+      axios.get("/api/cabin").then((res) => {
+        props.getCabin(res.data[0]);
         setMushroomCard(true);
-      })
+      });
     });
   };
 
   const toggleOldMan = () => {
-    if (props.cabin.cabin.knife_given && props.cabin.cabin.wood_given && !props.cabin.cabin.toy_received) {
-      axios.post("/api/toy").then(res => {
-        props.getInventory(res.data)
-        axios.get("/api/cabin").then(res => {
-          props.getCabin(res.data[0])
-          setToyCard(true)
-        })
-      })
-    }
-    else if (!props.cabin.cabin.potatoes_given) {
-      setRejectionCard(true)
+    if (
+      props.cabin.cabin.knife_given &&
+      props.cabin.cabin.wood_given &&
+      !props.cabin.cabin.toy_received
+    ) {
+      axios.post("/api/toy").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/cabin").then((res) => {
+          props.getCabin(res.data[0]);
+          setToyCard(true);
+        });
+      });
+    } else if (!props.cabin.cabin.potatoes_given) {
+      setRejectionCard(true);
     } else {
-      setOldMan(!oldMan)
+      setOldMan(!oldMan);
     }
   };
 
@@ -91,7 +93,7 @@ function Cabin(props) {
   const toggleFirstTimeCard = () => {
     axios.post("/api/cabinFirst").then((res) => {
       props.getCabin(res.data[0]);
-      setFirstTimeCard(false)
+      setFirstTimeCard(false);
     });
   };
 
@@ -179,43 +181,39 @@ function Cabin(props) {
         </Typography>
         <Button
           onClick={() => setMushroomCard(false)}
-          className="forest-card-button"
           variant="contained"
           color="primary"
         >
           CLOSE
         </Button>
       </Card>
-      <Card className={`${oldMan ? "cabin-card" : "cabin-card-closed"}`}>
-        <Typography variant="h5" color="primary" className="cabin-card-title">
+      <Card
+        className={`${oldMan ? "component-card" : "component-card-closed"}`}
+      >
+        <Typography variant="h5" color="primary" >
           I suppose since you saved me a trip to civilization I could answer a
           few questions?
         </Typography>
-        <List className="cabin-list">
-          <ListItem className="cabin-list-item" onClick={toggleAnswerOne}>
+        <List className="component-list">
+          <ListItem  onClick={toggleAnswerOne}>
             Pass
           </ListItem>
-          <ListItem className="cabin-list-item" onClick={toggleAnswerTwo}>
+          <ListItem  onClick={toggleAnswerTwo}>
             Cabin
           </ListItem>
-          <ListItem className="cabin-list-item" onClick={toggleAnswerThree}>
+          <ListItem  onClick={toggleAnswerThree}>
             Whittling
           </ListItem>
-          <ListItem className="cabin-list-item" onClick={toggleAnswerFour}>
+          <ListItem  onClick={toggleAnswerFour}>
             Toy
           </ListItem>
         </List>
-        <Button
-          onClick={toggleOldMan}
-          className="cabin-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleOldMan} variant="contained" color="primary">
           Say Goodbye
         </Button>
       </Card>
       <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="cabin-card-title">
+        <Typography variant="h4" color="primary" >
           Pass
         </Typography>
         <Typography
@@ -227,17 +225,12 @@ function Cabin(props) {
           been quiet around here since the ogre blocked the pass. I've had
           plenty of time to whittle in peace.
         </Typography>
-        <Button
-          onClick={toggleAnswerOne}
-          className="cabin-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerOne} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="cabin-card-title">
+        <Typography variant="h4" color="primary" >
           Cabin
         </Typography>
         <Typography
@@ -250,17 +243,12 @@ function Cabin(props) {
           the ogre blocked the pass. Every year or so I go into town for food to
           supplement what I can find in the mountains.
         </Typography>
-        <Button
-          onClick={toggleAnswerTwo}
-          className="cabin-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerTwo} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="cabin-card-title">
+        <Typography variant="h4" color="primary" >
           Whittling
         </Typography>
         <Typography
@@ -273,17 +261,12 @@ function Cabin(props) {
           time. I'm old enough now that my tree chopping days are over. I
           scrounge for wood here and there but it is hard to find good wood.
         </Typography>
-        <Button
-          onClick={toggleAnswerThree}
-          className="cabin-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerThree} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="cabin-card-title">
+        <Typography variant="h4" color="primary" >
           Toy
         </Typography>
         <Typography
@@ -294,19 +277,14 @@ function Cabin(props) {
           I suppose I could make a toy for you if you got me some wood and a new
           knife.
         </Typography>
-        <Button
-          onClick={toggleAnswerFour}
-          className="cabin-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerFour} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card
         className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}
       >
-        <Typography variant="h4" color="primary" className="cabin-card-title">
+        <Typography variant="h4" color="primary" >
           Phew!
         </Typography>
         <Typography
@@ -321,7 +299,6 @@ function Cabin(props) {
         </Typography>
         <Button
           onClick={toggleFirstTimeCard}
-          className="cabin-card-button"
           variant="contained"
           color="primary"
         >
@@ -342,16 +319,13 @@ function Cabin(props) {
         </Typography>
         <Button
           onClick={() => setRejectionCard(false)}
-          className="forest-card-button"
           variant="contained"
           color="primary"
         >
           CLOSE
         </Button>
       </Card>
-      <Card
-        className={`${toyCard ? "answer-card" : "answer-card-closed"}`}
-      >
+      <Card className={`${toyCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h6"
           color="secondary"
@@ -361,7 +335,6 @@ function Cabin(props) {
         </Typography>
         <Button
           onClick={() => setToyCard(false)}
-          className="forest-card-button"
           variant="contained"
           color="primary"
         >

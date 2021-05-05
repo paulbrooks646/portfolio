@@ -1,4 +1,4 @@
-.main {
+
  
   .bog-body {
     height: 90vh;
@@ -72,54 +72,4 @@
       }
     }
   }
-  .bog-card {
-    height: 500px;
-    width: 500px;
-    background-color: white;
-    border: solid black 2px;
-    box-shadow: 2px 2px 2px 2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: absolute;
-    text-align: center;
-
-    .bog-list {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-      color: tomato;
-    }
-
-    .bog-card-description {
-      width: 90%;
-    }
-  }
-
-  .bog-card-closed {
-    display: none;
-  }
-  .answer-card {
-    height: 400px;
-    width: 400px;
-    background-color: white;
-    border: solid black 2px;
-    box-shadow: 2px 2px 2px 2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: absolute;
-    text-align: center;
-
-    .answer-card-description {
-      width: 90%;
-    }
-  }
-
-  .answer-card-closed {
-    display: none;
-  }
-}
+ 

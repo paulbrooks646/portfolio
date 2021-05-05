@@ -108,7 +108,6 @@ function Bog(props) {
         </Typography>
         <Button
           onClick={() => setRejectionCard(false)}
-          className="castle-card-button"
           variant="contained"
           color="primary"
         >
@@ -128,7 +127,7 @@ function Bog(props) {
         </Typography>
         <Button
           onClick={() => setRejectionCardTwo(false)}
-          className="castle-card-button"
+          
           variant="contained"
           color="primary"
         >
@@ -149,7 +148,7 @@ function Bog(props) {
         </Typography>
         <Button
           onClick={() => setFirstTime(false)}
-          className="castle-card-button"
+          
           variant="contained"
           color="primary"
         >

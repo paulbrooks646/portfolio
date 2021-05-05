@@ -49,6 +49,8 @@
   text-align: center;
 }
 
+
+
 @mixin answer {
   height: 400px;
   width: 400px;
@@ -61,4 +63,11 @@
   align-items: center;
   position: absolute;
   text-align: center;
+}
+
+@mixin center($justify) {
+    display: flex;
+    align-items: center;
+    justify-content: $justify;
+    position: relative;
 }

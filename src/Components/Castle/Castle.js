@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import {getCastle} from "../../redux/castleReducer"
+import { getCastle } from "../../redux/castleReducer";
 import axios from "axios";
 import "./Castle.scss";
 import Card from "@material-ui/core/Card";
@@ -19,26 +19,26 @@ import Guard from "../../Images/Guard.png";
 import Loading from "../Loading/Loading";
 
 function Castle(props) {
- const [downCharacter, setDownCharacter] = useState(false);
- const [upCharacter, setUpCharacter] = useState(false);
- const [leftCharacter, setLeftCharacter] = useState(false);
- const [rightCharacter, setRightCharacter] = useState(false);
- const [downLeft, setDownLeft] = useState(false);
- const [upLeft, setUpLeft] = useState(false);
- const [rightLeft, setRightLeft] = useState(false);
- const [leftLeft, setLeftLeft] = useState(false);
- const [downUp, setDownUp] = useState(false);
- const [downDown, setDownDown] = useState(false);
- const [downRight, setDownRight] = useState(false);
- const [upUp, setUpUp] = useState(false);
- const [upRight, setUpRight] = useState(false);
- const [upDown, setUpDown] = useState(false);
- const [rightUp, setRightUp] = useState(false);
- const [rightRight, setRightRight] = useState(false);
- const [rightDown, setRightDown] = useState(false);
- const [leftUp, setLeftUp] = useState(false);
- const [leftRight, setLeftRight] = useState(false);
- const [leftDown, setLeftDown] = useState(false);
+  const [downCharacter, setDownCharacter] = useState(false);
+  const [upCharacter, setUpCharacter] = useState(false);
+  const [leftCharacter, setLeftCharacter] = useState(false);
+  const [rightCharacter, setRightCharacter] = useState(false);
+  const [downLeft, setDownLeft] = useState(false);
+  const [upLeft, setUpLeft] = useState(false);
+  const [rightLeft, setRightLeft] = useState(false);
+  const [leftLeft, setLeftLeft] = useState(false);
+  const [downUp, setDownUp] = useState(false);
+  const [downDown, setDownDown] = useState(false);
+  const [downRight, setDownRight] = useState(false);
+  const [upUp, setUpUp] = useState(false);
+  const [upRight, setUpRight] = useState(false);
+  const [upDown, setUpDown] = useState(false);
+  const [rightUp, setRightUp] = useState(false);
+  const [rightRight, setRightRight] = useState(false);
+  const [rightDown, setRightDown] = useState(false);
+  const [leftUp, setLeftUp] = useState(false);
+  const [leftRight, setLeftRight] = useState(false);
+  const [leftDown, setLeftDown] = useState(false);
   const [guard, setGuard] = useState(false);
   const [answerOne, setAnswerOne] = useState(false);
   const [answerTwo, setAnswerTwo] = useState(false);
@@ -53,44 +53,48 @@ function Castle(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [rejectionCard, setRejectionCard] = useState(false);
 
- useEffect(() => {
-   // if (!props.user.user.newgame) {
-   //   setNewgameCard(false);
+  useEffect(() => {
+    // if (!props.user.user.newgame) {
+    //   setNewgameCard(false);
 
-   // }
-   axios.get("/api/castle").then((res) => {
-     props.getCastle(res.data[0]);
+    // }
+    axios.get("/api/castle").then((res) => {
+      props.getCastle(res.data[0]);
 
-     if (props.user.user.last === "town") {
-       setDownCharacter(true);
-     } else if (props.user.user.last === "garden") {
-       setLeftCharacter(true);
-     } else if (props.user.user.last === "tower") {
-       setRightCharacter(true);
-     } else if (props.user.user.last === "throne") {
-       setUpCharacter(true);
-     }
-     setIsLoading(false);
-   });
- }, []);
+      if (props.user.user.last === "town") {
+        setDownCharacter(true);
+      } else if (props.user.user.last === "garden") {
+        setLeftCharacter(true);
+      } else if (props.user.user.last === "tower") {
+        setRightCharacter(true);
+      } else if (props.user.user.last === "throne") {
+        setUpCharacter(true);
+      }
+      setIsLoading(false);
+    });
+  }, []);
 
   const toggleUp = () => {
-    if (props.castle.castle.nuts_given === true && props.castle.castle.hat_given === true && props.castle.castle.letter_given === true) {
+    if (
+      props.castle.castle.nuts_given === true &&
+      props.castle.castle.hat_given === true &&
+      props.castle.castle.letter_given === true
+    ) {
       axios.post("/api/changeLast", { last: "castle" }).then((res) => {
         props.getUser(res.data).then(() => {
           props.history.push("/Throne");
         });
       });
     } else {
-    setNotAChance(true)
+      setNotAChance(true);
     }
   };
   const toggleLeft = () => {
-     axios.post("/api/changeLast", { last: "castle" }).then((res) => {
-       props.getUser(res.data).then(() => {
-         props.history.push("/Garden");
-       });
-     });
+    axios.post("/api/changeLast", { last: "castle" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Garden");
+      });
+    });
   };
 
   const toggleRight = () => {
@@ -101,23 +105,20 @@ function Castle(props) {
     });
   };
   const toggleDown = () => {
-     axios.post("/api/changeLast", { last: "castle" }).then((res) => {
-       props.getUser(res.data).then(() => {
-         props.history.push("/Town");
-       });
-     });
+    axios.post("/api/changeLast", { last: "castle" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Town");
+      });
+    });
   };
 
   const toggleGuard = () => {
-    
-      if (props.castle.castle.nuts_given === true) {
-        
-        setGuard(!guard);
-      } else {
-        setRejectionCard(true);
-        console.log("false")
-      }
-    
+    if (props.castle.castle.nuts_given === true) {
+      setGuard(!guard);
+    } else {
+      setRejectionCard(true);
+      console.log("false");
+    }
   };
 
   const toggleAnswerOne = () => {
@@ -165,69 +166,69 @@ function Castle(props) {
     setAnswerNine(!answerNine);
   };
 
-   const toggleGoLeft = () => {
-     if (props.user.user.last === "town") {
-       setDownLeft(true);
-       setDownCharacter(false);
-     } else if (props.user.user.last === "garden") {
-       setLeftCharacter(false);
-       setLeftLeft(true);
-     } else if (props.user.user.last === "tower") {
-       setRightCharacter(false);
-       setRightLeft(true);
-     } else if (props.user.user.last === "throne") {
-       setUpCharacter(false);
-       setUpLeft(true);
-     }
-   };
+  const toggleGoLeft = () => {
+    if (props.user.user.last === "town") {
+      setDownLeft(true);
+      setDownCharacter(false);
+    } else if (props.user.user.last === "garden") {
+      setLeftCharacter(false);
+      setLeftLeft(true);
+    } else if (props.user.user.last === "tower") {
+      setRightCharacter(false);
+      setRightLeft(true);
+    } else if (props.user.user.last === "throne") {
+      setUpCharacter(false);
+      setUpLeft(true);
+    }
+  };
 
-   const toggleGoRight = () => {
-     if (props.user.user.last === "town") {
-       setDownRight(true);
-       setDownCharacter(false);
-     } else if (props.user.user.last === "garden") {
-       setLeftCharacter(false);
-       setLeftRight(true);
-     } else if (props.user.user.last === "tower") {
-       setRightCharacter(false);
-       setRightRight(true);
-     } else if (props.user.user.last === "throne") {
-       setUpCharacter(false);
-       setUpRight(true);
-     }
-   };
+  const toggleGoRight = () => {
+    if (props.user.user.last === "town") {
+      setDownRight(true);
+      setDownCharacter(false);
+    } else if (props.user.user.last === "garden") {
+      setLeftCharacter(false);
+      setLeftRight(true);
+    } else if (props.user.user.last === "tower") {
+      setRightCharacter(false);
+      setRightRight(true);
+    } else if (props.user.user.last === "throne") {
+      setUpCharacter(false);
+      setUpRight(true);
+    }
+  };
 
-   const toggleGoUp = () => {
-     if (props.user.user.last === "town") {
-       setDownUp(true);
-       setDownCharacter(false);
-     } else if (props.user.user.last === "garden") {
-       setLeftCharacter(false);
-       setLeftUp(true);
-     } else if (props.user.user.last === "tower") {
-       setRightCharacter(false);
-       setRightUp(true);
-     } else if (props.user.user.last === "throne") {
-       setUpCharacter(false);
-       setUpUp(true);
-     }
-   };
+  const toggleGoUp = () => {
+    if (props.user.user.last === "town") {
+      setDownUp(true);
+      setDownCharacter(false);
+    } else if (props.user.user.last === "garden") {
+      setLeftCharacter(false);
+      setLeftUp(true);
+    } else if (props.user.user.last === "tower") {
+      setRightCharacter(false);
+      setRightUp(true);
+    } else if (props.user.user.last === "throne") {
+      setUpCharacter(false);
+      setUpUp(true);
+    }
+  };
 
-   const toggleGoDown = () => {
-     if (props.user.user.last === "town") {
-       setDownDown(true);
-       setDownCharacter(false);
-     } else if (props.user.user.last === "garden") {
-       setLeftCharacter(false);
-       setLeftDown(true);
-     } else if (props.user.user.last === "tower") {
-       setRightCharacter(false);
-       setRightDown(true);
-     } else if (props.user.user.last === "throne") {
-       setUpCharacter(false);
-       setUpDown(true);
-     }
-   };
+  const toggleGoDown = () => {
+    if (props.user.user.last === "town") {
+      setDownDown(true);
+      setDownCharacter(false);
+    } else if (props.user.user.last === "garden") {
+      setLeftCharacter(false);
+      setLeftDown(true);
+    } else if (props.user.user.last === "tower") {
+      setRightCharacter(false);
+      setRightDown(true);
+    } else if (props.user.user.last === "throne") {
+      setUpCharacter(false);
+      setUpDown(true);
+    }
+  };
 
   return isLoading ? (
     <Loading />
@@ -402,50 +403,53 @@ function Castle(props) {
           <div className="castle-bottom-right"></div>
         </div>
       </div>
-      <Card className={`${guard ? "castle-card" : "castle-card-closed"}`}>
-        <Typography variant="h5" color="primary" className="castle-card-title">
+      <Card className={`${guard ? "component-card" : "component-card-closed"}`}>
+        <Typography
+          variant="h5"
+          color="primary"
+          className="component-card-title"
+        >
           What would you like to know about?
         </Typography>
-        <List className="castle-list">
-          <ListItem className="castle-list-item" onClick={toggleAnswerOne}>
+        <List className="component-list">
+          <ListItem className="component-list-item" onClick={toggleAnswerOne}>
             The Dragon
           </ListItem>
-          <ListItem className="castle-list-item" onClick={toggleAnswerNine}>
+          <ListItem className="component-list-item" onClick={toggleAnswerNine}>
             Favor
           </ListItem>
-          <ListItem className="castle-list-item" onClick={toggleAnswerTwo}>
+          <ListItem className="component-list-item" onClick={toggleAnswerTwo}>
             The Garden
           </ListItem>
-          <ListItem className="castle-list-item" onClick={toggleAnswerThree}>
+          <ListItem className="component-list-item" onClick={toggleAnswerThree}>
             The King
           </ListItem>
-          <ListItem className="castle-list-item" onClick={toggleAnswerFour}>
+          <ListItem className="component-list-item" onClick={toggleAnswerFour}>
             Permission
           </ListItem>
-          <ListItem className="castle-list-item" onClick={toggleAnswerFive}>
+          <ListItem className="component-list-item" onClick={toggleAnswerFive}>
             The Princess
           </ListItem>
-          <ListItem className="castle-list-item" onClick={toggleAnswerSix}>
+          <ListItem className="component-list-item" onClick={toggleAnswerSix}>
             The Tower
           </ListItem>
-          <ListItem className="castle-list-item" onClick={toggleAnswerSeven}>
+          <ListItem className="component-list-item" onClick={toggleAnswerSeven}>
             The Throne Room
           </ListItem>
-          <ListItem className="castle-list-item" onClick={toggleAnswerEight}>
+          <ListItem className="component-list-item" onClick={toggleAnswerEight}>
             The Ultimate Axe
           </ListItem>
         </List>
-        <Button
-          onClick={toggleGuard}
-          className="castle-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleGuard} variant="contained" color="primary">
           Say Goodbye
         </Button>
       </Card>
       <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="castle-card-title">
+        <Typography
+          variant="h4"
+          color="primary"
+          className="component-card-title"
+        >
           The Dragon
         </Typography>
         <Typography
@@ -456,17 +460,16 @@ function Castle(props) {
           You want to slay the dragon? Don't be a fool! It is said that only the
           Ultimate Axe is sharp enough to penetrate its scales.
         </Typography>
-        <Button
-          onClick={toggleAnswerOne}
-          className="castle-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerOne} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="castle-card-title">
+        <Typography
+          variant="h4"
+          color="primary"
+          className="component-card-title"
+        >
           The Garden
         </Typography>
         <Typography
@@ -478,17 +481,16 @@ function Castle(props) {
           but the royal gardener wouldn't let me. She is very protective of her
           garden.
         </Typography>
-        <Button
-          onClick={toggleAnswerTwo}
-          className="castle-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerTwo} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="castle-card-title">
+        <Typography
+          variant="h4"
+          color="primary"
+          className="component-card-title"
+        >
           The King
         </Typography>
         <Typography
@@ -500,17 +502,16 @@ function Castle(props) {
           irritable since he and the princess got into an argument and the
           princess took up residence in the tower.
         </Typography>
-        <Button
-          onClick={toggleAnswerThree}
-          className="castle-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerThree} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="castle-card-title">
+        <Typography
+          variant="h4"
+          color="primary"
+          className="component-card-title"
+        >
           Permission
         </Typography>
         <Typography
@@ -521,17 +522,16 @@ function Castle(props) {
           I'll tell you what if can convince me you have a legitimate reason to
           see the King and do me a favor I will let you pass.
         </Typography>
-        <Button
-          onClick={toggleAnswerFour}
-          className="castle-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerFour} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerFive ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="castle-card-title">
+        <Typography
+          variant="h4"
+          color="primary"
+          className="component-card-title"
+        >
           The Princess
         </Typography>
         <Typography
@@ -543,17 +543,16 @@ function Castle(props) {
           summer day. Other times she is as frigid as winter. She is currently
           living in the tower.
         </Typography>
-        <Button
-          onClick={toggleAnswerFive}
-          className="castle-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerFive} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerSix ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="castle-card-title">
+        <Typography
+          variant="h4"
+          color="primary"
+          className="component-card-title"
+        >
           The Tower
         </Typography>
         <Typography
@@ -564,17 +563,16 @@ function Castle(props) {
           If you go there be careful. The princess doesn't want to disturbed.
           Her vicious pet weasel is attacking anyone who goes there.
         </Typography>
-        <Button
-          onClick={toggleAnswerSix}
-          className="castle-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerSix} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerSeven ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="castle-card-title">
+        <Typography
+          variant="h4"
+          color="primary"
+          className="component-card-title"
+        >
           The Throne Room
         </Typography>
         <Typography
@@ -585,17 +583,16 @@ function Castle(props) {
           No one crosses the drawbridge and enters the throne room with out my
           permission.
         </Typography>
-        <Button
-          onClick={toggleAnswerSeven}
-          className="castle-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerSeven} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerEight ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="castle-card-title">
+        <Typography
+          variant="h4"
+          color="primary"
+          className="component-card-title"
+        >
           The Ultimate Axe
         </Typography>
         <Typography
@@ -607,17 +604,16 @@ function Castle(props) {
           created. It is in the King's posession and I can't imagine he will
           ever part with it.
         </Typography>
-        <Button
-          onClick={toggleAnswerEight}
-          className="castle-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerEight} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerNine ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="castle-card-title">
+        <Typography
+          variant="h4"
+          color="primary"
+          className="component-card-title"
+        >
           Favor
         </Typography>
         <Typography
@@ -628,12 +624,7 @@ function Castle(props) {
           While I was hunting in the forest I lost my favorite hat. If you find
           it for me, I would be very grateful.
         </Typography>
-        <Button
-          onClick={toggleAnswerNine}
-          className="castle-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerNine} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
@@ -649,7 +640,6 @@ function Castle(props) {
         </Typography>
         <Button
           onClick={() => setRejectionCard(false)}
-          className="castle-card-button"
           variant="contained"
           color="primary"
         >
@@ -657,7 +647,11 @@ function Castle(props) {
         </Button>
       </Card>
       <Card className={`${notAChance ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="castle-card-title">
+        <Typography
+          variant="h4"
+          color="primary"
+          className="component-card-title"
+        >
           NOT A CHANCE!!!
         </Typography>
         <Typography
@@ -669,7 +663,6 @@ function Castle(props) {
         </Typography>
         <Button
           onClick={() => setNotAChance(false)}
-          className="castle-card-button"
           variant="contained"
           color="primary"
         >
