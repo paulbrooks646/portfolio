@@ -64,7 +64,6 @@ function Dashboard(props) {
 
   useEffect(() => {
     axios.get("/api/dashboard").then((res) => {
-      
       props.getDashboard(res.data[0]);
       if (res.data[0].first_time) {
         setHouse(true);
@@ -549,52 +548,39 @@ function Dashboard(props) {
       <Card
         className={`${
           props.dashboard.dashboard.first_time
-            ? "dashboard-card"
-            : "dashboard-card-closed"
+            ? "component-card"
+            : "component-card-closed"
         }`}
       >
-        <Typography
-          variant="h4"
-          color="primary"
-          className="dashboard-card-title"
-        >
+        <Typography variant="h4" color="primary">
           Welcome to {props.user.user.name}'s Quest
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
-          className="dashboard-card-description"
+          className="component-card-description"
         >
           {props.user.user.name}, you have recently come of age and have
           ventured far from your parents and the home of your youth to make a
           name for yourself. Using all the coins you have saved up in life you
           have bought a surprisingly cheap home. Everything seems perfect.
         </Typography>
-        <Button
-          onClick={toggleNewgame}
-          className="dashboard-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleNewgame} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card
         className={`${
-          newGameCardTwo ? "dashboard-card" : "dashboard-card-closed"
+          newGameCardTwo ? "component-card" : "component-card-closed"
         }`}
       >
-        <Typography
-          variant="h4"
-          color="primary"
-          className="dashboard-card-title"
-        >
+        <Typography variant="h4" color="primary">
           Oh boy!!!
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
-          className="dashboard-card-description"
+          className="component-card-description"
         >
           What are you supposed to do now? You have no home, no coins, and no
           friends. How will you survive? More importantly, how will you slay the
@@ -602,7 +588,6 @@ function Dashboard(props) {
         </Typography>
         <Button
           onClick={() => setNewGameCardTwo(false)}
-          className="dashboard-card-button"
           variant="contained"
           color="primary"
         >
@@ -611,45 +596,24 @@ function Dashboard(props) {
       </Card>
 
       <Card
-        className={`${oldmanCard ? "dashboard-card" : "dashboard-card-closed"}`}
+        className={`${oldmanCard ? "component-card" : "component-card-closed"}`}
       >
-        <Typography
-          variant="h4"
-          color="primary"
-          className="dashboard-card-title"
-        >
+        <Typography variant="h4" color="primary">
           I saw the dragon burn your house poor boy. What would you like to know
           about?
         </Typography>
         <List className="dashboard-list">
-          <ListItem className="dashboard-list-item" onClick={toggleAnswerOne}>
-            The Dragon
-          </ListItem>
-          <ListItem className="dashboard-list-item" onClick={toggleAnswerTwo}>
-            The Forest
-          </ListItem>
-          <ListItem className="dashboard-list-item" onClick={toggleAnswerThree}>
-            The Mountains
-          </ListItem>
-          <ListItem className="dashboard-list-item" onClick={toggleAnswerFour}>
-            The Town
-          </ListItem>
+          <ListItem onClick={toggleAnswerOne}>The Dragon</ListItem>
+          <ListItem onClick={toggleAnswerTwo}>The Forest</ListItem>
+          <ListItem onClick={toggleAnswerThree}>The Mountains</ListItem>
+          <ListItem onClick={toggleAnswerFour}>The Town</ListItem>
         </List>
-        <Button
-          onClick={toggleOldmanCard}
-          className="dashboard-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleOldmanCard} variant="contained" color="primary">
           Say Goodbye
         </Button>
       </Card>
       <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="dashboard-card-title"
-        >
+        <Typography variant="h4" color="primary">
           The Dragon
         </Typography>
         <Typography
@@ -661,21 +625,12 @@ function Dashboard(props) {
           tried to slay him but they all ended up the dragon's lunch. If you
           want my advice, stay away.
         </Typography>
-        <Button
-          onClick={toggleAnswerOne}
-          className="dashboard-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerOne} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="dashboard-card-title"
-        >
+        <Typography variant="h4" color="primary">
           The Forest
         </Typography>
         <Typography
@@ -686,21 +641,12 @@ function Dashboard(props) {
           The forest is a scary place full of ravenous beasts and other dangers.
           You'd be wise to avoid it.
         </Typography>
-        <Button
-          onClick={toggleAnswerTwo}
-          className="dashboard-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerTwo} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="dashboard-card-title"
-        >
+        <Typography variant="h4" color="primary">
           The Mountains
         </Typography>
         <Typography
@@ -711,21 +657,12 @@ function Dashboard(props) {
           The Mountains are cold and treacherous. Do not go there unless you are
           prepared.
         </Typography>
-        <Button
-          onClick={toggleAnswerThree}
-          className="dashboard-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerThree} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="dashboard-card-title"
-        >
+        <Typography variant="h4" color="primary">
           The Town
         </Typography>
         <Typography
@@ -736,12 +673,7 @@ function Dashboard(props) {
           The town is as unfriendly as the rest of this realm. If you don't have
           coins there is no place for you there.
         </Typography>
-        <Button
-          onClick={toggleAnswerFour}
-          className="dashboard-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerFour} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
@@ -752,11 +684,7 @@ function Dashboard(props) {
             : "answer-card-closed"
         }`}
       >
-        <Typography
-          variant="h4"
-          color="primary"
-          className="dashboard-card-title"
-        >
+        <Typography variant="h4" color="primary">
           Success!!!
         </Typography>
         <Typography
@@ -768,21 +696,12 @@ function Dashboard(props) {
           home as well. You are now free to start the peaceful life you long
           for. You win! Right?
         </Typography>
-        <Button
-          onClick={toggleGrowCard}
-          className="dashboard-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleGrowCard} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${screamCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="dashboard-card-title"
-        >
+        <Typography variant="h4" color="primary">
           Aaaaahhh!
         </Typography>
         <Typography
@@ -792,21 +711,12 @@ function Dashboard(props) {
         >
           Help!!! Our village has been overrun by phoenixes!
         </Typography>
-        <Button
-          onClick={toggleScreamCard}
-          className="dashboard-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleScreamCard} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${lastCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="dashboard-card-title"
-        >
+        <Typography variant="h4" color="primary">
           Here we go again!
         </Typography>
         <Typography
@@ -816,12 +726,7 @@ function Dashboard(props) {
         >
           The end?
         </Typography>
-        <Button
-          onClick={logout}
-          className="dashboard-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={logout} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
