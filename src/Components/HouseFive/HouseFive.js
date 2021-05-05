@@ -48,7 +48,7 @@ function HouseFive(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="houseFive-main">
+    <div className="main">
       <Nav />
       <div className="houseFive-body">
         <div className="houseFive-top">
@@ -87,7 +87,7 @@ function HouseFive(props) {
             >
               <Character />
             </div>
-            <div className="houseFive-maze" onClick={toggleGoDown}>
+            <div className="houseFive-cottage" onClick={toggleGoDown}>
               <h2>EXIT</h2>
               <ArrowDownward />
             </div>
