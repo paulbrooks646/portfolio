@@ -88,7 +88,7 @@ const toggleGoUp = () => {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="glade-main">
+    <div className="main">
       <Nav />
       <div className="glade-body">
         <div className="glade-top">

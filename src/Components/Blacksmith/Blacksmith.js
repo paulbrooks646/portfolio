@@ -216,69 +216,44 @@ function Blacksmith(props) {
   };
 
   return (
-    <div className="blacksmith-main">
+    <div className="main">
       <Nav />
       <div className="blacksmith-body">
         <Card
-          className={`${!blacksmithCard ? "blacksmith-card" : "blacksmith-card-closed"}`}
+          className={`${
+            !blacksmithCard ? "component-card" : "component-card-closed"
+          }`}
         >
-          <Typography
-            variant="h4"
-            color="primary"
-            className="blacksmith-card-title"
-          >
+          <Typography variant="h4" color="primary">
             Good day! Can I help you?
           </Typography>
-          <List className="blacksmith-list">
-            <ListItem className="blacksmith-list-item" onClick={togglePurchaseArmor}>
-              Armor
-            </ListItem>
-            <ListItem
-              className="blacksmith-list-item"
-              onClick={togglePurchaseBow}
-            >
-              Bow
-            </ListItem>
-            <ListItem
-              className="blacksmith-list-item"
-              onClick={togglePurchaseDagger}
-            >
-              Dagger
-            </ListItem>
-            <ListItem className="blacksmith-list-item" onClick={togglePurchaseKnife}>
-              Knife
-            </ListItem>
-            <ListItem className="blacksmith-list-item" onClick={togglePurchaseShield}>
-              Shield
-            </ListItem>
-            <ListItem
-              className="blacksmith-list-item"
-              onClick={togglePurchaseSword}
-            >
-              Sword
-            </ListItem>
+          <List className="component-list">
+            <ListItem onClick={togglePurchaseArmor}>Armor</ListItem>
+            <ListItem onClick={togglePurchaseBow}>Bow</ListItem>
+            <ListItem onClick={togglePurchaseDagger}>Dagger</ListItem>
+            <ListItem onClick={togglePurchaseKnife}>Knife</ListItem>
+            <ListItem onClick={togglePurchaseShield}>Shield</ListItem>
+            <ListItem onClick={togglePurchaseSword}>Sword</ListItem>
           </List>
-          <Button
-            onClick={toggleExit}
-            className="blacksmith-card-button"
-            variant="contained"
-            color="primary"
-          >
+          <Button onClick={toggleExit} variant="contained" color="primary">
             EXIT SHOP
           </Button>
         </Card>
-        <Card className={`${armorCard ? "blacksmith-card" : "blacksmith-card-closed"}`}>
+        <Card
+          className={`${
+            armorCard ? "component-card" : "component-card-closed"
+          }`}
+        >
           <Typography
             variant="h4"
             color="secondary"
-            className="blacksmith-card-description"
+            className="component-card-description"
           >
             Would you like to buy armor for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
               onClick={toggleBuyArmor}
-              className="blacksmith-card-button"
               variant="contained"
               color="primary"
             >
@@ -286,7 +261,6 @@ function Blacksmith(props) {
             </Button>
             <Button
               onClick={togglePurchaseArmor}
-              className="blacksmith-card-button"
               variant="contained"
               color="primary"
             >
@@ -295,19 +269,20 @@ function Blacksmith(props) {
           </div>
         </Card>
         <Card
-          className={`${daggerCard ? "blacksmith-card" : "blacksmith-card-closed"}`}
+          className={`${
+            daggerCard ? "component-card" : "component-card-closed"
+          }`}
         >
           <Typography
             variant="h4"
             color="secondary"
-            className="blacksmith-card-description"
+            className="component-card-description"
           >
             Would you like to buy a dagger for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
               onClick={toggleBuyDagger}
-              className="blacksmith-card-button"
               variant="contained"
               color="primary"
             >
@@ -315,7 +290,6 @@ function Blacksmith(props) {
             </Button>
             <Button
               onClick={togglePurchaseDagger}
-              className="blacksmith-card-button"
               variant="contained"
               color="primary"
             >
@@ -323,26 +297,22 @@ function Blacksmith(props) {
             </Button>
           </div>
         </Card>
-        <Card className={`${bowCard ? "blacksmith-card" : "blacksmith-card-closed"}`}>
+        <Card
+          className={`${bowCard ? "component-card" : "component-card-closed"}`}
+        >
           <Typography
             variant="h4"
             color="secondary"
-            className="blacksmith-card-description"
+            className="component-card-description"
           >
             Would you like to buy a bow with my last arrow for 1 coin?
           </Typography>
           <div className="button-div">
-            <Button
-              onClick={toggleBuyBow}
-              className="blacksmith-card-button"
-              variant="contained"
-              color="primary"
-            >
+            <Button onClick={toggleBuyBow} variant="contained" color="primary">
               YES
             </Button>
             <Button
               onClick={togglePurchaseBow}
-              className="blacksmith-card-button"
               variant="contained"
               color="primary"
             >
@@ -350,18 +320,21 @@ function Blacksmith(props) {
             </Button>
           </div>
         </Card>
-        <Card className={`${knifeCard ? "blacksmith-card" : "blacksmith-card-closed"}`}>
+        <Card
+          className={`${
+            knifeCard ? "component-card" : "component-card-closed"
+          }`}
+        >
           <Typography
             variant="h4"
             color="secondary"
-            className="blacksmith-card-description"
+            className="component-card-description"
           >
             Would you like to buy a knife for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
               onClick={toggleBuyKnife}
-              className="blacksmith-card-button"
               variant="contained"
               color="primary"
             >
@@ -369,7 +342,6 @@ function Blacksmith(props) {
             </Button>
             <Button
               onClick={togglePurchaseKnife}
-              className="blacksmith-card-button"
               variant="contained"
               color="primary"
             >
@@ -377,18 +349,21 @@ function Blacksmith(props) {
             </Button>
           </div>
         </Card>
-        <Card className={`${shieldCard ? "blacksmith-card" : "blacksmith-card-closed"}`}>
+        <Card
+          className={`${
+            shieldCard ? "component-card" : "component-card-closed"
+          }`}
+        >
           <Typography
             variant="h4"
             color="secondary"
-            className="blacksmith-card-description"
+            className="component-card-description"
           >
             Would you like to buy a shield for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
               onClick={toggleBuyShield}
-              className="blacksmith-card-button"
               variant="contained"
               color="primary"
             >
@@ -396,7 +371,6 @@ function Blacksmith(props) {
             </Button>
             <Button
               onClick={togglePurchaseShield}
-              className="blacksmith-card-button"
               variant="contained"
               color="primary"
             >
@@ -405,19 +379,20 @@ function Blacksmith(props) {
           </div>
         </Card>
         <Card
-          className={`${swordCard ? "blacksmith-card" : "blacksmith-card-closed"}`}
+          className={`${
+            swordCard ? "component-card" : "component-card-closed"
+          }`}
         >
           <Typography
             variant="h4"
             color="secondary"
-            className="blacksmith-card-description"
+            className="component-card-description"
           >
             Would you like to buy a sword for 1 coin?
           </Typography>
           <div className="button-div">
             <Button
               onClick={toggleBuySword}
-              className="blacksmith-card-button"
               variant="contained"
               color="primary"
             >
@@ -425,26 +400,6 @@ function Blacksmith(props) {
             </Button>
             <Button
               onClick={togglePurchaseSword}
-              className="blacksmith-card-button"
-              variant="contained"
-              color="primary"
-            >
-              NO
-            </Button>
-          </div>
-        </Card>
-        <Card className={`${poorCard ? "blacksmith-card" : "blacksmith-card-closed"}`}>
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="blacksmith-card-description"
-          >
-            I'm sorry. You appear not to have enough coins to buy this item.
-          </Typography>
-          <div className="button-div">
-            <Button
-              onClick={togglePoorCard}
-              className="blacksmith-card-button"
               variant="contained"
               color="primary"
             >
@@ -453,12 +408,34 @@ function Blacksmith(props) {
           </div>
         </Card>
         <Card
-          className={`${boughtCard ? "blacksmith-card" : "blacksmith-card-closed"}`}
+          className={`${poorCard ? "component-card" : "component-card-closed"}`}
         >
           <Typography
             variant="h4"
             color="secondary"
-            className="blacksmith-card-description"
+            className="component-card-description"
+          >
+            I'm sorry. You appear not to have enough coins to buy this item.
+          </Typography>
+          <div className="button-div">
+            <Button
+              onClick={togglePoorCard}
+              variant="contained"
+              color="primary"
+            >
+              NO
+            </Button>
+          </div>
+        </Card>
+        <Card
+          className={`${
+            boughtCard ? "component-card" : "component-card-closed"
+          }`}
+        >
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="component-card-description"
           >
             I'm sorry. I appear to be out of stock of that item. You must have
             bought my last one.
@@ -466,7 +443,6 @@ function Blacksmith(props) {
           <div className="button-div">
             <Button
               onClick={toggleBoughtCard}
-              className="blacksmith-card-button"
               variant="contained"
               color="primary"
             >
@@ -475,19 +451,20 @@ function Blacksmith(props) {
           </div>
         </Card>
         <Card
-          className={`${thanksCard ? "blacksmith-card" : "blacksmith-card-closed"}`}
+          className={`${
+            thanksCard ? "component-card" : "component-card-closed"
+          }`}
         >
           <Typography
             variant="h4"
             color="secondary"
-            className="blacksmith-card-description"
+            className="component-card-description"
           >
             Here you go. Thanks for your business!
           </Typography>
           <div className="button-div">
             <Button
               onClick={toggleThanksCardClosed}
-              className="blacksmith-card-button"
               variant="contained"
               color="primary"
             >
@@ -501,6 +478,8 @@ function Blacksmith(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getBlacksmith, getInventory })(
-  Blacksmith
-);
+export default connect(mapStateToProps, {
+  getUser,
+  getBlacksmith,
+  getInventory,
+})(Blacksmith);
