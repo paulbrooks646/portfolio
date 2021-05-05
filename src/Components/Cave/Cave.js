@@ -28,32 +28,32 @@ function Cave(props) {
   const [hatCard, setHatCard] = useState(false);
   const [rejectionCard, setRejectionCard] = useState(false);
 
-   useEffect(() => {
-     axios.get("/api/cave").then((res) => {
-       props.getCave(res.data[0]);
-       if (props.user.user.last === "cottage") {
-         setDownCharacter(true);
-       } else if (props.user.user.last === "forest") {
-         setUpCharacter(true);
-       }
-       setIsLoading(false);
-     });
-   }, []);
+  useEffect(() => {
+    axios.get("/api/cave").then((res) => {
+      props.getCave(res.data[0]);
+      if (props.user.user.last === "cottage") {
+        setDownCharacter(true);
+      } else if (props.user.user.last === "forest") {
+        setUpCharacter(true);
+      }
+      setIsLoading(false);
+    });
+  }, []);
 
   const toggleUp = () => {
-   axios.post("/api/changeLast", { last: "cave" }).then((res) => {
-     props.getUser(res.data).then(() => {
-       props.history.push("/Forest");
-     });
-   });
+    axios.post("/api/changeLast", { last: "cave" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Forest");
+      });
+    });
   };
 
   const toggleDown = () => {
-   axios.post("/api/changeLast", { last: "pass" }).then((res) => {
-     props.getUser(res.data).then(() => {
-       props.history.push("/Cottage");
-     });
-   });
+    axios.post("/api/changeLast", { last: "pass" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Cottage");
+      });
+    });
   };
 
   const toggleFirst = () => {
@@ -124,27 +124,27 @@ function Cave(props) {
     setRejectionCard(!rejectionCard);
   };
 
-   const toggleGoUp = () => {
-     if (props.user.user.last === "cottage") {
-       setDownUp(true);
-       setDownCharacter(false);
-     } else if (props.user.user.last === "forest") {
-       setUpCharacter(false);
-       setUpUp(true);
-     }
-   };
+  const toggleGoUp = () => {
+    if (props.user.user.last === "cottage") {
+      setDownUp(true);
+      setDownCharacter(false);
+    } else if (props.user.user.last === "forest") {
+      setUpCharacter(false);
+      setUpUp(true);
+    }
+  };
 
-   const toggleGoDown = () => {
-     if (!props.cave.cave.meat_given) {
-       setRejectionCard(true);
-     } else if (props.user.user.last === "cottage") {
-       setDownDown(true);
-       setDownCharacter(false);
-     } else if (props.user.user.last === "forest") {
-       setUpCharacter(false);
-       setUpDown(true);
-     }
-   };
+  const toggleGoDown = () => {
+    if (!props.cave.cave.meat_given) {
+      setRejectionCard(true);
+    } else if (props.user.user.last === "cottage") {
+      setDownDown(true);
+      setDownCharacter(false);
+    } else if (props.user.user.last === "forest") {
+      setUpCharacter(false);
+      setUpDown(true);
+    }
+  };
 
   return isLoading ? (
     <Loading />
@@ -183,8 +183,8 @@ function Cave(props) {
         </div>
         <div className="cave-middle">
           <div className="cave-middle-left"></div>
-            <div className="cave-middle-middle"></div>
-            <div className="cave-middle-right"></div>
+          <div className="cave-middle-middle"></div>
+          <div className="cave-middle-right"></div>
         </div>
         <div className="cave-bottom">
           <div className="cave-bottom-left">
@@ -266,12 +266,7 @@ function Cave(props) {
         >
           I would avoid interacting with that wolf at all costs.
         </Typography>
-        <Button
-          onClick={toggleWolfCard}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleWolfCard} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
@@ -289,12 +284,7 @@ function Cave(props) {
           distance you see a wolf standing in the middle of the trail. Chills
           run through you as you contemplate what to do next.
         </Typography>
-        <Button
-          onClick={toggleFirst}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleFirst} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
@@ -310,7 +300,6 @@ function Cave(props) {
         </Typography>
         <Button
           onClick={toggleRejectionCard}
-          className="forest-card-button"
           variant="contained"
           color="primary"
         >
@@ -325,12 +314,7 @@ function Cave(props) {
         >
           You pick up the shiny gold coin.
         </Typography>
-        <Button
-          onClick={toggleCoinCard}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleCoinCard} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
@@ -342,12 +326,7 @@ function Cave(props) {
         >
           You pick up the disgusting bone left from the wolf's last meal.
         </Typography>
-        <Button
-          onClick={toggleBoneCard}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleBoneCard} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
@@ -359,12 +338,7 @@ function Cave(props) {
         >
           You pick up the fancy hat.
         </Typography>
-        <Button
-          onClick={toggleHatCard}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleHatCard} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>

@@ -1,243 +1,169 @@
+@import "../mixins";
 
-  
+.cave-body {
+  background-image: url("../../Images/Dirt.png");
+  background-size: 100% 100%;
 
-  .cave-body {
-    background-image: url("../../Images/Dirt.png");
+  .cave-top {
+    @include row(35vh);
+
+    .cave-top-left {
+      background-image: url("../../Images/Forest2.png");
+      @include section(40vw);
+      background-size: 100% 100%;
+    }
+
+    .cave-top-middle {
+      @include section(20vw);
+
+      .cave-forest {
+        @include flex(flex-start);
+        cursor: pointer;
+      }
+    }
+
+    .cave-top-right {
+      background-image: url("../../Images/Forest2.png");
+      @include section(40vw);
+      background-size: 100% 100%;
+    }
+  }
+
+  .cave-middle {
+    @include row(20vh);
+    background-image: url("../../Images/Grass.png");
     background-size: 100% 100%;
 
-    .cave-top {
-      height: 35vh;
-      display: flex;
-      width: 100vw;
-
-      .cave-top-left {
-        background-image: url("../../Images/Forest2.png");
-        height: 100%;
-        width: 40%;
-        background-size: 100% 100%;
-      }
-
-      .cave-top-middle {
-        height: 100%;
-        width: 20%;
-
-        .cave-forest {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          cursor: pointer;
-        }
-      }
-
-      .cave-top-right {
-        background-image: url("../../Images/Forest2.png");
-        height: 100%;
-        width: 40%;
-        background-size: 100% 100%;
-      }
+    .cave-middle-left {
+      @include section(40vw);
     }
 
-    .cave-middle {
-      height: 20vh;
-      display: flex;
-      width: 100vw;
-      background-image: url("../../Images/Grass.png");
+    .cave-middle-middle {
+      @include section(20vw);
+      background-image: url("../../Images/Dirt.png");
+    }
+
+    .cave-middle-right {
+      @include section(40vw);
+    }
+  }
+
+  .cave-bottom {
+    @include row(35vh);
+
+    .cave-bottom-left {
+      background-image: url("../../Images//Grass.png");
       background-size: 100% 100%;
+      @include section(40vw);
+      @include center(space-evenly);
 
-      .cave-middle-left {
-        width: 40%;
-        height: 100%;
+      .cave-wolf {
+        background-image: url("../../Images/wolf.gif");
+        height: 200px;
+        width: 200px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        position: relative;
+        bottom: 30px;
+        cursor: pointer;
       }
 
-      .cave-middle-middle {
-        width: 20%;
-        height: 100%;
-        background-image: url("../../Images/Dirt.png");
+      .cave-wolf-closed {
+        display: none;
       }
 
-      .cave-middle-right {
-        width: 40%;
-        height: 100%;
+      .meat {
+        background-image: url("../../Images//Meat.png");
+        background-size: 100% 100%;
+        height: 50px;
+        width: 50px;
+      }
+
+      .meat-closed {
+        display: none;
       }
     }
 
-    .cave-bottom {
-      height: 35vh;
-      display: flex;
-      width: 100vw;
+    .cave-bottom-middle {
+      @include section(20vw);
+      @include flex(flex-end);
 
-      .cave-bottom-left {
-        background-image: url("../../Images//Grass.png");
-        background-size: 100% 100%;
-        height: 100%;
-        width: 40%;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
+      .cave-wolf {
+        background-image: url("../../Images/wolf.gif");
+        height: 200px;
+        width: 200px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        position: relative;
+        bottom: 30px;
+        cursor: pointer;
+      }
 
-        .cave-wolf {
-          background-image: url("../../Images/wolf.gif");
-          height: 200px;
-          width: 200px;
-          background-repeat: no-repeat;
-          background-size: contain;
-          position: relative;
-          bottom: 30px;
+      .cave-wolf-closed {
+        display: none;
+      }
+
+      .coin-div {
+        height: 10px;
+        width: 10px;
+        margin-bottom: 10px;
+
+        .coin {
+          background-color: gold;
+          border-radius: 50%;
+          height: 10px;
+          width: 10px;
           cursor: pointer;
         }
 
-        .cave-wolf-closed {
+        .coin-closed {
           display: none;
         }
+      }
 
-        .meat {
-          background-image: url("../../Images//Meat.png");
+      .bone-div {
+        height: 30px;
+        width: 50px;
+        margin-bottom: 10px;
+
+        .bone {
+          background-image: url("../../Images//Bone.png");
+          background-size: 100% 100%;
+          height: 30px;
+          width: 50px;
+          cursor: pointer;
+        }
+
+        .bone-closed {
+          display: none;
+        }
+      }
+      .hat-div {
+        height: 50px;
+        width: 50px;
+        margin-bottom: 10px;
+
+        .hat {
+          background-image: url("../../Images/Hat.png");
           background-size: 100% 100%;
           height: 50px;
           width: 50px;
+          cursor: pointer;
         }
-
-        .meat-closed {
+        .hat-closed {
           display: none;
         }
       }
-
-      .cave-bottom-middle {
-        height: 100%;
-        width: 20%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-end;
-
-        .cave-wolf {
-          background-image: url("../../Images/wolf.gif");
-          height: 200px;
-          width: 200px;
-          background-repeat: no-repeat;
-          background-size: contain;
-          position: relative;
-          bottom: 30px;
-          cursor: pointer;
-        }
-
-        .cave-wolf-closed {
-          display: none;
-        }
-
-        .coin-div {
-          height: 10px;
-          width: 10px;
-          margin-bottom: 10px;
-
-          .coin {
-            background-color: gold;
-            border-radius: 50%;
-            height: 10px;
-            width: 10px;
-            cursor: pointer;
-          }
-
-          .coin-closed {
-            display: none;
-          }
-        }
-
-        .bone-div {
-          height: 30px;
-          width: 50px;
-          margin-bottom: 10px;
-
-          .bone {
-            background-image: url("../../Images//Bone.png");
-            background-size: 100% 100%;
-            height: 30px;
-            width: 50px;
-            cursor: pointer;
-          }
-
-          .bone-closed {
-            display: none;
-          }
-        }
-        .hat-div {
-          height: 50px;
-          width: 50px;
-          margin-bottom: 10px;
-          .hat {
-            background-image: url("../../Images/Hat.png");
-            background-size: 100% 100%;
-            height: 50px;
-            width: 50px;
-            cursor: pointer;
-          }
-          .hat-closed {
-            display: none;
-          }
-        }
-        .cave-cottage {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          cursor: pointer;
-        }
-      }
-
-      .cave-bottom-right {
-        background-image: url("../../Images/Cave.png");
-        background-size: 100% 100%;
-        height: 100%;
-        width: 40%;
+      .cave-cottage {
+        @include flex(flex-start);
+        cursor: pointer;
       }
     }
-  }
-  .cave-card {
-    height: 500px;
-    width: 500px;
-    background-color: white;
-    border: solid black 2px;
-    box-shadow: 2px 2px 2px 2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: absolute;
-    text-align: center;
 
-    .cave-list {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-      color: tomato;
-    }
-
-    .cave-card-description {
-      width: 90%;
+    .cave-bottom-right {
+      background-image: url("../../Images/Cave.png");
+      background-size: 100% 100%;
+      @include section(40vw);
     }
   }
-
-  .cave-card-closed {
-    display: none;
-  }
-  .answer-card {
-    height: 400px;
-    width: 400px;
-    background-color: white;
-    border: solid black 2px;
-    box-shadow: 2px 2px 2px 2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: absolute;
-    text-align: center;
-
-    .answer-card-description {
-      width: 90%;
-    }
-  }
-
-  .answer-card-closed {
-    display: none;
-  }
+}
