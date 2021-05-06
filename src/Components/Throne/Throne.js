@@ -51,7 +51,7 @@ function Throne(props) {
    };
 
   return (
-    <div className="throne-main">
+    <div className="main">
       <Nav />
       <div className="throne-body">
         <div className="throne-top"></div>

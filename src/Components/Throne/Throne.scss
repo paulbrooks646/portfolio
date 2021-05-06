@@ -1,53 +1,37 @@
-.throne-main {
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
+@import "../mixins";
 
-    .throne-body {
-        height: 90vh;
-        width: 100vw;
+.throne-body {
+  height: 90vh;
+  width: 100vw;
 
-        .throne-top {
-            height: 55vh;
-            width: 100vw;
-            background-image: url("../../Images/Throne.jpg");
-            background-size: 100% 100%;
-        }
+  .throne-top {
+    @include row(55vh);
+    background-image: url("../../Images/Throne.jpg");
+    background-size: 100% 100%;
+  }
 
-        .throne-bottom {
-            display: flex;
-            height: 35vh;
-            width: 100vw;
+  .throne-bottom {
+    @include row(35vh);
 
-            .throne-bottom-left {
-                height: 100%;
-                width: 40vw;
-                background-color: papayawhip;
-            }
-
-            .throne-bottom-middle {
-height: 100%;
-width: 20vw;
-background-color: crimson;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: flex-end;
-
-.throne-castle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-
-}
-            }
-
-            .throne-bottom-right {
-                background-color: papayawhip;
-                width: 40vw;
-                height: 100%;
-            }
-        }
+    .throne-bottom-left {
+      @include section(40vw);
+      background-color: papayawhip;
     }
+
+    .throne-bottom-middle {
+      @include section(20vw);
+      @include flex(flex-end);
+      background-color: crimson;
+
+      .throne-castle {
+        @include flex(flex-start);
+        cursor: pointer;
+      }
+    }
+
+    .throne-bottom-right {
+      background-color: papayawhip;
+      @include section(40vw);
+    }
+  }
 }
