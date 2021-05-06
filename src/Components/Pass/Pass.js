@@ -3,7 +3,7 @@ import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
-import {getPass} from "../../redux/passReducer"
+import { getPass } from "../../redux/passReducer";
 import axios from "axios";
 import "./Pass.scss";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
@@ -15,29 +15,27 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
 function Pass(props) {
-
   const [isLoading, setIsLoading] = useState(false);
   const [downRejection, setDownRejection] = useState(false);
-  const [ogre, setOgre] = useState(false)
-  const [ogreAnimation, setOgreAnimation] = useState(false)
+  const [ogre, setOgre] = useState(false);
+  const [ogreAnimation, setOgreAnimation] = useState(false);
   const [upCharacter, setUpCharacter] = useState(false);
   const [downCharacter, setDownCharacter] = useState(false);
   const [downUp, setDownUp] = useState(false);
   const [downDown, setDownDown] = useState(false);
   const [upUp, setUpUp] = useState(false);
   const [upDown, setUpDown] = useState(false);
-  const [coinCard, setCoinCard] = useState(false)
-  const [gemCard, setGemCard] = useState(false)
-  
+  const [coinCard, setCoinCard] = useState(false);
+  const [gemCard, setGemCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/pass").then((res) => {
       props.getPass(res.data[0]);
-       if (props.user.user.last === "cabin") {
-         setDownCharacter(true);
-       }  else if (props.user.user.last === "mountain") {
-         setUpCharacter(true);
-       } 
+      if (props.user.user.last === "cabin") {
+        setDownCharacter(true);
+      } else if (props.user.user.last === "mountain") {
+        setUpCharacter(true);
+      }
       setIsLoading(false);
     });
   }, []);
@@ -45,34 +43,33 @@ function Pass(props) {
   const toggleCakeGiven = () => {
     axios.post("/api/ogreMoved").then((res) => {
       props.getPass(res.data[0]);
-setOgreAnimation(true);
+      setOgreAnimation(true);
     });
-    
-  }
+  };
 
   const toggleGem = () => {
-axios.post("/api/gem").then((res) => {
-  props.getInventory(res.data);
-  axios.get("/api/pass").then((res) => {
-    props.getPass(res.data[0]);
-    setGemCard(true);
-  });
-});
-  }
+    axios.post("/api/gem").then((res) => {
+      props.getInventory(res.data);
+      axios.get("/api/pass").then((res) => {
+        props.getPass(res.data[0]);
+        setGemCard(true);
+      });
+    });
+  };
 
   const toggleCoin = () => {
-     axios.post("/api/passCoin").then((res) => {
-       props.getPass(res.data[0]);
-       axios.post("/api/coin").then((res) => {
-         props.getUser(res.data);
-         setCoinCard(true);
-       });
-     });
-  }
+    axios.post("/api/passCoin").then((res) => {
+      props.getPass(res.data[0]);
+      axios.post("/api/coin").then((res) => {
+        props.getUser(res.data);
+        setCoinCard(true);
+      });
+    });
+  };
 
   const toggleOgreAnimationEnd = () => {
-    setOgreAnimation(false)
-  }
+    setOgreAnimation(false);
+  };
 
   const toggleUp = () => {
     axios.post("/api/changeLast", { last: "pass" }).then((res) => {
@@ -80,16 +77,15 @@ axios.post("/api/gem").then((res) => {
         props.history.push("/Mountain");
       });
     });
-  }
+  };
 
   const toggleDown = () => {
-   axios.post("/api/changeLast", { last: "pass" }).then((res) => {
-     props.getUser(res.data).then(() => {
-       props.history.push("/Cabin");
-     });
-   });
-    
-  }
+    axios.post("/api/changeLast", { last: "pass" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Cabin");
+      });
+    });
+  };
 
   const toggleFirst = () => {
     axios.post("/api/passFirst").then((res) => {
@@ -109,9 +105,8 @@ axios.post("/api/gem").then((res) => {
 
   const toggleGoDown = () => {
     if (!props.pass.pass.cake_given) {
-      setDownRejection(true)
-    }
-   else if (props.user.user.last === "cabin") {
+      setDownRejection(true);
+    } else if (props.user.user.last === "cabin") {
       setDownDown(true);
       setDownCharacter(false);
     } else if (props.user.user.last === "mountain") {
@@ -119,8 +114,6 @@ axios.post("/api/gem").then((res) => {
       setUpDown(true);
     }
   };
-
-
 
   return isLoading ? (
     <Loading />
@@ -179,8 +172,8 @@ axios.post("/api/gem").then((res) => {
             <div
               className={`${
                 props.pass.pass.cake_given &&
-                  props.pass.pass.ogre_moved &&
-                  props.pass.pass.gem_taken &&
+                props.pass.pass.ogre_moved &&
+                props.pass.pass.gem_taken &&
                 !props.pass.pass.coin_taken
                   ? "coin"
                   : "coin-closed"
@@ -258,12 +251,7 @@ axios.post("/api/gem").then((res) => {
           is blocking your way and stopping the runoff from making its way down
           the mountain.
         </Typography>
-        <Button
-          onClick={toggleFirst}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleFirst} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
@@ -280,7 +268,6 @@ axios.post("/api/gem").then((res) => {
         </Typography>
         <Button
           onClick={() => setDownRejection(false)}
-          className="forest-card-button"
           variant="contained"
           color="primary"
         >
@@ -299,7 +286,6 @@ axios.post("/api/gem").then((res) => {
         </Typography>
         <Button
           onClick={() => setOgre(false)}
-          className="forest-card-button"
           variant="contained"
           color="primary"
         >
@@ -308,7 +294,9 @@ axios.post("/api/gem").then((res) => {
       </Card>
       <Card
         id={`${
-          props.pass.pass.cake_given && !props.pass.pass.ogre_moved ? "answer-card" : "answer-card-closed"
+          props.pass.pass.cake_given && !props.pass.pass.ogre_moved
+            ? "answer-card"
+            : "answer-card-closed"
         }`}
       >
         <Typography
@@ -339,7 +327,6 @@ axios.post("/api/gem").then((res) => {
         </Typography>
         <Button
           onClick={() => setCoinCard(false)}
-          className="forest-card-button"
           variant="contained"
           color="primary"
         >
@@ -356,7 +343,6 @@ axios.post("/api/gem").then((res) => {
         </Typography>
         <Button
           onClick={() => setGemCard(false)}
-          className="forest-card-button"
           variant="contained"
           color="primary"
         >
@@ -368,4 +354,6 @@ axios.post("/api/gem").then((res) => {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory, getPass })(Pass);
+export default connect(mapStateToProps, { getUser, getInventory, getPass })(
+  Pass
+);
