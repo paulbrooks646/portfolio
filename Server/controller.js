@@ -47,6 +47,91 @@ module.exports = {
     res.status(200).send(tower);
   },
 
+  useIce: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_ice(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  useArmor: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_armor(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  useCloak: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_cloak(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  useSpeed: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+   db.use_speed(id).then((inventory) => {
+     let newArr = [];
+
+     for (let key in inventory[0]) {
+       if (inventory[0][key] === true) {
+         newArr.push(key);
+       }
+     }
+
+     res.status(200).send(newArr);
+   });
+  },
+
+  useAxe: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_axe(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
   manureHasCleaned: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -254,6 +339,14 @@ module.exports = {
 
     const pass = await db.pass_coin(id);
     res.status(200).send(pass);
+  },
+
+  dragonCoin: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const dragon = await db.dragon_coin(id);
+    res.status(200).send(dragon);
   },
 
   ogreMoved: async (req, res) => {

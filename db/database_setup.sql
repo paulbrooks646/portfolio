@@ -47,5 +47,5 @@ values ($1, false, false, true);
 insert into cabin (user_id, mushroom_taken, knife_given, wood_given, potatoes_given, train_received, first_time)
 values ($1, false, false, false, false, false, true);
 
-insert into dragon (user_id, ice_used, charcoal_taken, seed_taken, cloak_used, armor_used, speed_used, axe_used, dragon_killed, grow_taken, first_time)
-values ($1, false, false, false, false, false, false, false, false, false, true);
+insert into dragon (user_id, ice_used, charcoal_taken, seed_taken, cloak_used, armor_used, speed_used, axe_used, dragon_killed, grow_taken, coin_taken, first_time)
+values ($1, false, false, false, false, false, false, false, false, false, false, true);

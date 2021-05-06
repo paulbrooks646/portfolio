@@ -13,6 +13,7 @@ import { getNest } from "../../redux/nestReducer";
 import { getPass } from "../../redux/passReducer";
 import { getCabin } from "../../redux/cabinReducer";
 import { getForest } from "../../redux/forestReducer";
+import { getDragon } from "../../redux/dragonReducer";
 import axios from "axios";
 import "./Nav.scss";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
@@ -38,6 +39,11 @@ function Nav(props) {
   const [knifeCard, setKnifeCard] = useState(false);
   const [potatoesCard, setPotatoesCard] = useState(false);
   const [bowCard, setBowCard] = useState(false);
+  const [iceCard, setIceCard] = useState(false);
+  const [armorCard, setArmorCard] = useState(false)
+  const [cloakCard, setCloakCard] = useState(false)
+  const [speedCard, setSpeedCard] = useState(false)
+  const [axeCard, setAxeCard] = useState(false)
 
   useEffect(() => {
     axios.get("/api/getUser").then((res) => {
@@ -322,6 +328,76 @@ function Nav(props) {
           axios.get("/api/forest").then((res) => {
             props.getForest(res.data[0]);
             setBowCard(true);
+          });
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+
+    if (item === "ice") {
+      if (props.location.pathname === "/Dragon") {
+        axios.post("/api/useIce").then((res) => {
+          props.getInventory(res.data);
+          axios.get("/api/dragon").then((res) => {
+            props.getDragon(res.data[0]);
+            setIceCard(true);
+          });
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+
+    if (item === "armor") {
+      if (props.location.pathname === "/Dragon") {
+        axios.post("/api/useArmor").then((res) => {
+          props.getInventory(res.data);
+          axios.get("/api/dragon").then((res) => {
+            props.getDragon(res.data[0]);
+            setArmorCard(true);
+          });
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+
+    if (item === "cloak") {
+      if (props.location.pathname === "/Dragon") {
+        axios.post("/api/useCloak").then((res) => {
+          props.getInventory(res.data);
+          axios.get("/api/dragon").then((res) => {
+            props.getDragon(res.data[0]);
+            setCloakCard(true);
+          });
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+
+    if (item === "speed") {
+      if (props.location.pathname === "/Dragon") {
+        axios.post("/api/useSpeed").then((res) => {
+          props.getInventory(res.data);
+          axios.get("/api/dragon").then((res) => {
+            props.getDragon(res.data[0]);
+            setSpeedCard(true);
+          });
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+
+    if (item === "axe") {
+      if (props.location.pathname === "/Dragon") {
+        axios.post("/api/useAxe").then((res) => {
+          props.getInventory(res.data);
+          axios.get("/api/dragon").then((res) => {
+            props.getDragon(res.data[0]);
+            setAxeCard(true);
           });
         });
       } else {
@@ -622,6 +698,88 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
+      <Card id={`${iceCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          As you read the magic words, a small segment of coals turns slightly
+          blue.
+        </Typography>
+        <Button
+          onClick={() => setIceCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card id={`${armorCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          You put on your armor.
+        </Typography>
+        <Button
+          onClick={() => setArmorCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card id={`${cloakCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          You put on your cloak. The heat in the area no longer bothers
+          you.
+        </Typography>
+        <Button
+          onClick={() => setCloakCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card id={`${speedCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          As you read the scroll you feel significantly quicker.
+        </Typography>
+        <Button
+          onClick={() => setSpeedCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card id={`${axeCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          Weilding the ultimate axe, you feel very powerful.
+        </Typography>
+        <Button
+          onClick={() => setAxeCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
@@ -643,5 +801,7 @@ export default withRouter(
     getDashboard,
     getCabin,
     getForest,
+    getDragon,
+
   })(Nav)
 );

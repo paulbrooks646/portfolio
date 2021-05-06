@@ -17,17 +17,43 @@
         width: 50%;
         @include flex(center);
 
-        .seed {
-          background-image: url("../../Images/Seed.jpg");
-          background-size: 100% 100%;
-          height: 50px;
-          width: 50px;
-          cursor: pointer;
-        }
+        .seed-div {
+          height: 100%;
+          width: 50%;
+          @include flex(center);
 
-        .seed-closed {
+          .seed {
+            background-image: url("../../Images/Seed.jpg");
+            background-size: 100% 100%;
+            height: 50px;
+            width: 50px;
+            cursor: pointer;
+          }
+
+           .seed-closed {
           display: none;
         }
+        }
+
+        .coin-div {
+          height: 100%;
+          width: 50%;
+          @include flex(center);
+
+          .coin {
+             background-color: gold;
+          border-radius: 50%;
+          height: 10px;
+          width: 10px;
+          cursor: pointer;
+          }
+
+          .coin-closed {
+            display: none;
+          }
+        }
+
+       
       }
 
       .ice {
@@ -92,11 +118,17 @@
       @include flex(flex-end);
       border-bottom: solid black 40px;
 
-      .dragon-dragon {
+      .dragon {
+        background-image: url("../../Images/dragon.gif");
+        background-size: 100% 100%;
         height: 200px;
         width: 300px;
         z-index: 1;
         cursor: pointer;
+      }
+
+      .dragon-closed {
+        display: none;
       }
 
       .scroll {

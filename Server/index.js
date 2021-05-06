@@ -50,14 +50,16 @@ app.get("/api/dashboard", reduxController.getDashboard)
 app.get("/api/cabin", reduxController.getCabin);
 app.get("/api/forest", reduxController.getForest)
 
-app.post("/api/towerFirstTime", firstController.towerFirstTime)
+app.post("/api/towerFirst", firstController.towerFirst)
 app.post("/api/caveFirst", firstController.caveFirst)
 app.post("/api/nestFirst", firstController.nestFirst);
 app.post("/api/passFirst", firstController.passFirst)
 app.post("/api/cabinFirst", firstController.cabinFirst)
 app.post("/api/forestFirst", firstController.forestFirst);
 app.post("/api/mountainFirst", firstController.mountainFirst);
-app.post("/api/dashboardFirst", firstController.dashboardFirst);
+app.post("/api/dashboardFirst", firstController.dashboardFirst)
+  ;
+  app.post("/api/dragonFirst", firstController.dragonFirst)
 
 app.post("/api/manure", inventoryController.manure);
 app.post("/api/flowers", inventoryController.flowers);
@@ -121,11 +123,17 @@ app.post("/api/removeHome", controller.removeHome)
 app.post("/api/mountainCoin", controller.mountainCoin)
 app.post("/api/passCoin", controller.passCoin);
 app.post("/api/forestCoin", controller.forestCoin)
+app.post("/api/dragonCoin", controller.dragonCoin)
 app.post("/api/ogreMoved", controller.ogreMoved)
 app.post("/api/givePotatoes", controller.givePotatoes)
 app.post("/api/giveWood", controller.giveWood)
 app.post("/api/giveKnife", controller.giveKnife)
 app.post("/api/killDragon", controller.killDragon)
+app.post("/api/useIce", controller.useIce)
+app.post("/api/useArmor", controller.useArmor)
+app.post("/api/useCloak", controller.useCloak)
+app.post("/api/useSpeed", controller.useSpeed)
+app.post("/api/useAxe", controller.useAxe)
 
 
 app.use(express.static(__dirname + "/../build"));

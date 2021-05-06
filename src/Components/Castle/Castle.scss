@@ -1,97 +1,92 @@
 @import "../mixins";
-  
 
-  .castle-body {
+.castle-body {
+  .castle-top {
+    @include row(35vh);
+    background-image: url("../../Images/CastleTwo.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 
-    .castle-top {
-      @include row(35vh);
-      background-image: url("../../Images/CastleTwo.jpg");
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
-      
-      .castle-top-left {
-        @include section(40vw);
-      }
+    .castle-top-left {
+      @include section(40vw);
+    }
 
-      .castle-top-middle {
-        @include section(20vw);
+    .castle-top-middle {
+      @include section(20vw);
+      @include flex(flex-start);
+
+      .castle-throne {
         @include flex(flex-start);
-
-        .castle-throne {
-          @include flex(flex-start);
-          cursor: pointer;
-        }
-      }
-      .castle-top-right {
-        @include section(40vw);
+        cursor: pointer;
       }
     }
-
-    .castle-middle {
-      @include row(20vh);
-      background-image: url("../../Images/Dirt.png");
-      background-size: 100% 100%;
-
-      .castle-middle-left {
-        @include section(40vw);
-        display: flex;
-
-        .castle-garden {
-          @include center(flex-start);
-          cursor: pointer;
-        }
-      }
-
-      .castle-middle-middle {
-        @include section(20vw);
-        @include flex(center);
-
-        .guard-image {
-            height: 150px;
-            width: 100px;
-            cursor: pointer;
-            
-        }
-      }
-
-      .castle-middle-right {
-        @include section(40vw);
-        @include center(flex-end);
-       
-        .castle-tower {
-          @include center(space-evenly);
-          width: 120px;
-          cursor: pointer;
-        }
-      }
-    }
-    .castle-bottom {
-      @include row(35vh);
-
-      .castle-bottom-left {
-        background-image: url("../../Images/Grass.png");
-        background-size: 100% 100%;
-        @include section(40vw);
-      }
-
-      .castle-bottom-middle {
-        background-image: url("../../Images/Dirt.png");
-        background-size: 100% 100%;
-        @include section(20vw);
-        @include flex(flex-end);
-
-        .castle-town {
-          @include flex(flex-start);
-          cursor: pointer;
-        }
-      }
-
-      .castle-bottom-right {
-        background-image: url("../../Images/Grass.png");
-        background-size: 100% 100%;
-        @include section(40vw);
-      }
+    .castle-top-right {
+      @include section(40vw);
     }
   }
 
-  
+  .castle-middle {
+    @include row(20vh);
+    background-image: url("../../Images/Dirt.png");
+    background-size: 100% 100%;
+
+    .castle-middle-left {
+      @include section(40vw);
+      display: flex;
+
+      .castle-garden {
+        @include center(flex-start);
+        cursor: pointer;
+      }
+    }
+
+    .castle-middle-middle {
+      @include section(20vw);
+      @include flex(center);
+
+      .guard-image {
+        height: 150px;
+        width: 100px;
+        cursor: pointer;
+      }
+    }
+
+    .castle-middle-right {
+      @include section(40vw);
+      @include center(flex-end);
+
+      .castle-tower {
+        @include center(space-evenly);
+        width: 120px;
+        cursor: pointer;
+      }
+    }
+  }
+  .castle-bottom {
+    @include row(35vh);
+
+    .castle-bottom-left {
+      background-image: url("../../Images/Grass.png");
+      background-size: 100% 100%;
+      @include section(40vw);
+    }
+
+    .castle-bottom-middle {
+      background-image: url("../../Images/Dirt.png");
+      background-size: 100% 100%;
+      @include section(20vw);
+      @include flex(flex-end);
+
+      .castle-town {
+        @include flex(flex-start);
+        cursor: pointer;
+      }
+    }
+
+    .castle-bottom-right {
+      background-image: url("../../Images/Grass.png");
+      background-size: 100% 100%;
+      @include section(40vw);
+    }
+  }
+}

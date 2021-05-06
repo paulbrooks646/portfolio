@@ -1,10 +1,18 @@
 module.exports = {
-  towerFirstTime: async (req, res) => {
+  towerFirst: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
 
     const tower = await db.tower_first(id);
     res.status(200).send(tower);
+  },
+
+  dragonFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const dragon = await db.dragon_first(id);
+    res.status(200).send(dragon);
   },
 
   caveFirst: async (req, res) => {

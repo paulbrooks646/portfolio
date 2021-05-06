@@ -33,6 +33,7 @@ function Dragon(props) {
   const [axeRejectionCard, setAxeRejectionCard] = useState(false);
   const [growRejectionCard, setGrowRejectionCard] = useState(false);
   const [scrollCard, setScrollCard] = useState(false);
+  const [coinSuccess, setCoinSuccess] = useState(false);
 
   useEffect(() => {
     axios.get("/api/dragon").then((res) => {
@@ -74,49 +75,73 @@ function Dragon(props) {
 
   const toggleCharcoal = () => {
     if (props.dragon.dragon.ice_used && !props.dragon.dragon.charcoal_taken) {
-      axios.post("/api/charcoal").then(res => {
-        props.getInventory(res.data)
-        axios.get("/api/dragon").then(res => {
-          props.getDragon(res.data[0])
-          setCharcoalCard(true)
-        })
-      })
-    } else if (props.dragon.dragon.ice_used && props.dragon.dragon.charcoal_taken) {
-      setCharcoalRejectionCardTwo(true)
-    } else if (!props.dragon.dragon.ice_used){
-      setCharcoalRejectionCard(true)
+      axios.post("/api/charcoal").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/dragon").then((res) => {
+          props.getDragon(res.data[0]);
+          setCharcoalCard(true);
+        });
+      });
+    } else if (
+      props.dragon.dragon.ice_used &&
+      props.dragon.dragon.charcoal_taken
+    ) {
+      setCharcoalRejectionCardTwo(true);
+    } else if (!props.dragon.dragon.ice_used) {
+      setCharcoalRejectionCard(true);
     }
   };
 
   const toggleDragon = () => {
     if (!props.dragon.dragon.armor_used) {
-      setArmorRejectionCard(true)
+      setArmorRejectionCard(true);
     } else if (!props.dragon.dragon.cloak_used) {
-      setCloakRejectionCard(true)
+      setCloakRejectionCard(true);
     } else if (!props.dragon.dragon.speed_used) {
-      setSpeedRejectionCard(true)
+      setSpeedRejectionCard(true);
     } else if (!props.dragon.dragon.axe_used) {
-      setAxeRejectionCard(true)
+      setAxeRejectionCard(true);
     } else {
-      axios.post("/api/killDragon").then(res => {
-        props.getDragon(res.data[0])
-        setDragonCard(true)
-      })
+      axios.post("/api/killDragon").then((res) => {
+        props.getDragon(res.data[0]);
+        setDragonCard(true);
+      });
     }
   };
 
   const toggleScroll = () => {
     if (props.dragon.dragon.dragon_killed) {
-      axios.post("/api/grow").then(res => {
-        props.getInventory(res.data)
-        axios.get("/api/dragon").then(res => {
-          props.getDragon(res.data[0])
-          setScrollCard(true)
-        })
-      })
+      axios.post("/api/grow").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/dragon").then((res) => {
+          props.getDragon(res.data[0]);
+          setScrollCard(true);
+        });
+      });
     } else {
-      setGrowRejectionCard(true)
+      setGrowRejectionCard(true);
     }
+  };
+
+  const toggleCoin = () => {
+    if (props.dragon.dragon.ice_used) {
+      axios.post("/api/coin").then((res) => {
+        props.getUser(res.data);
+        axios.post("/api/dragonCoin").then((res) => {
+          props.getDragon(res.data[0]);
+          setCoinSuccess(true);
+        });
+      });
+    } else {
+      setSeedRejectionCard(true);
+    }
+  };
+
+  const toggleFirstTime = () => {
+    axios.post("/api/dragonFirst").then((res) => {
+      props.getDragon(res.data[0]);
+      setFirstTimeCard(false);
+    });
   };
 
   return isLoading ? (
@@ -128,12 +153,22 @@ function Dragon(props) {
         <div className="dragon-top">
           <div className="dragon-top-left">
             <div className="dirt">
-              <div
-                className={`${
-                  !props.dragon.dragon.seed_taken ? "seed" : "seed-closed"
-                }`}
-                onClick={toggleSeed}
-              ></div>
+              <div className="seed-div">
+                <div
+                  className={`${
+                    !props.dragon.dragon.seed_taken ? "seed" : "seed-closed"
+                  }`}
+                  onClick={toggleSeed}
+                ></div>
+              </div>
+              <div className="coin-div">
+                <div
+                  className={`${
+                    !props.dragon.dragon.coin_taken ? "coin" : "coin-closed"
+                  }`}
+                  onClick={toggleCoin}
+                ></div>
+              </div>
             </div>
             <div
               className={`${props.dragon.dragon.ice_used ? "ice" : "cinders"}`}
@@ -169,15 +204,15 @@ function Dragon(props) {
         <div className="dragon-bottom">
           <div className="dragon-bottom-left"></div>
           <div className="dragon-bottom-middle">
-            <img
-              src={DragonPic}
-              alt="dragon"
-              className="dragon-dragon"
+            <div
+              className={`${
+                !props.dragon.dragon.dragon_killed ? "dragon" : "dragon-closed"
+              }`}
               onClick={toggleDragon}
             />
             <div
               className={`${
-                !props.dragon.dragon.scroll_taken ? "scroll" : "scroll-closed"
+                !props.dragon.dragon.grow_taken ? "scroll" : "scroll-closed"
               }`}
               onClick={toggleScroll}
             ></div>
@@ -197,11 +232,7 @@ function Dragon(props) {
           smell of smoke fills your nostrils and all around you everything is
           burnt. You see the dragon in the distance and rage overcomes you.
         </Typography>
-        <Button
-          onClick={() => setFirstTimeCard(false)}
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleFirstTime} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
@@ -233,7 +264,7 @@ function Dragon(props) {
           color="secondary"
           className="answer-card-description"
         >
-          The ground is far too hot for you to cross to get the seed.
+          The ground is far too hot for you to cross.
         </Typography>
         <Button
           onClick={() => setSeedRejectionCard(false)}
@@ -418,7 +449,8 @@ function Dragon(props) {
           color="secondary"
           className="answer-card-description"
         >
-          There is a massive dragon between you and the scroll. You will have to deal with it before you think about getting that scroll.
+          There is a massive dragon between you and the scroll. You will have to
+          deal with it before you think about getting that scroll.
         </Typography>
         <Button
           onClick={() => setGrowRejectionCard(false)}
@@ -440,6 +472,22 @@ function Dragon(props) {
         </Typography>
         <Button
           onClick={() => setScrollCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${coinSuccess ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You pick up the shiny gold coin.
+        </Typography>
+        <Button
+          onClick={() => setCoinSuccess(false)}
           variant="contained"
           color="primary"
         >
