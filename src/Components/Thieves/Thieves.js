@@ -52,7 +52,7 @@ function Thieves(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="thieves-main">
+    <div className="main">
       <Nav />
       <div className="thieves-body">
         <div className="thieves-top">
