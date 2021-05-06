@@ -18,8 +18,8 @@ import Princess from "../../Images/Princess.png";
 import Loading from "../Loading/Loading";
 
 function Tower(props) {
-   const [leftCharacter, setLeftCharacter] = useState(false);
-   const [leftLeft, setLeftLeft] = useState(false);
+  const [leftCharacter, setLeftCharacter] = useState(false);
+  const [leftLeft, setLeftLeft] = useState(false);
   const [weaselHiss, setWeaselHiss] = useState(false);
   const [weaselPurr, setWeaselPurr] = useState(false);
   const [princess, setPrincess] = useState(false);
@@ -35,7 +35,7 @@ function Tower(props) {
   useEffect(() => {
     axios.get("/api/tower").then((res) => {
       props.getTower(res.data[0]);
-      setLeftCharacter(true)
+      setLeftCharacter(true);
       setIsLoading(false);
     });
     if (props.tower.tower.first_time) {
@@ -47,11 +47,11 @@ function Tower(props) {
   }, []);
 
   const toggleLeft = () => {
-   axios.post("/api/changeLast", { last: "tower" }).then((res) => {
-     props.getUser(res.data).then(() => {
-       props.history.push("/Castle");
-     });
-   });
+    axios.post("/api/changeLast", { last: "tower" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Castle");
+      });
+    });
   };
 
   const togglePrincess = () => {
@@ -98,15 +98,15 @@ function Tower(props) {
     }
   };
 
-   const toggleGoLeft = () => {
-     setLeftCharacter(false);
-     setLeftLeft(true);
-   };
+  const toggleGoLeft = () => {
+    setLeftCharacter(false);
+    setLeftLeft(true);
+  };
 
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="tower-main">
+    <div className="main">
       <Nav />
       <div className="tower-body">
         <div className="tower-top">
@@ -161,35 +161,24 @@ function Tower(props) {
           </div>
         </div>
       </div>
-      <Card className={`${princess ? "tower-card" : "tower-card-closed"}`}>
-        <Typography variant="h5" color="primary" className="tower-card-title">
+      <Card
+        className={`${princess ? "component-card" : "component-card-closed"}`}
+      >
+        <Typography variant="h5" color="primary">
           What knowledge shall I bestow upon you?
         </Typography>
-        <List className="tower-list">
-          <ListItem className="tower-list-item" onClick={toggleAnswerOne}>
-            The King
-          </ListItem>
-          <ListItem className="tower-list-item" onClick={toggleAnswerTwo}>
-            The Ribbon
-          </ListItem>
-          <ListItem className="tower-list-item" onClick={toggleAnswerThree}>
-            The Tower
-          </ListItem>
-          <ListItem className="tower-list-item" onClick={toggleAnswerFour}>
-            The Weasel
-          </ListItem>
+        <List className="component-list">
+          <ListItem onClick={toggleAnswerOne}>The King</ListItem>
+          <ListItem onClick={toggleAnswerTwo}>The Ribbon</ListItem>
+          <ListItem onClick={toggleAnswerThree}>The Tower</ListItem>
+          <ListItem onClick={toggleAnswerFour}>The Weasel</ListItem>
         </List>
-        <Button
-          onClick={togglePrincess}
-          className="tower-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={togglePrincess} variant="contained" color="primary">
           Say Goodbye
         </Button>
       </Card>
       <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="tower-card-title">
+        <Typography variant="h4" color="primary">
           The King
         </Typography>
         <Typography
@@ -201,17 +190,12 @@ function Tower(props) {
           your ignorance to speak with him. I will present you with a letter to
           be delivered to the King if you find my lost ribbon.
         </Typography>
-        <Button
-          onClick={toggleAnswerOne}
-          className="tower-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerOne} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="tower-card-title">
+        <Typography variant="h4" color="primary">
           Ribbon
         </Typography>
         <Typography
@@ -223,17 +207,12 @@ function Tower(props) {
           and stole my favorite ribbon from the line where my servants had hung
           it to dry. Such carelessness is peeving.
         </Typography>
-        <Button
-          onClick={toggleAnswerTwo}
-          className="tower-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerTwo} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="tower-card-title">
+        <Typography variant="h4" color="primary">
           The Tower
         </Typography>
         <Typography
@@ -245,17 +224,12 @@ function Tower(props) {
           mature, intelligent young lady I am. I also come here to escape
           associating with boorish people like yourself.
         </Typography>
-        <Button
-          onClick={toggleAnswerThree}
-          className="tower-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerThree} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="tower-card-title">
+        <Typography variant="h4" color="primary">
           The Weasel
         </Typography>
         <Typography
@@ -265,12 +239,7 @@ function Tower(props) {
         >
           Pop is far more intelligent and loyal than you will ever be.
         </Typography>
-        <Button
-          onClick={toggleAnswerFour}
-          className="tower-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerFour} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
@@ -286,7 +255,6 @@ function Tower(props) {
         </Typography>
         <Button
           onClick={() => setRejectionCard(false)}
-          className="castle-card-button"
           variant="contained"
           color="primary"
         >
@@ -306,7 +274,6 @@ function Tower(props) {
         </Typography>
         <Button
           onClick={() => setRejectionCardTwo(false)}
-          className="castle-card-button"
           variant="contained"
           color="primary"
         >
@@ -323,7 +290,6 @@ function Tower(props) {
         </Typography>
         <Button
           onClick={() => setWeaselHiss(false)}
-          className="castle-card-button"
           variant="contained"
           color="primary"
         >
@@ -340,7 +306,6 @@ function Tower(props) {
         </Typography>
         <Button
           onClick={() => setWeaselPurr(false)}
-          className="castle-card-button"
           variant="contained"
           color="primary"
         >
@@ -360,7 +325,6 @@ function Tower(props) {
         </Typography>
         <Button
           onClick={() => setFirstTime(false)}
-          className="castle-card-button"
           variant="contained"
           color="primary"
         >

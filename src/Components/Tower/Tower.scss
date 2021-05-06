@@ -1,187 +1,117 @@
-.tower-main {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  position: relative;
+@import "../mixins";
 
-  .tower-body {
-    .tower-top {
-      height: 55vh;
-      display: flex;
-      width: 100vw;
+.tower-body {
+  .tower-top {
+    @include row(55vh);
 
-      .tower-top-left {
-        height: 100%;
+    .tower-top-left {
+      @include section(60vw);
+
+      .tower-top-left-up {
+        height: 35vh;
         width: 60vw;
-
-        .tower-top-left-up {
-          height: 35vh;
-          width: 60vw;
-          background-image: url("../../Images/Brick.jpg");
-          background-size: 100% 100%;
-          border-right: solid black 30px;
-
-          
-        }
-
-        .tower-top-left-down {
-          width: 100%;
-          height: 20vh;
-          background-image: url("../../Images//Dirt.png");
-          background-size: 100% 100%;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-
-          .tower-castle {
-            display: flex;
-            align-items: center;
-            width: 110px;
-            cursor: pointer;
-          }
-
-          .tower-weasel {
-            height: 100px;
-            width: 100px;
-            cursor: pointer;
-            position: relative;
-            animation-name: weasel;
-            animation-iteration-count: 1;
-            animation-timing-function: linear;
-            animation-direction: normal;
-            animation-duration: 1s;
-            right: 10%;
-          }
-        }
+        background-image: url("../../Images/Brick.jpg");
+        background-size: 100% 100%;
+        border-right: solid black 30px;
       }
 
-      .tower-top-right {
-        height: 100%;
-        width: 40vw;
-        background-image: url("../../Images/Tower.jpg");
+      .tower-top-left-down {
+        width: 100%;
+        height: 20vh;
+        background-image: url("../../Images//Dirt.png");
         background-size: 100% 100%;
-        background-repeat: no-repeat;
-        background-position: center;
+        @include center(space-between);
+
+        .tower-castle {
+          @include center(flex-start);
+          width: 110px;
+          cursor: pointer;
+        }
+
+        .tower-weasel {
+          height: 100px;
+          width: 100px;
+          cursor: pointer;
+          position: relative;
+          animation-name: weasel;
+          animation-iteration-count: 1;
+          animation-timing-function: linear;
+          animation-direction: normal;
+          animation-duration: 1s;
+          right: 10%;
+        }
       }
     }
 
-    .tower-bottom {
-      height: 35vh;
-      display: flex;
-      width: 100vw;
+    .tower-top-right {
+      @include section(40vw);
+      background-image: url("../../Images/Tower.jpg");
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
 
-      .tower-bottom-left {
-        height: 100%;
-        width: 40vw;
+  .tower-bottom {
+    @include row(35vh);
+
+    .tower-bottom-left {
+      @include section(40vw);
+      background-image: url("../../Images/Grass.png");
+      background-size: 100% 100%;
+    }
+
+    .tower-bottom-middle {
+      @include section(20vw);
+
+      .tower-bottom-middle-up {
+        height: 20vh;
+        width: 100%;
+        background-image: url("../../Images/Dirt.png");
+        background-size: 100% 100%;
+      }
+      .tower-bottom-middle-down {
+        height: 15vh;
+        width: 100%;
         background-image: url("../../Images/Grass.png");
         background-size: 100% 100%;
       }
+    }
 
-      .tower-bottom-middle {
-        height: 100%;
-        width: 20vw;
-        .tower-bottom-middle-up {
-          height: 20vh;
-          width: 100%;
-          background-image: url("../../Images/Dirt.png");
-          background-size: 100% 100%;
-        }
-        .tower-bottom-middle-down {
-          height: 15vh;
-          width: 100%;
-          background-image: url("../../Images/Grass.png");
-          background-size: 100% 100%;
-        }
-      }
+    .tower-bottom-right {
+      @include section(40vw);
 
-      .tower-bottom-right {
-        height: 100%;
-        width: 40vw;
-        .tower-bottom-right-up {
-          height: 20vh;
-          width: 100%;
-          background-image: url("../../Images/Dirt.png");
-          background-size: 100% 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
+      .tower-bottom-right-up {
+        height: 20vh;
+        width: 100%;
+        background-image: url("../../Images/Dirt.png");
+        background-size: 100% 100%;
+        @include center(center);
 
-          .tower-princess {
-            height: 100px;
-            width: 100px;
-            cursor: pointer;
-          }
-        }
-        .tower-bottom-right-down {
-          height: 15vh;
-          width: 100%;
-          background-image: url("../../Images/Grass.png");
-          background-size: 100% 100%;
+        .tower-princess {
+          height: 100px;
+          width: 100px;
+          cursor: pointer;
         }
       }
+      .tower-bottom-right-down {
+        height: 15vh;
+        width: 100%;
+        background-image: url("../../Images/Grass.png");
+        background-size: 100% 100%;
+      }
     }
-  }
-   .tower-card {
-      height: 500px;
-      width: 500px;
-    background-color: white;
-    border: solid black 2px;
-    box-shadow: 2px 2px 2px 2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: absolute;
-    text-align: center;
-
-    .tower-list {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        cursor: pointer;
-        color: tomato;
-    }
-
-    .tower-card-description {
-        width: 90%;
-    }
-  }
-
-  .tower-card-closed {
-    display: none;
-  }
-  .answer-card {
-      height: 400px;
-      width: 400px;
-    background-color: white;
-    border: solid black 2px;
-    box-shadow: 2px 2px 2px 2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: absolute;
-    text-align: center;
-
-    
-
-    .answer-card-description {
-        width: 90%;
-    }
-  }
-
-  .answer-card-closed {
-    display: none;
   }
 }
 
 @keyframes weasel {
-  0% {right: 10%}
-  50% {right: 30%}
-  100% {right: 10%}
+  0% {
+    right: 10%;
+  }
+  50% {
+    right: 30%;
+  }
+  100% {
+    right: 10%;
+  }
 }
