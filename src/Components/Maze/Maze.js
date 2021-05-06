@@ -200,7 +200,7 @@ function Maze(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="maze-main">
+    <div className="main">
       <Nav />
       <div className="maze-body">
         <div className="maze-top">

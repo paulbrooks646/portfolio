@@ -1,182 +1,84 @@
-.maze-main {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  position: relative;
+@import "../mixins";
 
-  .maze-body {
-    background-image: url("../../Images/Grass.png");
-    background-size: 100% 100%;
+.maze-body {
+  background-image: url("../../Images/Grass.png");
+  background-size: 100% 100%;
 
-    .maze-top {
-      height: 35vh;
-      display: flex;
-      width: 100vw;
+  .maze-top {
+    @include row(35vh);
 
-      .maze-top-left {
-        height: 100%;
-        width: 40%;
-      }
-
-      .maze-top-middle {
-        height: 100%;
-        width: 20%;
-        background-size: 100% 100%;
-        background-image: url("../../Images/Dirt.png");
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .maze-up {
-          display: flex;
-          flex-direction: column;
-
-          align-items: center;
-          cursor: pointer;
-        }
-      }
-
-      .maze-top-right {
-        height: 100%;
-        width: 40%;
-      }
+    .maze-top-left {
+      @include section(40vw);
     }
 
-    .maze-middle {
-      height: 20vh;
-      display: flex;
-      width: 100vw;
+    .maze-top-middle {
+      @include section(20vw);
+      @include flex(flex-start);
+      background-size: 100% 100%;
       background-image: url("../../Images/Dirt.png");
 
-      .maze-middle-left {
-        width: 40%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-
-        .maze-left {
-          display: flex;
-          justify-content: space-evenly;
-          align-items: center;
-          cursor: pointer;
-
-        }
-      }
-
-      .maze-middle-middle {
-        width: 20%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .maze-middle-right {
-        width: 40%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-
-        .maze-right {
-          display: flex;
-          width: 100px;
-          justify-content: space-evenly;
-          align-items: center;
-          cursor: pointer;
-          position: relative;
-        }
+      .maze-up {
+        @include flex(flex-start);
+        cursor: pointer;
       }
     }
 
-    .maze-bottom {
-      height: 35vh;
-      display: flex;
-      width: 100vw;
+    .maze-top-right {
+      @include section(40vw);
+    }
+  }
 
-      .maze-bottom-left {
-        height: 100%;
-        width: 40%;
+  .maze-middle {
+    @include row(20vw);
+    background-image: url("../../Images/Dirt.png");
+
+    .maze-middle-left {
+      @include section(40vw);
+      @include center(flex-start);
+
+      .maze-left {
+        @include center(space-evenly);
+        cursor: pointer;
       }
+    }
 
-      .maze-bottom-middle {
-        height: 100%;
-        width: 20%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        align-items: center;
-        background-image: url("../../Images/Dirt.png");
+    .maze-middle-middle {
+      @include section(20vw);
+      @include flex(center);
+    }
 
-        .maze-down {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          cursor: pointer;
-        }
-      }
+    .maze-middle-right {
+      @include section(40vw);
+      @include center(flex-end);
 
-      .maze-bottom-right {
-        height: 100%;
-        width: 40%;
+      .maze-right {
+        @include center(space-evenly);
+        width: 100px;
+        cursor: pointer;
       }
     }
   }
 
-  .maze-card {
-    height: 500px;
-    width: 500px;
-    background-color: white;
-    border: solid black 2px;
-    box-shadow: 2px 2px 2px 2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: absolute;
-    text-align: center;
+  .maze-bottom {
+    @include row(35vh);
 
-    .maze-list {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-      color: tomato;
+    .maze-bottom-left {
+      @include section(40vw);
     }
 
-    .maze-card-description {
-      width: 90%;
+    .maze-bottom-middle {
+      @include section(20vw);
+      @include flex(flex-end);
+      background-image: url("../../Images/Dirt.png");
+
+      .maze-down {
+        @include flex(flex-start);
+        cursor: pointer;
+      }
     }
-  }
 
-  .maze-card-closed {
-    display: none;
-  }
-
-  .answer-card {
-    height: 400px;
-    width: 400px;
-    background-color: white;
-    border: solid black 2px;
-    box-shadow: 2px 2px 2px 2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: absolute;
-    text-align: center;
-
-    .answer-card-description {
-      width: 90%;
+    .maze-bottom-right {
+      @include section(40vw);
     }
-  }
-
-  .answer-card-closed {
-    display: none;
   }
 }
