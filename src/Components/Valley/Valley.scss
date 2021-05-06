@@ -1,179 +1,86 @@
-.valley-main {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
+@import "../mixins";
 
-  .valley-body {
-    .valley-top {
-      height: 35vh;
-      display: flex;
-      width: 100vw;
-      
+.valley-body {
+  .valley-top {
+    @include row(35vh);
 
-      .valley-top-left {
-        width: 40vw;
-        height: 100%;
-        background-image: url("../../Images/Grass.png");
-        background-size: 100% 100%;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-
-        .troll {
-          background-image: url("../../Images/Troll.gif");
-          background-size: 100% 100%;
-          height: 200px;
-          width: 150px;
-        }
-      }
-
-      .valley-top-middle {
-        width: 20vw;
-        height: 100%;
-        background-image: url("../../Images/Water.png");
-      }
-
-      .valley-top-right {
-        width: 40vw;
-        height: 100%;
-        background-image: url("../../Images//Grass.png");
-        background-size: 100% 100%;
-      }
-    }
-
-    .valley-middle {
-      height: 20vh;
-      display: flex;
-      width: 100vw;
-      background-image: url("../../Images/Dirt.png");
+    .valley-top-left {
+      @include section(40vw);
+      @include center(flex-end);
+      background-image: url("../../Images/Grass.png");
       background-size: 100% 100%;
 
-      .valley-middle-left {
-        
-        width: 40vw;
-        height: 100%;
-        display: flex;
-        align-items: center;
-
-        .valley-glade {
-          display: flex;
-          justify-content: space-evenly;
-          align-items: center;
-          cursor: pointer;
-          position: relative;
-         
-        }
-        
-      }
-
-      .valley-middle-middle {
-        background-image: url("../../Images/Bridge.png");
+      .troll {
+        background-image: url("../../Images/Troll.gif");
         background-size: 100% 100%;
-        width: 40vw;
-        height: 100%;
-      }
-
-      .valley-middle-right {
-        
-        width: 40%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-
-        .valley-stables {
-          display: flex;
-          justify-content: space-evenly;
-          align-items: center;
-          cursor: pointer;
-          position: relative;
-        }
+        height: 200px;
+        width: 150px;
       }
     }
 
-    .valley-bottom {
-      height: 35vh;
-      display: flex;
-      width: 100vw;
+    .valley-top-middle {
+      @include section(20vw);
+      background-image: url("../../Images/Water.png");
+    }
 
-      .valley-bottom-left {
-        background-image: url("../../Images//Grass.png");
-        background-size: 100% 100%;
-        height: 100%;
-        width: 40vw;
+    .valley-top-right {
+      @include section(40vw);
+      background-image: url("../../Images//Grass.png");
+      background-size: 100% 100%;
+    }
+  }
+
+  .valley-middle {
+    @include row(20vh);
+    background-image: url("../../Images/Dirt.png");
+    background-size: 100% 100%;
+
+    .valley-middle-left {
+      @include section(30vw);
+      @include center(flex-start);
+
+      .valley-glade {
+        @include center(space-evenly);
+        cursor: pointer;
       }
+    }
 
-      .valley-bottom-middle {
-        background-image: url("../../Images//Water.png");
-        height: 100%;
-        width: 20vw;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        align-items: center;
-      }
+    .valley-middle-middle {
+      background-image: url("../../Images/Bridge.png");
+      background-size: 100% 100%;
+      @include section(40vw);
+    }
 
-      .valley-bottom-right {
-        background-image: url("../../Images//Grass.png");
-        background-size: 100% 100%;
-        height: 100%;
-        width: 40vw;
+    .valley-middle-right {
+      @include section(30vw);
+      @include center(flex-end);
+
+      .valley-stables {
+        @include center(space-evenly);
+        cursor: pointer;
       }
     }
   }
 
-  .failure-card {
-    width: 500px;
-    height: 500px;
-    border: solid;
-    box-shadow: 2px 2px 2px 2px;
-    position: relative;
-    bottom: 80%;
-    left: 30%;
-    border-radius: 5px;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    text-align: center;
+  .valley-bottom {
+    @include row(35vh);
 
-    .card-title {
-      color: red;
+    .valley-bottom-left {
+      background-image: url("../../Images//Grass.png");
+      background-size: 100% 100%;
+      @include section(40vw);
     }
 
-    .card-paragraph {
-      width: 80%;
+    .valley-bottom-middle {
+      background-image: url("../../Images//Water.png");
+      @include section(20vw);
+      @include flex(flex-end);
     }
 
-    .card-subtitle {
-      color: blue;
+    .valley-bottom-right {
+      background-image: url("../../Images//Grass.png");
+      background-size: 100% 100%;
+      @include section(40vw);
     }
-
-    .card-button {
-      width: 100px;
-      height: 50px;
-      border-radius: 5%;
-      box-shadow: 2px 2px 2px 2px;
-      color: black;
-      background-color: white;
-    }
-  }
-
-  .failure-card-closed {
-    display: none;
-  }
-
-  .success-card {
-    width: 500px;
-    height: 500px;
-    border: solid;
-    box-shadow: 2px 2px 2px 2px;
-    position: relative;
-    bottom: 500px;
-  }
-
-  .success-card-closed {
-    display: none;
   }
 }

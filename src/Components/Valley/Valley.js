@@ -77,7 +77,7 @@ function Valley(props) {
   
 
   return (
-    <div className="valley-main">
+    <div className="main">
       <Nav />
       <div className="valley-body">
         <div className="valley-top">
