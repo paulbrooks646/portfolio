@@ -1,279 +1,89 @@
-.market-main {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
+@import "../mixins";
 
-  .market-body {
-    .market-top {
-      height: 35vh;
-      display: flex;
-      width: 100vw;
-      background-image: url("../../Images/Market.jpg");
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 100% 100%;
-    }
+.market-body {
+  .market-top {
+    @include row(35vh);
+    background-image: url("../../Images/Market.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+  }
 
-    .market-middle {
-      height: 20vh;
-      display: flex;
-      width: 100vw;
-      background-image: url("../../Images//Dirt.png");
-      background-size: 100% 100%;
+  .market-middle {
+    @include row(20vh);
+    background-image: url("../../Images//Dirt.png");
+    background-size: 100% 100%;
 
-      .market-middle-left {
-        width: 40%;
-        height: 100%;
-        display: flex;
-        align-items: center;
+    .market-middle-left {
+      @include section(40vw);
+      @include center(flex-start);
 
-        .market-town {
-          display: flex;
-          align-items: center;
-          cursor: pointer;
-        }
-      }
-
-      .market-middle-middle {
-        width: 20%;
-        height: 100%;
-      }
-
-      .market-middle-right {
-        width: 40%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-
-        .market-alley {
-          display: flex;
-          align-items: center;
-          cursor: pointer;
-          width: 100px;
-          justify-content: space-evenly;
-        }
-      }
-    }
-
-    .market-bottom {
-      height: 35vh;
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      width: 100vw;
-      background-image: url("../../Images/Grass.png");
-      background-size: 100% 100%;
-
-      .blacksmith-div {
+      .market-town {
+        @include center(flex-start);
         cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .market-blacksmith {
-          height: 200px;
-          width: 200px;
-        }
       }
+    }
 
-      .magic-store-div {
+    .market-middle-middle {
+      @include section(20vw);
+    }
+
+    .market-middle-right {
+      @include section(40vw);
+      @include center(flex-end);
+
+      .market-alley {
+        @include center(space-evenly);
         cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .market-magic {
-           height: 200px;
-          width: 200px;
-        }
-      }
-
-      .grocer-div {
-         cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .market-grocer {
-           height: 200px;
-          width: 200px;
-        }
-      }
-
-      .store-div {
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .market-store {
-          height: 200px;
-          width: 200px;
-        }
+        width: 100px;
       }
     }
   }
 
-  .character-moving {
-    position: relative;
+  .market-bottom {
+    @include row(35vh);
+    @include center(space-evenly);
+    background-image: url("../../Images/Grass.png");
+    background-size: 100% 100%;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    animation-name: motion;
-    animation-duration: 2s;
-    animation-timing-function: linear;
+    .blacksmith-div {
+      @include flex(flex-start);
+      cursor: pointer;
 
-    .face {
-      border-radius: 50%;
-      width: 40px;
-      height: 45px;
-      background-color: peachpuff;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-      align-items: center;
-      border-top: solid yellow 5px;
-
-      .eyes {
-        display: flex;
-        justify-content: space-evenly;
-        width: 100%;
-
-        .eye {
-          border-radius: 50%;
-          background-color: blue;
-          height: 3px;
-          width: 5px;
-        }
-      }
-
-      .nose {
-        border-radius: 50%;
-        background-color: black;
-        height: 3px;
-        width: 2px;
-      }
-
-      .mouth {
-        border-radius: 50%;
-        background-color: red;
-        width: 20px;
-        height: 3px;
+      .market-blacksmith {
+        height: 200px;
+        width: 200px;
       }
     }
-    .body {
-      width: 50px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
 
-      .neck {
-        background-color: black;
-        height: 5px;
-        width: 10px;
-      }
+    .magic-store-div {
+      cursor: pointer;
+      @include flex(flex-start);
 
-      .arms {
-        display: flex;
-
-        .left-arm {
-          background-color: black;
-          width: 25px;
-          height: 5px;
-          transform: rotate(-2deg);
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-
-          .hand {
-            border-radius: 50%;
-            height: 8px;
-            width: 8px;
-            background-color: peachpuff;
-          }
-        }
-
-        .right-arm {
-          background-color: black;
-          width: 25px;
-          height: 5px;
-          transform: rotate(2deg);
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-
-          .hand {
-            border-radius: 50%;
-            height: 8px;
-            width: 8px;
-            background-color: peachpuff;
-          }
-        }
-      }
-
-      .torso {
-        background-color: black;
-        height: 20px;
-        width: 10px;
-      }
-
-      .legs {
-        display: flex;
-
-        .left-leg {
-          background-color: black;
-          height: 30px;
-          width: 5px;
-          transform: rotate(10deg);
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          align-items: center;
-
-          .foot {
-            border-radius: 50%;
-            height: 8px;
-            width: 8px;
-            background-color: black;
-          }
-        }
-
-        .right-leg {
-          background-color: black;
-          height: 30px;
-          width: 5px;
-          transform: rotate(-10deg);
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          align-items: center;
-
-          .foot {
-            border-radius: 50%;
-            height: 8px;
-            width: 8px;
-            background-color: black;
-          }
-        }
+      .market-magic {
+        height: 200px;
+        width: 200px;
       }
     }
-  }
-}
 
-@keyframes motion {
-  0% {
-    bottom: 200px;
-    left: 0px;
-  }
-  50% {
-    bottom: 420px;
-    left: 0px;
-  }
-  100% {
-    left: -470px;
-    bottom: 420px;
+    .grocer-div {
+      cursor: pointer;
+      @include flex(flex-start);
+
+      .market-grocer {
+        height: 200px;
+        width: 200px;
+      }
+    }
+
+    .store-div {
+      cursor: pointer;
+      @include flex(flex-start);
+
+      .market-store {
+        height: 200px;
+        width: 200px;
+      }
+    }
   }
 }

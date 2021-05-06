@@ -1,3 +1,5 @@
+@import "../mixins";
+
 .portfolio-main {
   text-align: center;
   background-color: #282c34;
@@ -6,10 +8,7 @@
 
   .portfolio-introduction {
     height: 15%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @include flex(center);
 
     .portfolio-title {
       font-size: 50px;

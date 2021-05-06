@@ -95,7 +95,7 @@ function Market(props) {
   return (
 
     isLoading ? <Loading/> :
-    <div className="market-main">
+    <div className="main">
       <Nav />
       <div className="market-body">
         <div className="market-top">
