@@ -3,16 +3,16 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser, getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
-import { getCave } from "../../redux/caveReducer"
+import { getCave } from "../../redux/caveReducer";
 import { getDashboard } from "../../redux/dashboardReducer";
 import { getCastle } from "../../redux/castleReducer";
 import { getStables } from "../../redux/stablesReducer";
 import { getGarden } from "../../redux/gardenReducer";
 import { getTower } from "../../redux/towerReducer";
 import { getNest } from "../../redux/nestReducer";
-import { getPass } from "../../redux/passReducer"
-import { getCabin } from "../../redux/cabinReducer"
-import {getForest} from "../../redux/forestReducer"
+import { getPass } from "../../redux/passReducer";
+import { getCabin } from "../../redux/cabinReducer";
+import { getForest } from "../../redux/forestReducer";
 import axios from "axios";
 import "./Nav.scss";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
@@ -34,16 +34,15 @@ function Nav(props) {
   const [meatCard, setMeatCard] = useState(false);
   const [ropeCard, setRopeCard] = useState(false);
   const [homeCard, setHomeCard] = useState(false);
-  const [woodCard, setWoodCard] = useState(false)
-  const [knifeCard, setKnifeCard] = useState(false)
-  const [potatoesCard, setPotatoesCard] = useState(false)
-  const [bowCard, setBowCard] = useState(false)
-  
+  const [woodCard, setWoodCard] = useState(false);
+  const [knifeCard, setKnifeCard] = useState(false);
+  const [potatoesCard, setPotatoesCard] = useState(false);
+  const [bowCard, setBowCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/getUser").then((res) => {
-      getUser(res.data)
-    })
+      getUser(res.data);
+    });
   }, []);
 
   const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
@@ -119,7 +118,6 @@ function Nav(props) {
           props.getInventory(res.data);
           axios.get("/api/pass").then((res) => {
             props.getPass(res.data[0]);
-            
           });
         });
       } else {
@@ -129,7 +127,7 @@ function Nav(props) {
     if (item === "ribbon") {
       if (props.location.pathname === "/Tower") {
         axios.post("/api/giveRibbon").then((res) => {
-          props.getInventory(res.data)
+          props.getInventory(res.data);
           axios.get("/api/tower").then((res) => {
             props.getTower(res.data[0]);
             setRibbonCard(true);
@@ -237,11 +235,11 @@ function Nav(props) {
       if (props.location.pathname === "/Dashboard") {
         axios.post("/api/placeHome").then(() => {
           axios.get("/api/dashboard").then((res) => {
-            props.getDashboard(res.data[0])
-            axios.get("/api/inventory").then(res => {
-              props.getInventory(res.data)
+            props.getDashboard(res.data[0]);
+            axios.get("/api/inventory").then((res) => {
+              props.getInventory(res.data);
               setHomeCard(true);
-            })
+            });
           });
         });
       } else {
@@ -254,74 +252,76 @@ function Nav(props) {
           axios.get("/api/dashboard").then((res) => {
             props.getDashboard(res.data[0]);
             axios.get("/api/inventory").then((res) => {
-              props.getInventory(res.data)
-              
-            })
+              props.getInventory(res.data);
+            });
           });
         });
       } else {
         setRejectionCard(true);
       }
     }
-     if (item === "wood") {
-       if (props.location.pathname === "/Cabin" && props.cabin.cabin.potatoes_given) {
-         axios.post("/api/giveWood").then(() => {
-           axios.get("/api/cabin").then((res) => {
-             props.getCabin(res.data[0]);
-             axios.get("/api/inventory").then((res) => {
-               props.getInventory(res.data);
-               setWoodCard(true)
-             });
-           });
-         });
-       } else {
-         setRejectionCard(true);
-       }
-    }
-     if (item === "potatoes") {
-       if (props.location.pathname === "/Cabin") {
-         axios.post("/api/givePotatoes").then(() => {
-           axios.get("/api/cabin").then((res) => {
-             props.getCabin(res.data[0]);
-             axios.get("/api/inventory").then((res) => {
-               props.getInventory(res.data);
-               axios.post("/api/coin").then(res => {
-                 props.getUser(res.data)
-                 setPotatoesCard(true)
-               })
-             });
-           });
-         });
-       } else {
-         setRejectionCard(true);
-       }
-    }
-     if (item === "knife") {
-       if (props.location.pathname === "/Cabin" && props.cabin.cabin.potatoes_given) {
-         axios.post("/api/giveKnife").then(() => {
-           axios.get("/api/cabin").then((res) => {
-             props.getCabin(res.data[0]);
-             axios.get("/api/inventory").then((res) => {
-               props.getInventory(res.data);
-               setKnifeCard(true)
-             });
-           });
-         });
-       } else {
-         setRejectionCard(true);
-       }
-    }
-    
-    if (item === "bow") {
+    if (item === "wood") {
       if (
-        props.location.pathname === "/Forest"
+        props.location.pathname === "/Cabin" &&
+        props.cabin.cabin.potatoes_given
       ) {
-        axios.post("/api/apple").then(res => {
-          props.getInventory(res.data)
+        axios.post("/api/giveWood").then(() => {
+          axios.get("/api/cabin").then((res) => {
+            props.getCabin(res.data[0]);
+            axios.get("/api/inventory").then((res) => {
+              props.getInventory(res.data);
+              setWoodCard(true);
+            });
+          });
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+    if (item === "potatoes") {
+      if (props.location.pathname === "/Cabin") {
+        axios.post("/api/givePotatoes").then(() => {
+          axios.get("/api/cabin").then((res) => {
+            props.getCabin(res.data[0]);
+            axios.get("/api/inventory").then((res) => {
+              props.getInventory(res.data);
+              axios.post("/api/coin").then((res) => {
+                props.getUser(res.data);
+                setPotatoesCard(true);
+              });
+            });
+          });
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+    if (item === "knife") {
+      if (
+        props.location.pathname === "/Cabin" &&
+        props.cabin.cabin.potatoes_given
+      ) {
+        axios.post("/api/giveKnife").then(() => {
+          axios.get("/api/cabin").then((res) => {
+            props.getCabin(res.data[0]);
+            axios.get("/api/inventory").then((res) => {
+              props.getInventory(res.data);
+              setKnifeCard(true);
+            });
+          });
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+
+    if (item === "bow") {
+      if (props.location.pathname === "/Forest") {
+        axios.post("/api/apple").then((res) => {
+          props.getInventory(res.data);
           axios.get("/api/forest").then((res) => {
             props.getForest(res.data[0]);
             setBowCard(true);
-            
           });
         });
       } else {
@@ -361,7 +361,6 @@ function Nav(props) {
         </Typography>
         <Button
           onClick={() => setRejectionCard(false)}
-          className="stables-card-button"
           variant="contained"
           color="primary"
         >
@@ -379,7 +378,6 @@ function Nav(props) {
         </Typography>
         <Button
           onClick={() => setNutCard(false)}
-          className="stables-card-button"
           variant="contained"
           color="primary"
         >
@@ -396,7 +394,6 @@ function Nav(props) {
         </Typography>
         <Button
           onClick={() => setHatCard(false)}
-          className="stables-card-button"
           variant="contained"
           color="primary"
         >
@@ -414,7 +411,6 @@ function Nav(props) {
         </Typography>
         <Button
           onClick={() => setShowLetterCard(false)}
-          className="stables-card-button"
           variant="contained"
           color="primary"
         >
@@ -432,7 +428,6 @@ function Nav(props) {
         </Typography>
         <Button
           onClick={() => setBottleCard(false)}
-          className="stables-card-button"
           variant="contained"
           color="primary"
         >
@@ -451,7 +446,6 @@ function Nav(props) {
         </Typography>
         <Button
           onClick={() => setManureCard(false)}
-          className="stables-card-button"
           variant="contained"
           color="primary"
         >
@@ -469,7 +463,6 @@ function Nav(props) {
         </Typography>
         <Button
           onClick={() => setFluteCard(false)}
-          className="stables-card-button"
           variant="contained"
           color="primary"
         >
@@ -488,7 +481,6 @@ function Nav(props) {
         </Typography>
         <Button
           onClick={() => setFlowerCard(false)}
-          className="stables-card-button"
           variant="contained"
           color="primary"
         >
@@ -506,7 +498,6 @@ function Nav(props) {
         </Typography>
         <Button
           onClick={() => setRibbonCard(false)}
-          className="stables-card-button"
           variant="contained"
           color="primary"
         >
@@ -525,7 +516,6 @@ function Nav(props) {
         </Typography>
         <Button
           onClick={() => setMeatCard(false)}
-          className="stables-card-button"
           variant="contained"
           color="primary"
         >
@@ -544,7 +534,6 @@ function Nav(props) {
         </Typography>
         <Button
           onClick={() => setRopeCard(false)}
-          className="stables-card-button"
           variant="contained"
           color="primary"
         >
@@ -561,7 +550,6 @@ function Nav(props) {
         </Typography>
         <Button
           onClick={() => setHomeCard(false)}
-          className="stables-card-button"
           variant="contained"
           color="primary"
         >
@@ -579,7 +567,6 @@ function Nav(props) {
         </Typography>
         <Button
           onClick={() => setPotatoesCard(false)}
-          className="stables-card-button"
           variant="contained"
           color="primary"
         >
@@ -596,7 +583,6 @@ function Nav(props) {
         </Typography>
         <Button
           onClick={() => setKnifeCard(false)}
-          className="stables-card-button"
           variant="contained"
           color="primary"
         >
@@ -613,7 +599,6 @@ function Nav(props) {
         </Typography>
         <Button
           onClick={() => setWoodCard(false)}
-          className="stables-card-button"
           variant="contained"
           color="primary"
         >
@@ -626,11 +611,11 @@ function Nav(props) {
           color="primary"
           className="answer-card-description"
         >
-          You fire straight up. The arrow sails into the branches and a single apple falls. You dive and catch it but break the bow in the process.
+          You fire straight up. The arrow sails into the branches and a single
+          apple falls. You dive and catch it but break the bow in the process.
         </Typography>
         <Button
           onClick={() => setBowCard(false)}
-          className="stables-card-button"
           variant="contained"
           color="primary"
         >
@@ -657,6 +642,6 @@ export default withRouter(
     getPass,
     getDashboard,
     getCabin,
-    getForest
+    getForest,
   })(Nav)
 );
