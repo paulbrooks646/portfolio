@@ -76,7 +76,7 @@ function Swamp(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="swamp-main">
+    <div className="main">
       <Nav />
       <div className="swamp-body">
         <div className="swamp-top">

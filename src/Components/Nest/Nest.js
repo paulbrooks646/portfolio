@@ -100,7 +100,7 @@ function Nest(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="main">
+    <div className="inmain">
       <Nav />
       <div className="nest-body">
         <div className="nest-top">

@@ -1,464 +1,64 @@
-.swamp-main {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  position: relative;
+@import "../mixins";
 
-  .swamp-body {
+.swamp-body {
+  background-image: url("../../Images//Dirt.png");
+  background-size: 100% 100%;
 
-    background-image: url("../../Images//Dirt.png");
-    background-size: 100% 100%;
-
-    .swamp-top {
-      height: 35vh;
-      display: flex;
-      width: 100vw;
-      background-image: url("../../Images/Swamp.png");
-    }
-
-    .swamp-middle {
-      height: 20vh;
-      display: flex;
-      width: 100vw;
-      position: relative;
-
-      .swamp-middle-left {
-        width: 40%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-
-        .swamp-forest {
-          display: flex;
-          width: 100px;
-          justify-content: space-evenly;
-          align-items: center;
-          cursor: pointer;
-          position: relative;
-          width: 100px;
-        }
-      }
-
-      .swamp-middle-middle {
-        width: 20%;
-        height: 100%;
-
-        .goblin-open {
-          background-image: url("../../Images/goblin.gif");
-          width: 200px;
-          height: 200px;
-          background-repeat: no-repeat;
-          background-size: contain;
-          transform: scaleX(-1);
-          position: relative;
-          z-index: 1;
-          bottom: 20px;
-        }
-        .goblin-closed {
-        }
-      }
-
-      .swamp-middle-right {
-       
-        width: 40%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-
-        .swamp-bog {
-          display: flex;
-          width: 100px;
-          justify-content: space-evenly;
-          align-items: center;
-          cursor: pointer;
-          position: relative;
-          width: 100px;
-        }
-
-        
-      }
-    }
-
-    .swamp-bottom {
-      height: 35vh;
-      display: flex;
-      width: 100vw;
-      background-image: url("../../Images/Swamp.png");
-    }
+  .swamp-top {
+    @include row(35vh);
+    background-image: url("../../Images/Swamp.png");
   }
 
-  .character {
-    position: relative;
-    display: flex;
-    left: 20px;
-    flex-direction: column;
-    align-items: center;
+  .swamp-middle {
+    @include row(20vh);
+   
+    .swamp-middle-left {
+      @include section(40vw);
+      @include center(flex-start);
 
-    .face {
-      border-radius: 50%;
-      width: 40px;
-      height: 45px;
-      background-color: peachpuff;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-      align-items: center;
-      border-top: solid yellow 5px;
-
-      .eyes {
-        display: flex;
-        justify-content: space-evenly;
-        width: 100%;
-
-        .eye {
-          border-radius: 50%;
-          background-color: blue;
-          height: 3px;
-          width: 5px;
-        }
-      }
-
-      .nose {
-        border-radius: 50%;
-        background-color: black;
-        height: 3px;
-        width: 2px;
-      }
-
-      .mouth {
-        border-radius: 50%;
-        background-color: red;
-        width: 20px;
-        height: 3px;
+      .swamp-forest {
+        @include center(space-evenly);
+        width: 100px;
+        cursor: pointer;
+        width: 100px;
       }
     }
-    .body {
-      width: 50px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
 
-      .neck {
-        background-color: black;
-        height: 5px;
-        width: 10px;
+    .swamp-middle-middle {
+      @include section(20vw);
+
+      .goblin-open {
+        background-image: url("../../Images/goblin.gif");
+        width: 200px;
+        height: 200px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        transform: scaleX(-1);
+        position: relative;
+        z-index: 1;
+        bottom: 20px;
       }
 
-      .arms {
-        display: flex;
-
-        .left-arm {
-          background-color: black;
-          width: 25px;
-          height: 5px;
-          transform: rotate(-2deg);
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-
-          .hand {
-            border-radius: 50%;
-            height: 8px;
-            width: 8px;
-            background-color: peachpuff;
-          }
-        }
-
-        .right-arm {
-          background-color: black;
-          width: 25px;
-          height: 5px;
-          transform: rotate(2deg);
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-
-          .hand {
-            border-radius: 50%;
-            height: 8px;
-            width: 8px;
-            background-color: peachpuff;
-          }
-        }
+      .goblin-closed {
+        display: none;
       }
+    }
 
-      .torso {
-        background-color: black;
-        height: 20px;
-        width: 10px;
-      }
+    .swamp-middle-right {
+      @include section(40vw);
+      @include center(flex-end);
 
-      .legs {
-        display: flex;
-
-        .left-leg {
-          background-color: black;
-          height: 30px;
-          width: 5px;
-          transform: rotate(10deg);
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          align-items: center;
-
-          .foot {
-            border-radius: 50%;
-            height: 8px;
-            width: 8px;
-            background-color: black;
-          }
-        }
-
-        .right-leg {
-          background-color: black;
-          height: 30px;
-          width: 5px;
-          transform: rotate(-10deg);
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          align-items: center;
-
-          .foot {
-            border-radius: 50%;
-            height: 8px;
-            width: 8px;
-            background-color: black;
-          }
-        }
+      .swamp-bog {
+        @include center(space-evenly);
+        width: 100px;
+        cursor: pointer;
+        width: 100px;
       }
     }
   }
 
-  .character-moving {
-    position: relative;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    animation-name: motion;
-    animation-duration: 2s;
-    animation-timing-function: linear;
-
-    .face {
-      border-radius: 50%;
-      width: 40px;
-      height: 45px;
-      background-color: peachpuff;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-      align-items: center;
-      border-top: solid yellow 5px;
-
-      .eyes {
-        display: flex;
-        justify-content: space-evenly;
-        width: 100%;
-
-        .eye {
-          border-radius: 50%;
-          background-color: blue;
-          height: 3px;
-          width: 5px;
-        }
-      }
-
-      .nose {
-        border-radius: 50%;
-        background-color: black;
-        height: 3px;
-        width: 2px;
-      }
-
-      .mouth {
-        border-radius: 50%;
-        background-color: red;
-        width: 20px;
-        height: 3px;
-      }
-    }
-    .body {
-      width: 50px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      .neck {
-        background-color: black;
-        height: 5px;
-        width: 10px;
-      }
-
-      .arms {
-        display: flex;
-
-        .left-arm {
-          background-color: black;
-          width: 25px;
-          height: 5px;
-          transform: rotate(-2deg);
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-
-          .hand {
-            border-radius: 50%;
-            height: 8px;
-            width: 8px;
-            background-color: peachpuff;
-          }
-        }
-
-        .right-arm {
-          background-color: black;
-          width: 25px;
-          height: 5px;
-          transform: rotate(2deg);
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-
-          .hand {
-            border-radius: 50%;
-            height: 8px;
-            width: 8px;
-            background-color: peachpuff;
-          }
-        }
-      }
-
-      .torso {
-        background-color: black;
-        height: 20px;
-        width: 10px;
-      }
-
-      .legs {
-        display: flex;
-
-        .left-leg {
-          background-color: black;
-          height: 30px;
-          width: 5px;
-          transform: rotate(10deg);
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          align-items: center;
-
-          .foot {
-            border-radius: 50%;
-            height: 8px;
-            width: 8px;
-            background-color: black;
-          }
-        }
-
-        .right-leg {
-          background-color: black;
-          height: 30px;
-          width: 5px;
-          transform: rotate(-10deg);
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          align-items: center;
-
-          .foot {
-            border-radius: 50%;
-            height: 8px;
-            width: 8px;
-            background-color: black;
-          }
-        }
-      }
-    }
-  }
-
-  .failure-card {
-    width: 500px;
-    height: 500px;
-    border: solid;
-    box-shadow: 2px 2px 2px 2px;
-    position: relative;
-    bottom: 80%;
-    left: 30%;
-    border-radius: 5px;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    text-align: center;
-
-    .card-title {
-      color: red;
-    }
-
-    .card-paragraph {
-      width: 80%;
-    }
-
-    .card-subtitle {
-      color: blue;
-    }
-
-    .card-button {
-      width: 100px;
-      height: 50px;
-      border-radius: 5%;
-      box-shadow: 2px 2px 2px 2px;
-      color: black;
-      background-color: white;
-    }
-  }
-
-  .failure-card-closed {
-    display: none;
-  }
-
-  .success-card {
-    width: 500px;
-    height: 500px;
-    border: solid;
-    box-shadow: 2px 2px 2px 2px;
-    position: relative;
-    bottom: 500px;
-  }
-
-  .success-card-closed {
-    display: none;
-  }
-}
-
-@keyframes griffin {
-  0% {
-    bottom: 0px;
-    left: 0px;
-  }
-  50% {
-    bottom: -100px;
-    left: 250px;
-  }
-  100% {
-    left: 500px;
-    bottom: -200px;
-  }
-}
-
-@keyframes retreat {
-  0% {
-  }
-  50% {
-  }
-  100% {
+  .swamp-bottom {
+    @include row(35vh);
+    background-image: url("../../Images/Swamp.png");
   }
 }
