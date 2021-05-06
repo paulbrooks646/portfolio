@@ -1,205 +1,115 @@
-.houseThree-main {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  position: relative;
+@import "../mixins";
 
-  .houseThree-body {
-    background-image: url("../../Images/Floor.png");
-    background-size: 100% 100%;
-    .houseThree-top {
-      width: 100vw;
-      height: 35vh;
-      display: flex;
+.houseThree-body {
+  background-image: url("../../Images/Floor.png");
+  background-size: 100% 100%;
 
-      .houseThree-top-left {
-        width: 40vw;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+  .houseThree-top {
+    @include row(35vh);
 
-        .table {
-          background-image: url("../../Images/TableOne.png");
-          background-size: 100% 100%;
-          height: 150px;
-          width: 150px;
-          display: flex;
-          justify-content: center;
+    .houseThree-top-left {
+      @include section(40vw);
+      @include flex(center);
 
-          .paper {
-            background-image: url("../../Images/Scroll.jpg");
-            background-size: 100% 100%;
-            height: 75px;
-            width: 75px;
-          }
-        }
-      }
-
-      .houseThree-top-middle {
-        background-image: url("../../Images/StairsOne.png");
+      .table {
+        background-image: url("../../Images/TableOne.png");
         background-size: 100% 100%;
-        width: 20vw;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-end;
-      }
-      .houseThree-top-right {
-        width: 40vw;
+        height: 150px;
+        width: 150px;
         display: flex;
         justify-content: center;
 
-        .cupboard {
-          background-image: url("../../Images/Empty.png");
+        .paper {
+          background-image: url("../../Images/Scroll.jpg");
           background-size: 100% 100%;
-          height: 150px; 
-          width: 200px;
-
+          height: 75px;
+          width: 75px;
         }
       }
     }
 
-    .houseThree-middle {
-      width: 100vw;
-      height: 20vh;
+    .houseThree-top-middle {
+      background-image: url("../../Images/StairsOne.png");
+      background-size: 100% 100%;
+      @include section(20vw);
+      @include flex(center);
+    }
+
+    .houseThree-top-right {
+      @include section(40vw);
       display: flex;
+      justify-content: center;
 
-      .houseThree-middle-left {
-        display: flex;
-        height: 100%;
-        width: 40vw;
-      }
-
-      .houseThree-middle-middle {
-        height: 100%;
-        width: 20vw;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-end;
-
-        .dog {
-          background-image: url("../../Images/Dog.png");
-          background-size: 100% 100%;
-          height: 100px;
-          width: 100px;
-
-        }
-      }
-
-      .houseThree-middle-right {
-        height: 100%;
-        width: 40vw;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
+      .cupboard {
+        background-image: url("../../Images/Empty.png");
+        background-size: 100% 100%;
+        height: 150px;
+        width: 200px;
       }
     }
-    .houseThree-bottom {
-      height: 35vh;
-      width: 100vw;
+  }
+
+  .houseThree-middle {
+    @include row(20vh);
+
+    .houseThree-middle-left {
+      @include section(40vw);
       display: flex;
+    }
 
-      .houseThree-bottom-left {
-        width: 40vw;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .houseThree-middle-middle {
+      @include section(20vw);
+      @include flex(flex-end);
 
-        .rug {
-          background-image: url("../../Images/Rug.png");
-          background-size: 100% 100%;
-          height: 250px;
-          width: 150px;
-        }
-      }
-
-      .houseThree-bottom-middle {
-        width: 20vw;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-end;
-
-        .houseThree-maze {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          cursor: pointer;
-        }
-      }
-
-      .houseThree-bottom-right {
-        width: 40vw;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        .shovel {
-           background-image: url("../../Images/Shovel.png");
-          background-size: 100% 100%;
-          height: 100px;
-          width: 150px;
-        }
+      .dog {
+        background-image: url("../../Images/Dog.png");
+        background-size: 100% 100%;
+        height: 100px;
+        width: 100px;
       }
     }
-  }
 
-  .houseThree-card {
-    height: 500px;
-    width: 500px;
-    background-color: white;
-    border: solid black 2px;
-    box-shadow: 2px 2px 2px 2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: absolute;
-    text-align: center;
-
-    .houseThree-list {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-      color: tomato;
-    }
-
-    .houseThree-card-description {
-      width: 90%;
+    .houseThree-middle-right {
+      @include section(40vw);
+      @include center(flex-end);
     }
   }
+  .houseThree-bottom {
+    @include row(35vh);
 
-  .houseThree-card-closed {
-    display: nThree;
-  }
-  .answer-card {
-    height: 400px;
-    width: 400px;
-    background-color: white;
-    border: solid black 2px;
-    box-shadow: 2px 2px 2px 2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: absolute;
-    text-align: center;
+    .houseThree-bottom-left {
+      @include section(40vw);
+      @include flex(center);
 
-    .answer-card-description {
-      width: 90%;
+      .rug {
+        background-image: url("../../Images/Rug.png");
+        background-size: 100% 100%;
+        height: 250px;
+        width: 150px;
+      }
     }
-  }
 
-  .answer-card-closed {
-    display: nThree;
+    .houseThree-bottom-middle {
+      @include section(20vw);
+      @include flex(flex-end);
+
+      .houseThree-cottage {
+        @include flex(flex-start);
+        cursor: pointer;
+      }
+    }
+
+    .houseThree-bottom-right {
+      @include section(40vw);
+      @include flex(center);
+
+      .shovel {
+        background-image: url("../../Images/Shovel.png");
+        background-size: 100% 100%;
+        height: 100px;
+        width: 150px;
+      }
+    }
   }
 }
+

@@ -48,7 +48,7 @@ function HouseTwo(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="houseTwo-main">
+    <div className="main">
       <Nav />
       <div className="houseTwo-body">
         <div className="houseTwo-top">

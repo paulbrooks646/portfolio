@@ -1,205 +1,115 @@
-.houseTwo-main {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  position: relative;
+@import "../mixins";
 
-  .houseTwo-body {
-    background-image: url("../../Images/Floor.png");
-    background-size: 100% 100%;
-    .houseTwo-top {
-      width: 100vw;
-      height: 35vh;
-      display: flex;
+.houseTwo-body {
+  background-image: url("../../Images/Floor.png");
+  background-size: 100% 100%;
 
-      .houseTwo-top-left {
-        width: 40vw;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+  .houseTwo-top {
+    @include row(35vh);
 
-        .table {
-          background-image: url("../../Images/TableOne.png");
-          background-size: 100% 100%;
-          height: 150px;
-          width: 150px;
-          display: flex;
-          justify-content: center;
+    .houseTwo-top-left {
+      @include section(40vw);
+      @include flex(center);
 
-          .paper {
-            background-image: url("../../Images/Scroll.jpg");
-            background-size: 100% 100%;
-            height: 75px;
-            width: 75px;
-          }
-        }
-      }
-
-      .houseTwo-top-middle {
-        background-image: url("../../Images/StairsOne.png");
+      .table {
+        background-image: url("../../Images/TableOne.png");
         background-size: 100% 100%;
-        width: 20vw;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-end;
-      }
-      .houseTwo-top-right {
-        width: 40vw;
+        height: 150px;
+        width: 150px;
         display: flex;
         justify-content: center;
 
-        .cupboard {
-          background-image: url("../../Images/Empty.png");
+        .paper {
+          background-image: url("../../Images/Scroll.jpg");
           background-size: 100% 100%;
-          height: 150px; 
-          width: 200px;
-
+          height: 75px;
+          width: 75px;
         }
       }
     }
 
-    .houseTwo-middle {
-      width: 100vw;
-      height: 20vh;
+    .houseTwo-top-middle {
+      background-image: url("../../Images/StairsOne.png");
+      background-size: 100% 100%;
+      @include section(20vw);
+      @include flex(center);
+    }
+
+    .houseTwo-top-right {
+      @include section(40vw);
       display: flex;
+      justify-content: center;
 
-      .houseTwo-middle-left {
-        display: flex;
-        height: 100%;
-        width: 40vw;
-      }
-
-      .houseTwo-middle-middle {
-        height: 100%;
-        width: 20vw;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-end;
-
-        .dog {
-          background-image: url("../../Images/Dog.png");
-          background-size: 100% 100%;
-          height: 100px;
-          width: 100px;
-
-        }
-      }
-
-      .houseTwo-middle-right {
-        height: 100%;
-        width: 40vw;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
+      .cupboard {
+        background-image: url("../../Images/Empty.png");
+        background-size: 100% 100%;
+        height: 150px;
+        width: 200px;
       }
     }
-    .houseTwo-bottom {
-      height: 35vh;
-      width: 100vw;
+  }
+
+  .houseTwo-middle {
+    @include row(20vh);
+
+    .houseTwo-middle-left {
+      @include section(40vw);
       display: flex;
+    }
 
-      .houseTwo-bottom-left {
-        width: 40vw;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .houseTwo-middle-middle {
+      @include section(20vw);
+      @include flex(flex-end);
 
-        .rug {
-          background-image: url("../../Images/Rug.png");
-          background-size: 100% 100%;
-          height: 250px;
-          width: 150px;
-        }
-      }
-
-      .houseTwo-bottom-middle {
-        width: 20vw;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-end;
-
-        .houseTwo-maze {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          cursor: pointer;
-        }
-      }
-
-      .houseTwo-bottom-right {
-        width: 40vw;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        .shovel {
-           background-image: url("../../Images/Shovel.png");
-          background-size: 100% 100%;
-          height: 100px;
-          width: 150px;
-        }
+      .dog {
+        background-image: url("../../Images/Dog.png");
+        background-size: 100% 100%;
+        height: 100px;
+        width: 100px;
       }
     }
-  }
 
-  .houseTwo-card {
-    height: 500px;
-    width: 500px;
-    background-color: white;
-    border: solid black 2px;
-    box-shadow: 2px 2px 2px 2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: absolute;
-    text-align: center;
-
-    .houseTwo-list {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-      color: tomato;
-    }
-
-    .houseTwo-card-description {
-      width: 90%;
+    .houseTwo-middle-right {
+      @include section(40vw);
+      @include center(flex-end);
     }
   }
+  .houseTwo-bottom {
+    @include row(35vh);
 
-  .houseTwo-card-closed {
-    display: nTwo;
-  }
-  .answer-card {
-    height: 400px;
-    width: 400px;
-    background-color: white;
-    border: solid black 2px;
-    box-shadow: 2px 2px 2px 2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: absolute;
-    text-align: center;
+    .houseTwo-bottom-left {
+      @include section(40vw);
+      @include flex(center);
 
-    .answer-card-description {
-      width: 90%;
+      .rug {
+        background-image: url("../../Images/Rug.png");
+        background-size: 100% 100%;
+        height: 250px;
+        width: 150px;
+      }
     }
-  }
 
-  .answer-card-closed {
-    display: nTwo;
+    .houseTwo-bottom-middle {
+      @include section(20vw);
+      @include flex(flex-end);
+
+      .houseTwo-cottage {
+        @include flex(flex-start);
+        cursor: pointer;
+      }
+    }
+
+    .houseTwo-bottom-right {
+      @include section(40vw);
+      @include flex(center);
+
+      .shovel {
+        background-image: url("../../Images/Shovel.png");
+        background-size: 100% 100%;
+        height: 100px;
+        width: 150px;
+      }
+    }
   }
 }
+

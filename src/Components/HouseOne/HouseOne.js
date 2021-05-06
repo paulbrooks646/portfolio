@@ -49,7 +49,7 @@ function HouseOne(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="houseOne-main">
+    <div className="main">
       <Nav />
       <div className="houseOne-body">
         <div className="houseOne-top">
@@ -98,7 +98,7 @@ function HouseOne(props) {
           </div>
         </div>
       </div>
-      <Card
+      {/* <Card
         className={`${
           props.houseOne.houseOne.first_time
             ? "answer-card"
@@ -121,7 +121,7 @@ function HouseOne(props) {
         >
           CLOSE
         </Button>
-      </Card>
+      </Card> */}
     </div>
   );
 }
