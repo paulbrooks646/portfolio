@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getInventory } from "../../redux/inventoryReducer"
-import {getTown} from "../../redux/townReducer"
+import { getInventory } from "../../redux/inventoryReducer";
+import { getTown } from "../../redux/townReducer";
 import "./Town.scss";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
@@ -17,8 +17,8 @@ import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import House from "../../Images/House.jpg";
 import Character from "../Character/Character";
 import Farmer from "../../Images/Farmer.png";
-import axios from "axios"
-import Loading from "../Loading/Loading"
+import axios from "axios";
+import Loading from "../Loading/Loading";
 
 function Town(props) {
   const [oldmanCard, setOldmanCard] = useState(false);
@@ -47,17 +47,17 @@ function Town(props) {
   const [leftUp, setLeftUp] = useState(false);
   const [leftRight, setLeftRight] = useState(false);
   const [leftDown, setLeftDown] = useState(false);
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // if (!props.user.user.newgame) {
     //   setNewgameCard(false);
-  
+
     // }
     axios.get("/api/nest").then((res) => {
       props.getTown(res.data[0]);
 
-      if  (props.user.user.last === "home") {
+      if (props.user.user.last === "home") {
         setDownCharacter(true);
       } else if (props.user.user.last === "stables") {
         setLeftCharacter(true);
@@ -65,7 +65,7 @@ function Town(props) {
         setRightCharacter(true);
       } else if (props.user.user.last === "castle") {
         setUpCharacter(true);
-      } 
+      }
       setIsLoading(false);
     });
   }, []);
@@ -73,9 +73,8 @@ function Town(props) {
   const toggleRight = () => {
     axios.post("/api/changeLast", { last: "town" }).then((res) => {
       props.getUser(res.data).then(() => {
-
         props.history.push("/Market");
-      })
+      });
     });
   };
 
@@ -96,11 +95,11 @@ function Town(props) {
   };
 
   const toggleDown = () => {
-   axios.post("/api/changeLast", { last: "town" }).then((res) => {
-     props.getUser(res.data).then(() => {
-       props.history.push("/Dashboard");
-     });
-   });
+    axios.post("/api/changeLast", { last: "town" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Dashboard");
+      });
+    });
   };
 
   const toggleOldmanCard = () => {
@@ -127,103 +126,95 @@ function Town(props) {
     setAnswerFour(!answerFour);
   };
 
-   const toggleAnswerFive = () => {
-     toggleOldmanCard();
-     setAnswerFive(!answerFive);
+  const toggleAnswerFive = () => {
+    toggleOldmanCard();
+    setAnswerFive(!answerFive);
   };
-  
+
   const toggleHouseOne = () => {
-    props.history.push("/HouseOne")
-  }
+    props.history.push("/HouseOne");
+  };
 
   const toggleHouseTwo = () => {
-    props.history.push("/HouseTwo")
-  }
+    props.history.push("/HouseTwo");
+  };
 
   const toggleHouseThree = () => {
-    props.history.push("/HouseThree")
-  }
+    props.history.push("/HouseThree");
+  };
 
   const toggleHouseFour = () => {
-    props.history.push("/HouseFour")
-  }
+    props.history.push("/HouseFour");
+  };
 
-   const toggleGoLeft = () => {
-     if (
-       props.user.user.last === "home"
-     ) {
-       setDownLeft(true);
-       setDownCharacter(false);
-     } else if (props.user.user.last === "stables") {
-       setLeftCharacter(false);
-       setLeftLeft(true);
-     } else if (props.user.user.last === "market") {
-       setRightCharacter(false);
-       setRightLeft(true);
-     } else if (props.user.user.last === "castle") {
-       setUpCharacter(false);
-       setUpLeft(true);
-     }
-   };
+  const toggleGoLeft = () => {
+    if (props.user.user.last === "home") {
+      setDownLeft(true);
+      setDownCharacter(false);
+    } else if (props.user.user.last === "stables") {
+      setLeftCharacter(false);
+      setLeftLeft(true);
+    } else if (props.user.user.last === "market") {
+      setRightCharacter(false);
+      setRightLeft(true);
+    } else if (props.user.user.last === "castle") {
+      setUpCharacter(false);
+      setUpLeft(true);
+    }
+  };
 
-   const toggleGoRight = () => {
-     if (
-       props.user.user.last === "home"
-     ) {
-       setDownRight(true);
-       setDownCharacter(false);
-     } else if (props.user.user.last === "stables") {
-       setLeftCharacter(false);
-       setLeftRight(true);
-     } else if (props.user.user.last === "market") {
-       setRightCharacter(false);
-       setRightRight(true);
-     } else if (props.user.user.last === "castle") {
-       setUpCharacter(false);
-       setUpRight(true);
-     }
-   };
+  const toggleGoRight = () => {
+    if (props.user.user.last === "home") {
+      setDownRight(true);
+      setDownCharacter(false);
+    } else if (props.user.user.last === "stables") {
+      setLeftCharacter(false);
+      setLeftRight(true);
+    } else if (props.user.user.last === "market") {
+      setRightCharacter(false);
+      setRightRight(true);
+    } else if (props.user.user.last === "castle") {
+      setUpCharacter(false);
+      setUpRight(true);
+    }
+  };
 
-   const toggleGoUp = () => {
-     if (
-       props.user.user.last === "home"
-     ) {
-       setDownUp(true);
-       setDownCharacter(false);
-     } else if (props.user.user.last === "stables") {
-       setLeftCharacter(false);
-       setLeftUp(true);
-     } else if (props.user.user.last === "market") {
-       setRightCharacter(false);
-       setRightUp(true);
-     } else if (props.user.user.last === "castle") {
-       setUpCharacter(false);
-       setUpUp(true);
-     }
-   };
+  const toggleGoUp = () => {
+    if (props.user.user.last === "home") {
+      setDownUp(true);
+      setDownCharacter(false);
+    } else if (props.user.user.last === "stables") {
+      setLeftCharacter(false);
+      setLeftUp(true);
+    } else if (props.user.user.last === "market") {
+      setRightCharacter(false);
+      setRightUp(true);
+    } else if (props.user.user.last === "castle") {
+      setUpCharacter(false);
+      setUpUp(true);
+    }
+  };
 
-   const toggleGoDown = () => {
-     if (
-       props.user.user.last === "home"
-     ) {
-       setDownDown(true);
-       setDownCharacter(false);
-     } else if (props.user.user.last === "stables") {
-       setLeftCharacter(false);
-       setLeftDown(true);
-     } else if (props.user.user.last === "market") {
-       setRightCharacter(false);
-       setRightDown(true);
-     } else if (props.user.user.last === "castle") {
-       setUpCharacter(false);
-       setUpDown(true);
-     }
-   };
+  const toggleGoDown = () => {
+    if (props.user.user.last === "home") {
+      setDownDown(true);
+      setDownCharacter(false);
+    } else if (props.user.user.last === "stables") {
+      setLeftCharacter(false);
+      setLeftDown(true);
+    } else if (props.user.user.last === "market") {
+      setRightCharacter(false);
+      setRightDown(true);
+    } else if (props.user.user.last === "castle") {
+      setUpCharacter(false);
+      setUpDown(true);
+    }
+  };
 
-  return (
-
-    isLoading ? <Loading/> :
-    <div className="town-main">
+  return isLoading ? (
+    <Loading />
+  ) : (
+    <div className="main">
       <Nav />
       <div className="town-body">
         <div className="town-top">
@@ -362,7 +353,6 @@ function Town(props) {
             <ArrowUpward id="up-arrow" onClick={toggleHouseThree} />
           </div>
           <div className="town-bottom-middle">
-           
             <div
               className={`${
                 downCharacter ? "character-down" : "character-down-closed"
@@ -406,39 +396,26 @@ function Town(props) {
         </div>
       </div>
 
-      <Card className={`${oldmanCard ? "town-card" : "town-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="town-card-title">
+      <Card
+        className={`${oldmanCard ? "component-card" : "component-card-closed"}`}
+      >
+        <Typography variant="h4" color="primary">
           I don't have time to waste talking to you. Aaargh! Fine. What do you
           want to know?
         </Typography>
-        <List className="town-list">
-          <ListItem className="town-list-item" onClick={toggleAnswerOne}>
-            The Castle
-          </ListItem>
-          <ListItem className="town-list-item" onClick={toggleAnswerTwo}>
-            The Dragon
-          </ListItem>
-          <ListItem className="town-list-item" onClick={toggleAnswerFive}>
-            The Guard
-          </ListItem>
-          <ListItem className="town-list-item" onClick={toggleAnswerThree}>
-            The Market
-          </ListItem>
-          <ListItem className="town-list-item" onClick={toggleAnswerFour}>
-            Employment
-          </ListItem>
+        <List className="component-list">
+          <ListItem onClick={toggleAnswerOne}>The Castle</ListItem>
+          <ListItem onClick={toggleAnswerTwo}>The Dragon</ListItem>
+          <ListItem onClick={toggleAnswerFive}>The Guard</ListItem>
+          <ListItem onClick={toggleAnswerThree}>The Market</ListItem>
+          <ListItem onClick={toggleAnswerFour}>Employment</ListItem>
         </List>
-        <Button
-          onClick={toggleOldmanCard}
-          className="town-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleOldmanCard} variant="contained" color="primary">
           Say Goodbye
         </Button>
       </Card>
       <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="town-card-title">
+        <Typography variant="h4" color="primary">
           The Castle
         </Typography>
         <Typography
@@ -449,17 +426,12 @@ function Town(props) {
           Bah! Don't waste your time at the castle. The king won't even see you.
           He has no use for his subjects except for our taxes.
         </Typography>
-        <Button
-          onClick={toggleAnswerOne}
-          className="town-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerOne} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="town-card-title">
+        <Typography variant="h4" color="primary">
           The Dragon
         </Typography>
         <Typography
@@ -471,17 +443,12 @@ function Town(props) {
           magic to slay him but good luck getting a magical creature to help
           you.
         </Typography>
-        <Button
-          onClick={toggleAnswerTwo}
-          className="town-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerTwo} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="town-card-title">
+        <Typography variant="h4" color="primary">
           The Market
         </Typography>
         <Typography
@@ -492,17 +459,12 @@ function Town(props) {
           It's a typical market. If you have gold it's a good place to get
           supplies.
         </Typography>
-        <Button
-          onClick={toggleAnswerThree}
-          className="town-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerThree} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="town-card-title">
+        <Typography variant="h4" color="primary">
           Employment
         </Typography>
         <Typography
@@ -513,17 +475,12 @@ function Town(props) {
           Hah! You look lazy, I wouldn't waste my time on you. You could try the
           stables. I hope you like manure. Hehehe!
         </Typography>
-        <Button
-          onClick={toggleAnswerFour}
-          className="town-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerFour} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerFive ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="town-card-title">
+        <Typography variant="h4" color="primary">
           The Guard
         </Typography>
         <Typography
@@ -534,12 +491,7 @@ function Town(props) {
           I know little about the guard aside from the fact that he eats nuts
           constantly. He considers himself above us townspeople.
         </Typography>
-        <Button
-          onClick={toggleAnswerFive}
-          className="town-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerFive} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
@@ -548,4 +500,6 @@ function Town(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory, getTown })(Town);
+export default connect(mapStateToProps, { getUser, getInventory, getTown })(
+  Town
+);

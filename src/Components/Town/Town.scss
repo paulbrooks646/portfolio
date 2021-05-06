@@ -1,236 +1,122 @@
-.town-main {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  position: relative;
+@import "../mixins";
 
-  .town-body {
-    .town-top {
-      height: 35vh;
-      display: flex;
-      width: 100vw;
+.town-body {
+  .town-top {
+    @include row(35vh);
 
-      .town-top-left {
-        width: 40%;
-        height: 100%;
-        background-image: url("../../Images/Grass.png");
-        background-size: 100% 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-
-        .town-house {
-          height: 200px;
-          width: 200px;
-          
-        }
-
-        
-      }
-
-      .town-top-middle {
-        background-image: url("../../Images//Dirt.png");
-        background-size: 100% 100%;
-        width: 20%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-    
-
-        .town-castle {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          cursor: pointer;
-        }
-
-        .town-farmer {
-          height: 150px;
-          width: 120px;
-          cursor: pointer;
-        }
-      }
-
-      .town-top-right {
-        background-image: url("../../Images//Grass.png");
-        background-size: 100% 100%;
-        width: 40%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-
-        .town-house {
-          height: 200px;
-          width: 200px;
-          
-        }
-      }
-    }
-
-    .town-middle {
-      height: 20vh;
-      display: flex;
-      width: 100vw;
-      background-image: url("../../Images/Dirt.png");
+    .town-top-left {
+      @include section(40vw);
+      @include flex(space-evenly);
+      background-image: url("../../Images/Grass.png");
       background-size: 100% 100%;
 
-      .town-middle-left {
-        
-        width: 40%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-
-        .town-stables {
-          display: flex;
-          width: 110px;
-          justify-content: space-evenly;
-          align-items: center;
-          cursor: pointer;
-        }
-      }
-
-      .town-middle-middle {
-        
-        width: 20%;
-        height: 100%;
-      }
-
-      .town-middle-right {
-        width: 40%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-
-        .town-market {
-          display: flex;
-          width: 120px;
-          justify-content: space-evenly;
-          align-items: center;
-          cursor: pointer;
-        }
+      .town-house {
+        height: 200px;
+        width: 200px;
       }
     }
 
-    .town-bottom {
-      height: 35vh;
-      display: flex;
-      width: 100vw;
+    .town-top-middle {
+      background-image: url("../../Images//Dirt.png");
+      background-size: 100% 100%;
+      @include section(20vw);
+      @include flex(space-between);
 
-      .town-bottom-left {
-        background-image: url("../../Images/Grass.png");
-        background-size: 100% 100%;
-        height: 100%;
-        width: 40%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-
-        .town-house {
-          height: 200px;
-          width: 200px;
-          
-        }
-      }
-
-      .town-bottom-middle {
-        background-image: url("../../Images//Dirt.png");
-        background-size: 100% 100%;
-        height: 100%;
-        width: 20%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-end;
-
-        .town-town {
-          display: flex;
-          flex-direction: column;
-
-          align-items: center;
-          cursor: pointer;
-        }
-      }
-
-      .town-bottom-right {
-        background-image: url("../../Images/Grass.png");
-        background-size: 100% 100%;
-        height: 100%;
-        width: 40%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-
-        .town-house {
-          height: 200px;
-          width: 200px;
-        }
-      }
-    }
-  }
-  .town-card {
-      height: 500px;
-      width: 500px;
-    background-color: white;
-    border: solid black 2px;
-    box-shadow: 2px 2px 2px 2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: absolute;
-    text-align: center;
-
-    .town-list {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+      .town-castle {
+        @include flex(flex-start);
         cursor: pointer;
-        color: tomato;
+      }
+
+      .town-farmer {
+        height: 150px;
+        width: 120px;
+        cursor: pointer;
+      }
     }
 
-    .town-card-description {
-        width: 90%;
-    }
-  }
+    .town-top-right {
+      background-image: url("../../Images//Grass.png");
+      background-size: 100% 100%;
+      @include section(40vw);
+      @include flex(space-evenly);
 
-  .town-card-closed {
-    display: none;
-  }
-  .answer-card {
-      height: 400px;
-      width: 400px;
-    background-color: white;
-    border: solid black 2px;
-    box-shadow: 2px 2px 2px 2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: absolute;
-    text-align: center;
-
-    
-
-    .answer-card-description {
-        width: 90%;
+      .town-house {
+        height: 200px;
+        width: 200px;
+      }
     }
   }
 
-  .answer-card-closed {
-    display: none;
+  .town-middle {
+    @include row(20vh);
+    background-image: url("../../Images/Dirt.png");
+    background-size: 100% 100%;
+
+    .town-middle-left {
+      @include section(40vw);
+      @include center(flex-start);
+
+      .town-stables {
+        @include center(space-evenly);
+        width: 110px;
+        cursor: pointer;
+      }
+    }
+
+    .town-middle-middle {
+      @include section(20vw);
+    }
+
+    .town-middle-right {
+      @include section(40vw);
+      @include center(flex-end);
+
+      .town-market {
+        @include center(space-evenly);
+        width: 120px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .town-bottom {
+    @include row(35vh);
+
+    .town-bottom-left {
+      background-image: url("../../Images/Grass.png");
+      background-size: 100% 100%;
+      @include section(40vw);
+      @include flex(space-evenly);
+
+      .town-house {
+        height: 200px;
+        width: 200px;
+      }
+    }
+
+    .town-bottom-middle {
+      background-image: url("../../Images//Dirt.png");
+      background-size: 100% 100%;
+      @include section(20vw);
+      @include flex(flex-end);
+
+      .town-town {
+        @include flex(flex-start);
+        cursor: pointer;
+      }
+    }
+
+    .town-bottom-right {
+      background-image: url("../../Images/Grass.png");
+      background-size: 100% 100%;
+      @include section(40vw);
+      @include flex(space-evenly);
+
+      .town-house {
+        height: 200px;
+        width: 200px;
+      }
+    }
   }
 }
 
