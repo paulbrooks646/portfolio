@@ -46,6 +46,7 @@
       .mountain-home {
         @include center(flex-end);
         width: 100px;
+        cursor: pointer;
       }
     }
   }

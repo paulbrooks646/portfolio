@@ -7,3 +7,8 @@
   @include row(90vh);
   @include flex(center);
 }
+
+.button-div {
+    width: 100%;
+    @include center(space-evenly);
+  }

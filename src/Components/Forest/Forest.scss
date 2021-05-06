@@ -41,7 +41,7 @@
       @include center(flex-start);
 
       .forest-home {
-        @include flex(flex-start);
+        @include center(flex-start);
         cursor: pointer;
       }
     }

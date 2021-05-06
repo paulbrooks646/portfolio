@@ -132,7 +132,7 @@
       @include flex(flex-end);
 
       .pass-cabin {
-        @include center(flex-start);
+        @include flex(flex-start);
         cursor: pointer;
       }
     }

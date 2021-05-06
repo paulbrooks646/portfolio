@@ -75,7 +75,7 @@
   }
 
   .alley-bottom {
-    @include section(35vh);
+    @include row(35vh);
     background-image: url("../../Images/Brick.jpg");
     background-size: auto 100%;
   }

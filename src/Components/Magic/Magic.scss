@@ -1,9 +1,14 @@
 @import "../mixins";
 
-.blacksmith-body {
+.magic-body {
   background-image: url("../../Images/Magic.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   @include row(90vh);
   @include flex(center);
 }
+
+.button-div {
+    width: 100%;
+    @include center(space-evenly);
+  }

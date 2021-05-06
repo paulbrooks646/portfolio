@@ -87,7 +87,7 @@ function HouseTwo(props) {
             >
               <Character />
             </div>
-            <div className="houseTwo-maze" onClick={toggleGoDown}>
+            <div className="houseTwo-town" onClick={toggleGoDown}>
               <h2>EXIT</h2>
               <ArrowDownward />
             </div>

@@ -8,7 +8,7 @@
 
     .dragon-top-left {
       @include section(40vw);
-      @include flex(space-evenly);
+      @include center(space-evenly);
 
       .dirt {
         background-image: url("../../Images/Dirt.png");

@@ -602,11 +602,19 @@ function Dashboard(props) {
           I saw the dragon burn your house poor boy. What would you like to know
           about?
         </Typography>
-        <List className="dashboard-list">
-          <ListItem onClick={toggleAnswerOne}>The Dragon</ListItem>
-          <ListItem onClick={toggleAnswerTwo}>The Forest</ListItem>
-          <ListItem onClick={toggleAnswerThree}>The Mountains</ListItem>
-          <ListItem onClick={toggleAnswerFour}>The Town</ListItem>
+        <List className="component-list">
+          <ListItem onClick={toggleAnswerOne}>
+            The Dragon
+          </ListItem>
+          <ListItem onClick={toggleAnswerTwo}>
+            The Forest
+          </ListItem>
+          <ListItem onClick={toggleAnswerThree}>
+            The Mountains
+          </ListItem>
+          <ListItem onClick={toggleAnswerFour}>
+            The Town
+          </ListItem>
         </List>
         <Button onClick={toggleOldmanCard} variant="contained" color="primary">
           Say Goodbye

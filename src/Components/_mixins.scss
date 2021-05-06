@@ -48,6 +48,7 @@
   align-items: center;
   position: absolute;
   text-align: center;
+  z-index: 3;
 }
 
 
@@ -64,6 +65,7 @@
   align-items: center;
   position: absolute;
   text-align: center;
+  z-index: 3;
 }
 
 @mixin center($justify) {

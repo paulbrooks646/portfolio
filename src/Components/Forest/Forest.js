@@ -289,7 +289,7 @@ function Forest(props) {
           <div className="forest-bottom-right"></div>
         </div>
       </div>
-      <Card id={`${ranger ? "component-card" : "component-card-closed"}`}>
+      <Card className={`${ranger ? "component-card" : "component-card-closed"}`}>
         <Typography variant="h5" color="primary">
           What brings you into the forest?
         </Typography>
@@ -303,7 +303,7 @@ function Forest(props) {
           Say Goodbye
         </Button>
       </Card>
-      <Card id={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
           Caves
         </Typography>
@@ -319,7 +319,7 @@ function Forest(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
           Goblins
         </Typography>
@@ -336,7 +336,7 @@ function Forest(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
           The Swamp
         </Typography>
@@ -352,7 +352,7 @@ function Forest(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
           Wolves
         </Typography>
@@ -369,7 +369,7 @@ function Forest(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${forestFirst ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${forestFirst ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h6"
           color="secondary"
@@ -383,7 +383,7 @@ function Forest(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${coinCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${coinCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h6"
           color="secondary"
@@ -399,7 +399,7 @@ function Forest(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${trunkRejectionCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${trunkRejectionCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h6"
           color="secondary"
@@ -415,7 +415,7 @@ function Forest(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${holeRejectionCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${holeRejectionCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h6"
           color="secondary"

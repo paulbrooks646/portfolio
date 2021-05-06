@@ -219,46 +219,29 @@ function Magic(props) {
     <div className="main">
       <Nav />
       <div className="magic-body">
-        <Card className={`${!magicCard ? "component-card" : "component-card-closed"}`}>
-          <Typography variant="h4" color="primary" >
+        <Card
+          className={`${
+            !magicCard ? "component-card" : "component-card-closed"
+          }`}
+        >
+          <Typography variant="h4" color="primary">
             Good day! What kind of scroll do you need?
           </Typography>
           <List className="component-list">
-            <ListItem  onClick={togglePurchaseFire}>
-              Fire
-            </ListItem>
-            <ListItem  onClick={togglePurchaseHeal}>
-              Heal
-            </ListItem>
-            <ListItem  onClick={togglePurchaseIce}>
-              Ice
-            </ListItem>
-            <ListItem  onClick={togglePurchaseOpen}>
-              Open
-            </ListItem>
-            <ListItem
-              
-              onClick={togglePurchaseProtection}
-            >
-              Protection
-            </ListItem>
-            <ListItem
-              
-              onClick={togglePurchaseStrength}
-            >
-              Strength
-            </ListItem>
+            <ListItem onClick={togglePurchaseFire}>Fire</ListItem>
+            <ListItem onClick={togglePurchaseHeal}>Heal</ListItem>
+            <ListItem onClick={togglePurchaseIce}>Ice</ListItem>
+            <ListItem onClick={togglePurchaseOpen}>Open</ListItem>
+            <ListItem onClick={togglePurchaseProtection}>Protection</ListItem>
+            <ListItem onClick={togglePurchaseStrength}>Strength</ListItem>
           </List>
-          <Button
-            onClick={toggleExit}
-            
-            variant="contained"
-            color="primary"
-          >
+          <Button onClick={toggleExit} variant="contained" color="primary">
             EXIT SHOP
           </Button>
         </Card>
-        <Card className={`${fireCard ? "component-card" : "component-card-closed"}`}>
+        <Card
+          className={`${fireCard ? "component-card" : "component-card-closed"}`}
+        >
           <Typography
             variant="h4"
             color="secondary"
@@ -267,98 +250,11 @@ function Magic(props) {
             Would you like to buy a fire scroll for 1 coin?
           </Typography>
           <div className="button-div">
-            <Button
-              onClick={toggleBuyFire}
-              
-              variant="contained"
-              color="primary"
-            >
+            <Button onClick={toggleBuyFire} variant="contained" color="primary">
               YES
             </Button>
             <Button
               onClick={togglePurchaseFire}
-              
-              variant="contained"
-              color="primary"
-            >
-              NO
-            </Button>
-          </div>
-        </Card>
-        <Card className={`${iceCard ? "component-card" : "component-card-closed"}`}>
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="component-card-description"
-          >
-            Would you like to buy an ice scroll for 1 coin?
-          </Typography>
-          <div className="button-div">
-            <Button
-              onClick={toggleBuyIce}
-              
-              variant="contained"
-              color="primary"
-            >
-              YES
-            </Button>
-            <Button
-              onClick={togglePurchaseIce}
-              
-              variant="contained"
-              color="primary"
-            >
-              NO
-            </Button>
-          </div>
-        </Card>
-        <Card className={`${healCard ? "component-card" : "component-card-closed"}`}>
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="component-card-description"
-          >
-            Would you like to buy a healing scroll for 1 coin?
-          </Typography>
-          <div className="button-div">
-            <Button
-              onClick={toggleBuyHeal}
-              
-              variant="contained"
-              color="primary"
-            >
-              YES
-            </Button>
-            <Button
-              onClick={togglePurchaseHeal}
-              
-              variant="contained"
-              color="primary"
-            >
-              NO
-            </Button>
-          </div>
-        </Card>
-        <Card className={`${openCard ? "component-card" : "component-card-closed"}`}>
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="component-card-description"
-          >
-            Would you like to buy an open scroll for 1 coin?
-          </Typography>
-          <div className="button-div">
-            <Button
-              onClick={toggleBuyOpen}
-              
-              variant="contained"
-              color="primary"
-            >
-              YES
-            </Button>
-            <Button
-              onClick={togglePurchaseOpen}
-              
               variant="contained"
               color="primary"
             >
@@ -367,7 +263,78 @@ function Magic(props) {
           </div>
         </Card>
         <Card
-          className={`${protectionCard ? "component-card" : "component-card-closed"}`}
+          className={`${iceCard ? "component-card" : "component-card-closed"}`}
+        >
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="component-card-description"
+          >
+            Would you like to buy an ice scroll for 1 coin?
+          </Typography>
+          <div className="button-div">
+            <Button onClick={toggleBuyIce} variant="contained" color="primary">
+              YES
+            </Button>
+            <Button
+              onClick={togglePurchaseIce}
+              variant="contained"
+              color="primary"
+            >
+              NO
+            </Button>
+          </div>
+        </Card>
+        <Card
+          className={`${healCard ? "component-card" : "component-card-closed"}`}
+        >
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="component-card-description"
+          >
+            Would you like to buy a healing scroll for 1 coin?
+          </Typography>
+          <div className="button-div">
+            <Button onClick={toggleBuyHeal} variant="contained" color="primary">
+              YES
+            </Button>
+            <Button
+              onClick={togglePurchaseHeal}
+              variant="contained"
+              color="primary"
+            >
+              NO
+            </Button>
+          </div>
+        </Card>
+        <Card
+          className={`${openCard ? "component-card" : "component-card-closed"}`}
+        >
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="component-card-description"
+          >
+            Would you like to buy an open scroll for 1 coin?
+          </Typography>
+          <div className="button-div">
+            <Button onClick={toggleBuyOpen} variant="contained" color="primary">
+              YES
+            </Button>
+            <Button
+              onClick={togglePurchaseOpen}
+              variant="contained"
+              color="primary"
+            >
+              NO
+            </Button>
+          </div>
+        </Card>
+        <Card
+          className={`${
+            protectionCard ? "component-card" : "component-card-closed"
+          }`}
         >
           <Typography
             variant="h4"
@@ -379,7 +346,6 @@ function Magic(props) {
           <div className="button-div">
             <Button
               onClick={toggleBuyProtection}
-              
               variant="contained"
               color="primary"
             >
@@ -387,7 +353,6 @@ function Magic(props) {
             </Button>
             <Button
               onClick={togglePurchaseProtection}
-              
               variant="contained"
               color="primary"
             >
@@ -396,7 +361,9 @@ function Magic(props) {
           </div>
         </Card>
         <Card
-          className={`${strengthCard ? "component-card" : "component-card-closed"}`}
+          className={`${
+            strengthCard ? "component-card" : "component-card-closed"
+          }`}
         >
           <Typography
             variant="h4"
@@ -408,7 +375,6 @@ function Magic(props) {
           <div className="button-div">
             <Button
               onClick={toggleBuyStrength}
-              
               variant="contained"
               color="primary"
             >
@@ -416,7 +382,6 @@ function Magic(props) {
             </Button>
             <Button
               onClick={togglePurchaseStrength}
-              
               variant="contained"
               color="primary"
             >
@@ -424,7 +389,9 @@ function Magic(props) {
             </Button>
           </div>
         </Card>
-        <Card className={`${poorCard ? "component-card" : "component-card-closed"}`}>
+        <Card
+          className={`${poorCard ? "component-card" : "component-card-closed"}`}
+        >
           <Typography
             variant="h4"
             color="secondary"
@@ -435,7 +402,6 @@ function Magic(props) {
           <div className="button-div">
             <Button
               onClick={togglePoorCard}
-              
               variant="contained"
               color="primary"
             >
@@ -443,7 +409,11 @@ function Magic(props) {
             </Button>
           </div>
         </Card>
-        <Card className={`${boughtCard ? "component-card" : "component-card-closed"}`}>
+        <Card
+          className={`${
+            boughtCard ? "component-card" : "component-card-closed"
+          }`}
+        >
           <Typography
             variant="h4"
             color="secondary"
@@ -455,7 +425,6 @@ function Magic(props) {
           <div className="button-div">
             <Button
               onClick={toggleBoughtCard}
-              
               variant="contained"
               color="primary"
             >
@@ -463,7 +432,11 @@ function Magic(props) {
             </Button>
           </div>
         </Card>
-        <Card className={`${thanksCard ? "component-card" : "component-card-closed"}`}>
+        <Card
+          className={`${
+            thanksCard ? "component-card" : "component-card-closed"
+          }`}
+        >
           <Typography
             variant="h4"
             color="secondary"
@@ -474,7 +447,6 @@ function Magic(props) {
           <div className="button-div">
             <Button
               onClick={toggleThanksCardClosed}
-              
               variant="contained"
               color="primary"
             >
@@ -488,17 +460,16 @@ function Magic(props) {
     <div className="magic-main">
       <Nav />
       <div className="magic-body">
-        <Card className={`${!magicCard ? "component-card" : "component-card-closed"}`}>
-          <Typography variant="h4" color="primary" >
+        <Card
+          className={`${
+            !magicCard ? "component-card" : "component-card-closed"
+          }`}
+        >
+          <Typography variant="h4" color="secondary" className="component-card-description">
             I only do business with magic users. Come back when you are one.
           </Typography>
-          
-          <Button
-            onClick={toggleExit}
-            
-            variant="contained"
-            color="primary"
-          >
+
+          <Button onClick={toggleExit} variant="contained" color="primary">
             EXIT SHOP
           </Button>
         </Card>
