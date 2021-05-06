@@ -27,16 +27,16 @@ function Nest(props) {
     axios.get("/api/nest").then((res) => {
       props.getNest(res.data[0]);
       setIsLoading(false);
-      setRightCharacter(true)
+      setRightCharacter(true);
     });
   }, []);
 
   const toggleRight = () => {
-   axios.post("/api/changeLast", { last: "nest" }).then((res) => {
-     props.getUser(res.data).then(() => {
-       props.history.push("/Mountain");
-     });
-   });
+    axios.post("/api/changeLast", { last: "nest" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Mountain");
+      });
+    });
   };
 
   const toggleFirst = () => {
@@ -50,9 +50,9 @@ function Nest(props) {
       axios.post("/api/coin").then((res) => {
         props.getUser(res.data);
         axios.post("/api/nestCoin").then((res) => {
-          props.getNest(res.data[0])
-          setCoinSuccess(true)
-        })
+          props.getNest(res.data[0]);
+          setCoinSuccess(true);
+        });
       });
     } else {
       setGriffin(true);
@@ -93,9 +93,8 @@ function Nest(props) {
   };
 
   const toggleGoRight = () => {
-     setRightCharacter(false);
-     setRightRight(true);
-    
+    setRightCharacter(false);
+    setRightRight(true);
   };
 
   return isLoading ? (
@@ -185,12 +184,7 @@ function Nest(props) {
           You climb the steep cliff. Up ahead you see the massive griffin's
           nest. You look around tenatively for the owner of the nest.
         </Typography>
-        <Button
-          onClick={toggleFirst}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleFirst} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
@@ -204,7 +198,6 @@ function Nest(props) {
         </Typography>
         <Button
           onClick={() => setCoinSuccess(false)}
-          className="forest-card-button"
           variant="contained"
           color="primary"
         >
@@ -223,7 +216,6 @@ function Nest(props) {
         </Typography>
         <Button
           onClick={() => setRibbonSuccess(false)}
-          className="forest-card-button"
           variant="contained"
           color="primary"
         >
@@ -242,7 +234,6 @@ function Nest(props) {
         </Typography>
         <Button
           onClick={() => setFeatherSuccess(false)}
-          className="forest-card-button"
           variant="contained"
           color="primary"
         >
@@ -261,7 +252,6 @@ function Nest(props) {
         </Typography>
         <Button
           onClick={() => setFailure(false)}
-          className="forest-card-button"
           variant="contained"
           color="primary"
         >
@@ -273,4 +263,6 @@ function Nest(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getNest, getInventory })(Nest);
+export default connect(mapStateToProps, { getUser, getNest, getInventory })(
+  Nest
+);
