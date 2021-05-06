@@ -36,14 +36,13 @@ function Mountain(props) {
   const [leftRight, setLeftRight] = useState(false);
   const [leftDown, setLeftDown] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [firstTimeCard, setFirstTimeCard] = useState(true)
-  const [rockCard, setRockCard] = useState(false)
-  const [coinCard, setCoinCard] = useState(false)
+  const [firstTimeCard, setFirstTimeCard] = useState(true);
+  const [rockCard, setRockCard] = useState(false);
+  const [coinCard, setCoinCard] = useState(false);
 
   useEffect(() => {
     if (!props.mountain.mountain.first_time) {
       setFirstTimeCard(false);
-
     }
     axios.get("/api/mountain").then((res) => {
       props.getMountain(res.data[0]);
@@ -60,24 +59,24 @@ function Mountain(props) {
   }, []);
 
   const toggleRock = () => {
-    axios.post("/api/rock").then(res => {
-      props.getInventory(res.data)
-      axios.get("/api/mountain").then(res => {
-        props.getMountain(res.data[0])
-        setRockCard(true)
-      })
-    })
-  }
+    axios.post("/api/rock").then((res) => {
+      props.getInventory(res.data);
+      axios.get("/api/mountain").then((res) => {
+        props.getMountain(res.data[0]);
+        setRockCard(true);
+      });
+    });
+  };
 
   const toggleCoin = () => {
-    axios.post("/api/mountainCoin").then(res => {
-      props.getMountain(res.data[0])
-      axios.post("/api/coin").then(res => {
-        props.getUser(res.data)
-        setCoinCard(true)
-      })
-    })
-  }
+    axios.post("/api/mountainCoin").then((res) => {
+      props.getMountain(res.data[0]);
+      axios.post("/api/coin").then((res) => {
+        props.getUser(res.data);
+        setCoinCard(true);
+      });
+    });
+  };
 
   const toggleRight = () => {
     axios.post("/api/changeLast", { last: "mountain" }).then((res) => {
@@ -129,8 +128,8 @@ function Mountain(props) {
 
   const toggleFirstTimeCard = () => {
     axios.post("/api/mountainFirst").then((res) => {
-      props.getMountain(res.data[0])
-      setFirstTimeCard(false)
+      props.getMountain(res.data[0]);
+      setFirstTimeCard(false);
     });
   };
 
@@ -304,46 +303,27 @@ function Mountain(props) {
           <div className="mountain-bottom-right"></div>
         </div>
       </div>
-      
+
       <Card
-        className={`${mountaineer ? "mountain-card" : "mountain-card-closed"}`}
+        className={`${
+          mountaineer ? "component-card" : "component-card-closed"
+        }`}
       >
-        <Typography
-          variant="h5"
-          color="primary"
-          className="mountain-card-title"
-        >
+        <Typography variant="h5" color="primary">
           What brings you up the mountain?
         </Typography>
-        <List className="mountain-list">
-          <ListItem className="mountain-list-item" onClick={toggleAnswerOne}>
-            Griffins
-          </ListItem>
-          <ListItem className="mountain-list-item" onClick={toggleAnswerTwo}>
-            Nests
-          </ListItem>
-          <ListItem className="mountain-list-item" onClick={toggleAnswerThree}>
-            Ogres
-          </ListItem>
-          <ListItem className="mountain-list-item" onClick={toggleAnswerFour}>
-            The Pass
-          </ListItem>
+        <List className="component-list">
+          <ListItem onClick={toggleAnswerOne}>Griffins</ListItem>
+          <ListItem onClick={toggleAnswerTwo}>Nests</ListItem>
+          <ListItem onClick={toggleAnswerThree}>Ogres</ListItem>
+          <ListItem onClick={toggleAnswerFour}>The Pass</ListItem>
         </List>
-        <Button
-          onClick={toggleMountaineer}
-          className="mountain-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleMountaineer} variant="contained" color="primary">
           Say Goodbye
         </Button>
       </Card>
       <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="mountain-card-title"
-        >
+        <Typography variant="h4" color="primary">
           Griffins
         </Typography>
         <Typography
@@ -355,21 +335,12 @@ function Mountain(props) {
           their young. Griffins typically won't attack humans unless a human
           gets too close to the Griffin's nest.
         </Typography>
-        <Button
-          onClick={toggleAnswerOne}
-          className="mountain-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerOne} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="mountain-card-title"
-        >
+        <Typography variant="h4" color="primary">
           Nests
         </Typography>
         <Typography
@@ -381,21 +352,12 @@ function Mountain(props) {
           are home to giant birds like Rocs and Griffins. Griffins are
           particularly common in this area.
         </Typography>
-        <Button
-          onClick={toggleAnswerTwo}
-          className="mountain-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerTwo} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="mountain-card-title"
-        >
+        <Typography variant="h4" color="primary">
           Ogres
         </Typography>
         <Typography
@@ -409,21 +371,12 @@ function Mountain(props) {
           Ogre's sense of smell is unrivaled. Ogre's keep to themselves but can
           get aggressive if they smell something nasty enough.
         </Typography>
-        <Button
-          onClick={toggleAnswerThree}
-          className="mountain-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerThree} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="mountain-card-title"
-        >
+        <Typography variant="h4" color="primary">
           The Pass
         </Typography>
         <Typography
@@ -435,23 +388,14 @@ function Mountain(props) {
           and creatures depend on that water. The pass is a point this water is
           shallow enough to cross, it is the only way through the mountains.
         </Typography>
-        <Button
-          onClick={toggleAnswerFour}
-          className="mountain-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerFour} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card
         className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}
       >
-        <Typography
-          variant="h4"
-          color="primary"
-          className="mountain-card-title"
-        >
+        <Typography variant="h4" color="primary">
           Brrrrrrr!
         </Typography>
         <Typography
@@ -465,7 +409,6 @@ function Mountain(props) {
         </Typography>
         <Button
           onClick={toggleFirstTimeCard}
-          className="mountain-card-button"
           variant="contained"
           color="primary"
         >
@@ -489,9 +432,7 @@ function Mountain(props) {
           CLOSE
         </Button>
       </Card>
-      <Card
-        className={`${rockCard ? "answer-card" : "answer-card-closed"}`}
-      >
+      <Card className={`${rockCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h6"
           color="secondary"

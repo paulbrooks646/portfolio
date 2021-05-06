@@ -1,207 +1,108 @@
-.mountain-main {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  position: relative;
+@import "../mixins";
 
+.mountain-body {
+  background-image: url("../../Images/Dirt.png");
+  background-size: 100% 100%;
 
-  .mountain-body {
-
-    background-image: url("../../Images/Dirt.png");
+  .mountain-top {
+    @include row(35vh);
+    background-image: url("../../Images/Mountain.png");
     background-size: 100% 100%;
-
-    .mountain-top {
-      height: 35vh;
-      display: flex;
-      width: 100vw;
-      background-image: url("../../Images/Mountain.png");
-      background-size: 100% 100%;
-    }
-
-    .mountain-middle {
-      height: 20vh;
-      display: flex;
-      width: 100vw;
-
-      .mountain-middle-left {
-        width: 40%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-
-        .mountain-nest {
-          display: flex;
-          align-items: center;
-          cursor: pointer;
-        }
-      }
-
-      .mountain-middle-middle {
-        width: 20%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .mountaineer {
-            background-image: url("../../Images//Mountaineer.png");
-            background-size: 100% 100%;
-            height: 150px;
-            width: 100px;
-            z-index: 1;
-            position: relative;
-            bottom: 100px;
-            cursor: pointer;
-            
-
-        }
-      }
-
-      .mountain-middle-right {
-
-        width: 40%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-
-        .mountain-home {
-          display: flex;
-          width: 100px;
-          justify-content: space-evenly;
-          align-items: center;
-          cursor: pointer;
-          position: relative;
-        }
-      }
-    }
-
-    .mountain-bottom {
-      height: 35vh;
-      display: flex;
-      width: 100vw;
-
-      .mountain-bottom-left {
-        background-image: url("../../Images/Snow.png");
-        background-size: 100% 100%;
-        height: 100%;
-        width: 40%;
-        display: flex;
-        justify-content: center;
-        padding: 10px;
-
-        .rock {
-          background-image: url("../../Images//Snow.png");
-          background-size: 100% 100%;
-          border: solid 1px white;
-          border-radius: 50%;
-          height: 30px;
-          width: 20px;
-          cursor: pointer;
-
-        }
-
-        .rock-closed {
-          display: none;
-        }
-
-        .coin {
- background-color: gold;
-            border-radius: 50%;
-            height: 10px;
-            width: 10px;
-            cursor: pointer;
-        }
-
-        .coin-closed {
-          display: none;
-          
-        }
-
-      }
-
-      .mountain-bottom-middle {
-        height: 100%;
-        width: 20%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        align-items: center;
-
-        .mountain-pass {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          cursor: pointer;
-          position: relative;
-          bottom: 5px;
-        }
-      }
-
-      .mountain-bottom-right {
-         background-image: url("../../Images/Snow.png");
-        background-size: 100% 100%;
-        height: 100%;
-        width: 40%;
-      }
-    }
   }
-  .mountain-card {
-      height: 500px;
-      width: 500px;
-    background-color: white;
-    border: solid black 2px;
-    box-shadow: 2px 2px 2px 2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: absolute;
-    text-align: center;
-    z-index: 2;
 
-    .mountain-list {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+  .mountain-middle {
+    @include row(20vh);
+
+    .mountain-middle-left {
+      @include section(40vw);
+      @include center(flex-start);
+
+      .mountain-nest {
+        @include center(flex-start);
         cursor: pointer;
-        color: tomato;
+      }
     }
 
-    .mountain-card-description {
-        width: 90%;
+    .mountain-middle-middle {
+      @include section(20vw);
+      @include flex(flex-start);
+
+      .mountaineer {
+        background-image: url("../../Images//Mountaineer.png");
+        background-size: 100% 100%;
+        height: 150px;
+        width: 100px;
+        z-index: 1;
+        position: relative;
+        bottom: 100px;
+        cursor: pointer;
+      }
     }
-  }
 
-  .mountain-card-closed {
-    display: none;
-  }
-  .answer-card {
-      height: 400px;
-      width: 400px;
-    background-color: white;
-    border: solid black 2px;
-    box-shadow: 2px 2px 2px 2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: absolute;
-    text-align: center;
-    z-index: 2;
+    .mountain-middle-right {
+      @include section(40vw);
+      @include center(flex-end);
 
-    
-
-    .answer-card-description {
-        width: 90%;
+      .mountain-home {
+        @include center(flex-end);
+        width: 100px;
+      }
     }
   }
 
-  .answer-card-closed {
-    display: none;
+  .mountain-bottom {
+    @include row(35vh);
+
+    .mountain-bottom-left {
+      background-image: url("../../Images/Snow.png");
+      background-size: 100% 100%;
+      @include section(40vw);
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+
+      .rock {
+        background-image: url("../../Images//Snow.png");
+        background-size: 100% 100%;
+        border: solid 1px white;
+        border-radius: 50%;
+        height: 30px;
+        width: 20px;
+        cursor: pointer;
+      }
+
+      .rock-closed {
+        display: none;
+      }
+
+      .coin {
+        background-color: gold;
+        border-radius: 50%;
+        height: 10px;
+        width: 10px;
+        cursor: pointer;
+      }
+
+      .coin-closed {
+        display: none;
+      }
+    }
+
+    .mountain-bottom-middle {
+      @include section(20vw);
+      @include flex(flex-end);
+
+      .mountain-pass {
+        @include flex(flex-start);
+        cursor: pointer;
+        bottom: 5px;
+      }
+    }
+
+    .mountain-bottom-right {
+      background-image: url("../../Images/Snow.png");
+      background-size: 100% 100%;
+      @include section(40vw);
+    }
   }
 }
