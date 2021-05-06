@@ -20,12 +20,12 @@ import Loading from "../Loading/Loading";
 import Character from "../Character/Character";
 
 function Stables(props) {
- const [rightLeft, setRightLeft] = useState(false);
- const [leftLeft, setLeftLeft] = useState(false);
- const [rightRight, setRightRight] = useState(false);
- const [leftRight, setLeftRight] = useState(false);
- const [leftCharacter, setLeftCharacter] = useState(false);
- const [rightCharacter, setRightCharacter] = useState(false);
+  const [rightLeft, setRightLeft] = useState(false);
+  const [leftLeft, setLeftLeft] = useState(false);
+  const [rightRight, setRightRight] = useState(false);
+  const [leftRight, setLeftRight] = useState(false);
+  const [leftCharacter, setLeftCharacter] = useState(false);
+  const [rightCharacter, setRightCharacter] = useState(false);
   const [oldmanCard, setOldmanCard] = useState(false);
   const [answerOne, setAnswerOne] = useState(false);
   const [answerTwo, setAnswerTwo] = useState(false);
@@ -42,22 +42,22 @@ function Stables(props) {
   const [needPermission, setNeedPermission] = useState(false);
   const [alreadyTaken, setAlreadyTaken] = useState(false);
 
- useEffect(() => {
-   // if (!props.user.user.newgame) {
-   //   setNewgameCard(false);
+  useEffect(() => {
+    // if (!props.user.user.newgame) {
+    //   setNewgameCard(false);
 
-   // }
-   axios.get("/api/stables").then((res) => {
-     props.getStables(res.data[0]);
+    // }
+    axios.get("/api/stables").then((res) => {
+      props.getStables(res.data[0]);
 
-     if (props.user.user.last === "valley") {
-       setLeftCharacter(true);
-     } else if (props.user.user.last === "town") {
-       setRightCharacter(true);
-     }
-     setIsLoading(false);
-   });
- }, []);
+      if (props.user.user.last === "valley") {
+        setLeftCharacter(true);
+      } else if (props.user.user.last === "town") {
+        setRightCharacter(true);
+      }
+      setIsLoading(false);
+    });
+  }, []);
 
   const toggleLeft = () => {
     axios.post("/api/changeLast", { last: "stables" }).then((res) => {
@@ -182,7 +182,7 @@ function Stables(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="stables-main">
+    <div className="main">
       <Nav />
       <div className="stables-body">
         <div className="stables-top">
@@ -292,36 +292,23 @@ function Stables(props) {
         </div>
       </div>
       <Card
-        className={`${oldmanCard ? "stables-card" : "stables-card-closed"}`}
+        className={`${oldmanCard ? "component-card" : "component-card-closed"}`}
       >
-        <Typography variant="h4" color="primary" className="stables-card-title">
+        <Typography variant="h4" color="primary">
           Hello there! I'm busy so be quick. What do you want to know?
         </Typography>
-        <List className="stables-list">
-          <ListItem className="stables-list-item" onClick={toggleAnswerOne}>
-            Manure
-          </ListItem>
-          <ListItem className="stables-list-item" onClick={toggleAnswerTwo}>
-            The Mountains
-          </ListItem>
-          <ListItem className="stables-list-item" onClick={toggleAnswerThree}>
-            The Valley
-          </ListItem>
-          <ListItem className="stables-list-item" onClick={toggleAnswerFour}>
-            Employment
-          </ListItem>
+        <List className="component-list">
+          <ListItem onClick={toggleAnswerOne}>Manure</ListItem>
+          <ListItem onClick={toggleAnswerTwo}>The Mountains</ListItem>
+          <ListItem onClick={toggleAnswerThree}>The Valley</ListItem>
+          <ListItem onClick={toggleAnswerFour}>Employment</ListItem>
         </List>
-        <Button
-          onClick={toggleOldmanCard}
-          className="stables-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleOldmanCard} variant="contained" color="primary">
           Say Goodbye
         </Button>
       </Card>
       <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="stables-card-title">
+        <Typography variant="h4" color="primary">
           Manure
         </Typography>
         <Typography
@@ -331,17 +318,12 @@ function Stables(props) {
         >
           Stinky stuff! Help yourself to as much as you want. Hahaha!
         </Typography>
-        <Button
-          onClick={toggleAnswerOne}
-          className="stables-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerOne} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="stables-card-title">
+        <Typography variant="h4" color="primary">
           The Mountains
         </Typography>
         <Typography
@@ -353,17 +335,12 @@ function Stables(props) {
           it stopped. Since its been gone my crops are struggling. I hear it is
           hurting the royal gardens as well.
         </Typography>
-        <Button
-          onClick={toggleAnswerTwo}
-          className="stables-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerTwo} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="stables-card-title">
+        <Typography variant="h4" color="primary">
           The Valley
         </Typography>
         <Typography
@@ -375,17 +352,12 @@ function Stables(props) {
           protected, you are liable to get hit by rocks. Some trolls have taken
           up residence there and are very protective of their territory.
         </Typography>
-        <Button
-          onClick={toggleAnswerThree}
-          className="stables-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleAnswerThree} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" className="stables-card-title">
+        <Typography variant="h4" color="primary">
           Employment
         </Typography>
         <Typography
@@ -403,10 +375,9 @@ function Stables(props) {
         >
           Would you like to clean up manure?
         </Typography>
-        <div className="stables-card-button-div">
+        <div className="component-card-button-div">
           <Button
             onClick={toggleAnswerFourYes}
-            className="stables-card-button"
             variant="contained"
             color="primary"
           >
@@ -414,7 +385,6 @@ function Stables(props) {
           </Button>
           <Button
             onClick={toggleAnswerFourNo}
-            className="stables-card-button"
             variant="contained"
             color="primary"
           >
@@ -435,7 +405,6 @@ function Stables(props) {
 
         <Button
           onClick={toggleAnswerFourYesA}
-          className="stables-card-button"
           variant="contained"
           color="primary"
         >
@@ -455,7 +424,6 @@ function Stables(props) {
 
         <Button
           onClick={toggleAnswerFourYesB}
-          className="stables-card-button"
           variant="contained"
           color="primary"
         >
@@ -475,7 +443,6 @@ function Stables(props) {
 
         <Button
           onClick={toggleAnswerFourNo}
-          className="stables-card-button"
           variant="contained"
           color="primary"
         >
@@ -491,12 +458,7 @@ function Stables(props) {
           Neigh!!!
         </Typography>
 
-        <Button
-          onClick={toggleHorseCard}
-          className="stables-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleHorseCard} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
@@ -515,12 +477,7 @@ function Stables(props) {
         >
           You would have to have a really good reason to pick up this dung!
         </Typography>
-        <Button
-          onClick={toggleGoodReason}
-          className="stables-card-button"
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleGoodReason} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
@@ -544,7 +501,6 @@ function Stables(props) {
         </Typography>
         <Button
           onClick={toggleNeedPermission}
-          className="stables-card-button"
           variant="contained"
           color="primary"
         >
@@ -571,7 +527,6 @@ function Stables(props) {
         </Typography>
         <Button
           onClick={toggleBottleNeeded}
-          className="stables-card-button"
           variant="contained"
           color="primary"
         >
@@ -598,7 +553,6 @@ function Stables(props) {
         </Typography>
         <Button
           onClick={toggleAlreadyTaken}
-          className="stables-card-button"
           variant="contained"
           color="primary"
         >

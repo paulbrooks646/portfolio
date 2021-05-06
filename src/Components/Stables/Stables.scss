@@ -1,254 +1,144 @@
-.stables-main {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  position: relative;
+@import "../mixins";
 
-  .stables-body {
-    .stables-top {
-      height: 35vh;
-      display: flex;
-      width: 100vw;
-      background-image: url("../../Images/Grass.png");
-      background-size: 100% 100%;
+.stables-body {
+  .stables-top {
+    @include row(35vh);
+    background-image: url("../../Images/Grass.png");
+    background-size: 100% 100%;
 
-      .stables-top-left {
-        width: 40%;
-        height: 100%;
+    .stables-top-left {
+      @include section(40vw);
+      @include flex(center);
+
+      .stables-horse {
+        height: 200px;
+        width: 200px;
+        background-color: green;
+        cursor: pointer;
+      }
+    }
+
+    .stables-top-middle {
+      @include section(20vw);
+      @include center(center);
+
+      .stables-cowboy {
+        height: 150px;
+        width: 100px;
+        cursor: pointer;
+      }
+    }
+
+    .stables-top-right {
+      @include section(40vw);
+      @include flex(center);
+
+      .stables-stables {
+        height: 250px;
+        width: 250px;
+        background-color: green;
+      }
+    }
+  }
+
+  .stables-middle {
+    @include row(20vh);
+    background-image: url("../../Images/Dirt.png");
+    background-size: 100% 100%;
+
+    .stables-middle-left {
+      @include section(40vw);
+      @include center(flex-start);
+
+      .stables-valley {
+        @include center(space-evenly);
+        width: 110px;
+        cursor: pointer;
+      }
+    }
+
+    .stables-middle-middle {
+      @include section(20vw);
+    }
+
+    .stables-middle-right {
+      @include section(40vw);
+      @include center(flex-end);
+
+      .stables-stables {
+        @include center(space-evenly);
+        width: 100px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .stables-bottom {
+    @include row(35vh);
+    background-image: url("../../Images/Grass.png");
+    background-size: 100% 100%;
+
+    .stables-bottom-left {
+      @include section(40vw);
+
+      .manure-piles {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        .stables-horse {
-          height: 200px;
-          width: 200px;
-          background-color: green;
-          cursor: pointer;
-        }
-      }
-
-      .stables-top-middle {
-        
-        width: 20%;
+        justify-content: space-evenly;
         height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        width: 100%;
+        cursor: pointer;
 
-        .stables-cowboy {
-          height: 150px;
-          width: 100px;
-          cursor: pointer;
-        }
-      }
+        .manure-top {
+          @include center(space-evenly);
 
-      .stables-top-right {
-        
-        width: 40%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        .stables-stables {
-          height: 250px;
-          width: 250px;
-          background-color: green;
-        }
-      }
-    }
-
-    .stables-middle {
-      height: 20vh;
-      display: flex;
-      width: 100vw;
-      background-image: url("../../Images/Dirt.png");
-      background-size: 100% 100%;
-
-      .stables-middle-left {
-        
-        width: 40%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-
-        .stables-valley {
-          display: flex;
-          width: 110px;
-          justify-content: space-evenly;
-          align-items: center;
-          cursor: pointer;
-        }
-      }
-
-      .stables-middle-middle {
-        
-        width: 20%;
-        height: 100%;
-      }
-
-      .stables-middle-right {
-        
-        width: 40%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-
-        .stables-stables {
-          display: flex;
-          width: 100px;
-          justify-content: space-evenly;
-          align-items: center;
-          cursor: pointer;
-        }
-      }
-    }
-
-    .stables-bottom {
-      height: 35vh;
-      display: flex;
-      width: 100vw;
-      background-image: url("../../Images/Grass.png");
-      background-size: 100% 100%;
-
-      .stables-bottom-left {
-        
-        height: 100%;
-        width: 40%;
-
-        .manure-piles {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-evenly;
-          height: 100%;
-          width: 100%;
-          cursor: pointer;
-
-          .manure-top {
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-
-            .manure {
-              height: 20px;
-              width: 20px;
-              border-radius: 50%;
-              background-color: brown;
-            }
+          .manure {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background-color: brown;
           }
+        }
 
-          .manure-middle {
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
+        .manure-middle {
+          @include center(space-evenly);
 
-            .manure {
-              height: 20px;
-              width: 20px;
-              border-radius: 50%;
-              background-color: brown;
-            }
+          .manure {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background-color: brown;
           }
+        }
 
-          .manure-bottom {
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
+        .manure-bottom {
+          @include center(space-evenly);
 
-            .manure {
-              height: 20px;
-              width: 20px;
-              border-radius: 50%;
-              background-color: brown;
-            }
+          .manure {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background-color: brown;
           }
         }
       }
+    }
 
-      .stables-bottom-middle {
-        
-        height: 100%;
-        width: 20%;
-      }
+    .stables-bottom-middle {
+      @include section(20vw);
+    }
 
-      .stables-bottom-right {
-        height: 100%;
-        width: 40%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .stables-bottom-right {
+      @include section(40vw);
+      @include center(center);
 
-        .manure-mound {
-          height: 200px;
-          width: 200px;
-          border-radius: 50%;
-          background-color: brown;
-          cursor: pointer;
-        }
+      .manure-mound {
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+        background-color: brown;
+        cursor: pointer;
       }
     }
-  }
-  .stables-card {
-    height: 500px;
-    width: 500px;
-    background-color: white;
-    border: solid black 2px;
-    box-shadow: 2px 2px 2px 2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: absolute;
-    text-align: center;
-
-    .stables-list {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-      color: tomato;
-    }
-
-    .stables-card-description {
-      width: 90%;
-    }
-  }
-
-  .stables-card-button-div {
-    display: flex;
-    width: 100%;
-    justify-content: space-evenly;
-  }
-
-  .stables-card-closed {
-    display: none;
-  }
-  .answer-card {
-    height: 400px;
-    width: 400px;
-    background-color: white;
-    border: solid black 2px;
-    box-shadow: 2px 2px 2px 2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: absolute;
-    text-align: center;
-
-    .answer-card-description {
-      width: 90%;
-    }
-  }
-
-  .answer-card-closed {
-    display: none;
   }
 }
