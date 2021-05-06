@@ -2,83 +2,153 @@
 
 .cottage-body {
   background-image: url("../../Images/Dirt.png");
+  display: flex;
 
-  .cottage-top {
-    @include row(35vh);
+  .cottage-left {
+    height: 90vh;
+    width: 40vw;
+    background-image: url("../../Images/Spooky2.jpg");
+    background-size: 100% 100%;
+  }
 
-    .cottage-top-left {
-      @include section(40vw);
-      background-image: url("../../Images//Cinders.png");
-      background-size: 100% 100%;
-    }
+  .cottage-middle {
+    width: 20vw;
+    height: 90vh;
+    @include flex(flex-start);
 
-    .cottage-top-middle {
-      @include section(20vw);
-      @include flex(flex-start);
-     
+    .cottage-middle-top {
+      width: 100%;
+      height: 35vh;
+
       .cottage-home {
         @include flex(flex-start);
         cursor: pointer;
       }
     }
 
-    .cottage-top-right {
-      @include section(40vw);
-      background-image: url("../../Images//Cinders.png");
-      background-size: 100% 100%;
-    }
-  }
-
-  .cottage-middle {
-    @include row(35vh);
-
-    .cottage-middle-left {
-      @include section(40vw);
-      background-image: url("../../Images//Cinders.png");
-      background-size: 100% 100%;
-    }
-
     .cottage-middle-middle {
-      @include section(20vw);
-    }
+      height: 35vh;
+      width: 100%;
+      @include flex(space-between);
 
-    .cottage-middle-right {
-      @include section(40vw);
-      background-image: url("../../Images/Hut.jpg");
-      background-size: 100% 100%;
-    }
-  }
+      .lasers {
+        background-image: url("../../Images/Lasers.jpg");
+        background-size: 100% 100%;
+        width: 100%;
+        height: 100px;
+        transform: skewY(180deg);
+      }
 
-  .cottage-bottom {
-    @include row(20vh);
+      .lasers-closed {
+        display: none;
+      }
 
-    .cottage-bottom-left {
-      @include section(40vw);
-      background-image: url("../../Images//Cinders.png");
-      background-size: 100% 100%;
-    }
+      .pouch {
+        background-image: url("../../Images//Pouch.jpg");
+        background-size: 100% 100%;
+        height: 35px;
+        width: 35px;
+      }
 
-    .cottage-bottom-middle {
-      @include section(20vw);
-      @include flex(flex-end);
+      .pouch-closed {
+        display: none;
+      }
 
-      .cottage-cottage {
-        height: 200px;
-        width: 300px;
-        z-index: 1;
+      .brambles {
+        background-image: url("../../Images/Brambles.jpg");
+        background-size: 100% 100%;
+        width: 100%;
+        height: 100px;
+        transform: skewY(180deg);
+      }
+
+      .brambles-closed {
+        display: none;
       }
     }
 
-    .cottage-bottom-right {
-      @include section(40vw);
-      display: flex;
-      justify-content: center;
+    .cottage-middle-bottom {
+      height: 20vh;
+      width: 100%;
+      @include flex(center);
 
-      #arrow-up {
-        color: red;
-        width: 50px;
-        height: 50px;
+      .coin {
+        background-color: gold;
+        border-radius: 50%;
+        height: 10px;
+        width: 10px;
         cursor: pointer;
+      }
+
+      .coin-closed {
+        display: none;
+      }
+    }
+  }
+
+  .cottage-right {
+    height: 90vh;
+    width: 40vw;
+
+    .cottage-right-top {
+      width: 100%;
+      height: 35vh;
+      background-image: url("../../Images/Spooky.jpg");
+      background-size: 100% 100%;
+    }
+
+    .cottage-right-middle {
+      width: 100%;
+      height: 35vh;
+      background-image: url("../../Images/Hut.jpg");
+      background-size: 100% 100%;
+    }
+
+    .cottage-right-bottom {
+      width: 100%;
+      height: 20vh;
+      @include center(center);
+
+      .pod-div {
+        height: 100%;
+        width: 33%;
+        @include flex(center);
+
+        .pod {
+          height: 50%;
+          width: 50%;
+          background-image: url("../../Images/Pod.jpg");
+          background-size: 100% 100%;
+        }
+      }
+      .arrow-div {
+        height: 100%;
+        width: 33%;
+        @include flex(flex-start);
+
+        #arrow-up {
+          color: red;
+          width: 50px;
+          height: 50px;
+          cursor: pointer;
+        }
+      }
+      .scroll-div {
+        height: 100%;
+        width: 33%;
+        @include flex(space-evenly);
+
+        .inner-scroll-div {
+          height: 50%;
+          width: 100%;
+          @include flex(center);
+
+        .scroll {
+          height: 90%;
+          width: 90%;
+          background-image: url("../../Images/Scroll.jpg");
+          background-size: 100% 100%;
+        }}
       }
     }
   }

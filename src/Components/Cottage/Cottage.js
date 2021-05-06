@@ -2,21 +2,19 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getCottage } from "../../redux/cottageReducer"
-import {getInventory} from "../../redux/inventoryReducer"
+import { getCottage } from "../../redux/cottageReducer";
+import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Cottage.scss";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import Character from "../Character/Character";
 import Loading from "../Loading/Loading";
 
-
 function Cottage(props) {
-  
-   const [upCharacter, setUpCharacter] = useState(false);
-   const [upUp, setUpUp] = useState(false);
+  const [upCharacter, setUpCharacter] = useState(false);
+  const [upUp, setUpUp] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  
+
   useEffect(() => {
     // if (!props.user.user.newgame) {
     //   setNewgameCard(false);
@@ -30,7 +28,6 @@ function Cottage(props) {
     });
   }, []);
 
-
   const toggleUp = () => {
     axios.post("/api/changeLast", { last: "cottage" }).then((res) => {
       props.getUser(res.data).then(() => {
@@ -39,14 +36,14 @@ function Cottage(props) {
     });
   };
 
-   const toggleGoUp = () => {
-     setUpCharacter(false);
-     setUpUp(true);
-   };
+  const toggleGoUp = () => {
+    setUpCharacter(false);
+    setUpUp(true);
+  };
 
   const toggleHouseFive = () => {
-    props.history.push("/HouseFive")
-  }
+    props.history.push("/HouseFive");
+  };
 
   return isLoading ? (
     <Loading />
@@ -54,9 +51,9 @@ function Cottage(props) {
     <div className="main">
       <Nav />
       <div className="cottage-body">
-        <div className="cottage-top">
-          <div className="cottage-top-left"></div>
-          <div className="cottage-top-middle">
+        <div className="cottage-left"></div>
+        <div className="cottage-middle">
+          <div className="cottage-middle-top">
             <div className="cottage-home" onClick={toggleGoUp}>
               <ArrowUpward />
               <h2>Cave</h2>
@@ -75,18 +72,34 @@ function Cottage(props) {
               <Character />
             </div>
           </div>
-          <div className="cottage-top-right"></div>
+          <div className="cottage-middle-middle">
+            <div className="lasers"></div>
+            <div className="pouch"></div>
+            <div className="brambles"></div>
+          </div>
+          <div className="cottage-middle-bottom">
+            <div className="coin"></div>
+          </div>
         </div>
-        <div className="cottage-middle">
-          <div className="cottage-middle-left"></div>
-          <div className="cottage-middle-middle"></div>
-          <div className="cottage-middle-right"></div>
-        </div>
-        <div className="cottage-bottom">
-          <div className="cottage-bottom-left"></div>
-          <div className="cottage-bottom-middle"></div>
-          <div className="cottage-bottom-right">
-            <ArrowUpward id="arrow-up" onClick={toggleHouseFive} />
+        <div className="cottage-right">
+          <div className="cottage-right-top"></div>
+          <div className="cottage-right-middle"></div>
+          <div className="cottage-right-bottom">
+            <div className="pod-div">
+              <div className="pod"></div>
+            </div>
+            "
+            <div className="arrow-div">
+              <ArrowUpward id="arrow-up" onClick={toggleHouseFive} />
+            </div>
+            <div className="scroll-div">
+              <div className="inner-scroll-div">
+                <div className="scroll"></div>
+              </div>
+              <div className="inner-scroll-div">
+                <div className="scroll"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -95,4 +108,6 @@ function Cottage(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getCottage, getInventory })(Cottage);
+export default connect(mapStateToProps, { getUser, getCottage, getInventory })(
+  Cottage
+);
