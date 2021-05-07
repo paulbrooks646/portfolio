@@ -14,6 +14,19 @@ function Cottage(props) {
   const [upCharacter, setUpCharacter] = useState(false);
   const [upUp, setUpUp] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [laserRejectionCard, setLaserRejectionCard] = useState(false)
+  const [bramblesRejectionCard, setBramblesRejectionCard] = useState(false)
+  const [podRejectionCard, setPodRejectionCard] = useState(false)
+  const [purseCard, setPurseCard] = useState(false)
+  const [coinCard, setCoinCard] = useState(false)
+  const [podCard, setPodCard] = useState(false)
+  const [levitationCard, setLevitationCard] = useState(false)
+  const [invisibilityCard, setInvisibilityCard] = useState(false)
+  const [laserCard, setLaserCard] = useState(false)
+  const [brambleCard, setBrambleCard] = useState(false)
+  const [doorRejectionCard, setDoorRejectionCard] = useState(false)
+  const [lockRejectionCard, setLockRejectionCard] = useState(false)
+  const [firstTimeCard, setFirstTimeCard] = useState(false)
 
   useEffect(() => {
     // if (!props.user.user.newgame) {
@@ -44,6 +57,26 @@ function Cottage(props) {
   const toggleHouseFive = () => {
     props.history.push("/HouseFive");
   };
+
+  const togglePurse = () => {
+
+  }
+
+  const toggleCoin = () => {
+
+  }
+
+  const togglePod = () => {
+
+  }
+
+  const toggleLevitation = () => {
+
+  }
+
+  const toggleInvisibility = () => {
+
+  }
 
   return isLoading ? (
     <Loading />
