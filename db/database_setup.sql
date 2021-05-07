@@ -55,3 +55,6 @@ values ($1, false, false, false, false, false, false, false, false, false, true)
 
 insert into swamp (user_id, goblin_scared, goblin_gone, items_taken, first_time)
 values ($1, false, false, false, true);
+
+insert into bog (user_id, sulfur_taken, coins_taken, scales_taken, pod_thrown, hydra_exploding, hydra_dead, first_time)
+values ($1, false, false, false, false, false, false, true);

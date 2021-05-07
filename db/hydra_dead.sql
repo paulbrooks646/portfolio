@@ -1,5 +1,5 @@
 update bog
-set first_time = false
+set hydra_dead = true
 where user_id = $1;
 
 select * from bog

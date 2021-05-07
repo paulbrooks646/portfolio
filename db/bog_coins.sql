@@ -1,5 +1,5 @@
 update bog
-set first_time = false
+set coins_taken = true
 where user_id = $1;
 
 select * from bog

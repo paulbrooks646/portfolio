@@ -424,4 +424,33 @@ module.exports = {
     const swamp = await db.goblin_gone(id);
     res.status(200).send(swamp);
   },
+
+  bogCoins: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const bog = await db.bog_coins(id);
+    res.status(200).send(bog);
+  },
+
+  podThrown: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const bog = await db.pod_thrown(id);
+    res.status(200).send(bog);
+  },
+
+  hydraExploding: async (req, res) => {
+    
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const bog = await db.hydra_exploding(id);
+    res.status(200).send(bog);
+  },
+
+  hydraDead: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const bog = await db.hydra_dead(id);
+    res.status(200).send(bog);
+  },
 };

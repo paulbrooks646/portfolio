@@ -20,14 +20,19 @@ function Bog(props) {
   const [rejectionCardTwo, setRejectionCardTwo] = useState(false);
   const [leftCharacter, setLeftCharacter] = useState(false);
   const [leftLeft, setLeftLeft] = useState(false);
+  const [sulfurCard, setSulfurCard] = useState(false)
+  const [coinCard, setCoinCard] = useState(false)
+  const [coinRejectionCard, setCoinRejectionCard] = useState(false)
+  const [scalesCard, setScalesCard] = useState(false)
+  const [hydraCard, setHydraCard] = useState(false)
 
   useEffect(() => {
-    // if (!props.user.user.newgame) {
-    //   setNewgameCard(false);
 
-    // }
-    axios.get("/api/nest").then((res) => {
+    axios.get("/api/bog").then((res) => {
       props.getBog(res.data[0]);
+      if (res.data[0].first_time) {
+        setFirstTime(true)
+      }
       setLeftCharacter(true);
       setIsLoading(false);
     });
@@ -46,13 +51,73 @@ function Bog(props) {
     setLeftLeft(true);
   };
 
-  const toggleRejectionCard = () => {
-    if (!props.bog.bog.weasel_soothed) {
-      setRejectionCardTwo(true);
+  const toggleFirst = () => {
+    axios.post("/api/bogFirst").then(res => {
+      props.getBog(res.data[0])
+      setFirstTime(false)
+    })
+  }
+
+  const toggleSulfur = () => {
+    axios.post("/api/sulfur").then(res => {
+      props.getInventory(res.data)
+      axios.get("/api/bog").then(res => {
+        props.getBog(res.data[0])
+        setSulfurCard(true)
+      })
+    })
+  }
+
+  const toggleHydra = () => {
+    setHydraCard(true)
+  }
+
+  const toggleCoin = () => {
+    if (props.bog.bog.hydra_dead) {
+      axios.post("/api/coin").then(res => {
+        props.getUser(res.data)
+        axios.post("/api/coin").then(res => {
+          props.getUser(res.data)
+          axios.post("/api/coin").then(res => {
+            props.getUser(res.data)
+            axios.post("/api/bogCoins").then(res => {
+              props.getBog(res.data[0])
+              setCoinCard(true)
+            })
+          })
+        })
+      })
     } else {
-      setRejectionCard(true);
+      setCoinRejectionCard(true)
     }
-  };
+  }
+
+  const toggleScales = () => {
+    axios.post("/api/scales").then(res => {
+      props.getInventory(res.data)
+      axios.get("/api/bog").then(res => {
+        props.getBog(res.data[0])
+        setScalesCard(true)
+      })
+    })
+  }
+
+  const togglePodAnimation = () => {
+    
+    axios.post("/api/hydraExploding").then(res => {
+    
+      props.getBog(res.data[0])
+    })
+    
+  }
+
+  const toggleExplosion = () => {
+    axios.post("/api/hydraDead").then(res => {
+      props.getBog(res.data[0])
+    })
+  }
+
+
 
   return isLoading ? (
     <Loading />
@@ -73,6 +138,7 @@ function Bog(props) {
               }`}
             >
               <Character />
+              <div className={`${props.bog.bog.pod_thrown && !props.bog.bog.hydra_exploding ? "pod" : "pod-closed"}`} onAnimationEnd={togglePodAnimation}></div>
             </div>
             <div
               className={`${leftLeft ? "left-left" : "left-left-closed"}`}
@@ -82,11 +148,16 @@ function Bog(props) {
             </div>
           </div>
           <div className="bog-middle-right">
-            <div className="bog-hydra"></div>
+              <div className={`${!props.bog.bog.hydra_dead ? "hydra" : "hydra-closed"}`} onClick={toggleHydra}></div>
+              <div className={`${props.bog.bog.hydra_exploding && !props.bog.bog.hydra_dead ? "explosion" : "explosion-closed"}`} onAnimationEnd={toggleExplosion}></div>
+              <div className={`${props.bog.bog.hydra_dead && !props.bog.bog.scales_taken ? "scales" : "scales-closed"}`} onClick={toggleScales}></div>
+              <div className={`${!props.bog.bog.coins_taken ? "coins" : "coins-closed"}`} onClick={toggleCoin}><div className="coin"></div><div className="coin"></div><div className="coin"></div></div>
+
+              
           </div>
         </div>
         <div className="bog-bottom">
-          <div className="bog-bottom-left"></div>
+            <div className="bog-bottom-left"><div className={`${!props.bog.bog.sulfur_taken ? "sulfur" : "sulfur-closed"}`} onClick={toggleSulfur}></div></div>
           <div className="bog-bottom-middle"></div>
           <div className="bog-bottom-right"></div>
         </div>
@@ -140,11 +211,7 @@ function Bog(props) {
           darts at you. You back away. You'll have to figure out how to get past
           the weasel if you want to go any further.
         </Typography>
-        <Button
-          onClick={() => setFirstTime(false)}
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleFirst} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
