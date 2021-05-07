@@ -14,6 +14,14 @@ import { getPass } from "../../redux/passReducer";
 import { getCabin } from "../../redux/cabinReducer";
 import { getForest } from "../../redux/forestReducer";
 import { getDragon } from "../../redux/dragonReducer";
+import { getSwamp } from "../../redux/swampReducer"
+import { getCottage } from "../../redux/cottageReducer"
+import { getBog } from "../../redux/bogReducer"
+import { getHouseOne } from "../../redux/houseOneReducer"
+import { getHouseTwo } from "../../redux/houseTwoReducer"
+import { getHouseThree } from "../../redux/houseThreeReducer"
+import { getHouseFour } from "../../redux/houseFourReducer"
+import {getHouseFive} from "../../redux/houseFiveReducer"
 import axios from "axios";
 import "./Nav.scss";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
@@ -44,6 +52,7 @@ function Nav(props) {
   const [cloakCard, setCloakCard] = useState(false)
   const [speedCard, setSpeedCard] = useState(false)
   const [axeCard, setAxeCard] = useState(false)
+  const [swordCard, setSwordCard] = useState(false)
 
   useEffect(() => {
     axios.get("/api/getUser").then((res) => {
@@ -166,13 +175,7 @@ function Nav(props) {
         setRejectionCard(true);
       }
     }
-    if (item === "sword") {
-      if (props.location.pathname === "/Swamp") {
-        alert("blah blah blah");
-      } else {
-        setRejectionCard(true);
-      }
-    }
+    
     if (item === "shield") {
       if (props.location.pathname === "/Valley") {
         alert("blah blah blah");
@@ -404,6 +407,20 @@ function Nav(props) {
         setRejectionCard(true);
       }
     }
+
+     if (item === "sword") {
+       if (props.location.pathname === "/Swamp") {
+         axios.post("/api/useSword").then((res) => {
+           props.getInventory(res.data);
+           axios.get("/api/swamp").then((res) => {
+             props.getSwamp(res.data[0]);
+             setSwordCard(true);
+           });
+         });
+       } else {
+         setRejectionCard(true);
+       }
+     }
   };
 
   return (
@@ -737,8 +754,7 @@ function Nav(props) {
           color="primary"
           className="answer-card-description"
         >
-          You put on your cloak. The heat in the area no longer bothers
-          you.
+          You put on your cloak. The heat in the area no longer bothers you.
         </Typography>
         <Button
           onClick={() => setCloakCard(false)}
@@ -780,6 +796,22 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
+      <Card id={`${swordCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          You charge, screaming and brandishing your sword. Seeing this, the goblin quickly flees. Luckily, it is after he is gone that your sword slips and sinks into the swamp.
+        </Typography>
+        <Button
+          onClick={() => setSwordCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
@@ -802,6 +834,13 @@ export default withRouter(
     getCabin,
     getForest,
     getDragon,
-
+    getSwamp,
+    getCottage,
+    getBog,
+    getHouseOne,
+    getHouseTwo,
+    getHouseThree,
+    getHouseFour,
+    getHouseFive
   })(Nav)
 );

@@ -48,8 +48,15 @@ app.get("/api/dragon", reduxController.getDragon)
 app.get("/api/mountain", reduxController.getMountain)
 app.get("/api/dashboard", reduxController.getDashboard)
 app.get("/api/cabin", reduxController.getCabin);
-app.get("/api/forest", reduxController.getForest)
-
+app.get("/api/forest", reduxController.getForest);
+app.get("/api/swamp", reduxController.getSwamp)
+app.get("/api/bog", reduxController.getBog)
+app.get("/api/cottage", reduxController.getCottage)
+app.get("/api/houseOne", reduxController.getHouseOne)
+app.get("/api/houseTwo", reduxController.getHouseTwo)
+app.get("/api/houseThree", reduxController.getHouseThree)
+app.get("/api/houseFour", reduxController.getHouseFour)
+app.get("/api/houseFive", reduxController.getHouseFive)
 app.post("/api/towerFirst", firstController.towerFirst)
 app.post("/api/caveFirst", firstController.caveFirst)
 app.post("/api/nestFirst", firstController.nestFirst);
@@ -59,7 +66,15 @@ app.post("/api/forestFirst", firstController.forestFirst);
 app.post("/api/mountainFirst", firstController.mountainFirst);
 app.post("/api/dashboardFirst", firstController.dashboardFirst)
   ;
-  app.post("/api/dragonFirst", firstController.dragonFirst)
+app.post("/api/dragonFirst", firstController.dragonFirst);
+app.post("/api/swampFirst", firstController.swampFirst)
+app.post("/api/cottageFirst", firstController.cottageFirst)
+app.post("/api/bogFirst", firstController.bogFirst)
+app.post("/api/houseOneFirst", firstController.houseOneFirst)
+app.post("/api/houseTwoFirst", firstController.houseTwoFirst)
+app.post("/api/houseThreeFirst", firstController.houseThreeFirst)
+app.post("/api/houseFourFirst", firstController.houseFourFirst)
+app.post("/api/houseFiveFirst", firstController.houseFiveFirst)
 
 app.post("/api/manure", inventoryController.manure);
 app.post("/api/flowers", inventoryController.flowers);
@@ -134,6 +149,9 @@ app.post("/api/useArmor", controller.useArmor)
 app.post("/api/useCloak", controller.useCloak)
 app.post("/api/useSpeed", controller.useSpeed)
 app.post("/api/useAxe", controller.useAxe)
+app.post("/api/getItems", controller.getItems)
+app.post("/api/goblinGone", controller.goblinGone)
+app.post("/api/useSword", controller.useSword)
 
 
 app.use(express.static(__dirname + "/../build"));

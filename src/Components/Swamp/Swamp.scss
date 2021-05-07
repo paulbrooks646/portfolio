@@ -7,6 +7,19 @@
   .swamp-top {
     @include row(35vh);
     background-image: url("../../Images/Swamp.png");
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    .log {
+      background-image: url("../../Images/Log.jpg");
+      background-size: 100% 100%;
+      width: 25%;
+      height: 20%;
+      z-index: 1;
+      cursor: pointer;
+    }
+
   }
 
   .swamp-middle {
@@ -27,7 +40,7 @@
     .swamp-middle-middle {
       @include section(20vw);
 
-      .goblin-open {
+      .goblin {
         background-image: url("../../Images/goblin.gif");
         width: 200px;
         height: 200px;
@@ -37,9 +50,34 @@
         position: relative;
         z-index: 1;
         bottom: 20px;
+        left: 0px;
+        cursor: pointer;
       }
 
       .goblin-closed {
+        display: none;
+      }
+
+      .goblin-moving {
+        background-image: url("../../Images/goblin.gif");
+        width: 200px;
+        height: 200px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        transform: scaleX(-1);
+        position: relative;
+        z-index: 1;
+        bottom: 20px;
+        left: 0px;
+        animation-name: goblin;
+        animation-iteration-count: 1;
+        animation-direction: normal;
+        animation-fill-mode: forwards;
+        animation-duration: 2s;
+        animation-timing-function: linear;
+      }
+
+      .goblin-moving-closed {
         display: none;
       }
     }
@@ -60,5 +98,15 @@
   .swamp-bottom {
     @include row(35vh);
     background-image: url("../../Images/Swamp.png");
+  }
+}
+
+@keyframes goblin {
+  0% {
+    left: 0px;
+  }
+
+  100% {
+    left: 50vw;
   }
 }

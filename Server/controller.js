@@ -64,6 +64,23 @@ module.exports = {
     });
   },
 
+  useSword: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_sword(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
   useArmor: (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -102,17 +119,17 @@ module.exports = {
     const db = req.app.get("db");
     const { id } = req.session.user;
 
-   db.use_speed(id).then((inventory) => {
-     let newArr = [];
+    db.use_speed(id).then((inventory) => {
+      let newArr = [];
 
-     for (let key in inventory[0]) {
-       if (inventory[0][key] === true) {
-         newArr.push(key);
-       }
-     }
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
 
-     res.status(200).send(newArr);
-   });
+      res.status(200).send(newArr);
+    });
   },
 
   useAxe: (req, res) => {
@@ -284,6 +301,23 @@ module.exports = {
     });
   },
 
+  getItems: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.get_items(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
   showLetter: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -382,5 +416,12 @@ module.exports = {
     const { id } = req.session.user;
     const cabin = await db.give_wood(id);
     res.status(200).send(cabin);
+  },
+
+  goblinGone: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const swamp = await db.goblin_gone(id);
+    res.status(200).send(swamp);
   },
 };

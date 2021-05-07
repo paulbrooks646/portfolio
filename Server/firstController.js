@@ -70,4 +70,68 @@ module.exports = {
     const mountain = await db.mountain_first(id);
     res.status(200).send(mountain);
   },
+
+  swampFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const swamp = await db.swamp_first(id);
+    res.status(200).send(swamp);
+  },
+
+  bogFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const bog = await db.bog_first(id);
+    res.status(200).send(bog);
+  },
+
+  cottageFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const cottage = await db.cottage_first(id);
+    res.status(200).send(cottage);
+  },
+
+  houseOneFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const houseOne = await db.house_one_first(id);
+    res.status(200).send(houseOne);
+  },
+
+  houseTwoFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const houseTwo = await db.house_two_first(id);
+    res.status(200).send(houseTwo);
+  },
+
+  houseThreeFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const houseThree = await db.house_three_first(id);
+    res.status(200).send(houseThree);
+  },
+
+  houseFourFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const houseFour = await db.house_four_first(id);
+    res.status(200).send(houseFour);
+  },
+
+  houseFiveFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const houseFive = await db.house_five_first(id);
+    res.status(200).send(houseFive);
+  }
 };

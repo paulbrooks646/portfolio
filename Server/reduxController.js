@@ -165,4 +165,76 @@ module.exports = {
 
     res.status(200).send(forest);
   },
+
+  getCottage: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const cottage = await db.get_cottage(id);
+
+    res.status(200).send(cottage);
+  },
+
+  getSwamp: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const swamp = await db.get_swamp(id);
+
+    res.status(200).send(swamp);
+  },
+
+  getBog: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const bog = await db.get_bog(id);
+
+    res.status(200).send(bog);
+  },
+
+  getHouseOne: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const houseOne = await db.get_house_one(id);
+
+    res.status(200).send(houseOne);
+  },
+
+  getHouseTwo: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const houseTwo = await db.get_house_two(id);
+
+    res.status(200).send(houseTwo);
+  },
+
+  getHouseThree: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const houseThree = await db.get_house_three(id);
+
+    res.status(200).send(houseThree);
+  },
+
+  getHouseFour: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const houseFour = await db.get_house_four(id);
+
+    res.status(200).send(houseFour);
+  },
+
+  getHouseFive: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const houseFive = await db.get_house_five(id);
+
+    res.status(200).send(houseFive);
+  },
 };
