@@ -435,8 +435,17 @@ module.exports = {
   podThrown: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
-    const bog = await db.pod_thrown(id);
-    res.status(200).send(bog);
+    const bog = await db.pod_thrown(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
   },
 
   hydraExploding: async (req, res) => {
