@@ -420,6 +420,20 @@ function Nav(props) {
        } else {
          setRejectionCard(true);
        }
+    }
+    
+     if (item === "pod") {
+       if (props.location.pathname === "/Bog") {
+         axios.post("/api/podThrown").then((res) => {
+           props.getInventory(res.data);
+           axios.get("/api/bog").then((res) => {
+             props.getBog(res.data[0]);
+             setBogCard(true);
+           });
+         });
+       } else {
+         setRejectionCard(true);
+       }
      }
   };
 
