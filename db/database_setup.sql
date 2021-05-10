@@ -58,3 +58,6 @@ values ($1, false, false, false, true);
 
 insert into bog (user_id, sulfur_taken, coins_taken, scales_taken, pod_thrown, hydra_exploding, hydra_dead, first_time)
 values ($1, false, false, false, false, false, false, true);
+
+insert into town (user_id, oil_used, lock_one, lock_two, lock_three, lock_four, first_time)
+values ($1, false, false, false, false, false, true);

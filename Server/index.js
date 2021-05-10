@@ -56,6 +56,8 @@ app.get("/api/houseTwo", reduxController.getHouseTwo);
 app.get("/api/houseThree", reduxController.getHouseThree);
 app.get("/api/houseFour", reduxController.getHouseFour);
 app.get("/api/houseFive", reduxController.getHouseFive);
+app.get("/api/town", reduxController.getTown)
+
 app.post("/api/towerFirst", firstController.towerFirst);
 app.post("/api/caveFirst", firstController.caveFirst);
 app.post("/api/nestFirst", firstController.nestFirst);
@@ -73,6 +75,7 @@ app.post("/api/houseTwoFirst", firstController.houseTwoFirst);
 app.post("/api/houseThreeFirst", firstController.houseThreeFirst);
 app.post("/api/houseFourFirst", firstController.houseFourFirst);
 app.post("/api/houseFiveFirst", firstController.houseFiveFirst);
+app.post("/api/townFirst", firstController.townFirst)
 
 app.post("/api/manure", inventoryController.manure);
 app.post("/api/flowers", inventoryController.flowers);
@@ -165,6 +168,11 @@ app.post("/api/hydraExploding", controller.hydraExploding);
 app.post("/api/hydraDead", controller.hydraDead);
 app.post("/api/purseTaken", controller.purseTaken);
 app.post("/api/houseFiveLock", controller.houseFiveLock)
+app.post("/api/houseOneLock", controller.houseOneLock)
+app.post("/api/houseTwoLock", controller.houseTwoLock)
+app.post("/api/houseThreeLock", controller.houseThreeLock)
+app.post("/api/houseFourLock", controller.houseFourLock)
+app.post("/api/useOil", controller.useOil)
 
 app.use(express.static(__dirname + "/../build"));
 

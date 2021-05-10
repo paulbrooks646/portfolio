@@ -183,6 +183,23 @@ module.exports = {
     });
   },
 
+  useOil: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_oil(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
   useOpen: (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -532,5 +549,33 @@ module.exports = {
     const { id } = req.session.user;
     const bog = await db.hydra_dead(id);
     res.status(200).send(bog);
+  },
+
+  houseOneLock: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const town = await db.lock_one(id);
+    res.status(200).send(town);
+  },
+
+  houseTwoLock: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const town = await db.lock_two(id);
+    res.status(200).send(town);
+  },
+
+  houseThreeLock: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const town = await db.lock_three(id);
+    res.status(200).send(town);
+  },
+
+  houseFourLock: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const town = await db.lock_four(id);
+    res.status(200).send(town);
   },
 };

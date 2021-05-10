@@ -237,4 +237,13 @@ module.exports = {
 
     res.status(200).send(houseFive);
   },
+
+  getTown: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const town = await db.get_town(id);
+
+    res.status(200).send(town);
+  },
 };

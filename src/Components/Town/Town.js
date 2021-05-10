@@ -48,13 +48,16 @@ function Town(props) {
   const [leftRight, setLeftRight] = useState(false);
   const [leftDown, setLeftDown] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [firstTimeCard, setFirstTimeCard] = useState(false)
+  const [PickRejectionCard, setPickRejectionCard] = useState(false)
+  const [unlockCard, setUnlockCard] = useState(false)
+  const [oilRejectionCard, setOilRejectionCard] = useState(false)
 
   useEffect(() => {
-    // if (!props.user.user.newgame) {
-    //   setNewgameCard(false);
-
-    // }
-    axios.get("/api/nest").then((res) => {
+    axios.get("/api/town").then((res) => {
+      if (res.data[0].first_time) {
+        setFirstTimeCard(true)
+      }
       props.getTown(res.data[0]);
 
       if (props.user.user.last === "home") {
@@ -132,19 +135,60 @@ function Town(props) {
   };
 
   const toggleHouseOne = () => {
-    props.history.push("/HouseOne");
+    if (!props.inventory.inventory.pick) {
+      setPickRejectionCard(true)
+    } else if (!props.town.town.lock_one) {
+      axios.post("/api/houseOneLock").then(res => {
+        props.getTown(res.data[0])
+        setUnlockCard(true)
+      })
+    }
+      else {
+props.history.push("/HouseOne");
+      }
+    
+    
   };
 
   const toggleHouseTwo = () => {
-    props.history.push("/HouseTwo");
+    if (!props.inventory.inventory.pick) {
+      setPickRejectionCard(true);
+    } else if (!props.town.town.oil_used) {
+      setOilRejectionCard(true)
+    }else if (!props.town.town.lock_two) {
+       axios.post("/api/houseTwoLock").then((res) => {
+         props.getTown(res.data[0]);
+         setUnlockCard(true);
+       });
+    } else {
+      props.history.push("/HouseTwo");
+    }
   };
 
   const toggleHouseThree = () => {
-    props.history.push("/HouseThree");
+    if (!props.inventory.inventory.pick) {
+      setPickRejectionCard(true);
+    } else if (!props.town.town.lock_three) {
+       axios.post("/api/houseThreeLock").then((res) => {
+         props.getTown(res.data[0]);
+         setUnlockCard(true);
+       });
+    } else {
+      props.history.push("/HouseThree");
+    }
   };
 
   const toggleHouseFour = () => {
-    props.history.push("/HouseFour");
+   if (!props.inventory.inventory.pick) {
+     setPickRejectionCard(true);
+   } else if (!props.town.town.lock_four) {
+     axios.post("/api/houseOneLock").then((res) => {
+       props.getTown(res.data[0]);
+       setUnlockCard(true);
+     });
+   } else {
+     props.history.push("/HouseFour");
+   }
   };
 
   const toggleGoLeft = () => {
@@ -492,6 +536,71 @@ function Town(props) {
           constantly. He considers himself above us townspeople.
         </Typography>
         <Button onClick={toggleAnswerFive} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${oilRejectionCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography variant="h4" color="primary">
+          The Guard
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          The lock is far too rusty to unlock.
+        </Typography>
+        <Button
+          onClick={() => setOilRejectionCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${
+          PickRejectionCard ? "answer-card" : "answer-card-closed"
+        }`}
+      >
+        <Typography variant="h4" color="primary">
+          The Guard
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          The door is locked.
+        </Typography>
+        <Button
+          onClick={() => setPickRejectionCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${unlockCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography variant="h4" color="primary">
+          The Guard
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          The lock clicks open.
+        </Typography>
+        <Button
+          onClick={() => setUnlockCard(false)}
+          variant="contained"
+          color="primary"
+        >
           CLOSE
         </Button>
       </Card>

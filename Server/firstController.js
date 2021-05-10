@@ -47,6 +47,14 @@ module.exports = {
     res.status(200).send(pass);
   },
 
+  townFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const town = await db.town_first(id);
+    res.status(200).send(town);
+  },
+
   dashboardFirst: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -133,5 +141,5 @@ module.exports = {
 
     const houseFive = await db.house_five_first(id);
     res.status(200).send(houseFive);
-  }
+  },
 };
