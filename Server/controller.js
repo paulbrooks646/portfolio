@@ -432,6 +432,20 @@ module.exports = {
     res.status(200).send(bog);
   },
 
+  purseTaken: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const cottage = await db.purse_taken(id);
+    res.status(200).send(cottage);
+  },
+
+  cottageCoin: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const cottage = await db.cottage_coin(id);
+    res.status(200).send(cottage);
+  },
+
   podThrown: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -449,7 +463,6 @@ module.exports = {
   },
 
   hydraExploding: async (req, res) => {
-    
     const db = req.app.get("db");
     const { id } = req.session.user;
     const bog = await db.hydra_exploding(id);

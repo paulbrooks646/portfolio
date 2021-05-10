@@ -50,6 +50,57 @@ module.exports = {
     });
   },
 
+  pod: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.pod(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  levitation: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.levitation(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  invisibility: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.invisibility(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
   toy: (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;

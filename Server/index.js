@@ -116,6 +116,9 @@ app.post("/api/charcoal", inventoryController.charcoal)
 app.post("/api/grow", inventoryController.grow)
 app.post("/api/sulfur", inventoryController.sulfur)
 app.post("/api/scales", inventoryController.scales)
+app.post("/api/pod", inventoryController.pod)
+app.post("/api/levitation", inventoryController.levitation)
+app.post("/api/invisibility", inventoryController.invisibility)
 
 app.post("/api/manureCleanPermission", controller.manureCleanPermission);
 app.post("/api/caveCoin", controller.caveCoin);
@@ -141,6 +144,7 @@ app.post("/api/mountainCoin", controller.mountainCoin)
 app.post("/api/passCoin", controller.passCoin);
 app.post("/api/forestCoin", controller.forestCoin)
 app.post("/api/dragonCoin", controller.dragonCoin)
+app.post("/api/cottageCoin", controller.cottageCoin)
 app.post("/api/ogreMoved", controller.ogreMoved)
 app.post("/api/givePotatoes", controller.givePotatoes)
 app.post("/api/giveWood", controller.giveWood)
@@ -158,6 +162,7 @@ app.post("/api/bogCoins", controller.bogCoins)
 app.post("/api/podThrown", controller.podThrown)
 app.post("/api/hydraExploding", controller.hydraExploding)
 app.post("/api/hydraDead", controller.hydraDead)
+app.post("/api/purseTaken", controller.purseTaken)
 
 
 app.use(express.static(__dirname + "/../build"));
