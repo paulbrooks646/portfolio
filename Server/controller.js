@@ -149,6 +149,57 @@ module.exports = {
     });
   },
 
+  useProtection: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_protection(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  useFire: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_fire(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  useOpen: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_open(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
   manureHasCleaned: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -467,6 +518,13 @@ module.exports = {
     const { id } = req.session.user;
     const bog = await db.hydra_exploding(id);
     res.status(200).send(bog);
+  },
+
+  houseFiveLock: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const cottage = await db.lock_five(id);
+    res.status(200).send(cottage);
   },
 
   hydraDead: async (req, res) => {

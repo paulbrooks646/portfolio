@@ -54,6 +54,10 @@ function Nav(props) {
   const [axeCard, setAxeCard] = useState(false);
   const [swordCard, setSwordCard] = useState(false);
   const [podCard, setPodCard] = useState(false);
+  const [protectionCard, setProtectionCard] = useState(false);
+  const [fireCard, setFireCard] = useState(false)
+  const [openCard, setOpenCard] = useState(false)
+  const [pickCard, setPickCard] = useState(false)
 
   useEffect(() => {
     axios.get("/api/getUser").then((res) => {
@@ -430,6 +434,54 @@ function Nav(props) {
         setRejectionCard(true);
       }
     }
+
+    if (item === "protection") {
+      if (props.location.pathname === "/Cottage") {
+        axios.post("/api/useProtection").then((res) => {
+          props.getInventory(res.data);
+          axios.get("/api/cottage").then((res) => {
+            props.getCottage(res.data[0]);
+            setProtectionCard(true);
+          });
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+
+    if (item === "fire") {
+       if (props.location.pathname === "/Cottage" && props.cottage.cottage.pod_taken) {
+         axios.post("/api/useFire").then((res) => {
+           props.getInventory(res.data);
+           axios.get("/api/cottage").then((res) => {
+             props.getCottage(res.data[0]);
+             setFireCard(true);
+           });
+         });
+       } else {
+         setRejectionCard(true);
+       }
+     }
+
+    if (item === "open") {
+      if (
+        props.location.pathname === "/Cottage" && props.cottage.cottage.door_unlocked
+      ) {
+        axios.post("/api/useOpen").then((res) => {
+          props.getInventory(res.data);
+          axios.get("/api/cottage").then((res) => {
+            props.getCottage(res.data[0]);
+            setOpenCard(true);
+          });
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+
+    if (item === "pick") {
+      setPickCard(true)
+    }
   };
 
   const togglePod = () => {
@@ -469,7 +521,7 @@ function Nav(props) {
           color="secondary"
           className="answer-card-description"
         >
-          That item is not useful here.
+          That item is either not useful here or not useful here yet.
         </Typography>
         <Button
           onClick={() => setRejectionCard(false)}
@@ -839,10 +891,75 @@ function Nav(props) {
           color="primary"
           className="answer-card-description"
         >
-         Hoping that the hydra is covered in sulfur, you stand back and hurl the pod at it.
+          Hoping that the hydra is covered in sulfur, you stand back and hurl
+          the pod at it.
+        </Typography>
+        <Button onClick={togglePod} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card id={`${protectionCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          As you read the protection scroll, you glow blue. Nervously, you step
+          into the laser field. The lasers sizzle into nothingness as they hit
+          you until they are all gone. You stop glowing.
         </Typography>
         <Button
-          onClick={togglePod}
+          onClick={() => setProtectionCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card id={`${fireCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          As you read the fire scroll, the wall of brambles bursts into flames.
+          After a few glorious minutes, the wall is nothing but ash.
+        </Typography>
+        <Button
+          onClick={() => setFireCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card id={`${openCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          Now that the door is unlocked, you read the open scroll. The door pops
+          open. For better or worse, you can now enter the cottage.
+        </Typography>
+        <Button
+          onClick={() => setOpenCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card id={`${pickCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          You will automatically try to use your lock pick if you click on a locked door.
+        </Typography>
+        <Button
+          onClick={() => setPickCard(false)}
           variant="contained"
           color="primary"
         >

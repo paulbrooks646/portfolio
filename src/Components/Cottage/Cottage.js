@@ -30,6 +30,7 @@ function Cottage(props) {
   const [doorRejectionCard, setDoorRejectionCard] = useState(false);
   const [lockRejectionCard, setLockRejectionCard] = useState(false);
   const [firstTimeCard, setFirstTimeCard] = useState(false);
+  const [lockCard, setLockCard] = useState(false)
 
   useEffect(() => {
     axios.get("/api/cottage").then((res) => {
@@ -64,7 +65,14 @@ function Cottage(props) {
     } else if (!props.cottage.cottage.fire_used) {
       setBramblesRejectionCard(true);
     } else if (!props.cottage.cottage.door_unlocked) {
-      setLockRejectionCard(true);
+      if (props.cottage.cottage.master_thief) {
+        axios.post("/api/houseFiveLock").then(res => {
+          props.getCottage(res.data[0])
+          setLockCard(true)
+        })
+      } else {
+        setLockRejectionCard(true);
+      }
     } else if (!props.cottage.cottage.open_used) {
       setDoorRejectionCard(true);
     } else {
@@ -518,7 +526,8 @@ function Cottage(props) {
           color="secondary"
           className="answer-card-description"
         >
-          You try to open the door but it is locked.
+          You try to pick the lock but you are not yet skilled enough to pick
+          this lock.
         </Typography>
         <Button
           onClick={() => setLockRejectionCard(false)}
@@ -541,6 +550,20 @@ function Cottage(props) {
           as possible.
         </Typography>
         <Button onClick={toggleFirstTime} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${lockCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Success! The lock clicks open.
+        </Typography>
+        <Button onClick={() => setLockCard(false)} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
