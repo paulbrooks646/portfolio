@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getCastle } from "../../redux/castleReducer";
 import axios from "axios";
 import "./Castle.scss";
 import Card from "@material-ui/core/Card";
@@ -52,6 +51,9 @@ function Castle(props) {
   const [notAChance, setNotAChance] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [rejectionCard, setRejectionCard] = useState(false);
+  const [castleData, setCastleData] = useState()
+  const [inventoryOpen, setInentoryOpen] = useState(false);
+
 
   useEffect(() => {
     // if (!props.user.user.newgame) {
@@ -59,7 +61,7 @@ function Castle(props) {
 
     // }
     axios.get("/api/castle").then((res) => {
-      props.getCastle(res.data[0]);
+      setCastleData(res.data[0]);
 
       if (props.user.user.last === "town") {
         setDownCharacter(true);
@@ -73,12 +75,43 @@ function Castle(props) {
       setIsLoading(false);
     });
   }, []);
+  
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+  
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+   };
+
+   const inventoryList = props.inventory.inventory.map((e, index) => {
+     return (
+       <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+         {e}
+       </h4>
+     );
+   });
+
+   const toggleItem = (item) => {
+     if (item === "flute") {
+       if (props.location.pathname === "/Tower") {
+         axios.post("/api/useFlute").then((res) => {
+           props.getTower(res.data[0]);
+           setFluteCard(true);
+         });
+       } else {
+         setRejectionCard(true);
+       }
+     }
+   };
+
 
   const toggleUp = () => {
     if (
-      props.castle.castle.nuts_given === true &&
-      props.castle.castle.hat_given === true &&
-      props.castle.castle.letter_given === true
+      castleData.nuts_given === true &&
+      castleData.hat_given === true &&
+      castleData.letter_given === true
     ) {
       axios.post("/api/changeLast", { last: "castle" }).then((res) => {
         props.getUser(res.data).then(() => {
@@ -113,7 +146,7 @@ function Castle(props) {
   };
 
   const toggleGuard = () => {
-    if (props.castle.castle.nuts_given === true) {
+    if (castleData.nuts_given === true) {
       setGuard(!guard);
     } else {
       setRejectionCard(true);
@@ -612,4 +645,4 @@ function Castle(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getCastle })(Castle);
+export default connect(mapStateToProps, { getUser})(Castle);

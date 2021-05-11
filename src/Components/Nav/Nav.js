@@ -3,25 +3,6 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser, getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
-import { getCave } from "../../redux/caveReducer";
-import { getDashboard } from "../../redux/dashboardReducer";
-import { getCastle } from "../../redux/castleReducer";
-import { getStables } from "../../redux/stablesReducer";
-import { getGarden } from "../../redux/gardenReducer";
-import { getTower } from "../../redux/towerReducer";
-import { getNest } from "../../redux/nestReducer";
-import { getPass } from "../../redux/passReducer";
-import { getCabin } from "../../redux/cabinReducer";
-import { getForest } from "../../redux/forestReducer";
-import { getDragon } from "../../redux/dragonReducer";
-import { getSwamp } from "../../redux/swampReducer";
-import { getCottage } from "../../redux/cottageReducer";
-import { getBog } from "../../redux/bogReducer";
-import { getHouseOne } from "../../redux/houseOneReducer";
-import { getHouseTwo } from "../../redux/houseTwoReducer";
-import { getHouseThree } from "../../redux/houseThreeReducer";
-import { getHouseFour } from "../../redux/houseFourReducer";
-import { getHouseFive } from "../../redux/houseFiveReducer";
 import axios from "axios";
 import "./Nav.scss";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
@@ -58,12 +39,15 @@ function Nav(props) {
   const [fireCard, setFireCard] = useState(false)
   const [openCard, setOpenCard] = useState(false)
   const [pickCard, setPickCard] = useState(false)
+  const [inventoryOpen, setInentoryOpen] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/getUser").then((res) => {
       getUser(res.data);
     });
   }, []);
+
 
   const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
 
@@ -977,24 +961,5 @@ export default withRouter(
     logoutUser,
     getUser,
     getInventory,
-    getCastle,
-    getStables,
-    getGarden,
-    getTower,
-    getCave,
-    getNest,
-    getPass,
-    getDashboard,
-    getCabin,
-    getForest,
-    getDragon,
-    getSwamp,
-    getCottage,
-    getBog,
-    getHouseOne,
-    getHouseTwo,
-    getHouseThree,
-    getHouseFour,
-    getHouseFive,
   })(Nav)
 );

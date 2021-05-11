@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getCastle } from "../../redux/castleReducer"
 import {getInventory} from "../../redux/inventoryReducer"
 import axios from "axios";
 import "./Throne.scss";
@@ -85,4 +84,4 @@ function Throne(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory, getCastle })(Throne);
+export default connect(mapStateToProps, { getUser, getInventory })(Throne);

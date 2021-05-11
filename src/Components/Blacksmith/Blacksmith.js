@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getBlacksmith } from "../../redux/blacksmithReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Blacksmith.scss";
@@ -24,12 +23,46 @@ function Blacksmith(props) {
   const [poorCard, setPoorCard] = useState(false);
   const [boughtCard, setBoughtCard] = useState(false);
   const [thanksCard, setThanksCard] = useState(false);
+   const [inventoryOpen, setInentoryOpen] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false);
+  const [blacksmithData, setBlacksmithData] = useState();
+   
+   useEffect(() => {
+     axios.get("/api/blacksmith").then((res) => {
+       setBlacksmithData(res.data[0]);
+     });
+   }, []);
+  
+   const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
 
-  useEffect(() => {
-    axios.get("/api/blacksmith").then((res) => {
-      props.getBlacksmith(res.data[0]);
-    });
-  }, []);
+   const logout = () => {
+     axios.delete("/api/logout").then(() => {
+       props.logoutUser();
+       props.history.push("/Auth");
+     });
+   };
+
+   const inventoryList = props.inventory.inventory.map((e, index) => {
+     return (
+       <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+         {e}
+       </h4>
+     );
+   });
+
+   const toggleItem = (item) => {
+     if (item === "flute") {
+       if (props.location.pathname === "/Tower") {
+         axios.post("/api/useFlute").then((res) => {
+           setBlacksmithData(res.data[0]);
+           setFluteCard(true);
+         });
+       } else {
+         setRejectionCard(true);
+       }
+     }
+   };
+
 
   const toggleExit = () => {
     setExit(!exit);
@@ -67,7 +100,7 @@ function Blacksmith(props) {
   };
 
   const toggleBuyArmor = () => {
-    if (props.blacksmith.blacksmith.armor_bought) {
+    if (blacksmithData.armor_bought) {
       setArmorCard(!armorCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -79,7 +112,7 @@ function Blacksmith(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/blacksmith").then((res) => {
-            props.getBlacksmith(res.data[0]);
+            setBlacksmithData(res.data[0]);
             setArmorCard(!armorCard);
             toggleThanksCard();
           });
@@ -89,7 +122,7 @@ function Blacksmith(props) {
   };
 
   const toggleBuyBow = () => {
-    if (props.blacksmith.blacksmith.bow_bought) {
+    if (blacksmithData.bow_bought) {
       setBowCard(!bowCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -101,7 +134,7 @@ function Blacksmith(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/blacksmith").then((res) => {
-            props.getBlacksmith(res.data[0]);
+            setBlacksmithData(res.data[0]);
             setBowCard(!bowCard);
             toggleThanksCard();
           });
@@ -111,7 +144,7 @@ function Blacksmith(props) {
   };
 
   const toggleBuyDagger = () => {
-    if (props.blacksmith.blacksmith.dagger_bought) {
+    if (blacksmithData.dagger_bought) {
       setDaggerCard(!daggerCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -123,7 +156,7 @@ function Blacksmith(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/blacksmith").then((res) => {
-            props.getBlacksmith(res.data[0]);
+            setBlacksmithData(res.data[0]);
             setDaggerCard(!daggerCard);
             toggleThanksCard();
           });
@@ -133,7 +166,7 @@ function Blacksmith(props) {
   };
 
   const toggleBuyKnife = () => {
-    if (props.blacksmith.blacksmith.knife_bought) {
+    if (blacksmithData.knife_bought) {
       setKnifeCard(!knifeCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -145,7 +178,7 @@ function Blacksmith(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/blacksmith").then((res) => {
-            props.getBlacksmith(res.data[0]);
+            setBlacksmithData(res.data[0]);
             setKnifeCard(!knifeCard);
             toggleThanksCard();
           });
@@ -155,7 +188,7 @@ function Blacksmith(props) {
   };
 
   const toggleBuyShield = () => {
-    if (props.blacksmith.blacksmith.shield_bought) {
+    if (blacksmithData.shield_bought) {
       setShieldCard(!shieldCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -167,7 +200,7 @@ function Blacksmith(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/blacksmith").then((res) => {
-            props.getBlacksmith(res.data[0]);
+            setBlacksmithData(res.data[0]);
             setShieldCard(!shieldCard);
             toggleThanksCard();
           });
@@ -177,7 +210,7 @@ function Blacksmith(props) {
   };
 
   const toggleBuySword = () => {
-    if (props.blacksmith.blacksmith.sword_bought) {
+    if (blacksmithData.sword_bought) {
       setSwordCard(!swordCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -189,7 +222,7 @@ function Blacksmith(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/blacksmith").then((res) => {
-            props.getBlacksmith(res.data[0]);
+            setBlacksmithData(res.data[0]);
             setSwordCard(!swordCard);
             toggleThanksCard();
           });

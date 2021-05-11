@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
+import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
-import { getTown } from "../../redux/townReducer";
 import "./Town.scss";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
@@ -21,6 +21,7 @@ import axios from "axios";
 import Loading from "../Loading/Loading";
 
 function Town(props) {
+  const [inventoryOpen, setInentoryOpen] = useState(false);
   const [oldmanCard, setOldmanCard] = useState(false);
   const [answerOne, setAnswerOne] = useState(false);
   const [answerTwo, setAnswerTwo] = useState(false);
@@ -48,17 +49,20 @@ function Town(props) {
   const [leftRight, setLeftRight] = useState(false);
   const [leftDown, setLeftDown] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [firstTimeCard, setFirstTimeCard] = useState(false)
-  const [PickRejectionCard, setPickRejectionCard] = useState(false)
-  const [unlockCard, setUnlockCard] = useState(false)
-  const [oilRejectionCard, setOilRejectionCard] = useState(false)
+  const [firstTimeCard, setFirstTimeCard] = useState(false);
+  const [PickRejectionCard, setPickRejectionCard] = useState(false);
+  const [unlockCard, setUnlockCard] = useState(false);
+  const [oilRejectionCard, setOilRejectionCard] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false)
+  const [oilCard, setOilCard] = useState(false)
+  const [townData, setTownData] = useState(false)
 
   useEffect(() => {
     axios.get("/api/town").then((res) => {
       if (res.data[0].first_time) {
-        setFirstTimeCard(true)
+        setFirstTimeCard(true);
       }
-      props.getTown(res.data[0]);
+      setTownData(res.data[0]);
 
       if (props.user.user.last === "home") {
         setDownCharacter(true);
@@ -72,6 +76,13 @@ function Town(props) {
       setIsLoading(false);
     });
   }, []);
+
+   const toggleFirst = () => {
+     axios.post("/api/townFirst").then((res) => {
+       setTownData(res.data[0]);
+       setFirstTimeCard(false);
+     });
+   };
 
   const toggleRight = () => {
     axios.post("/api/changeLast", { last: "town" }).then((res) => {
@@ -135,60 +146,57 @@ function Town(props) {
   };
 
   const toggleHouseOne = () => {
-    if (!props.inventory.inventory.pick) {
-      setPickRejectionCard(true)
-    } else if (!props.town.town.lock_one) {
-      axios.post("/api/houseOneLock").then(res => {
-        props.getTown(res.data[0])
-        setUnlockCard(true)
-      })
+    if (!props.inventory.inventory.includes("pick")) {
+      setPickRejectionCard(true);
+    } else if (!townData.lock_one) {
+      axios.post("/api/houseOneLock").then((res) => {
+        setTownData(res.data[0]);
+        setUnlockCard(true);
+      });
+    } else {
+      props.history.push("/HouseOne");
     }
-      else {
-props.history.push("/HouseOne");
-      }
-    
-    
   };
 
   const toggleHouseTwo = () => {
-    if (!props.inventory.inventory.pick) {
+    if (!props.inventory.inventory.includes("pick")) {
       setPickRejectionCard(true);
-    } else if (!props.town.town.oil_used) {
-      setOilRejectionCard(true)
-    }else if (!props.town.town.lock_two) {
-       axios.post("/api/houseTwoLock").then((res) => {
-         props.getTown(res.data[0]);
-         setUnlockCard(true);
-       });
+    } else if (!townData.oil_used) {
+      setOilRejectionCard(true);
+    } else if (!townData.lock_two) {
+      axios.post("/api/houseTwoLock").then((res) => {
+        setTownData(res.data[0]);
+        setUnlockCard(true);
+      });
     } else {
       props.history.push("/HouseTwo");
     }
   };
 
   const toggleHouseThree = () => {
-    if (!props.inventory.inventory.pick) {
+    if (!props.inventory.inventory.includes("pick")) {
       setPickRejectionCard(true);
-    } else if (!props.town.town.lock_three) {
-       axios.post("/api/houseThreeLock").then((res) => {
-         props.getTown(res.data[0]);
-         setUnlockCard(true);
-       });
+    } else if (!townData.lock_three) {
+      axios.post("/api/houseThreeLock").then((res) => {
+        setTownData(res.data[0]);
+        setUnlockCard(true);
+      });
     } else {
       props.history.push("/HouseThree");
     }
   };
 
   const toggleHouseFour = () => {
-   if (!props.inventory.inventory.pick) {
-     setPickRejectionCard(true);
-   } else if (!props.town.town.lock_four) {
-     axios.post("/api/houseOneLock").then((res) => {
-       props.getTown(res.data[0]);
-       setUnlockCard(true);
-     });
-   } else {
-     props.history.push("/HouseFour");
-   }
+    if (!props.inventory.inventory.includes("pick")) {
+      setPickRejectionCard(true);
+    } else if (!townData.lock_four) {
+      axios.post("/api/houseFourLock").then((res) => {
+      setTownData(res.data[0]);
+        setUnlockCard(true);
+      });
+    } else {
+      props.history.push("/HouseFour");
+    }
   };
 
   const toggleGoLeft = () => {
@@ -255,11 +263,67 @@ props.history.push("/HouseOne");
     }
   };
 
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
+
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    if (item === "oil") {
+      if (props.location.pathname === "/Town") {
+        axios.post("/api/useOil").then((res) => {
+          props.getInventory(res.data);
+        });
+        axios.post("/api/manureHasTaken").then((res) => {
+          setTownData(res.data[0]);
+          setOilCard(true);
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    } else {
+      setRejectionCard(true)
+    }
+  }
+
   return isLoading ? (
     <Loading />
   ) : (
     <div className="main">
-      <Nav />
+      <div className="nav-main">
+        <div className="inventory-div">
+          <BusinessCenter
+            className="inventory-icon"
+            onClick={toggleInventoryOpen}
+          />
+          <div
+            className={`${
+              inventoryOpen ? "inventory-open" : "inventory-closed"
+            }`}
+          >
+            {inventoryList}
+          </div>
+        </div>
+        <h2 className="nav-welcome">{props.user.user.name}'s Quest</h2>
+        <div className="coin-div">
+          <h3>{`Coins: ${props.user.user.coins}`}</h3>
+        </div>
+        <button className="nav-logout" onClick={logout}>
+          Logout
+        </button>
+      </div>
       <div className="town-body">
         <div className="town-top">
           <div className="town-top-left">
@@ -542,9 +606,6 @@ props.history.push("/HouseOne");
       <Card
         className={`${oilRejectionCard ? "answer-card" : "answer-card-closed"}`}
       >
-        <Typography variant="h4" color="primary">
-          The Guard
-        </Typography>
         <Typography
           variant="h6"
           color="secondary"
@@ -565,9 +626,6 @@ props.history.push("/HouseOne");
           PickRejectionCard ? "answer-card" : "answer-card-closed"
         }`}
       >
-        <Typography variant="h4" color="primary">
-          The Guard
-        </Typography>
         <Typography
           variant="h6"
           color="secondary"
@@ -583,12 +641,7 @@ props.history.push("/HouseOne");
           CLOSE
         </Button>
       </Card>
-      <Card
-        className={`${unlockCard ? "answer-card" : "answer-card-closed"}`}
-      >
-        <Typography variant="h4" color="primary">
-          The Guard
-        </Typography>
+      <Card className={`${unlockCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h6"
           color="secondary"
@@ -604,11 +657,61 @@ props.history.push("/HouseOne");
           CLOSE
         </Button>
       </Card>
+      <Card className={`${oilCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You apply oil liberally to the lock. It should now be easier to unlock.
+        </Typography>
+        <Button
+          onClick={() => setOilCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          This part of town is very quiet. Everyone must be off working except
+          one cantankerous old man who is standing at the crossroads giving you
+          dirty looks.
+        </Typography>
+        <Button onClick={toggleFirst} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          That item is either not useful here or not useful here yet.
+        </Typography>
+        <Button
+          onClick={() => setRejectionCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory, getTown })(
+export default connect(mapStateToProps, { getUser, getInventory, logoutUser })(
   Town
 );

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getCabin } from "../../redux/cabinReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Cabin.scss";
@@ -28,10 +27,13 @@ function Cabin(props) {
   const [firstTimeCard, setFirstTimeCard] = useState(false);
   const [rejectionCard, setRejectionCard] = useState(false);
   const [toyCard, setToyCard] = useState(false);
-
+  const [cabinData, setCabinData] = useState()
+  const [inventoryOpen, setInentoryOpen] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false);
+  
   useEffect(() => {
     axios.get("/api/cabin").then((res) => {
-      props.getCabin(res.data[0]);
+      setCabinData(res.data[0]);
       setUpCharacter(true);
       if (res.data[0].first_time) {
         setFirstTimeCard(true);
@@ -40,11 +42,42 @@ function Cabin(props) {
     });
   }, []);
 
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+
+   const logout = () => {
+     axios.delete("/api/logout").then(() => {
+       props.logoutUser();
+       props.history.push("/Auth");
+     });
+   };
+
+   const inventoryList = props.inventory.inventory.map((e, index) => {
+     return (
+       <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+         {e}
+       </h4>
+     );
+   });
+
+   const toggleItem = (item) => {
+     if (item === "flute") {
+       if (props.location.pathname === "/Tower") {
+         axios.post("/api/useFlute").then((res) => {
+           setCabinData(res.data[0]);
+           setFluteCard(true);
+         });
+       } else {
+         setRejectionCard(true);
+       }
+     }
+   };
+
+
   const toggleMushroom = () => {
     axios.post("/api/mushroom").then((res) => {
       props.getInventory(res.data);
       axios.get("/api/cabin").then((res) => {
-        props.getCabin(res.data[0]);
+        setCabinData(res.data[0]);
         setMushroomCard(true);
       });
     });
@@ -52,18 +85,18 @@ function Cabin(props) {
 
   const toggleOldMan = () => {
     if (
-      props.cabin.cabin.knife_given &&
-      props.cabin.cabin.wood_given &&
-      !props.cabin.cabin.toy_received
+      cabinData.knife_given &&
+      cabinData.wood_given &&
+      !cabinData.toy_received
     ) {
       axios.post("/api/toy").then((res) => {
         props.getInventory(res.data);
         axios.get("/api/cabin").then((res) => {
-          props.getCabin(res.data[0]);
+          setCabinData(res.data[0]);
           setToyCard(true);
         });
       });
-    } else if (!props.cabin.cabin.potatoes_given) {
+    } else if (!cabinData.potatoes_given) {
       setRejectionCard(true);
     } else {
       setOldMan(!oldMan);
@@ -92,7 +125,7 @@ function Cabin(props) {
 
   const toggleFirstTimeCard = () => {
     axios.post("/api/cabinFirst").then((res) => {
-      props.getCabin(res.data[0]);
+      setCabinData(res.data[0]);
       setFirstTimeCard(false);
     });
   };
@@ -160,7 +193,7 @@ function Cabin(props) {
           <div className="cabin-bottom-right">
             <div
               className={`${
-                !props.cabin.cabin.mushroom_taken
+                !cabinData.mushroom_taken
                   ? "mushroom"
                   : "mushroom-closed"
               }`}
@@ -346,6 +379,6 @@ function Cabin(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getCabin, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory })(
   Cabin
 );

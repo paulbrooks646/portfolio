@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getAlley } from "../../redux/alleyReducer"
 import {getInventory} from "../../redux/inventoryReducer"
 import axios from "axios";
 import "./Alley.scss";
@@ -29,23 +28,56 @@ function Alley(props) {
    const [leftRight, setLeftRight] = useState(false);
    const [leftCharacter, setLeftCharacter] = useState(false);
   const [rightCharacter, setRightCharacter] = useState(false);
+   const [inventoryOpen, setInentoryOpen] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false);
+  const [alleyData, setAlleyData] = useState()
+
+   useEffect(() => {
+     // if (!props.user.user.newgame) {
+     //   setNewgameCard(false);
+ 
+     // }
+     axios.get("/api/nest").then((res) => {
+       setAlleyData(res.data[0]);
+ 
+       if (props.user.user.last === "market") {
+         setLeftCharacter(true);
+       } else if (props.user.user.last === "thieves") {
+         setRightCharacter(true);
+       }
+       setIsLoading(false);
+     });
+   }, []);
   
-  useEffect(() => {
-    // if (!props.user.user.newgame) {
-    //   setNewgameCard(false);
+   const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
 
-    // }
-    axios.get("/api/nest").then((res) => {
-      props.getAlley(res.data[0]);
+   const logout = () => {
+     axios.delete("/api/logout").then(() => {
+       props.logoutUser();
+       props.history.push("/Auth");
+     });
+   };
 
-      if (props.user.user.last === "market") {
-        setLeftCharacter(true);
-      } else if (props.user.user.last === "thieves") {
-        setRightCharacter(true);
-      }
-      setIsLoading(false);
-    });
-  }, []);
+   const inventoryList = props.inventory.inventory.map((e, index) => {
+     return (
+       <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+         {e}
+       </h4>
+     );
+   });
+
+   const toggleItem = (item) => {
+     if (item === "flute") {
+       if (props.location.pathname === "/Tower") {
+         axios.post("/api/useFlute").then((res) => {
+           setAlleyData(res.data[0]);
+           setFluteCard(true);
+         });
+       } else {
+         setRejectionCard(true);
+       }
+     }
+   };
   
  const toggleLeft = () => {
    axios.post("/api/changeLast", { last: "alley" }).then((res) => {
@@ -160,4 +192,4 @@ function Alley(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getAlley, getInventory })(Alley);
+export default connect(mapStateToProps, { getUser, getInventory })(Alley);

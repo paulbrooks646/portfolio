@@ -3,7 +3,6 @@ import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
-import { getBog } from "../../redux/bogReducer";
 import axios from "axios";
 import "./Bog.scss";
 import Card from "@material-ui/core/Card";
@@ -23,11 +22,14 @@ function Bog(props) {
   const [coinRejectionCard, setCoinRejectionCard] = useState(false)
   const [scalesCard, setScalesCard] = useState(false)
   const [hydraCard, setHydraCard] = useState(false)
-
+  const [bogData, setBogData] = useState()
+  const [inventoryOpen, setInentoryOpen] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false);
+  
   useEffect(() => {
-
+  
     axios.get("/api/bog").then((res) => {
-      props.getBog(res.data[0]);
+      setBogData(res.data[0]);
       if (res.data[0].first_time) {
         setFirstTime(true)
       }
@@ -35,6 +37,37 @@ function Bog(props) {
       setIsLoading(false);
     });
   }, []);
+
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+  
+  const logout = () => {
+     axios.delete("/api/logout").then(() => {
+       props.logoutUser();
+       props.history.push("/Auth");
+      });
+   };
+
+   const inventoryList = props.inventory.inventory.map((e, index) => {
+     return (
+       <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+         {e}
+       </h4>
+     );
+   });
+
+   const toggleItem = (item) => {
+     if (item === "flute") {
+       if (props.location.pathname === "/Tower") {
+         axios.post("/api/useFlute").then((res) => {
+           setBogData(res.data[0]);
+           setFluteCard(true);
+         });
+       } else {
+         setRejectionCard(true);
+       }
+     }
+   };
+
 
   const toggleLeft = () => {
     axios.post("/api/changeLast", { last: "bog" }).then((res) => {
@@ -51,7 +84,7 @@ function Bog(props) {
 
   const toggleFirst = () => {
     axios.post("/api/bogFirst").then(res => {
-      props.getBog(res.data[0])
+      setBogData(res.data[0])
       setFirstTime(false)
     })
   }
@@ -60,7 +93,7 @@ function Bog(props) {
     axios.post("/api/sulfur").then(res => {
       props.getInventory(res.data)
       axios.get("/api/bog").then(res => {
-        props.getBog(res.data[0])
+        setBogData(res.data[0])
         setSulfurCard(true)
       })
     })
@@ -71,7 +104,7 @@ function Bog(props) {
   }
 
   const toggleCoin = () => {
-    if (props.bog.bog.hydra_dead) {
+    if (bogData.hydra_dead) {
       axios.post("/api/coin").then(res => {
         props.getUser(res.data)
         axios.post("/api/coin").then(res => {
@@ -79,7 +112,7 @@ function Bog(props) {
           axios.post("/api/coin").then(res => {
             props.getUser(res.data)
             axios.post("/api/bogCoins").then(res => {
-              props.getBog(res.data[0])
+              setBogData(res.data[0])
               setCoinCard(true)
             })
           })
@@ -94,7 +127,7 @@ function Bog(props) {
     axios.post("/api/scales").then(res => {
       props.getInventory(res.data)
       axios.get("/api/bog").then(res => {
-        props.getBog(res.data[0])
+        setBogData(res.data[0])
         setScalesCard(true)
       })
     })
@@ -104,14 +137,14 @@ function Bog(props) {
     
     axios.post("/api/hydraExploding").then(res => {
     
-      props.getBog(res.data[0])
+      setBogData(res.data[0])
     })
     
   }
 
   const toggleExplosion = () => {
     axios.post("/api/hydraDead").then(res => {
-      props.getBog(res.data[0])
+      setBogData(res.data[0])
     })
   }
 
@@ -138,7 +171,7 @@ function Bog(props) {
               <Character />
               <div
                 className={`${
-                  props.bog.bog.pod_thrown && !props.bog.bog.hydra_exploding
+                  bogData.pod_thrown && !bogData.hydra_exploding
                     ? "pod"
                     : "pod-closed"
                 }`}
@@ -155,13 +188,13 @@ function Bog(props) {
           <div className="bog-middle-right">
             <div
               className={`${
-                !props.bog.bog.hydra_dead ? "hydra" : "hydra-closed"
+                !bogData.hydra_dead ? "hydra" : "hydra-closed"
               }`}
               onClick={toggleHydra}
             ></div>
             <div
               className={`${
-                props.bog.bog.hydra_exploding && !props.bog.bog.hydra_dead
+                bogData.hydra_exploding && !bogData.hydra_dead
                   ? "explosion"
                   : "explosion-closed"
               }`}
@@ -169,7 +202,7 @@ function Bog(props) {
             ></div>
             <div
               className={`${
-                props.bog.bog.hydra_dead && !props.bog.bog.scales_taken
+                bogData.hydra_dead && !bogData.scales_taken
                   ? "scales"
                   : "scales-closed"
               }`}
@@ -177,7 +210,7 @@ function Bog(props) {
             ></div>
             <div
               className={`${
-                !props.bog.bog.coins_taken ? "coins" : "coins-closed"
+                !bogData.coins_taken ? "coins" : "coins-closed"
               }`}
               onClick={toggleCoin}
             >
@@ -191,7 +224,7 @@ function Bog(props) {
           <div className="bog-bottom-left">
             <div
               className={`${
-                !props.bog.bog.sulfur_taken ? "sulfur" : "sulfur-closed"
+                !bogData.sulfur_taken ? "sulfur" : "sulfur-closed"
               }`}
               onClick={toggleSulfur}
             ></div>
@@ -308,4 +341,4 @@ function Bog(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory, getBog })(Bog);
+export default connect(mapStateToProps, { getUser, getInventory })(Bog);

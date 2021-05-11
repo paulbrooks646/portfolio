@@ -20,6 +20,7 @@ function HouseOne(props) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    
     axios.get("/api/houseOne").then((res) => {
       props.getHouseOne(res.data[0]);
       setDownCharacter(true)

@@ -102,18 +102,17 @@ function Swamp(props) {
   };
 
   const toggleFirst = () => {
-    axios.post("/api/swampFirst").then(res => {
-      props.getSwamp(res.data[0])
-      setFirstTimeCard(false)
-    })
-  }
+    axios.post("/api/swampFirst").then((res) => {
+      props.getSwamp(res.data[0]);
+      setFirstTimeCard(false);
+    });
+  };
 
   const toggleAnimationEnd = () => {
-    axios.post("/api/goblinGone").then(res => {
-      props.getSwamp(res.data[0])
-    })
-  }
-
+    axios.post("/api/goblinGone").then((res) => {
+      props.getSwamp(res.data[0]);
+    });
+  };
 
   return isLoading ? (
     <Loading />
@@ -269,7 +268,11 @@ function Swamp(props) {
           There is an angry goblin in your way. You'll have to deal with him
           before you can go in that direction.
         </Typography>
-        <Button onClick={() => setRightRejectionCard(false)} variant="contained" color="primary">
+        <Button
+          onClick={() => setRightRejectionCard(false)}
+          variant="contained"
+          color="primary"
+        >
           CLOSE
         </Button>
       </Card>
@@ -301,7 +304,11 @@ function Swamp(props) {
         >
           You find nothing else in the log.
         </Typography>
-        <Button onClick={() => setLogEmptyCard(false)} variant="contained" color="primary">
+        <Button
+          onClick={() => setLogEmptyCard(false)}
+          variant="contained"
+          color="primary"
+        >
           CLOSE
         </Button>
       </Card>

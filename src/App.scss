@@ -6,504 +6,561 @@
   margin: 0px;
 }
 
-
-
 .main {
   @include main;
 }
-  /////////DOWN//////////
 
-  .down-left {
-    animation-name: downLeft;
-    @include animation(1s);
-  }
+//////////Nav/////////
 
-  .down-left-closed {
-    display: none;
-  }
+.nav-main {
+  @include row(10vh);
+  @include center(space-between);
+  border: solid;
 
-  @keyframes downLeft {
-    0% {
-      bottom: 0%;
-      right: 0%;
-    }
+  .inventory-div {
+    @include flex(center);
+    width: 100px;
+    height: 100%;
 
-    50% {
-      bottom: 90%;
-      right: 0%;
-    }
-
-    100% {
-      bottom: 90%;
-      right: 250%;
-    }
-  }
-
-  .down-up {
-    animation-name: downUp;
-    @include animation(1s);
-  }
-
-  .down-up-closed {
-    display: none;
-  }
-
-  @keyframes downUp {
-    0% {
-      bottom: 0%;
-    }
-
-    100% {
-      bottom: 200%;
-    }
-  }
-
-  .down-down {
-    animation-name: downDown;
-    @include animation(200ms);
-  }
-
-  .down-down-closed {
-    display: none;
-  }
-
-  @keyframes downDown {
-    0% {
-      top: 0%;
-    }
-
-    100% {
-      top: 20%;
-    }
-  }
-
-  .down-right {
-    animation-name: downRight;
-    @include animation(1s);
-  }
-
-  .down-right-closed {
-    display: none;
-  }
-
-  @keyframes downRight {
-    0% {
-      bottom: 0%;
-      left: 0%;
-    }
-
-    50% {
-      bottom: 90%;
-      left: 0%;
-    }
-
-    100% {
-      bottom: 90%;
-      left: 250%;
-    }
-  }
-
-  /////////UP//////////
-
-  .up-left {
-    animation-name: upLeft;
-    @include animation(1s);
-  }
-
-  .up-left-closed {
-    display: none;
-  }
-
-  @keyframes upLeft {
-    0% {
-      top: 0%;
-      right: 0%;
-    }
-
-    50% {
-      top: 90%;
-      right: 0%;
-    }
-
-    100% {
-      top: 90%;
-      right: 250%;
-    }
-  }
-
-  .up-down {
-    animation-name: upDown;
-    @include animation(1s);
-  }
-
-  .up-down-closed {
-    display: none;
-  }
-
-  @keyframes upDown {
-    0% {
-      top: 0%;
-    }
-
-    100% {
-      top: 200%;
-    }
-  }
-
-  .up-up {
-    animation-name: upUp;
-    @include animation(200ms);
-  }
-
-  .up-up-closed {
-    display: none;
-  }
-
-  @keyframes upUp {
-    0% {
-      bottom: 0%;
-    }
-
-    100% {
-      bottom: 20%;
-    }
-  }
-
-  .up-right {
-    animation-name: upRight;
-    @include animation(1s);
-  }
-
-  .up-right-closed {
-    display: none;
-  }
-
-  @keyframes upRight {
-    0% {
-      top: 0%;
-      left: 0%;
-    }
-
-    50% {
-      top: 90%;
-      left: 0%;
-    }
-
-    100% {
-      top: 90%;
-      left: 250%;
-    }
-  }
-
-  /////////Left//////////
-
-  .left-up {
-    animation-name: leftUp;
-    @include animation(1s);
-  }
-
-  .left-up-closed {
-    display: none;
-  }
-
-  @keyframes leftUp {
-    0% {
-      left: 0%;
-      bottom: 0%;
-    }
-
-    50% {
-      left: 85%;
-      bottom: 0%;
-    }
-
-    100% {
-      left: 85%;
-      bottom: 180%;
-    }
-  }
-
-  .left-right {
-    animation-name: leftRight;
-    @include animation(1s);
-  }
-
-  .left-right-closed {
-    display: none;
-  }
-
-  @keyframes leftRight {
-    0% {
-      left: 0%;
-    }
-
-    100% {
-      left: 250%;
-    }
-  }
-
-  .left-left {
-    animation-name: leftLeft;
-    @include animation(200ms);
-  }
-
-  .left-left-closed {
-    display: none;
-  }
-
-  @keyframes leftLeft {
-    0% {
-      right: 0%;
-    }
-
-    100% {
-      right: 20%;
-    }
-  }
-
-  .left-down {
-    animation-name: leftDown;
-    @include animation(1s);
-  }
-
-  .left-down-closed {
-    display: none;
-  }
-
-  @keyframes leftDown {
-    0% {
-      top: 0%;
-      left: 0%;
-    }
-
-    50% {
-      top: 0%;
-      left: 85%;
-    }
-
-    100% {
-      top: 180%;
-      left: 85%;
-    }
-  }
-
-  /////////Right//////////
-
-  .right-up {
-    animation-name: rightUp;
-    @include animation(1s);
-  }
-
-  .right-up-closed {
-    display: none;
-  }
-
-  @keyframes rightUp {
-    0% {
-      right: 0%;
-      bottom: 0%;
-    }
-
-    50% {
-      right: 85%;
-      bottom: 0%;
-    }
-
-    100% {
-      right: 85%;
-      bottom: 180%;
-    }
-  }
-
-  .right-left {
-    animation-name: rightLeft;
-    @include animation(1s);
-  }
-
-  .right-left-closed {
-    display: none;
-  }
-
-  @keyframes rightLeft {
-    0% {
-      right: 0%;
-    }
-
-    100% {
-      right: 250%;
-    }
-  }
-
-  .right-right {
-    animation-name: rightRight;
-    @include animation(200ms);
-  }
-
-  .right-right-closed {
-    display: none;
-  }
-
-  @keyframes rightRight {
-    0% {
-      left: 0%;
-    }
-
-    100% {
-      left: 20%;
-    }
-  }
-
-  .right-down {
-    animation-name: rightDown;
-    @include animation(1s);
-  }
-
-  .right-down-closed {
-    display: none;
-  }
-
-  @keyframes rightDown {
-    0% {
-      top: 0%;
-      right: 0%;
-    }
-
-    50% {
-      top: 0%;
-      right: 85%;
-    }
-
-    100% {
-      top: 180%;
-      right: 85%;
-    }
-  }
-
-  ///////OTHER///////
-
-  .character-initial {
-    display: initial;
-  }
-
-  .character-initial-closed {
-    display: none;
-  }
-
-  @keyframes downStart {
-    0% {
-      top: 50px;
-    }
-
-    100% {
-      top: 0px;
-    }
-  }
-
-  @keyframes upStart {
-    0% {
-      bottom: 50px;
-    }
-
-    100% {
-      bottom: 0px;
-    }
-  }
-
-  @keyframes leftStart {
-    0% {
-      right: 50px;
-    }
-
-    100% {
-      right: 0px;
-    }
-  }
-
-  @keyframes rightStart {
-    0% {
-      left: 50px;
-    }
-
-    100% {
-      left: 0px;
-    }
-  }
-
-  .character-up {
-    display: initial;
-    animation-name: upStart;
-    @include animation(300ms);
-
-    animation-direction: normal;
-  }
-
-  .character-up-closed {
-    display: none;
-  }
-
-  .character-right {
-    display: initial;
-    animation-name: rightStart;
-    @include animation(300ms);
-
-    animation-direction: normal;
-  }
-
-  .character-right-closed {
-    display: none;
-  }
-  .character-left {
-    display: initial;
-    animation-name: leftStart;
-    @include animation(300ms);
-
-    animation-direction: normal;
-  }
-
-  .character-left-closed {
-    display: none;
-  }
-  .character-down {
-    display: initial;
-    animation-name: downStart;
-    @include animation(300ms);
-
-    animation-direction: normal;
-  }
-
-  .character-down-closed {
-    display: none;
-  }
-
-  ///////Component Cards
-
-  .component-card {
-    @include component;
-
-    .component-list {
-      @include flex(flex-start);
-
+    .inventory-icon {
       cursor: pointer;
-      color: tomato;
+      height: 50px;
+      width: 50px;
     }
 
-    .component-card-description {
-      width: 90%;
+    .inventory-open {
+      position: absolute;
+      top: 10vh;
+      width: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 2;
+
+      .nav-list-item {
+        font-size: 20px;
+        color: red;
+        cursor: pointer;
+      }
+
+      .nav-list-item:hover {
+        transform: scale(1.1);
+      }
+    }
+
+    .inventory-closed {
+      display: none;
     }
   }
 
-  .component-card-closed {
-    display: none;
-  }
-  .answer-card {
-    @include answer;
-
-    .answer-card-description {
-      width: 90%;
-    }
+  .nav-welcome {
+    color: blue;
   }
 
-  .answer-card-closed {
-    display: none;
+  .nav-logout {
+    width: 90px;
+    color: red;
+    background-color: white;
+    border-radius: 5%;
+    height: 30px;
+    position: relative;
+    right: 20px;
+    cursor: pointer;
+  }
+}
+
+/////////DOWN//////////
+
+.down-left {
+  animation-name: downLeft;
+  @include animation(1s);
+}
+
+.down-left-closed {
+  display: none;
+}
+
+@keyframes downLeft {
+  0% {
+    bottom: 0%;
+    right: 0%;
   }
 
+  50% {
+    bottom: 90%;
+    right: 0%;
+  }
+
+  100% {
+    bottom: 90%;
+    right: 250%;
+  }
+}
+
+.down-up {
+  animation-name: downUp;
+  @include animation(1s);
+}
+
+.down-up-closed {
+  display: none;
+}
+
+@keyframes downUp {
+  0% {
+    bottom: 0%;
+  }
+
+  100% {
+    bottom: 200%;
+  }
+}
+
+.down-down {
+  animation-name: downDown;
+  @include animation(200ms);
+}
+
+.down-down-closed {
+  display: none;
+}
+
+@keyframes downDown {
+  0% {
+    top: 0%;
+  }
+
+  100% {
+    top: 20%;
+  }
+}
+
+.down-right {
+  animation-name: downRight;
+  @include animation(1s);
+}
+
+.down-right-closed {
+  display: none;
+}
+
+@keyframes downRight {
+  0% {
+    bottom: 0%;
+    left: 0%;
+  }
+
+  50% {
+    bottom: 90%;
+    left: 0%;
+  }
+
+  100% {
+    bottom: 90%;
+    left: 250%;
+  }
+}
+
+/////////UP//////////
+
+.up-left {
+  animation-name: upLeft;
+  @include animation(1s);
+}
+
+.up-left-closed {
+  display: none;
+}
+
+@keyframes upLeft {
+  0% {
+    top: 0%;
+    right: 0%;
+  }
+
+  50% {
+    top: 90%;
+    right: 0%;
+  }
+
+  100% {
+    top: 90%;
+    right: 250%;
+  }
+}
+
+.up-down {
+  animation-name: upDown;
+  @include animation(1s);
+}
+
+.up-down-closed {
+  display: none;
+}
+
+@keyframes upDown {
+  0% {
+    top: 0%;
+  }
+
+  100% {
+    top: 200%;
+  }
+}
+
+.up-up {
+  animation-name: upUp;
+  @include animation(200ms);
+}
+
+.up-up-closed {
+  display: none;
+}
+
+@keyframes upUp {
+  0% {
+    bottom: 0%;
+  }
+
+  100% {
+    bottom: 20%;
+  }
+}
+
+.up-right {
+  animation-name: upRight;
+  @include animation(1s);
+}
+
+.up-right-closed {
+  display: none;
+}
+
+@keyframes upRight {
+  0% {
+    top: 0%;
+    left: 0%;
+  }
+
+  50% {
+    top: 90%;
+    left: 0%;
+  }
+
+  100% {
+    top: 90%;
+    left: 250%;
+  }
+}
+
+/////////Left//////////
+
+.left-up {
+  animation-name: leftUp;
+  @include animation(1s);
+}
+
+.left-up-closed {
+  display: none;
+}
+
+@keyframes leftUp {
+  0% {
+    left: 0%;
+    bottom: 0%;
+  }
+
+  50% {
+    left: 85%;
+    bottom: 0%;
+  }
+
+  100% {
+    left: 85%;
+    bottom: 180%;
+  }
+}
+
+.left-right {
+  animation-name: leftRight;
+  @include animation(1s);
+}
+
+.left-right-closed {
+  display: none;
+}
+
+@keyframes leftRight {
+  0% {
+    left: 0%;
+  }
+
+  100% {
+    left: 250%;
+  }
+}
+
+.left-left {
+  animation-name: leftLeft;
+  @include animation(200ms);
+}
+
+.left-left-closed {
+  display: none;
+}
+
+@keyframes leftLeft {
+  0% {
+    right: 0%;
+  }
+
+  100% {
+    right: 20%;
+  }
+}
+
+.left-down {
+  animation-name: leftDown;
+  @include animation(1s);
+}
+
+.left-down-closed {
+  display: none;
+}
+
+@keyframes leftDown {
+  0% {
+    top: 0%;
+    left: 0%;
+  }
+
+  50% {
+    top: 0%;
+    left: 85%;
+  }
+
+  100% {
+    top: 180%;
+    left: 85%;
+  }
+}
+
+/////////Right//////////
+
+.right-up {
+  animation-name: rightUp;
+  @include animation(1s);
+}
+
+.right-up-closed {
+  display: none;
+}
+
+@keyframes rightUp {
+  0% {
+    right: 0%;
+    bottom: 0%;
+  }
+
+  50% {
+    right: 85%;
+    bottom: 0%;
+  }
+
+  100% {
+    right: 85%;
+    bottom: 180%;
+  }
+}
+
+.right-left {
+  animation-name: rightLeft;
+  @include animation(1s);
+}
+
+.right-left-closed {
+  display: none;
+}
+
+@keyframes rightLeft {
+  0% {
+    right: 0%;
+  }
+
+  100% {
+    right: 250%;
+  }
+}
+
+.right-right {
+  animation-name: rightRight;
+  @include animation(200ms);
+}
+
+.right-right-closed {
+  display: none;
+}
+
+@keyframes rightRight {
+  0% {
+    left: 0%;
+  }
+
+  100% {
+    left: 20%;
+  }
+}
+
+.right-down {
+  animation-name: rightDown;
+  @include animation(1s);
+}
+
+.right-down-closed {
+  display: none;
+}
+
+@keyframes rightDown {
+  0% {
+    top: 0%;
+    right: 0%;
+  }
+
+  50% {
+    top: 0%;
+    right: 85%;
+  }
+
+  100% {
+    top: 180%;
+    right: 85%;
+  }
+}
+
+///////OTHER///////
+
+.character-initial {
+  display: initial;
+}
+
+.character-initial-closed {
+  display: none;
+}
+
+@keyframes downStart {
+  0% {
+    top: 50px;
+  }
+
+  100% {
+    top: 0px;
+  }
+}
+
+@keyframes upStart {
+  0% {
+    bottom: 50px;
+  }
+
+  100% {
+    bottom: 0px;
+  }
+}
+
+@keyframes leftStart {
+  0% {
+    right: 50px;
+  }
+
+  100% {
+    right: 0px;
+  }
+}
+
+@keyframes rightStart {
+  0% {
+    left: 50px;
+  }
+
+  100% {
+    left: 0px;
+  }
+}
+
+.character-up {
+  display: initial;
+  animation-name: upStart;
+  @include animation(300ms);
+
+  animation-direction: normal;
+}
+
+.character-up-closed {
+  display: none;
+}
+
+.character-right {
+  display: initial;
+  animation-name: rightStart;
+  @include animation(300ms);
+
+  animation-direction: normal;
+}
+
+.character-right-closed {
+  display: none;
+}
+.character-left {
+  display: initial;
+  animation-name: leftStart;
+  @include animation(300ms);
+
+  animation-direction: normal;
+}
+
+.character-left-closed {
+  display: none;
+}
+.character-down {
+  display: initial;
+  animation-name: downStart;
+  @include animation(300ms);
+
+  animation-direction: normal;
+}
+
+.character-down-closed {
+  display: none;
+}
+
+///////Component Cards
+
+.component-card {
+  @include component;
+
+  .component-list {
+    @include flex(flex-start);
+
+    cursor: pointer;
+    color: tomato;
+  }
+
+  .component-card-description {
+    width: 90%;
+  }
+}
+
+.component-card-closed {
+  display: none;
+}
+.answer-card {
+  @include answer;
+
+  .answer-card-description {
+    width: 90%;
+  }
+}
+
+.answer-card-closed {
+  display: none;
+}
