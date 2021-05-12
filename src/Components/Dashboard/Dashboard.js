@@ -60,14 +60,12 @@ function Dashboard(props) {
   const [lastCard, setLastCard] = useState(false);
   const [phoenixAnimationTwo, setPhoenixAnimationTwo] = useState(false);
   const [fireballAnimationTwo, setFireballAnimationTwo] = useState(false);
-  const [inventoryOpen, setInventoryOpen] = useState(false)
-  const [dashboardData, setDashboardData] = useState()
-  const [rejectionCard, setRejectionCard] = useState(false)
+  const [inventoryOpen, setInventoryOpen] = useState(false);
+  const [dashboardData, setDashboardData] = useState();
+  const [rejectionCard, setRejectionCard] = useState(false);
+  const [homeCard, setHomeCard] = useState(false)
 
   useEffect(() => {
-    axios.get("/api/component", { component: "dashboard" }).then(res => {
-      console.log(res.data)
-    })
     axios.get("/api/dashboard").then((res) => {
       setDashboardData(res.data[0]);
       if (res.data[0].first_time) {
@@ -127,15 +125,31 @@ function Dashboard(props) {
   });
 
   const toggleItem = (item) => {
-    if (item === "flute") {
-      if (props.location.pathname === "/Tower") {
-        axios.post("/api/useFlute").then((res) => {
+    if (item === "home") {
+      axios.post("/api/placeHome").then(() => {
+        axios.get("/api/dashboard").then((res) => {
           setDashboardData(res.data[0]);
-          ;
+          axios.get("/api/inventory").then((res) => {
+            props.getInventory(res.data);
+            setHomeCard(true);
+          });
         });
+      });
+    } else if (item === "grow") {
+      if (dashboardData.home_placed) {
+        axios.post("/api/castGrow").then(() => {
+          axios.get("/api/dashboard").then((res) => {
+            setDashboardData(res.data[0]);
+            axios.get("/api/inventory").then((res) => {
+              props.getInventory(res.data);
+            });
+          });
+        })
       } else {
-        setRejectionCard(true);
-      }
+        setRejectionCard(true)
+      };
+    } else {
+      setRejectionCard(true);
     }
   };
 
@@ -362,7 +376,7 @@ function Dashboard(props) {
       </div>
       <div className="dashboard-body">
         <div className="dashboard-top">
-          <div className="dashboard-top-left"></div>
+          <div className="dashboard-top-left"><div className="triangle"></div></div>
           <div className="dashboard-top-middle">
             <div className="dashboard-town" onClick={toggleGoUp}>
               <ArrowUpward />
@@ -779,6 +793,40 @@ function Dashboard(props) {
           The end?
         </Typography>
         <Button onClick={finalLogout} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          That item is either not useful here or not useful here yet.
+        </Typography>
+        <Button
+          onClick={() => setRejectionCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${homeCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          You place the model of a home where your home used to be. Now what?
+        </Typography>
+        <Button
+          onClick={() => setHomeCard(false)}
+          variant="contained"
+          color="primary"
+        >
           CLOSE
         </Button>
       </Card>

@@ -247,12 +247,4 @@ module.exports = {
     res.status(200).send(town);
   },
 
-  getComponent: async (req, res) => {
-    const db = req.app.get("db")
-    const { id } = req.session.user
-    const { component } = req.body
-    console.log(component)
-    const info = await db.a([component, id])
-    res.status(200).send(info)
-  }
 };

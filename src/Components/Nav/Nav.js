@@ -227,35 +227,7 @@ function Nav(props) {
         setRejectionCard(true);
       }
     }
-    if (item === "home") {
-      if (props.location.pathname === "/Dashboard") {
-        axios.post("/api/placeHome").then(() => {
-          axios.get("/api/dashboard").then((res) => {
-            props.getDashboard(res.data[0]);
-            axios.get("/api/inventory").then((res) => {
-              props.getInventory(res.data);
-              setHomeCard(true);
-            });
-          });
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
-    if (item === "grow") {
-      if (props.location.pathname === "/Dashboard") {
-        axios.post("/api/castGrow").then(() => {
-          axios.get("/api/dashboard").then((res) => {
-            props.getDashboard(res.data[0]);
-            axios.get("/api/inventory").then((res) => {
-              props.getInventory(res.data);
-            });
-          });
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
+    
     if (item === "wood") {
       if (
         props.location.pathname === "/Cabin" &&
@@ -686,22 +658,7 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${homeCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="answer-card-description"
-        >
-          You place the model of a home where your home used to be. Now what?
-        </Typography>
-        <Button
-          onClick={() => setHomeCard(false)}
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
+     
       <Card id={`${potatoesCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
