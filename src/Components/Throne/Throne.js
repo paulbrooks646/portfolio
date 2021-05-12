@@ -25,16 +25,49 @@ function Throne(props) {
   const [firstTime, setFirstTime] = useState(false);
    const [downCharacter, setDownCharacter] = useState(false);
   const [downDown, setDownDown] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false)
+  const [inventoryOpen, setInventoryOpen] = useState(false)
+  const [throneData, setThroneData] = useState()
   
    useEffect(() => {
      axios.get("/api/clearing").then((res) => {
-       props.getCastle(res.data[0]);
+       setThroneData(res.data[0]);
 
        setDownCharacter(true);
 
        setIsLoading(false);
      });
    }, []);
+  
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
+
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    if (item === "flute") {
+      if (props.location.pathname === "/Tower") {
+        axios.post("/api/useFlute").then((res) => {
+          setThroneData(res.data[0]);
+          setFluteCard(true);
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+  };
 
   const toggleDown = () => {
     axios.post("/api/changeLast", { last: "throne" }).then((res) => {

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getGrocer } from "../../redux/grocerReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Grocer.scss";
@@ -24,12 +23,45 @@ function Grocer(props) {
   const [poorCard, setPoorCard] = useState(false);
   const [boughtCard, setBoughtCard] = useState(false);
   const [thanksCard, setThanksCard] = useState(false);
+  const [grocerData, setGrocerData] = useState()
+  const [rejectionCard, setRejectionCard] = useState(false)
+  const [inventoryOpen, setInventoryOpen] = useState(false)
 
   useEffect(() => {
     axios.get("/api/grocer").then((res) => {
-      props.getGrocer(res.data[0]);
+      setGrocerData(res.data[0]);
     });
   }, []);
+
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
+
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    if (item === "flute") {
+      if (props.location.pathname === "/Tower") {
+        axios.post("/api/useFlute").then((res) => {
+          setGrocerData(res.data[0]);
+          setFluteCard(true);
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+  };
 
   const toggleExit = () => {
     setExit(!exit);
@@ -67,7 +99,7 @@ function Grocer(props) {
   };
 
   const toggleBuyCake = () => {
-    if (props.grocer.grocer.cake_bought) {
+    if (grocerData.cake_bought) {
       setCakeCard(!cakeCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -79,7 +111,7 @@ function Grocer(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/grocer").then((res) => {
-            props.getGrocer(res.data[0]);
+            setGrocerData(res.data[0]);
             setCakeCard(!cakeCard);
             toggleThanksCard();
           });
@@ -89,7 +121,7 @@ function Grocer(props) {
   };
 
   const toggleBuyCandy = () => {
-    if (props.grocer.grocer.candy_bought) {
+    if (grocerData.candy_bought) {
       setCandyCard(!candyCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -101,7 +133,7 @@ function Grocer(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/grocer").then((res) => {
-            props.getGrocer(res.data[0]);
+            setGrocerData(res.data[0]);
             setCandyCard(!candyCard);
             toggleThanksCard();
           });
@@ -111,7 +143,7 @@ function Grocer(props) {
   };
 
   const toggleBuyCheese = () => {
-    if (props.grocer.grocer.cheese_bought) {
+    if (grocerData.cheese_bought) {
       setCheeseCard(!cheeseCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -123,7 +155,7 @@ function Grocer(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/grocer").then((res) => {
-            props.getGrocer(res.data[0]);
+            setGrocerData(res.data[0]);
             setCheeseCard(!cheeseCard);
             toggleThanksCard();
           });
@@ -133,7 +165,7 @@ function Grocer(props) {
   };
 
   const toggleBuyMeat = () => {
-    if (props.grocer.grocer.meat_bought) {
+    if (grocerData.meat_bought) {
       setMeatCard(!meatCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -145,7 +177,7 @@ function Grocer(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/grocer").then((res) => {
-            props.getGrocer(res.data[0]);
+            setGrocerData(res.data[0]);
             setMeatCard(!meatCard);
             toggleThanksCard();
           });
@@ -155,7 +187,7 @@ function Grocer(props) {
   };
 
   const toggleBuyNuts = () => {
-    if (props.grocer.grocer.nuts_bought) {
+    if (grocerData.nuts_bought) {
       setNutsCard(!nutsCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -167,7 +199,7 @@ function Grocer(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/grocer").then((res) => {
-            props.getGrocer(res.data[0]);
+            setGrocerData(res.data[0]);
             setNutsCard(!nutsCard);
             toggleThanksCard();
           });
@@ -177,7 +209,7 @@ function Grocer(props) {
   };
 
   const toggleBuyPotatoes = () => {
-    if (props.grocer.grocer.potatoes_bought) {
+    if (grocerData.potatoes_bought) {
       setPotatoesCard(!potatoesCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -189,7 +221,7 @@ function Grocer(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/grocer").then((res) => {
-            props.getGrocer(res.data[0]);
+            setGrocerData(res.data[0]);
             setPotatoesCard(!potatoesCard);
             toggleThanksCard();
           });
@@ -466,6 +498,6 @@ function Grocer(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getGrocer, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory })(
   Grocer
 );

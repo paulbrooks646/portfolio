@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getMagic } from "../../redux/magicReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Magic.scss";
@@ -24,12 +23,45 @@ function Magic(props) {
   const [poorCard, setPoorCard] = useState(false);
   const [boughtCard, setBoughtCard] = useState(false);
   const [thanksCard, setThanksCard] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false)
+  const [inventoryOpen, setInventoryOpen] = useState(false)
+  const [magicData, setMagicData] = useState()
 
   useEffect(() => {
     axios.get("/api/magic").then((res) => {
-      props.getMagic(res.data[0]);
+      setMagicData(res.data[0]);
     });
   }, []);
+
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
+
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    if (item === "flute") {
+      if (props.location.pathname === "/Tower") {
+        axios.post("/api/useFlute").then((res) => {
+          setMagicData(res.data[0]);
+          setFluteCard(true);
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+  };
 
   const toggleExit = () => {
     setExit(!exit);
@@ -67,7 +99,7 @@ function Magic(props) {
   };
 
   const toggleBuyFire = () => {
-    if (props.magic.magic.fire_bought) {
+    if (magicData.fire_bought) {
       setFireCard(!fireCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -79,7 +111,7 @@ function Magic(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/magic").then((res) => {
-            props.getMagic(res.data[0]);
+            setMagicData(res.data[0]);
             setFireCard(!fireCard);
             toggleThanksCard();
           });
@@ -89,7 +121,7 @@ function Magic(props) {
   };
 
   const toggleBuyHeal = () => {
-    if (props.magic.magic.heal_bought) {
+    if (magicData.heal_bought) {
       setHealCard(!healCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -101,7 +133,7 @@ function Magic(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/magic").then((res) => {
-            props.getMagic(res.data[0]);
+            setMagicData(res.data[0]);
             setHealCard(!healCard);
             toggleThanksCard();
           });
@@ -111,7 +143,7 @@ function Magic(props) {
   };
 
   const toggleBuyIce = () => {
-    if (props.magic.magic.ice_bought) {
+    if (magicData.ice_bought) {
       setIceCard(!iceCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -123,7 +155,7 @@ function Magic(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/magic").then((res) => {
-            props.getMagic(res.data[0]);
+            setMagicData(res.data[0]);
             setIceCard(!iceCard);
             toggleThanksCard();
           });
@@ -133,7 +165,7 @@ function Magic(props) {
   };
 
   const toggleBuyOpen = () => {
-    if (props.magic.magic.open_bought) {
+    if (magicData.open_bought) {
       setOpenCard(!openCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -145,7 +177,7 @@ function Magic(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/magic").then((res) => {
-            props.getMagic(res.data[0]);
+            setMagicData(res.data[0]);
             setOpenCard(!openCard);
             toggleThanksCard();
           });
@@ -155,7 +187,7 @@ function Magic(props) {
   };
 
   const toggleBuyProtection = () => {
-    if (props.magic.magic.protection_bought) {
+    if (magicData.protection_bought) {
       setProtectionCard(!protectionCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -167,7 +199,7 @@ function Magic(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/magic").then((res) => {
-            props.getMagic(res.data[0]);
+            setMagicData(res.data[0]);
             setProtectionCard(!protectionCard);
             toggleThanksCard();
           });
@@ -177,7 +209,7 @@ function Magic(props) {
   };
 
   const toggleBuyStrength = () => {
-    if (props.magic.magic.strength_bought) {
+    if (magicData.strength_bought) {
       setStrengthCard(!strengthCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -189,7 +221,7 @@ function Magic(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/magic").then((res) => {
-            props.getMagic(res.data[0]);
+            setMagicData(res.data[0]);
             setStrengthCard(!strengthCard);
             toggleThanksCard();
           });
@@ -479,6 +511,6 @@ function Magic(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getMagic, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory })(
   Magic
 );

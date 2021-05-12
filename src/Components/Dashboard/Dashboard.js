@@ -3,7 +3,6 @@ import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser, logoutUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
-import { getDashboard } from "../../redux/dashboardReducer";
 import axios from "axios";
 import "./Dashboard.scss";
 import Card from "@material-ui/core/Card";
@@ -61,10 +60,13 @@ function Dashboard(props) {
   const [lastCard, setLastCard] = useState(false);
   const [phoenixAnimationTwo, setPhoenixAnimationTwo] = useState(false);
   const [fireballAnimationTwo, setFireballAnimationTwo] = useState(false);
+  const [inventoryOpen, setInventoryOpen] = useState(false)
+  const [dashboardData, setDashboardData] = useState()
+  const [rejectionCard, setRejectionCard] = useState(false)
 
   useEffect(() => {
     axios.get("/api/dashboard").then((res) => {
-      props.getDashboard(res.data[0]);
+      setDashboardData(res.data[0]);
       if (res.data[0].first_time) {
         setHouse(true);
         setBurnt(false);
@@ -104,6 +106,36 @@ function Dashboard(props) {
     });
   }, []);
 
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
+
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    if (item === "flute") {
+      if (props.location.pathname === "/Tower") {
+        axios.post("/api/useFlute").then((res) => {
+          setDashboardData(res.data[0]);
+          setFluteCard(true);
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+  };
+
   const toggleRight = () => {
     axios.post("/api/changeLast", { last: "home" }).then((res) => {
       props.getUser(res.data).then(() => {
@@ -139,7 +171,7 @@ function Dashboard(props) {
   const toggleNewgame = () => {
     setBurnt(false);
     axios.post("/api/dashboardFirst").then((res) => {
-      props.getDashboard(res.data[0]);
+      setDashboardData(res.data[0]);
       setDragonAnimation(true);
     });
   };
@@ -212,7 +244,7 @@ function Dashboard(props) {
 
   const toggleFireballAnimationTwo = () => {
     axios.post("/api/removeHome").then((res) => {
-      props.getDashboard(res.data[0]);
+      setDashboardData(res.data[0]);
       setFireballAnimationTwo(false);
       setPhoenixAnimationTwo(true);
       setPhoenix(false);
@@ -393,7 +425,7 @@ function Dashboard(props) {
           </div>
           <div
             className={`${
-              burnt && !props.dashboard.dashboard.home_placed
+              burnt && !dashboardData.home_placed
                 ? "burned-house"
                 : "burned-house-closed"
             }`}
@@ -401,16 +433,16 @@ function Dashboard(props) {
           <div
             className={`${
               house ||
-              (props.dashboard.dashboard.grow_used &&
-                props.dashboard.dashboard.home_placed)
+              (dashboardData.grow_used &&
+                dashboardData.home_placed)
                 ? "house"
                 : "house-closed"
             }`}
           ></div>
           <div
             className={`${
-              (miniHome || props.dashboard.dashboard.home_placed) &&
-              !props.dashboard.dashboard.grow_used
+              (miniHome || dashboardData.home_placed) &&
+              !dashboardData.grow_used
                 ? "mini-house"
                 : "mini-house-closed"
             }`}
@@ -547,7 +579,7 @@ function Dashboard(props) {
       </div>
       <Card
         className={`${
-          props.dashboard.dashboard.first_time
+          dashboardData.first_time
             ? "component-card"
             : "component-card-closed"
         }`}
@@ -687,7 +719,7 @@ function Dashboard(props) {
       </Card>
       <Card
         className={`${
-          props.dashboard.dashboard.grow_used && growCard
+          dashboardData.grow_used && growCard
             ? "answer-card"
             : "answer-card-closed"
         }`}
@@ -746,6 +778,5 @@ const mapStateToProps = (reduxState) => reduxState;
 export default connect(mapStateToProps, {
   getUser,
   getInventory,
-  getDashboard,
   logoutUser,
 })(Dashboard);

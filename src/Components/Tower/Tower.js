@@ -3,7 +3,6 @@ import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
-import { getTower } from "../../redux/towerReducer";
 import axios from "axios";
 import "./Tower.scss";
 import Card from "@material-ui/core/Card";
@@ -31,10 +30,12 @@ function Tower(props) {
   const [rejectionCard, setRejectionCard] = useState(false);
   const [firstTime, setFirstTime] = useState(false);
   const [rejectionCardTwo, setRejectionCardTwo] = useState(false);
+  const [inventoryOpen, setInventoryOpen] = useState(false)
+  const [towerData, setTowerData] = useState()
 
   useEffect(() => {
     axios.get("/api/tower").then((res) => {
-      props.getTower(res.data[0]);
+      setTowerData(res.data[0]);
       setLeftCharacter(true);
       setIsLoading(false);
     });
@@ -45,6 +46,36 @@ function Tower(props) {
       });
     }
   }, []);
+
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
+
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    if (item === "flute") {
+      if (props.location.pathname === "/Tower") {
+        axios.post("/api/useFlute").then((res) => {
+          setTowerData(res.data[0]);
+          setFluteCard(true);
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+  };
 
   const toggleLeft = () => {
     axios.post("/api/changeLast", { last: "tower" }).then((res) => {
@@ -336,6 +367,6 @@ function Tower(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory, getTower })(
+export default connect(mapStateToProps, { getUser, getInventory })(
   Tower
 );

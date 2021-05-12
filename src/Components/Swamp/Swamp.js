@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getSwamp } from "../../redux/swampReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Swamp.scss";
@@ -28,11 +27,14 @@ function Swamp(props) {
   const [logCard, setLogCard] = useState(false);
   const [logEmptyCard, setLogEmptyCard] = useState(false);
   const [firstTimeCard, setFirstTimeCard] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false)
+  const [inventoryOpen, setInventoryOpen] = useState(false)
+  const [swampData, setSwampData] = useState()
 
   useEffect(() => {
     axios.get("/api/swamp").then((res) => {
-      props.getSwamp(res.data[0]);
-      if (props.swamp.swamp.first_time) {
+      setSwampData(res.data[0]);
+      if (swampData.first_time) {
         setFirstTimeCard(true);
       }
       if (props.user.user.last === "forest") {
@@ -43,6 +45,36 @@ function Swamp(props) {
       setIsLoading(false);
     });
   }, []);
+
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
+
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    if (item === "flute") {
+      if (props.location.pathname === "/Tower") {
+        axios.post("/api/useFlute").then((res) => {
+          setSwampData(res.data[0]);
+          setFluteCard(true);
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+  };
 
   const toggleLeft = () => {
     axios.post("/api/changeLast", { last: "swamp" }).then((res) => {
@@ -71,7 +103,7 @@ function Swamp(props) {
   };
 
   const toggleGoRight = () => {
-    if (!props.swamp.swamp.goblin_gone) {
+    if (!swampData.goblin_gone) {
       setRightRejectionCard(true);
     } else if (props.user.user.last === "forest") {
       setLeftCharacter(false);
@@ -83,9 +115,9 @@ function Swamp(props) {
   };
 
   const toggleLog = () => {
-    if (!props.swamp.swamp.goblin_gone) {
+    if (!swampData.goblin_gone) {
       setLogRejectionCard(true);
-    } else if (props.swamp.swamp.items_taken) {
+    } else if (swampData.items_taken) {
       setLogEmptyCard(true);
     } else {
       axios.post("/api/getItems").then((res) => {
@@ -93,7 +125,7 @@ function Swamp(props) {
         axios.post("/api/coin").then((res) => {
           props.getUser(res.data);
           axios.get("/api/swamp").then((res) => {
-            props.getSwamp(res.data[0]);
+            setSwampData(res.data[0]);
             setLogCard(true);
           });
         });
@@ -103,14 +135,14 @@ function Swamp(props) {
 
   const toggleFirst = () => {
     axios.post("/api/swampFirst").then((res) => {
-      props.getSwamp(res.data[0]);
+      setSwampData(res.data[0]);
       setFirstTimeCard(false);
     });
   };
 
   const toggleAnimationEnd = () => {
     axios.post("/api/goblinGone").then((res) => {
-      props.getSwamp(res.data[0]);
+      setSwampData(res.data[0]);
     });
   };
 
@@ -152,14 +184,14 @@ function Swamp(props) {
           <div className="swamp-middle-middle">
             <div
               className={`${
-                !props.swamp.swamp.goblin_scared ? "goblin" : "goblin-closed"
+                !swampData.goblin_scared ? "goblin" : "goblin-closed"
               }`}
               onClick={() => setGoblinRejectionCard(true)}
             ></div>
             <div
               className={`${
-                props.swamp.swamp.goblin_scared &&
-                !props.swamp.swamp.goblin_gone
+                swampData.goblin_scared &&
+                !swampData.goblin_gone
                   ? "goblin-moving"
                   : "goblin-moving-closed"
               }`}
@@ -317,6 +349,6 @@ function Swamp(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory, getSwamp })(
+export default connect(mapStateToProps, { getUser, getInventory })(
   Swamp
 );

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getThieves } from "../../redux/thievesReducer";
 import axios from "axios";
 import "./Thieves.scss";
 import Character from "../Character/Character";
@@ -23,6 +22,9 @@ function Thieves(props) {
   const [answerFour, setAnswerFour] = useState(false);
   const [leftCharacter, setLeftCharacter] = useState(false);
   const [leftLeft, setLeftLeft] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false)
+  const [inventoryOpen, setInventoryOpen] = useState(false)
+  const [thievesData, setThievesData] = useState()
 
   useEffect(() => {
     // if (!props.user.user.newgame) {
@@ -30,11 +32,41 @@ function Thieves(props) {
 
     // }
     axios.get("/api/nest").then((res) => {
-      props.getThieves(res.data[0]);
+      setThievesData(res.data[0]);
       setLeftCharacter(true);
       setIsLoading(false);
     });
   }, []);
+
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
+
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    if (item === "flute") {
+      if (props.location.pathname === "/Tower") {
+        axios.post("/api/useFlute").then((res) => {
+          setThievesData(res.data[0]);
+          setFluteCard(true);
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+  };
 
   const toggleLeft = () => {
     axios.post("/api/changeLast", { last: "thieves" }).then((res) => {
@@ -103,6 +135,6 @@ function Thieves(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getThieves, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory })(
   Thieves
 );

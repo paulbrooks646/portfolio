@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getMarket } from "../../redux/marketReducer";
 import {getInventory} from "../../redux/inventoryReducer"
 import axios from "axios";
 import "./Market.scss";
@@ -23,6 +22,9 @@ function Market(props) {
  const [leftRight, setLeftRight] = useState(false);
  const [leftCharacter, setLeftCharacter] = useState(false);
   const [rightCharacter, setRightCharacter] = useState(false);
+  const [marketData, setMarketData] = useState()
+  const [inventoryOpen, setInventoryOpen] = useState(false)
+  const [rejectionCard, setRejectionCard] = useState(false)
   
   useEffect(() => {
     // if (!props.user.user.newgame) {
@@ -30,7 +32,7 @@ function Market(props) {
 
     // }
     axios.get("/api/nest").then((res) => {
-      props.getMarket(res.data[0]);
+      setMarketData(res.data[0]);
 
       if (props.user.user.last === "town") {
         setLeftCharacter(true);
@@ -40,6 +42,36 @@ function Market(props) {
       setIsLoading(false);
     });
   }, []);
+
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
+
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    if (item === "flute") {
+      if (props.location.pathname === "/Tower") {
+        axios.post("/api/useFlute").then((res) => {
+          setMarketData(res.data[0]);
+          setFluteCard(true);
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+  };
 
   const toggleRight = () => {
     axios.post("/api/changeLast", { last: "market" }).then((res) => {
@@ -186,4 +218,4 @@ function Market(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory, getMarket })(Market);
+export default connect(mapStateToProps, { getUser, getInventory})(Market);

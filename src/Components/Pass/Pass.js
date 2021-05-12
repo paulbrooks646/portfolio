@@ -3,7 +3,6 @@ import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
-import { getPass } from "../../redux/passReducer";
 import axios from "axios";
 import "./Pass.scss";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
@@ -27,10 +26,13 @@ function Pass(props) {
   const [upDown, setUpDown] = useState(false);
   const [coinCard, setCoinCard] = useState(false);
   const [gemCard, setGemCard] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false)
+  const [inventoryOpen, setInventoryOpen] = useState(false)
+  const [passData, setPassData] = useState()
 
   useEffect(() => {
     axios.get("/api/pass").then((res) => {
-      props.getPass(res.data[0]);
+      setPassData(res.data[0]);
       if (props.user.user.last === "cabin") {
         setDownCharacter(true);
       } else if (props.user.user.last === "mountain") {
@@ -40,9 +42,39 @@ function Pass(props) {
     });
   }, []);
 
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
+
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    if (item === "flute") {
+      if (props.location.pathname === "/Tower") {
+        axios.post("/api/useFlute").then((res) => {
+          setPassData(res.data[0]);
+          setFluteCard(true);
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+  };
+
   const toggleCakeGiven = () => {
     axios.post("/api/ogreMoved").then((res) => {
-      props.getPass(res.data[0]);
+      setPassData(res.data[0]);
       setOgreAnimation(true);
     });
   };
@@ -51,7 +83,7 @@ function Pass(props) {
     axios.post("/api/gem").then((res) => {
       props.getInventory(res.data);
       axios.get("/api/pass").then((res) => {
-        props.getPass(res.data[0]);
+        setPassData(res.data[0]);
         setGemCard(true);
       });
     });
@@ -59,7 +91,7 @@ function Pass(props) {
 
   const toggleCoin = () => {
     axios.post("/api/passCoin").then((res) => {
-      props.getPass(res.data[0]);
+      setPassData(res.data[0]);
       axios.post("/api/coin").then((res) => {
         props.getUser(res.data);
         setCoinCard(true);
@@ -89,7 +121,7 @@ function Pass(props) {
 
   const toggleFirst = () => {
     axios.post("/api/passFirst").then((res) => {
-      props.getPass(res.data[0]);
+      setPassData(res.data[0]);
     });
   };
 
@@ -104,7 +136,7 @@ function Pass(props) {
   };
 
   const toggleGoDown = () => {
-    if (!props.pass.pass.cake_given) {
+    if (!passData.cake_given) {
       setDownRejection(true);
     } else if (props.user.user.last === "cabin") {
       setDownDown(true);
@@ -150,7 +182,7 @@ function Pass(props) {
           </div>
           <div
             className={`${
-              props.pass.pass.cake_given
+              passData.cake_given
                 ? "pass-top-right-closed"
                 : "pass-top-right"
             }`}
@@ -161,7 +193,7 @@ function Pass(props) {
           <div className="pass-middle-middle">
             <div
               className={`${
-                !props.pass.pass.cake_given ? "pass-ogre" : "pass-ogre-closed"
+                !passData.cake_given ? "pass-ogre" : "pass-ogre-closed"
               }`}
               onClick={() => setOgre(true)}
             ></div>
@@ -171,10 +203,10 @@ function Pass(props) {
             ></div>
             <div
               className={`${
-                props.pass.pass.cake_given &&
-                props.pass.pass.ogre_moved &&
-                props.pass.pass.gem_taken &&
-                !props.pass.pass.coin_taken
+                passData.cake_given &&
+                passData.ogre_moved &&
+                passData.gem_taken &&
+                !passData.coin_taken
                   ? "coin"
                   : "coin-closed"
               }`}
@@ -182,9 +214,9 @@ function Pass(props) {
             ></div>
             <div
               className={`${
-                props.pass.pass.cake_given &&
-                props.pass.pass.ogre_moved &&
-                !props.pass.pass.gem_taken
+                passData.cake_given &&
+                passData.ogre_moved &&
+                !passData.gem_taken
                   ? "gem"
                   : "gem-closed"
               }`}
@@ -194,7 +226,7 @@ function Pass(props) {
 
           <div
             className={`${
-              props.pass.pass.cake_given
+              passData.cake_given
                 ? "pass-middle-right-closed"
                 : "pass-middle-right"
             }`}
@@ -229,7 +261,7 @@ function Pass(props) {
           </div>
           <div
             className={`${
-              props.pass.pass.cake_given
+              passData.cake_given
                 ? "pass-bottom-right-closed"
                 : "pass-bottom-right"
             }`}
@@ -238,7 +270,7 @@ function Pass(props) {
       </div>
       <Card
         className={`${
-          props.pass.pass.first_time ? "answer-card" : "answer-card-closed"
+          passData.first_time ? "answer-card" : "answer-card-closed"
         }`}
       >
         <Typography
@@ -294,7 +326,7 @@ function Pass(props) {
       </Card>
       <Card
         id={`${
-          props.pass.pass.cake_given && !props.pass.pass.ogre_moved
+          passData.cake_given && !passData.ogre_moved
             ? "answer-card"
             : "answer-card-closed"
         }`}
@@ -354,6 +386,6 @@ function Pass(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory, getPass })(
+export default connect(mapStateToProps, { getUser, getInventory })(
   Pass
 );

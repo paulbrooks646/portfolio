@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getCottage } from "../../redux/cottageReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Cottage.scss";
@@ -31,6 +30,9 @@ function Cottage(props) {
   const [lockRejectionCard, setLockRejectionCard] = useState(false);
   const [firstTimeCard, setFirstTimeCard] = useState(false);
   const [lockCard, setLockCard] = useState(false)
+  const [rejectionCard, setRejectionCard] = useState(false)
+  const [inventoryOpen, setInventoryOpen] = useState(false)
+  const [cottageData, setCottageData] = useState()
 
   useEffect(() => {
     axios.get("/api/cottage").then((res) => {
@@ -572,6 +574,6 @@ function Cottage(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getCottage, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory })(
   Cottage
 );

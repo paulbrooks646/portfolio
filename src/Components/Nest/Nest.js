@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getNest } from "../../redux/nestReducer";
 import axios from "axios";
 import "./Nest.scss";
 import Character from "../Character/Character";
@@ -22,14 +21,47 @@ function Nest(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [rightCharacter, setRightCharacter] = useState(false);
   const [rightRight, setRightRight] = useState(false);
+  const [inventoryOpen, setInventoryOpen] = useState(false)
+  const [rejectionCard, setRejectionCard] = useState(false)
+  const [nestData, setNestData] = useState()
 
   useEffect(() => {
     axios.get("/api/nest").then((res) => {
-      props.getNest(res.data[0]);
+      setNestData(res.data[0]);
       setIsLoading(false);
       setRightCharacter(true);
     });
   }, []);
+
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
+
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    if (item === "flute") {
+      if (props.location.pathname === "/Tower") {
+        axios.post("/api/useFlute").then((res) => {
+          setNestData(res.data[0]);
+          setFluteCard(true);
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+  };
 
   const toggleRight = () => {
     axios.post("/api/changeLast", { last: "nest" }).then((res) => {
@@ -41,16 +73,16 @@ function Nest(props) {
 
   const toggleFirst = () => {
     axios.post("/api/nestFirst").then((res) => {
-      props.getNest(res.data[0]);
+      setNestData(res.data[0]);
     });
   };
 
   const toggleCoin = () => {
-    if (props.nest.nest.rope_used) {
+    if (nestData.rope_used) {
       axios.post("/api/coin").then((res) => {
         props.getUser(res.data);
         axios.post("/api/nestCoin").then((res) => {
-          props.getNest(res.data[0]);
+          setNestData(res.data[0]);
           setCoinSuccess(true);
         });
       });
@@ -60,11 +92,11 @@ function Nest(props) {
   };
 
   const toggleRibbon = () => {
-    if (props.nest.nest.rope_used) {
+    if (nestData.rope_used) {
       axios.post("/api/ribbon").then((res) => {
         props.getInventory(res.data);
         axios.get("/api/nest").then((res) => {
-          props.getNest(res.data[0]);
+          setNestData(res.data[0]);
           setRibbonSuccess(true);
         });
       });
@@ -74,11 +106,11 @@ function Nest(props) {
   };
 
   const toggleFeather = () => {
-    if (props.nest.nest.rope_used) {
+    if (nestData.rope_used) {
       axios.post("/api/feather").then((res) => {
         props.getInventory(res.data);
         axios.get("/api/nest").then((res) => {
-          props.getNest(res.data[0]);
+          setNestData(res.data[0]);
           setFeatherSuccess(true);
         });
       });
@@ -118,7 +150,7 @@ function Nest(props) {
             <div className="feather-div">
               <div
                 className={`${
-                  props.nest.nest.feather_taken
+                  nestData.feather_taken
                     ? "nest-feather-closed"
                     : "nest-feather"
                 }`}
@@ -128,7 +160,7 @@ function Nest(props) {
             <div className="coin-div">
               <div
                 className={`${
-                  props.nest.nest.coin_taken ? "nest-coin-closed" : "nest-coin"
+                  nestData.coin_taken ? "nest-coin-closed" : "nest-coin"
                 }`}
                 onClick={toggleCoin}
               ></div>
@@ -136,7 +168,7 @@ function Nest(props) {
             <div className="ribbon-div">
               <div
                 className={`${
-                  props.nest.nest.ribbon_taken
+                  nestData.ribbon_taken
                     ? "nest-ribbon-closed"
                     : "nest-ribbon"
                 }`}
@@ -173,7 +205,7 @@ function Nest(props) {
       </div>
       <Card
         className={`${
-          props.nest.nest.first_time ? "answer-card" : "answer-card-closed"
+          nestData.first_time ? "answer-card" : "answer-card-closed"
         }`}
       >
         <Typography
@@ -263,6 +295,6 @@ function Nest(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getNest, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory })(
   Nest
 );

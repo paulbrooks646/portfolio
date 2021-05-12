@@ -3,7 +3,6 @@ import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
-import { getMountain } from "../../redux/mountainReducer";
 import axios from "axios";
 import "./Mountain.scss";
 import Card from "@material-ui/core/Card";
@@ -39,13 +38,16 @@ function Mountain(props) {
   const [firstTimeCard, setFirstTimeCard] = useState(true);
   const [rockCard, setRockCard] = useState(false);
   const [coinCard, setCoinCard] = useState(false);
+  const [mountainData, setMountainData] = useState()
+  const [rejectionCard, setRejectionCard] = useState(false)
+  const [inventoryOpen, setInventoryOpen] = useState(false)
 
   useEffect(() => {
-    if (!props.mountain.mountain.first_time) {
+    if (!mountainData.first_time) {
       setFirstTimeCard(false);
     }
     axios.get("/api/mountain").then((res) => {
-      props.getMountain(res.data[0]);
+      setMountainData(res.data[0]);
 
       if (props.user.user.last === "pass") {
         setDownCharacter(true);
@@ -58,11 +60,41 @@ function Mountain(props) {
     });
   }, []);
 
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
+
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    if (item === "flute") {
+      if (props.location.pathname === "/Tower") {
+        axios.post("/api/useFlute").then((res) => {
+          setMountainData(res.data[0]);
+          setFluteCard(true);
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+  };
+
   const toggleRock = () => {
     axios.post("/api/rock").then((res) => {
       props.getInventory(res.data);
       axios.get("/api/mountain").then((res) => {
-        props.getMountain(res.data[0]);
+        setMountainData(res.data[0]);
         setRockCard(true);
       });
     });
@@ -70,7 +102,7 @@ function Mountain(props) {
 
   const toggleCoin = () => {
     axios.post("/api/mountainCoin").then((res) => {
-      props.getMountain(res.data[0]);
+      setMountainData(res.data[0]);
       axios.post("/api/coin").then((res) => {
         props.getUser(res.data);
         setCoinCard(true);
@@ -128,7 +160,7 @@ function Mountain(props) {
 
   const toggleFirstTimeCard = () => {
     axios.post("/api/mountainFirst").then((res) => {
-      props.getMountain(res.data[0]);
+      setMountainData(res.data[0]);
       setFirstTimeCard(false);
     });
   };
@@ -255,14 +287,14 @@ function Mountain(props) {
           <div className="mountain-bottom-left">
             <div
               className={`${
-                !props.mountain.mountain.rock_taken ? "rock" : "rock-closed"
+                !mountainData.rock_taken ? "rock" : "rock-closed"
               }`}
               onClick={toggleRock}
             ></div>
             <div
               className={`${
-                props.mountain.mountain.rock_taken &&
-                !props.mountain.mountain.coin_taken
+                mountainData.rock_taken &&
+                !mountainData.coin_taken
                   ? "coin"
                   : "coin-closed"
               }`}

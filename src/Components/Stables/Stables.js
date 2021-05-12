@@ -3,7 +3,6 @@ import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
-import { getStables } from "../../redux/stablesReducer";
 import axios from "axios";
 import "./Stables.scss";
 import Card from "@material-ui/core/Card";
@@ -41,6 +40,9 @@ function Stables(props) {
   const [bottleNeeded, setBottleNeeded] = useState(false);
   const [needPermission, setNeedPermission] = useState(false);
   const [alreadyTaken, setAlreadyTaken] = useState(false);
+  const [inventoryOpen, setInventoryOpen] = useState(false)
+  const [rejectionCard, setRejectionCard] = useState(false)
+  const [stablesData, setStablesData] = useState(false)
 
   useEffect(() => {
     // if (!props.user.user.newgame) {
@@ -48,7 +50,7 @@ function Stables(props) {
 
     // }
     axios.get("/api/stables").then((res) => {
-      props.getStables(res.data[0]);
+      setStablesData(res.data[0]);
 
       if (props.user.user.last === "valley") {
         setLeftCharacter(true);
@@ -58,6 +60,36 @@ function Stables(props) {
       setIsLoading(false);
     });
   }, []);
+
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
+
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    if (item === "flute") {
+      if (props.location.pathname === "/Tower") {
+        axios.post("/api/useFlute").then((res) => {
+          setStablesData(res.data[0]);
+          setFluteCard(true);
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+  };
 
   const toggleLeft = () => {
     axios.post("/api/changeLast", { last: "stables" }).then((res) => {
@@ -102,7 +134,7 @@ function Stables(props) {
   const toggleAnswerOne = () => {
     axios
       .post("/api/manureTakePermission")
-      .then((res) => props.getStables(res.data[0]));
+      .then((res) => setStablesData(res.data[0]));
     toggleOldmanCard();
     setAnswerOne(!answerOne);
   };
@@ -119,7 +151,7 @@ function Stables(props) {
 
   const toggleAnswerFour = () => {
     axios.post("/api/manureCleanPermission").then((res) => {
-      props.getStables(res.data[0]);
+      setStablesData(res.data[0]);
       toggleOldmanCard();
       setAnswerFour(!answerFour);
     });
@@ -128,7 +160,7 @@ function Stables(props) {
   const toggleAnswerFourYes = () => {
     setOldmanCard(false);
     setAnswerFour(false);
-    if (props.stables.stables.has_cleaned) {
+    if (stablesData.has_cleaned) {
       toggleAnswerFourYesB();
     } else {
       toggleAnswerFourYesA();
@@ -148,9 +180,9 @@ function Stables(props) {
   const toggleHorseCard = () => setHorseCard(!horseCard);
 
   const toggleManureCleaned = () => {
-    if (props.stables.stables.clean_permission) {
+    if (stablesData.clean_permission) {
       axios.post("/api/manureHasCleaned").then((res) => {
-        props.getStables(res.data[0]);
+        setStablesData(res.data[0]);
       });
       axios.post("/api/coin").then((res) => {
         props.getUser(res.data);
@@ -164,9 +196,9 @@ function Stables(props) {
   const toggleGoodReason = () => setGoodReason(!goodReason);
 
   const manureMound = () => {
-    if (!props.stables.stables.take_permission) {
+    if (!stablesData.take_permission) {
       toggleNeedPermission();
-    } else if (props.stables.stables.has_taken) {
+    } else if (stablesData.has_taken) {
       toggleAlreadyTaken();
     } else {
       toggleBottleNeeded();
@@ -265,7 +297,7 @@ function Stables(props) {
             <div
               onClick={toggleManureCleaned}
               className={`${
-                props.stables.stables.has_cleaned
+                stablesData.has_cleaned
                   ? "manure-piles-closed"
                   : "manure-piles"
               }`}
@@ -564,6 +596,6 @@ function Stables(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory, getStables })(
+export default connect(mapStateToProps, { getUser, getInventory })(
   Stables
 );

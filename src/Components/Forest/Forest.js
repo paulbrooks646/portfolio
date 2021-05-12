@@ -3,7 +3,6 @@ import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
-import { getForest } from "../../redux/forestReducer";
 import axios from "axios";
 import "./Forest.scss";
 import Card from "@material-ui/core/Card";
@@ -41,10 +40,13 @@ function Forest(props) {
   const [trunkRejectionCard, setTrunkRejectionCard] = useState(false);
   const [holeRejectionCard, setHoleRejectionCard] = useState(false);
   const [coinCard, setCoinCard] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false)
+  const [inventoryOpen, setInventoryOpen] = useState(false)
+  const [forestData, setForestData] = useState(false)
 
   useEffect(() => {
     axios.get("/api/forest").then((res) => {
-      props.getForest(res.data[0]);
+      setForestData(res.data[0]);
       if (res.data[0].first_time) {
         setForestFirst(true);
       }
@@ -59,6 +61,36 @@ function Forest(props) {
       setIsLoading(false);
     });
   }, []);
+
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
+
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    if (item === "flute") {
+      if (props.location.pathname === "/Tower") {
+        axios.post("/api/useFlute").then((res) => {
+          setForestData(res.data[0]);
+          setFluteCard(true);
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+  };
 
   const toggleLeft = () => {
     axios.post("/api/changeLast", { last: "forest" }).then((res) => {
@@ -157,11 +189,11 @@ function Forest(props) {
   };
 
   const hole = () => {
-    if (props.forest.forest.coin_taken) {
+    if (forestData.coin_taken) {
       setHoleRejectionCard(true);
     } else {
       axios.post("/api/forestCoin").then((res) => {
-        props.getForest(res.data[0]);
+        setForestData(res.data[0]);
         axios.post("/api/coin").then((res) => {
           props.getUser(res.data);
           setCoinCard(true);
@@ -436,6 +468,6 @@ function Forest(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getForest, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory })(
   Forest
 );

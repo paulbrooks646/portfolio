@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getValley } from "../../redux/valleyReducer"
 import {getInventory} from "../../redux/inventoryReducer"
 import axios from "axios";
 import "./Valley.scss";
@@ -152,4 +151,4 @@ function Valley(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getValley, getInventory })(Valley);
+export default connect(mapStateToProps, { getUser, getInventory })(Valley);

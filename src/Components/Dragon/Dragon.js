@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getDragon } from "../../redux/dragonReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Dragon.scss";
@@ -11,7 +10,6 @@ import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Character from "../Character/Character";
-import DragonPic from "../../Images/dragon.gif";
 import Loading from "../Loading/Loading";
 
 function Dragon(props) {
@@ -34,17 +32,50 @@ function Dragon(props) {
   const [growRejectionCard, setGrowRejectionCard] = useState(false);
   const [scrollCard, setScrollCard] = useState(false);
   const [coinSuccess, setCoinSuccess] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false)
+  const [dragonData, setDragonData] = useState(false)
+  const [inventoryOpen, setInventoryOpen] = useState(false)
 
   useEffect(() => {
     axios.get("/api/dragon").then((res) => {
       if (res.data[0].first_time) {
         setFirstTimeCard(true);
       }
-      props.getDragon(res.data[0]);
+      setDragonData(res.data[0]);
       setUpCharacter(true);
       setIsLoading(false);
     });
   }, []);
+
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
+
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    if (item === "flute") {
+      if (props.location.pathname === "/Tower") {
+        axios.post("/api/useFlute").then((res) => {
+          setDragonData(res.data[0]);
+          setFluteCard(true);
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+  };
 
   const toggleUp = () => {
     axios.post("/api/changeLast", { last: "dragon" }).then((res) => {
@@ -60,11 +91,11 @@ function Dragon(props) {
   };
 
   const toggleSeed = () => {
-    if (props.dragon.dragon.ice_used) {
+    if (dragonData.ice_used) {
       axios.post("/api/seed").then((res) => {
         props.getInventory(res.data);
         axios.get("/api/dragon").then((res) => {
-          props.getDragon(res.data[0]);
+          setDragonData(res.data[0]);
           setSeedCard(true);
         });
       });
@@ -74,47 +105,47 @@ function Dragon(props) {
   };
 
   const toggleCharcoal = () => {
-    if (props.dragon.dragon.ice_used && !props.dragon.dragon.charcoal_taken) {
+    if (dragonData.ice_used && !dragonData.charcoal_taken) {
       axios.post("/api/charcoal").then((res) => {
         props.getInventory(res.data);
         axios.get("/api/dragon").then((res) => {
-          props.getDragon(res.data[0]);
+          setDragonData(res.data[0]);
           setCharcoalCard(true);
         });
       });
     } else if (
-      props.dragon.dragon.ice_used &&
-      props.dragon.dragon.charcoal_taken
+      dragonData.ice_used &&
+      dragonData.charcoal_taken
     ) {
       setCharcoalRejectionCardTwo(true);
-    } else if (!props.dragon.dragon.ice_used) {
+    } else if (!dragonData.ice_used) {
       setCharcoalRejectionCard(true);
     }
   };
 
   const toggleDragon = () => {
-    if (!props.dragon.dragon.armor_used) {
+    if (!dragonData.armor_used) {
       setArmorRejectionCard(true);
-    } else if (!props.dragon.dragon.cloak_used) {
+    } else if (!dragonData.cloak_used) {
       setCloakRejectionCard(true);
-    } else if (!props.dragon.dragon.speed_used) {
+    } else if (!dragonData.speed_used) {
       setSpeedRejectionCard(true);
-    } else if (!props.dragon.dragon.axe_used) {
+    } else if (!dragonData.axe_used) {
       setAxeRejectionCard(true);
     } else {
       axios.post("/api/killDragon").then((res) => {
-        props.getDragon(res.data[0]);
+        setDragonData(res.data[0]);
         setDragonCard(true);
       });
     }
   };
 
   const toggleScroll = () => {
-    if (props.dragon.dragon.dragon_killed) {
+    if (dragonData.dragon_killed) {
       axios.post("/api/grow").then((res) => {
         props.getInventory(res.data);
         axios.get("/api/dragon").then((res) => {
-          props.getDragon(res.data[0]);
+          setDragonData(res.data[0]);
           setScrollCard(true);
         });
       });
@@ -124,11 +155,11 @@ function Dragon(props) {
   };
 
   const toggleCoin = () => {
-    if (props.dragon.dragon.ice_used) {
+    if (dragonData.ice_used) {
       axios.post("/api/coin").then((res) => {
         props.getUser(res.data);
         axios.post("/api/dragonCoin").then((res) => {
-          props.getDragon(res.data[0]);
+          setDragonData(res.data[0]);
           setCoinSuccess(true);
         });
       });
@@ -139,7 +170,7 @@ function Dragon(props) {
 
   const toggleFirstTime = () => {
     axios.post("/api/dragonFirst").then((res) => {
-      props.getDragon(res.data[0]);
+      setDragonData(res.data[0]);
       setFirstTimeCard(false);
     });
   };
@@ -156,7 +187,7 @@ function Dragon(props) {
               <div className="seed-div">
                 <div
                   className={`${
-                    !props.dragon.dragon.seed_taken ? "seed" : "seed-closed"
+                    !dragonData.seed_taken ? "seed" : "seed-closed"
                   }`}
                   onClick={toggleSeed}
                 ></div>
@@ -164,14 +195,14 @@ function Dragon(props) {
               <div className="coin-div">
                 <div
                   className={`${
-                    !props.dragon.dragon.coin_taken ? "coin" : "coin-closed"
+                    !dragonData.coin_taken ? "coin" : "coin-closed"
                   }`}
                   onClick={toggleCoin}
                 ></div>
               </div>
             </div>
             <div
-              className={`${props.dragon.dragon.ice_used ? "ice" : "cinders"}`}
+              className={`${dragonData.ice_used ? "ice" : "cinders"}`}
               onClick={toggleCharcoal}
             ></div>
           </div>
@@ -206,13 +237,13 @@ function Dragon(props) {
           <div className="dragon-bottom-middle">
             <div
               className={`${
-                !props.dragon.dragon.dragon_killed ? "dragon" : "dragon-closed"
+                !dragonData.dragon_killed ? "dragon" : "dragon-closed"
               }`}
               onClick={toggleDragon}
             />
             <div
               className={`${
-                !props.dragon.dragon.grow_taken ? "scroll" : "scroll-closed"
+                !dragonData.grow_taken ? "scroll" : "scroll-closed"
               }`}
               onClick={toggleScroll}
             ></div>
@@ -499,6 +530,6 @@ function Dragon(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getDragon, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory })(
   Dragon
 );

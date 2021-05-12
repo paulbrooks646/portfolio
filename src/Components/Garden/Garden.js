@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getGarden } from "../../redux/gardenReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Garden.scss";
@@ -28,14 +27,46 @@ function Garden(props) {
   const [rejectionCard, setRejectionCard] = useState(false);
   const [rejectionCardTwo, setRejectionCardTwo] = useState(false);
   const [flowerRetrievalCard, setFlowerRetrievalCard] = useState(false);
+  const [gardenData, setGardenData] = useState()
+  const [inventoryOpen, setInventoryOpen] = useState(false)
 
   useEffect(() => {
     axios.get("/api/garden").then((res) => {
-      props.getGarden(res.data[0]);
+      setGardenData(res.data[0]);
       setRightCharacter(true);
       setIsLoading(false);
     });
   }, []);
+
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
+
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    if (item === "flute") {
+      if (props.location.pathname === "/Tower") {
+        axios.post("/api/useFlute").then((res) => {
+          setGardenData(res.data[0]);
+          setFluteCard(true);
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+  };
 
   const toggleRight = () => {
     axios.post("/api/changeLast", { last: "garden" }).then((res) => {
@@ -46,7 +77,7 @@ function Garden(props) {
   };
 
   const toggleFairy = () => {
-    if (props.garden.garden.manure_given === true) {
+    if (gardenData.manure_given === true) {
       setFairy(!fairy);
     } else {
       setRejectionCardTwo(true);
@@ -75,13 +106,13 @@ function Garden(props) {
 
   const toggleRejectionCard = () => {
     if (
-      props.garden.garden.manure_given === true &&
-      props.garden.garden.flowers_taken === false
+      gardenData.manure_given === true &&
+      gardenData.flowers_taken === false
     ) {
       axios.post("/api/flowers").then((res) => {
         props.getInventory(res.data);
         axios.get("/api/garden").then((res) => {
-          props.getGarden(res.data[0]);
+          setGardenData(res.data[0]);
           setFlowerRetrievalCard(true);
         });
       });
@@ -282,6 +313,6 @@ function Garden(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getGarden, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory })(
   Garden
 );

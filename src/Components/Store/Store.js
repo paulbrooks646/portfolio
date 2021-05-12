@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getStore } from "../../redux/storeReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Store.scss";
@@ -24,12 +23,45 @@ function Store(props) {
   const [poorCard, setPoorCard] = useState(false);
   const [boughtCard, setBoughtCard] = useState(false);
   const [thanksCard, setThanksCard] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false)
+  const [inventoryOpen, setInventoryOpen] = useState(false)
+  const [storeData, setStoreData] = useState()
 
   useEffect(() => {
     axios.get("/api/store").then((res) => {
-      props.getStore(res.data[0]);
+      setStoreData(res.data[0]);
     });
   }, []);
+
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
+
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    if (item === "flute") {
+      if (props.location.pathname === "/Tower") {
+        axios.post("/api/useFlute").then((res) => {
+          setStoreData(res.data[0]);
+          setFluteCard(true);
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+  };
 
   const toggleExit = () => {
     setExit(!exit);
@@ -67,7 +99,7 @@ function Store(props) {
   };
 
   const toggleBuyShoes = () => {
-    if (props.store.store.shoes_bought) {
+    if (storeData.shoes_bought) {
       setShoesCard(!shoesCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -79,7 +111,7 @@ function Store(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/store").then((res) => {
-            props.getStore(res.data[0]);
+            setStoreData(res.data[0]);
             setShoesCard(!shoesCard);
             toggleThanksCard();
           });
@@ -89,7 +121,7 @@ function Store(props) {
   };
 
   const toggleBuyRope = () => {
-    if (props.store.store.rope_bought) {
+    if (storeData.rope_bought) {
       setRopeCard(!ropeCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -101,7 +133,7 @@ function Store(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/store").then((res) => {
-            props.getStore(res.data[0]);
+            setStoreData(res.data[0]);
             setRopeCard(!ropeCard);
             toggleThanksCard();
           });
@@ -111,7 +143,7 @@ function Store(props) {
   };
 
   const toggleBuyFlute = () => {
-    if (props.store.store.flute_bought) {
+    if (storeData.flute_bought) {
       setFluteCard(!fluteCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -123,7 +155,7 @@ function Store(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/store").then((res) => {
-            props.getStore(res.data[0]);
+            setStoreData(res.data[0]);
             setFluteCard(!fluteCard);
             toggleThanksCard();
           });
@@ -133,7 +165,7 @@ function Store(props) {
   };
 
   const toggleBuyOil = () => {
-    if (props.store.store.oil_bought) {
+    if (storeData.oil_bought) {
       setOilCard(!oilCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -145,7 +177,7 @@ function Store(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/store").then((res) => {
-            props.getStore(res.data[0]);
+            setStoreData(res.data[0]);
             setOilCard(!oilCard);
             toggleThanksCard();
           });
@@ -155,7 +187,7 @@ function Store(props) {
   };
 
   const toggleBuyWood = () => {
-    if (props.store.store.wood_bought) {
+    if (storeData.wood_bought) {
       setWoodCard(!woodCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -167,7 +199,7 @@ function Store(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/store").then((res) => {
-            props.getStore(res.data[0]);
+            setStoreData(res.data[0]);
             setWoodCard(!woodCard);
             toggleThanksCard();
           });
@@ -177,7 +209,7 @@ function Store(props) {
   };
 
   const toggleBuyBottle = () => {
-    if (props.store.store.bottle_bought) {
+    if (storeData.bottle_bought) {
       setBottleCard(!bottleCard);
       setBoughtCard(!boughtCard);
     } else if (props.user.user.coins < 1) {
@@ -189,7 +221,7 @@ function Store(props) {
         axios.get("/api/user").then((res) => {
           props.getUser(res.data);
           axios.get("/api/store").then((res) => {
-            props.getStore(res.data[0]);
+            setStoreData(res.data[0]);
             setBottleCard(!bottleCard);
             toggleThanksCard();
           });
@@ -466,6 +498,6 @@ function Store(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getStore, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory })(
   Store
 );

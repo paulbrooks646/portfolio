@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getHouseFive } from "../../redux/houseFiveReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./HouseFive.scss";
@@ -17,14 +16,47 @@ function HouseFive(props) {
   const [downCharacter, setDownCharacter] = useState(false);
   const [downDown, setDownDown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false)
+  const [inventoryOpen, setInventoryOpen] = useState(false)
+  const [houseFiveData, setHouseFiveData] = useState(false)
 
   useEffect(() => {
     axios.get("/api/houseFive").then((res) => {
-      props.getHouseFive(res.data[0]);
+      setHouseFiveData(res.data[0]);
       setDownCharacter(true);
       setIsLoading(false);
     });
   }, []);
+
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
+
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    if (item === "flute") {
+      if (props.location.pathname === "/Tower") {
+        axios.post("/api/useFlute").then((res) => {
+          setHouseFiveData(res.data[0]);
+          setFluteCard(true);
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+  };
 
   const toggleDown = () => {
     axios.post("/api/changeLast", { last: "houseFive" }).then((res) => {
@@ -36,7 +68,7 @@ function HouseFive(props) {
 
   const toggleFirst = () => {
     axios.post("/api/houseFiveFirst").then((res) => {
-      props.getHouseFive(res.data[0]);
+      setHouseFiveData(res.data[0]);
     });
   };
 
@@ -99,7 +131,7 @@ function HouseFive(props) {
       </div>
       {/* <Card
         className={`${
-          props.houseFive.houseFive.first_time
+          houseFiveData.first_time
             ? "answer-card"
             : "answer-card-closed"
         }`}
@@ -126,6 +158,6 @@ function HouseFive(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getHouseFive, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory })(
   HouseFive
 );

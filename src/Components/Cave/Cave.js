@@ -3,7 +3,6 @@ import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
-import { getCave } from "../../redux/caveReducer";
 import axios from "axios";
 import "./Cave.scss";
 import Card from "@material-ui/core/Card";
@@ -27,10 +26,13 @@ function Cave(props) {
   const [boneCard, setBoneCard] = useState(false);
   const [hatCard, setHatCard] = useState(false);
   const [rejectionCard, setRejectionCard] = useState(false);
+  const [caveData, setCaveData] = useState(false)
+  const [inventoryOpen, setInventoryOpen] = useState()
+  
 
   useEffect(() => {
     axios.get("/api/cave").then((res) => {
-      props.getCave(res.data[0]);
+      setCaveData(res.data[0]);
       if (props.user.user.last === "cottage") {
         setDownCharacter(true);
       } else if (props.user.user.last === "forest") {
@@ -39,6 +41,36 @@ function Cave(props) {
       setIsLoading(false);
     });
   }, []);
+
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
+
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    if (item === "flute") {
+      if (props.location.pathname === "/Tower") {
+        axios.post("/api/useFlute").then((res) => {
+          setCaveData(res.data[0]);
+          setFluteCard(true);
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+  };
 
   const toggleUp = () => {
     axios.post("/api/changeLast", { last: "cave" }).then((res) => {
@@ -58,7 +90,7 @@ function Cave(props) {
 
   const toggleFirst = () => {
     axios.post("/api/caveFirst").then((res) => {
-      props.getCave(res.data[0]);
+      setCaveData(res.data[0]);
     });
   };
 
@@ -67,11 +99,11 @@ function Cave(props) {
   };
 
   const toggleCoin = () => {
-    if (props.cave.cave.meat_given) {
+    if (caveData.meat_given) {
       axios.post("/api/coin").then((res) => {
         props.getUser(res.data);
         axios.post("/api/caveCoin").then((res) => {
-          props.getCave(res.data[0]);
+          setCaveData(res.data[0]);
           toggleCoinCard();
         });
       });
@@ -85,11 +117,11 @@ function Cave(props) {
   };
 
   const toggleBone = () => {
-    if (props.cave.cave.meat_given) {
+    if (caveData.meat_given) {
       axios.post("/api/bone").then((res) => {
         props.getInventory(res.data);
         axios.get("/api/cave").then((res) => {
-          props.getCave(res.data[0]);
+          setCaveData(res.data[0]);
           toggleBoneCard();
         });
       });
@@ -103,11 +135,11 @@ function Cave(props) {
   };
 
   const toggleHat = () => {
-    if (props.cave.cave.meat_given) {
+    if (caveData.meat_given) {
       axios.post("/api/hat").then((res) => {
         props.getInventory(res.data);
         axios.get("/api/cave").then((res) => {
-          props.getCave(res.data[0]);
+          setCaveData(res.data[0]);
           toggleHatCard();
         });
       });
@@ -135,7 +167,7 @@ function Cave(props) {
   };
 
   const toggleGoDown = () => {
-    if (!props.cave.cave.meat_given) {
+    if (!caveData.meat_given) {
       setRejectionCard(true);
     } else if (props.user.user.last === "cottage") {
       setDownDown(true);
@@ -190,27 +222,27 @@ function Cave(props) {
           <div className="cave-bottom-left">
             <div
               className={`${
-                props.cave.cave.meat_given ? "cave-wolf" : "cave-wolf-closed"
+                caveData.meat_given ? "cave-wolf" : "cave-wolf-closed"
               }`}
               onClick={toggleWolfCard}
             ></div>
             <div
               className={`${
-                props.cave.cave.meat_given ? "meat" : "meat-closed"
+                caveData.meat_given ? "meat" : "meat-closed"
               }`}
             ></div>
           </div>
           <div className="cave-bottom-middle">
             <div
               className={`${
-                !props.cave.cave.meat_given ? "cave-wolf" : "cave-wolf-closed"
+                !caveData.meat_given ? "cave-wolf" : "cave-wolf-closed"
               }`}
               onClick={toggleWolfCard}
             ></div>
             <div className="coin-div">
               <div
                 className={`${
-                  !props.cave.cave.coin_taken ? "coin" : "coin-closed"
+                  !caveData.coin_taken ? "coin" : "coin-closed"
                 }`}
                 onClick={toggleCoin}
               ></div>
@@ -218,7 +250,7 @@ function Cave(props) {
             <div className="bone-div">
               <div
                 className={`${
-                  !props.cave.cave.bone_taken ? "bone" : "bone-closed"
+                  !caveData.bone_taken ? "bone" : "bone-closed"
                 }`}
                 onClick={toggleBone}
               ></div>
@@ -226,7 +258,7 @@ function Cave(props) {
             <div className="hat-div">
               <div
                 className={`${
-                  !props.cave.cave.hat_taken ? "hat" : "hat-closed"
+                  !caveData.hat_taken ? "hat" : "hat-closed"
                 }`}
                 onClick={toggleHat}
               ></div>
@@ -272,7 +304,7 @@ function Cave(props) {
       </Card>
       <Card
         className={`${
-          props.cave.cave.first_time ? "answer-card" : "answer-card-closed"
+          caveData.first_time ? "answer-card" : "answer-card-closed"
         }`}
       >
         <Typography
@@ -347,6 +379,6 @@ function Cave(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory, getCave })(
+export default connect(mapStateToProps, { getUser, getInventory})(
   Cave
 );

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
-import { getMaze } from "../../redux/mazeReducer";
 import axios from "axios";
 import "./Maze.scss";
 import Character from "../Character/Character";
@@ -39,6 +38,9 @@ function Maze(props) {
   const [leftDown, setLeftDown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState("")
+  const [mazeData, setMazeData] = useState()
+  const [rejectionCard, setRejectionCard] = useState(false)
+  const [inventoryOpen, setInventoryOpen] = useState(false)
 
   useEffect(() => {
     // if (!props.user.user.newgame) {
@@ -46,7 +48,7 @@ function Maze(props) {
 
     // }
     axios.get("/api/nest").then((res) => {
-      props.getMaze(res.data[0]);
+      setMazeData(res.data[0]);
 
       if (props.user.user.last === "glade" || props.user.user.last === "up") {
         setDownCharacter(true);
@@ -60,6 +62,36 @@ function Maze(props) {
       setIsLoading(false);
     });
   }, []);
+
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
+
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    if (item === "flute") {
+      if (props.location.pathname === "/Tower") {
+        axios.post("/api/useFlute").then((res) => {
+          setMazeData(res.data[0]);
+          setFluteCard(true);
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+  };
 
   const toggleRight = () => {
     if (status === "uu") {
@@ -129,7 +161,7 @@ function Maze(props) {
 
   const toggleFirst = () => {
     axios.post("/api/mazeFirst").then((res) => {
-      props.getMaze(res.data[0]);
+      setMazeData(res.data[0]);
     });
   };
 
@@ -368,6 +400,6 @@ function Maze(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getMaze, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory })(
   Maze
 );
