@@ -57,6 +57,8 @@ app.get("/api/houseThree", reduxController.getHouseThree);
 app.get("/api/houseFour", reduxController.getHouseFour);
 app.get("/api/houseFive", reduxController.getHouseFive);
 app.get("/api/town", reduxController.getTown)
+app.get("/api/component", reduxController.getComponent)
+
 
 app.post("/api/towerFirst", firstController.towerFirst);
 app.post("/api/caveFirst", firstController.caveFirst);

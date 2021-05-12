@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Nav from "../Nav/Nav";
+import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
 import { getUser, logoutUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
@@ -65,6 +65,9 @@ function Dashboard(props) {
   const [rejectionCard, setRejectionCard] = useState(false)
 
   useEffect(() => {
+    axios.get("/api/component", { component: "dashboard" }).then(res => {
+      console.log(res.data)
+    })
     axios.get("/api/dashboard").then((res) => {
       setDashboardData(res.data[0]);
       if (res.data[0].first_time) {
@@ -335,7 +338,28 @@ function Dashboard(props) {
     <Loading />
   ) : (
     <div className="main">
-      <Nav />
+      <div className="nav-main">
+        <div className="inventory-div">
+          <BusinessCenter
+            className="inventory-icon"
+            onClick={toggleInventoryOpen}
+          />
+          <div
+            className={`${
+              inventoryOpen ? "inventory-open" : "inventory-closed"
+            }`}
+          >
+            {inventoryList}
+          </div>
+        </div>
+        <h2 className="nav-welcome">{props.user.user.name}'s Quest</h2>
+        <div className="coin-div">
+          <h3>{`Coins: ${props.user.user.coins}`}</h3>
+        </div>
+        <button className="nav-logout" onClick={logout}>
+          Logout
+        </button>
+      </div>
       <div className="dashboard-body">
         <div className="dashboard-top">
           <div className="dashboard-top-left"></div>
@@ -432,9 +456,7 @@ function Dashboard(props) {
           ></div>
           <div
             className={`${
-              house ||
-              (dashboardData.grow_used &&
-                dashboardData.home_placed)
+              house || (dashboardData.grow_used && dashboardData.home_placed)
                 ? "house"
                 : "house-closed"
             }`}
@@ -579,9 +601,7 @@ function Dashboard(props) {
       </div>
       <Card
         className={`${
-          dashboardData.first_time
-            ? "component-card"
-            : "component-card-closed"
+          dashboardData.first_time ? "component-card" : "component-card-closed"
         }`}
       >
         <Typography variant="h4" color="primary">
@@ -635,18 +655,10 @@ function Dashboard(props) {
           about?
         </Typography>
         <List className="component-list">
-          <ListItem onClick={toggleAnswerOne}>
-            The Dragon
-          </ListItem>
-          <ListItem onClick={toggleAnswerTwo}>
-            The Forest
-          </ListItem>
-          <ListItem onClick={toggleAnswerThree}>
-            The Mountains
-          </ListItem>
-          <ListItem onClick={toggleAnswerFour}>
-            The Town
-          </ListItem>
+          <ListItem onClick={toggleAnswerOne}>The Dragon</ListItem>
+          <ListItem onClick={toggleAnswerTwo}>The Forest</ListItem>
+          <ListItem onClick={toggleAnswerThree}>The Mountains</ListItem>
+          <ListItem onClick={toggleAnswerFour}>The Town</ListItem>
         </List>
         <Button onClick={toggleOldmanCard} variant="contained" color="primary">
           Say Goodbye

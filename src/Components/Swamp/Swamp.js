@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Nav from "../Nav/Nav";
+import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
@@ -46,7 +46,7 @@ function Swamp(props) {
     });
   }, []);
 
-  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+  const toggleInventoryOpen = () => setInventoryOpen(!inventoryOpen);
 
   const logout = () => {
     axios.delete("/api/logout").then(() => {
@@ -68,7 +68,7 @@ function Swamp(props) {
       if (props.location.pathname === "/Tower") {
         axios.post("/api/useFlute").then((res) => {
           setSwampData(res.data[0]);
-          setFluteCard(true);
+          ;
         });
       } else {
         setRejectionCard(true);
@@ -150,7 +150,28 @@ function Swamp(props) {
     <Loading />
   ) : (
     <div className="main">
-      <Nav />
+      <div className="nav-main">
+        <div className="inventory-div">
+          <BusinessCenter
+            className="inventory-icon"
+            onClick={toggleInventoryOpen}
+          />
+          <div
+            className={`${
+              inventoryOpen ? "inventory-open" : "inventory-closed"
+            }`}
+          >
+            {inventoryList}
+          </div>
+        </div>
+        <h2 className="nav-welcome">{props.user.user.name}'s Quest</h2>
+        <div className="coin-div">
+          <h3>{`Coins: ${props.user.user.coins}`}</h3>
+        </div>
+        <button className="nav-logout" onClick={logout}>
+          Logout
+        </button>
+      </div>
       <div className="swamp-body">
         <div className="swamp-top">
           <div className="log" onClick={toggleLog}></div>
@@ -190,8 +211,7 @@ function Swamp(props) {
             ></div>
             <div
               className={`${
-                swampData.goblin_scared &&
-                !swampData.goblin_gone
+                swampData.goblin_scared && !swampData.goblin_gone
                   ? "goblin-moving"
                   : "goblin-moving-closed"
               }`}

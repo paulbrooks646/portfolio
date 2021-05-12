@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
-import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser, logoutUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
@@ -21,7 +20,7 @@ import axios from "axios";
 import Loading from "../Loading/Loading";
 
 function Town(props) {
-  const [inventoryOpen, setInentoryOpen] = useState(false);
+  const [inventoryOpen, setInventoryOpen] = useState(false);
   const [oldmanCard, setOldmanCard] = useState(false);
   const [answerOne, setAnswerOne] = useState(false);
   const [answerTwo, setAnswerTwo] = useState(false);
@@ -263,7 +262,7 @@ function Town(props) {
     }
   };
 
-  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+  const toggleInventoryOpen = () => setInventoryOpen(!inventoryOpen);
 
   const logout = () => {
     axios.delete("/api/logout").then(() => {

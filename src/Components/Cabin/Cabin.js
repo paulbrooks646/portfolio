@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Nav from "../Nav/Nav";
+import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
@@ -146,7 +146,28 @@ function Cabin(props) {
     <Loading />
   ) : (
     <div className="main">
-      <Nav />
+      <div className="nav-main">
+        <div className="inventory-div">
+          <BusinessCenter
+            className="inventory-icon"
+            onClick={toggleInventoryOpen}
+          />
+          <div
+            className={`${
+              inventoryOpen ? "inventory-open" : "inventory-closed"
+            }`}
+          >
+            {inventoryList}
+          </div>
+        </div>
+        <h2 className="nav-welcome">{props.user.user.name}'s Quest</h2>
+        <div className="coin-div">
+          <h3>{`Coins: ${props.user.user.coins}`}</h3>
+        </div>
+        <button className="nav-logout" onClick={logout}>
+          Logout
+        </button>
+      </div>
       <div className="cabin-body">
         <div className="cabin-top">
           <div className="cabin-top-left">
@@ -192,9 +213,7 @@ function Cabin(props) {
           <div className="cabin-bottom-right">
             <div
               className={`${
-                !cabinData.mushroom_taken
-                  ? "mushroom"
-                  : "mushroom-closed"
+                !cabinData.mushroom_taken ? "mushroom" : "mushroom-closed"
               }`}
               onClick={toggleMushroom}
             ></div>
@@ -222,30 +241,22 @@ function Cabin(props) {
       <Card
         className={`${oldMan ? "component-card" : "component-card-closed"}`}
       >
-        <Typography variant="h5" color="primary" >
+        <Typography variant="h5" color="primary">
           I suppose since you saved me a trip to civilization I could answer a
           few questions?
         </Typography>
         <List className="component-list">
-          <ListItem  onClick={toggleAnswerOne}>
-            Pass
-          </ListItem>
-          <ListItem  onClick={toggleAnswerTwo}>
-            Cabin
-          </ListItem>
-          <ListItem  onClick={toggleAnswerThree}>
-            Whittling
-          </ListItem>
-          <ListItem  onClick={toggleAnswerFour}>
-            Toy
-          </ListItem>
+          <ListItem onClick={toggleAnswerOne}>Pass</ListItem>
+          <ListItem onClick={toggleAnswerTwo}>Cabin</ListItem>
+          <ListItem onClick={toggleAnswerThree}>Whittling</ListItem>
+          <ListItem onClick={toggleAnswerFour}>Toy</ListItem>
         </List>
         <Button onClick={toggleOldMan} variant="contained" color="primary">
           Say Goodbye
         </Button>
       </Card>
       <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" >
+        <Typography variant="h4" color="primary">
           Pass
         </Typography>
         <Typography
@@ -262,7 +273,7 @@ function Cabin(props) {
         </Button>
       </Card>
       <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" >
+        <Typography variant="h4" color="primary">
           Cabin
         </Typography>
         <Typography
@@ -280,7 +291,7 @@ function Cabin(props) {
         </Button>
       </Card>
       <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" >
+        <Typography variant="h4" color="primary">
           Whittling
         </Typography>
         <Typography
@@ -298,7 +309,7 @@ function Cabin(props) {
         </Button>
       </Card>
       <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary" >
+        <Typography variant="h4" color="primary">
           Toy
         </Typography>
         <Typography
@@ -316,7 +327,7 @@ function Cabin(props) {
       <Card
         className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}
       >
-        <Typography variant="h4" color="primary" >
+        <Typography variant="h4" color="primary">
           Phew!
         </Typography>
         <Typography

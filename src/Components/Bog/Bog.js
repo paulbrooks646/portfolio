@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Nav from "../Nav/Nav";
+import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
@@ -154,7 +154,28 @@ function Bog(props) {
     <Loading />
   ) : (
     <div className="main">
-      <Nav />
+      <div className="nav-main">
+        <div className="inventory-div">
+          <BusinessCenter
+            className="inventory-icon"
+            onClick={toggleInventoryOpen}
+          />
+          <div
+            className={`${
+              inventoryOpen ? "inventory-open" : "inventory-closed"
+            }`}
+          >
+            {inventoryList}
+          </div>
+        </div>
+        <h2 className="nav-welcome">{props.user.user.name}'s Quest</h2>
+        <div className="coin-div">
+          <h3>{`Coins: ${props.user.user.coins}`}</h3>
+        </div>
+        <button className="nav-logout" onClick={logout}>
+          Logout
+        </button>
+      </div>
       <div className="bog-body">
         <div className="bog-top"></div>
         <div className="bog-middle">
@@ -187,9 +208,7 @@ function Bog(props) {
           </div>
           <div className="bog-middle-right">
             <div
-              className={`${
-                !bogData.hydra_dead ? "hydra" : "hydra-closed"
-              }`}
+              className={`${!bogData.hydra_dead ? "hydra" : "hydra-closed"}`}
               onClick={toggleHydra}
             ></div>
             <div
@@ -209,9 +228,7 @@ function Bog(props) {
               onClick={toggleScales}
             ></div>
             <div
-              className={`${
-                !bogData.coins_taken ? "coins" : "coins-closed"
-              }`}
+              className={`${!bogData.coins_taken ? "coins" : "coins-closed"}`}
               onClick={toggleCoin}
             >
               <div className="coin"></div>
@@ -326,7 +343,8 @@ function Bog(props) {
           color="secondary"
           className="answer-card-description"
         >
-          You pick up a few hydra scales, which is all that is left of the hydra after the explosion.
+          You pick up a few hydra scales, which is all that is left of the hydra
+          after the explosion.
         </Typography>
         <Button
           onClick={() => setScalesCard(false)}

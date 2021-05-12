@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Nav from "../Nav/Nav";
+import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import axios from "axios";
@@ -47,7 +47,7 @@ function Glade(props) {
    });
  }, []);
   
-  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+  const toggleInventoryOpen = () => setInventoryOpen(!inventoryOpen);
 
   const logout = () => {
     axios.delete("/api/logout").then(() => {
@@ -69,7 +69,7 @@ function Glade(props) {
       if (props.location.pathname === "/Tower") {
         axios.post("/api/useFlute").then((res) => {
           setGladeData(res.data[0]);
-          setFluteCard(true);
+          ;
         });
       } else {
         setRejectionCard(true);
@@ -121,7 +121,28 @@ const toggleGoUp = () => {
     <Loading />
   ) : (
     <div className="main">
-      <Nav />
+      <div className="nav-main">
+        <div className="inventory-div">
+          <BusinessCenter
+            className="inventory-icon"
+            onClick={toggleInventoryOpen}
+          />
+          <div
+            className={`${
+              inventoryOpen ? "inventory-open" : "inventory-closed"
+            }`}
+          >
+            {inventoryList}
+          </div>
+        </div>
+        <h2 className="nav-welcome">{props.user.user.name}'s Quest</h2>
+        <div className="coin-div">
+          <h3>{`Coins: ${props.user.user.coins}`}</h3>
+        </div>
+        <button className="nav-logout" onClick={logout}>
+          Logout
+        </button>
+      </div>
       <div className="glade-body">
         <div className="glade-top">
           <div className="glade-top-left"></div>
@@ -155,8 +176,8 @@ const toggleGoUp = () => {
         <div className="glade-middle">
           <div className="glade-middle-left">
             <div className="unicorn"></div>
-            </div>
-            <div className="glade-middle-middle"></div>
+          </div>
+          <div className="glade-middle-middle"></div>
           <div className="glade-middle-right">
             <div
               className={`${
@@ -189,7 +210,6 @@ const toggleGoUp = () => {
           <div className="glade-bottom-right"></div>
         </div>
       </div>
-     
     </div>
   );
 }

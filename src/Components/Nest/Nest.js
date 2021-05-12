@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Nav from "../Nav/Nav";
+import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import axios from "axios";
@@ -33,7 +33,7 @@ function Nest(props) {
     });
   }, []);
 
-  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+  const toggleInventoryOpen = () => setInventoryOpen(!inventoryOpen);
 
   const logout = () => {
     axios.delete("/api/logout").then(() => {
@@ -55,7 +55,7 @@ function Nest(props) {
       if (props.location.pathname === "/Tower") {
         axios.post("/api/useFlute").then((res) => {
           setNestData(res.data[0]);
-          setFluteCard(true);
+          ;
         });
       } else {
         setRejectionCard(true);
@@ -132,8 +132,29 @@ function Nest(props) {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="inininmain">
-      <Nav />
+    <div className="main">
+      <div className="nav-main">
+        <div className="inventory-div">
+          <BusinessCenter
+            className="inventory-icon"
+            onClick={toggleInventoryOpen}
+          />
+          <div
+            className={`${
+              inventoryOpen ? "inventory-open" : "inventory-closed"
+            }`}
+          >
+            {inventoryList}
+          </div>
+        </div>
+        <h2 className="nav-welcome">{props.user.user.name}'s Quest</h2>
+        <div className="coin-div">
+          <h3>{`Coins: ${props.user.user.coins}`}</h3>
+        </div>
+        <button className="nav-logout" onClick={logout}>
+          Logout
+        </button>
+      </div>
       <div className="nest-body">
         <div className="nest-top">
           <div className="nest-top-left">
@@ -168,9 +189,7 @@ function Nest(props) {
             <div className="ribbon-div">
               <div
                 className={`${
-                  nestData.ribbon_taken
-                    ? "nest-ribbon-closed"
-                    : "nest-ribbon"
+                  nestData.ribbon_taken ? "nest-ribbon-closed" : "nest-ribbon"
                 }`}
                 onClick={toggleRibbon}
               ></div>

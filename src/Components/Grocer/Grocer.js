@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Nav from "../Nav/Nav";
+import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
@@ -33,7 +33,7 @@ function Grocer(props) {
     });
   }, []);
 
-  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+  const toggleInventoryOpen = () => setInventoryOpen(!inventoryOpen);
 
   const logout = () => {
     axios.delete("/api/logout").then(() => {
@@ -55,7 +55,7 @@ function Grocer(props) {
       if (props.location.pathname === "/Tower") {
         axios.post("/api/useFlute").then((res) => {
           setGrocerData(res.data[0]);
-          setFluteCard(true);
+          ;
         });
       } else {
         setRejectionCard(true);
@@ -249,7 +249,28 @@ function Grocer(props) {
 
   return (
     <div className="main">
-      <Nav />
+      <div className="nav-main">
+        <div className="inventory-div">
+          <BusinessCenter
+            className="inventory-icon"
+            onClick={toggleInventoryOpen}
+          />
+          <div
+            className={`${
+              inventoryOpen ? "inventory-open" : "inventory-closed"
+            }`}
+          >
+            {inventoryList}
+          </div>
+        </div>
+        <h2 className="nav-welcome">{props.user.user.name}'s Quest</h2>
+        <div className="coin-div">
+          <h3>{`Coins: ${props.user.user.coins}`}</h3>
+        </div>
+        <button className="nav-logout" onClick={logout}>
+          Logout
+        </button>
+      </div>
       <div className="grocer-body">
         <Card
           className={`${

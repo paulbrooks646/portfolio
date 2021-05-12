@@ -156,7 +156,7 @@ function Nav(props) {
       }
     }
     if (item === "dagger") {
-      if (props.location.pathname === "/Alley") {
+      if (props.location.pathname === "/Clearing") {
         alert("blah blah blah");
       } else {
         setRejectionCard(true);

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Nav from "../Nav/Nav";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import {getInventory} from "../../redux/inventoryReducer"
@@ -12,6 +11,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import Character from "../Character/Character"
 import Loading from "../Loading/Loading";
 
@@ -67,9 +67,9 @@ function Alley(props) {
    });
 
    const toggleItem = (item) => {
-     if (item === "flute") {
-       if (props.location.pathname === "/Tower") {
-         axios.post("/api/useFlute").then((res) => {
+     if (item === "rock") {
+       if (props.location.pathname === "/Alley") {
+         axios.post("/api/useRock").then((res) => {
            setAlleyData(res.data[0]);
            
          });
@@ -121,7 +121,28 @@ function Alley(props) {
     <Loading />
   ) : (
     <div className="main">
-      <Nav />
+      <div className="nav-main">
+        <div className="inventory-div">
+          <BusinessCenter
+            className="inventory-icon"
+            onClick={toggleInventoryOpen}
+          />
+          <div
+            className={`${
+              inventoryOpen ? "inventory-open" : "inventory-closed"
+            }`}
+          >
+            {inventoryList}
+          </div>
+        </div>
+        <h2 className="nav-welcome">{props.user.user.name}'s Quest</h2>
+        <div className="coin-div">
+          <h3>{`Coins: ${props.user.user.coins}`}</h3>
+        </div>
+        <button className="nav-logout" onClick={logout}>
+          Logout
+        </button>
+      </div>
       <div className="alley-body">
         <div className="alley-top"></div>
         <div className="alley-middle">

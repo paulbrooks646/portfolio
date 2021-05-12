@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Nav from "../Nav/Nav";
+import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import {getInventory} from "../../redux/inventoryReducer"
@@ -18,6 +18,9 @@ function Valley(props) {
   const [leftRight, setLeftRight] = useState(false);
   const [leftCharacter, setLeftCharacter] = useState(false);
   const [rightCharacter, setRightCharacter] = useState(false);
+  const [inventoryOpen, setInventoryOpen] = useState(false)
+  const [rejectionCard, setRejectionCard] = useState(false)
+  const [valleyData, setValleyData] = useState()
 
    useEffect(() => {
      // if (!props.user.user.newgame) {
@@ -35,6 +38,41 @@ function Valley(props) {
        setIsLoading(false);
      });
    }, []);
+  
+  const toggleInventoryOpen = () => setInventoryOpen(!inventoryOpen);
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
+
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    if (item === "oil") {
+      if (props.location.pathname === "/Town") {
+        axios.post("/api/useOil").then((res) => {
+          props.getInventory(res.data);
+        });
+        axios.post("/api/manureHasTaken").then((res) => {
+          setValleyData(res.data[0]);
+          
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    } else {
+      setRejectionCard(true);
+    }
+  };
   
 
  const toggleRight = () => {
@@ -77,7 +115,28 @@ function Valley(props) {
 
   return (
     <div className="main">
-      <Nav />
+      <div className="nav-main">
+        <div className="inventory-div">
+          <BusinessCenter
+            className="inventory-icon"
+            onClick={toggleInventoryOpen}
+          />
+          <div
+            className={`${
+              inventoryOpen ? "inventory-open" : "inventory-closed"
+            }`}
+          >
+            {inventoryList}
+          </div>
+        </div>
+        <h2 className="nav-welcome">{props.user.user.name}'s Quest</h2>
+        <div className="coin-div">
+          <h3>{`Coins: ${props.user.user.coins}`}</h3>
+        </div>
+        <button className="nav-logout" onClick={logout}>
+          Logout
+        </button>
+      </div>
       <div className="valley-body">
         <div className="valley-top">
           <div className="valley-top-left">

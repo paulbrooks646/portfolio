@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Nav from "../Nav/Nav";
+import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
@@ -45,6 +45,35 @@ function Cottage(props) {
       setIsLoading(false);
     });
   }, []);
+
+  const toggleInventoryOpen = () => setInventoryOpen(!inventoryOpen);
+
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
+
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    if (item === "flute") {
+      if (props.location.pathname === "/Tower") {
+        axios.post("/api/useFlute").then((res) => {
+          setCottageData(res.data[0]);
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+  };
 
   const toggleUp = () => {
     axios.post("/api/changeLast", { last: "cottage" }).then((res) => {
@@ -192,7 +221,28 @@ function Cottage(props) {
     <Loading />
   ) : (
     <div className="main">
-      <Nav />
+      <div className="nav-main">
+        <div className="inventory-div">
+          <BusinessCenter
+            className="inventory-icon"
+            onClick={toggleInventoryOpen}
+          />
+          <div
+            className={`${
+              inventoryOpen ? "inventory-open" : "inventory-closed"
+            }`}
+          >
+            {inventoryList}
+          </div>
+        </div>
+        <h2 className="nav-welcome">{props.user.user.name}'s Quest</h2>
+        <div className="coin-div">
+          <h3>{`Coins: ${props.user.user.coins}`}</h3>
+        </div>
+        <button className="nav-logout" onClick={logout}>
+          Logout
+        </button>
+      </div>
       <div className="cottage-body">
         <div className="cottage-left"></div>
         <div className="cottage-middle">
@@ -555,9 +605,7 @@ function Cottage(props) {
           CLOSE
         </Button>
       </Card>
-      <Card
-        className={`${lockCard ? "answer-card" : "answer-card-closed"}`}
-      >
+      <Card className={`${lockCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h6"
           color="secondary"
@@ -565,7 +613,11 @@ function Cottage(props) {
         >
           Success! The lock clicks open.
         </Typography>
-        <Button onClick={() => setLockCard(false)} variant="contained" color="primary">
+        <Button
+          onClick={() => setLockCard(false)}
+          variant="contained"
+          color="primary"
+        >
           CLOSE
         </Button>
       </Card>
