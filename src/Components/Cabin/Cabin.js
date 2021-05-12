@@ -29,7 +29,6 @@ function Cabin(props) {
   const [toyCard, setToyCard] = useState(false);
   const [cabinData, setCabinData] = useState()
   const [inventoryOpen, setInentoryOpen] = useState(false);
-  const [rejectionCard, setRejectionCard] = useState(false);
   
   useEffect(() => {
     axios.get("/api/cabin").then((res) => {
@@ -64,7 +63,7 @@ function Cabin(props) {
        if (props.location.pathname === "/Tower") {
          axios.post("/api/useFlute").then((res) => {
            setCabinData(res.data[0]);
-           setFluteCard(true);
+           ;
          });
        } else {
          setRejectionCard(true);

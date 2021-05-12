@@ -39,8 +39,6 @@ function Nav(props) {
   const [fireCard, setFireCard] = useState(false)
   const [openCard, setOpenCard] = useState(false)
   const [pickCard, setPickCard] = useState(false)
-  const [inventoryOpen, setInentoryOpen] = useState(false);
-  const [rejectionCard, setRejectionCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/getUser").then((res) => {

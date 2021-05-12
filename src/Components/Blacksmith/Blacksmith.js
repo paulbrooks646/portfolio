@@ -55,7 +55,7 @@ function Blacksmith(props) {
        if (props.location.pathname === "/Tower") {
          axios.post("/api/useFlute").then((res) => {
            setBlacksmithData(res.data[0]);
-           setFluteCard(true);
+           ;
          });
        } else {
          setRejectionCard(true);
@@ -513,6 +513,5 @@ function Blacksmith(props) {
 const mapStateToProps = (reduxState) => reduxState;
 export default connect(mapStateToProps, {
   getUser,
-  getBlacksmith,
   getInventory,
 })(Blacksmith);

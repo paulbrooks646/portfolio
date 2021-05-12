@@ -106,7 +106,7 @@ function Dashboard(props) {
     });
   }, []);
 
-  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+  const toggleInventoryOpen = () => setInventoryOpen(!inventoryOpen);
 
   const logout = () => {
     axios.delete("/api/logout").then(() => {
@@ -128,7 +128,7 @@ function Dashboard(props) {
       if (props.location.pathname === "/Tower") {
         axios.post("/api/useFlute").then((res) => {
           setDashboardData(res.data[0]);
-          setFluteCard(true);
+          ;
         });
       } else {
         setRejectionCard(true);
@@ -254,7 +254,7 @@ function Dashboard(props) {
     });
   };
 
-  const logout = () => {
+  const finalLogout = () => {
     axios.post("/api/removeGrow").then(() => {
       axios.delete("/api/logout").then(() => {
         props.logoutUser();
@@ -766,7 +766,7 @@ function Dashboard(props) {
         >
           The end?
         </Typography>
-        <Button onClick={logout} variant="contained" color="primary">
+        <Button onClick={finalLogout} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>

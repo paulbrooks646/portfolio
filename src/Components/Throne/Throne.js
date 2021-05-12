@@ -25,7 +25,6 @@ function Throne(props) {
   const [firstTime, setFirstTime] = useState(false);
    const [downCharacter, setDownCharacter] = useState(false);
   const [downDown, setDownDown] = useState(false);
-  const [rejectionCard, setRejectionCard] = useState(false)
   const [inventoryOpen, setInventoryOpen] = useState(false)
   const [throneData, setThroneData] = useState()
   

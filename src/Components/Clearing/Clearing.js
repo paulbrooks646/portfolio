@@ -29,7 +29,7 @@ function Clearing(props) {
       setIsLoading(false);
     });
   }, []);
-  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
+  const toggleInventoryOpen = () => setInventoryOpen(!inventoryOpen);
 
   const logout = () => {
     axios.delete("/api/logout").then(() => {
@@ -50,8 +50,8 @@ function Clearing(props) {
     if (item === "flute") {
       if (props.location.pathname === "/Tower") {
         axios.post("/api/useFlute").then((res) => {
-          setCastleData(res.data[0]);
-          setFluteCard(true);
+          setClearingData(res.data[0]);
+          ;
         });
       } else {
         setRejectionCard(true);

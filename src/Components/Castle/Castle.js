@@ -98,7 +98,7 @@ function Castle(props) {
        if (props.location.pathname === "/Tower") {
          axios.post("/api/useFlute").then((res) => {
            setCastleData(res.data[0]);
-           setFluteCard(true);
+           ;
          });
        } else {
          setRejectionCard(true);
