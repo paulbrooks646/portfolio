@@ -21,7 +21,6 @@ function Nav(props) {
   const [fluteCard, setFluteCard] = useState(false);
   const [flowerCard, setFlowerCard] = useState(false);
   const [ribbonCard, setRibbonCard] = useState(false);
-  const [meatCard, setMeatCard] = useState(false);
   const [protectionCard, setProtectionCard] = useState(false);
   const [fireCard, setFireCard] = useState(false);
   const [openCard, setOpenCard] = useState(false);
@@ -75,19 +74,7 @@ function Nav(props) {
       }
     }
 
-    if (item === "meat") {
-      if (props.location.pathname === "/Cave") {
-        axios.post("/api/giveMeat").then((res) => {
-          props.getInventory(res.data);
-          axios.get("/api/cave").then((res) => {
-            props.getCave(res.data[0]);
-            setMeatCard(true);
-          });
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
+    
 
     if (item === "ribbon") {
       if (props.location.pathname === "/Tower") {
@@ -191,10 +178,6 @@ function Nav(props) {
       }
     }
 
-   
-
-    
-
     if (item === "protection") {
       if (props.location.pathname === "/Cottage") {
         axios.post("/api/useProtection").then((res) => {
@@ -247,8 +230,6 @@ function Nav(props) {
       setPickCard(true);
     }
   };
-
-  
 
   return (
     <div className="nav-main">
@@ -428,26 +409,6 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card className={`${meatCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="answer-card-description"
-        >
-          You hurl the hunk of meat to the wolf. It eyes the meat suspiciously,
-          walks over, smells it, drags it to the side of the path, then starts
-          to devour it.
-        </Typography>
-        <Button
-          onClick={() => setMeatCard(false)}
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-
-     
      
       <Card
         className={`${protectionCard ? "answer-card" : "answer-card-closed"}`}
