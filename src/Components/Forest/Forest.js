@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Forest.scss";
@@ -40,9 +40,10 @@ function Forest(props) {
   const [trunkRejectionCard, setTrunkRejectionCard] = useState(false);
   const [holeRejectionCard, setHoleRejectionCard] = useState(false);
   const [coinCard, setCoinCard] = useState(false);
-  const [rejectionCard, setRejectionCard] = useState(false)
-  const [inventoryOpen, setInventoryOpen] = useState(false)
-  const [forestData, setForestData] = useState(false)
+  const [rejectionCard, setRejectionCard] = useState(false);
+  const [inventoryOpen, setInventoryOpen] = useState(false);
+  const [forestData, setForestData] = useState(false);
+  const [bowCard, setBowCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/forest").then((res) => {
@@ -80,15 +81,16 @@ function Forest(props) {
   });
 
   const toggleItem = (item) => {
-    if (item === "flute") {
-      if (props.location.pathname === "/Tower") {
-        axios.post("/api/useFlute").then((res) => {
+    if (item === "bow") {
+      axios.post("/api/apple").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/forest").then((res) => {
           setForestData(res.data[0]);
-          ;
+          setBowCard(true);
         });
-      } else {
-        setRejectionCard(true);
-      }
+      });
+    } else {
+      setRejectionCard(true);
     }
   };
 
@@ -512,11 +514,28 @@ function Forest(props) {
           CLOSE
         </Button>
       </Card>
+      <Card className={`${bowCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          You fire straight up. The arrow sails into the branches and a single
+          apple falls. You dive and catch it but break the bow in the process.
+        </Typography>
+        <Button
+          onClick={() => setBowCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory, logoutUser })(
   Forest
 );

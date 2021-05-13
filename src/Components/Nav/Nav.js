@@ -22,21 +22,19 @@ function Nav(props) {
   const [flowerCard, setFlowerCard] = useState(false);
   const [ribbonCard, setRibbonCard] = useState(false);
   const [meatCard, setMeatCard] = useState(false);
- 
-  const [bowCard, setBowCard] = useState(false);
+
   const [swordCard, setSwordCard] = useState(false);
   const [podCard, setPodCard] = useState(false);
   const [protectionCard, setProtectionCard] = useState(false);
-  const [fireCard, setFireCard] = useState(false)
-  const [openCard, setOpenCard] = useState(false)
-  const [pickCard, setPickCard] = useState(false)
+  const [fireCard, setFireCard] = useState(false);
+  const [openCard, setOpenCard] = useState(false);
+  const [pickCard, setPickCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/getUser").then((res) => {
       getUser(res.data);
     });
   }, []);
-
 
   const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
 
@@ -79,7 +77,7 @@ function Nav(props) {
         setRejectionCard(true);
       }
     }
-    
+
     if (item === "meat") {
       if (props.location.pathname === "/Cave") {
         axios.post("/api/giveMeat").then((res) => {
@@ -93,7 +91,7 @@ function Nav(props) {
         setRejectionCard(true);
       }
     }
-  
+
     if (item === "ribbon") {
       if (props.location.pathname === "/Tower") {
         axios.post("/api/giveRibbon").then((res) => {
@@ -195,24 +193,6 @@ function Nav(props) {
         setRejectionCard(true);
       }
     }
-    
-    
-
-    if (item === "bow") {
-      if (props.location.pathname === "/Forest") {
-        axios.post("/api/apple").then((res) => {
-          props.getInventory(res.data);
-          axios.get("/api/forest").then((res) => {
-            props.getForest(res.data[0]);
-            setBowCard(true);
-          });
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
-
-    
 
     if (item === "sword") {
       if (props.location.pathname === "/Swamp") {
@@ -251,22 +231,26 @@ function Nav(props) {
     }
 
     if (item === "fire") {
-       if (props.location.pathname === "/Cottage" && props.cottage.cottage.pod_taken) {
-         axios.post("/api/useFire").then((res) => {
-           props.getInventory(res.data);
-           axios.get("/api/cottage").then((res) => {
-             props.getCottage(res.data[0]);
-             setFireCard(true);
-           });
-         });
-       } else {
-         setRejectionCard(true);
-       }
-     }
+      if (
+        props.location.pathname === "/Cottage" &&
+        props.cottage.cottage.pod_taken
+      ) {
+        axios.post("/api/useFire").then((res) => {
+          props.getInventory(res.data);
+          axios.get("/api/cottage").then((res) => {
+            props.getCottage(res.data[0]);
+            setFireCard(true);
+          });
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
 
     if (item === "open") {
       if (
-        props.location.pathname === "/Cottage" && props.cottage.cottage.door_unlocked
+        props.location.pathname === "/Cottage" &&
+        props.cottage.cottage.door_unlocked
       ) {
         axios.post("/api/useOpen").then((res) => {
           props.getInventory(res.data);
@@ -281,12 +265,12 @@ function Nav(props) {
     }
 
     if (item === "pick") {
-      setPickCard(true)
+      setPickCard(true);
     }
   };
 
   const togglePod = () => {
-    setPodCard(false)
+    setPodCard(false);
     axios.post("/api/podThrown").then((res) => {
       props.getInventory(res.data);
       axios.get("/api/bog").then((res) => {
@@ -316,7 +300,9 @@ function Nav(props) {
       <button className="nav-logout" onClick={logout}>
         Logout
       </button>
-      <Card className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card
+        className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
+      >
         <Typography
           variant="h4"
           color="secondary"
@@ -365,7 +351,9 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card className={`${showLetterCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card
+        className={`${showLetterCard ? "answer-card" : "answer-card-closed"}`}
+      >
         <Typography
           variant="h4"
           color="secondary"
@@ -487,27 +475,7 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      
-     
-     
-      <Card className={`${bowCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="answer-card-description"
-        >
-          You fire straight up. The arrow sails into the branches and a single
-          apple falls. You dive and catch it but break the bow in the process.
-        </Typography>
-        <Button
-          onClick={() => setBowCard(false)}
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-     
+
       <Card className={`${swordCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
@@ -539,7 +507,9 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card className={`${protectionCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card
+        className={`${protectionCard ? "answer-card" : "answer-card-closed"}`}
+      >
         <Typography
           variant="h4"
           color="primary"
@@ -597,7 +567,8 @@ function Nav(props) {
           color="primary"
           className="answer-card-description"
         >
-          You will automatically try to use your lock pick if you click on a locked door.
+          You will automatically try to use your lock pick if you click on a
+          locked door.
         </Typography>
         <Button
           onClick={() => setPickCard(false)}
