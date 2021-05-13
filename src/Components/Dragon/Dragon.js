@@ -35,6 +35,11 @@ function Dragon(props) {
   const [rejectionCard, setRejectionCard] = useState(false)
   const [dragonData, setDragonData] = useState(false)
   const [inventoryOpen, setInventoryOpen] = useState(false)
+  const [iceCard, setIceCard] = useState(false);
+  const [armorCard, setArmorCard] = useState(false);
+  const [cloakCard, setCloakCard] = useState(false);
+  const [speedCard, setSpeedCard] = useState(false);
+  const [axeCard, setAxeCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/dragon").then((res) => {
@@ -540,6 +545,105 @@ function Dragon(props) {
         </Typography>
         <Button
           onClick={() => setCoinSuccess(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${iceCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          As you read the magic words, a small segment of coals turns slightly
+          blue.
+        </Typography>
+        <Button
+          onClick={() => setIceCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${armorCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          You put on your armor.
+        </Typography>
+        <Button
+          onClick={() => setArmorCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${cloakCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          You put on your cloak. The heat in the area no longer bothers you.
+        </Typography>
+        <Button
+          onClick={() => setCloakCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${speedCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          As you read the scroll you feel significantly quicker.
+        </Typography>
+        <Button
+          onClick={() => setSpeedCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${axeCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          Weilding the ultimate axe, you feel very powerful.
+        </Typography>
+        <Button
+          onClick={() => setAxeCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          That item is either not useful here or not useful here yet.
+        </Typography>
+        <Button
+          onClick={() => setRejectionCard(false)}
           variant="contained"
           color="primary"
         >

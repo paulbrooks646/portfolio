@@ -28,7 +28,7 @@ function Cave(props) {
   const [rejectionCard, setRejectionCard] = useState(false);
   const [caveData, setCaveData] = useState(false)
   const [inventoryOpen, setInventoryOpen] = useState()
-  
+  const [caveRejectionCard, setCaveRejectionCard] = useState(false)
 
   useEffect(() => {
     axios.get("/api/cave").then((res) => {
@@ -153,7 +153,7 @@ function Cave(props) {
   };
 
   const toggleRejectionCard = () => {
-    setRejectionCard(!rejectionCard);
+    setCaveRejectionCard(!caveRejectionCard);
   };
 
   const toggleGoUp = () => {
@@ -334,7 +334,9 @@ function Cave(props) {
         </Button>
       </Card>
       <Card
-        className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
+        className={`${
+          caveRejectionCard ? "answer-card" : "answer-card-closed"
+        }`}
       >
         <Typography
           variant="h6"
@@ -384,6 +386,24 @@ function Cave(props) {
           You pick up the fancy hat.
         </Typography>
         <Button onClick={toggleHatCard} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          That item is either not useful here or not useful here yet.
+        </Typography>
+        <Button
+          onClick={() => setRejectionCard(false)}
+          variant="contained"
+          color="primary"
+        >
           CLOSE
         </Button>
       </Card>

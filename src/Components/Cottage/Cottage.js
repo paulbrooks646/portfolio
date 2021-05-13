@@ -39,7 +39,7 @@ function Cottage(props) {
       if (res.data[0].first_time) {
         setFirstTimeCard(true);
       }
-      props.getCottage(res.data[0]);
+      setCottageData(res.data[0]);
       setUpCharacter(true);
 
       setIsLoading(false);
@@ -89,22 +89,22 @@ function Cottage(props) {
   };
 
   const toggleHouseFive = () => {
-    if (!props.cottage.cottage.protection_used) {
+    if (!cottageData.protection_used) {
       setLaserRejectionCard(true);
-    } else if (!props.cottage.cottage.pod_taken) {
+    } else if (!cottageData.pod_taken) {
       setPodRejectionCard(true);
-    } else if (!props.cottage.cottage.fire_used) {
+    } else if (!cottageData.fire_used) {
       setBramblesRejectionCard(true);
-    } else if (!props.cottage.cottage.door_unlocked) {
-      if (props.cottage.cottage.master_thief) {
+    } else if (!cottageData.door_unlocked) {
+      if (cottageData.master_thief) {
         axios.post("/api/houseFiveLock").then(res => {
-          props.getCottage(res.data[0])
+          setCottageData(res.data[0])
           setLockCard(true)
         })
       } else {
         setLockRejectionCard(true);
       }
-    } else if (!props.cottage.cottage.open_used) {
+    } else if (!cottageData.open_used) {
       setDoorRejectionCard(true);
     } else {
       props.history.push("/HouseFive");
@@ -112,11 +112,11 @@ function Cottage(props) {
   };
 
   const togglePurse = () => {
-    if (!props.cottage.cottage.protection_used) {
+    if (!cottageData.protection_used) {
       setLaserRejectionCard(true);
-    } else if (!props.cottage.cottage.pod_taken) {
+    } else if (!cottageData.pod_taken) {
       setPodRejectionCard(true);
-    } else if (!props.cottage.cottage.fire_used) {
+    } else if (!cottageData.fire_used) {
       setBramblesRejectionCard(true);
     } else {
       axios.post("/api/coin").then((res) => {
@@ -130,7 +130,7 @@ function Cottage(props) {
               axios.post("/api/coin").then((res) => {
                 props.getUser(res.data);
                 axios.post("/api/purseTaken").then((res) => {
-                  props.getCottage(res.data[0]);
+                  setCottageData(res.data[0]);
                   setPurseCard(true);
                 });
               });
@@ -145,19 +145,19 @@ function Cottage(props) {
     axios.post("/api/coin").then((res) => {
       props.getUser(res.data);
       axios.post("/api/cottageCoin").then((res) => {
-        props.getCottage(res.data[0]);
+        setCottageData(res.data[0]);
       });
     });
   };
 
   const togglePod = () => {
-    if (!props.cottage.cottage.protection_used) {
+    if (!cottageData.protection_used) {
       setLaserRejectionCard(true);
     } else {
       axios.post("/api/pod").then((res) => {
         props.getInventory(res.data);
         axios.get("/api/cottage").then((res) => {
-          props.getCottage(res.data[0]);
+          setCottageData(res.data[0]);
           setPodCard(true);
         });
       });
@@ -165,17 +165,17 @@ function Cottage(props) {
   };
 
   const toggleLevitation = () => {
-    if (!props.cottage.cottage.protection_used) {
+    if (!cottageData.protection_used) {
       setLaserRejectionCard(true);
-    } else if (!props.cottage.cottage.pod_taken) {
+    } else if (!cottageData.pod_taken) {
       setPodRejectionCard(true);
-    } else if (!props.cottage.cottage.fire_used) {
+    } else if (!cottageData.fire_used) {
       setBramblesRejectionCard(true);
     } else {
       axios.post("/api/levitation").then((res) => {
         props.getInventory(res.data);
         axios.get("/api/cottage").then((res) => {
-          props.getCottage(res.data[0]);
+          setCottageData(res.data[0]);
           setLevitationCard(true);
         });
       });
@@ -183,9 +183,9 @@ function Cottage(props) {
   };
 
   const toggleBrambles = () => {
-    if (!props.cottage.cottage.protection_used) {
+    if (!cottageData.protection_used) {
       setLaserRejectionCard(true);
-    } else if (!props.cottage.cottage.pod_taken) {
+    } else if (!cottageData.pod_taken) {
       setPodRejectionCard(true);
     } else {
       setBrambleCard(true);
@@ -193,17 +193,17 @@ function Cottage(props) {
   };
 
   const toggleInvisibility = () => {
-    if (!props.cottage.cottage.protection_used) {
+    if (!cottageData.protection_used) {
       setLaserRejectionCard(true);
-    } else if (!props.cottage.cottage.pod_taken) {
+    } else if (!cottageData.pod_taken) {
       setPodRejectionCard(true);
-    } else if (!props.cottage.cottage.fire_used) {
+    } else if (!cottageData.fire_used) {
       setBramblesRejectionCard(true);
     } else {
       axios.post("/api/invisibility").then((res) => {
         props.getInventory(res.data);
         axios.get("/api/cottage").then((res) => {
-          props.getCottage(res.data[0]);
+          setCottageData(res.data[0]);
           setInvisibilityCard(true);
         });
       });
@@ -212,7 +212,7 @@ function Cottage(props) {
 
   const toggleFirstTime = () => {
     axios.post("/api/cottageFirst").then((res) => {
-      props.getCottage(res.data[0]);
+      setCottageData(res.data[0]);
       setFirstTimeCard(false);
     });
   };
@@ -268,16 +268,14 @@ function Cottage(props) {
           <div className="cottage-middle-middle">
             <div
               className={`${
-                !props.cottage.cottage.protection_used
-                  ? "lasers"
-                  : "lasers-closed"
+                !cottageData.protection_used ? "lasers" : "lasers-closed"
               }`}
               onClick={() => setLaserCard(true)}
             ></div>
             <div className="pod-div">
               <div
                 className={`${
-                  !props.cottage.cottage.pod_taken
+                  !cottageData.pod_taken
                     ? "dashboard-pod"
                     : "dahsboard-pod-closed"
                 }`}
@@ -285,8 +283,7 @@ function Cottage(props) {
               ></div>
               <div
                 className={`${
-                  !props.cottage.cottage.coin_taken &&
-                  props.cottage.cottage.pod_taken
+                  !cottageData.coin_taken && cottageData.pod_taken
                     ? "coin"
                     : "coin-closed"
                 }`}
@@ -295,9 +292,7 @@ function Cottage(props) {
             </div>
             <div
               className={`${
-                !props.cottage.cottage.fire_used
-                  ? "brambles"
-                  : "brambles-closed"
+                !cottageData.fire_used ? "brambles" : "brambles-closed"
               }`}
               onClick={toggleBrambles}
             ></div>
@@ -305,7 +300,7 @@ function Cottage(props) {
           <div className="cottage-middle-bottom">
             <div
               className={`${
-                !props.cottage.cottage.purse_taken ? "pouch" : "pouch-closed"
+                !cottageData.purse_taken ? "pouch" : "pouch-closed"
               }`}
               onClick={togglePurse}
             ></div>
@@ -322,9 +317,7 @@ function Cottage(props) {
               <div className="inner-scroll-div">
                 <div
                   className={`${
-                    !props.cottage.cottage.levitation_taken
-                      ? "scroll"
-                      : "scroll-closed"
+                    !cottageData.levitation_taken ? "scroll" : "scroll-closed"
                   }`}
                   onClick={toggleLevitation}
                 ></div>
@@ -332,9 +325,7 @@ function Cottage(props) {
               <div className="inner-scroll-div">
                 <div
                   className={`${
-                    !props.cottage.cottage.invisibility_taken
-                      ? "scroll"
-                      : "scroll-closed"
+                    !cottageData.invisibility_taken ? "scroll" : "scroll-closed"
                   }`}
                   onClick={toggleInvisibility}
                 ></div>
@@ -615,6 +606,24 @@ function Cottage(props) {
         </Typography>
         <Button
           onClick={() => setLockCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          That item is either not useful here or not useful here yet.
+        </Typography>
+        <Button
+          onClick={() => setRejectionCard(false)}
           variant="contained"
           color="primary"
         >

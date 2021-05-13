@@ -63,7 +63,7 @@ function Dashboard(props) {
   const [inventoryOpen, setInventoryOpen] = useState(false);
   const [dashboardData, setDashboardData] = useState();
   const [rejectionCard, setRejectionCard] = useState(false);
-  const [homeCard, setHomeCard] = useState(false)
+  const [homeCard, setHomeCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/dashboard").then((res) => {
@@ -144,10 +144,10 @@ function Dashboard(props) {
               props.getInventory(res.data);
             });
           });
-        })
+        });
       } else {
-        setRejectionCard(true)
-      };
+        setRejectionCard(true);
+      }
     } else {
       setRejectionCard(true);
     }
@@ -376,7 +376,9 @@ function Dashboard(props) {
       </div>
       <div className="dashboard-body">
         <div className="dashboard-top">
-          <div className="dashboard-top-left"><div className="triangle"></div></div>
+          <div className="dashboard-top-left">
+            <div className="triangle"></div>
+          </div>
           <div className="dashboard-top-middle">
             <div className="dashboard-town" onClick={toggleGoUp}>
               <ArrowUpward />

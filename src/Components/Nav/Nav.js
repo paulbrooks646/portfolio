@@ -28,11 +28,6 @@ function Nav(props) {
   const [knifeCard, setKnifeCard] = useState(false);
   const [potatoesCard, setPotatoesCard] = useState(false);
   const [bowCard, setBowCard] = useState(false);
-  const [iceCard, setIceCard] = useState(false);
-  const [armorCard, setArmorCard] = useState(false);
-  const [cloakCard, setCloakCard] = useState(false);
-  const [speedCard, setSpeedCard] = useState(false);
-  const [axeCard, setAxeCard] = useState(false);
   const [swordCard, setSwordCard] = useState(false);
   const [podCard, setPodCard] = useState(false);
   const [protectionCard, setProtectionCard] = useState(false);
@@ -469,7 +464,7 @@ function Nav(props) {
       <button className="nav-logout" onClick={logout}>
         Logout
       </button>
-      <Card id={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="secondary"
@@ -485,7 +480,7 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${nutCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${nutCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="secondary"
@@ -502,7 +497,7 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${hatCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${hatCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="secondary"
@@ -518,7 +513,7 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${showLetterCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${showLetterCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="secondary"
@@ -535,7 +530,7 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${bottleCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${bottleCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="primary"
@@ -552,7 +547,7 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${manureCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${manureCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="primary"
@@ -570,7 +565,7 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${fluteCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${fluteCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="primary"
@@ -587,7 +582,7 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${flowerCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${flowerCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="primary"
@@ -605,7 +600,7 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${ribbonCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${ribbonCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="primary"
@@ -622,7 +617,7 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${meatCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${meatCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="primary"
@@ -640,7 +635,7 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${ropeCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${ropeCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="primary"
@@ -659,7 +654,7 @@ function Nav(props) {
         </Button>
       </Card>
      
-      <Card id={`${potatoesCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${potatoesCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="primary"
@@ -676,7 +671,7 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${knifeCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${knifeCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="primary"
@@ -692,7 +687,7 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${woodCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${woodCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="primary"
@@ -708,7 +703,7 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${bowCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${bowCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="primary"
@@ -725,88 +720,8 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${iceCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="answer-card-description"
-        >
-          As you read the magic words, a small segment of coals turns slightly
-          blue.
-        </Typography>
-        <Button
-          onClick={() => setIceCard(false)}
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card id={`${armorCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="answer-card-description"
-        >
-          You put on your armor.
-        </Typography>
-        <Button
-          onClick={() => setArmorCard(false)}
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card id={`${cloakCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="answer-card-description"
-        >
-          You put on your cloak. The heat in the area no longer bothers you.
-        </Typography>
-        <Button
-          onClick={() => setCloakCard(false)}
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card id={`${speedCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="answer-card-description"
-        >
-          As you read the scroll you feel significantly quicker.
-        </Typography>
-        <Button
-          onClick={() => setSpeedCard(false)}
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card id={`${axeCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="answer-card-description"
-        >
-          Weilding the ultimate axe, you feel very powerful.
-        </Typography>
-        <Button
-          onClick={() => setAxeCard(false)}
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card id={`${swordCard ? "answer-card" : "answer-card-closed"}`}>
+     
+      <Card className={`${swordCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="primary"
@@ -824,7 +739,7 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${podCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${podCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="primary"
@@ -837,7 +752,7 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${protectionCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${protectionCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="primary"
@@ -855,7 +770,7 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${fireCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${fireCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="primary"
@@ -872,7 +787,7 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${openCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${openCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="primary"
@@ -889,7 +804,7 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card id={`${pickCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${pickCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="primary"

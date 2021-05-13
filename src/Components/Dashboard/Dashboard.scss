@@ -5,22 +5,9 @@
     @include row(35vh);
 
     .dashboard-top-left {
-height: 100%;
-  width: 40vw;
-  border: solid;
-      display: grid;
-      grid-template-columns: repeat(4, 25px);
-      grid-template-rows: repeat(4, 25px) ;
-      grid-gap: 5px;
-
-      .triangle {
-
-border: solid;
-  border-radius: 50%;
-  background-color: green;
-      }
-     
-  
+       background-image: url("../../Images/Grass.png");
+      background-size: 100% 100%;
+      @include section(40vw);
     }
 
     .dashboard-top-middle {

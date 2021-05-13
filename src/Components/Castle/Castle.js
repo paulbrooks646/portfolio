@@ -53,6 +53,7 @@ function Castle(props) {
   const [rejectionCard, setRejectionCard] = useState(false);
   const [castleData, setCastleData] = useState()
   const [inventoryOpen, setInentoryOpen] = useState(false);
+  const [castleRejectionCard, setCastleRejectionCard] = useState(false)
 
 
   useEffect(() => {
@@ -149,8 +150,7 @@ function Castle(props) {
     if (castleData.nuts_given === true) {
       setGuard(!guard);
     } else {
-      setRejectionCard(true);
-      console.log("false");
+      setCastleRejectionCard(true);
     }
   };
 
@@ -625,7 +625,9 @@ function Castle(props) {
         </Button>
       </Card>
       <Card
-        className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
+        className={`${
+          castleRejectionCard ? "answer-card" : "answer-card-closed"
+        }`}
       >
         <Typography
           variant="h6"
@@ -635,7 +637,7 @@ function Castle(props) {
           I don't talk to peasants!!!
         </Typography>
         <Button
-          onClick={() => setRejectionCard(false)}
+          onClick={() => setCastleRejectionCard(false)}
           variant="contained"
           color="primary"
         >
@@ -655,6 +657,24 @@ function Castle(props) {
         </Typography>
         <Button
           onClick={() => setNotAChance(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          That item is either not useful here or not useful here yet.
+        </Typography>
+        <Button
+          onClick={() => setRejectionCard(false)}
           variant="contained"
           color="primary"
         >

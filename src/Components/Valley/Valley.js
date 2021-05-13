@@ -7,6 +7,9 @@ import axios from "axios";
 import "./Valley.scss";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
+import Card from "@material-ui/core/Card";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import Character from "../Character/Character"
 import Loading from "../Loading/Loading"
 
@@ -114,6 +117,8 @@ function Valley(props) {
   
 
   return (
+
+    isLoading ? <Loading/> :
     <div className="main">
       <div className="nav-main">
         <div className="inventory-div">
@@ -205,6 +210,24 @@ function Valley(props) {
           <div className="valley-bottom-right"></div>
         </div>
       </div>
+      <Card
+        className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          That item is either not useful here or not useful here yet.
+        </Typography>
+        <Button
+          onClick={() => setRejectionCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }

@@ -27,11 +27,12 @@ function Tower(props) {
   const [answerTwo, setAnswerTwo] = useState(false);
   const [answerThree, setAnswerThree] = useState(false);
   const [answerFour, setAnswerFour] = useState(false);
-  const [rejectionCard, setRejectionCard] = useState(false);
+  const [rejectionCardThree, setRejectionCardThree] = useState(false);
   const [firstTime, setFirstTime] = useState(false);
   const [rejectionCardTwo, setRejectionCardTwo] = useState(false);
   const [inventoryOpen, setInventoryOpen] = useState(false)
   const [towerData, setTowerData] = useState()
+  const [rejectionCard, setRejectionCard] = useState()
 
   useEffect(() => {
     axios.get("/api/tower").then((res) => {
@@ -125,7 +126,7 @@ function Tower(props) {
     } else if (props.tower.tower.flowers_given === true) {
       setPrincess(true);
     } else {
-      setRejectionCard(true);
+      setRejectionCardThree(true);
     }
   };
 
@@ -296,7 +297,9 @@ function Tower(props) {
         </Button>
       </Card>
       <Card
-        className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
+        className={`${
+          rejectionCardThree ? "answer-card" : "answer-card-closed"
+        }`}
       >
         <Typography
           variant="h6"
@@ -306,7 +309,7 @@ function Tower(props) {
           How droll! The peasant thinks I would talk to him.
         </Typography>
         <Button
-          onClick={() => setRejectionCard(false)}
+          onClick={() => setRejectionCardThree(false)}
           variant="contained"
           color="primary"
         >
@@ -377,6 +380,24 @@ function Tower(props) {
         </Typography>
         <Button
           onClick={() => setFirstTime(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          That item is either not useful here or not useful here yet.
+        </Typography>
+        <Button
+          onClick={() => setRejectionCard(false)}
           variant="contained"
           color="primary"
         >

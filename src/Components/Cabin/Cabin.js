@@ -29,6 +29,7 @@ function Cabin(props) {
   const [toyCard, setToyCard] = useState(false);
   const [cabinData, setCabinData] = useState()
   const [inventoryOpen, setInentoryOpen] = useState(false);
+  const [cabinRejectionCard, setCabinRejectionCard] = useState(false)
   
   useEffect(() => {
     axios.get("/api/cabin").then((res) => {
@@ -96,7 +97,7 @@ function Cabin(props) {
         });
       });
     } else if (!cabinData.potatoes_given) {
-      setRejectionCard(true);
+      setCabinRejectionCard(true);
     } else {
       setOldMan(!oldMan);
     }
@@ -349,7 +350,9 @@ function Cabin(props) {
         </Button>
       </Card>
       <Card
-        className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
+        className={`${
+          cabinRejectionCard ? "answer-card" : "answer-card-closed"
+        }`}
       >
         <Typography
           variant="h6"
@@ -361,7 +364,7 @@ function Cabin(props) {
           getting along.
         </Typography>
         <Button
-          onClick={() => setRejectionCard(false)}
+          onClick={() => setCabinRejectionCard(false)}
           variant="contained"
           color="primary"
         >
@@ -378,6 +381,24 @@ function Cabin(props) {
         </Typography>
         <Button
           onClick={() => setToyCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          That item is either not useful here or not useful here yet.
+        </Typography>
+        <Button
+          onClick={() => setRejectionCard(false)}
           variant="contained"
           color="primary"
         >

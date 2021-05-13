@@ -26,6 +26,7 @@ function Garden(props) {
   const [answerFour, setAnswerFour] = useState(false);
   const [rejectionCard, setRejectionCard] = useState(false);
   const [rejectionCardTwo, setRejectionCardTwo] = useState(false);
+  const [rejectionCardThree, setRejectionCardThree] = useState(false)
   const [flowerRetrievalCard, setFlowerRetrievalCard] = useState(false);
   const [gardenData, setGardenData] = useState()
   const [inventoryOpen, setInventoryOpen] = useState(false)
@@ -117,7 +118,7 @@ function Garden(props) {
         });
       });
     } else {
-      setRejectionCard(true);
+      setRejectionCardThree(true);
     }
   };
 
@@ -270,7 +271,9 @@ function Garden(props) {
         </Button>
       </Card>
       <Card
-        className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
+        className={`${
+          rejectionCardThree ? "answer-card" : "answer-card-closed"
+        }`}
       >
         <Typography
           variant="h6"
@@ -280,7 +283,7 @@ function Garden(props) {
           Don't touch the flowers!!!
         </Typography>
         <Button
-          onClick={() => setRejectionCard(false)}
+          onClick={() => setRejectionCardThree(false)}
           className="castle-card-button"
           variant="contained"
           color="primary"
@@ -323,6 +326,24 @@ function Garden(props) {
         <Button
           onClick={() => setFlowerRetrievalCard(false)}
           className="castle-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          That item is either not useful here or not useful here yet.
+        </Typography>
+        <Button
+          onClick={() => setRejectionCard(false)}
           variant="contained"
           color="primary"
         >
