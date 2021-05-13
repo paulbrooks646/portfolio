@@ -22,11 +22,7 @@ function Nav(props) {
   const [flowerCard, setFlowerCard] = useState(false);
   const [ribbonCard, setRibbonCard] = useState(false);
   const [meatCard, setMeatCard] = useState(false);
-  const [ropeCard, setRopeCard] = useState(false);
-  const [homeCard, setHomeCard] = useState(false);
-  const [woodCard, setWoodCard] = useState(false);
-  const [knifeCard, setKnifeCard] = useState(false);
-  const [potatoesCard, setPotatoesCard] = useState(false);
+ 
   const [bowCard, setBowCard] = useState(false);
   const [swordCard, setSwordCard] = useState(false);
   const [podCard, setPodCard] = useState(false);
@@ -83,19 +79,7 @@ function Nav(props) {
         setRejectionCard(true);
       }
     }
-    if (item === "rope") {
-      if (props.location.pathname === "/Nest") {
-        axios.post("/api/useRope").then((res) => {
-          props.getInventory(res.data);
-        });
-        axios.get("/api/nest").then((res) => {
-          props.getNest(res.data[0]);
-          setRopeCard(true);
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
+    
     if (item === "meat") {
       if (props.location.pathname === "/Cave") {
         axios.post("/api/giveMeat").then((res) => {
@@ -109,18 +93,7 @@ function Nav(props) {
         setRejectionCard(true);
       }
     }
-    if (item === "cake") {
-      if (props.location.pathname === "/Pass") {
-        axios.post("/api/giveCake").then((res) => {
-          props.getInventory(res.data);
-          axios.get("/api/pass").then((res) => {
-            props.getPass(res.data[0]);
-          });
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
+  
     if (item === "ribbon") {
       if (props.location.pathname === "/Tower") {
         axios.post("/api/giveRibbon").then((res) => {
@@ -223,60 +196,7 @@ function Nav(props) {
       }
     }
     
-    if (item === "wood") {
-      if (
-        props.location.pathname === "/Cabin" &&
-        props.cabin.cabin.potatoes_given
-      ) {
-        axios.post("/api/giveWood").then(() => {
-          axios.get("/api/cabin").then((res) => {
-            props.getCabin(res.data[0]);
-            axios.get("/api/inventory").then((res) => {
-              props.getInventory(res.data);
-              setWoodCard(true);
-            });
-          });
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
-    if (item === "potatoes") {
-      if (props.location.pathname === "/Cabin") {
-        axios.post("/api/givePotatoes").then(() => {
-          axios.get("/api/cabin").then((res) => {
-            props.getCabin(res.data[0]);
-            axios.get("/api/inventory").then((res) => {
-              props.getInventory(res.data);
-              axios.post("/api/coin").then((res) => {
-                props.getUser(res.data);
-                setPotatoesCard(true);
-              });
-            });
-          });
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
-    if (item === "knife") {
-      if (
-        props.location.pathname === "/Cabin" &&
-        props.cabin.cabin.potatoes_given
-      ) {
-        axios.post("/api/giveKnife").then(() => {
-          axios.get("/api/cabin").then((res) => {
-            props.getCabin(res.data[0]);
-            axios.get("/api/inventory").then((res) => {
-              props.getInventory(res.data);
-              setKnifeCard(true);
-            });
-          });
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
+    
 
     if (item === "bow") {
       if (props.location.pathname === "/Forest") {
@@ -292,75 +212,7 @@ function Nav(props) {
       }
     }
 
-    if (item === "ice") {
-      if (props.location.pathname === "/Dragon") {
-        axios.post("/api/useIce").then((res) => {
-          props.getInventory(res.data);
-          axios.get("/api/dragon").then((res) => {
-            props.getDragon(res.data[0]);
-            setIceCard(true);
-          });
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
-
-    if (item === "armor") {
-      if (props.location.pathname === "/Dragon") {
-        axios.post("/api/useArmor").then((res) => {
-          props.getInventory(res.data);
-          axios.get("/api/dragon").then((res) => {
-            props.getDragon(res.data[0]);
-            setArmorCard(true);
-          });
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
-
-    if (item === "cloak") {
-      if (props.location.pathname === "/Dragon") {
-        axios.post("/api/useCloak").then((res) => {
-          props.getInventory(res.data);
-          axios.get("/api/dragon").then((res) => {
-            props.getDragon(res.data[0]);
-            setCloakCard(true);
-          });
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
-
-    if (item === "speed") {
-      if (props.location.pathname === "/Dragon") {
-        axios.post("/api/useSpeed").then((res) => {
-          props.getInventory(res.data);
-          axios.get("/api/dragon").then((res) => {
-            props.getDragon(res.data[0]);
-            setSpeedCard(true);
-          });
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
-
-    if (item === "axe") {
-      if (props.location.pathname === "/Dragon") {
-        axios.post("/api/useAxe").then((res) => {
-          props.getInventory(res.data);
-          axios.get("/api/dragon").then((res) => {
-            props.getDragon(res.data[0]);
-            setAxeCard(true);
-          });
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
+    
 
     if (item === "sword") {
       if (props.location.pathname === "/Swamp") {
@@ -635,74 +487,9 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card className={`${ropeCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="answer-card-description"
-        >
-          You tie one end of your rope into a knot and hurl it at the nest. The
-          knot gets wedged amid the branches. Using the rope you might be able
-          to get to the nest before the griffin can attack.
-        </Typography>
-        <Button
-          onClick={() => setRopeCard(false)}
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
+      
      
-      <Card className={`${potatoesCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="answer-card-description"
-        >
-          Thanks for the potatoes. I was running low on vittles. Here is a coin
-          in payment.
-        </Typography>
-        <Button
-          onClick={() => setPotatoesCard(false)}
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${knifeCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="answer-card-description"
-        >
-          Thanks for the new knife!
-        </Typography>
-        <Button
-          onClick={() => setKnifeCard(false)}
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${woodCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="answer-card-description"
-        >
-          Thanks for the wood!
-        </Typography>
-        <Button
-          onClick={() => setWoodCard(false)}
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
+     
       <Card className={`${bowCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"

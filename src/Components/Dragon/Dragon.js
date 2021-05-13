@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Dragon.scss";
@@ -19,9 +19,8 @@ function Dragon(props) {
   const [firstTimeCard, setFirstTimeCard] = useState(false);
   const [charcoalCard, setCharcoalCard] = useState(false);
   const [charcoalRejectionCard, setCharcoalRejectionCard] = useState(false);
-  const [charcoalRejectionCardTwo, setCharcoalRejectionCardTwo] = useState(
-    false
-  );
+  const [charcoalRejectionCardTwo, setCharcoalRejectionCardTwo] =
+    useState(false);
   const [seedCard, setSeedCard] = useState(false);
   const [seedRejectionCard, setSeedRejectionCard] = useState(false);
   const [dragonCard, setDragonCard] = useState(false);
@@ -32,9 +31,9 @@ function Dragon(props) {
   const [growRejectionCard, setGrowRejectionCard] = useState(false);
   const [scrollCard, setScrollCard] = useState(false);
   const [coinSuccess, setCoinSuccess] = useState(false);
-  const [rejectionCard, setRejectionCard] = useState(false)
-  const [dragonData, setDragonData] = useState(false)
-  const [inventoryOpen, setInventoryOpen] = useState(false)
+  const [rejectionCard, setRejectionCard] = useState(false);
+  const [dragonData, setDragonData] = useState(false);
+  const [inventoryOpen, setInventoryOpen] = useState(false);
   const [iceCard, setIceCard] = useState(false);
   const [armorCard, setArmorCard] = useState(false);
   const [cloakCard, setCloakCard] = useState(false);
@@ -70,15 +69,48 @@ function Dragon(props) {
   });
 
   const toggleItem = (item) => {
-    if (item === "flute") {
-      if (props.location.pathname === "/Tower") {
-        axios.post("/api/useFlute").then((res) => {
+    if (item === "ice") {
+      axios.post("/api/useIce").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/dragon").then((res) => {
           setDragonData(res.data[0]);
-          ;
+          setIceCard(true);
         });
-      } else {
-        setRejectionCard(true);
-      }
+      });
+    } else if (item === "armor") {
+      axios.post("/api/useArmor").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/dragon").then((res) => {
+          setDragonData(res.data[0]);
+          setArmorCard(true);
+        });
+      });
+    } else if (item === "cloak") {
+      axios.post("/api/useCloak").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/dragon").then((res) => {
+          setDragonData(res.data[0]);
+          setCloakCard(true);
+        });
+      });
+    } else if (item === "speed") {
+      axios.post("/api/useSpeed").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/dragon").then((res) => {
+          setDragonData(res.data[0]);
+          setSpeedCard(true);
+        });
+      });
+    } else if (item === "axe") {
+      axios.post("/api/useAxe").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/dragon").then((res) => {
+          setDragonData(res.data[0]);
+          setAxeCard(true);
+        });
+      });
+    } else {
+      setRejectionCard(true);
     }
   };
 
@@ -118,10 +150,7 @@ function Dragon(props) {
           setCharcoalCard(true);
         });
       });
-    } else if (
-      dragonData.ice_used &&
-      dragonData.charcoal_taken
-    ) {
+    } else if (dragonData.ice_used && dragonData.charcoal_taken) {
       setCharcoalRejectionCardTwo(true);
     } else if (!dragonData.ice_used) {
       setCharcoalRejectionCard(true);
@@ -463,7 +492,7 @@ function Dragon(props) {
           color="secondary"
           className="answer-card-description"
         >
-          Finally! You charge, screaming as you go. The dragon and meets your
+          Finally! You charge, screaming as you go. The dragon meets your
           charge. Its flames don't harm you. Its claws can't penetrate your
           armor. You are too quick for the dragon to flee. With a mighty swing
           of your axe, you sever the dragon's head from its body.
@@ -655,6 +684,6 @@ function Dragon(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory, logoutUser })(
   Dragon
 );

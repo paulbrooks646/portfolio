@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Mountain.scss";
@@ -35,18 +35,19 @@ function Mountain(props) {
   const [leftRight, setLeftRight] = useState(false);
   const [leftDown, setLeftDown] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [firstTimeCard, setFirstTimeCard] = useState(true);
+  const [firstTimeCard, setFirstTimeCard] = useState(false
+  );
   const [rockCard, setRockCard] = useState(false);
   const [coinCard, setCoinCard] = useState(false);
-  const [mountainData, setMountainData] = useState()
-  const [rejectionCard, setRejectionCard] = useState(false)
-  const [inventoryOpen, setInventoryOpen] = useState(false)
+  const [mountainData, setMountainData] = useState();
+  const [rejectionCard, setRejectionCard] = useState(false);
+  const [inventoryOpen, setInventoryOpen] = useState(false);
 
   useEffect(() => {
-    if (!mountainData.first_time) {
-      setFirstTimeCard(false);
-    }
     axios.get("/api/mountain").then((res) => {
+      if (res.data[0].first_time) {
+        setFirstTimeCard(true);
+      }
       setMountainData(res.data[0]);
 
       if (props.user.user.last === "pass") {
@@ -78,16 +79,7 @@ function Mountain(props) {
   });
 
   const toggleItem = (item) => {
-    if (item === "flute") {
-      if (props.location.pathname === "/Tower") {
-        axios.post("/api/useFlute").then((res) => {
-          setMountainData(res.data[0]);
-          ;
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
+    setRejectionCard(true);
   };
 
   const toggleRock = () => {
@@ -522,6 +514,6 @@ function Mountain(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory, logoutUser })(
   Mountain
 );

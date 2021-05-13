@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
+import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Nest.scss";
 import Character from "../Character/Character";
@@ -10,7 +11,6 @@ import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import ArrowForward from "@material-ui/icons/ArrowForward";
-import { getInventory } from "../../redux/inventoryReducer";
 
 function Nest(props) {
   const [failure, setFailure] = useState(false);
@@ -18,18 +18,24 @@ function Nest(props) {
   const [ribbonSuccess, setRibbonSuccess] = useState(false);
   const [featherSuccess, setFeatherSuccess] = useState(false);
   const [griffin, setGriffin] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [rightCharacter, setRightCharacter] = useState(false);
   const [rightRight, setRightRight] = useState(false);
-  const [inventoryOpen, setInventoryOpen] = useState(false)
-  const [rejectionCard, setRejectionCard] = useState(false)
-  const [nestData, setNestData] = useState()
+  const [inventoryOpen, setInventoryOpen] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false);
+  const [nestData, setNestData] = useState();
+  const [ropeCard, setRopeCard] = useState(false);
+  const [firstTimeCard, setFirstTimeCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/nest").then((res) => {
+      console.log(res.data[0])
+      if (res.data[0].first_time) {
+        setFirstTimeCard(true);
+      }
       setNestData(res.data[0]);
-      setIsLoading(false);
       setRightCharacter(true);
+      setIsLoading(false);
     });
   }, []);
 
@@ -51,15 +57,16 @@ function Nest(props) {
   });
 
   const toggleItem = (item) => {
-    if (item === "flute") {
-      if (props.location.pathname === "/Tower") {
-        axios.post("/api/useFlute").then((res) => {
-          setNestData(res.data[0]);
-          ;
-        });
-      } else {
-        setRejectionCard(true);
-      }
+    if (item === "rope") {
+      axios.post("/api/useRope").then((res) => {
+        props.getInventory(res.data);
+      });
+      axios.get("/api/nest").then((res) => {
+        setNestData(res.data[0]);
+        setRopeCard(true);
+      });
+    } else {
+      setRejectionCard(true);
     }
   };
 
@@ -74,6 +81,7 @@ function Nest(props) {
   const toggleFirst = () => {
     axios.post("/api/nestFirst").then((res) => {
       setNestData(res.data[0]);
+      setFirstTimeCard(false);
     });
   };
 
@@ -223,9 +231,7 @@ function Nest(props) {
         </div>
       </div>
       <Card
-        className={`${
-          nestData.first_time ? "answer-card" : "answer-card-closed"
-        }`}
+        className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}
       >
         <Typography
           variant="h6"
@@ -327,11 +333,29 @@ function Nest(props) {
           CLOSE
         </Button>
       </Card>
+      <Card className={`${ropeCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          You tie one end of your rope into a knot and hurl it at the nest. The
+          knot gets wedged amid the branches. Using the rope you might be able
+          to get to the nest before the griffin can attack.
+        </Typography>
+        <Button
+          onClick={() => setRopeCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory, logoutUser })(
   Nest
 );

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Cabin.scss";
@@ -17,7 +17,7 @@ import ListItem from "@material-ui/core/ListItem";
 function Cabin(props) {
   const [upCharacter, setUpCharacter] = useState(false);
   const [upUp, setUpUp] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [mushroomCard, setMushroomCard] = useState(false);
   const [answerOne, setAnswerOne] = useState(false);
   const [answerTwo, setAnswerTwo] = useState(false);
@@ -27,10 +27,13 @@ function Cabin(props) {
   const [firstTimeCard, setFirstTimeCard] = useState(false);
   const [rejectionCard, setRejectionCard] = useState(false);
   const [toyCard, setToyCard] = useState(false);
-  const [cabinData, setCabinData] = useState()
+  const [cabinData, setCabinData] = useState();
   const [inventoryOpen, setInentoryOpen] = useState(false);
-  const [cabinRejectionCard, setCabinRejectionCard] = useState(false)
-  
+  const [cabinRejectionCard, setCabinRejectionCard] = useState(false);
+   const [woodCard, setWoodCard] = useState(false);
+   const [knifeCard, setKnifeCard] = useState(false);
+   const [potatoesCard, setPotatoesCard] = useState(false);
+
   useEffect(() => {
     axios.get("/api/cabin").then((res) => {
       setCabinData(res.data[0]);
@@ -44,34 +47,67 @@ function Cabin(props) {
 
   const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
 
-   const logout = () => {
-     axios.delete("/api/logout").then(() => {
-       props.logoutUser();
-       props.history.push("/Auth");
-     });
-   };
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
 
-   const inventoryList = props.inventory.inventory.map((e, index) => {
-     return (
-       <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
-         {e}
-       </h4>
-     );
-   });
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
 
-   const toggleItem = (item) => {
-     if (item === "flute") {
-       if (props.location.pathname === "/Tower") {
-         axios.post("/api/useFlute").then((res) => {
-           setCabinData(res.data[0]);
-           ;
-         });
-       } else {
-         setRejectionCard(true);
-       }
-     }
-   };
-
+  const toggleItem = (item) => {
+    if (item === "wood") {
+      if (cabinData.potatoes_given) {
+        axios.post("/api/giveWood").then(() => {
+          axios.get("/api/cabin").then((res) => {
+            setCabinData(res.data[0]);
+            axios.get("/api/inventory").then((res) => {
+              props.getInventory(res.data);
+              setWoodCard(true);
+            });
+          });
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    } else if (item === "potatoes") {
+      axios.post("/api/givePotatoes").then(() => {
+        axios.get("/api/cabin").then((res) => {
+          setCabinData(res.data[0]);
+          axios.get("/api/inventory").then((res) => {
+            props.getInventory(res.data);
+            axios.post("/api/coin").then((res) => {
+              props.getUser(res.data);
+              setPotatoesCard(true);
+            });
+          });
+        });
+      });
+    } else if (item === "knife") {
+      if (cabinData.potatoes_given) {
+        axios.post("/api/giveKnife").then(() => {
+          axios.get("/api/cabin").then((res) => {
+            setCabinData(res.data[0]);
+            axios.get("/api/inventory").then((res) => {
+              props.getInventory(res.data);
+              setKnifeCard(true);
+            });
+          });
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    } else {
+      setRejectionCard(true)
+    }
+  };
 
   const toggleMushroom = () => {
     axios.post("/api/mushroom").then((res) => {
@@ -405,11 +441,62 @@ function Cabin(props) {
           CLOSE
         </Button>
       </Card>
+      <Card
+        className={`${potatoesCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          Thanks for the potatoes. I was running low on vittles. Here is a coin
+          in payment.
+        </Typography>
+        <Button
+          onClick={() => setPotatoesCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${knifeCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          Thanks for the new knife!
+        </Typography>
+        <Button
+          onClick={() => setKnifeCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${woodCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          Thanks for the wood!
+        </Typography>
+        <Button
+          onClick={() => setWoodCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory, logoutUser })(
   Cabin
 );

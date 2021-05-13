@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Pass.scss";
@@ -14,7 +14,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
 function Pass(props) {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [downRejection, setDownRejection] = useState(false);
   const [ogre, setOgre] = useState(false);
   const [ogreAnimation, setOgreAnimation] = useState(false);
@@ -26,12 +26,17 @@ function Pass(props) {
   const [upDown, setUpDown] = useState(false);
   const [coinCard, setCoinCard] = useState(false);
   const [gemCard, setGemCard] = useState(false);
-  const [rejectionCard, setRejectionCard] = useState(false)
-  const [inventoryOpen, setInventoryOpen] = useState(false)
-  const [passData, setPassData] = useState()
+  const [rejectionCard, setRejectionCard] = useState(false);
+  const [inventoryOpen, setInventoryOpen] = useState(false);
+  const [passData, setPassData] = useState();
+  const [cakeCard, setCakeCard] = useState(false)
+  const [firstTimeCard, setFirstTimeCard] = useState(false)
 
   useEffect(() => {
     axios.get("/api/pass").then((res) => {
+      if (res.data[0].first_time) {
+        setFirstTimeCard(true)
+      }
       setPassData(res.data[0]);
       if (props.user.user.last === "cabin") {
         setDownCharacter(true);
@@ -60,19 +65,21 @@ function Pass(props) {
   });
 
   const toggleItem = (item) => {
-    if (item === "flute") {
-      if (props.location.pathname === "/Tower") {
-        axios.post("/api/useFlute").then((res) => {
+    if (item === "cake") {
+      axios.post("/api/giveCake").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/pass").then((res) => {
           setPassData(res.data[0]);
-          ;
+          setCakeCard(true)
         });
-      } else {
-        setRejectionCard(true);
-      }
+      });
+    } else {
+      setRejectionCard(true);
     }
   };
 
   const toggleCakeGiven = () => {
+    setCakeCard(false)
     axios.post("/api/ogreMoved").then((res) => {
       setPassData(res.data[0]);
       setOgreAnimation(true);
@@ -122,6 +129,7 @@ function Pass(props) {
   const toggleFirst = () => {
     axios.post("/api/passFirst").then((res) => {
       setPassData(res.data[0]);
+      setFirstTimeCard(false)
     });
   };
 
@@ -289,7 +297,7 @@ function Pass(props) {
       </div>
       <Card
         className={`${
-          passData.first_time ? "answer-card" : "answer-card-closed"
+          firstTimeCard ? "answer-card" : "answer-card-closed"
         }`}
       >
         <Typography
@@ -344,8 +352,8 @@ function Pass(props) {
         </Button>
       </Card>
       <Card
-        id={`${
-          passData.cake_given && !passData.ogre_moved
+        className={`${
+          cakeCard
             ? "answer-card"
             : "answer-card-closed"
         }`}
@@ -423,6 +431,6 @@ function Pass(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory, logoutUser })(
   Pass
 );
