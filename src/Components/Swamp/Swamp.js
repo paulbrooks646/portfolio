@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Swamp.scss";
@@ -27,14 +27,15 @@ function Swamp(props) {
   const [logCard, setLogCard] = useState(false);
   const [logEmptyCard, setLogEmptyCard] = useState(false);
   const [firstTimeCard, setFirstTimeCard] = useState(false);
-  const [rejectionCard, setRejectionCard] = useState(false)
-  const [inventoryOpen, setInventoryOpen] = useState(false)
-  const [swampData, setSwampData] = useState()
+  const [rejectionCard, setRejectionCard] = useState(false);
+  const [inventoryOpen, setInventoryOpen] = useState(false);
+  const [swampData, setSwampData] = useState();
+  const [swordCard, setSwordCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/swamp").then((res) => {
       setSwampData(res.data[0]);
-      if (swampData.first_time) {
+      if (res.data[0].first_time) {
         setFirstTimeCard(true);
       }
       if (props.user.user.last === "forest") {
@@ -64,15 +65,16 @@ function Swamp(props) {
   });
 
   const toggleItem = (item) => {
-    if (item === "flute") {
-      if (props.location.pathname === "/Tower") {
-        axios.post("/api/useFlute").then((res) => {
+    if (item === "sword") {
+      axios.post("/api/useSword").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/swamp").then((res) => {
           setSwampData(res.data[0]);
-          ;
+          setSwordCard(true);
         });
-      } else {
-        setRejectionCard(true);
-      }
+      });
+    } else {
+      setRejectionCard(true);
     }
   };
 
@@ -382,11 +384,29 @@ function Swamp(props) {
           CLOSE
         </Button>
       </Card>
+      <Card className={`${swordCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          You charge, screaming and brandishing your sword. Seeing this, the
+          goblin quickly flees. Luckily, it is after he is gone that your sword
+          slips and sinks into the swamp.
+        </Typography>
+        <Button
+          onClick={() => setSwordCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory, logoutUser })(
   Swamp
 );

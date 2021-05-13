@@ -22,9 +22,6 @@ function Nav(props) {
   const [flowerCard, setFlowerCard] = useState(false);
   const [ribbonCard, setRibbonCard] = useState(false);
   const [meatCard, setMeatCard] = useState(false);
-
-  const [swordCard, setSwordCard] = useState(false);
-  const [podCard, setPodCard] = useState(false);
   const [protectionCard, setProtectionCard] = useState(false);
   const [fireCard, setFireCard] = useState(false);
   const [openCard, setOpenCard] = useState(false);
@@ -194,27 +191,9 @@ function Nav(props) {
       }
     }
 
-    if (item === "sword") {
-      if (props.location.pathname === "/Swamp") {
-        axios.post("/api/useSword").then((res) => {
-          props.getInventory(res.data);
-          axios.get("/api/swamp").then((res) => {
-            props.getSwamp(res.data[0]);
-            setSwordCard(true);
-          });
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
+   
 
-    if (item === "pod") {
-      if (props.location.pathname === "/Bog") {
-        setPodCard(true);
-      } else {
-        setRejectionCard(true);
-      }
-    }
+    
 
     if (item === "protection") {
       if (props.location.pathname === "/Cottage") {
@@ -269,15 +248,7 @@ function Nav(props) {
     }
   };
 
-  const togglePod = () => {
-    setPodCard(false);
-    axios.post("/api/podThrown").then((res) => {
-      props.getInventory(res.data);
-      axios.get("/api/bog").then((res) => {
-        props.getBog(res.data[0]);
-      });
-    });
-  };
+  
 
   return (
     <div className="nav-main">
@@ -476,37 +447,8 @@ function Nav(props) {
         </Button>
       </Card>
 
-      <Card className={`${swordCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="answer-card-description"
-        >
-          You charge, screaming and brandishing your sword. Seeing this, the
-          goblin quickly flees. Luckily, it is after he is gone that your sword
-          slips and sinks into the swamp.
-        </Typography>
-        <Button
-          onClick={() => setSwordCard(false)}
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${podCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="answer-card-description"
-        >
-          Hoping that the hydra is covered in sulfur, you stand back and hurl
-          the pod at it.
-        </Typography>
-        <Button onClick={togglePod} variant="contained" color="primary">
-          CLOSE
-        </Button>
-      </Card>
+     
+     
       <Card
         className={`${protectionCard ? "answer-card" : "answer-card-closed"}`}
       >
