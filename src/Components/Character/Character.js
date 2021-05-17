@@ -8,8 +8,9 @@ function Character(props) {
 
 return (
   <div className="character">
+    <div className="hair"></div>
     <div className="head">
-      <div className="left-ear"></div>
+      <div className="left-ear"><div className="left-ear-hole"></div></div>
       <div className="face">
         <div className="eyes">
           <div className="eye">
@@ -26,7 +27,7 @@ return (
         <div className="nose"></div>
         <div className="mouth"></div>
       </div>
-      <div className="right-ear"></div>
+      <div className="right-ear"><div className="right-ear-hole"></div></div>
     </div>
     <div className="body">
       <div className="neck"></div>
