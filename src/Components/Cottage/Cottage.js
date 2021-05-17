@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Cottage.scss";
@@ -15,7 +15,7 @@ import Loading from "../Loading/Loading";
 function Cottage(props) {
   const [upCharacter, setUpCharacter] = useState(false);
   const [upUp, setUpUp] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [laserRejectionCard, setLaserRejectionCard] = useState(false);
   const [bramblesRejectionCard, setBramblesRejectionCard] = useState(false);
   const [podRejectionCard, setPodRejectionCard] = useState(false);
@@ -33,6 +33,9 @@ function Cottage(props) {
   const [rejectionCard, setRejectionCard] = useState(false)
   const [inventoryOpen, setInventoryOpen] = useState(false)
   const [cottageData, setCottageData] = useState()
+  const [protectionCard, setProtectionCard] = useState(false);
+  const [fireCard, setFireCard] = useState(false);
+  const [openCard, setOpenCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/cottage").then((res) => {
@@ -64,14 +67,52 @@ function Cottage(props) {
   });
 
   const toggleItem = (item) => {
-    if (item === "flute") {
-      if (props.location.pathname === "/Tower") {
-        axios.post("/api/useFlute").then((res) => {
-          setCottageData(res.data[0]);
+    if (item === "protection") {
+     
+        axios.post("/api/useProtection").then((res) => {
+          props.getInventory(res.data);
+          axios.get("/api/cottage").then((res) => {
+            setCottageData(res.data[0]);
+            setProtectionCard(true);
+          });
+        });
+     
+    }
+
+   else if (item === "fire") {
+      if (
+        
+        cottageData.pod_taken
+      ) {
+        axios.post("/api/useFire").then((res) => {
+          props.getInventory(res.data);
+          axios.get("/api/cottage").then((res) => {
+            setCottageData(res.data[0]);
+            setFireCard(true);
+          });
         });
       } else {
         setRejectionCard(true);
       }
+    }
+
+   else if (item === "open") {
+      if (
+        
+        cottageData.door_unlocked
+      ) {
+        axios.post("/api/useOpen").then((res) => {
+          props.getInventory(res.data);
+          axios.get("/api/cottage").then((res) => {
+            setCottageData(res.data[0]);
+            setOpenCard(true);
+          });
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    } else {
+      setRejectionCard(true)
     }
   };
 
@@ -630,11 +671,65 @@ function Cottage(props) {
           CLOSE
         </Button>
       </Card>
+      <Card
+        className={`${protectionCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          As you read the protection scroll, you glow blue. Nervously, you step
+          into the laser field. The lasers sizzle into nothingness as they hit
+          you until they are all gone. You stop glowing.
+        </Typography>
+        <Button
+          onClick={() => setProtectionCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${fireCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          As you read the fire scroll, the wall of brambles bursts into flames.
+          After a few glorious minutes, the wall is nothing but ash.
+        </Typography>
+        <Button
+          onClick={() => setFireCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${openCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          Now that the door is unlocked, you read the open scroll. The door pops
+          open. For better or worse, you can now enter the cottage.
+        </Typography>
+        <Button
+          onClick={() => setOpenCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory, logoutUser })(
   Cottage
 );

@@ -4,55 +4,63 @@
   @include flex(flex-start);
   z-index: 1;
 
-  .face {
-    border-radius: 50%;
-    width: 60px;
-    height: 70px;
-    background-color: peachpuff;
-    @include flex(space-evenly);
-    border-top: solid yellow 5px;
+  .head {
+    .left-ear {
+    }
 
-    .eyes {
-      display: flex;
-      justify-content: center;
-      width: 100%;
+    .face {
+      border-radius: 50%;
+      width: 70px;
+      height: 80px;
+      background-color: peachpuff;
+      @include flex(space-evenly);
+      border-top: solid yellow 8px;
 
-      .eye {
-        border-radius: 50%;
-        background-color: white;
-        height: 18px;
-        width: 18px;
-        @include flex(center);
+      .eyes {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
 
-        .iris {
+        .eye {
           border-radius: 50%;
-          background-color: green;
-          height: 8px;
-          width: 8px;
-          @include flex(center);
+          background-color: white;
+          height: 13px;
+          width: 18px;
+          border: solid;
+          @include flex(space-evenly);
 
-          .pupil {
+          .iris {
             border-radius: 50%;
-            background-color: black;
-            height: 2px;
-            width: 2px;
+            background-color: green;
+            height: 5px;
+            width: 5px;
+            @include flex(center);
+
+            .pupil {
+              border-radius: 50%;
+              background-color: black;
+              height: 2px;
+              width: 2px;
+            }
           }
         }
       }
-    }
 
-    .nose {
-      border-radius: 50%;
-      background-color: black;
-      height: 3px;
-      width: 2px;
-    }
+      .nose {
+        border-radius: 50%;
+        background-color: black;
+        height: 3px;
+        width: 2px;
+      }
 
-    .mouth {
-      border-radius: 50%;
-      background-color: red;
-      width: 20px;
-      height: 3px;
+      .mouth {
+        border-radius: 50%;
+        background-color: red;
+        width: 20px;
+        height: 3px;
+      }
+    }
+    .right-ear {
     }
   }
   .body {

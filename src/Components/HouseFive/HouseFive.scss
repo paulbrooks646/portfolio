@@ -1,113 +1,429 @@
 @import "../mixins";
 
 .houseFive-body {
-  background-image: url("../../Images/Floor.png");
-  background-size: 100% 100%;
-
   .houseFive-top {
     @include row(35vh);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    border-bottom: solid black 3px;
+    background-color: lightcyan;
 
-    .houseFive-top-left {
-      @include section(40vw);
-      @include flex(center);
+    // background-color: silver;
+    // background-image: linear-gradient(335deg, #b00 23px, transparent 23px),
+    //   linear-gradient(155deg, #d00 23px, transparent 23px),
+    //   linear-gradient(335deg, #b00 23px, transparent 23px),
+    //   linear-gradient(155deg, #d00 23px, transparent 23px);
+    // background-size: 58px 58px;
+    // background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
 
-      .table {
-        background-image: url("../../Images/TableOne.png");
-        background-size: 100% 100%;
-        height: 150px;
-        width: 150px;
-        display: flex;
-        justify-content: center;
+    .door {
+      height: 200px;
+      width: 140px;
+      padding: 10px;
+      @include center(flex-start);
+      background-color: chocolate;
+      border: solid black 2px;
 
-        .paper {
-          background-image: url("../../Images/Scroll.jpg");
-          background-size: 100% 100%;
-          height: 75px;
-          width: 75px;
+      .door-knob {
+        border-radius: 50%;
+        background-color: black;
+        height: 20px;
+        width: 20px;
+      }
+    }
+
+    .dining-div {
+      display: flex;
+      height: 200px;
+      width: 500px;
+      align-items: flex-end;
+      justify-content: space-evenly;
+
+      .chair-div-left {
+        @include flex(flex-start);
+        height: 200px;
+        width: 100px;
+        transform: scaleX(-1);
+
+        .chair-top-div {
+          width: 100%;
+          height: 90px;
+          @include center(flex-end);
+
+          .chair-top {
+            height: 100%;
+            width: 25px;
+            background-color: chocolate;
+          }
+        }
+
+        .chair-seat {
+          width: 100%;
+          height: 25px;
+          background-color: chocolate;
+        }
+
+        .chair-leg-div {
+          @include center(space-between);
+          height: 90px;
+          width: 100%;
+
+          .chair-leg {
+            height: 100%;
+            width: 25px;
+            background-color: chocolate;
+          }
+        }
+      }
+
+      .table-div {
+        @include flex(flex-start);
+        width: 200px;
+        height: 125px;
+
+        .table-top {
+          width: 200px;
+          height: 25px;
+          background-color: chocolate;
+        }
+
+        .table-leg-div {
+          @include center(space-between);
+          width: 200px;
+          height: 100px;
+
+          .table-leg {
+            height: 100px;
+            width: 30px;
+            background-color: chocolate;
+          }
+        }
+      }
+      .chair-div {
+        @include flex(flex-start);
+        height: 200px;
+        width: 100px;
+
+        .chair-top-div {
+          width: 100%;
+          height: 90px;
+          @include center(flex-end);
+
+          .chair-top {
+            height: 100%;
+            width: 25px;
+            background-color: chocolate;
+          }
+        }
+
+        .chair-seat {
+          width: 100%;
+          height: 25px;
+          background-color: chocolate;
+        }
+
+        .chair-leg-div {
+          @include center(space-between);
+          height: 90px;
+          width: 100%;
+
+          .chair-leg {
+            height: 100%;
+            width: 25px;
+            background-color: chocolate;
+          }
         }
       }
     }
 
-    .houseFive-top-middle {
-      background-image: url("../../Images/StairsOne.png");
-      background-size: 100% 100%;
-      @include section(20vw);
-      @include flex(center);
-    }
-
-    .houseFive-top-right {
-      @include section(40vw);
+    .dresser-div {
       display: flex;
-      justify-content: center;
+      height: 250px;
+      width: 200px;
 
-      .cupboard {
-        background-image: url("../../Images/Empty.png");
-        background-size: 100% 100%;
-        height: 150px;
-        width: 200px;
+      .dresser-side {
+        height: 100%;
+        width: 25px;
+        background-color: chocolate;
+      }
+      .dresser-middle {
+        @include flex(space-between);
+        height: 100%;
+        width: 150px;
+
+        .shelf {
+          width: 100%;
+          height: 10px;
+          background-color: chocolate;
+        }
       }
     }
   }
 
-  .houseFive-middle {
-    @include row(20vh);
+  .houseFive-bottom-middle {
+    @include flex(flex-start);
+    height: 55vh;
+    width: 100%;
 
-    .houseFive-middle-left {
-      @include section(40vw);
-      display: flex;
-    }
+    .houseFive-middle {
+      @include row(50%);
+      position: relative;
+      width: 100%;
 
-    .houseFive-middle-middle {
-      @include section(20vw);
-      @include flex(flex-end);
+      .board {
+        height: 100%;
+        width: 2.5%;
+        background-color: sienna;
+        border: solid 2px black;
+      }
 
-      .dog {
-        background-image: url("../../Images/Dog.png");
-        background-size: 100% 100%;
-        height: 100px;
-        width: 100px;
+      .houseFive-middle-left {
+        @include section(40vw);
+        display: flex;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+      }
+
+      .houseFive-middle-middle {
+        @include section(20vw);
+        @include flex(flex-end);
+        position: absolute;
+        top: 0px;
+        left: 40vw;
+
+        .dog {
+          height: 300px;
+          width: 300px;
+
+          display: flex;
+          flex-direction: column;
+
+          .dog-top {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            position: relative;
+            top: 50px;
+            left: 25px;
+            z-index: 2;
+
+            .dog-left-ear {
+              border-radius: 50% 0% 50% 0%;
+              border: solid;
+              background-color: white;
+              height: 30px;
+              width: 20px;
+              position: relative;
+              left: 15px;
+              top: 5px;
+              transform: rotate(10deg);
+            }
+
+            .dog-face {
+              width: 90px;
+              height: 80px;
+              background-color: white;
+              border: solid;
+              border-radius: 50%;
+              @include flex(space-evenly);
+              z-index: 3;
+
+              .dog-eye-div {
+                width: 100%;
+                @include center(space-evenly);
+                height: 25px;
+
+                .dog-eye {
+                  border-radius: 50%;
+                  height: 15px;
+                  width: 19px;
+                  border: solid;
+                  background-color: white;
+                  @include flex(center);
+
+                  .dog-pupil {
+                    height: 5px;
+                    width: 5px;
+                    background-color: black;
+                    border-radius: 50%;
+                  }
+                }
+              }
+              .dog-nose {
+                border-radius: 50%;
+                background-color: black;
+                width: 18px;
+                height: 10px;
+              }
+              .dog-smile {
+                @include flex(cneter);
+
+                .dog-mouth {
+                  width: 40px;
+                  height: 15px;
+                  border-radius: 50%;
+                  border: solid black 5px;
+                  background-color: red;
+                }
+                .dog-tongue {
+                  position: relative;
+                  bottom: 6px;
+                  background-color: red;
+                  width: 20px;
+                  height: 14px;
+                  border-radius: 0% 0% 50% 50%;
+                  display: flex;
+                  justify-content: center;
+
+                  .tongue-line {
+                    height: 100%;
+                    width: 1px;
+                    background-color: black;
+                  }
+                }
+              }
+            }
+            .dog-right-ear {
+              border-radius: 0% 50% 0% 50%;
+              border: solid;
+              background-color: white;
+              height: 30px;
+              width: 20px;
+              position: relative;
+              right: 15px;
+              top: 5px;
+              transform: rotate(-10deg);
+            }
+          }
+          .dog-bottom {
+            display: flex;
+            justify-content: center;
+
+            .dog-body {
+              z-index: 1;
+              .dog-torso {
+                width: 125px;
+                height: 90px;
+                background-color: white;
+                border: solid;
+                border-radius: 50%;
+                z-index: 1;
+                position: relative;
+              }
+              .dog-leg-div {
+                width: 125px;
+                display: flex;
+                justify-content: space-evenly;
+                position: relative;
+                bottom: 15px;
+
+                .dog-leg {
+                  height: 35px;
+                  width: 20px;
+                  background-color: white;
+                  border: solid;
+                  border-radius: 25%;
+                  display: flex;
+                  justify-content: space-evenly;
+                  align-items: flex-end;
+
+                  .paw-line {
+                    height: 10px;
+                    width: 1px;
+                    background-color: black;
+
+                  }
+                }
+              }
+            }
+          }
+          .dog-tail {
+            border-radius: 50%;
+            background-color: black;
+            height:60px;
+            width: 10px;
+            transform: rotate(-60deg);
+            position: relative;
+            top: 20px;
+          }
+        }
+      }
+
+      .houseFive-middle-right {
+        @include section(40vw);
+        @include center(flex-end);
+        position: absolute;
+        top: 0px;
+        right: 0px;
       }
     }
 
-    .houseFive-middle-right {
-      @include section(40vw);
-      @include center(flex-end);
-    }
-  }
-  .houseFive-bottom {
-    @include row(35vh);
+    .houseFive-bottom {
+      @include row(50%);
+      width: 100%;
+      position: relative;
 
-    .houseFive-bottom-left {
-      @include section(40vw);
-      @include flex(center);
+      .board {
+        height: 100%;
+        width: 2.5%;
+        background-color: sienna;
+        border: solid 2px black;
+      }
 
       .rug {
-        background-image: url("../../Images/Rug.png");
-        background-size: 100% 100%;
-        height: 250px;
-        width: 150px;
+        height: 100%;
+        width: 10%;
+        background-color: rosybrown;
+        border: solid black 2px;
       }
-    }
 
-    .houseFive-bottom-middle {
-      @include section(20vw);
-      @include flex(flex-end);
+      .houseFive-bottom-left {
+        @include section(40vw);
+        @include flex(center);
+        position: absolute;
+        top: 0px;
+        left: 0px;
 
-      .houseFive-cottage {
-        @include flex(flex-start);
-        cursor: pointer;
+        .rug {
+          background-image: url("../../Images/Rug.png");
+          background-size: 100% 100%;
+          height: 250px;
+          width: 150px;
+        }
       }
-    }
 
-    .houseFive-bottom-right {
-      @include section(40vw);
-      @include flex(center);
+      .houseFive-bottom-middle {
+        @include section(20vw);
+        @include flex(flex-end);
+        position: absolute;
+        left: 40vw;
+        top: 0px;
 
-      .shovel {
-        background-image: url("../../Images/Shovel.png");
-        background-size: 100% 100%;
-        height: 100px;
-        width: 150px;
+        .houseFive-cottage {
+          @include flex(flex-start);
+          cursor: pointer;
+          z-index: 1;
+        }
+      }
+
+      .houseFive-bottom-right {
+        @include section(40vw);
+        @include flex(center);
+        position: absolute;
+        right: 0px;
+        bottom: 0px;
+
+        .shovel {
+          .shovel-top {
+           
+         }
+         .shovel-handle {
+
+         }
+         
+        }
       }
     }
   }

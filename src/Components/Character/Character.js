@@ -8,21 +8,25 @@ function Character(props) {
 
 return (
   <div className="character">
-    <div className="face">
-      <div className="eyes">
-        <div className="eye">
-          <div className="iris">
-            <div className="pupil"></div>
+    <div className="head">
+      <div className="left-ear"></div>
+      <div className="face">
+        <div className="eyes">
+          <div className="eye">
+            <div className="iris">
+              <div className="pupil"></div>
+            </div>
+          </div>
+          <div className="eye">
+            <div className="iris">
+              <div className="pupil"></div>
+            </div>
           </div>
         </div>
-        <div className="eye">
-          <div className="iris">
-            <div className="pupil"></div>
-          </div>
-        </div>
+        <div className="nose"></div>
+        <div className="mouth"></div>
       </div>
-      <div className="nose"></div>
-      <div className="mouth"></div>
+      <div className="right-ear"></div>
     </div>
     <div className="body">
       <div className="neck"></div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./HouseFive.scss";
@@ -15,13 +15,13 @@ import ArrowDownward from "@material-ui/icons/ArrowDownward";
 function HouseFive(props) {
   const [downCharacter, setDownCharacter] = useState(false);
   const [downDown, setDownDown] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [rejectionCard, setRejectionCard] = useState(false)
-  const [inventoryOpen, setInventoryOpen] = useState(false)
-  const [houseFiveData, setHouseFiveData] = useState(false)
+  const [isLoading, setIsLoading] = useState(true);
+  const [rejectionCard, setRejectionCard] = useState(false);
+  const [inventoryOpen, setInventoryOpen] = useState(false);
+  const [houseFiveData, setHouseFiveData] = useState(false);
 
   useEffect(() => {
-    axios.get("/api/houseFive").then((res) => {
+    axios.get("/api/nest").then((res) => {
       setHouseFiveData(res.data[0]);
       setDownCharacter(true);
       setIsLoading(false);
@@ -50,7 +50,6 @@ function HouseFive(props) {
       if (props.location.pathname === "/Tower") {
         axios.post("/api/useFlute").then((res) => {
           setHouseFiveData(res.data[0]);
-          ;
         });
       } else {
         setRejectionCard(true);
@@ -105,48 +104,198 @@ function HouseFive(props) {
       </div>
       <div className="houseFive-body">
         <div className="houseFive-top">
-          <div className="houseFive-top-left">
-            <div className="table">
-              <div className="paper"></div>
+          <div className="door">
+            <div className="door-knob"></div>
+          </div>
+          <div className="dining-div">
+            <div className="chair-div-left">
+              <div className="chair-top-div">
+                <div className="chair-top"></div>
+              </div>
+              <div className="chair-seat"></div>
+              <div className="chair-leg-div">
+                <div className="chair-leg"></div>
+                <div className="chair-leg"></div>
+              </div>
+            </div>
+            <div className="table-div">
+              <div className="table-top"></div>
+              <div className="table-leg-div">
+                <div className="table-leg"></div>
+                <div className="table-leg"></div>
+              </div>
+            </div>
+            <div className="chair-div">
+              <div className="chair-top-div">
+                <div className="chair-top"></div>
+              </div>
+              <div className="chair-seat"></div>
+              <div className="chair-leg-div">
+                <div className="chair-leg"></div>
+                <div className="chair-leg"></div>
+              </div>
             </div>
           </div>
-          <div className="houseFive-top-middle"></div>
-          <div className="houseFive-top-right">
-            <div className="cupboard"></div>
+          <div className="dresser-div">
+            <div className="dresser-side"></div>
+            <div className="dresser-middle">
+              <div className="shelf"></div>
+              <div className="shelf"></div>
+              <div className="shelf"></div>
+              <div className="shelf"></div>
+              <div className="shelf"></div>
+            </div>
+            <div className="dresser-side"></div>
           </div>
         </div>
-        <div className="houseFive-middle">
-          <div className="houseFive-middle-left"></div>
-          <div className="houseFive-middle-middle">
-            <div className="dog"></div>
+        <div className="houseFive-bottom-middle">
+          <div className="houseFive-middle">
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+
+            <div className="houseFive-middle-left"></div>
+            <div className="houseFive-middle-middle">
+              <div className="dog">
+                <div className="dog-top">
+                  <div className="dog-left-ear"></div>
+                  <div className="dog-face">
+                    <div className="dog-eye-div">
+                      <div className="dog-eye">
+                        <div className="dog-pupil"></div>
+                      </div>
+                      <div className="dog-eye">
+                        <div className="dog-pupil"></div>
+                      </div>
+                    </div>
+                    <div className="dog-nose"></div>
+                    <div className="dog-smile">
+                      <div className="dog-mouth"></div>
+                      <div className="dog-tongue">
+                        <div className="tongue-line"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="dog-right-ear"></div>
+                </div>
+                <div className="dog-bottom">
+                  <div className="dog-body">
+                    <div className="dog-torso"></div>
+                    <div className="dog-leg-div">
+                      <div className="dog-leg">
+                        <div className="paw-line"></div>
+                        <div className="paw-line"></div>
+                      </div>
+                      <div className="dog-leg">
+                        <div className="paw-line"></div>
+                        <div className="paw-line"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="dog-tail"></div>
+                </div>
+              </div>
+            </div>
+            <div className="houseFive-middle-right"></div>
           </div>
-          <div className="houseFive-middle-right"></div>
-        </div>
-        <div className="houseFive-bottom">
-          <div className="houseFive-bottom-left">
+          <div className="houseFive-bottom">
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
             <div className="rug"></div>
-          </div>
-          <div className="houseFive-bottom-middle">
-            <div
-              className={`${
-                downCharacter ? "character-down" : "character-down-closed"
-              }`}
-            >
-              <Character />
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="board"></div>
+            <div className="houseFive-bottom-left"></div>
+            <div className="houseFive-bottom-middle">
+              <div
+                className={`${
+                  downCharacter ? "character-down" : "character-down-closed"
+                }`}
+              >
+                <Character />
+              </div>
+              <div
+                className={`${downDown ? "down-down" : "down-down-closed"}`}
+                onAnimationEnd={toggleDown}
+              >
+                <Character />
+              </div>
+              <div className="houseFive-cottage" onClick={toggleGoDown}>
+                <h2>EXIT</h2>
+                <ArrowDownward />
+              </div>
             </div>
-            <div
-              className={`${downDown ? "down-down" : "down-down-closed"}`}
-              onAnimationEnd={toggleDown}
-            >
-              <Character />
+            <div className="houseFive-bottom-right">
+              <div className="shovel"><div className="shovel-top"></div><div className="shovel-handle"></div></div>
             </div>
-            <div className="houseFive-cottage" onClick={toggleGoDown}>
-              <h2>EXIT</h2>
-              <ArrowDownward />
-            </div>
-          </div>
-          <div className="houseFive-bottom-right">
-            <div className="shovel"></div>
           </div>
         </div>
       </div>
@@ -197,6 +346,6 @@ function HouseFive(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory, logoutUser })(
   HouseFive
 );
