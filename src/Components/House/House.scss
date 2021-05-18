@@ -1,7 +1,7 @@
 @import "../mixins";
 
-.houseFive-body {
-  .houseFive-top {
+.house-body {
+  .house-top {
     @include row(35vh);
     display: flex;
     justify-content: space-evenly;
@@ -159,14 +159,14 @@
         }
       }
     }
-  }
+  } 
 
-  .houseFive-bottom-middle {
+  .house-bottom-middle {
     @include flex(flex-start);
     height: 55vh;
     width: 100%;
 
-    .houseFive-middle {
+    .house-middle {
       @include row(50%);
       position: relative;
       width: 100%;
@@ -176,36 +176,9 @@
         width: 2.5%;
         background-color: sienna;
         border: solid 2px black;
-      }
-
-      .houseFive-middle-left {
-        @include section(40vw);
-        display: flex;
-        position: absolute;
-        left: 0px;
-        top: 0px;
-      }
-
-      .houseFive-middle-middle {
-        @include section(20vw);
-        @include flex(flex-end);
-        position: absolute;
-        top: 0px;
-        left: 40vw;
-
-       
-      }
-
-      .houseFive-middle-right {
-        @include section(40vw);
-        @include center(flex-end);
-        position: absolute;
-        top: 0px;
-        right: 0px;
       }
     }
-
-    .houseFive-bottom {
+    .house-bottom {
       @include row(50%);
       width: 100%;
       position: relative;
@@ -215,60 +188,6 @@
         width: 2.5%;
         background-color: sienna;
         border: solid 2px black;
-      }
-
-      .rug {
-        height: 100%;
-        width: 10%;
-        background-color: rosybrown;
-        border: solid black 2px;
-      }
-
-      .houseFive-bottom-left {
-        @include section(40vw);
-        @include flex(center);
-        position: absolute;
-        top: 0px;
-        left: 0px;
-
-        .rug {
-          background-image: url("../../Images/Rug.png");
-          background-size: 100% 100%;
-          height: 250px;
-          width: 150px;
-        }
-      }
-
-      .houseFive-bottom-middle {
-        @include section(20vw);
-        @include flex(flex-end);
-        position: absolute;
-        left: 40vw;
-        top: 0px;
-
-        .houseFive-cottage {
-          @include flex(flex-start);
-          cursor: pointer;
-          z-index: 1;
-        }
-      }
-
-      .houseFive-bottom-right {
-        @include section(40vw);
-        @include flex(center);
-        position: absolute;
-        right: 0px;
-        bottom: 0px;
-
-        .shovel {
-          .shovel-top {
-           
-         }
-         .shovel-handle {
-
-         }
-         
-        }
       }
     }
   }

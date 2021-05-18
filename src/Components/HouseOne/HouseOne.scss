@@ -1,115 +1,335 @@
 @import "../mixins";
 
-.houseOne-body {
-  background-image: url("../../Images/Floor.png");
-  background-size: 100% 100%;
+// .houseOne-body {
+//   background-image: url("../../Images/Floor.png");
+//   background-size: 100% 100%;
 
-  .houseOne-top {
-    @include row(35vh);
+//   .houseOne-top {
+//     @include row(35vh);
 
-    .houseOne-top-left {
-      @include section(40vw);
-      @include flex(center);
+//     .houseOne-top-left {
+//       @include section(40vw);
+//       @include flex(center);
 
-      .table {
-        background-image: url("../../Images/TableOne.png");
-        background-size: 100% 100%;
-        height: 150px;
-        width: 150px;
-        display: flex;
-        justify-content: center;
+//       .table {
+//         background-image: url("../../Images/TableOne.png");
+//         background-size: 100% 100%;
+//         height: 150px;
+//         width: 150px;
+//         display: flex;
+//         justify-content: center;
 
-        .paper {
-          background-image: url("../../Images/Scroll.jpg");
-          background-size: 100% 100%;
-          height: 75px;
-          width: 75px;
+//         .paper {
+//           background-image: url("../../Images/Scroll.jpg");
+//           background-size: 100% 100%;
+//           height: 75px;
+//           width: 75px;
+//         }
+//       }
+//     }
+
+//     .houseOne-top-middle {
+//       background-image: url("../../Images/StairsOne.png");
+//       background-size: 100% 100%;
+//       @include section(20vw);
+//       @include flex(center);
+//     }
+
+//     .houseOne-top-right {
+//       @include section(40vw);
+//       display: flex;
+//       justify-content: center;
+
+//       .cupboard {
+//         background-image: url("../../Images/Empty.png");
+//         background-size: 100% 100%;
+//         height: 150px;
+//         width: 200px;
+//       }
+//     }
+//   }
+
+//   .houseOne-middle {
+//     @include row(20vh);
+
+.houseOne-middle-left {
+  width: 40vw;
+  height: 27.5vh;
+  display: flex;
+  position: absolute;
+  top: 45vh;
+  left: 0px;
+  border: solid blue 1px;
+}
+
+.houseOne-middle-middle {
+  width: 20vw;
+  height: 27.5vh;
+  @include flex(flex-end);
+  position: absolute;
+  top: 45vh;
+  left: 40vw;
+  border: solid yellow 1px;
+
+  .dog {
+    height: 400px;
+    width: 300px;
+
+    display: flex;
+    flex-direction: column;
+
+    .dog-top {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      position: relative;
+      top: 50px;
+      left: 25px;
+      z-index: 2;
+
+      .dog-left-ear {
+        border-radius: 50% 0% 50% 0%;
+        border: solid;
+        background-color: white;
+        height: 30px;
+        width: 20px;
+        position: relative;
+        left: 15px;
+        top: 5px;
+        transform: rotate(10deg);
+      }
+
+      .dog-face {
+        width: 90px;
+        height: 80px;
+        background-color: white;
+        border: solid;
+        border-radius: 50%;
+        @include flex(space-evenly);
+        z-index: 3;
+
+        .dog-eye-div {
+          width: 100%;
+          @include center(space-evenly);
+          height: 25px;
+
+          .dog-eye {
+            border-radius: 50%;
+            height: 15px;
+            width: 19px;
+            border: solid;
+            background-color: white;
+            @include flex(center);
+
+            .dog-pupil {
+              height: 5px;
+              width: 5px;
+              background-color: black;
+              border-radius: 50%;
+            }
+          }
+        }
+        .dog-nose {
+          border-radius: 50%;
+          background-color: black;
+          width: 18px;
+          height: 10px;
+        }
+        .dog-smile {
+          @include flex(cneter);
+
+          .dog-mouth {
+            width: 40px;
+            height: 15px;
+            border-radius: 50%;
+            border: solid black 5px;
+            background-color: red;
+          }
+          .dog-tongue {
+            position: relative;
+            bottom: 6px;
+            background-color: red;
+            width: 20px;
+            height: 14px;
+            border-radius: 0% 0% 50% 50%;
+            display: flex;
+            justify-content: center;
+
+            .tongue-line {
+              height: 100%;
+              width: 1px;
+              background-color: black;
+            }
+          }
         }
       }
+      .dog-right-ear {
+        border-radius: 0% 50% 0% 50%;
+        border: solid;
+        background-color: white;
+        height: 30px;
+        width: 20px;
+        position: relative;
+        right: 15px;
+        top: 5px;
+        transform: rotate(-10deg);
+      }
     }
-
-    .houseOne-top-middle {
-      background-image: url("../../Images/StairsOne.png");
-      background-size: 100% 100%;
-      @include section(20vw);
-      @include flex(center);
-    }
-
-    .houseOne-top-right {
-      @include section(40vw);
+    .dog-bottom {
       display: flex;
       justify-content: center;
 
-      .cupboard {
-        background-image: url("../../Images/Empty.png");
-        background-size: 100% 100%;
-        height: 150px;
-        width: 200px;
+      .dog-body {
+        z-index: 1;
+        .dog-torso {
+          width: 125px;
+          height: 90px;
+          background-color: white;
+          border: solid;
+          border-radius: 50%;
+          z-index: 1;
+          position: relative;
+        }
+        .dog-leg-div {
+          width: 125px;
+          display: flex;
+          justify-content: space-evenly;
+          position: relative;
+
+          .dog-leg-one {
+            height: 45px;
+            width: 20px;
+            background-color: white;
+            border: solid;
+            border-radius: 25%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            position: relative;
+            right: 5px;
+            bottom: 25px;
+
+            .dog-paw {
+              border-radius: 50% 50% 25% 25%;
+              background-color: white;
+              width: 35px;
+              height: 20px;
+              border: solid;
+              position: relative;
+              top: 5px;
+              right: 8px;
+              
+
+              
+            }
+          }
+           .dog-leg-two {
+            height: 40px;
+            width: 20px;
+            background-color: white;
+            border: solid;
+            border-top: none;
+            border-radius: 25%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            z-index: 1;
+            position: relative;
+            bottom: 15px;
+            right: 5px;
+            
+
+            .dog-paw {
+              border-radius: 50% 50% 25% 25%;
+              background-color: white;
+              width: 35px;
+              height: 20px;
+              border: solid;
+              position: relative;
+              top: 5px;
+              right: 8px;
+              
+
+              
+            }
+          }
+        }
       }
     }
-  }
-
-  .houseOne-middle {
-    @include row(20vh);
-
-    .houseOne-middle-left {
-      @include section(40vw);
-      display: flex;
-    }
-
-    .houseOne-middle-middle {
-      @include section(20vw);
-      @include flex(flex-end);
-
-      .dog {
-        background-image: url("../../Images/Dog.png");
-        background-size: 100% 100%;
-        height: 100px;
-        width: 100px;
-      }
-    }
-
-    .houseOne-middle-right {
-      @include section(40vw);
-      @include center(flex-end);
-    }
-  }
-  .houseOne-bottom {
-    @include row(35vh);
-
-    .houseOne-bottom-left {
-      @include section(40vw);
-      @include flex(center);
-
-      .rug {
-        background-image: url("../../Images/Rug.png");
-        background-size: 100% 100%;
-        height: 250px;
-        width: 150px;
-      }
-    }
-
-    .houseOne-bottom-middle {
-      @include section(20vw);
-      @include flex(flex-end);
-
-      .houseOne-town {
-        @include flex(flex-start);
-        cursor: pointer;
-      }
-    }
-
-    .houseOne-bottom-right {
-      @include section(40vw);
-      @include flex(center);
-
-      .shovel {
-        background-image: url("../../Images/Shovel.png");
-        background-size: 100% 100%;
-        height: 100px;
-        width: 150px;
-      }
+    .dog-tail {
+      border-radius: 50%;
+      background-color: black;
+      height: 60px;
+      width: 10px;
+      transform: rotate(-60deg);
+      position: relative;
+      top: 20px;
     }
   }
 }
 
+.houseOne-middle-right {
+  width: 40vw;
+  height: 27.5vh;
+  @include center(flex-end);
+  position: absolute;
+  top: 45vh;
+  left: 60vw;
+  border: solid green 1px;
+}
+//   }
+//   .houseOne-bottom {
+//     @include row(35vh);
+
+.houseOne-bottom-left {
+  width: 40vw;
+  height: 27.5vh;
+  @include flex(center);
+  border: orange solid 1px;
+  top: 72.5vh;
+  left: 0px;
+  position: absolute;
+
+  .rug {
+    background-image: url("../../Images/Rug.png");
+    background-size: 100% 100%;
+    height: 250px;
+    width: 150px;
+  }
+}
+
+.houseOne-bottom-middle {
+  width: 20vw;
+  height: 27.5vh;
+  @include flex(flex-end);
+  border: red solid 1px;
+  top: 72.5vh;
+  left: 40vw;
+  position: absolute;
+
+  .houseOne-cottage {
+    @include flex(flex-start);
+    cursor: pointer;
+  }
+}
+
+.houseOne-bottom-right {
+  width: 40vw;
+  height: 27.5vh;
+  @include flex(center);
+  border: purple solid 1px;
+  top: 72.5vh;
+  left: 60vw;
+  position: absolute;
+
+  .shovel {
+    background-image: url("../../Images/Shovel.png");
+    background-size: 100% 100%;
+    height: 100px;
+    width: 150px;
+  }
+}
+//   }
+// }
