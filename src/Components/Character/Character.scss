@@ -4,18 +4,149 @@
   @include flex(flex-start);
   z-index: 1;
 
-.hair {
-  border-top: 5px brown solid;
-  border-left: 5px brown solid;
-  transform: rotate(45deg);
-  width: 50px;
-  height: 50px;
-}
+  .hair {
+    width: 55px;
+    height: 19px;
+    background-color: #b7410e;
+    border-radius: 50%;
+    z-index: 2;
+    position: relative;
+    top: 25px;
+    display: flex;
+    justify-content: space-between;
+
+    .clump {
+      background-color: #b7410e;
+      width: 20px;
+      height: 4px;
+      position: relative;
+      top: 14px;
+      right: 4px;
+    }
+
+    .strand-zero {
+      background-color: #b7410e;
+      height: 12px;
+      width: 6px;
+      border-radius: 0% 0% 50% 50%;
+      transform: rotate(-30deg);
+      position: relative;
+      top: 15px;
+      right: 14px;
+    }
+
+    .strand-one {
+      background-color: #b7410e;
+      height: 20px;
+      width: 5px;
+      border-radius: 0% 0% 50% 50%;
+      transform: rotate(-35deg);
+      position: relative;
+      right: 15px;
+      top: 10px;
+    }
+
+    .strand-two {
+      background-color: #b7410e;
+      height: 20px;
+      width: 6px;
+      border-radius: 0% 0% 50% 50%;
+      transform: rotate(-40deg);
+      position: relative;
+      top: 4px;
+      right: 16px;
+      top: 8px;
+    }
+
+    .strand-three {
+      background-color: #b7410e;
+      height: 20px;
+      width: 6px;
+      border-radius: 0% 0% 50% 50%;
+      transform: rotate(-45deg);
+      position: relative;
+      right: 15px;
+      top: 9px;
+    }
+
+    .strand-four {
+      background-color: #b7410e;
+      height: 20px;
+      width: 6px;
+      border-radius: 0% 0% 50% 50%;
+      transform: rotate(-50deg);
+      position: relative;
+      right: 15px;
+      top: 9px;
+    }
+
+    .strand-five {
+      background-color: #b7410e;
+      height: 20px;
+      width: 6px;
+      border-radius: 0% 0% 50% 50%;
+      transform: rotate(-50deg);
+      position: relative;
+      right: 13px;
+      top: 9px;
+    }
+
+    .strand-six {
+      background-color: #b7410e;
+      height: 20px;
+      width: 6px;
+      border-radius: 0% 0% 50% 50%;
+      transform: rotate(-65deg);
+      position: relative;
+      right: 12px;
+      top: 10px;
+    }
+    .strand-seven {
+      background-color: #b7410e;
+      height: 20px;
+      width: 6px;
+      border-radius: 0% 0% 50% 50%;
+      transform: rotate(-75deg);
+      position: relative;
+      right: 9px;
+      top: 10px;
+    }
+    .strand-eight {
+      background-color: #b7410e;
+      height: 20px;
+      width: 6px;
+      border-radius: 0% 0% 50% 50%;
+      transform: rotate(-65deg);
+      position: relative;
+      right: 7px;
+      top: 8px;
+    }
+    .strand-nine {
+      background-color: #b7410e;
+      height: 20px;
+      width: 6px;
+      border-radius: 0% 0% 50% 50%;
+      transform: rotate(-70deg);
+      right: 5px;
+      position: relative;
+      top: 7px;
+    }
+    .strand-ten {
+      background-color: #b7410e;
+      height: 24px;
+      width: 9px;
+      border-radius: 0% 0% 50% 50%;
+      transform: rotate(-36deg);
+      position: relative;
+      right: 0px;
+      top: 3px;
+    }
+  }
 
   .head {
     @include center(center);
     width: 100%;
-    
+
     .left-ear {
       height: 17px;
       width: 8px;
@@ -32,14 +163,13 @@
       transform: rotate(-15deg);
 
       .left-ear-hole {
-        height: 5px;
-        width: 3px;
-        background-color: black;;
+        height: 4px;
+        width: 2px;
+        background-color: gray;
         border-radius: 50% 0% 0% 50%;
         transform: rotate(15deg);
         position: relative;
         bottom: 2px;
-
       }
     }
 
@@ -49,7 +179,7 @@
       height: 80px;
       background-color: peachpuff;
       @include flex(space-evenly);
-      
+      border-top: #b7410e 10px solid;
       z-index: 1;
 
       .eyes {
@@ -64,7 +194,7 @@
           background-color: white;
           height: 12px;
           width: 15px;
-          border: solid .5px;
+          border: solid 0.5px;
           @include flex(space-evenly);
 
           .iris {
@@ -85,12 +215,11 @@
       }
 
       .nose {
-        border-radius:  60% 0% 0% 50%;
-        border-left: solid .5px;
+        border-radius: 60% 0% 0% 50%;
+        border-left: solid 0.5px;
         background-color: peachpuff;
         height: 12px;
         width: 11px;
-        
       }
 
       .mouth {
@@ -101,13 +230,12 @@
       }
     }
     .right-ear {
-       height: 17px;
+      height: 17px;
       width: 8px;
-      // border:solid;
       border-radius: 0% 50% 50% 0%;
       background-color: peachpuff;
       position: relative;
-      right: 4px;
+      right: 5px;
       bottom: 5px;
       display: flex;
       align-items: center;
@@ -115,9 +243,9 @@
       transform: rotate(15deg);
 
       .right-ear-hole {
-         height: 5px;
+        height: 5px;
         width: 3px;
-        background-color: black;;
+        background-color: gray;
         border-radius: 0% 50% 50% 0%;
         position: relative;
         bottom: 2px;
