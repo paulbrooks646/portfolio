@@ -174,6 +174,8 @@ app.post("/api/houseTwoLock", controller.houseTwoLock)
 app.post("/api/houseThreeLock", controller.houseThreeLock)
 app.post("/api/houseFourLock", controller.houseFourLock)
 app.post("/api/useOil", controller.useOil)
+app.post("/api/useBone", controller.useBone)
+app.post("/api/useCandy", controller.useCandy)
 
 app.use(express.static(__dirname + "/../build"));
 

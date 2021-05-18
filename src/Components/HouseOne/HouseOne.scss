@@ -1,65 +1,40 @@
 @import "../mixins";
 
-// .houseOne-body {
-//   background-image: url("../../Images/Floor.png");
-//   background-size: 100% 100%;
 
-//   .houseOne-top {
-//     @include row(35vh);
-
-//     .houseOne-top-left {
-//       @include section(40vw);
-//       @include flex(center);
-
-//       .table {
-//         background-image: url("../../Images/TableOne.png");
-//         background-size: 100% 100%;
-//         height: 150px;
-//         width: 150px;
-//         display: flex;
-//         justify-content: center;
-
-//         .paper {
-//           background-image: url("../../Images/Scroll.jpg");
-//           background-size: 100% 100%;
-//           height: 75px;
-//           width: 75px;
-//         }
-//       }
-//     }
-
-//     .houseOne-top-middle {
-//       background-image: url("../../Images/StairsOne.png");
-//       background-size: 100% 100%;
-//       @include section(20vw);
-//       @include flex(center);
-//     }
-
-//     .houseOne-top-right {
-//       @include section(40vw);
-//       display: flex;
-//       justify-content: center;
-
-//       .cupboard {
-//         background-image: url("../../Images/Empty.png");
-//         background-size: 100% 100%;
-//         height: 150px;
-//         width: 200px;
-//       }
-//     }
-//   }
-
-//   .houseOne-middle {
-//     @include row(20vh);
 
 .houseOne-middle-left {
   width: 40vw;
   height: 27.5vh;
-  display: flex;
+  @include flex(center);
   position: absolute;
   top: 45vh;
   left: 0px;
-  border: solid blue 1px;
+
+  .houseOne-paper {
+      height: 50px;
+      width: 40px;
+      background-color: #FFFFCC;
+      @include flex(center);
+      cursor: pointer;
+      transform: rotate(-30deg);
+
+    .line {
+        width: 10px;
+        height: 10px;
+        border-right: solid .5px;
+        border-radius: 50%;
+
+    }
+
+    .line-two {
+         width: 10px;
+        height: 10px;
+        border-left: solid .5px;
+        border-radius: 50%;
+
+    }
+  }
+  
 }
 
 .houseOne-middle-middle {
@@ -69,11 +44,12 @@
   position: absolute;
   top: 45vh;
   left: 40vw;
-  border: solid yellow 1px;
+  
 
   .dog {
     height: 400px;
     width: 300px;
+    cursor: pointer;
 
     display: flex;
     flex-direction: column;
@@ -219,12 +195,9 @@
               position: relative;
               top: 5px;
               right: 8px;
-              
-
-              
             }
           }
-           .dog-leg-two {
+          .dog-leg-two {
             height: 40px;
             width: 20px;
             background-color: white;
@@ -239,7 +212,6 @@
             position: relative;
             bottom: 15px;
             right: 5px;
-            
 
             .dog-paw {
               border-radius: 50% 50% 25% 25%;
@@ -250,9 +222,6 @@
               position: relative;
               top: 5px;
               right: 8px;
-              
-
-              
             }
           }
         }
@@ -277,17 +246,12 @@
   position: absolute;
   top: 45vh;
   left: 60vw;
-  border: solid green 1px;
 }
-//   }
-//   .houseOne-bottom {
-//     @include row(35vh);
 
 .houseOne-bottom-left {
   width: 40vw;
   height: 27.5vh;
   @include flex(center);
-  border: orange solid 1px;
   top: 72.5vh;
   left: 0px;
   position: absolute;
@@ -304,7 +268,6 @@
   width: 20vw;
   height: 27.5vh;
   @include flex(flex-end);
-  border: red solid 1px;
   top: 72.5vh;
   left: 40vw;
   position: absolute;
@@ -325,11 +288,36 @@
   position: absolute;
 
   .shovel {
-    background-image: url("../../Images/Shovel.png");
-    background-size: 100% 100%;
-    height: 100px;
-    width: 150px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform: rotate(45deg);
+      cursor: pointer;
+
+    .shovel-top {
+        height: 60px;
+        width: 45px;
+        border-radius: 50% 50% 0% 0%;
+        background-color: gray;
+        border: solid;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+
+        .shovel-line {
+            height: 40px;
+            width: 10px;
+            border: solid .5px;
+             border-radius: 50% 50% 0% 0%;
+        }
+    }
+    .shovel-handle {
+height: 120px;
+width: 20px;
+background-color: brown;
+border: solid;
+    }
   }
 }
-//   }
-// }
+

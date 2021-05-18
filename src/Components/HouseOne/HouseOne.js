@@ -20,9 +20,19 @@ function HouseOne(props) {
   const [rejectionCard, setRejectionCard] = useState(false);
   const [inventoryOpen, setInventoryOpen] = useState(false);
   const [houseOneData, setHouseOneData] = useState();
+  const [dogCard, setDogCard] = useState(false);
+  const [shovelCard, setShovelCard] = useState(false);
+  const [letterCard, setLetterCard] = useState(false);
+  const [boneCard, setBoneCard] = useState(false);
+  const [candyCard, setCandyCard] = useState(false)
+  const [firstTimeCard, setFirstTimeCard] = useState(false);
+  const [dogRejectionCard, setDogRejectionCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/nest").then((res) => {
+      if (res.data[0].first_time) {
+        setFirstTimeCard(true)
+      }
       setHouseOneData(res.data[0]);
       setDownCharacter(true);
       setIsLoading(false);
@@ -47,14 +57,22 @@ function HouseOne(props) {
   });
 
   const toggleItem = (item) => {
-    if (item === "flute") {
-      if (props.location.pathname === "/Tower") {
-        axios.post("/api/useFlute").then((res) => {
+    if (item === "bone") {
+      axios.post("/api/useBone").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/houseOne").then((res) => {
           setHouseOneData(res.data[0]);
         });
-      } else {
-        setRejectionCard(true);
-      }
+      });
+    } else if (item === "candy") {
+      axios.post("/api/useCandy").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/houseOne").then((res) => {
+          setHouseOneData(res.data[0]);
+        });
+      });
+    } else {
+      setRejectionCard(true);
     }
   };
 
@@ -69,6 +87,7 @@ function HouseOne(props) {
   const toggleFirst = () => {
     axios.post("/api/houseOneFirst").then((res) => {
       setHouseOneData(res.data[0]);
+      setFirstTimeCard(false)
     });
   };
 
@@ -76,6 +95,14 @@ function HouseOne(props) {
     setDownDown(true);
     setDownCharacter(false);
   };
+
+  const toggleLetter = () => {
+    if (houseOneData.bone_used) {
+      setLetterCard(true)
+    } else {
+      setDogRejectionCard(true)
+    }
+  }
 
   return isLoading ? (
     <Loading />
@@ -104,9 +131,16 @@ function HouseOne(props) {
         </button>
       </div>
       <House />
-      <div className="houseOne-middle-left"></div>
+      <div className="houseOne-middle-left">
+        <div className="houseOne-paper" onClick={toggleLetter}>
+          <div className="line"></div>
+          <div className="line-two"></div>
+          <div className="line"></div>
+          <div className="line-two"></div>
+        </div>
+      </div>
       <div className="houseOne-middle-middle">
-        <div className="dog">
+        <div className="dog" onClick={() => setDogCard(true)}>
           <div className="dog-top">
             <div className="dog-left-ear"></div>
             <div className="dog-face">
@@ -172,8 +206,10 @@ function HouseOne(props) {
         </div>
       </div>
       <div className="houseOne-bottom-right">
-        <div className="shovel">
-          <div className="shovel-top"></div>
+        <div className="shovel" onClick={() => setShovelCard(true)}>
+          <div className="shovel-top">
+            <div className="shovel-line"></div>
+          </div>
           <div className="shovel-handle"></div>
         </div>
       </div>
@@ -195,30 +231,123 @@ function HouseOne(props) {
           CLOSE
         </Button>
       </Card>
-      {/* <Card
-        className={`${
-          houseOneData.first_time
-            ? "answer-card"
-            : "answer-card-closed"
-        }`}
-      >
+      <Card className={`${dogCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
-          variant="h6"
+          variant="h4"
           color="secondary"
           className="answer-card-description"
         >
-          You climb the steep cliff. Up ahead you see the massive Griffin's
-          houseOne. You look around tenatively for the owner of the houseOne.
+          As much as you would like to play with the adorable dog, the dog would
+          inevitably make noise. Either find a way to distract it or come back
+          later.
         </Typography>
         <Button
-          onClick={toggleFirst}
-          className="forest-card-button"
+          onClick={() => setDogCard(false)}
           variant="contained"
           color="primary"
         >
           CLOSE
         </Button>
-      </Card> */}
+      </Card>
+      <Card className={`${letterCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You pick up the piece of paper. It says "Candy"
+        </Typography>
+        <Button
+          onClick={() => setLetterCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${dogRejectionCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Find a way to keep the dog quiet before you try to do anything else.
+        </Typography>
+        <Button
+          onClick={() => setDogRejectionCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${boneCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You toss the bone to the dog. He chews on it contentedly.
+        </Typography>
+        <Button
+          onClick={() => setBoneCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${candyCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You put the candy on the letter.
+        </Typography>
+        <Button
+          onClick={() => setCandyCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${shovelCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You can't bring yourself to steal something for people who have so
+          little.
+        </Typography>
+        <Button
+          onClick={() => setShovelCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You look around the little house. The shelves are bare. Clearly the people who live here are very poor. 
+        </Typography>
+        <Button
+          onClick={toggleFirst}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }

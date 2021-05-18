@@ -386,6 +386,40 @@ module.exports = {
     });
   },
 
+  useCandy: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_candy(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+   useBone: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_bone(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
   showLetter: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
