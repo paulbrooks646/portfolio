@@ -1,115 +1,164 @@
 @import "../mixins";
 
-.houseThree-body {
-  background-image: url("../../Images/Floor.png");
-  background-size: 100% 100%;
+.houseThree-middle-left {
+  width: 40vw;
+  height: 27.5vh;
+  @include flex(center);
+  position: absolute;
+  top: 45vh;
+  left: 0px;
 
-  .houseThree-top {
-    @include row(35vh);
+  .houseThree-paper {
+    height: 50px;
+    width: 40px;
+    background-color: #ffffcc;
+    @include flex(center);
+    cursor: pointer;
+    transform: rotate(-30deg);
 
-    .houseThree-top-left {
-      @include section(40vw);
-      @include flex(center);
-
-      .table {
-        background-image: url("../../Images/TableOne.png");
-        background-size: 100% 100%;
-        height: 150px;
-        width: 150px;
-        display: flex;
-        justify-content: center;
-
-        .paper {
-          background-image: url("../../Images/Scroll.jpg");
-          background-size: 100% 100%;
-          height: 75px;
-          width: 75px;
-        }
-      }
+    .line {
+      width: 10px;
+      height: 10px;
+      border-right: solid 0.5px;
+      border-radius: 50%;
     }
 
-    .houseThree-top-middle {
-      background-image: url("../../Images/StairsOne.png");
-      background-size: 100% 100%;
-      @include section(20vw);
-      @include flex(center);
-    }
-
-    .houseThree-top-right {
-      @include section(40vw);
-      display: flex;
-      justify-content: center;
-
-      .cupboard {
-        background-image: url("../../Images/Empty.png");
-        background-size: 100% 100%;
-        height: 150px;
-        width: 200px;
-      }
-    }
-  }
-
-  .houseThree-middle {
-    @include row(20vh);
-
-    .houseThree-middle-left {
-      @include section(40vw);
-      display: flex;
-    }
-
-    .houseThree-middle-middle {
-      @include section(20vw);
-      @include flex(flex-end);
-
-      .dog {
-        background-image: url("../../Images/Dog.png");
-        background-size: 100% 100%;
-        height: 100px;
-        width: 100px;
-      }
-    }
-
-    .houseThree-middle-right {
-      @include section(40vw);
-      @include center(flex-end);
-    }
-  }
-  .houseThree-bottom {
-    @include row(35vh);
-
-    .houseThree-bottom-left {
-      @include section(40vw);
-      @include flex(center);
-
-      .rug {
-        background-image: url("../../Images/Rug.png");
-        background-size: 100% 100%;
-        height: 250px;
-        width: 150px;
-      }
-    }
-
-    .houseThree-bottom-middle {
-      @include section(20vw);
-      @include flex(flex-end);
-
-      .houseThree-town {
-        @include flex(flex-start);
-        cursor: pointer;
-      }
-    }
-
-    .houseThree-bottom-right {
-      @include section(40vw);
-      @include flex(center);
-
-      .shovel {
-        background-image: url("../../Images/Shovel.png");
-        background-size: 100% 100%;
-        height: 100px;
-        width: 150px;
-      }
+    .line-two {
+      width: 10px;
+      height: 10px;
+      border-left: solid 0.5px;
+      border-radius: 50%;
     }
   }
 }
 
+.houseThree-middle-middle {
+  width: 20vw;
+  height: 27.5vh;
+  @include flex(flex-end);
+  position: absolute;
+  top: 45vh;
+  left: 40vw;
+}
+
+.houseThree-middle-right {
+  width: 40vw;
+  height: 27.5vh;
+  @include center(flex-end);
+  position: absolute;
+  top: 45vh;
+  left: 60vw;
+}
+
+.houseThree-bottom-left {
+  width: 40vw;
+  height: 27.5vh;
+  @include flex(center);
+  top: 72.5vh;
+  left: 0px;
+  position: absolute;
+}
+
+.houseThree-bottom-middle {
+  width: 20vw;
+  height: 27.5vh;
+  @include flex(flex-end);
+  top: 72.5vh;
+  left: 40vw;
+  position: absolute;
+
+  .houseThree-town {
+    @include flex(flex-start);
+    cursor: pointer;
+  }
+}
+
+.houseThree-bottom-right {
+  width: 40vw;
+  height: 27.5vh;
+  @include flex(center);
+  top: 72.5vh;
+  left: 60vw;
+  position: absolute;
+
+  .glove-div {
+    display: flex;
+    width: 40%;
+    justify-content: center;
+
+    .glove {
+      cursor: pointer;
+
+      .finger-div {
+        display: flex;
+        justify-content: space-between;
+
+        .finger-one {
+          background-color: forestgreen;
+          border-radius: 50% 50% 0% 0%;
+          position: relative;
+          transform: rotate(-15deg);
+          height: 12.5px;
+          width: 5px;
+          top: 15px;
+          right: 2px;
+        }
+
+        .finger-two {
+          background-color: forestgreen;
+          border-radius: 50% 50% 0% 0%;
+          position: relative;
+          top: 10px;
+          height: 12.5px;
+          width: 5px;
+          transform: rotate(-10deg);
+          right: 0px;
+        }
+
+        .finger-three {
+          background-color: forestgreen;
+          border-radius: 50% 50% 0% 0%;
+          position: relative;
+
+          height: 15px;
+          width: 5px;
+          top: 8px;
+          left: 3px;
+        }
+
+        .finger-four {
+          background-color: forestgreen;
+          border-radius: 50% 50% 0% 0%;
+          position: relative;
+          transform: rotate(15deg);
+          height: 14.5px;
+          width: 5px;
+          top: 10px;
+          left: 5px;
+        }
+
+        .finger-five {
+          background-color: forestgreen;
+          border-radius: 50% 50% 0% 0%;
+          position: relative;
+          transform: rotate(45deg);
+          height: 17.5px;
+          width: 7.5px;
+          top: 22px;
+          left: 5px;
+        }
+      }
+      .glove-hand {
+        background-color: forestgreen;
+        border-radius: 50% 50% 0% 0%;
+        width: 25px;
+        height: 25px;
+      }
+    }
+  }
+  .glove-two {
+    transform: scaleX(-1);
+    position: relative;
+    left: 20px;
+  }
+}

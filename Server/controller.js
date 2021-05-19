@@ -64,6 +64,23 @@ module.exports = {
     });
   },
 
+  useBlanket: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_blanket(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
   useSword: (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -403,7 +420,41 @@ module.exports = {
     });
   },
 
-   useBone: async (req, res) => {
+  useLevitation: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_levitation(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+   useShoes: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_shoes(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  useBone: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
 

@@ -68,10 +68,7 @@ function HouseOne(props) {
     } else if (item === "candy") {
       axios.post("/api/useCandy").then((res) => {
         props.getInventory(res.data);
-        axios.get("/api/houseOne").then((res) => {
-          setHouseOneData(res.data[0]);
-          setCandyCard(true);
-        });
+        setCandyCard(true);
       });
     } else {
       setRejectionCard(true);
@@ -265,7 +262,8 @@ function HouseOne(props) {
           color="secondary"
           className="answer-card-description"
         >
-          You pick up the piece of paper. It says "Candy". You quickly put it back where you found it.
+          You pick up the piece of paper. It says "Candy". You quickly put it
+          back where you found it.
         </Typography>
         <Button
           onClick={() => setLetterCard(false)}
@@ -315,7 +313,7 @@ function HouseOne(props) {
           color="secondary"
           className="answer-card-description"
         >
-          You put the candy on the letter.
+          You put the candy on the letter. It feels good to know that this child will have something sweet during an otherwise difficult life.
         </Typography>
         <Button
           onClick={() => setCandyCard(false)}
@@ -351,7 +349,8 @@ function HouseOne(props) {
           className="answer-card-description"
         >
           You look around the little house. The shelves are bare. Clearly the
-          people who live here are very poor. A friendly dog stands directly in front of you.
+          people who live here are very poor. A friendly dog stands directly in
+          front of you.
         </Typography>
         <Button onClick={toggleFirst} variant="contained" color="primary">
           CLOSE

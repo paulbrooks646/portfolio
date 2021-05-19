@@ -62,14 +62,14 @@ values ($1, false, false, false, false, false, false, true);
 insert into town (user_id, oil_used, lock_one, lock_two, lock_three, lock_four, first_time)
 values ($1, false, false, false, false, false, true);
 
-insert into houseone (user_id, bone_used, candy_used, first_time)
-values ($1, false, false, true);
-
-insert into housetwo (user_id, blanket_used, first_time)
+insert into houseone (user_id, bone_used, first_time)
 values ($1, false, true);
 
-insert into housethree (user_id, levitation_used, shoes_used, first_time)
-values ($1, false, false, true);
+insert into housetwo (user_id, first_time)
+values ($1, true);
+
+insert into housethree (user_id, levitation_used, first_time)
+values ($1, false, true);
 
 insert into housefour (user_id, heal_used, toy_used, first_time)
 values ($1, false, false, true);

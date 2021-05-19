@@ -1,9 +1,9 @@
 update thieves
-set candy_used = true
+set shoes_used = true
 where user_id = $1;
 
 update inventory
-set candy = false
+set shoes = false
 where user_id = $1;
 
 select * from inventory
