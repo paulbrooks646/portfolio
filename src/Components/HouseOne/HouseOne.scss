@@ -1,7 +1,5 @@
 @import "../mixins";
 
-
-
 .houseOne-middle-left {
   width: 40vw;
   height: 27.5vh;
@@ -11,30 +9,27 @@
   left: 0px;
 
   .houseOne-paper {
-      height: 50px;
-      width: 40px;
-      background-color: #FFFFCC;
-      @include flex(center);
-      cursor: pointer;
-      transform: rotate(-30deg);
+    height: 50px;
+    width: 40px;
+    background-color: #ffffcc;
+    @include flex(center);
+    cursor: pointer;
+    transform: rotate(-30deg);
 
     .line {
-        width: 10px;
-        height: 10px;
-        border-right: solid .5px;
-        border-radius: 50%;
-
+      width: 10px;
+      height: 10px;
+      border-right: solid 0.5px;
+      border-radius: 50%;
     }
 
     .line-two {
-         width: 10px;
-        height: 10px;
-        border-left: solid .5px;
-        border-radius: 50%;
-
+      width: 10px;
+      height: 10px;
+      border-left: solid 0.5px;
+      border-radius: 50%;
     }
   }
-  
 }
 
 .houseOne-middle-middle {
@@ -44,7 +39,6 @@
   position: absolute;
   top: 45vh;
   left: 40vw;
-  
 
   .dog {
     height: 400px;
@@ -272,7 +266,7 @@
   left: 40vw;
   position: absolute;
 
-  .houseOne-cottage {
+  .houseOne-town {
     @include flex(flex-start);
     cursor: pointer;
   }
@@ -282,42 +276,40 @@
   width: 40vw;
   height: 27.5vh;
   @include flex(center);
-  border: purple solid 1px;
   top: 72.5vh;
   left: 60vw;
   position: absolute;
 
   .shovel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: rotate(45deg);
+    cursor: pointer;
+
+    .shovel-top {
+      height: 60px;
+      width: 45px;
+      border-radius: 50% 50% 0% 0%;
+      background-color: gray;
+      border: solid;
       display: flex;
       flex-direction: column;
       align-items: center;
-      transform: rotate(45deg);
-      cursor: pointer;
+      justify-content: flex-end;
 
-    .shovel-top {
-        height: 60px;
-        width: 45px;
+      .shovel-line {
+        height: 40px;
+        width: 10px;
+        border: solid 0.5px;
         border-radius: 50% 50% 0% 0%;
-        background-color: gray;
-        border: solid;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-end;
-
-        .shovel-line {
-            height: 40px;
-            width: 10px;
-            border: solid .5px;
-             border-radius: 50% 50% 0% 0%;
-        }
+      }
     }
     .shovel-handle {
-height: 120px;
-width: 20px;
-background-color: brown;
-border: solid;
+      height: 120px;
+      width: 20px;
+      background-color: brown;
+      border: solid;
     }
   }
 }
-

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./HouseTwo.scss";
 import Character from "../Character/Character";
 import Loading from "../Loading/Loading";
+import House from "../House/House";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
@@ -16,13 +17,19 @@ function HouseTwo(props) {
   const [downCharacter, setDownCharacter] = useState(false);
   const [downDown, setDownDown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [rejectionCard, setRejectionCard] = useState(false)
-  const [inventoryOpen, setInventoryOpen] = useState(false)
-  const [houseTwoData, setHouseTwoData] = useState(false)
+  const [rejectionCard, setRejectionCard] = useState(false);
+  const [inventoryOpen, setInventoryOpen] = useState(false);
+  const [firstTimeCard, setFirstTimeCard] = useState(false);
+  const [blanketCard, setBlanketCard] = useState(false);
+  const [letterCard, setLetterCard] = useState(false);
+  const [forkCard, setForkCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/houseTwo").then((res) => {
-      setHouseTwoData(res.data[0]);
+      if (res.data[0].first_time) {
+        setFirstTimeCard(true);
+      }
+    
       setDownCharacter(true);
       setIsLoading(false);
     });
@@ -46,15 +53,14 @@ function HouseTwo(props) {
   });
 
   const toggleItem = (item) => {
-    if (item === "flute") {
-      if (props.location.pathname === "/Tower") {
-        axios.post("/api/useFlute").then((res) => {
-          setHouseTwoData(res.data[0]);
-          ;
-        });
-      } else {
-        setRejectionCard(true);
-      }
+    if (item === "blanket") {
+      axios.post("/api/useBlanket").then((res) => {
+        props.getInventory(res.data);
+        setBlanketCard(true);
+       
+      });
+    } else {
+      setRejectionCard(true);
     }
   };
 
@@ -68,7 +74,7 @@ function HouseTwo(props) {
 
   const toggleFirst = () => {
     axios.post("/api/houseTwoFirst").then((res) => {
-      setHouseTwoData(res.data[0]);
+      setFirstTimeCard(false)
     });
   };
 
@@ -103,51 +109,59 @@ function HouseTwo(props) {
           Logout
         </button>
       </div>
-      <div className="houseTwo-body">
-        <div className="houseTwo-top">
-          <div className="houseTwo-top-left">
-            <div className="table">
-              <div className="paper"></div>
-            </div>
-          </div>
-          <div className="houseTwo-top-middle"></div>
-          <div className="houseTwo-top-right">
-            <div className="cupboard"></div>
-          </div>
+      <House />
+      <div className="houseTwo-middle-left">
+        <div className="houseTwo-paper" onClick={() => setLetterCard(true)}>
+          <div className="line"></div>
+          <div className="line-two"></div>
+          <div className="line"></div>
+          <div className="line-two"></div>
         </div>
-        <div className="houseTwo-middle">
-          <div className="houseTwo-middle-left"></div>
-          <div className="houseTwo-middle-middle">
-            <div className="dog"></div>
-          </div>
-          <div className="houseTwo-middle-right"></div>
+      </div>
+      <div className="houseTwo-middle-middle"></div>
+      <div className="houseTwo-middle-right"></div>
+      <div className="houseTwo-bottom-left"></div>
+      <div className="houseTwo-bottom-middle">
+        <div
+          className={`${
+            downCharacter ? "character-down" : "character-down-closed"
+          }`}
+        >
+          <Character />
         </div>
-        <div className="houseTwo-bottom">
-          <div className="houseTwo-bottom-left">
-            <div className="rug"></div>
-          </div>
-          <div className="houseTwo-bottom-middle">
-            <div
-              className={`${
-                downCharacter ? "character-down" : "character-down-closed"
-              }`}
-            >
-              <Character />
+        <div
+          className={`${downDown ? "down-down" : "down-down-closed"}`}
+          onAnimationEnd={toggleDown}
+        >
+          <Character />
+        </div>
+        <div className="houseTwo-town" onClick={toggleGoDown}>
+          <h2>EXIT</h2>
+          <ArrowDownward />
+        </div>
+      </div>
+      <div className="houseTwo-bottom-right">
+        <div className="fork" onClick={() => setForkCard(true)}>
+          <div className="fork-top">
+            <div className="tine-div">
+              <div className="tip"></div>
+              <div className="tine"></div>
             </div>
-            <div
-              className={`${downDown ? "down-down" : "down-down-closed"}`}
-              onAnimationEnd={toggleDown}
-            >
-              <Character />
+            <div className="tine-div">
+              <div className="tip"></div>
+              <div className="tine"></div>
             </div>
-            <div className="houseTwo-town" onClick={toggleGoDown}>
-              <h2>EXIT</h2>
-              <ArrowDownward />
+            <div className="tine-div">
+              <div className="tip"></div>
+              <div className="tine"></div>
             </div>
-          </div>
-          <div className="houseTwo-bottom-right">
-            <div className="shovel"></div>
-          </div>
+            <div className="tine-div">
+              <div className="tip"></div>
+              <div className="tine"></div>
+            </div>
+            </div>
+            <div className="fork-middle"></div>
+            <div className="fork-handle"></div>
         </div>
       </div>
       <Card
@@ -168,35 +182,78 @@ function HouseTwo(props) {
           CLOSE
         </Button>
       </Card>
-      {/* <Card
-        className={`${
-          houseTwoData.first_time
-            ? "answer-card"
-            : "answer-card-closed"
-        }`}
-      >
+      <Card className={`${blanketCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
-          variant="h6"
+          variant="h4"
           color="secondary"
           className="answer-card-description"
         >
-          You climb the steep cliff. Up ahead you see the massive Griffin's
-          houseTwo. You look around tenatively for the owner of the houseTwo.
+          You fold up the blanket and set it next to the letter. It feels goo to
+          know that this child will now sleep more warmly at night.
         </Typography>
         <Button
-          onClick={toggleFirst}
-          className="forest-card-button"
+          onClick={() => setBlanketCard(false)}
           variant="contained"
           color="primary"
         >
           CLOSE
         </Button>
-      </Card> */}
+      </Card>
+      <Card className={`${letterCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You pick up the piece of paper. It says "Blanket". You quickly put it
+          back where you found it.
+        </Typography>
+        <Button
+          onClick={() => setLetterCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+
+      <Card className={`${forkCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You can't bring yourself to steal, especially from people who have so
+          little.
+        </Typography>
+        <Button
+          onClick={() => setForkCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You look around the little house. The shelves are bare. Clearly the
+          people who live here are very poor.
+        </Typography>
+        <Button onClick={toggleFirst} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory, logoutUser })(
   HouseTwo
 );

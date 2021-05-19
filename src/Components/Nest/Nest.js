@@ -29,7 +29,6 @@ function Nest(props) {
 
   useEffect(() => {
     axios.get("/api/nest").then((res) => {
-      console.log(res.data[0])
       if (res.data[0].first_time) {
         setFirstTimeCard(true);
       }

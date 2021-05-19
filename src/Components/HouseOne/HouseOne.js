@@ -24,14 +24,14 @@ function HouseOne(props) {
   const [shovelCard, setShovelCard] = useState(false);
   const [letterCard, setLetterCard] = useState(false);
   const [boneCard, setBoneCard] = useState(false);
-  const [candyCard, setCandyCard] = useState(false)
+  const [candyCard, setCandyCard] = useState(false);
   const [firstTimeCard, setFirstTimeCard] = useState(false);
   const [dogRejectionCard, setDogRejectionCard] = useState(false);
 
   useEffect(() => {
-    axios.get("/api/nest").then((res) => {
+    axios.get("/api/houseOne").then((res) => {
       if (res.data[0].first_time) {
-        setFirstTimeCard(true)
+        setFirstTimeCard(true);
       }
       setHouseOneData(res.data[0]);
       setDownCharacter(true);
@@ -62,6 +62,7 @@ function HouseOne(props) {
         props.getInventory(res.data);
         axios.get("/api/houseOne").then((res) => {
           setHouseOneData(res.data[0]);
+          setBoneCard(true);
         });
       });
     } else if (item === "candy") {
@@ -69,6 +70,7 @@ function HouseOne(props) {
         props.getInventory(res.data);
         axios.get("/api/houseOne").then((res) => {
           setHouseOneData(res.data[0]);
+          setCandyCard(true);
         });
       });
     } else {
@@ -87,7 +89,7 @@ function HouseOne(props) {
   const toggleFirst = () => {
     axios.post("/api/houseOneFirst").then((res) => {
       setHouseOneData(res.data[0]);
-      setFirstTimeCard(false)
+      setFirstTimeCard(false);
     });
   };
 
@@ -98,11 +100,19 @@ function HouseOne(props) {
 
   const toggleLetter = () => {
     if (houseOneData.bone_used) {
-      setLetterCard(true)
+      setLetterCard(true);
     } else {
-      setDogRejectionCard(true)
+      setDogRejectionCard(true);
     }
-  }
+  };
+
+  const toggleShovel = () => {
+    if (houseOneData.bone_used) {
+      setShovelCard(true);
+    } else {
+      setDogRejectionCard(true);
+    }
+  };
 
   return isLoading ? (
     <Loading />
@@ -200,13 +210,13 @@ function HouseOne(props) {
         >
           <Character />
         </div>
-        <div className="houseOne-cottage" onClick={toggleGoDown}>
+        <div className="houseOne-town" onClick={toggleGoDown}>
           <h2>EXIT</h2>
           <ArrowDownward />
         </div>
       </div>
       <div className="houseOne-bottom-right">
-        <div className="shovel" onClick={() => setShovelCard(true)}>
+        <div className="shovel" onClick={toggleShovel}>
           <div className="shovel-top">
             <div className="shovel-line"></div>
           </div>
@@ -255,7 +265,7 @@ function HouseOne(props) {
           color="secondary"
           className="answer-card-description"
         >
-          You pick up the piece of paper. It says "Candy"
+          You pick up the piece of paper. It says "Candy". You quickly put it back where you found it.
         </Typography>
         <Button
           onClick={() => setLetterCard(false)}
@@ -289,7 +299,7 @@ function HouseOne(props) {
           color="secondary"
           className="answer-card-description"
         >
-          You toss the bone to the dog. He chews on it contentedly.
+          You toss the bone to the dog. He chews it contentedly.
         </Typography>
         <Button
           onClick={() => setBoneCard(false)}
@@ -321,7 +331,7 @@ function HouseOne(props) {
           color="secondary"
           className="answer-card-description"
         >
-          You can't bring yourself to steal something for people who have so
+          You can't bring yourself to steal, especially from people who have so
           little.
         </Typography>
         <Button
@@ -332,19 +342,18 @@ function HouseOne(props) {
           CLOSE
         </Button>
       </Card>
-      <Card className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card
+        className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}
+      >
         <Typography
           variant="h4"
           color="secondary"
           className="answer-card-description"
         >
-          You look around the little house. The shelves are bare. Clearly the people who live here are very poor. 
+          You look around the little house. The shelves are bare. Clearly the
+          people who live here are very poor. A friendly dog stands directly in front of you.
         </Typography>
-        <Button
-          onClick={toggleFirst}
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleFirst} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
