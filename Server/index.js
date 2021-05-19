@@ -179,6 +179,8 @@ app.post("/api/useCandy", controller.useCandy)
 app.post("/api/useBlanket", controller.useBlanket)
 app.post("/api/useLevitation", controller.useLevitation)
 app.post("/api/useShoes", controller.useShoes)
+app.post("/api/useHeal", controller.useHeal)
+app.post("/api/useToy", controller.useToy)
 
 app.use(express.static(__dirname + "/../build"));
 

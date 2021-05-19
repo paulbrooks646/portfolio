@@ -71,5 +71,5 @@ values ($1, true);
 insert into housethree (user_id, levitation_used, first_time)
 values ($1, false, true);
 
-insert into housefour (user_id, heal_used, toy_used, first_time)
-values ($1, false, false, true);
+insert into housefour (user_id, heal_used, first_time)
+values ($1, false, true);

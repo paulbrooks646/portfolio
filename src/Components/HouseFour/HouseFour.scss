@@ -1,115 +1,270 @@
 @import "../mixins";
 
-.houseFour-body {
-  background-image: url("../../Images/Floor.png");
-  background-size: 100% 100%;
+.houseFour-middle-left {
+  width: 40vw;
+  height: 27.5vh;
+  @include flex(center);
+  position: absolute;
+  top: 45vh;
+  left: 0px;
 
-  .houseFour-top {
-    @include row(35vh);
+  .houseFour-paper {
+    height: 50px;
+    width: 40px;
+    background-color: #ffffcc;
+    @include flex(center);
+    cursor: pointer;
+    transform: rotate(-30deg);
 
-    .houseFour-top-left {
-      @include section(40vw);
-      @include flex(center);
-
-      .table {
-        background-image: url("../../Images/TableOne.png");
-        background-size: 100% 100%;
-        height: 150px;
-        width: 150px;
-        display: flex;
-        justify-content: center;
-
-        .paper {
-          background-image: url("../../Images/Scroll.jpg");
-          background-size: 100% 100%;
-          height: 75px;
-          width: 75px;
-        }
-      }
+    .line {
+      width: 10px;
+      height: 10px;
+      border-right: solid 0.5px;
+      border-radius: 50%;
     }
 
-    .houseFour-top-middle {
-      background-image: url("../../Images/StairsOne.png");
-      background-size: 100% 100%;
-      @include section(20vw);
-      @include flex(center);
-    }
-
-    .houseFour-top-right {
-      @include section(40vw);
-      display: flex;
-      justify-content: center;
-
-      .cupboard {
-        background-image: url("../../Images/Empty.png");
-        background-size: 100% 100%;
-        height: 150px;
-        width: 200px;
-      }
-    }
-  }
-
-  .houseFour-middle {
-    @include row(20vh);
-
-    .houseFour-middle-left {
-      @include section(40vw);
-      display: flex;
-    }
-
-    .houseFour-middle-middle {
-      @include section(20vw);
-      @include flex(flex-end);
-
-      .dog {
-        background-image: url("../../Images/Dog.png");
-        background-size: 100% 100%;
-        height: 100px;
-        width: 100px;
-      }
-    }
-
-    .houseFour-middle-right {
-      @include section(40vw);
-      @include center(flex-end);
-    }
-  }
-  .houseFour-bottom {
-    @include row(35vh);
-
-    .houseFour-bottom-left {
-      @include section(40vw);
-      @include flex(center);
-
-      .rug {
-        background-image: url("../../Images/Rug.png");
-        background-size: 100% 100%;
-        height: 250px;
-        width: 150px;
-      }
-    }
-
-    .houseFour-bottom-middle {
-      @include section(20vw);
-      @include flex(flex-end);
-
-      .houseFour-town {
-        @include flex(flex-start);
-        cursor: pointer;
-      }
-    }
-
-    .houseFour-bottom-right {
-      @include section(40vw);
-      @include flex(center);
-
-      .shovel {
-        background-image: url("../../Images/Shovel.png");
-        background-size: 100% 100%;
-        height: 100px;
-        width: 150px;
-      }
+    .line-two {
+      width: 10px;
+      height: 10px;
+      border-left: solid 0.5px;
+      border-radius: 50%;
     }
   }
 }
 
+.houseFour-middle-middle {
+  width: 20vw;
+  height: 27.5vh;
+  @include flex(flex-end);
+  position: absolute;
+  top: 45vh;
+  left: 40vw;
+}
+
+.houseFour-middle-right {
+  width: 40vw;
+  height: 27.5vh;
+  @include center(flex-end);
+  position: absolute;
+  top: 45vh;
+  left: 60vw;
+}
+
+.houseFour-bottom-left {
+  width: 40vw;
+  height: 27.5vh;
+  @include flex(center);
+  top: 72.5vh;
+  left: 0px;
+  position: absolute;
+
+  .bed {
+    display: flex;
+    justify-content: center;
+    height: 125px;
+    width: 300px;
+
+    .bed-left {
+      height: 100%;
+      width: 20px;
+      background-color: chocolate;
+    }
+
+    .bed-middle {
+      width: 250px;
+      height: 100px;
+      
+      @include flex(center);
+
+      .invalid {
+      cursor: pointer;  
+        height: 50px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+
+        .invalid-shoe {
+          background-color: black;
+          height: 25px;
+          width: 15px;
+          border-radius: 25% 50% 0% 0%;
+        }
+        .invalid-leg {
+          width: 75px;
+          height: 15px;
+          background-color: royalblue;
+        }
+        .invalid-body {
+          background-color: forestgreen;
+          height: 25px;
+          width: 75px;
+          border-radius: 50% 50% 0% 0%;
+          @include flex(center);
+
+          .invalid-arm-div {
+            display: flex;
+            align-items: center;
+
+            .invalid-hand {
+              border-radius: 50%;
+              width: 15px;
+              height: 10px;
+              background-color: peachpuff;
+            }
+
+            .invalid-arm {
+              border-radius: 0% 50% 50% 0%;
+              width: 40px;
+              height: 10px;
+              border: solid .5px;
+            }
+          }
+        }
+        .invalid-head-div {
+
+          .invalid-head {
+            height: 25px;
+            width: 40px;
+            background-color: peachpuff;
+            border-radius: 50%;
+            position: relative;
+            right: 4px;
+            transform: rotate(-5deg);
+            display: flex;
+            justify-content: space-evenly;
+
+            .invalid-mouth {
+              height: 10px;
+              width: 1px;
+              background-color: red;
+              transform: rotate(-10deg);
+              position: relative;
+              top: 3px;
+              left: 3px;
+
+            }
+            .invalid-nose {
+              border-top: solid .5px;
+              border-left: solid .5px;
+              height: 5px;
+              width: 5px;
+              background-color: peachpuff;
+              border-radius: 50% 0% 0% 0%;
+               transform: rotate(30deg);position: relative;
+               bottom: 3px;
+               left: 4px;
+            }
+            .invalid-eye {
+              height: 5px;
+              width: 5px;
+              border: solid .5px darkgray;
+              background-color: peachpuff;
+              border-radius: 50% 0% 0% 50%;
+              position: relative;
+              left: 8px;
+            }
+            .invalid-ear {
+              width: 10px;
+              height: 5px;
+              border-right: solid .5px gray;
+              border-bottom: solid .5px gray;
+              border-radius: 0% 50% 50% 50%;
+              position: relative;
+              top: 12px;
+          
+            }
+            .invalid-hair {
+              height: 20px;
+              width: 12px;
+              border-radius: 0% 50% 50% 0%;
+              background-color: brown;
+              position: relative;
+              left: 3px;
+              top: 2px;
+            }
+          }
+
+          .invalid-pillow {
+            height: 5px;
+            width: 40px;
+            background-color: white;
+            border-radius: 50%;
+          }
+        }
+      }
+      .invalid-mattress {
+        height: 20px;
+        width: 100%;
+        background-color: white;
+      }
+      .invalid-bed-bottom {
+        height: 10px;
+        width: 100%;
+        background-color: chocolate;
+      }
+    }
+    .bed-right {
+      height: 100%;
+      width: 25px;
+      background-color: chocolate;
+    }
+  }
+}
+
+.houseFour-bottom-middle {
+  width: 20vw;
+  height: 27.5vh;
+  @include flex(flex-end);
+  top: 72.5vh;
+  left: 40vw;
+  position: absolute;
+
+  .houseFour-town {
+    @include flex(flex-start);
+    cursor: pointer;
+  }
+}
+
+.houseFour-bottom-right {
+  width: 40vw;
+  height: 27.5vh;
+  @include flex(center);
+  top: 72.5vh;
+  left: 60vw;
+  position: absolute;
+
+  .bandages {
+    display: flex;
+    justify-content: center;
+    .bandage-left {
+      border-radius: 50%;
+      border-top: lightyellow solid 10px;
+      height: 50px;
+      width: 50px;
+      position: relative;
+      left: 2px;
+      top: 1px;
+      cursor: pointer;
+    }
+    .bandage-middle {
+       border-radius: 50%;
+      border-bottom: lightyellow solid 10px;
+      height: 50px;
+      width: 50px;
+      position: relative;
+      bottom: 8px;
+      cursor: pointer;
+    }
+    .bandage-right {
+       border-radius: 50%;
+      border-top: lightyellow solid 10px;
+      height: 50px;
+      width: 50px;
+       position: relative;
+      right: 2px;
+      top: 2px;
+      cursor: pointer;
+    }
+  }
+}
