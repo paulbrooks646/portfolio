@@ -243,7 +243,7 @@ function HouseTwo(props) {
           className="answer-card-description"
         >
           You look around the little house. The shelves are bare. Clearly the
-          people who live here are very poor.
+          people who live here are very poor. Based on the pitch fork on the ground, these people propbably work on a farm.
         </Typography>
         <Button onClick={toggleFirst} variant="contained" color="primary">
           CLOSE

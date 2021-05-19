@@ -349,7 +349,7 @@ function HouseOne(props) {
           className="answer-card-description"
         >
           You look around the little house. The shelves are bare. Clearly the
-          people who live here are very poor. A friendly dog stands directly in
+          people who live here are very poor. Based on the shovel on the ground, these people are probably diggers. A friendly dog stands directly in
           front of you.
         </Typography>
         <Button onClick={toggleFirst} variant="contained" color="primary">

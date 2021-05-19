@@ -753,15 +753,15 @@ function Dashboard(props) {
         }`}
       >
         <Typography variant="h4" color="primary">
-          Success!!!
+          As you read the scroll it disappears. The home grows until it is the perfect size for you!
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          Not only have you slayed the dragon, you know have a beautiful new
-          home as well. You are now free to start the peaceful life you long
+          Not only have you slain the dragon, you have a beautiful new
+          home. You are free to start the peaceful life you long
           for. You win! Right?
         </Typography>
         <Button onClick={toggleGrowCard} variant="contained" color="primary">

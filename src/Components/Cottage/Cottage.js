@@ -29,10 +29,10 @@ function Cottage(props) {
   const [doorRejectionCard, setDoorRejectionCard] = useState(false);
   const [lockRejectionCard, setLockRejectionCard] = useState(false);
   const [firstTimeCard, setFirstTimeCard] = useState(false);
-  const [lockCard, setLockCard] = useState(false)
-  const [rejectionCard, setRejectionCard] = useState(false)
-  const [inventoryOpen, setInventoryOpen] = useState(false)
-  const [cottageData, setCottageData] = useState()
+  const [lockCard, setLockCard] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false);
+  const [inventoryOpen, setInventoryOpen] = useState(false);
+  const [cottageData, setCottageData] = useState();
   const [protectionCard, setProtectionCard] = useState(false);
   const [fireCard, setFireCard] = useState(false);
   const [openCard, setOpenCard] = useState(false);
@@ -68,22 +68,15 @@ function Cottage(props) {
 
   const toggleItem = (item) => {
     if (item === "protection") {
-     
-        axios.post("/api/useProtection").then((res) => {
-          props.getInventory(res.data);
-          axios.get("/api/cottage").then((res) => {
-            setCottageData(res.data[0]);
-            setProtectionCard(true);
-          });
+      axios.post("/api/useProtection").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/cottage").then((res) => {
+          setCottageData(res.data[0]);
+          setProtectionCard(true);
         });
-     
-    }
-
-   else if (item === "fire") {
-      if (
-        
-        cottageData.pod_taken
-      ) {
+      });
+    } else if (item === "fire") {
+      if (cottageData.pod_taken) {
         axios.post("/api/useFire").then((res) => {
           props.getInventory(res.data);
           axios.get("/api/cottage").then((res) => {
@@ -94,13 +87,8 @@ function Cottage(props) {
       } else {
         setRejectionCard(true);
       }
-    }
-
-   else if (item === "open") {
-      if (
-        
-        cottageData.door_unlocked
-      ) {
+    } else if (item === "open") {
+      if (cottageData.door_unlocked) {
         axios.post("/api/useOpen").then((res) => {
           props.getInventory(res.data);
           axios.get("/api/cottage").then((res) => {
@@ -112,7 +100,7 @@ function Cottage(props) {
         setRejectionCard(true);
       }
     } else {
-      setRejectionCard(true)
+      setRejectionCard(true);
     }
   };
 
@@ -138,10 +126,10 @@ function Cottage(props) {
       setBramblesRejectionCard(true);
     } else if (!cottageData.door_unlocked) {
       if (cottageData.master_thief) {
-        axios.post("/api/houseFiveLock").then(res => {
-          setCottageData(res.data[0])
-          setLockCard(true)
-        })
+        axios.post("/api/houseFiveLock").then((res) => {
+          setCottageData(res.data[0]);
+          setLockCard(true);
+        });
       } else {
         setLockRejectionCard(true);
       }
@@ -561,25 +549,6 @@ function Cottage(props) {
         </Button>
       </Card>
       <Card
-        className={`${levitationCard ? "answer-card" : "answer-card-closed"}`}
-      >
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          You pick up the scroll. Scanning it you discern that it allows the
-          user to hover a few inches off the ground for a short period of time.
-        </Typography>
-        <Button
-          onClick={() => setLevitationCard(false)}
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card
         className={`${
           doorRejectionCard ? "answer-card" : "answer-card-closed"
         }`}
@@ -679,9 +648,9 @@ function Cottage(props) {
           color="primary"
           className="answer-card-description"
         >
-          As you read the protection scroll, you glow blue. Nervously, you step
-          into the laser field. The lasers sizzle into nothingness as they hit
-          you until they are all gone. You stop glowing.
+          As you read the protection scroll it disappears. You glow blue.
+          Nervously, you step into the laser field. The lasers sizzle into
+          nothingness as they hit you until they are all gone. You stop glowing.
         </Typography>
         <Button
           onClick={() => setProtectionCard(false)}
@@ -697,7 +666,7 @@ function Cottage(props) {
           color="primary"
           className="answer-card-description"
         >
-          As you read the fire scroll, the wall of brambles bursts into flames.
+          As you read the fire scroll it disappears. The wall of brambles bursts into flames.
           After a few glorious minutes, the wall is nothing but ash.
         </Typography>
         <Button
@@ -714,7 +683,7 @@ function Cottage(props) {
           color="primary"
           className="answer-card-description"
         >
-          Now that the door is unlocked, you read the open scroll. The door pops
+          As you read the open scroll it disappears. The unlocked door pops
           open. For better or worse, you can now enter the cottage.
         </Typography>
         <Button

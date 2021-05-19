@@ -586,7 +586,7 @@ function Dragon(props) {
           color="primary"
           className="answer-card-description"
         >
-          As you read the magic words, a small segment of coals turns slightly
+          As you read the scroll it disappears. A small segment of coals turns slightly
           blue.
         </Typography>
         <Button
