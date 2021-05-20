@@ -108,31 +108,16 @@ function HouseFive(props) {
             <div className="door-knob"></div>
           </div>
           <div className="dining-div">
-            <div className="chair-div-left">
-              <div className="chair-top-div">
-                <div className="chair-top"></div>
-              </div>
-              <div className="chair-seat"></div>
-              <div className="chair-leg-div">
-                <div className="chair-leg"></div>
-                <div className="chair-leg"></div>
-              </div>
-            </div>
             <div className="table-div">
-              <div className="table-top"></div>
-              <div className="table-leg-div">
-                <div className="table-leg"></div>
-                <div className="table-leg"></div>
-              </div>
-            </div>
-            <div className="chair-div">
-              <div className="chair-top-div">
-                <div className="chair-top"></div>
-              </div>
-              <div className="chair-seat"></div>
-              <div className="chair-leg-div">
-                <div className="chair-leg"></div>
-                <div className="chair-leg"></div>
+              <div className="flame">
+                <div className="flame-one"></div>
+                <div className="flame-two"></div>
+                <div className="flame-three"></div>
+                <div className="flame-four"></div>
+                <div className="flame-five"></div>
+                <div className="flame-six"></div>
+                <div className="flame-seven"></div>
+                <div className="flame-eight"></div>
               </div>
             </div>
           </div>
@@ -140,9 +125,66 @@ function HouseFive(props) {
             <div className="dresser-side"></div>
             <div className="dresser-middle">
               <div className="shelf"></div>
-              <div className="shelf"></div>
-              <div className="shelf"></div>
-              <div className="shelf"></div>
+              <div className="shelf-one">
+                <div className="houseFive-cottage-mini">
+                  <div className="houseFive-left-mini"></div>
+                  <div className="houseFive-middle-mini">
+                    <div className="houseFive-chimney-div">
+                      
+                      <div className="houseFive-chimney"></div>
+                    </div>
+                    <div className="houseFive-short-log"></div>
+                    <div className="houseFive-medium-log"></div>
+                    <div className="houseFive-window-div">
+                      <div className="houseFive-window-div-side">
+                        <div className="houseFive-short-log"></div>
+                        <div className="houseFive-short-log"></div>
+                      </div>
+                      <div className="houseFive-window">
+                        <div className="houseFive-window-row">
+                          <div className="houseFive-window-pane"></div>
+                          <div className="houseFive-window-line"></div>
+                          <div className="houseFive-window-pane"></div>
+                        </div>
+                        <div className="houseFive-window-middle"></div>
+                        <div className="houseFive-window-row">
+                          <div className="houseFive-window-pane"></div>
+                          <div className="houseFive-window-line"></div>
+                          <div className="houseFive-window-pane"></div>
+                        </div>
+                      </div>
+                      <div className="houseFive-window-div-side">
+                        <div className="houseFive-short-log"></div>
+                        <div className="houseFive-short-log"></div>
+                      </div>
+                    </div>
+                    <div className="houseFive-long-log"></div>
+                    <div className="houseFive-long-log"></div>
+                    <div className="houseFive-door-div">
+                      <div className="houseFive-door-div-side">
+                        <div className="houseFive-short-log"></div>
+                        <div className="houseFive-short-log"></div>
+                        <div className="houseFive-short-log"></div>
+                      </div>
+                      <div className="houseFive-door-mini">
+                        <div className="houseFive-door-knob-mini"></div>
+                        <div className="houseFive-lock-div">
+                          <div className="houseFive-lock-top"></div>
+                          <div className="houseFive-lock-bottom"></div>
+                        </div>
+                      </div>
+                      <div className="houseFive-door-div-side">
+                        <div className="houseFive-short-log"></div>
+                        <div className="houseFive-short-log"></div>
+                        <div className="houseFive-short-log"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="houseFive-right-mini"></div>
+                </div>
+              </div>
+              <div className="shelf-two"></div>
+              <div className="shelf-three"></div>
               <div className="shelf"></div>
             </div>
             <div className="dresser-side"></div>
@@ -150,197 +192,133 @@ function HouseFive(props) {
         </div>
         <div className="houseFive-bottom-middle">
           <div className="houseFive-middle">
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-
-            <div className="houseFive-middle-left"></div>
-            <div className="houseFive-middle-middle">
-              <div className="dog">
-                <div className="dog-top">
-                  <div className="dog-left-ear"></div>
-                  <div className="dog-face">
-                    <div className="dog-eye-div">
-                      <div className="dog-eye">
-                        <div className="dog-pupil"></div>
-                      </div>
-                      <div className="dog-eye">
-                        <div className="dog-pupil"></div>
-                      </div>
-                    </div>
-                    <div className="dog-nose"></div>
-                    <div className="dog-smile">
-                      <div className="dog-mouth"></div>
-                      <div className="dog-tongue">
-                        <div className="tongue-line"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="dog-right-ear"></div>
-                </div>
-                <div className="dog-bottom">
-                  <div className="dog-body">
-                    <div className="dog-torso"></div>
-                    <div className="dog-leg-div">
-                      <div className="dog-leg">
-                        <div className="paw-line"></div>
-                        <div className="paw-line"></div>
-                      </div>
-                      <div className="dog-leg">
-                        <div className="paw-line"></div>
-                        <div className="paw-line"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="dog-tail"></div>
-                </div>
-              </div>
-            </div>
-            <div className="houseFive-middle-right"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
           </div>
           <div className="houseFive-bottom">
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="rug"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="board"></div>
-            <div className="houseFive-bottom-left"></div>
-            <div className="houseFive-bottom-middle">
-              <div
-                className={`${
-                  downCharacter ? "character-down" : "character-down-closed"
-                }`}
-              >
-                <Character />
-              </div>
-              <div
-                className={`${downDown ? "down-down" : "down-down-closed"}`}
-                onAnimationEnd={toggleDown}
-              >
-                <Character />
-              </div>
-              <div className="houseFive-cottage" onClick={toggleGoDown}>
-                <h2>EXIT</h2>
-                <ArrowDownward />
-              </div>
-            </div>
-            <div className="houseFive-bottom-right">
-              <div className="shovel"><div className="shovel-top"></div><div className="shovel-handle"></div></div>
-            </div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
+            <div className="houseFive-board"></div>
           </div>
         </div>
+        <div className="houseFive-middle-left"></div>
+        <div className="houseFive-middle-middle"></div>
+        <div className="houseFive-middle-right"></div>
+        <div className="houseFive-bottom-left"></div>
+        <div className="houseFive-bottom-center">
+          <div
+            className={`${
+              downCharacter ? "character-down" : "character-down-closed"
+            }`}
+          >
+            <Character />
+          </div>
+          <div
+            className={`${downDown ? "down-down" : "down-down-closed"}`}
+            onAnimationEnd={toggleDown}
+          >
+            <Character />
+          </div>
+          <div className="houseFive-town" onClick={toggleGoDown}>
+            <h2>EXIT</h2>
+            <ArrowDownward />
+          </div>
+        </div>
+        <div className="houseFive-bottom-right"></div>
+        <Card
+          className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
+        >
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="answer-card-description"
+          >
+            That item is either not useful here or not useful here yet.
+          </Typography>
+          <Button
+            onClick={() => setRejectionCard(false)}
+            variant="contained"
+            color="primary"
+          >
+            CLOSE
+          </Button>
+        </Card>
       </div>
-      <Card
-        className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
-      >
-        <Typography
-          variant="h4"
-          color="secondary"
-          className="answer-card-description"
-        >
-          That item is either not useful here or not useful here yet.
-        </Typography>
-        <Button
-          onClick={() => setRejectionCard(false)}
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      {/* <Card
-        className={`${
-          houseFiveData.first_time
-            ? "answer-card"
-            : "answer-card-closed"
-        }`}
-      >
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          You climb the steep cliff. Up ahead you see the massive Griffin's
-          houseFive. You look around tenatively for the owner of the houseFive.
-        </Typography>
-        <Button
-          onClick={toggleFirst}
-          className="forest-card-button"
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card> */}
     </div>
   );
 }

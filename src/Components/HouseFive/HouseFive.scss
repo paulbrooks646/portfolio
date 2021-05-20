@@ -7,27 +7,19 @@
     justify-content: space-evenly;
     align-items: flex-end;
     border-bottom: solid black 3px;
-    background-color: lightcyan;
-
-    // background-color: silver;
-    // background-image: linear-gradient(335deg, #b00 23px, transparent 23px),
-    //   linear-gradient(155deg, #d00 23px, transparent 23px),
-    //   linear-gradient(335deg, #b00 23px, transparent 23px),
-    //   linear-gradient(155deg, #d00 23px, transparent 23px);
-    // background-size: 58px 58px;
-    // background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+    background-color: gray;
 
     .door {
       height: 200px;
       width: 140px;
       padding: 10px;
       @include center(flex-start);
-      background-color: chocolate;
+      background-color: black;
       border: solid black 2px;
 
       .door-knob {
         border-radius: 50%;
-        background-color: black;
+        background-color: white;
         height: 20px;
         width: 20px;
       }
@@ -40,98 +32,113 @@
       align-items: flex-end;
       justify-content: space-evenly;
 
-      .chair-div-left {
-        @include flex(flex-start);
-        height: 200px;
-        width: 100px;
-        transform: scaleX(-1);
-
-        .chair-top-div {
-          width: 100%;
-          height: 90px;
-          @include center(flex-end);
-
-          .chair-top {
-            height: 100%;
-            width: 25px;
-            background-color: chocolate;
-          }
-        }
-
-        .chair-seat {
-          width: 100%;
-          height: 25px;
-          background-color: chocolate;
-        }
-
-        .chair-leg-div {
-          @include center(space-between);
-          height: 90px;
-          width: 100%;
-
-          .chair-leg {
-            height: 100%;
-            width: 25px;
-            background-color: chocolate;
-          }
-        }
-      }
-
       .table-div {
         @include flex(flex-start);
-        width: 200px;
-        height: 125px;
+        width: 250px;
+        height: 150px;
+        background-color: black;
 
-        .table-top {
-          width: 200px;
-          height: 25px;
-          background-color: chocolate;
-        }
+        .flame {
+          background-image: linear-gradient(
+            45deg,
+            transparent 50%,
+            yellow 50%,
+            red
+          );
+          width: 150px;
+          height: 150px;
+          transform: rotate(-45deg);
+          position: relative;
+          top: 75px;
+          z-index: 1;
+          border-radius: 25% 0% 25% 0%;
 
-        .table-leg-div {
-          @include center(space-between);
-          width: 200px;
-          height: 100px;
-
-          .table-leg {
-            height: 100px;
+          .flame-one {
+            border-radius: 50%;
+            border-left: black solid 6px;
+            position: absolute;
+            height: 40px;
             width: 30px;
-            background-color: chocolate;
+            transform: rotate(45deg);
+            left: 125px;
+            bottom: 113px;
           }
-        }
-      }
-      .chair-div {
-        @include flex(flex-start);
-        height: 200px;
-        width: 100px;
 
-        .chair-top-div {
-          width: 100%;
-          height: 90px;
-          @include center(flex-end);
-
-          .chair-top {
-            height: 100%;
-            width: 25px;
-            background-color: chocolate;
+          .flame-two {
+            border-radius: 50% 50% 25% 50%;
+            border-right: black solid 6px;
+            position: absolute;
+            height: 70px;
+            width: 30px;
+            transform: rotate(50deg);
+            left: 104px;
+            bottom: 111px;
           }
-        }
 
-        .chair-seat {
-          width: 100%;
-          height: 25px;
-          background-color: chocolate;
-        }
+          .flame-three {
+            border-radius: 50%;
+            border-right: black solid 6px;
+            position: absolute;
+            height: 50px;
+            width: 20px;
+            transform: rotate(30deg);
+            left: 125px;
+            bottom: 83px;
+          }
 
-        .chair-leg-div {
-          @include center(space-between);
-          height: 90px;
-          width: 100%;
+          .flame-four {
+            border-radius: 50%;
+            border-left: black solid 6px;
+            position: absolute;
+            height: 50px;
+            width: 20px;
+            transform: rotate(70deg);
+            left: 48px;
+            bottom: 115px;
+          }
 
-          .chair-leg {
-            height: 100%;
+          .flame-five {
+            border-radius: 50%;
+            border-right: black solid 6px;
+            position: absolute;
+            height: 40px;
+            width: 20px;
+            transform: rotate(40deg);
+            left: 70px;
+            bottom: 122px;
+          }
+
+          .flame-six {
+            border-radius: 50%;
+            border-right: black solid 6px;
+            position: absolute;
+            height: 60px;
+            width: 20px;
+            transform: rotate(24deg);
+            left: 126px;
+            bottom: 63px;
+          }
+
+          .flame-seven {
+            border-radius: 50%;
+            border-right: black solid 6px;
+            position: absolute;
+            height: 60px;
+            width: 30px;
+            transform: rotate(40deg);
+            left: 90px;
+            bottom: 82px;
+          }
+
+          .flame-eight {
+            border-radius: 50%;
+            border-left: black solid 6px;
+            position: absolute;
+            height: 25px;
             width: 25px;
-            background-color: chocolate;
+            transform: rotate(45deg);
+            left: 136px;
+            bottom: 28px;
           }
         }
       }
@@ -145,7 +152,7 @@
       .dresser-side {
         height: 100%;
         width: 25px;
-        background-color: chocolate;
+        background-color: black;
       }
       .dresser-middle {
         @include flex(space-between);
@@ -155,7 +162,172 @@
         .shelf {
           width: 100%;
           height: 10px;
-          background-color: chocolate;
+          background-color: black;
+        }
+        .shelf-one {
+          width: 100%;
+          height: 10px;
+          background-color: black;
+          position: relative;
+
+          .houseFive-cottage-mini {
+            width: 40px;
+            display: flex;
+            position: relative;
+            top: 24px;
+            left: 15px;
+
+            .houseFive-left-mini {
+              width: 5px;
+              height: 25px;
+              background-color: sienna;
+              transform: rotate(50deg);
+              position: relative;
+              left: 10px;
+              bottom: 8px;
+              z-index: 1;
+            }
+
+            .houseFive-middle-mini {
+              position: relative;
+              width: 30px;
+              @include flex(flex-start);
+
+              .houseFive-chimney-div {
+                position: absolute;
+                top: -2px;
+                left: 23px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .houseFive-chimney {
+                  background-color: sienna;
+                  height: 10px;
+                  width: 5px;
+                  border-radius: 0% 0% 0% 50%;
+                }
+              }
+
+              .houseFive-short-log {
+                background-color: sienna;
+                width: 10px;
+                height: 4px;
+                border: solid 0.1px;
+              }
+              .houseFive-medium-log {
+                background-color: sienna;
+                width: 15px;
+                height: 4px;
+                border: solid 0.1px;
+              }
+
+              .houseFive-window-div {
+                width: 30px;
+                height: 8px;
+                display: flex;
+                .houseFive-window-div-side {
+                  width: 10px;
+                  height: 8px;
+                }
+                .houseFive-window {
+                  width: 10px;
+                  height: 8px;
+
+                  .houseFive-window-row {
+                    display: flex;
+                    width: 10px;
+                    height: 4px;
+                    
+
+                    .houseFive-window-pane {
+                      height: 100%;
+                      width: 5px;
+                      height: 4px;
+                      background-color: white;
+                      border: solid .1px;
+                    }
+                  }
+                }
+              }
+
+              .houseFive-long-log {
+                height: 4px;
+                width: 30px;
+                background-color: sienna;
+                border: solid .1px;
+              }
+
+              .houseFive-door-div {
+                display: flex;
+                height: 12px;
+                width: 30px;
+                .houseFive-door-div-side {
+                  height: 12px;
+                  width: 10px;
+                }
+                .houseFive-door-mini {
+                  height: 12px;
+                  width: 10px;
+                  background-color: sienna;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-start;
+                  justify-content: center;
+                  border: solid .1px;
+
+                  .houseFive-door-knob-mini {
+                    background-color: gold;
+                    border-radius: 50%;
+                    position: relative;
+                    left: 1px;
+                    height: 2px;
+                    width: 2px;
+                  }
+                  .houseFive-lock-div {
+                    @include flex(center);
+                    height: 2px;
+                    width: 2px;
+                    left: 1px;
+
+                    .houseFive-lock-top {
+                      background-color: black;
+                      border-radius: 50%;
+                      height: 1px;
+                      width: 1px;
+                    }
+
+                    .houseFive-lock-bottom {
+                      background-color: black;
+                      height: 1px;
+                      width: 1px;
+                      position: relative;
+                      bottom: .4px;
+                    }
+                  }
+                }
+              }
+            }
+            .houseFive-right-mini {
+              width: 5px;
+              height: 25px;
+              background-color: sienna;
+              transform: rotate(-48deg);
+              position: relative;
+              right: 10px;
+              bottom: 8px;
+            }
+          }
+        }
+        .shelf-two {
+          width: 100%;
+          height: 10px;
+          background-color: black;
+        }
+        .shelf-three {
+          width: 100%;
+          height: 10px;
+          background-color: black;
         }
       }
     }
@@ -171,105 +343,83 @@
       position: relative;
       width: 100%;
 
-      .board {
+      .houseFive-board {
         height: 100%;
         width: 2.5%;
-        background-color: sienna;
+        background-color: gray;
         border: solid 2px black;
       }
-
-      .houseFive-middle-left {
-        @include section(40vw);
-        display: flex;
-        position: absolute;
-        left: 0px;
-        top: 0px;
-      }
-
-      .houseFive-middle-middle {
-        @include section(20vw);
-        @include flex(flex-end);
-        position: absolute;
-        top: 0px;
-        left: 40vw;
-
-       
-      }
-
-      .houseFive-middle-right {
-        @include section(40vw);
-        @include center(flex-end);
-        position: absolute;
-        top: 0px;
-        right: 0px;
-      }
     }
-
     .houseFive-bottom {
       @include row(50%);
       width: 100%;
       position: relative;
 
-      .board {
+      .houseFive-board {
         height: 100%;
         width: 2.5%;
-        background-color: sienna;
+        background-color: gray;
         border: solid 2px black;
-      }
-
-      .rug {
-        height: 100%;
-        width: 10%;
-        background-color: rosybrown;
-        border: solid black 2px;
-      }
-
-      .houseFive-bottom-left {
-        @include section(40vw);
-        @include flex(center);
-        position: absolute;
-        top: 0px;
-        left: 0px;
-
-        .rug {
-          background-image: url("../../Images/Rug.png");
-          background-size: 100% 100%;
-          height: 250px;
-          width: 150px;
-        }
-      }
-
-      .houseFive-bottom-middle {
-        @include section(20vw);
-        @include flex(flex-end);
-        position: absolute;
-        left: 40vw;
-        top: 0px;
-
-        .houseFive-cottage {
-          @include flex(flex-start);
-          cursor: pointer;
-          z-index: 1;
-        }
-      }
-
-      .houseFive-bottom-right {
-        @include section(40vw);
-        @include flex(center);
-        position: absolute;
-        right: 0px;
-        bottom: 0px;
-
-        .shovel {
-          .shovel-top {
-           
-         }
-         .shovel-handle {
-
-         }
-         
-        }
       }
     }
   }
+}
+
+.houseFive-middle-left {
+  width: 40vw;
+  height: 27.5vh;
+  @include flex(center);
+  position: absolute;
+  top: 45vh;
+  left: 0px;
+}
+
+.houseFive-middle-middle {
+  width: 20vw;
+  height: 27.5vh;
+  @include flex(flex-end);
+  position: absolute;
+  top: 45vh;
+  left: 40vw;
+}
+
+.houseFive-middle-right {
+  width: 40vw;
+  height: 27.5vh;
+  @include center(flex-end);
+  position: absolute;
+  top: 45vh;
+  left: 60vw;
+}
+
+.houseFive-bottom-left {
+  width: 40vw;
+  height: 27.5vh;
+  @include flex(center);
+  top: 72.5vh;
+  left: 0px;
+  position: absolute;
+}
+
+.houseFive-bottom-center {
+  width: 20vw;
+  height: 27.5vh;
+  @include flex(flex-end);
+  top: 72.5vh;
+  left: 40vw;
+  position: absolute;
+
+  .houseFive-town {
+    @include flex(flex-start);
+    cursor: pointer;
+  }
+}
+
+.houseFive-bottom-right {
+  width: 40vw;
+  height: 27.5vh;
+  @include flex(center);
+  top: 72.5vh;
+  left: 60vw;
+  position: absolute;
 }
