@@ -337,7 +337,66 @@ function Cottage(props) {
         </div>
         <div className="cottage-right">
           <div className="cottage-right-top"></div>
-          <div className="cottage-right-middle"></div>
+          <div className="cottage-right-middle">
+            <div className="creepy-cottage">
+              <div className="creepy-left"></div>
+                <div className="creepy-middle">
+                  <div className="creepy-chimney-div">
+                    <div className="creepy-smoke"></div>
+                    <div className="creepy-smoke-middle"></div>
+                    <div className="creepy-smoke"></div>
+                    <div className="creepy-chimney"></div>
+                  </div>
+                <div className="creepy-short-log"></div>
+                <div className="creepy-medium-log"></div>
+                <div className="creepy-window-div">
+                  <div className="creepy-window-div-side">
+                    <div className="creepy-short-log"></div>
+                    <div className="creepy-short-log"></div>
+                  </div>
+                  <div className="creepy-window">
+                    <div className="creepy-window-row">
+                      <div className="creepy-window-pane"></div>
+                      <div className="creepy-window-line"></div>
+                      <div className="creepy-window-pane"></div>
+                    </div>
+                    <div className="creepy-window-middle"></div>
+                    <div className="creepy-window-row">
+                      <div className="creepy-window-pane"></div>
+                      <div className="creepy-window-line"></div>
+                      <div className="creepy-window-pane"></div>
+                    </div>
+                  </div>
+                  <div className="creepy-window-div-side">
+                    <div className="creepy-short-log"></div>
+                    <div className="creepy-short-log"></div>
+                  </div>
+                </div>
+                <div className="creepy-long-log"></div>
+                <div className="creepy-long-log"></div>
+                <div className="creepy-door-div">
+                  <div className="creepy-door-div-side">
+                    <div className="creepy-short-log"></div>
+                    <div className="creepy-short-log"></div>
+                    <div className="creepy-short-log"></div>
+                  </div>
+                  <div className="creepy-door">
+                      <div className="creepy-door-knob"></div>
+                      <div className="creepy-lock-div">
+                        <div className="creepy-lock-top"></div>
+                        <div className="creepy-lock-bottom"></div>
+                      </div>
+                  </div>
+                  <div className="creepy-door-div-side">
+                    <div className="creepy-short-log"></div>
+                    <div className="creepy-short-log"></div>
+                    <div className="creepy-short-log"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="creepy-right"></div>
+            </div>
+          </div>
           <div className="cottage-right-bottom">
             <div className="arrow-div">
               <ArrowUpward id="arrow-up" onClick={toggleHouseFive} />
@@ -666,8 +725,9 @@ function Cottage(props) {
           color="primary"
           className="answer-card-description"
         >
-          As you read the fire scroll it disappears. The wall of brambles bursts into flames.
-          After a few glorious minutes, the wall is nothing but ash.
+          As you read the fire scroll it disappears. The wall of brambles bursts
+          into flames. After a few glorious minutes, the wall is nothing but
+          ash.
         </Typography>
         <Button
           onClick={() => setFireCard(false)}
