@@ -32,7 +32,7 @@
       align-items: flex-end;
       justify-content: space-evenly;
 
-      .table-div {
+      .fireplace {
         @include flex(flex-start);
         width: 250px;
         height: 150px;
@@ -174,7 +174,7 @@
             width: 40px;
             display: flex;
             position: relative;
-            top: 24px;
+            bottom: 36px;
             left: 15px;
 
             .houseFive-left-mini {
@@ -238,14 +238,13 @@
                     display: flex;
                     width: 10px;
                     height: 4px;
-                    
 
                     .houseFive-window-pane {
                       height: 100%;
                       width: 5px;
                       height: 4px;
                       background-color: white;
-                      border: solid .1px;
+                      border: solid 0.1px;
                     }
                   }
                 }
@@ -255,7 +254,7 @@
                 height: 4px;
                 width: 30px;
                 background-color: sienna;
-                border: solid .1px;
+                border: solid 0.1px;
               }
 
               .houseFive-door-div {
@@ -274,7 +273,7 @@
                   flex-direction: column;
                   align-items: flex-start;
                   justify-content: center;
-                  border: solid .1px;
+                  border: solid 0.1px;
 
                   .houseFive-door-knob-mini {
                     background-color: gold;
@@ -302,7 +301,7 @@
                       height: 1px;
                       width: 1px;
                       position: relative;
-                      bottom: .4px;
+                      bottom: 0.4px;
                     }
                   }
                 }
@@ -318,16 +317,322 @@
               bottom: 8px;
             }
           }
+
+          .potion-div {
+            position: relative;
+            left: 25px;
+            bottom: 66px;
+            @include flex(center);
+
+            .potion-cork {
+              height: 8px;
+              width: 5.5px;
+              background-color: chocolate;
+              position: relative;
+              top: 4px;
+            }
+
+            .potion-top {
+              height: 3px;
+              width: 12px;
+              background-color: rgba(255, 255, 255, 0.3);
+              z-index: 1;
+            }
+
+            .potion-neck {
+              height: 8px;
+              width: 8px;
+              background-color: rgba(255, 255, 255, 0.3);
+              @include flex(flex-end);
+
+              .neck-potion {
+                height: 6px;
+                width: 5px;
+                background-color: limegreen;
+                position: relative;
+                top: 2px;
+              }
+            }
+
+            .potion-bottle {
+              height: 20px;
+              width: 20px;
+              border-radius: 50%;
+              background-image: linear-gradient(
+                45deg,
+                transparent 50%,
+                rgba(255, 255, 255, 0.3) 50%
+              );
+              @include flex(center);
+              transform: rotate(-45deg);
+
+              .potion {
+                height: 15px;
+                width: 15px;
+                border-radius: 50%;
+                background-image: linear-gradient(
+                  45deg,
+                  transparent 50%,
+                  limegreen 50%
+                );
+                position: relative;
+                bottom: 1px;
+                left: 1px;
+              }
+            }
+          }
+          .potion-div-closed {
+            display: none;
+          }
         }
         .shelf-two {
           width: 100%;
           height: 10px;
           background-color: black;
+          position: relative;
+
+          .book-div {
+            width: 50%;
+            @include center(center);
+            position: absolute;
+            left: 0px;
+            bottom: 10px;
+
+            .book-cover-front {
+              height: 40px;
+              width: 30px;
+              background-color: black;
+
+              .book-title {
+                width: 100%;
+                height: 5px;
+                @include center(center);
+                position: relative;
+                top: 10px;
+
+                .book-title-left {
+                  height: 4px;
+                  width: 4px;
+                  border-top: red solid;
+                  border-radius: 50%;
+                }
+
+                .book-title-right {
+                  height: 4px;
+                  width: 4px;
+                  border-bottom: red solid;
+                  border-radius: 50%;
+                }
+              }
+            }
+            .book-page {
+              height: 40px;
+              background-color: white;
+              border-top: black solid 2px;
+              border-bottom: black solid 2px;
+              border-right: black solid 0.1px;
+              width: 2px;
+            }
+
+            .book-cover-back {
+              height: 40px;
+              background-color: black;
+              width: 2px;
+            }
+          }
+          .eyes-div {
+            width: 50%;
+            @include flex(center);
+            position: absolute;
+            right: 0px;
+            bottom: 10px;
+
+            .eyes-top {
+              width: 40px;
+              background-color: rgba(255, 255, 255, 0.3);
+              height: 5px;
+            }
+
+            .eyes-bottom {
+              width: 30px;
+              height: 40px;
+              background-color: rgba(255, 255, 255, 0.3);
+              border-radius: 0% 0% 25% 25%;
+              @include flex(flex-end);
+              padding-bottom: 2px;
+
+              .eye-row {
+                @include center(space-evenly);
+                height: 12px;
+                width: 100%;
+
+                .eye {
+                  border-radius: 50%;
+                  height: 12px;
+                  width: 12px;
+                  @include flex(center);
+                  background-color: white;
+
+                  .eye-pupil {
+                    height: 8px;
+                    width: 8px;
+                    background-color: black;
+                    border-radius: 50%;
+                  }
+                }
+              }
+            }
+          }
         }
         .shelf-three {
           width: 100%;
           height: 10px;
           background-color: black;
+          position: relative;
+
+          .blood-div {
+            width: 50%;
+            @include flex(center);
+            position: absolute;
+            left: 0px;
+            bottom: 10px;
+
+            .blood-top {
+              width: 50px;
+              background-color: rgba(255, 255, 255, 0.3);
+              height: 3px;
+            }
+
+            .blood-bottom {
+              width: 50px;
+              height: 22px;
+              border-radius: 0% 0% 50% 50%;
+              background-color: rgba(255, 255, 255, 0.3);
+              @include flex(center);
+
+              .blood {
+                background-color: red;
+                border-radius: 0% 0% 50% 50%;
+                height: 18px;
+                width: 46px;
+              }
+            }
+          }
+          .bugs-div {
+            width: 50%;
+            @include flex(center);
+            position: absolute;
+            right: 0px;
+            bottom: 10px;
+
+            .bugs-top {
+              width: 70px;
+              height: 5px;
+              background-color: silver;
+            }
+
+            .bugs-bottom {
+              width: 65px;
+              height: 25px;
+              background-color: rgba(255, 255, 255, 0.3);
+              @include center(space-between);
+
+              .bug {
+                @include center(center);
+
+                .bug-left {
+                  width: 2.5px;
+                  height: 20px;
+                  @include flex(space-evenly);
+
+                  .bug-leg-one {
+                    width: 2.5px;
+                    height: 1px;
+                    background-color: brown;
+                    transform: rotate(45deg);
+                  }
+                  .bug-leg-two {
+                    width: 2.5px;
+                    height: 1px;
+                    background-color: brown;
+                    transform: rotate(15deg);
+                  }
+                  .bug-leg-three {
+                    width: 2.5px;
+                    height: 1px;
+                    background-color: brown;
+                    transform: rotate(-15deg);
+                  }
+                  .bug-leg-four {
+                    width: 2.5px;
+                    height: 1px;
+                    background-color: brown;
+                    transform: rotate(-45deg);
+                  }
+                }
+                .bug-body {
+                  width: 5px;
+                  height: 20px;
+                  border-radius: 50%;
+                  background-color: brown;
+                  @include flex(flex-end);
+
+                  .bug-eye-div {
+                    width: 100%;
+                    @include center(space-evenly);
+
+                    .bug-eye {
+                      height: 2px;
+                      width: 2px;
+                      border-radius: 50%;
+                      background-color: white;
+                      @include flex(center);
+                      position: relative;
+                      bottom: 3px;
+
+                      .bug-pupil {
+                        height: 0.5px;
+                        width: 0.5px;
+                        border-radius: 50%;
+                        background-color: black;
+                      }
+                    }
+                  }
+                }
+                .bug-right {
+                  width: 2.5px;
+                  height: 20px;
+                  @include flex(space-evenly);
+                  transform: scaleX(-1);
+
+                  .bug-leg-one {
+                    width: 2.5px;
+                    height: 1px;
+                    background-color: brown;
+                    transform: rotate(45deg);
+                  }
+                  .bug-leg-two {
+                    width: 2.5px;
+                    height: 1px;
+                    background-color: brown;
+                    transform: rotate(15deg);
+                  }
+                  .bug-leg-three {
+                    width: 2.5px;
+                    height: 1px;
+                    background-color: brown;
+                    transform: rotate(-15deg);
+                  }
+                  .bug-leg-four {
+                    width: 2.5px;
+                    height: 1px;
+                    background-color: brown;
+                    transform: rotate(-45deg);
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -377,19 +682,384 @@
 .houseFive-middle-middle {
   width: 20vw;
   height: 27.5vh;
-  @include flex(flex-end);
+  @include flex(center);
   position: absolute;
   top: 45vh;
   left: 40vw;
+
+  .cauldron-div {
+    @include flex(center);
+
+    .cauldron-top {
+      width: 100px;
+      height: 8px;
+      border-top: black solid 2px;
+      border-right: black solid 10px;
+      border-left: black solid 10px;
+      background-color: silver;
+      border-radius: 50% 50% 0% 0%;
+    }
+
+    .cauldron-bottom {
+      width: 90px;
+      height: 80px;
+      background-color: black;
+      border-radius: 0% 0% 50% 50%;
+    }
+  }
 }
 
 .houseFive-middle-right {
   width: 40vw;
   height: 27.5vh;
-  @include center(flex-end);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
   position: absolute;
   top: 45vh;
   left: 60vw;
+
+  .houseFive-middle-right-top {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    .fly-div {
+      @include center(center);
+
+      .fly-wing-left {
+        height: 10px;
+        width: 15px;
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 50% 0% 0% 50%;
+      }
+
+      .fly-body {
+        height: 30px;
+        width: 25px;
+        border-radius: 50%;
+        background-color: black;
+        @include flex(flex-end);
+
+        .fly-eye-div {
+          @include center(space-evenly);
+          position: relative;
+          bottom: 5px;
+
+          .fly-eye {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: white;
+            @include flex(center);
+            .fly-pupil {
+              width: 5px;
+              height: 5px;
+              border-radius: 50%;
+              background-color: black;
+            }
+          }
+        }
+      }
+
+      .fly-wing-right {
+        height: 10px;
+        width: 15px;
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 0% 50% 50% 00%;
+      }
+    }
+
+    .fly-div-closed {
+      display: none;
+    }
+    .witch {
+      @include flex(center);
+      position: relative;
+      bottom: 45px;
+      left: 50px;
+
+      .witch-hat {
+        @include flex(center);
+        position: relative;
+        top: 30px;
+        z-index: 1;
+
+        .witch-hat-top {
+          background-image: linear-gradient(-45deg, transparent 50%, black 50%);
+          border-radius: 0% 0% 0% 0%;
+          height: 30px;
+          width: 30px;
+          transform: rotate(45deg);
+        }
+        .witch-hat-bottom {
+          width: 50px;
+          height: 4px;
+          background-color: black;
+          position: relative;
+          bottom: 16px;
+        }
+      }
+
+      .witch-head {
+        display: flex;
+        justify-content: center;
+
+        .witch-hair-left {
+          height: 30px;
+          width: 30px;
+          border-radius: 0% 0% 50% 50%;
+          border-right: black solid 7px;
+          border-bottom: black solid 7px;
+          position: relative;
+          top: 10px;
+          left: 4px;
+          z-index: 1;
+        }
+
+        .witch-face {
+          height: 40px;
+          width: 30px;
+          background-color: greenyellow;
+          border-radius: 50%;
+          @include flex(center);
+
+          .witch-eyes {
+            width: 100%;
+            @include center(space-evenly);
+            position: relative;
+            top: 9px;
+
+            .witch-eye {
+              width: 11px;
+              height: 11px;
+              border-radius: 50%;
+              background-color: white;
+              @include flex(center);
+
+              .witch-iris {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: transparent;
+                @include flex(center);
+
+                .witch-pupil {
+                  width: 4px;
+                  height: 4px;
+                  border-radius: 50%;
+                  background-color: black;
+                }
+              }
+            }
+          }
+          .witch-nose {
+            height: 12px;
+            width: 8px;
+            @include flex(center);
+            border-left: solid 0.5px;
+            border-right: solid 0.5px;
+            border-bottom: solid 0.5px;
+            border-radius: 0% 0% 50% 50%;
+            position: relative;
+            top: 8px;
+
+            .witch-wart {
+              height: 3px;
+              width: 3px;
+              background-color: brown;
+              border-radius: 50%;
+              position: relative;
+              right: 1.5px;
+            }
+          }
+
+          .witch-mouth {
+            height: 15px;
+            width: 15px;
+            border-bottom: red 2px solid;
+            border-radius: 50%;
+            position: relative;
+            bottom: 2.5px;
+          }
+        }
+
+        .witch-hair-right {
+          height: 30px;
+          width: 30px;
+          border-radius: 0% 0% 50% 50%;
+          border-left: black solid 7px;
+          border-bottom: black solid 7px;
+          position: relative;
+          top: 10px;
+          right: 4px;
+          z-index: 1;
+        }
+      }
+      .witch-body {
+        @include flex(flex-start);
+        .witch-neck {
+          height: 5px;
+          width: 10px;
+          background-color: yellowgreen;
+          position: relative;
+          bottom: 2px;
+        }
+        .witch-arms {
+          display: flex;
+          justify-content: center;
+          .witch-arm-left {
+            height: 30px;
+            width: 5px;
+            background-color: black;
+            transform: rotate(45deg);
+            @include flex(flex-end);
+            position: relative;
+            right: 14px;
+
+            .witch-hand {
+              width: 10px;
+              height: 8px;
+              background-color: yellowgreen;
+              border-radius: 50%;
+            }
+          }
+          .witch-arm-right {
+            height: 30px;
+            width: 5px;
+            background-color: black;
+            transform: rotate(-45deg);
+            @include flex(flex-end);
+            position: relative;
+            left: 14px;
+
+            .witch-hand {
+              width: 10px;
+              height: 8px;
+              background-color: yellowgreen;
+              border-radius: 50%;
+            }
+          }
+        }
+        .witch-dress {
+          width: 60px;
+          height: 25px;
+          background-color: black;
+          border-radius: 50% 0% 0% 50%;
+          transform: rotate(90deg);
+          position: relative;
+          bottom: 15px;
+          z-index: 1;
+        }
+
+        .witch-legs {
+          @include center(space-evenly);
+          width: 40px;
+
+          .witch-leg-left {
+            height: 10px;
+            width: 5px;
+            background-color: yellowgreen;
+            @include flex(flex-end);
+
+            .witch-foot {
+              height: 5px;
+              width: 9px;
+              background-color: black;
+              position: relative;
+              top: 5px;
+            }
+          }
+
+          .witch-leg-right {
+            height: 10px;
+            width: 5px;
+            background-color: yellowgreen;
+            @include flex(flex-end);
+            .witch-foot {
+              height: 5px;
+              width: 9px;
+              background-color: black;
+              position: relative;
+              top: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .houseFive-middle-right-bottom {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    .houseFive-table-div {
+      @include flex(flex-end);
+      width: 175px;
+      height: 125px;
+      position: relative;
+      right: 20px;
+
+      .houseFive-table-top {
+        width: 125px;
+        height: 15px;
+        background-color: black;
+      }
+
+      .houseFive-table-leg-div {
+        @include center(space-between);
+        width: 125px;
+        height: 80px;
+
+        .houseFive-table-leg {
+          height: 80px;
+          width: 20px;
+          background-color: black;
+        }
+      }
+    }
+    .houseFive-chair-div {
+      @include flex(flex-start);
+      height: 100px;
+      width: 100px;
+
+      .houseFive-chair-top-div {
+        width: 75px;
+        height: 45px;
+        @include center(flex-end);
+
+        .houseFive-chair-top {
+          height: 45px;
+          width: 10px;
+          background-color: black;
+        }
+      }
+
+      .houseFive-chair-seat {
+        width: 75px;
+        height: 10px;
+        background-color: black;
+      }
+
+      .houseFive-chair-leg-div {
+        @include center(space-between);
+        height: 45px;
+        width: 75px;
+
+        .houseFive-chair-leg {
+          height: 45px;
+          width: 10px;
+          background-color: black;
+        }
+      }
+    }
+  }
 }
 
 .houseFive-bottom-left {
@@ -399,6 +1069,36 @@
   top: 72.5vh;
   left: 0px;
   position: absolute;
+
+  .broom-div {
+    transform: rotate(45deg);
+    @include flex(center);
+    width: 35px;
+
+    .broom-top {
+      display: flex;
+      width: 35px;
+
+      .broom-bristle {
+        background-color: yellow;
+        border: solid black 0.25px;
+        width: 3px;
+        height: 25px;
+      }
+    }
+    .broom-middle {
+      height: 15px;
+      width: 35px;
+      background-color: black;
+      border-radius: 0% 0% 50% 50%;
+    }
+
+    .broom-handle {
+      height: 100px;
+      width: 10px;
+      background-color: black;
+    }
+  }
 }
 
 .houseFive-bottom-center {
@@ -408,7 +1108,27 @@
   top: 72.5vh;
   left: 40vw;
   position: absolute;
+  border-right: solid black 2.5vw;
+  border-left: solid black 2.5vw;
 
+  .houseFive-laser {
+    width: 100%;
+    height: 20px;
+    background-image: linear-gradient(
+      90deg,
+      yellow,
+      red 25%,
+      yellow 50%,
+      red 75%,
+      yellow 100%
+    );
+  }
+
+  .houseFive-laser-closed {
+    width: 100%;
+    height: 20px;
+    background-color: transparent;
+  }
   .houseFive-town {
     @include flex(flex-start);
     cursor: pointer;
@@ -418,8 +1138,165 @@
 .houseFive-bottom-right {
   width: 40vw;
   height: 27.5vh;
-  @include flex(center);
+  @include center(center);
   top: 72.5vh;
   left: 60vw;
   position: absolute;
+
+  .unicorn-div {
+    width: 50%;
+    height: 100%;
+    @include center(center);
+
+    .unicorn {
+      background-image: url("../../Images/Unicorn.gif");
+      background-size: 100% 100%;
+      width: 200px;
+      height: 150px;
+    }
+    .unicorn-closed {
+      display: none;
+    }
+  }
+
+  .cage-div {
+    width: 50%;
+    height: 100%;
+    @include flex(center);
+
+    .cage {
+      width: 200px;
+      height: 100px;
+      border: solid silver;
+      .cage-top {
+        width: 100%;
+        height: 10px;
+        background-color: black;
+      }
+      .cage-middle {
+        height: 80px;
+        width: 100%;
+        @include center(space-between);
+       
+        .cage-bar {
+          height: 100%;
+          width: 10px;
+          background-color: black;
+        }
+          .cage-door {
+            height: 100%;
+            width: 120px;
+            .cage-door-bars {
+              height: 30px;
+              width: 120px;
+              @include center(space-between);
+              .cage-bar-short {
+                height: 100%;
+                width: 10px;
+                background-color: black;
+              }
+            }
+            .cage-lock-div {
+              @include center(center);
+              height: 20px;
+              width: 120px;
+              background-color: black;
+
+              .cage-lock {
+                width: 50px;
+                height: 20px;
+                background-color: silver;
+                @include flex(center);
+                .cage-keyhole-div {
+                  @include flex(center);
+
+                  .cage-keyhole-top {
+                    height: 10px;
+                    width: 10px;
+                    border-radius: 50%;
+                    background-color: black;
+                  }
+                  .cage-keyhole-bottom {
+                    height: 6px;
+                    width: 6px;
+                    background-color: black;
+                    position: relative;
+                    bottom: 1px;
+                  }
+                }
+              }
+            }
+            .frog {
+              .frog-head {
+                .frog-eye-div {
+                  .frog-eye {
+                    .frog-pupil {
+                    }
+                  }
+                }
+                .frog-nostril-div {
+                  .frog-nostril {
+                  }
+                }
+                .frog-lips {
+                }
+              }
+              .frog-bottom-div {
+                .frog-arm-left {
+                  .frog-hand-left {
+                    .frog-finger-one {
+                    }
+                    .frog-finger-two {
+                    }
+                    .frog-finger-three {
+                    }
+                    .frog-finger-four {
+                    }
+                  }
+                }
+                .frog-leg {
+                  .frog-foot {
+                    .frog-toe-one {
+                    }
+                    .frog-toe-two {
+                    }
+                    .frog-toe-three {
+                    }
+                    .frog-toe-four {
+                    }
+                  }
+                }
+                .frog-arm-right {
+                  .frog-hand-right {
+                    .frog-finger-one {
+                    }
+                    .frog-finger-two {
+                    }
+                    .frog-finger-three {
+                    }
+                    .frog-finger-four {
+                    }
+                  }
+                
+              }
+            }
+            .frog-closed {
+              display: none;
+            }
+          }
+          .open-cage {
+            .cage-bar {
+            }
+            .cage-door-open {
+            }
+          }
+        }
+      }
+      .cage-bottom {
+        width: 100%;
+        height: 10px;
+        background-color: black;
+      }
+    }
+  }
 }

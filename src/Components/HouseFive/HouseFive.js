@@ -19,6 +19,34 @@ function HouseFive(props) {
   const [rejectionCard, setRejectionCard] = useState(false);
   const [inventoryOpen, setInventoryOpen] = useState(false);
   const [houseFiveData, setHouseFiveData] = useState(false);
+  const [laser, setLaser] = useState(true);
+  const [witchRejectionCard, setWitchRejectionCard] = useState(false);
+  const [firstTimeCard, setFirstTimeCard] = useState(false);
+  const [cauldronCard, setCauldronCard] = useState(false);
+  const [broomCard, setBroomCard] = useState(false);
+  const [glassesCard, setGlassesCard] = useState(false);
+  const [potionCard, setPotionCard] = useState(false);
+  const [bugsCard, setBugsCard] = useState(false);
+  const [bugs, setBugs] = useState(false);
+  const [fireCard, setFireCard] = useState(false);
+  const [mirrorCard, setMirrorCard] = useState(false);
+  const [homeCard, setHomeCard] = useState(false);
+  const [laserRejectionCard] = useState(false);
+  const [potion, setPotion] = useState(true);
+  const [witch, setWitch] = useState(false);
+  const [witchCard, setWitchCard] = useState(false);
+  const [bookCard, setBookCard] = useState(false);
+  const [eyesCard, setEyesCard] = useState(false);
+  const [cageCard, setCageCard] = useState(false);
+  const [cage, setCage] = useState(true);
+  const [frog, setFrog] = useState(false);
+  const [frogCard, setFrogCard] = useState(false);
+  const [unicorn, setUnicorn] = useState(true);
+  const [unicornCard, setUnicornCard] = useState(false);
+  const [bloodCard, setBloodCard] = useState(false);
+  const [fly, setFly] = useState(true);
+  const [flyCard, setFlyCard] = useState(false);
+  const [home, setHome] = useState(true);
 
   useEffect(() => {
     axios.get("/api/nest").then((res) => {
@@ -108,7 +136,7 @@ function HouseFive(props) {
             <div className="door-knob"></div>
           </div>
           <div className="dining-div">
-            <div className="table-div">
+            <div className="fireplace">
               <div className="flame">
                 <div className="flame-one"></div>
                 <div className="flame-two"></div>
@@ -126,11 +154,16 @@ function HouseFive(props) {
             <div className="dresser-middle">
               <div className="shelf"></div>
               <div className="shelf-one">
-                <div className="houseFive-cottage-mini">
+                <div
+                  className={`${
+                    home
+                      ? "houseFive-cottage-mini"
+                      : "houseFive-cottage-mini-closed"
+                  }`}
+                >
                   <div className="houseFive-left-mini"></div>
                   <div className="houseFive-middle-mini">
                     <div className="houseFive-chimney-div">
-                      
                       <div className="houseFive-chimney"></div>
                     </div>
                     <div className="houseFive-short-log"></div>
@@ -182,9 +215,224 @@ function HouseFive(props) {
                   </div>
                   <div className="houseFive-right-mini"></div>
                 </div>
+                <div
+                  className={`${potion ? "potion-div" : "potion-div-closed"}`}
+                >
+                  <div className="potion-cork"></div>
+                  <div className="potion-top"></div>
+                  <div className="potion-neck">
+                    <div className="neck-potion"></div>
+                  </div>
+                  <div className="potion-bottle">
+                    <div className="potion"></div>
+                  </div>
+                </div>
               </div>
-              <div className="shelf-two"></div>
-              <div className="shelf-three"></div>
+              <div className="shelf-two">
+                <div className="book-div">
+                  <div className="book-cover-front">
+                    <div className="book-title">
+                      <div className="book-title-left"></div>
+                      <div className="book-title-right"></div>
+                      <div className="book-title-left"></div>
+                      <div className="book-title-right"></div>
+                      <div className="book-title-left"></div>
+                    </div>
+                  </div>
+                  <div className="book-page"></div>
+                  <div className="book-page"></div>
+                  <div className="book-page"></div>
+                  <div className="book-page"></div>
+                  <div className="book-page"></div>
+                  <div className="book-cover-back"></div>
+                </div>
+                <div className="eyes-div">
+                  <div className="eyes-top"></div>
+                  <div className="eyes-bottom">
+                    <div className="eye-row">
+                      <div className="eye">
+                        <div className="eye-pupil"></div>
+                      </div>
+                      <div className="eye">
+                        <div className="eye-pupil"></div>
+                      </div>
+                    </div>
+                    <div className="eye-row">
+                      <div className="eye">
+                        <div className="eye-pupil"></div>
+                      </div>
+                      <div className="eye">
+                        <div className="eye-pupil"></div>
+                      </div>
+                    </div>
+                    <div className="eye-row">
+                      <div className="eye">
+                        <div className="eye-pupil"></div>
+                      </div>
+                      <div className="eye">
+                        <div className="eye-pupil"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="shelf-three">
+                <div className="blood-div">
+                  <div className="blood-top"></div>
+                  <div className="blood-bottom">
+                    <div className="blood"></div>
+                  </div>
+                </div>
+                <div className="bugs-div">
+                  <div className="bugs-top"></div>
+                  <div className="bugs-bottom">
+                    <div className="bug">
+                      <div className="bug-left">
+                        <div className="bug-leg-one"></div>
+                        <div className="bug-leg-two"></div>
+                        <div className="bug-leg-three"></div>
+                        <div className="bug-leg-four"></div>
+                      </div>
+                      <div className="bug-body">
+                        <div className="bug-eye-div">
+                          <div className="bug-eye">
+                            <div className="bug-pupil"></div>
+                          </div>
+                          <div className="bug-eye">
+                            <div className="bug-pupil"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="bug-right">
+                        <div className="bug-leg-one"></div>
+                        <div className="bug-leg-two"></div>
+                        <div className="bug-leg-three"></div>
+                        <div className="bug-leg-four"></div>
+                      </div>
+                    </div>
+                    <div className="bug">
+                      <div className="bug-left">
+                        <div className="bug-leg-one"></div>
+                        <div className="bug-leg-two"></div>
+                        <div className="bug-leg-three"></div>
+                        <div className="bug-leg-four"></div>
+                      </div>
+                      <div className="bug-body">
+                        <div className="bug-eye-div">
+                          <div className="bug-eye">
+                            <div className="bug-pupil"></div>
+                          </div>
+                          <div className="bug-eye">
+                            <div className="bug-pupil"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="bug-right">
+                        <div className="bug-leg-one"></div>
+                        <div className="bug-leg-two"></div>
+                        <div className="bug-leg-three"></div>
+                        <div className="bug-leg-four"></div>
+                      </div>
+                    </div>
+                    <div className="bug">
+                      <div className="bug-left">
+                        <div className="bug-leg-one"></div>
+                        <div className="bug-leg-two"></div>
+                        <div className="bug-leg-three"></div>
+                        <div className="bug-leg-four"></div>
+                      </div>
+                      <div className="bug-body">
+                        <div className="bug-eye-div">
+                          <div className="bug-eye">
+                            <div className="bug-pupil"></div>
+                          </div>
+                          <div className="bug-eye">
+                            <div className="bug-pupil"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="bug-right">
+                        <div className="bug-leg-one"></div>
+                        <div className="bug-leg-two"></div>
+                        <div className="bug-leg-three"></div>
+                        <div className="bug-leg-four"></div>
+                      </div>
+                    </div>
+                    <div className="bug">
+                      <div className="bug-left">
+                        <div className="bug-leg-one"></div>
+                        <div className="bug-leg-two"></div>
+                        <div className="bug-leg-three"></div>
+                        <div className="bug-leg-four"></div>
+                      </div>
+                      <div className="bug-body">
+                        <div className="bug-eye-div">
+                          <div className="bug-eye">
+                            <div className="bug-pupil"></div>
+                          </div>
+                          <div className="bug-eye">
+                            <div className="bug-pupil"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="bug-right">
+                        <div className="bug-leg-one"></div>
+                        <div className="bug-leg-two"></div>
+                        <div className="bug-leg-three"></div>
+                        <div className="bug-leg-four"></div>
+                      </div>
+                    </div>
+                    <div className="bug">
+                      <div className="bug-left">
+                        <div className="bug-leg-one"></div>
+                        <div className="bug-leg-two"></div>
+                        <div className="bug-leg-three"></div>
+                        <div className="bug-leg-four"></div>
+                      </div>
+                      <div className="bug-body">
+                        <div className="bug-eye-div">
+                          <div className="bug-eye">
+                            <div className="bug-pupil"></div>
+                          </div>
+                          <div className="bug-eye">
+                            <div className="bug-pupil"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="bug-right">
+                        <div className="bug-leg-one"></div>
+                        <div className="bug-leg-two"></div>
+                        <div className="bug-leg-three"></div>
+                        <div className="bug-leg-four"></div>
+                      </div>
+                    </div>
+                    <div className="bug">
+                      <div className="bug-left">
+                        <div className="bug-leg-one"></div>
+                        <div className="bug-leg-two"></div>
+                        <div className="bug-leg-three"></div>
+                        <div className="bug-leg-four"></div>
+                      </div>
+                      <div className="bug-body">
+                        <div className="bug-eye-div">
+                          <div className="bug-eye">
+                            <div className="bug-pupil"></div>
+                          </div>
+                          <div className="bug-eye">
+                            <div className="bug-pupil"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="bug-right">
+                        <div className="bug-leg-one"></div>
+                        <div className="bug-leg-two"></div>
+                        <div className="bug-leg-three"></div>
+                        <div className="bug-leg-four"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div className="shelf"></div>
             </div>
             <div className="dresser-side"></div>
@@ -277,10 +525,121 @@ function HouseFive(props) {
           </div>
         </div>
         <div className="houseFive-middle-left"></div>
-        <div className="houseFive-middle-middle"></div>
-        <div className="houseFive-middle-right"></div>
-        <div className="houseFive-bottom-left"></div>
+        <div className="houseFive-middle-middle">
+          <div className="cauldron-div">
+            <div className="cauldron-top"></div>
+            <div className="cauldron-bottom"></div>
+          </div>
+        </div>
+        <div className="houseFive-middle-right">
+          <div className="houseFive-middle-right-top">
+            <div className={`${fly ? "fly-div" : "fly-div-closed"}`}>
+              <div className="fly-wing-left"></div>
+              <div className="fly-body">
+                <div className="fly-eye-div">
+                  <div className="fly-eye">
+                    <div className="fly-pupil"></div>
+                  </div>
+                  <div className="fly-eye">
+                    <div className="fly-pupil"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="fly-wing-right"></div>
+            </div>
+            <div className={`${witch ? "witch" : "witch-closed"}`}>
+              <div className="witch-hat">
+                <div className="witch-hat-top"></div>
+                <div className="witch-hat-bottom"></div>
+              </div>
+              <div className="witch-head">
+                <div className="witch-hair-left"></div>
+                <div className="witch-face">
+                  <div className="witch-eyes">
+                    <div className="witch-eye">
+                      <div className="witch-iris">
+                        <div className="witch-pupil"></div>
+                      </div>
+                    </div>
+                    <div className="witch-eye">
+                      <div className="witch-iris">
+                        <div className="witch-pupil"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="witch-nose">
+                    <div className="witch-wart"></div>
+                  </div>
+                  <div className="witch-mouth"></div>
+                </div>
+                <div className="witch-hair-right"></div>
+              </div>
+              <div className="witch-body">
+                <div className="witch-neck"></div>
+                <div className="witch-arms">
+                  <div className="witch-arm-left">
+                    <div className="witch-hand"></div>
+                  </div>
+                  <div className="witch-arm-right">
+                    <div className="witch-hand"></div>
+                  </div>
+                </div>
+                <div className="witch-dress"></div>
+                <div className="witch-legs">
+                  <div className="witch-leg-left">
+                    <div className="witch-foot"></div>
+                  </div>
+                  <div className="witch-leg-right">
+                    <div className="witch-foot"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="houseFive-middle-right-bottom">
+            <div className="houseFive-table-div">
+              <div className="houseFive-table-top"></div>
+              <div className="houseFive-table-leg-div">
+                <div className="houseFive-table-leg"></div>
+                <div className="houseFive-table-leg"></div>
+              </div>
+            </div>
+            <div className="houseFive-chair-div">
+              <div className="houseFive-chair-top-div">
+                <div className="houseFive-chair-top"></div>
+              </div>
+              <div className="houseFive-chair-seat"></div>
+              <div className="houseFive-chair-leg-div">
+                <div className="houseFive-chair-leg"></div>
+                <div className="houseFive-chair-leg"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="houseFive-bottom-left">
+          <div className="broom-div">
+            <div className="broom-top">
+              <div className="broom-bristle"></div>
+              <div className="broom-bristle"></div>
+              <div className="broom-bristle"></div>
+              <div className="broom-bristle"></div>
+              <div className="broom-bristle"></div>
+              <div className="broom-bristle"></div>
+              <div className="broom-bristle"></div>
+              <div className="broom-bristle"></div>
+              <div className="broom-bristle"></div>
+              <div className="broom-bristle"></div>
+            </div>
+            <div className="broom-middle"></div>
+            <div className="broom-handle"></div>
+          </div>
+        </div>
         <div className="houseFive-bottom-center">
+          <div
+            className={`${
+              laser ? "houseFive-laser" : "houseFive-laser-closed"
+            }`}
+          ></div>
           <div
             className={`${
               downCharacter ? "character-down" : "character-down-closed"
@@ -299,7 +658,108 @@ function HouseFive(props) {
             <ArrowDownward />
           </div>
         </div>
-        <div className="houseFive-bottom-right"></div>
+        <div className="houseFive-bottom-right">
+          <div className="unicorn-div">
+            <div class={`${unicorn ? "unicorn" : "unicorn-closed"}`}></div>
+          </div>
+          <div className="cage-div">
+            <div className="cage">
+              <div className="cage-top"></div>
+              <div className="cage-middle">
+                <div className="cage-bar"></div>
+                <div className="cage-bar"></div>
+                <div className={`${cage ? "cage-door" : "cage-door-closed"}`}>
+                  <div className="cage-door-bars">
+                    <div className="cage-bar-short"></div>
+                    <div className="cage-bar-short"></div>
+                    <div className="cage-bar-short"></div>
+                    <div className="cage-bar-short"></div>
+                    <div className="cage-bar-short"></div>
+                    <div className="cage-bar-short"></div>
+                  </div>
+                  <div className="cage-lock-div">
+                    <div className="cage-lock">
+                      <div className="cage-keyhole-div">
+                        <div className="cage-keyhole-top"></div>
+                        <div className="cage-keyhole-bottom"></div>
+                      </div>
+                    </div>
+                   
+                  </div>
+                  <div className="cage-door-bars">
+                    <div className="cage-bar-short"></div>
+                    <div className="cage-bar-short"></div>
+                    <div className="cage-bar-short"></div>
+                    <div className="cage-bar-short"></div>
+                    <div className="cage-bar-short"></div>
+                    <div className="cage-bar-short"></div>
+                  </div>
+                  <div className={`${frog ? "frog" : "frog-closed"}`}>
+                    <div className="frog-head">
+                      <div className="frog-eye-div">
+                        <div className="frog-eye">
+                          <div className="frog-pupil"></div>
+                        </div>
+                        <div className="frog-eye">
+                          <div className="frog-pupil"></div>
+                        </div>
+                      </div>
+                      <div className="frog-nostril-div">
+                        <div className="frog-nostril"></div>
+                        <div className="frog-nostril"></div>
+                      </div>
+                      <div className="frog-lips"></div>
+                    </div>
+                    <div className="frog-bottom-div">
+                      <div className="frog-arm-left">
+                        <div className="frog-hand-left">
+                          <div className="frog-finger-one"></div>
+                          <div className="frog-finger-two"></div>
+                          <div className="frog-finger-three"></div>
+                          <div className="frog-finger-four"></div>
+                        </div>
+                      </div>
+
+                      <div className="frog-leg">
+                        <div className="frog-foot">
+                          <div className="frog-toe-one"></div>
+                          <div className="frog-toe-two"></div>
+                          <div className="frog-toe-three"></div>
+                          <div className="frog-toe-four"></div>
+                        </div>
+                      </div>
+
+                      <div className="frog-leg">
+                        <div className="frog-foot">
+                          <div className="frog-toe-one"></div>
+                          <div className="frog-toe-two"></div>
+                          <div className="frog-toe-three"></div>
+                          <div className="frog-toe-four"></div>
+                        </div>
+                      </div>
+                      <div className="frog-arm-right">
+                        <div className="frog-hand-right">
+                          <div className="frog-finger-one"></div>
+                          <div className="frog-finger-two"></div>
+                          <div className="frog-finger-three"></div>
+                          <div className="frog-finger-four"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className={`${!cage ? "open-cage" : "open-cage-closed"}`}>
+                  <div className="cage-bar"></div>
+                  <div className="cage-bar"></div>
+                  <div className="cage-bar"></div>
+                  <div className="cage-bar"></div>
+                  <div className="cage-door-open"></div>
+                </div>
+              </div>
+              <div className="cage-bottom"></div>
+            </div>
+          </div>
+        </div>
         <Card
           className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
         >
