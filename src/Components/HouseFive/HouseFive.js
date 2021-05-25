@@ -25,31 +25,26 @@ function HouseFive(props) {
   const [cauldronCard, setCauldronCard] = useState(false);
   const [broomCard, setBroomCard] = useState(false);
   const [glassesCard, setGlassesCard] = useState(false);
-  const [potionCard, setPotionCard] = useState(false);
-  const [bugsCard, setBugsCard] = useState(false);
-  const [bugs, setBugs] = useState(false);
+  const [ingredientCard, setIngredientCard] = useState(false);
   const [fireCard, setFireCard] = useState(false);
   const [mirrorCard, setMirrorCard] = useState(false);
   const [homeCard, setHomeCard] = useState(false);
-  const [laserRejectionCard] = useState(false);
+  const [laserRejectionCard, setLaserRejectionCard] = useState(false);
   const [potion, setPotion] = useState(true);
   const [witch, setWitch] = useState(false);
   const [witchCard, setWitchCard] = useState(false);
   const [bookCard, setBookCard] = useState(false);
-  const [eyesCard, setEyesCard] = useState(false);
   const [cageCard, setCageCard] = useState(false);
   const [cage, setCage] = useState(true);
-  const [frog, setFrog] = useState(false);
-  const [frogCard, setFrogCard] = useState(false);
-  const [unicorn, setUnicorn] = useState(true);
-  const [unicornCard, setUnicornCard] = useState(false);
-  const [bloodCard, setBloodCard] = useState(false);
+  const [unicornMotion, setUnicornMotion] = useState(false)
   const [fly, setFly] = useState(true);
-  const [flyCard, setFlyCard] = useState(false);
   const [home, setHome] = useState(true);
 
   useEffect(() => {
-    axios.get("/api/nest").then((res) => {
+    axios.get("/api/houseFive").then((res) => {
+      if (res.data[0].first_time) {
+        setFirstTimeCard(true)
+      }
       setHouseFiveData(res.data[0]);
       setDownCharacter(true);
       setIsLoading(false);
@@ -74,14 +69,28 @@ function HouseFive(props) {
   });
 
   const toggleItem = (item) => {
-    if (item === "flute") {
-      if (props.location.pathname === "/Tower") {
-        axios.post("/api/useFlute").then((res) => {
+    if (item === "glasses") {
+      axios.post("/api/useGlasses").then((res) => {
+        props.getInventory(res.data)
+        axios.get("/api/houseFive").then(res => {
           setHouseFiveData(res.data[0]);
-        });
+          setGlassesCard(true)
+        })
+      })
+    } else if (item === "mirror") {
+      if (houseFiveData.glasses_used) {
+        axios.post("/api/mirror").then(res => {
+          props.getInventory(res.data)
+          axios.get("/api/houseFive").then(res => {
+            setHouseFiveData(res.data[0])
+            setMirrorCard(true)
+          })
+        })
       } else {
         setRejectionCard(true);
       }
+    } else {
+      setRejectionCard(true)
     }
   };
 
@@ -95,14 +104,106 @@ function HouseFive(props) {
 
   const toggleFirst = () => {
     axios.post("/api/houseFiveFirst").then((res) => {
-      setHouseFiveData(res.data[0]);
+      setHouseFiveData(res.data[0])
+      setFirstTimeCard(false)
     });
   };
+
+  const toggleHome = () => {
+    if (!houseFiveData.glasses_used) {
+      setWitchRejectionCard(true)
+    } else if (!houseFiveData.mirror_used) {
+      setLaserRejectionCard(true)
+    } else {
+      axios.post("/api/homeTaken").then(res => {
+        props.getInventory(res.data)
+        axios.get("/api/houseFive").then(res => {
+          setHouseFiveData(res.data[0])
+          setHomeCard(true)
+        })
+      })
+    }
+  }
+
+  const toggleIngredient = () => {
+    if (!houseFiveData.glasses_used) {
+      setWitchRejectionCard(true)
+    } else if (!houseFiveData.mirror_used) {
+      setLaserRejectionCard(true)
+    } else {
+      setIngredientCard(true)
+    }
+  }
+
+  const toggleFire = () => {
+     if (!houseFiveData.glasses_used) {
+       setWitchRejectionCard(true);
+     } else if (!houseFiveData.mirror_used) {
+       setLaserRejectionCard(true);
+     } else {
+       setFireCard(true);
+     }
+  }
+
+  const toggleBook = () => {
+     if (!houseFiveData.glasses_used) {
+       setWitchRejectionCard(true);
+     } else if (!houseFiveData.mirror_used) {
+       setLaserRejectionCard(true);
+     } else {
+       setBookCard(true);
+     }
+  }
+
+  const toggleCauldron = () => {
+     if (!houseFiveData.glasses_used) {
+       setWitchRejectionCard(true);
+     } else if (!houseFiveData.mirror_used) {
+       setLaserRejectionCard(true);
+     } else {
+       setCauldronCard(true);
+     }
+  }
+
+  const toggleBroom = () => {
+
+    if (!houseFiveData.glasses_used) {
+      setWitchRejectionCard(true);
+    } else if (!houseFiveData.mirror_used) {
+      setLaserRejectionCard(true);
+    } else {
+      setBroomCard(true);
+    }
+  }
+
+  const toggleCage = () => {
+     if (!houseFiveData.glasses_used) {
+       setWitchRejectionCard(true);
+     } else if (!houseFiveData.mirror_used) {
+       setLaserRejectionCard(true);
+     } else {
+       setCageCard(true);
+     }
+  }
 
   const toggleGoDown = () => {
     setDownDown(true);
     setDownCharacter(false);
   };
+
+  const toggleUnicorn = () => {
+    axios.post("/api/unicornGone").then(res => {
+      setHouseFiveData(res.data[0])
+    })
+  }
+
+  const toggleWitch = () => {
+    if (houseFiveData.glasses_used === true && houseFiveData.mirror_used === false) {
+      setLaserRejectionCard(true)
+    } else {
+      setWitchCard(true)
+    }
+  }
 
   return isLoading ? (
     <Loading />
@@ -137,7 +238,7 @@ function HouseFive(props) {
           </div>
           <div className="dining-div">
             <div className="fireplace">
-              <div className="flame">
+              <div className="flame" onClick={() => setFireCard(true)}>
                 <div className="flame-one"></div>
                 <div className="flame-two"></div>
                 <div className="flame-three"></div>
@@ -159,7 +260,7 @@ function HouseFive(props) {
                     home
                       ? "houseFive-cottage-mini"
                       : "houseFive-cottage-mini-closed"
-                  }`}
+                  }`} onClick={toggleHome}
                 >
                   <div className="houseFive-left-mini"></div>
                   <div className="houseFive-middle-mini">
@@ -216,7 +317,7 @@ function HouseFive(props) {
                   <div className="houseFive-right-mini"></div>
                 </div>
                 <div
-                  className={`${potion ? "potion-div" : "potion-div-closed"}`}
+                  className={`${potion ? "potion-div" : "potion-div-closed"}`} onClick={toggleIngredient}
                 >
                   <div className="potion-cork"></div>
                   <div className="potion-top"></div>
@@ -229,7 +330,7 @@ function HouseFive(props) {
                 </div>
               </div>
               <div className="shelf-two">
-                <div className="book-div">
+                <div className="book-div" onClick={toggleBook}>
                   <div className="book-cover-front">
                     <div className="book-title">
                       <div className="book-title-left"></div>
@@ -246,7 +347,7 @@ function HouseFive(props) {
                   <div className="book-page"></div>
                   <div className="book-cover-back"></div>
                 </div>
-                <div className="eyes-div">
+                <div className="eyes-div" onClick={toggleIngredient}>
                   <div className="eyes-top"></div>
                   <div className="eyes-bottom">
                     <div className="eye-row">
@@ -277,13 +378,13 @@ function HouseFive(props) {
                 </div>
               </div>
               <div className="shelf-three">
-                <div className="blood-div">
+                <div className="blood-div" onClick={toggleIngredient}>
                   <div className="blood-top"></div>
                   <div className="blood-bottom">
                     <div className="blood"></div>
                   </div>
                 </div>
-                <div className="bugs-div">
+                <div className="bugs-div" onClick={toggleIngredient}>
                   <div className="bugs-top"></div>
                   <div className="bugs-bottom">
                     <div className="bug">
@@ -526,7 +627,7 @@ function HouseFive(props) {
         </div>
         <div className="houseFive-middle-left"></div>
         <div className="houseFive-middle-middle">
-          <div className="cauldron-div">
+          <div className="cauldron-div" onClick={toggleCauldron}>
             <div className="cauldron-top"></div>
             <div className="cauldron-bottom"></div>
           </div>
@@ -547,7 +648,7 @@ function HouseFive(props) {
               </div>
               <div className="fly-wing-right"></div>
             </div>
-            <div className={`${witch ? "witch" : "witch-closed"}`}>
+            <div className={`${witch ? "witch" : "witch-closed"}`} onClick={toggleWitch}>
               <div className="witch-hat">
                 <div className="witch-hat-top"></div>
                 <div className="witch-hat-bottom"></div>
@@ -617,7 +718,7 @@ function HouseFive(props) {
           </div>
         </div>
         <div className="houseFive-bottom-left">
-          <div className="broom-div">
+          <div className="broom-div" onClick={toggleBroom}>
             <div className="broom-top">
               <div className="broom-bristle"></div>
               <div className="broom-bristle"></div>
@@ -637,8 +738,8 @@ function HouseFive(props) {
         <div className="houseFive-bottom-center">
           <div
             className={`${
-              laser ? "houseFive-laser" : "houseFive-laser-closed"
-            }`}
+              houseFiveData.glasses_used && !houseFiveData.mirror_used ? "houseFive-laser" : "houseFive-laser-closed"
+            }`} onClick={() => setLaserRejectionCard(true)}
           ></div>
           <div
             className={`${
@@ -660,41 +761,83 @@ function HouseFive(props) {
         </div>
         <div className="houseFive-bottom-right">
           <div className="unicorn-div">
-            <div class={`${unicorn ? "unicorn" : "unicorn-closed"}`}></div>
+            <div class={`${houseFiveData.cage_open && !houseFiveData.unicorn_gone ? "unicorn" : "unicorn-closed"}`}></div>
           </div>
           <div className="cage-div">
             <div className="cage">
               <div className="cage-top"></div>
               <div className="cage-middle">
                 <div className="cage-bar"></div>
-                <div className="cage-bar"></div>
-                <div className={`${cage ? "cage-door" : "cage-door-closed"}`}>
+                <div
+                  className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                  }`}
+                ></div>
+                <div className={`${ !houseFiveData.cage_open ? "cage-door" : "cage-door-closed"}`}>
                   <div className="cage-door-bars">
-                    <div className="cage-bar-short"></div>
-                    <div className="cage-bar-short"></div>
-                    <div className="cage-bar-short"></div>
-                    <div className="cage-bar-short"></div>
-                    <div className="cage-bar-short"></div>
-                    <div className="cage-bar-short"></div>
+                    <div
+                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      }`}
+                    ></div>
+                    <div
+                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      }`}
+                    ></div>
+                    <div
+                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      }`}
+                    ></div>
+                    <div
+                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      }`}
+                    ></div>
+                    <div
+                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      }`}
+                    ></div>
+                    <div
+                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      }`}
+                    ></div>
                   </div>
-                  <div className="cage-lock-div">
+                  <div
+                    className={`${ !houseFiveData.cage_open ? "cage-lock-div" : "cage-lock-div-closed"
+                    }`}
+                  >
                     <div className="cage-lock">
                       <div className="cage-keyhole-div">
                         <div className="cage-keyhole-top"></div>
                         <div className="cage-keyhole-bottom"></div>
                       </div>
                     </div>
-                   
                   </div>
                   <div className="cage-door-bars">
-                    <div className="cage-bar-short"></div>
-                    <div className="cage-bar-short"></div>
-                    <div className="cage-bar-short"></div>
-                    <div className="cage-bar-short"></div>
-                    <div className="cage-bar-short"></div>
-                    <div className="cage-bar-short"></div>
+                    <div
+                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      }`}
+                    ></div>
+                    <div
+                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      }`}
+                    ></div>
+                    <div
+                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      }`}
+                    ></div>
+                    <div
+                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      }`}
+                    ></div>
+                    <div
+                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      }`}
+                    ></div>
+                    <div
+                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      }`}
+                    ></div>
                   </div>
-                  <div className={`${frog ? "frog" : "frog-closed"}`}>
+
+                  <div className={`${ !houseFiveData.cage_open ? "frog" : "frog-closed"}`}>
                     <div className="frog-head">
                       <div className="frog-eye-div">
                         <div className="frog-eye">
@@ -712,25 +855,26 @@ function HouseFive(props) {
                     </div>
                     <div className="frog-bottom-div">
                       <div className="frog-arm-left">
-                        <div className="frog-hand-left">
+                        <div className="frog-hand-left"></div>
+                        <div className="frog-finger-div">
                           <div className="frog-finger-one"></div>
                           <div className="frog-finger-two"></div>
                           <div className="frog-finger-three"></div>
                           <div className="frog-finger-four"></div>
                         </div>
                       </div>
-
                       <div className="frog-leg">
-                        <div className="frog-foot">
+                        <div className="frog-foot"></div>
+                        <div className="frog-toe-div">
                           <div className="frog-toe-one"></div>
                           <div className="frog-toe-two"></div>
                           <div className="frog-toe-three"></div>
                           <div className="frog-toe-four"></div>
                         </div>
                       </div>
-
                       <div className="frog-leg">
-                        <div className="frog-foot">
+                        <div className="frog-foot"></div>
+                        <div className="frog-toe-div">
                           <div className="frog-toe-one"></div>
                           <div className="frog-toe-two"></div>
                           <div className="frog-toe-three"></div>
@@ -738,7 +882,8 @@ function HouseFive(props) {
                         </div>
                       </div>
                       <div className="frog-arm-right">
-                        <div className="frog-hand-right">
+                        <div className="frog-hand-right"></div>
+                        <div className="frog-finger-div">
                           <div className="frog-finger-one"></div>
                           <div className="frog-finger-two"></div>
                           <div className="frog-finger-three"></div>
@@ -748,13 +893,11 @@ function HouseFive(props) {
                     </div>
                   </div>
                 </div>
-                <div className={`${!cage ? "open-cage" : "open-cage-closed"}`}>
-                  <div className="cage-bar"></div>
-                  <div className="cage-bar"></div>
-                  <div className="cage-bar"></div>
-                  <div className="cage-bar"></div>
-                  <div className="cage-door-open"></div>
-                </div>
+                <div
+                  className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                  }`}
+                ></div>
+                <div className="cage-bar"></div>
               </div>
               <div className="cage-bottom"></div>
             </div>

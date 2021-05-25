@@ -1167,7 +1167,7 @@
     .cage {
       width: 200px;
       height: 100px;
-      border: solid silver;
+      background-color: white;
       .cage-top {
         width: 100%;
         height: 10px;
@@ -1175,120 +1175,293 @@
       }
       .cage-middle {
         height: 80px;
-        width: 100%;
+        width: 200px;
         @include center(space-between);
-       
+        
+        
+
         .cage-bar {
-          height: 100%;
+          height: 80px;
           width: 10px;
           background-color: black;
         }
-          .cage-door {
-            height: 100%;
+
+         .cage-bar-short {
+              height: 100%;
+              width: 2.5px;
+              background-color: black;
+            }
+
+            .cage-bar-short-closed {
+              display: none;
+            }
+
+        .cage-door {
+          height: 80px;
+          width: 120px;
+          z-index: 3;
+
+          .cage-door-bars {
+            height: 40px;
             width: 120px;
-            .cage-door-bars {
-              height: 30px;
-              width: 120px;
-              @include center(space-between);
-              .cage-bar-short {
-                height: 100%;
+            z-index: 3;
+            @include center(space-between);
+           
+          }
+          .cage-lock-div {
+            @include center(center);
+            height: 20px;
+            width: 200px;
+            background-color: black;
+            position: absolute;
+            z-index: 4;
+            bottom: 36px;
+            right: 0px;
+
+            .cage-lock {
+              width: 50px;
+              height: 20px;
+              background-color: silver;
+              @include flex(center);
+              .cage-keyhole-div {
+                @include flex(center);
+
+                .cage-keyhole-top {
+                  height: 10px;
+                  width: 10px;
+                  border-radius: 50%;
+                  background-color: black;
+                }
+                .cage-keyhole-bottom {
+                  height: 6px;
+                  width: 6px;
+                  background-color: black;
+                  position: relative;
+                  bottom: 1px;
+                }
+              }
+            }
+          }
+          .cage-lock-div-closed {
+            display: none;
+          }
+        }
+
+        .cage-door-closed {
+          display: none;
+        }
+
+        .frog {
+          position: absolute;
+          bottom: 0px;
+          left: 77.5px;
+          z-index: 0;
+
+          .frog-head {
+            height: 25px;
+            width: 45px;
+            border-radius: 50%;
+            background-color: green;
+            position: relative;
+            @include flex(space-evenly);
+            border:solid .5px;
+            z-index: 1;
+            .frog-eye-div {
+              @include center(center);
+              .frog-eye {
+                height: 10px;
                 width: 10px;
+                border-radius: 50%;
+                background-color: white;
+                @include flex(center);
+                .frog-pupil {
+                  height: 5px;
+                  width: 5px;
+                  border-radius: 50%;
+                  background-color: black;
+                }
+              }
+            }
+            .frog-nostril-div {
+              @include center(space-evenly);
+              width: 8px;
+              .frog-nostril {
+                height: 2px;
+                width: 2px;
+                border-radius: 50%;
                 background-color: black;
               }
             }
-            .cage-lock-div {
-              @include center(center);
-              height: 20px;
-              width: 120px;
-              background-color: black;
-
-              .cage-lock {
-                width: 50px;
-                height: 20px;
-                background-color: silver;
-                @include flex(center);
-                .cage-keyhole-div {
-                  @include flex(center);
-
-                  .cage-keyhole-top {
-                    height: 10px;
-                    width: 10px;
-                    border-radius: 50%;
-                    background-color: black;
-                  }
-                  .cage-keyhole-bottom {
-                    height: 6px;
-                    width: 6px;
-                    background-color: black;
-                    position: relative;
-                    bottom: 1px;
-                  }
-                }
-              }
-            }
-            .frog {
-              .frog-head {
-                .frog-eye-div {
-                  .frog-eye {
-                    .frog-pupil {
-                    }
-                  }
-                }
-                .frog-nostril-div {
-                  .frog-nostril {
-                  }
-                }
-                .frog-lips {
-                }
-              }
-              .frog-bottom-div {
-                .frog-arm-left {
-                  .frog-hand-left {
-                    .frog-finger-one {
-                    }
-                    .frog-finger-two {
-                    }
-                    .frog-finger-three {
-                    }
-                    .frog-finger-four {
-                    }
-                  }
-                }
-                .frog-leg {
-                  .frog-foot {
-                    .frog-toe-one {
-                    }
-                    .frog-toe-two {
-                    }
-                    .frog-toe-three {
-                    }
-                    .frog-toe-four {
-                    }
-                  }
-                }
-                .frog-arm-right {
-                  .frog-hand-right {
-                    .frog-finger-one {
-                    }
-                    .frog-finger-two {
-                    }
-                    .frog-finger-three {
-                    }
-                    .frog-finger-four {
-                    }
-                  }
-                
-              }
-            }
-            .frog-closed {
-              display: none;
+            .frog-lips {
+              width: 15px;
+              background-color: red;
+              height: 2px;
             }
           }
-          .open-cage {
-            .cage-bar {
+          .frog-bottom-div {
+            @include center(space-evenly);
+            .frog-arm-left {
+              height: 10px;
+              width: 6px;
+              background-color: green;
+              border-radius: 50% 50% 0% 0%;
+              position: relative;
+              transform: rotate(5deg);
+              bottom: 7px;
+              @include flex(flex-end);
+              z-index: 2;
+              left: 2px;
+              
+              .frog-hand-left {
+                height: 5px;
+                width: 12px;
+                background-color: green;
+                border-radius: 50%;
+                position: relative;
+              }
+              .frog-finger-div {
+                @include center(space-evenly);
+                position: relative;
+                top: 8px;
+                .frog-finger-one {
+                  height: 10px;
+                  width: 2px;
+                  background-color: green;
+                  border-radius: 0% 0% 50% 50%;
+                  transform: rotate(15deg);
+                }
+                .frog-finger-two {
+                  height: 10px;
+                  width: 2px;
+                  background-color: green;
+                  border-radius: 0% 0% 50% 50%;
+                  transform: rotate(5deg);
+                }
+                .frog-finger-three {
+                  height: 10px;
+                  width: 2px;
+                  background-color: green;
+                  border-radius: 0% 0% 50% 50%;
+                  transform: rotate(-5deg);
+                }
+                .frog-finger-four {
+                  height: 10px;
+                  width: 2px;
+                  background-color: green;
+                  border-radius: 0% 0% 50% 50%;
+                  transform: rotate(-10deg);
+                  position: relative;
+                  right: 1px;
+                }
+              }
             }
-            .cage-door-open {
+            .frog-leg {
+              height: 10px;
+              width: 5px;
+              background-color: green;
+              border-radius: 50% 50% 0% 0%;
+              position: relative;
+              @include flex(flex-end);
+              bottom: 12px;
+              .frog-foot {
+                height: 5px;
+                width: 12px;
+                background-color: green;
+                border-radius: 50%;
+                position: relative;
+              }
+              .frog-toe-div {
+                  @include center(space-between);
+                position: relative;
+                top: 8px;
+                .frog-toe-one {
+                  height: 10px;
+                  width: 2px;
+                  background-color: green;
+                  border-radius: 0% 0% 50% 50%;
+                  transform: rotate(15deg);
+                }
+                .frog-toe-two {
+                  height: 10px;
+                  width: 2px;
+                  background-color: green;
+                  border-radius: 0% 0% 50% 50%;
+                  transform: rotate(5deg);
+                }
+                .frog-toe-three {
+                  height: 10px;
+                  width: 2px;
+                  background-color: green;
+                  border-radius: 0% 0% 50% 50%;
+                  transform: rotate(-5deg);
+                }
+                .frog-toe-four {
+                  height: 10px;
+                  width: 2px;
+                  background-color: green;
+                  border-radius: 0% 0% 50% 50%;
+                  transform: rotate(-15deg);
+                }
+              }
             }
+            .frog-arm-right {
+              height: 10px;
+              width: 5px;
+              background-color: green;
+              border-radius: 50% 50% 0% 0%;
+              position: relative;
+              transform: rotate(-5deg);
+              bottom: 7px;
+              @include flex(flex-end);
+              z-index: 2;
+              right: 1px;
+              .frog-hand-right {
+                height: 5px;
+                width: 12px;
+                background-color: green;
+                border-radius: 50%;
+                position: relative;
+                
+              }
+              .frog-finger-div {
+                @include center(space-between);
+                position: relative;
+                top: 8px;
+                .frog-finger-one {
+                  height: 10px;
+                  width: 2px;
+                  background-color: green;
+                  border-radius: 0% 0% 50% 50%;
+                  transform: rotate(10deg);
+                  position: relative;
+                  left: 1px;
+                }
+                .frog-finger-two {
+                  height: 10px;
+                  width: 2px;
+                  background-color: green;
+                  border-radius: 0% 0% 50% 50%;
+                  transform: rotate(5deg);
+                }
+                .frog-finger-three {
+                  height: 10px;
+                  width: 2px;
+                  background-color: green;
+                  border-radius: 0% 0% 50% 50%;
+                  transform: rotate(-5deg);
+                }
+                .frog-finger-four {
+                  height: 10px;
+                  width: 2px;
+                  background-color: green;
+                  border-radius: 0% 0% 50% 50%;
+                  transform: rotate(-15deg);
+                }
+              }
+            }
+          }
+          .frog-closed {
+            display: none;
           }
         }
       }

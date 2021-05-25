@@ -73,3 +73,6 @@ values ($1, false, true);
 
 insert into housefour (user_id, heal_used, first_time)
 values ($1, false, true);
+
+insert into housefive (user_id, glasses_used, mirror_used, house_taken, unicorn_gone, first_time)
+values ($1, false, false, false, false, true);
