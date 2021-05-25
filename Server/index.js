@@ -121,6 +121,7 @@ app.post("/api/scales", inventoryController.scales);
 app.post("/api/pod", inventoryController.pod);
 app.post("/api/levitation", inventoryController.levitation);
 app.post("/api/invisibility", inventoryController.invisibility);
+app.post("/api/home", inventoryController.home)
 
 app.post("/api/manureCleanPermission", controller.manureCleanPermission);
 app.post("/api/caveCoin", controller.caveCoin);
@@ -181,6 +182,10 @@ app.post("/api/useLevitation", controller.useLevitation)
 app.post("/api/useShoes", controller.useShoes)
 app.post("/api/useHeal", controller.useHeal)
 app.post("/api/useToy", controller.useToy)
+app.post("/api/useGlasses", controller.useGlasses)
+app.post("/api/useMirror", controller.useMirror)
+app.post("/api/cageOpen", controller.cageOpen)
+app.post("/api/unicornGone", controller.unicornGone)
 
 app.use(express.static(__dirname + "/../build"));
 

@@ -649,6 +649,54 @@ module.exports = {
     });
   },
 
+  useGlasses: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    db.use_glasses(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  useMirror: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    db.use_mirror(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  podThrown: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const bog = await db.pod_thrown(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
   hydraExploding: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -696,5 +744,19 @@ module.exports = {
     const { id } = req.session.user;
     const town = await db.lock_four(id);
     res.status(200).send(town);
+  },
+
+  cageOpen: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const houseFive = await db.cage_open(id);
+    res.status(200).send(houseFive);
+  },
+
+  unicornGone: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const houseFive = await db.unicorn_gone(id);
+    res.status(200).send(houseFive);
   },
 };

@@ -19,7 +19,6 @@ function HouseFive(props) {
   const [rejectionCard, setRejectionCard] = useState(false);
   const [inventoryOpen, setInventoryOpen] = useState(false);
   const [houseFiveData, setHouseFiveData] = useState(false);
-  const [laser, setLaser] = useState(true);
   const [witchRejectionCard, setWitchRejectionCard] = useState(false);
   const [firstTimeCard, setFirstTimeCard] = useState(false);
   const [cauldronCard, setCauldronCard] = useState(false);
@@ -28,17 +27,15 @@ function HouseFive(props) {
   const [ingredientCard, setIngredientCard] = useState(false);
   const [fireCard, setFireCard] = useState(false);
   const [mirrorCard, setMirrorCard] = useState(false);
+  const [mirrorCardTwo, setMirrorCardTwo] = useState(false)
   const [homeCard, setHomeCard] = useState(false);
   const [laserRejectionCard, setLaserRejectionCard] = useState(false);
-  const [potion, setPotion] = useState(true);
-  const [witch, setWitch] = useState(false);
   const [witchCard, setWitchCard] = useState(false);
   const [bookCard, setBookCard] = useState(false);
   const [cageCard, setCageCard] = useState(false);
-  const [cage, setCage] = useState(true);
-  const [unicornMotion, setUnicornMotion] = useState(false)
-  const [fly, setFly] = useState(true);
-  const [home, setHome] = useState(true);
+  const [flyCard, setFlyCard] = useState(false)
+  const [unicornCard, setUnicornCard] = useState(false)
+ 
 
   useEffect(() => {
     axios.get("/api/houseFive").then((res) => {
@@ -182,7 +179,10 @@ function HouseFive(props) {
      } else if (!houseFiveData.mirror_used) {
        setLaserRejectionCard(true);
      } else {
-       setCageCard(true);
+       axios.post("/api/openCage").then(res => {
+         setHouseFiveData(res.data[0])
+         setCageCard(true);
+       })
      }
   }
 
@@ -191,18 +191,24 @@ function HouseFive(props) {
     setDownCharacter(false);
   };
 
-  const toggleUnicorn = () => {
-    axios.post("/api/unicornGone").then(res => {
-      setHouseFiveData(res.data[0])
-    })
-  }
-
   const toggleWitch = () => {
     if (houseFiveData.glasses_used === true && houseFiveData.mirror_used === false) {
       setLaserRejectionCard(true)
     } else {
       setWitchCard(true)
     }
+  }
+
+  const toggleMirror = () => {
+    setMirrorCard(false)
+    setMirrorCardTwo(true)
+  }
+
+  const toggleUnicorn = () => {
+    axios.post("/api/unicornGone").then(res => {
+      setHouseFiveData(res.data[0])
+      setUnicornCard(true)
+    })
   }
 
   return isLoading ? (
@@ -238,7 +244,7 @@ function HouseFive(props) {
           </div>
           <div className="dining-div">
             <div className="fireplace">
-              <div className="flame" onClick={() => setFireCard(true)}>
+              <div className="flame" onClick={toggleFire}>
                 <div className="flame-one"></div>
                 <div className="flame-two"></div>
                 <div className="flame-three"></div>
@@ -257,10 +263,11 @@ function HouseFive(props) {
               <div className="shelf-one">
                 <div
                   className={`${
-                    home
+                    !houseFiveData.house_taken
                       ? "houseFive-cottage-mini"
                       : "houseFive-cottage-mini-closed"
-                  }`} onClick={toggleHome}
+                  }`}
+                  onClick={toggleHome}
                 >
                   <div className="houseFive-left-mini"></div>
                   <div className="houseFive-middle-mini">
@@ -317,7 +324,12 @@ function HouseFive(props) {
                   <div className="houseFive-right-mini"></div>
                 </div>
                 <div
-                  className={`${potion ? "potion-div" : "potion-div-closed"}`} onClick={toggleIngredient}
+                  className={`${
+                    !houseFiveData.mirror_used
+                      ? "potion-div"
+                      : "potion-div-closed"
+                  }`}
+                  onClick={toggleIngredient}
                 >
                   <div className="potion-cork"></div>
                   <div className="potion-top"></div>
@@ -634,7 +646,13 @@ function HouseFive(props) {
         </div>
         <div className="houseFive-middle-right">
           <div className="houseFive-middle-right-top">
-            <div className={`${fly ? "fly-div" : "fly-div-closed"}`}>
+            <div
+              className={`${
+                houseFiveData.mirror_used && !houseFiveData.cage_open
+                  ? "fly-div"
+                  : "fly-div-closed"
+              }`}
+            >
               <div className="fly-wing-left"></div>
               <div className="fly-body">
                 <div className="fly-eye-div">
@@ -648,7 +666,12 @@ function HouseFive(props) {
               </div>
               <div className="fly-wing-right"></div>
             </div>
-            <div className={`${witch ? "witch" : "witch-closed"}`} onClick={toggleWitch}>
+            <div
+              className={`${
+                !houseFiveData.mirror_used ? "witch" : "witch-closed"
+              }`}
+              onClick={toggleWitch}
+            >
               <div className="witch-hat">
                 <div className="witch-hat-top"></div>
                 <div className="witch-hat-bottom"></div>
@@ -738,8 +761,11 @@ function HouseFive(props) {
         <div className="houseFive-bottom-center">
           <div
             className={`${
-              houseFiveData.glasses_used && !houseFiveData.mirror_used ? "houseFive-laser" : "houseFive-laser-closed"
-            }`} onClick={() => setLaserRejectionCard(true)}
+              houseFiveData.glasses_used && !houseFiveData.mirror_used
+                ? "houseFive-laser"
+                : "houseFive-laser-closed"
+            }`}
+            onClick={() => setLaserRejectionCard(true)}
           ></div>
           <div
             className={`${
@@ -761,46 +787,80 @@ function HouseFive(props) {
         </div>
         <div className="houseFive-bottom-right">
           <div className="unicorn-div">
-            <div class={`${houseFiveData.cage_open && !houseFiveData.unicorn_gone ? "unicorn" : "unicorn-closed"}`}></div>
+            <div
+              class={`${
+                houseFiveData.cage_open && !houseFiveData.unicorn_gone
+                  ? "unicorn"
+                  : "unicorn-closed"
+              }`} onClick={toggleUnicorn}
+            ></div>
           </div>
           <div className="cage-div">
-            <div className="cage">
+            <div className="cage" onClick={toggleCage}>
               <div className="cage-top"></div>
               <div className="cage-middle">
                 <div className="cage-bar"></div>
                 <div
-                  className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                  className={`${
+                    !houseFiveData.cage_open
+                      ? "cage-bar-short"
+                      : "cage-bar-short-closed"
                   }`}
                 ></div>
-                <div className={`${ !houseFiveData.cage_open ? "cage-door" : "cage-door-closed"}`}>
+                <div
+                  className={`${
+                    !houseFiveData.cage_open ? "cage-door" : "cage-door-closed"
+                  }`}
+                >
                   <div className="cage-door-bars">
                     <div
-                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      className={`${
+                        !houseFiveData.cage_open
+                          ? "cage-bar-short"
+                          : "cage-bar-short-closed"
                       }`}
                     ></div>
                     <div
-                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      className={`${
+                        !houseFiveData.cage_open
+                          ? "cage-bar-short"
+                          : "cage-bar-short-closed"
                       }`}
                     ></div>
                     <div
-                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      className={`${
+                        !houseFiveData.cage_open
+                          ? "cage-bar-short"
+                          : "cage-bar-short-closed"
                       }`}
                     ></div>
                     <div
-                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      className={`${
+                        !houseFiveData.cage_open
+                          ? "cage-bar-short"
+                          : "cage-bar-short-closed"
                       }`}
                     ></div>
                     <div
-                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      className={`${
+                        !houseFiveData.cage_open
+                          ? "cage-bar-short"
+                          : "cage-bar-short-closed"
                       }`}
                     ></div>
                     <div
-                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      className={`${
+                        !houseFiveData.cage_open
+                          ? "cage-bar-short"
+                          : "cage-bar-short-closed"
                       }`}
                     ></div>
                   </div>
                   <div
-                    className={`${ !houseFiveData.cage_open ? "cage-lock-div" : "cage-lock-div-closed"
+                    className={`${
+                      !houseFiveData.cage_open
+                        ? "cage-lock-div"
+                        : "cage-lock-div-closed"
                     }`}
                   >
                     <div className="cage-lock">
@@ -812,32 +872,54 @@ function HouseFive(props) {
                   </div>
                   <div className="cage-door-bars">
                     <div
-                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      className={`${
+                        !houseFiveData.cage_open
+                          ? "cage-bar-short"
+                          : "cage-bar-short-closed"
                       }`}
                     ></div>
                     <div
-                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      className={`${
+                        !houseFiveData.cage_open
+                          ? "cage-bar-short"
+                          : "cage-bar-short-closed"
                       }`}
                     ></div>
                     <div
-                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      className={`${
+                        !houseFiveData.cage_open
+                          ? "cage-bar-short"
+                          : "cage-bar-short-closed"
                       }`}
                     ></div>
                     <div
-                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      className={`${
+                        !houseFiveData.cage_open
+                          ? "cage-bar-short"
+                          : "cage-bar-short-closed"
                       }`}
                     ></div>
                     <div
-                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      className={`${
+                        !houseFiveData.cage_open
+                          ? "cage-bar-short"
+                          : "cage-bar-short-closed"
                       }`}
                     ></div>
                     <div
-                      className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                      className={`${
+                        !houseFiveData.cage_open
+                          ? "cage-bar-short"
+                          : "cage-bar-short-closed"
                       }`}
                     ></div>
                   </div>
 
-                  <div className={`${ !houseFiveData.cage_open ? "frog" : "frog-closed"}`}>
+                  <div
+                    className={`${
+                      !houseFiveData.cage_open ? "frog" : "frog-closed"
+                    }`}
+                  >
                     <div className="frog-head">
                       <div className="frog-eye-div">
                         <div className="frog-eye">
@@ -894,7 +976,10 @@ function HouseFive(props) {
                   </div>
                 </div>
                 <div
-                  className={`${ !houseFiveData.cage_open ? "cage-bar-short" : "cage-bar-short-closed"
+                  className={`${
+                    !houseFiveData.cage_open
+                      ? "cage-bar-short"
+                      : "cage-bar-short-closed"
                   }`}
                 ></div>
                 <div className="cage-bar"></div>
@@ -915,6 +1000,302 @@ function HouseFive(props) {
           </Typography>
           <Button
             onClick={() => setRejectionCard(false)}
+            variant="contained"
+            color="primary"
+          >
+            CLOSE
+          </Button>
+        </Card>
+        <Card
+          className={`${
+            witchRejectionCard ? "answer-card" : "answer-card-closed"
+          }`}
+        >
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="answer-card-description"
+          >
+            The second you left this entryway the witch would see you. Having
+            heard what she is capable of you decide not to proceed without a
+            solid plan.
+          </Typography>
+          <Button
+            onClick={() => setWitchRejectionCard(false)}
+            variant="contained"
+            color="primary"
+          >
+            CLOSE
+          </Button>
+        </Card>
+        <Card
+          className={`${
+            laserRejectionCard ? "answer-card" : "answer-card-closed"
+          }`}
+        >
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="answer-card-description"
+          >
+            There is no way to get by the laser without getting zapped.
+          </Typography>
+          <Button
+            onClick={() => setLaserRejectionCard(false)}
+            variant="contained"
+            color="primary"
+          >
+            CLOSE
+          </Button>
+        </Card>
+        <Card className={`${fireCard ? "answer-card" : "answer-card-closed"}`}>
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="answer-card-description"
+          >
+            What possible reason could you have to want to burn your hand by
+            touching the blazing fire.
+          </Typography>
+          <Button
+            onClick={() => setFireCard(false)}
+            variant="contained"
+            color="primary"
+          >
+            CLOSE
+          </Button>
+        </Card>
+        <Card className={`${homeCard ? "answer-card" : "answer-card-closed"}`}>
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="answer-card-description"
+          >
+            The miniature home is intricate and detailed. The inside is just as
+            impressive. In fact, its your dream house. Unlike everything else in
+            this place it isn't creepy. You decide to take it with you.
+          </Typography>
+          <Button
+            onClick={() => setHomeCard(false)}
+            variant="contained"
+            color="primary"
+          >
+            CLOSE
+          </Button>
+        </Card>
+        <Card
+          className={`${ingredientCard ? "answer-card" : "answer-card-closed"}`}
+        >
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="answer-card-description"
+          >
+            Yuck!!! You absolutely refuse to touch any of the witch's disgusting
+            ingredients.
+          </Typography>
+          <Button
+            onClick={() => setIngredientCard(false)}
+            variant="contained"
+            color="primary"
+          >
+            CLOSE
+          </Button>
+        </Card>
+        <Card className={`${bookCard ? "answer-card" : "answer-card-closed"}`}>
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="answer-card-description"
+          >
+            You have no interest in dark magic.
+          </Typography>
+          <Button
+            onClick={() => setBookCard(false)}
+            variant="contained"
+            color="primary"
+          >
+            CLOSE
+          </Button>
+        </Card>
+        <Card
+          className={`${glassesCard ? "answer-card" : "answer-card-closed"}`}
+        >
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="answer-card-description"
+          >
+            You put on your glasses realize there was an invisible laser only
+            inches in front of you. Phew! Its a good thing you found this before
+            you decided to proceed.
+          </Typography>
+          <Button
+            onClick={() => setGlassesCard(false)}
+            variant="contained"
+            color="primary"
+          >
+            CLOSE
+          </Button>
+        </Card>
+        <Card
+          className={`${mirrorCard ? "answer-card" : "answer-card-closed"}`}
+        >
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="answer-card-description"
+          >
+            You push the mirror into the laser aiming at the witch. The mirror
+            shatters but first sends a small laser ball flying toward the witch.
+            To your dismay it misses her, instead it hits a green potion on the
+            shelf above her. You cringe as she turns toward you smiling eerily.
+          </Typography>
+          <Button onClick={toggleMirror} variant="contained" color="primary">
+            CLOSE
+          </Button>
+        </Card>
+        <Card
+          className={`${mirrorCardTwo ? "answer-card" : "answer-card-closed"}`}
+        >
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="answer-card-description"
+          >
+            She raises one hand and you find you find you can no longer move.
+            She raises her other hand and a big ball of lightning appears.
+            You're sure this is the end when something green catches you eye. A
+            single drop from the shattered potion oozes off the shelf and hits
+            the witch's outstretched hand. Poof! The witch turns into a fly.
+          </Typography>
+          <Button
+            onClick={() => setMirrorCardTwo(true)}
+            variant="contained"
+            color="primary"
+          >
+            CLOSE
+          </Button>
+        </Card>
+        <Card
+          className={`${cauldronCard ? "answer-card" : "answer-card-closed"}`}
+        >
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="answer-card-description"
+          >
+            You have no idea what vile things the witch has brewed in that
+            cauldron. Touching it isn't worth it.
+          </Typography>
+          <Button
+            onClick={() => setCauldronCard(false)}
+            variant="contained"
+            color="primary"
+          >
+            CLOSE
+          </Button>
+        </Card>
+        <Card className={`${broomCard ? "answer-card" : "answer-card-closed"}`}>
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="answer-card-description"
+          >
+            You decide against taking the broom. It is likely infused with dark
+            magic.
+          </Typography>
+          <Button
+            onClick={() => setBroomCard(false)}
+            variant="contained"
+            color="primary"
+          >
+            CLOSE
+          </Button>
+        </Card>
+        <Card className={`${flyCard ? "answer-card" : "answer-card-closed"}`}>
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="answer-card-description"
+          >
+            Now that the witch is a fly, she can do no further harm. You are
+            literally the type of person who couldn't hurt a fly.
+          </Typography>
+          <Button
+            onClick={() => setFlyCard(false)}
+            variant="contained"
+            color="primary"
+          >
+            CLOSE
+          </Button>
+        </Card>
+        <Card className={`${cageCard ? "answer-card" : "answer-card-closed"}`}>
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="answer-card-description"
+          >
+            Picking the lock you open the cage to free the poor frog. The cute
+            little frog jumps out. The fly that was formerly a witch flys too
+            close. A long pink tongue shoots out of the frog's mouth and the fly
+            becomes his meal. Suddenly the frog starts glowing and before your
+            eyes he turns into a unicorn.
+          </Typography>
+          <Button
+            onClick={() => setCageCard(false)}
+            variant="contained"
+            color="primary"
+          >
+            CLOSE
+          </Button>
+        </Card>
+        <Card
+          className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}
+        >
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="answer-card-description"
+          >
+            You slowly creep into the house. You hear the witch cackling and you
+            tremble in fear. Fortunately the entryway hides you from the witches
+            view. It buys you a little time to plan your next move.
+          </Typography>
+          <Button onClick={toggleFirst} variant="contained" color="primary">
+            CLOSE
+          </Button>
+        </Card>
+        <Card className={`${witchCard ? "answer-card" : "answer-card-closed"}`}>
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="answer-card-description"
+          >
+            The witches quick and powerful. She enjoys transforming people into
+            less desirable creatures. She keeps them in cages until she grows
+            bored of them. Engaging her would be a really, really bad idea.
+          </Typography>
+          <Button
+            onClick={() => setWitchCard(false)}
+            variant="contained"
+            color="primary"
+          >
+            CLOSE
+          </Button>
+        </Card>
+        <Card
+          className={`${unicornCard ? "answer-card" : "answer-card-closed"}`}
+        >
+          <Typography
+            variant="h4"
+            color="secondary"
+            className="answer-card-description"
+          >
+            The unicorn bows his head as if to say "thanks", then quickly gallops out of the cottage.
+          </Typography>
+          <Button
+            onClick={() => setUnicornCard(false)}
             variant="contained"
             color="primary"
           >
