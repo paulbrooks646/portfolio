@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
 import {getInventory} from "../../redux/inventoryReducer"
 import axios from "axios";
 import "./Market.scss";
@@ -25,25 +25,18 @@ function Market(props) {
  const [leftRight, setLeftRight] = useState(false);
  const [leftCharacter, setLeftCharacter] = useState(false);
   const [rightCharacter, setRightCharacter] = useState(false);
-  const [marketData, setMarketData] = useState()
   const [inventoryOpen, setInventoryOpen] = useState(false)
   const [rejectionCard, setRejectionCard] = useState(false)
   
   useEffect(() => {
-    // if (!props.user.user.newgame) {
-    //   setNewgameCard(false);
-
-    // }
-    axios.get("/api/nest").then((res) => {
-      setMarketData(res.data[0]);
-
+    
       if (props.user.user.last === "town") {
         setLeftCharacter(true);
       } else if (props.user.user.last === "alley") {
         setRightCharacter(true);
       }
       setIsLoading(false);
-    });
+    
   }, []);
 
   const toggleInventoryOpen = () => setInventoryOpen(!inventoryOpen);
@@ -64,16 +57,7 @@ function Market(props) {
   });
 
   const toggleItem = (item) => {
-    if (item === "flute") {
-      if (props.location.pathname === "/Tower") {
-        axios.post("/api/useFlute").then((res) => {
-          setMarketData(res.data[0]);
-          ;
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
+    setRejectionCard(true)
   };
 
   const toggleRight = () => {
@@ -260,4 +244,4 @@ function Market(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory})(Market);
+export default connect(mapStateToProps, { getUser, getInventory, logoutUser})(Market);

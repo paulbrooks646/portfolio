@@ -1,20 +1,26 @@
 @import "../mixins";
 
 .alley-body {
-
   .alley-top {
-    @include row(35vh);
-    background-image: url("../../Images/Brick.jpg");
-    background-size: auto 100%;
+    @include row(37vh);
+    background-color: silver;
+    background-image: linear-gradient(335deg, #b00 23px, transparent 23px),
+      linear-gradient(155deg, #d00 23px, transparent 23px),
+      linear-gradient(335deg, #b00 23px, transparent 23px),
+      linear-gradient(155deg, #d00 23px, transparent 23px);
+    background-size: 58px 58px;
+    background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+    border-right: solid 25px black;
   }
 
   .alley-middle {
-    @include row(20vh);
+    @include row(16vh);
     background-image: url("../../Images/Dirt.png");
     background-size: 100% 100%;
+    border-right: solid black 25px;
 
     .alley-middle-left {
-      @include section(45vw);
+      @include section(30vw);
       @include center(flex-start);
 
       .alley-market {
@@ -25,19 +31,253 @@
     }
 
     .alley-middle-middle {
-      @include section(50vw);
+      @include section(40vw);
       @include center(space-between);
 
       .cat {
-        background-image: url("../../Images/Cat.png");
-        background-size: 100% 100%;
-        height: 75px;
-        width: 75px;
-        transform: scaleX(-1);
+        height: 200px;
+        width: 150px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .cat-top {
+          display: flex;
+          justify-content: flex-start;
+          align-items: flex-start;
+          position: relative;
+          top: 8px;
+          right: 20px;
+          z-index: 2;
+
+          .cat-left-ear {
+            background-image: linear-gradient(
+              45deg,
+              transparent 50%,
+              black 50%
+            );
+            height: 15px;
+            width: 15px;
+            position: relative;
+            left: 25px;
+            bottom: 4px;
+            transform: rotate(-60deg);
+            @include flex(center);
+
+            .cat-left-inner-ear {
+              background-image: linear-gradient(
+                45deg,
+                transparent 50%,
+                pink 50%
+              );
+              height: 10px;
+              width: 10px;
+            }
+          }
+
+          .cat-face {
+            width: 60px;
+            height: 30px;
+            background-color: black;
+            border-radius: 50%;
+            @include flex(space-evenly);
+            z-index: 3;
+
+            .cat-eye-div {
+              width: 90%;
+              @include center(space-evenly);
+              height: 12px;
+
+              .cat-eye {
+                border-radius: 50%;
+                height: 12px;
+                width: 20px;
+                border: solid;
+                background-color: #ffff33;
+                @include flex(center);
+
+                .cat-pupil {
+                  height: 6px;
+                  width: 4px;
+                  background-color: black;
+                  border-radius: 50%;
+                }
+              }
+            }
+            .cat-nose {
+              border-radius: 50%;
+              background-color: pink;
+              width: 3.5px;
+              height: 3.5px;
+              position: relative;
+              bottom: 2.5px;
+            }
+            .cat-smile {
+              @include flex(center);
+              position: relative;
+              bottom: 2.5px;
+
+              .cat-mouth {
+                width: 30px;
+                height: 4px;
+                border-radius: 50%;
+                background-color: red;
+                @include flex(space-between);
+
+                .cat-teeth-top {
+                  display: flex;
+                  justify-content: space-evenly;
+                  align-items: flex-start;
+                  height: 50%;
+                  width: 100%;
+
+                  .cat-tooth {
+                    background-image: linear-gradient(
+                      45deg,
+                      transparent 50%,
+                      white 50%
+                    );
+                    height: 3.6px;
+                    width: 3.6px;
+                    transform: rotate(135deg);
+                    position: relative;
+                    bottom: 2px;
+                  }
+                }
+
+                .cat-teeth-bottom {
+                  display: flex;
+                  justify-content: space-evenly;
+                  align-items: flex-end;
+                  width: 100%;
+                  height: 50%;
+
+                  .cat-tooth {
+                    background-image: linear-gradient(
+                      45deg,
+                      transparent 50%,
+                      white 50%
+                    );
+                    height: 3.6px;
+                    width: 3.6px;
+                    transform: rotate(-45deg);
+                    position: relative;
+                    top: 2px;
+                  }
+                }
+              }
+            }
+          }
+          .cat-right-ear {
+            background-image: linear-gradient(
+              45deg,
+              transparent 50%,
+              black 50%
+            );
+            height: 15px;
+            width: 15px;
+            position: relative;
+            right: 25px;
+            bottom: 4px;
+            transform: rotate(-30deg);
+            @include flex(center);
+
+            .cat-right-inner-ear {
+              background-image: linear-gradient(
+                45deg,
+                transparent 50%,
+                pink 50%
+              );
+              height: 10px;
+              width: 10px;
+            }
+          }
+        }
+        .cat-bottom {
+          display: flex;
+          justify-content: center;
+
+          .cat-body {
+            z-index: 1;
+            .cat-torso {
+              width: 70px;
+              height: 30px;
+              background-color: black;
+              border: solid;
+              border-radius: 50%;
+              z-index: 1;
+              position: relative;
+            }
+            .cat-leg-div {
+              width: 70px;
+              display: flex;
+              justify-content: space-between;
+              position: relative;
+
+              .cat-leg-one {
+                height: 22.5px;
+                width: 5px;
+                background-color: black;
+                border-radius: 25%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                align-items: center;
+                position: relative;
+                bottom: 15px;
+
+                .cat-paw {
+                  border-radius: 50% 50% 25% 25%;
+                  background-color: black;
+                  width: 12px;
+                  height: 8px;
+                  position: relative;
+                  top: 2.5px;
+                  right: 4px;
+                }
+              }
+              .cat-leg-two {
+                height: 20px;
+                width: 5px;
+                background-color: black;
+                border-radius: 25%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                align-items: center;
+                z-index: 1;
+                position: relative;
+                bottom: 10px;
+                right: 4px;
+
+                .cat-paw {
+                  border-radius: 50% 50% 25% 25%;
+                  background-color: black;
+                  width: 12px;
+                  height: 8px;
+                  position: relative;
+                  top: 2.5px;
+                  right: 4px;
+                }
+              }
+            }
+          }
+        }
+        .cat-tail {
+          border-radius: 50%;
+          border-top: solid black 10px;
+          height: 30px;
+          width: 45px;
+          transform: rotate(10deg);
+          position: relative;
+          top: 7px;
+          right: 13px;
+        }
       }
 
       .beggar-div {
-        @include flex(space-evenly);
+        @include center(space-evenly);
         height: 100%;
 
         .beggar {
@@ -49,34 +289,150 @@
         }
 
         .mouse {
-          background-image: url("../../Images/Mouse.png");
-          background-size: 100% 100%;
-          height: 30px;
-          width: 30px;
-          cursor: pointer;
+          @include flex(center);
+          
+          .mouse-ear {
+            width: 15px;
+            height: 20px;
+            background-image: linear-gradient(0deg, transparent 50%, gray 50%);
+            border-radius: 50%;
+            @include flex(center);
+            position: relative;
+            right: 16px;
+            top: 11px;
+            transform: rotate(-5deg);
+
+            .mouse-inner-ear {
+               width: 8px;
+            height: 15px;
+            background-image: linear-gradient(0deg, transparent 50%, pink 50%);
+            border-radius: 50%;
+
+
+            }
+          }
+          .mouse-body-div {
+            display: flex;
+
+            .mouse-nose {
+              height: 5px;
+              width: 5px;
+              border-radius: 50%;
+              background-color: pink;
+              position: relative;
+              top: 3px;
+              left: 2px;
+            }
+
+            .mouse-body-one {
+              width: 40px;
+              border-radius: 50%;
+              height: 20px;
+              background-color: gray;
+              @include flex(center);
+
+              .mouse-eye {
+                height: 3.5px;
+              width: 3.5px;
+              border-radius: 50%;
+              background-color: black;
+              position: relative;
+              right: 12px;
+              }
+
+              .mouse-mouth {
+                width: 8px;
+                height: 8px;
+                border-radius: 25%;
+                border-bottom: solid pink 1px;
+                position: relative;
+                right: 15px;
+                bottom: 3px;
+                transform: rotate(-10deg);
+              }
+            }
+            .mouse-tail-one {
+              height: 15px;
+              width: 15px;
+              border-bottom: solid pink 3px;
+              border-right: solid pink 3px;
+              border-radius: 40%;
+              transform: rotate(15deg);
+              position: relative;
+              right: 2px;
+            }
+
+            .mouse-tail-two {
+              height: 15px;
+              width: 15px;
+              border-top: solid pink 3px;
+              border-right: solid pink 3px;
+              border-left: solid pink 3px;
+              border-radius: 40%;
+              position: relative;
+              bottom: 8px;
+              right: 15px;
+            }
+          }
+          .mouse-paw-div {
+            display: flex;
+            width: 40%;
+            justify-content: space-evenly;
+            position: relative;
+            right: 12px;
+            bottom: 1px;
+            .mouse-paw-one {
+              width: 5px;
+              height: 3px;
+              background-color: pink;
+              border-radius: 50%;
+            }
+            .mouse-paw-two {
+              width: 5px;
+              height: 3px;
+              background-color: pink;
+              border-radius: 50%;
+            }
+            .mouse-paw-three {
+              width: 5px;
+              height: 3px;
+              background-color: pink;
+              border-radius: 50%;
+            }
+            .mouse-paw-four {
+              width: 5px;
+              height: 3px;
+              background-color: pink;
+              border-radius: 50%;
+              position: relative;
+              bottom: 1px;
+            }
+          }
         }
       }
 
-      .thieves-guild-div {
-        width: 185px;
-
-        .alley-thieves-guild {
-          @include center(flex-start);
-          cursor: pointer;
-        }
-      }
-    }
-
-    .alley-middle-right {
-      background-color: #606060;
-      @include section(5vw);
+      .alley-middle-right {
+         @include section(30vw);
       @include center(flex-end);
+        .thieves-guild-div {
+          .alley-thieves-guild {
+            @include center(flex-end);
+            cursor: pointer;
+          }
+        }
+      }
     }
   }
 
   .alley-bottom {
-    @include row(35vh);
-    background-image: url("../../Images/Brick.jpg");
-    background-size: auto 100%;
+    @include row(37vh);
+    background-color: silver;
+    background-image: linear-gradient(335deg, #b00 23px, transparent 23px),
+      linear-gradient(155deg, #d00 23px, transparent 23px),
+      linear-gradient(335deg, #b00 23px, transparent 23px),
+      linear-gradient(155deg, #d00 23px, transparent 23px);
+    background-size: 58px 58px;
+    background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+    border-right: solid 25px black;
   }
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
 import {getInventory} from "../../redux/inventoryReducer"
 import axios from "axios";
 import "./Alley.scss";
@@ -172,10 +172,90 @@ function Alley(props) {
             </div>
           </div>
           <div className="alley-middle-middle">
-            <div className="cat"></div>
+            <div className="cat-div">
+              <div className="cat">
+                <div className="cat-top">
+                  <div className="cat-left-ear">
+                    <div className="cat-left-inner-ear"></div>
+                  </div>
+                  <div className="cat-face">
+                    <div className="cat-eye-div">
+                      <div className="cat-eye">
+                        <div className="cat-pupil"></div>
+                      </div>
+                      <div className="cat-eye">
+                        <div className="cat-pupil"></div>
+                      </div>
+                    </div>
+                    <div className="cat-nose"></div>
+                    <div className="cat-smile">
+                      <div className="cat-mouth">
+                        <div className="cat-teeth-top">
+                          <div className="cat-tooth"></div>
+                          <div className="cat-tooth"></div>
+                          <div className="cat-tooth"></div>
+                          <div className="cat-tooth"></div>
+                        </div>
+                        <div className="cat-teeth-bottom">
+                          <div className="cat-tooth"></div>
+                          <div className="cat-tooth"></div>
+                          <div className="cat-tooth"></div>
+                          <div className="cat-tooth"></div>
+                          <div className="cat-tooth"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="cat-right-ear">
+                    <div className="cat-right-inner-ear"></div>
+                  </div>
+                </div>
+                <div className="cat-bottom">
+                  <div className="cat-body">
+                    <div className="cat-torso"></div>
+                    <div className="cat-leg-div">
+                      <div className="cat-leg-one">
+                        <div className="cat-paw"></div>
+                      </div>
+                      <div className="cat-leg-two">
+                        <div className="cat-paw"></div>
+                      </div>
+                      <div className="cat-leg-one">
+                        <div className="cat-paw"></div>
+                      </div>
+                      <div className="cat-leg-two">
+                        <div className="cat-paw"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="cat-tail"></div>
+                </div>
+              </div>
+            </div>
             <div className="beggar-div">
               <div className="beggar"></div>
-              <div className="mouse"></div>
+                <div className="mouse">
+                  <div className="mouse-ear">
+                    <div className="mouse-inner-ear"></div>
+                  </div>
+                  <div className="mouse-body-div">
+                    <div className="mouse-nose"></div>
+                    <div className="mouse-body-one">
+                      <div className="mouse-eye">
+                        
+                      </div>
+                      <div className="mouse-mouth"></div>
+                    </div>
+                    <div className="mouse-tail-one"></div>
+                    <div className="mouse-tail-two"></div>
+                  </div>
+                  <div className="mouse-paw-div">
+                    <div className="mouse-paw-one"></div>
+                    <div className="mouse-paw-two"></div>
+                    <div className="mouse-paw-three"></div>
+                    <div className="mouse-paw-four"></div>
+                  </div>
+              </div>
             </div>
             <div
               className={`${
@@ -231,4 +311,4 @@ function Alley(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory })(Alley);
+export default connect(mapStateToProps, { getUser, getInventory, logoutUser })(Alley);
