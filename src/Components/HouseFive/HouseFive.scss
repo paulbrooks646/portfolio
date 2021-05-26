@@ -52,6 +52,7 @@
           top: 75px;
           z-index: 1;
           border-radius: 25% 0% 25% 0%;
+          cursor: pointer;
 
           .flame-one {
             border-radius: 50%;
@@ -176,6 +177,7 @@
             position: relative;
             bottom: 36px;
             left: 15px;
+            cursor: pointer;
 
             .houseFive-left-mini {
               width: 5px;
@@ -323,6 +325,7 @@
             left: 25px;
             bottom: 66px;
             @include flex(center);
+            cursor: pointer;
 
             .potion-cork {
               height: 8px;
@@ -397,6 +400,7 @@
             position: absolute;
             left: 0px;
             bottom: 10px;
+            cursor: pointer;
 
             .book-cover-front {
               height: 40px;
@@ -446,6 +450,7 @@
             position: absolute;
             right: 0px;
             bottom: 10px;
+            cursor: pointer;
 
             .eyes-top {
               width: 40px;
@@ -496,6 +501,7 @@
             position: absolute;
             left: 0px;
             bottom: 10px;
+            cursor: pointer;
 
             .blood-top {
               width: 50px;
@@ -524,6 +530,7 @@
             position: absolute;
             right: 0px;
             bottom: 10px;
+            cursor: pointer;
 
             .bugs-top {
               width: 70px;
@@ -689,6 +696,7 @@
 
   .cauldron-div {
     @include flex(center);
+    cursor: pointer;
 
     .cauldron-top {
       width: 100px;
@@ -729,6 +737,7 @@
 
     .fly-div {
       @include center(center);
+      cursor: pointer;
 
       .fly-wing-left {
         height: 10px;
@@ -781,6 +790,7 @@
       position: relative;
       bottom: 45px;
       left: 50px;
+      cursor: pointer;
 
       .witch-hat {
         @include flex(center);
@@ -1074,6 +1084,7 @@
     transform: rotate(45deg);
     @include flex(center);
     width: 35px;
+    cursor: pointer;
 
     .broom-top {
       display: flex;
@@ -1113,7 +1124,10 @@
 
   .houseFive-laser {
     width: 100%;
-    height: 20px;
+    height: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 0px;
     background-image: linear-gradient(
       90deg,
       yellow,
@@ -1126,8 +1140,10 @@
 
   .houseFive-laser-closed {
     width: 100%;
-    height: 20px;
+    height: 10px;
     background-color: transparent;
+    position: absolute;
+    top: 0px;
   }
   .houseFive-town {
     @include flex(flex-start);
@@ -1153,6 +1169,7 @@
       background-size: 100% 100%;
       width: 200px;
       height: 150px;
+      cursor: pointer;
     }
     .unicorn-closed {
       display: none;
@@ -1168,6 +1185,8 @@
       width: 200px;
       height: 100px;
       background-color: white;
+      cursor: pointer;
+
       .cage-top {
         width: 100%;
         height: 10px;

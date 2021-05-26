@@ -27,20 +27,21 @@ function HouseFive(props) {
   const [ingredientCard, setIngredientCard] = useState(false);
   const [fireCard, setFireCard] = useState(false);
   const [mirrorCard, setMirrorCard] = useState(false);
-  const [mirrorCardTwo, setMirrorCardTwo] = useState(false)
+  const [mirrorCardTwo, setMirrorCardTwo] = useState(false);
+  const [mirrorCardThree, setMirrorCardThree] = useState(false);
   const [homeCard, setHomeCard] = useState(false);
   const [laserRejectionCard, setLaserRejectionCard] = useState(false);
   const [witchCard, setWitchCard] = useState(false);
   const [bookCard, setBookCard] = useState(false);
   const [cageCard, setCageCard] = useState(false);
-  const [flyCard, setFlyCard] = useState(false)
-  const [unicornCard, setUnicornCard] = useState(false)
- 
+  const [cageCardTwo, setCageCardTwo] = useState(false)
+  const [flyCard, setFlyCard] = useState(false);
+  const [unicornCard, setUnicornCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/houseFive").then((res) => {
       if (res.data[0].first_time) {
-        setFirstTimeCard(true)
+        setFirstTimeCard(true);
       }
       setHouseFiveData(res.data[0]);
       setDownCharacter(true);
@@ -68,26 +69,26 @@ function HouseFive(props) {
   const toggleItem = (item) => {
     if (item === "glasses") {
       axios.post("/api/useGlasses").then((res) => {
-        props.getInventory(res.data)
-        axios.get("/api/houseFive").then(res => {
+        props.getInventory(res.data);
+        axios.get("/api/houseFive").then((res) => {
           setHouseFiveData(res.data[0]);
-          setGlassesCard(true)
-        })
-      })
+          setGlassesCard(true);
+        });
+      });
     } else if (item === "mirror") {
       if (houseFiveData.glasses_used) {
-        axios.post("/api/mirror").then(res => {
-          props.getInventory(res.data)
-          axios.get("/api/houseFive").then(res => {
-            setHouseFiveData(res.data[0])
-            setMirrorCard(true)
-          })
-        })
+        axios.post("/api/useMirror").then((res) => {
+          props.getInventory(res.data);
+          axios.get("/api/houseFive").then((res) => {
+            setHouseFiveData(res.data[0]);
+            setMirrorCard(true);
+          });
+        });
       } else {
         setRejectionCard(true);
       }
     } else {
-      setRejectionCard(true)
+      setRejectionCard(true);
     }
   };
 
@@ -101,69 +102,68 @@ function HouseFive(props) {
 
   const toggleFirst = () => {
     axios.post("/api/houseFiveFirst").then((res) => {
-      setHouseFiveData(res.data[0])
-      setFirstTimeCard(false)
+      setHouseFiveData(res.data[0]);
+      setFirstTimeCard(false);
     });
   };
 
   const toggleHome = () => {
     if (!houseFiveData.glasses_used) {
-      setWitchRejectionCard(true)
+      setWitchRejectionCard(true);
     } else if (!houseFiveData.mirror_used) {
-      setLaserRejectionCard(true)
+      setLaserRejectionCard(true);
     } else {
-      axios.post("/api/homeTaken").then(res => {
-        props.getInventory(res.data)
-        axios.get("/api/houseFive").then(res => {
-          setHouseFiveData(res.data[0])
-          setHomeCard(true)
-        })
-      })
+      axios.post("/api/home").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/houseFive").then((res) => {
+          setHouseFiveData(res.data[0]);
+          setHomeCard(true);
+        });
+      });
     }
-  }
+  };
 
   const toggleIngredient = () => {
     if (!houseFiveData.glasses_used) {
-      setWitchRejectionCard(true)
+      setWitchRejectionCard(true);
     } else if (!houseFiveData.mirror_used) {
-      setLaserRejectionCard(true)
+      setLaserRejectionCard(true);
     } else {
-      setIngredientCard(true)
+      setIngredientCard(true);
     }
-  }
+  };
 
   const toggleFire = () => {
-     if (!houseFiveData.glasses_used) {
-       setWitchRejectionCard(true);
-     } else if (!houseFiveData.mirror_used) {
-       setLaserRejectionCard(true);
-     } else {
-       setFireCard(true);
-     }
-  }
+    if (!houseFiveData.glasses_used) {
+      setWitchRejectionCard(true);
+    } else if (!houseFiveData.mirror_used) {
+      setLaserRejectionCard(true);
+    } else {
+      setFireCard(true);
+    }
+  };
 
   const toggleBook = () => {
-     if (!houseFiveData.glasses_used) {
-       setWitchRejectionCard(true);
-     } else if (!houseFiveData.mirror_used) {
-       setLaserRejectionCard(true);
-     } else {
-       setBookCard(true);
-     }
-  }
+    if (!houseFiveData.glasses_used) {
+      setWitchRejectionCard(true);
+    } else if (!houseFiveData.mirror_used) {
+      setLaserRejectionCard(true);
+    } else {
+      setBookCard(true);
+    }
+  };
 
   const toggleCauldron = () => {
-     if (!houseFiveData.glasses_used) {
-       setWitchRejectionCard(true);
-     } else if (!houseFiveData.mirror_used) {
-       setLaserRejectionCard(true);
-     } else {
-       setCauldronCard(true);
-     }
-  }
+    if (!houseFiveData.glasses_used) {
+      setWitchRejectionCard(true);
+    } else if (!houseFiveData.mirror_used) {
+      setLaserRejectionCard(true);
+    } else {
+      setCauldronCard(true);
+    }
+  };
 
   const toggleBroom = () => {
-
     if (!houseFiveData.glasses_used) {
       setWitchRejectionCard(true);
     } else if (!houseFiveData.mirror_used) {
@@ -171,19 +171,24 @@ function HouseFive(props) {
     } else {
       setBroomCard(true);
     }
-  }
+  };
 
   const toggleCage = () => {
-     if (!houseFiveData.glasses_used) {
-       setWitchRejectionCard(true);
-     } else if (!houseFiveData.mirror_used) {
-       setLaserRejectionCard(true);
-     } else {
-       axios.post("/api/openCage").then(res => {
-         setHouseFiveData(res.data[0])
-         setCageCard(true);
-       })
-     }
+    if (!houseFiveData.glasses_used) {
+      setWitchRejectionCard(true);
+    } else if (!houseFiveData.mirror_used) {
+      setLaserRejectionCard(true);
+    } else if (!houseFiveData.cage_open) {
+      axios.post("/api/cageOpen").then((res) => {
+        setHouseFiveData(res.data[0]);
+        setCageCard(true);
+      });
+    }
+  };
+
+  const toggleCageCard = () => {
+    setCageCard(false)
+    setCageCardTwo(true)
   }
 
   const toggleGoDown = () => {
@@ -192,24 +197,32 @@ function HouseFive(props) {
   };
 
   const toggleWitch = () => {
-    if (houseFiveData.glasses_used === true && houseFiveData.mirror_used === false) {
-      setLaserRejectionCard(true)
+    if (
+      houseFiveData.glasses_used === true &&
+      houseFiveData.mirror_used === false
+    ) {
+      setLaserRejectionCard(true);
     } else {
-      setWitchCard(true)
+      setWitchCard(true);
     }
-  }
+  };
 
   const toggleMirror = () => {
-    setMirrorCard(false)
-    setMirrorCardTwo(true)
-  }
+    setMirrorCard(false);
+    setMirrorCardTwo(true);
+  };
+
+  const toggleMirrorTwo = () => {
+    setMirrorCardTwo(false);
+    setMirrorCardThree(true);
+  };
 
   const toggleUnicorn = () => {
-    axios.post("/api/unicornGone").then(res => {
-      setHouseFiveData(res.data[0])
-      setUnicornCard(true)
-    })
-  }
+    axios.post("/api/unicornGone").then((res) => {
+      setHouseFiveData(res.data[0]);
+      setUnicornCard(true);
+    });
+  };
 
   return isLoading ? (
     <Loading />
@@ -652,6 +665,7 @@ function HouseFive(props) {
                   ? "fly-div"
                   : "fly-div-closed"
               }`}
+              onClick={() => setFlyCard(true)}
             >
               <div className="fly-wing-left"></div>
               <div className="fly-body">
@@ -792,7 +806,8 @@ function HouseFive(props) {
                 houseFiveData.cage_open && !houseFiveData.unicorn_gone
                   ? "unicorn"
                   : "unicorn-closed"
-              }`} onClick={toggleUnicorn}
+              }`}
+              onClick={toggleUnicorn}
             ></div>
           </div>
           <div className="cage-div">
@@ -988,321 +1003,341 @@ function HouseFive(props) {
             </div>
           </div>
         </div>
-        <Card
-          className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
-        >
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="answer-card-description"
-          >
-            That item is either not useful here or not useful here yet.
-          </Typography>
-          <Button
-            onClick={() => setRejectionCard(false)}
-            variant="contained"
-            color="primary"
-          >
-            CLOSE
-          </Button>
-        </Card>
-        <Card
-          className={`${
-            witchRejectionCard ? "answer-card" : "answer-card-closed"
-          }`}
-        >
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="answer-card-description"
-          >
-            The second you left this entryway the witch would see you. Having
-            heard what she is capable of you decide not to proceed without a
-            solid plan.
-          </Typography>
-          <Button
-            onClick={() => setWitchRejectionCard(false)}
-            variant="contained"
-            color="primary"
-          >
-            CLOSE
-          </Button>
-        </Card>
-        <Card
-          className={`${
-            laserRejectionCard ? "answer-card" : "answer-card-closed"
-          }`}
-        >
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="answer-card-description"
-          >
-            There is no way to get by the laser without getting zapped.
-          </Typography>
-          <Button
-            onClick={() => setLaserRejectionCard(false)}
-            variant="contained"
-            color="primary"
-          >
-            CLOSE
-          </Button>
-        </Card>
-        <Card className={`${fireCard ? "answer-card" : "answer-card-closed"}`}>
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="answer-card-description"
-          >
-            What possible reason could you have to want to burn your hand by
-            touching the blazing fire.
-          </Typography>
-          <Button
-            onClick={() => setFireCard(false)}
-            variant="contained"
-            color="primary"
-          >
-            CLOSE
-          </Button>
-        </Card>
-        <Card className={`${homeCard ? "answer-card" : "answer-card-closed"}`}>
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="answer-card-description"
-          >
-            The miniature home is intricate and detailed. The inside is just as
-            impressive. In fact, its your dream house. Unlike everything else in
-            this place it isn't creepy. You decide to take it with you.
-          </Typography>
-          <Button
-            onClick={() => setHomeCard(false)}
-            variant="contained"
-            color="primary"
-          >
-            CLOSE
-          </Button>
-        </Card>
-        <Card
-          className={`${ingredientCard ? "answer-card" : "answer-card-closed"}`}
-        >
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="answer-card-description"
-          >
-            Yuck!!! You absolutely refuse to touch any of the witch's disgusting
-            ingredients.
-          </Typography>
-          <Button
-            onClick={() => setIngredientCard(false)}
-            variant="contained"
-            color="primary"
-          >
-            CLOSE
-          </Button>
-        </Card>
-        <Card className={`${bookCard ? "answer-card" : "answer-card-closed"}`}>
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="answer-card-description"
-          >
-            You have no interest in dark magic.
-          </Typography>
-          <Button
-            onClick={() => setBookCard(false)}
-            variant="contained"
-            color="primary"
-          >
-            CLOSE
-          </Button>
-        </Card>
-        <Card
-          className={`${glassesCard ? "answer-card" : "answer-card-closed"}`}
-        >
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="answer-card-description"
-          >
-            You put on your glasses realize there was an invisible laser only
-            inches in front of you. Phew! Its a good thing you found this before
-            you decided to proceed.
-          </Typography>
-          <Button
-            onClick={() => setGlassesCard(false)}
-            variant="contained"
-            color="primary"
-          >
-            CLOSE
-          </Button>
-        </Card>
-        <Card
-          className={`${mirrorCard ? "answer-card" : "answer-card-closed"}`}
-        >
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="answer-card-description"
-          >
-            You push the mirror into the laser aiming at the witch. The mirror
-            shatters but first sends a small laser ball flying toward the witch.
-            To your dismay it misses her, instead it hits a green potion on the
-            shelf above her. You cringe as she turns toward you smiling eerily.
-          </Typography>
-          <Button onClick={toggleMirror} variant="contained" color="primary">
-            CLOSE
-          </Button>
-        </Card>
-        <Card
-          className={`${mirrorCardTwo ? "answer-card" : "answer-card-closed"}`}
-        >
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="answer-card-description"
-          >
-            She raises one hand and you find you find you can no longer move.
-            She raises her other hand and a big ball of lightning appears.
-            You're sure this is the end when something green catches you eye. A
-            single drop from the shattered potion oozes off the shelf and hits
-            the witch's outstretched hand. Poof! The witch turns into a fly.
-          </Typography>
-          <Button
-            onClick={() => setMirrorCardTwo(true)}
-            variant="contained"
-            color="primary"
-          >
-            CLOSE
-          </Button>
-        </Card>
-        <Card
-          className={`${cauldronCard ? "answer-card" : "answer-card-closed"}`}
-        >
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="answer-card-description"
-          >
-            You have no idea what vile things the witch has brewed in that
-            cauldron. Touching it isn't worth it.
-          </Typography>
-          <Button
-            onClick={() => setCauldronCard(false)}
-            variant="contained"
-            color="primary"
-          >
-            CLOSE
-          </Button>
-        </Card>
-        <Card className={`${broomCard ? "answer-card" : "answer-card-closed"}`}>
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="answer-card-description"
-          >
-            You decide against taking the broom. It is likely infused with dark
-            magic.
-          </Typography>
-          <Button
-            onClick={() => setBroomCard(false)}
-            variant="contained"
-            color="primary"
-          >
-            CLOSE
-          </Button>
-        </Card>
-        <Card className={`${flyCard ? "answer-card" : "answer-card-closed"}`}>
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="answer-card-description"
-          >
-            Now that the witch is a fly, she can do no further harm. You are
-            literally the type of person who couldn't hurt a fly.
-          </Typography>
-          <Button
-            onClick={() => setFlyCard(false)}
-            variant="contained"
-            color="primary"
-          >
-            CLOSE
-          </Button>
-        </Card>
-        <Card className={`${cageCard ? "answer-card" : "answer-card-closed"}`}>
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="answer-card-description"
-          >
-            Picking the lock you open the cage to free the poor frog. The cute
-            little frog jumps out. The fly that was formerly a witch flys too
-            close. A long pink tongue shoots out of the frog's mouth and the fly
-            becomes his meal. Suddenly the frog starts glowing and before your
-            eyes he turns into a unicorn.
-          </Typography>
-          <Button
-            onClick={() => setCageCard(false)}
-            variant="contained"
-            color="primary"
-          >
-            CLOSE
-          </Button>
-        </Card>
-        <Card
-          className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}
-        >
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="answer-card-description"
-          >
-            You slowly creep into the house. You hear the witch cackling and you
-            tremble in fear. Fortunately the entryway hides you from the witches
-            view. It buys you a little time to plan your next move.
-          </Typography>
-          <Button onClick={toggleFirst} variant="contained" color="primary">
-            CLOSE
-          </Button>
-        </Card>
-        <Card className={`${witchCard ? "answer-card" : "answer-card-closed"}`}>
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="answer-card-description"
-          >
-            The witches quick and powerful. She enjoys transforming people into
-            less desirable creatures. She keeps them in cages until she grows
-            bored of them. Engaging her would be a really, really bad idea.
-          </Typography>
-          <Button
-            onClick={() => setWitchCard(false)}
-            variant="contained"
-            color="primary"
-          >
-            CLOSE
-          </Button>
-        </Card>
-        <Card
-          className={`${unicornCard ? "answer-card" : "answer-card-closed"}`}
-        >
-          <Typography
-            variant="h4"
-            color="secondary"
-            className="answer-card-description"
-          >
-            The unicorn bows his head as if to say "thanks", then quickly gallops out of the cottage.
-          </Typography>
-          <Button
-            onClick={() => setUnicornCard(false)}
-            variant="contained"
-            color="primary"
-          >
-            CLOSE
-          </Button>
-        </Card>
       </div>
+      <Card
+        className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          That item is either not useful here or not useful here yet.
+        </Typography>
+        <Button
+          onClick={() => setRejectionCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${
+          witchRejectionCard ? "answer-card" : "answer-card-closed"
+        }`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          The second you left this entryway the witch would see you. Having
+          heard what she is capable of you decide not to proceed without a solid
+          plan.
+        </Typography>
+        <Button
+          onClick={() => setWitchRejectionCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${
+          laserRejectionCard ? "answer-card" : "answer-card-closed"
+        }`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          There is no way to get by the laser without getting zapped.
+        </Typography>
+        <Button
+          onClick={() => setLaserRejectionCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${fireCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          What possible reason could you have to want to burn your hand by
+          touching the blazing fire.
+        </Typography>
+        <Button
+          onClick={() => setFireCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${homeCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          The miniature home is intricate and detailed. The inside is just as
+          impressive. In fact, its your dream house. Unlike everything else in
+          this place it isn't creepy. You decide to take it with you.
+        </Typography>
+        <Button
+          onClick={() => setHomeCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${ingredientCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Yuck!!! You absolutely refuse to touch any of the witch's disgusting
+          ingredients.
+        </Typography>
+        <Button
+          onClick={() => setIngredientCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${bookCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You have no interest in dark magic.
+        </Typography>
+        <Button
+          onClick={() => setBookCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${glassesCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You put on your glasses and realize there was an invisible laser only
+          inches in front of you. Phew! Its a good thing you found this before
+          you decided to proceed.
+        </Typography>
+        <Button
+          onClick={() => setGlassesCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${mirrorCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You push the mirror into the laser aiming at the witch. The mirror
+          shatters but sends a laser ball flying toward her. To your dismay it
+          misses, instead it hits a potion on the shelves.
+        </Typography>
+        <Button onClick={toggleMirror} variant="contained" color="primary">
+          NEXT
+        </Button>
+      </Card>
+      <Card
+        className={`${mirrorCardTwo ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You cringe as she turns toward you smiling eerily. She raises one hand
+          and you can no longer move. She raises her other hand and a ball of
+          lightning appears.
+        </Typography>
+        <Button onClick={toggleMirrorTwo} variant="contained" color="primary">
+          NEXT
+        </Button>
+      </Card>
+      <Card
+        className={`${mirrorCardThree ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You're sure this is the end when something green catches your eye. A
+          single drop from the shattered potion oozes off the shelf and hits the
+          witch's hand. Poof! The witch turns into a fly.
+        </Typography>
+        <Button
+          onClick={() => setMirrorCardThree(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${cauldronCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You have no idea what vile things the witch has brewed in that
+          cauldron. Touching it isn't worth it.
+        </Typography>
+        <Button
+          onClick={() => setCauldronCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${broomCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You decide against taking the broom. It is likely infused with dark
+          magic.
+        </Typography>
+        <Button
+          onClick={() => setBroomCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${flyCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Now that the witch is a fly, she can do no further harm. You are
+          literally the type of person who couldn't hurt a fly.
+        </Typography>
+        <Button
+          onClick={() => setFlyCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${cageCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Picking the lock you open the cage to free the poor frog. The little
+          frog hops out. The fly that was formerly a witch flys too close to the
+          frog.
+        </Typography>
+        <Button onClick={toggleCageCard} variant="contained" color="primary">
+          NEXT
+        </Button>
+      </Card>
+      <Card className={`${cageCardTwo ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          A long pink tongue shoots out of the frog's mouth and the fly becomes
+          the frog's meal. The witch is no more. The frog starts glowing, then
+          turns into a unicorn.
+        </Typography>
+        <Button
+          onClick={() => setCageCardTwo(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You slowly creep into the house. You hear the witch cackling and you
+          tremble in fear. Fortunately the entryway hides you from the witches
+          view. It buys you a little time to plan your next move.
+        </Typography>
+        <Button onClick={toggleFirst} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${witchCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          The witch is quick and powerful. She enjoys transforming people into
+          less desirable creatures. She keeps them in cages until she grows
+          bored of them. Engaging her would be a really, really bad idea.
+        </Typography>
+        <Button
+          onClick={() => setWitchCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${unicornCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          The unicorn bows his head as if to say "thanks", then quickly gallops
+          out of the cottage.
+        </Typography>
+        <Button
+          onClick={() => setUnicornCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
