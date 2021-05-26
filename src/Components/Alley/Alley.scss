@@ -20,7 +20,7 @@
     border-right: solid black 25px;
 
     .alley-middle-left {
-      @include section(30vw);
+      @include section(30%);
       @include center(flex-start);
 
       .alley-market {
@@ -31,8 +31,13 @@
     }
 
     .alley-middle-middle {
-      @include section(40vw);
+      @include section(40%);
       @include center(space-between);
+
+      .cat-div {
+        width: 50%;
+        height: 100%;
+        @include flex(center);
 
       .cat {
         height: 200px;
@@ -274,19 +279,222 @@
           top: 7px;
           right: 13px;
         }
-      }
+      }}
 
       .beggar-div {
         @include center(space-evenly);
         height: 100%;
+        width: 50%;
 
         .beggar {
-          background-image: url("../../Images/Beggar.png");
-          background-size: 100% 100%;
-          height: 75px;
-          width: 75px;
-          cursor: pointer;
+      @include flex(center);
+      position: relative;
+      cursor: pointer;
+      bottom: 25px;
+
+      .beggar-hat {
+        @include flex(center);
+        position: relative;
+        top: 27px;
+        z-index: 3;
+
+        .beggar-hat-top {
+          background-image: linear-gradient(-45deg, transparent 60%, #5A3825 60%);
+          border-radius: 50%;
+          height: 28px;
+          width: 28px;
+          transform: rotate(45deg);
         }
+       
+      }
+
+      .beggar-head {
+        display: flex;
+        justify-content: center;
+
+        .beggar-hair-left {
+          height: 30px;
+          width: 30px;
+          border-radius: 0% 0% 50% 0%;
+          border-right: #5A3825 solid 5px;
+          position: relative;
+          top: 9px;
+          left: 4px;
+          z-index: 3;
+        }
+
+        .beggar-face {
+          height: 40px;
+          width: 30px;
+          background-color: peachpuff;
+          border-radius: 50%;
+          @include flex(space-evenly);
+          border-left: solid .5px;
+           border-right: solid .5px;
+           z-index: 2;
+
+          .beggar-eyes {
+            width: 80%;
+            @include center(space-evenly);
+            position: relative;
+            top: 9px;
+
+            .beggar-eye {
+              width: 9px;
+              height: 6px;
+              border-radius: 50%;
+              background-color: white;
+              @include flex(center);
+
+              .beggar-iris {
+                width: 4.5px;
+                height: 4.5px;
+                border-radius: 50%;
+                background-color: #A1CAF1;
+                @include flex(center);
+
+                .beggar-pupil {
+                  width: 1.85px;
+                  height: 1.85px;
+                  border-radius: 50%;
+                  background-color: black;
+                }
+              }
+            }
+          }
+          .beggar-nose {
+            height: 6px;
+            width: 4px;
+            @include flex(center);
+            border-left: solid 0.5px;
+            border-bottom: solid 0.5px;
+            border-radius: 25% 0% 50% 50%;
+            position: relative;
+            top: 6px;
+
+           
+          }
+
+          .beggar-mouth {
+            height: 10px;
+            width: 10px;
+            border-bottom: red 2px solid;
+            border-radius: 50%;
+            position: relative;
+            bottom: 1px;
+          }
+        }
+
+        .beggar-hair-right {
+          height: 30px;
+          width: 30px;
+          border-radius: 0% 0% 0% 50%;
+          border-left: #5A3825 solid 4px;
+          position: relative;
+          top: 10px;
+          right: 3px;
+          z-index: 3;
+        }
+      }
+      .beggar-body {
+        @include flex(flex-start);
+        .beggar-neck {
+          height: 8px;
+          width: 10px;
+          background-color: peachpuff;
+          position: relative;
+          bottom: 2px;
+          border-radius: 0% 0% 50% 50%;
+          z-index: 1;
+        }
+        .beggar-arms {
+          display: flex;
+          justify-content: center;
+          position: relative;
+          bottom: 5px;
+          .beggar-arm-left {
+            height: 25px;
+            width: 5px;
+            background-image: linear-gradient(skyblue 40%, peachpuff 40%);
+            transform: rotate(45deg);
+            @include flex(flex-end);
+            position: relative;
+            right: 14px;
+            z-index: 1;
+
+            .beggar-hand {
+              width: 8px;
+              height: 6px;
+              background-color: peachpuff;
+              border-radius: 50%;
+            }
+          }
+          .beggar-arm-right {
+            height: 25px;
+            width: 5px;
+            background-image: linear-gradient(skyblue 40%, peachpuff 40%);
+            transform: rotate(-45deg);
+            @include flex(flex-end);
+            position: relative;
+            left: 12px;
+            z-index: 1;
+
+            .beggar-hand {
+              width: 8px;
+              height: 6px;
+              background-color: peachpuff;
+              border-radius: 50%;
+            }
+          }
+        }
+        .beggar-dress {
+          width: 40px;
+          height: 20px;
+          background-color: skyblue;
+          border-radius: 50% 0% 0% 50%;
+          transform: rotate(90deg);
+          position: relative;
+          bottom: 25px;
+          
+        }
+
+        .beggar-legs {
+          @include center(space-evenly);
+          width: 30px;
+
+          .beggar-leg-left {
+            height: 12px;
+            width: 5px;
+            background-color: peachpuff;
+            @include flex(flex-end);
+            bottom: 17px;
+
+            .beggar-foot {
+              height: 5px;
+              width: 9px;
+              background-color: chocolate;
+              position: relative;
+              top: 5px;
+            }
+          }
+
+          .beggar-leg-right {
+            height: 12px;
+            width: 5px;
+            background-color: peachpuff;
+            @include flex(flex-end);
+            bottom: 17px;
+            .beggar-foot {
+              height: 5px;
+              width: 9px;
+              background-color: chocolate;
+              position: relative;
+              top: 5px;
+            }
+          }
+        }
+      }
+    }
 
         .mouse {
           @include flex(center);
@@ -408,18 +616,18 @@
               bottom: 1px;
             }
           }
-        }
+        }}
       }
 
       .alley-middle-right {
-         @include section(30vw);
+         @include section(30%);
       @include center(flex-end);
         .thieves-guild-div {
           .alley-thieves-guild {
             @include center(flex-end);
             cursor: pointer;
           }
-        }
+        
       }
     }
   }
