@@ -33,6 +33,40 @@ module.exports = {
     });
   },
 
+  picture: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.picture(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  rag: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.rag(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
   home: (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;

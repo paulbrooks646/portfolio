@@ -7,6 +7,14 @@ module.exports = {
 
     res.status(200).send(stables);
   },
+  getAlley: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const alley = await db.get_alley(id);
+
+    res.status(200).send(alley);
+  },
   getMountain: async (req, res) => {
     const db = req.app.get("db");
 
@@ -246,5 +254,4 @@ module.exports = {
 
     res.status(200).send(town);
   },
-
 };

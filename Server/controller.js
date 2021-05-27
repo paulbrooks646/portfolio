@@ -23,6 +23,14 @@ module.exports = {
     res.status(200).send(cave);
   },
 
+  alleyCoin: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const alley = await db.alley_coin(id);
+    res.status(200).send(alley);
+  },
+
   forestCoin: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -681,6 +689,70 @@ module.exports = {
     });
   },
 
+  useGlassesAlley: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    db.use_glasses_alley(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  useCheese: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    db.use_cheese(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  useCharcoal: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    db.use_charcoal(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  useRock: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    db.use_rock(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
   podThrown: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -758,5 +830,19 @@ module.exports = {
     const { id } = req.session.user;
     const houseFive = await db.unicorn_gone(id);
     res.status(200).send(houseFive);
+  },
+
+  pictureViewed: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const alley = await db.picture_viewed(id);
+    res.status(200).send(alley);
+  },
+
+  coinGiven: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const alley = await db.coin_given(id);
+    res.status(200).send(alley);
   },
 };

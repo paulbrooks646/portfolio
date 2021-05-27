@@ -45,6 +45,7 @@ function Alley(props) {
   const [cheeseCard, setCheeseCard] = useState(false);
   const [coinCard, setCoinCard] = useState(false);
   const [goatPicture, setGoatPicture] = useState(false)
+  const [sympathyCard, setSympathyCard] = useState(false)
 
 
   useEffect(() => {
@@ -62,6 +63,13 @@ function Alley(props) {
       setIsLoading(false);
     });
   }, []);
+
+  const toggleFirst = () => {
+    axios.post("/api/alleyFirst").then((res) => {
+      setAlleyData(res.data[0]);
+      setFirstTimeCard(false);
+    });
+  };
 
   const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
 
@@ -149,13 +157,17 @@ function Alley(props) {
   };
 
   const toggleCoin = () => {
-    axios.post("/api/alleyCoin").then(res => {
-      props.getUser(res.data)
-      axios.get("/api/alley").then(res => {
-        setAlleyData(res.data[0])
-        setCoinCard(true)
+    if (props.user.user.coins < 1) {
+      setSympathyCard(true)
+    } else {
+      axios.post("/api/alleyCoin").then(res => {
+        props.getUser(res.data)
+        axios.get("/api/alley").then(res => {
+          setAlleyData(res.data[0])
+          setCoinCard(true)
+        })
       })
-    })
+    }
   }
 
   const togglePicture = () => {
@@ -222,6 +234,16 @@ function Alley(props) {
    setBeggarCard(!beggarCard);
     setAnswerSix(!answerSix);
   };
+
+  const toggleGiveCoin = () => {
+    axios.post("/api/useCoin").then(res => {
+      props.getUser(res.data)
+      axios.get("/api/alley").then(res => {
+        setAlleyData(res.data[0])
+        setBeggingCard(false)
+      })
+    })
+  }
 
   return isLoading ? (
     <Loading />
@@ -493,7 +515,9 @@ function Alley(props) {
           <ListItem
             onClick={toggleAnswerFive}
             id={`${
-              alleyData.picture_viewed && !alleyData.picture_received ? "list-item" : "list-item-closed"
+              alleyData.picture_viewed && !alleyData.picture_received
+                ? "list-item"
+                : "list-item-closed"
             }`}
           >
             Picture
@@ -501,9 +525,7 @@ function Alley(props) {
           <ListItem onClick={toggleAnswerFour}>Thieves</ListItem>
           <ListItem
             onClick={toggleAnswerSix}
-            id={`${
-              alleyData.glasses_used ? "list-item" : "list-item-closed"
-            }`}
+            id={`${alleyData.glasses_used ? "list-item" : "list-item-closed"}`}
           >
             Thieves Guild
           </ListItem>
@@ -525,7 +547,8 @@ function Alley(props) {
           color="secondary"
           className="answer-card-description"
         >
-          Hard times for a beggar. Brigands rob citizens blind so they have no money to give.
+          Hard times for a beggar. Brigands rob citizens blind so they have no
+          money to give.
         </Typography>
         <Button onClick={toggleAnswerOne} variant="contained" color="primary">
           CLOSE
@@ -533,14 +556,15 @@ function Alley(props) {
       </Card>
       <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
-            Brigands
+          Brigands
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          Bringands are awful. They rob mercilessly and violently, even from the poor. The king is doing nothing to stop or help them.
+          Bringands are awful. They rob mercilessly and violently, even from the
+          poor. The king is doing nothing to stop or help them.
         </Typography>
         <Button onClick={toggleAnswerTwo} variant="contained" color="primary">
           CLOSE
@@ -555,7 +579,8 @@ function Alley(props) {
           color="secondary"
           className="answer-card-description"
         >
-          This is my best friend Squeaky. We take care of each other. He's as hungry as I am.
+          This is my best friend Squeaky. We take care of each other. He's as
+          hungry as I am.
         </Typography>
         <Button onClick={toggleAnswerThree} variant="contained" color="primary">
           CLOSE
@@ -570,7 +595,8 @@ function Alley(props) {
           color="secondary"
           className="answer-card-description"
         >
-          Thieves aren't violent like brigands. Some thieves are even kind. The Magic Thief grants wishes to good children if they truly believe.
+          Thieves aren't violent like brigands. Some thieves are even kind. The
+          Magic Thief grants wishes to good children if they truly believe.
         </Typography>
         <Button onClick={toggleAnswerFour} variant="contained" color="primary">
           CLOSE
@@ -585,7 +611,8 @@ function Alley(props) {
           color="secondary"
           className="answer-card-description"
         >
-          Its a picture of the home I want someday. Do you like it? I can draw you a picture if you find me something to draw with.
+          Its a picture of the home I want someday. Do you like it? I can draw
+          you a picture if you find me something to draw with.
         </Typography>
         <Button onClick={toggleAnswerFive} variant="contained" color="primary">
           CLOSE
@@ -600,13 +627,237 @@ function Alley(props) {
           color="secondary"
           className="answer-card-description"
         >
-          How did you find the door? Please don't tell anyone. The thief who lives there has always showed me kindness.
+          How did you find the door? Please don't tell anyone. The thief who
+          lives there has always been kind and generous to me.
         </Typography>
         <Button onClick={toggleAnswerSix} variant="contained" color="primary">
           CLOSE
         </Button>
-        </Card>
-      
+      </Card>
+      <Card className={`${coinCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You pick up the shiny gold coin.
+        </Typography>
+        <Button
+          onClick={() => setCoinCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${catCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Trying to pet the angry cat is a really bad idea.
+        </Typography>
+        <Button
+          onClick={() => setCatCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${catRejectionCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You'll have to get by the angry cat before you interact with anything
+          beyond.
+        </Typography>
+        <Button
+          onClick={() => setCatRejectionCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${mouseCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Squeak squeak!
+        </Typography>
+        <Button
+          onClick={() => setMouseCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${rockCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You throw the rock full force at the wall by the cat. The noise is so
+          loud that cat bolts by you and out of the alley.
+        </Typography>
+        <Button
+          onClick={() => setRockCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${glassesCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You put on the glasses and clearly see a door at the end of the alley
+          that was disguied before.
+        </Typography>
+        <Button
+          onClick={() => setGlassesCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${charcoalCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Thank you! Now I can draw you that picture I promised.
+        </Typography>
+        <Button
+          onClick={() => setCharcoalCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${cheeseCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          The mouse devours the cheese. The little beggar girl gives you a
+          filthy rag in thanks. Not wanting to offend her you tell her "thanks"
+          and accept the gift.
+        </Typography>
+        <Button
+          onClick={() => setCheeseCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${beggingCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Thanks for scaring the cat off. May I have a coin please?
+        </Typography>
+        <div className="button-div">
+          <Button onClick={toggleGiveCoin} variant="contained" color="primary">
+            YES
+          </Button>
+          <Button
+            onClick={() => setBeggingCard(false)}
+            variant="contained"
+            color="primary"
+          >
+            NO
+          </Button>
+        </div>
+      </Card>
+      <Card
+        className={`${sympathyCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          I'm sorry. It appears you are just as poor as I am.
+        </Typography>
+        <Button
+          onClick={() => setSympathyCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${goatPicture ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Here's you picture. She hands you an impressive picture of a goat.
+        </Typography>
+        <Button
+          onClick={() => setGoatPicture(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${pictureCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Its a very impressive picture of a house.
+        </Typography>
+        <Button
+          onClick={() => setPictureCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You enter the alley. A furious cat has trapped a little beggar girl and a mouse at the end of the alley.
+        </Typography>
+        <Button
+          onClick={toggleFirst}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }

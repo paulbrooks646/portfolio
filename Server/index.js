@@ -57,6 +57,7 @@ app.get("/api/houseThree", reduxController.getHouseThree);
 app.get("/api/houseFour", reduxController.getHouseFour);
 app.get("/api/houseFive", reduxController.getHouseFive);
 app.get("/api/town", reduxController.getTown)
+app.get("/api/alley", reduxController.getAlley)
 
 
 app.post("/api/towerFirst", firstController.towerFirst);
@@ -77,6 +78,7 @@ app.post("/api/houseThreeFirst", firstController.houseThreeFirst);
 app.post("/api/houseFourFirst", firstController.houseFourFirst);
 app.post("/api/houseFiveFirst", firstController.houseFiveFirst);
 app.post("/api/townFirst", firstController.townFirst)
+app.post("/api/alleyFirst", firstController.alleyFirst)
 
 app.post("/api/manure", inventoryController.manure);
 app.post("/api/flowers", inventoryController.flowers);
@@ -122,6 +124,8 @@ app.post("/api/pod", inventoryController.pod);
 app.post("/api/levitation", inventoryController.levitation);
 app.post("/api/invisibility", inventoryController.invisibility);
 app.post("/api/home", inventoryController.home)
+app.post("/api/picture", inventoryController.picture)
+app.post("/api/rag", inventoryController.rag)
 
 app.post("/api/manureCleanPermission", controller.manureCleanPermission);
 app.post("/api/caveCoin", controller.caveCoin);
@@ -186,6 +190,13 @@ app.post("/api/useGlasses", controller.useGlasses)
 app.post("/api/useMirror", controller.useMirror)
 app.post("/api/cageOpen", controller.cageOpen)
 app.post("/api/unicornGone", controller.unicornGone)
+app.post("/api/alleyCoin", controller.alleyCoin)
+app.post("/api/useRock", controller.useRock)
+app.post("/api/useCharcoal", controller.useCharcoal)
+app.post("/api/useCheese", controller.useCheese)
+app.post("/api/useGlassesAlley, controller.useGlassesAlley")
+app.post("/api/coinGiven", controller.coinGiven)
+app.post("/api/pictureViewed", controller.pictureViewed)
 
 app.use(express.static(__dirname + "/../build"));
 

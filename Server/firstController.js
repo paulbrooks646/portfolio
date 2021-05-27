@@ -7,6 +7,14 @@ module.exports = {
     res.status(200).send(tower);
   },
 
+  alleyFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const alley = await db.alley_first(id);
+    res.status(200).send(alley);
+  },
+
   dragonFirst: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
