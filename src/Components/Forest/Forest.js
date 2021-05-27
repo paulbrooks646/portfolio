@@ -44,6 +44,7 @@ function Forest(props) {
   const [inventoryOpen, setInventoryOpen] = useState(false);
   const [forestData, setForestData] = useState(false);
   const [bowCard, setBowCard] = useState(false);
+  
 
   useEffect(() => {
     axios.get("/api/forest").then((res) => {
