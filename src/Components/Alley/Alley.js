@@ -20,8 +20,8 @@ function Alley(props) {
   const [answerTwo, setAnswerTwo] = useState(false);
   const [answerThree, setAnswerThree] = useState(false);
   const [answerFour, setAnswerFour] = useState(false);
-  const [answerFive, setAnswerFive] = useState(false)
-  const [answerSix, setAnswerSix] = useState(false)
+  const [answerFive, setAnswerFive] = useState(false);
+  const [answerSix, setAnswerSix] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [rightLeft, setRightLeft] = useState(false);
   const [leftLeft, setLeftLeft] = useState(false);
@@ -33,8 +33,8 @@ function Alley(props) {
   const [rejectionCard, setRejectionCard] = useState(false);
   const [alleyData, setAlleyData] = useState();
   const [firstTimeCard, setFirstTimeCard] = useState(false);
-  const [catRejectionCard, setCatRejectionCard] = useState(false)
-  const [catCard, setCatCard] = useState(false)
+  const [catRejectionCard, setCatRejectionCard] = useState(false);
+  const [catCard, setCatCard] = useState(false);
   const [mouseCard, setMouseCard] = useState(false);
   const [beggarCard, setBeggarCard] = useState(false);
   const [pictureCard, setPictureCard] = useState(false);
@@ -44,9 +44,8 @@ function Alley(props) {
   const [charcoalCard, setCharcoalCard] = useState(false);
   const [cheeseCard, setCheeseCard] = useState(false);
   const [coinCard, setCoinCard] = useState(false);
-  const [goatPicture, setGoatPicture] = useState(false)
-  const [sympathyCard, setSympathyCard] = useState(false)
-
+  const [goatPicture, setGoatPicture] = useState(false);
+  const [sympathyCard, setSympathyCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/alley").then((res) => {
@@ -94,28 +93,43 @@ function Alley(props) {
         props.getInventory(res.data);
         axios.get("/api/alley").then((res) => {
           setAlleyData(res.data[0]);
+          setRockCard(true);
         });
       });
     } else if (item === "charcoal") {
-      axios.post("/api/useCharcoal").then((res) => {
-        props.getInventory(res.data);
-        axios.get("/api/alley").then((res) => {
-          setAlleyData(res.data[0]);
+      if (!alleyData.rock_used) {
+        setRejectionCard(true);
+      } else {
+        axios.post("/api/useCharcoal").then((res) => {
+          props.getInventory(res.data);
+          axios.get("/api/alley").then((res) => {
+            setAlleyData(res.data[0]);
+            setCharcoalCard(true);
+          });
         });
-      })
+      }
     } else if (item === "glasses") {
-      axios.post("/api/useGlassesAlley").then(res => {
-        setAlleyData(res.data[0])
-      })
+      if (!alleyData.rock_used || alleyData.glasses_used) {
+        setRejectionCard(true);
+      } else {
+        axios.post("/api/useGlassesAlley").then((res) => {
+          setAlleyData(res.data[0]);
+          setGlassesCard(true);
+        });
+      }
     } else if (item === "cheese") {
-      axios.post("/api/useCheese").then(res => {
-        props.getInventory(res.data)
-        axios.get("/api/alley").then(res => {
-          setAlleyData(res.data[0])
-        })
-      })
-    }
-      else {
+      if (!alleyData.rock_used) {
+        setRejectionCard(true);
+      } else {
+        axios.post("/api/useCheese").then((res) => {
+          props.getInventory(res.data);
+          axios.get("/api/alley").then((res) => {
+            setAlleyData(res.data[0]);
+            setCheeseCard(true);
+          });
+        });
+      }
+    } else {
       setRejectionCard(true);
     }
   };
@@ -158,55 +172,48 @@ function Alley(props) {
 
   const toggleCoin = () => {
     if (props.user.user.coins < 1) {
-      setSympathyCard(true)
+      setSympathyCard(true);
     } else {
-      axios.post("/api/alleyCoin").then(res => {
-        props.getUser(res.data)
-        axios.get("/api/alley").then(res => {
-          setAlleyData(res.data[0])
-          setCoinCard(true)
-        })
-      })
+      axios.post("/api/alleyCoin").then((res) => {
+        setAlleyData(res.data[0]);
+        axios.post("/api/coin").then((res) => {
+          props.getUser(res.data);
+          setCoinCard(true);
+        });
+      });
     }
-  }
+  };
 
-  const togglePicture = () => {
-    if (alleyData.rock_used) {
-      setPictureCard(true)
-    } else {
-      setCatRejectionCard(true)
-    }
-  }
+ 
 
   const toggleMouse = () => {
     if (alleyData.rock_used) {
-      setMouseCard(true)
+      setMouseCard(true);
     } else {
-      setCatRejectionCard(true)
+      setCatRejectionCard(true);
     }
-  }
+  };
 
   const toggleBeggar = () => {
-    if (alleyData.charcoal_given && !alleyData.picture_received) {
-      axios.post("/api/pictureReceived").then(res => {
-        props.getInventory(res.data)
-        axios.get("/api/alley").then(res => {
-          setAlleyData(res.data[0])
-          setGoatPicture(true)
-        })
-      })
-    }
-   else if (alleyData.rock_used && !alleyData.coin_given) {
-      setBeggingCard(true)
+    if (alleyData.charcoal_used && !alleyData.picture_received) {
+      axios.post("/api/picture").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/alley").then((res) => {
+          setAlleyData(res.data[0]);
+          setGoatPicture(true);
+        });
+      });
+    } else if (alleyData.rock_used && !alleyData.coin_given) {
+      setBeggingCard(true);
     } else if (alleyData.rock_used && alleyData.coin_given) {
-      setBeggarCard(true)
+      setBeggarCard(true);
     } else {
-      setCatRejectionCard(true)
+      setCatRejectionCard(true);
     }
-  }
+  };
 
   const toggleAnswerOne = () => {
-    setBeggarCard(!beggarCard)
+    setBeggarCard(!beggarCard);
     setAnswerOne(!answerOne);
   };
 
@@ -216,7 +223,7 @@ function Alley(props) {
   };
 
   const toggleAnswerThree = () => {
-   setBeggarCard(!beggarCard);
+    setBeggarCard(!beggarCard);
     setAnswerThree(!answerThree);
   };
 
@@ -231,19 +238,19 @@ function Alley(props) {
   };
 
   const toggleAnswerSix = () => {
-   setBeggarCard(!beggarCard);
+    setBeggarCard(!beggarCard);
     setAnswerSix(!answerSix);
   };
 
   const toggleGiveCoin = () => {
-    axios.post("/api/useCoin").then(res => {
-      props.getUser(res.data)
-      axios.get("/api/alley").then(res => {
-        setAlleyData(res.data[0])
-        setBeggingCard(false)
-      })
-    })
-  }
+    axios.post("/api/coinGiven").then((res) => {
+      props.getUser(res.data);
+      axios.get("/api/alley").then((res) => {
+        setAlleyData(res.data[0]);
+        setBeggingCard(false);
+      });
+    });
+  };
 
   return isLoading ? (
     <Loading />
@@ -425,7 +432,7 @@ function Alley(props) {
                   </div>
                 </div>
               </div>
-              <div className="mouse" onClick={() => setMouseCard(true)}>
+              <div className="mouse" onClick={toggleMouse}>
                 <div className="mouse-ear">
                   <div className="mouse-inner-ear"></div>
                 </div>
@@ -512,23 +519,9 @@ function Alley(props) {
           <ListItem onClick={toggleAnswerOne}>Beggar</ListItem>
           <ListItem onClick={toggleAnswerTwo}>Brigands</ListItem>
           <ListItem onClick={toggleAnswerThree}>Mouse</ListItem>
-          <ListItem
-            onClick={toggleAnswerFive}
-            id={`${
-              alleyData.picture_viewed && !alleyData.picture_received
-                ? "list-item"
-                : "list-item-closed"
-            }`}
-          >
-            Picture
-          </ListItem>
+          <ListItem onClick={toggleAnswerFive}>Picture</ListItem>
           <ListItem onClick={toggleAnswerFour}>Thieves</ListItem>
-          <ListItem
-            onClick={toggleAnswerSix}
-            id={`${alleyData.glasses_used ? "list-item" : "list-item-closed"}`}
-          >
-            Thieves Guild
-          </ListItem>
+          <ListItem onClick={toggleAnswerSix}>Thieves Guild</ListItem>
         </List>
         <Button
           onClick={() => setBeggarCard(false)}
@@ -627,8 +620,8 @@ function Alley(props) {
           color="secondary"
           className="answer-card-description"
         >
-          How did you find the door? Please don't tell anyone. The thief who
-          lives there has always been kind and generous to me.
+          The thief who
+          lives there has always been kind and generous to me, so if you find it, don't tell anyone.
         </Typography>
         <Button onClick={toggleAnswerSix} variant="contained" color="primary">
           CLOSE
@@ -842,19 +835,18 @@ function Alley(props) {
           CLOSE
         </Button>
       </Card>
-      <Card className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card
+        className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}
+      >
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          You enter the alley. A furious cat has trapped a little beggar girl and a mouse at the end of the alley.
+          You enter the alley. A furious cat has trapped a little beggar girl
+          and a mouse at the end of the alley.
         </Typography>
-        <Button
-          onClick={toggleFirst}
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleFirst} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>

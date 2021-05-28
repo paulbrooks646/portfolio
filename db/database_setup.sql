@@ -77,7 +77,7 @@ values ($1, false, true);
 insert into housefive (user_id, glasses_used, mirror_used, house_taken, unicorn_gone, cage_open, first_time)
 values ($1, false, false, false, false, false, true);
 
-insert into alley (user_id, glasses_used, rock_used, charcoal_used, cheese_used, rag_received, picture_received, coin_given, cage_open, coin_taken, first_time)
-values ($1, false, false, false, false, false, false, false, false, false, true);
+insert into alley (user_id, glasses_used, rock_used, charcoal_used, cheese_used, picture_received, coin_given, coin_taken, first_time)
+values ($1, false, false, false, false, false, false, false, true);
 
 

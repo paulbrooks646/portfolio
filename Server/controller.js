@@ -689,20 +689,11 @@ module.exports = {
     });
   },
 
-  useGlassesAlley: (req, res) => {
+  useGlassesAlley: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
-    db.use_glasses_alley(id).then((inventory) => {
-      let newArr = [];
-
-      for (let key in inventory[0]) {
-        if (inventory[0][key] === true) {
-          newArr.push(key);
-        }
-      }
-
-      res.status(200).send(newArr);
-    });
+    const alley = await db.use_glasses_alley(id)
+    res.status(200).send(alley)
   },
 
   useCheese: (req, res) => {
@@ -832,17 +823,20 @@ module.exports = {
     res.status(200).send(houseFive);
   },
 
-  pictureViewed: async (req, res) => {
-    const db = req.app.get("db");
-    const { id } = req.session.user;
-    const alley = await db.picture_viewed(id);
-    res.status(200).send(alley);
-  },
-
   coinGiven: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
-    const alley = await db.coin_given(id);
-    res.status(200).send(alley);
+    const { coins } = req.session.user;
+    db.coin_given(id);
+    const payCoin = coins - 1;
+    const user = await db.coin(id, payCoin);
+    req.session.user = {
+      id: user[0].id,
+      name: user[0].name,
+      coins: user[0].coins,
+      last: user[0].last,
+    };
+
+    res.status(200).send(req.session.user);
   },
 };

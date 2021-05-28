@@ -194,9 +194,8 @@ app.post("/api/alleyCoin", controller.alleyCoin)
 app.post("/api/useRock", controller.useRock)
 app.post("/api/useCharcoal", controller.useCharcoal)
 app.post("/api/useCheese", controller.useCheese)
-app.post("/api/useGlassesAlley, controller.useGlassesAlley")
+app.post("/api/useGlassesAlley", controller.useGlassesAlley)
 app.post("/api/coinGiven", controller.coinGiven)
-app.post("/api/pictureViewed", controller.pictureViewed)
 
 app.use(express.static(__dirname + "/../build"));
 

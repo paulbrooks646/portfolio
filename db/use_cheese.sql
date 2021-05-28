@@ -3,7 +3,7 @@ set cheese_used = true
 where user_id = $1;
 
 update inventory
-set cheese = false
+set cheese = false, rag = true
 where user_id = $1;
 
 select * from inventory
