@@ -80,4 +80,6 @@ values ($1, false, false, false, false, false, true);
 insert into alley (user_id, glasses_used, rock_used, charcoal_used, cheese_used, picture_received, coin_given, coin_taken, first_time)
 values ($1, false, false, false, false, false, false, false, true);
 
+insert into thieves (user_id, rag_used, candy_used, toy_used, shoes_used, blanket_used, chest_used, cloak_received, pick_received, brigands_stopped, master_thief, first_time)
+
 

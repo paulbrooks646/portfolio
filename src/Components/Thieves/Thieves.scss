@@ -1,102 +1,294 @@
 @import "../mixins";
 
-.thieves-body {
-  background-image: url("../../Images/Snow.png");
-  background-size: 100% 100%;
+.thieves-middle-left {
+  width: 40vw;
+  height: 27.5vh;
+  @include center(flex-start);
+  position: absolute;
+  top: 45vh;
+  left: 0px;
 
-  .thieves-top {
-    @include row(35vh);
-    background-image: url("../../Images/Shelves.jpg");
-    background-size: 33% 100%;
-    background-position: center center;
-    justify-content: center;
-
-    .thieves-sign {
-      height: 80px;
-      width: 300px;
-      font-size: 30px;
-      @include flex(center);
-      border: solid;
-      background-color: white;
-
-      .thieves-anti {
-        position: absolute;
-        color: red;
-        font-style: italic;
-      }
-    }
-  }
-
-  .thieves-middle {
-    background-image: url("../../Images/Floor.png");
-    @include row(20vh);
-
-    .thieves-middle-left {
-      @include section(40vw);
-      @include center(flex-start);
-
-      .thieves-alley {
-        @include center(space-evenly);
-        cursor: pointer;
-      }
-    }
-
-    .thieves-middle-middle {
-      @include section(20vw);
-    }
-
-    .thieves-middle-right {
-      @include section(40vw);
-      @include center(center);
-
-      .thieves-thief {
-        background-image: url("../../Images//Thief.png");
-        background-size: 100% 100%;
-        height: 150px;
-        width: 100px;
-      }
-    }
-  }
-
-  .thieves-bottom {
-    @include row(35vh);
+  .thieves-alley {
     @include center(space-evenly);
-    background-image: url("../../Images/Floor.png");
+    cursor: pointer;
+  }
+}
 
-    .thieves-bottom-left {
-      @include section(40vw);
-      @include center(center);
+.thieves-middle-middle {
+  width: 20vw;
+  height: 27.5vh;
+  @include flex(flex-end);
+  position: absolute;
+  top: 45vh;
+  left: 40vw;
+}
 
-      .thieves-dining {
-        background-image: url("../../Images/Dining.png");
-        background-size: 100% 100%;
-        height: 200px;
-        width: 200px;
+.thieves-middle-right {
+  width: 40vw;
+  height: 27.5vh;
+  @include flex(center);
+  position: absolute;
+  top: 45vh;
+  left: 60vw;
+
+  .thief {
+    @include flex(center);
+    position: relative;
+    cursor: pointer;
+
+    .thief-hat {
+      border-radius: 50% 50% 25% 25%;
+      height: 50px;
+      width: 50px;
+      border: green 4px solid;
+      position: relative;
+      z-index: 3;
+      top: 3px;
+    }
+
+    .thief-head {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      bottom: 42px;
+
+      .thief-hair-left {
+        height: 30px;
+        width: 25px;
+        border-right: #b7410e solid 7px;
+        position: relative;
+        top: 10px;
+        left: 4px;
+        z-index: 1;
+      }
+
+      .thief-face {
+        height: 42px;
+        width: 42px;
+        background-color: #eebb99;
+        border-radius: 50%;
+        @include flex(center);
+        border-bottom: black solid 1px;
+
+        .thief-hair-top-left {
+          height: 100px;
+          width: 28px;
+          border-radius: 50%;
+          background-image: linear-gradient(transparent 20%, #b7410e 20%);
+          z-index: 2;
+          transform: rotate(-35deg);
+          position: relative;
+          right: 12px;
+          bottom: 2px;
+        }
+
+        .thief-hair-top-right {
+          height: 100px;
+          width: 28px;
+          border-radius: 50%;
+          background-image: linear-gradient(transparent 20%, #b7410e 20%);
+          transform: rotate(25deg);
+          position: relative;
+          left: 9px;
+          z-index: 2;
+          bottom: 14px;
+        }
+
+        .thief-eyes {
+          width: 80%;
+          @include center(space-evenly);
+          position: relative;
+          bottom: 11px;
+
+          .thief-eye {
+            width: 13px;
+            height: 11px;
+            border-radius: 50%;
+            background-color: white;
+            @include flex(center);
+
+            .thief-iris {
+              width: 9px;
+              height: 7px;
+              border-radius: 50%;
+              background-color: #a1caf1;
+              @include flex(center);
+
+              .thief-pupil {
+                height: 2.5px;
+                width: 3.5px;
+                border-radius: 50%;
+                border: black solid 1.8px;
+              }
+            }
+          }
+        }
+        .thief-nose {
+          height: 18px;
+          width: 8px;
+          @include flex(center);
+          border-left: solid 0.5px;
+          border-right: solid 0.5px;
+          border-bottom: solid 0.5px;
+          border-radius: 0% 0% 50% 50%;
+          position: relative;
+          bottom: 7px;
+        }
+
+        .thief-mouth {
+          height: 20px;
+          width: 18px;
+          border-bottom: red 3px solid;
+          border-radius: 50%;
+          position: relative;
+          bottom: 5px;
+        }
+      }
+
+      .thief-hair-right {
+        height: 30px;
+        width: 25px;
+        border-radius: 0%;
+        border-left: #b7410e solid 7px;
+        position: relative;
+        top: 10px;
+        right: 4px;
+        z-index: 1;
       }
     }
 
-    .thieves-bottom-middle {
-      @include section(20vw);
-      @include flex(center);
+    .thief-body {
+      @include flex(flex-start);
 
-      .thieves-rocks {
-        background-image: url("../../Images/Rocks.png");
-        background-size: 100% 100%;
-        height: 200px;
-        width: 200px;
+      .thief-upper-neck {
+        height: 5px;
+        width: 20px;
+
+        z-index: 5;
+        border-radius: 50%;
+        border-bottom: 1px black solid;
+        position: relative;
+        bottom: 49px;
+      }
+      .thief-neck {
+        height: 15px;
+        width: 20px;
+        background-color: #eebb99;
+        position: relative;
+        bottom: 50px;
+        border-radius: 30% 30% 50% 50%;
+        z-index: 4;
+      }
+
+      .thief-dress {
+        width: 50px;
+        height: 100px;
+        background-color: green;
+        border-radius: 25% 25% 0% 0%;
+        position: relative;
+        bottom: 62px;
+        z-index: 2;
+        @include flex(flex-start);
+
+        .thief-shirt {
+          width: 30px;
+          height: 60px;
+          background-color: black;
+          border-radius: 50% 50% 0% 0%;
+          z-index: 0;
+        }
+
+        .thief-pants-div {
+          width: 30px;
+          height: 40px;
+          background-color: rgb(132, 132, 179);
+        }
+      }
+
+      .thief-legs {
+        @include center(space-evenly);
+        width: 50px;
+        position: relative;
+        bottom: 62px;
+
+        .thief-leg-left {
+          height: 30px;
+          width: 9px;
+          background-color: #eebb99;
+          @include flex(flex-end);
+          border-radius: 0% 0% 50% 50%;
+
+          .thief-foot {
+            height: 9px;
+            width: 13px;
+            background-color: silver;
+            position: relative;
+            z-index: 1;
+            border-radius: 50% 50% 0% 0%;
+          }
+        }
+
+        .thief-leg-right {
+          height: 30px;
+          width: 9px;
+          background-color: #eebb99;
+          @include flex(flex-end);
+          border-radius: 0% 0% 50% 50%;
+
+          .thief-foot {
+            height: 9px;
+            width: 13px;
+            background-color: silver;
+            position: relative;
+            z-index: 1;
+            border-radius: 50% 50% 0% 0%;
+          }
+        }
       }
     }
+  }
+}
 
-    .thieves-bottom-right {
-      @include section(40vw);
-      @include flex(center);
+.thieves-bottom-left {
+  width: 40vw;
+  height: 27.5vh;
+  @include flex(center);
+  position: absolute;
+  top: 72.5vh;
+  left: 0px;
+}
 
-      .thieves-table {
-        background-image: url("../../Images/Table.png");
-        background-size: 100% 100%;
-        height: 250px;
-        width: 275px;
-      }
-    }
+.thieves-bottom-middle {
+  width: 20vw;
+  height: 27.5vh;
+  @include flex(flex-end);
+  position: absolute;
+  top: 72.5vh;
+  left: 40vw;
+}
+
+.thieves-bottom-right {
+  width: 40vw;
+  height: 27.5vh;
+  @include flex(center);
+  position: absolute;
+  top: 72.5vh;
+  left: 60vw;
+}
+
+.thieves-sign {
+  height: 80px;
+  width: 300px;
+  font-size: 30px;
+  @include flex(center);
+  border: solid;
+  background-color: white;
+  position: absolute;
+  top: 10vh;
+
+  .thieves-anti {
+    position: absolute;
+    color: red;
+    font-style: italic;
   }
 }
