@@ -23,6 +23,22 @@ module.exports = {
     res.status(200).send(cave);
   },
 
+  valleyCoin: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const valley = await db.valley_coin(id);
+    res.status(200).send(valley);
+  },
+
+  valleyCoinTwo: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const valley = await db.valley_coin_two(id);
+    res.status(200).send(valley);
+  },
+
   alleyCoin: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -535,6 +551,40 @@ module.exports = {
     const { id } = req.session.user;
 
     db.use_bone(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  useShield: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_shield(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+   usePicture: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_picture(id).then((inventory) => {
       let newArr = [];
 
       for (let key in inventory[0]) {

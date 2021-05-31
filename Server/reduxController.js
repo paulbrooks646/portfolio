@@ -23,6 +23,14 @@ module.exports = {
 
     res.status(200).send(thieves);
   },
+  getValley: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const valley = await db.get_valley(id);
+
+    res.status(200).send(valley);
+  },
   getMountain: async (req, res) => {
     const db = req.app.get("db");
 

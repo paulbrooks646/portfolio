@@ -83,4 +83,7 @@ values ($1, false, false, false, false, false, false, false, true);
 insert into thieves (user_id, rag_used, candy_used, toy_used, shoes_used, blanket_used, chest_used, cloak_received, pick_received, brigands_stopped, master_thief, coins_received, first_time)
 values ($1, false, false, false, false, false, false, false, false, false, false, false, true);
 
+insert into valley (user_id, shield_used, picture_used, hair_taken, coin_taken, coin_two_taken, first_time)
+values ($1, false, false, false, false, false, true);
+
 
