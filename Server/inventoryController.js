@@ -16,6 +16,40 @@ module.exports = {
     });
   },
 
+  pick: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.pick(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  cloak: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.cloak(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
   sulfur: (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;

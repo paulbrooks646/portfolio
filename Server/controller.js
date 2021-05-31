@@ -72,6 +72,40 @@ module.exports = {
     });
   },
 
+  useRag: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_rag(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  useChest: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_chest(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
   useBlanket: (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -692,8 +726,8 @@ module.exports = {
   useGlassesAlley: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
-    const alley = await db.use_glasses_alley(id)
-    res.status(200).send(alley)
+    const alley = await db.use_glasses_alley(id);
+    res.status(200).send(alley);
   },
 
   useCheese: (req, res) => {
@@ -821,6 +855,13 @@ module.exports = {
     const { id } = req.session.user;
     const houseFive = await db.unicorn_gone(id);
     res.status(200).send(houseFive);
+  },
+
+  masterThief: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+    const thieves = await db.master_thief(id);
+    res.status(200).send(thieves);
   },
 
   coinGiven: async (req, res) => {

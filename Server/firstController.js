@@ -7,6 +7,14 @@ module.exports = {
     res.status(200).send(tower);
   },
 
+  thievesFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const thieves = await db.thieves_first(id);
+    res.status(200).send(thieves);
+  },
+
   alleyFirst: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;

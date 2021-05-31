@@ -15,6 +15,14 @@ module.exports = {
 
     res.status(200).send(alley);
   },
+  getThieves: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const thieves = await db.get_thieves(id);
+
+    res.status(200).send(thieves);
+  },
   getMountain: async (req, res) => {
     const db = req.app.get("db");
 
