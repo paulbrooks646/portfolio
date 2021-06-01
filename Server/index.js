@@ -82,6 +82,7 @@ app.post("/api/houseFiveFirst", firstController.houseFiveFirst);
 app.post("/api/townFirst", firstController.townFirst)
 app.post("/api/alleyFirst", firstController.alleyFirst)
 app.post("/api/thievesFirst", firstController.thievesFirst)
+app.post("/api/valleyFirst", firstController.valleyFirst)
 
 app.post("/api/manure", inventoryController.manure);
 app.post("/api/flowers", inventoryController.flowers);

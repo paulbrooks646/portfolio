@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
 import axios from "axios";
 import "./Glade.scss";
 import Character from "../Character/Character";
@@ -9,6 +9,8 @@ import Loading from "../Loading/Loading";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowUpward from "@material-ui/icons/ArrowUpward"
 import { getInventory } from "../../redux/inventoryReducer";
@@ -18,7 +20,12 @@ function Glade(props) {
  const [answerTwo, setAnswerTwo] = useState(false);
  const [answerThree, setAnswerThree] = useState(false);
  const [answerFour, setAnswerFour] = useState(false);
- const [answerFive, setAnswerFive] = useState(false);
+  const [answerFive, setAnswerFive] = useState(false);
+   const [answerSix, setAnswerSix] = useState(false);
+   const [answerSeven, setAnswerSeven] = useState(false);
+   const [answerEight, setAnswerEight] = useState(false);
+   const [answerNine, setAnswerNine] = useState(false);
+   const [answerTen, setAnswerTen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [upCharacter, setUpCharacter] = useState(false)
   const [rightCharacter, setRightCharacter] = useState(false)
@@ -29,13 +36,14 @@ function Glade(props) {
   const [rejectionCard, setRejectionCard] = useState(false)
   const [gladeData, setGladeData] = useState()
   const [inventoryOpen, setInventoryOpen] = useState(false)
+  const [firstTimeCard, setFirstTimeCard] = useState(false)
+  const [druid, setDruid] = useState(false)
 
  useEffect(() => {
-   // if (!props.user.user.newgame) {
-   //   setNewgameCard(false);
-
-   // }
-   axios.get("/api/nest").then((res) => {
+   axios.get("/api/glade").then((res) => {
+     if (res.data[0].first_time) {
+       setFirstTimeCard(true)
+     }
      setGladeData(res.data[0]);
 
      if (props.user.user.last === "valley") {
@@ -113,9 +121,61 @@ const toggleGoUp = () => {
     setUpCharacter(false);
     setUpUp(true);
   }
-};
-
+  };
   
+  const toggleDruid = () => {
+    setDruid(!druid)
+  }
+
+   const toggleAnswerOne = () => {
+     toggleDruid();
+     setAnswerOne(!answerOne);
+   };
+
+   const toggleAnswerTwo = () => {
+     toggleDruid();
+     setAnswerTwo(!answerTwo);
+   };
+
+   const toggleAnswerThree = () => {
+     toggleDruid();
+     setAnswerThree(!answerThree);
+   };
+
+   const toggleAnswerFour = () => {
+     toggleDruid();
+     setAnswerFour(!answerFour);
+   };
+
+   const toggleAnswerFive = () => {
+     toggleDruid();
+     setAnswerFive(!answerFive);
+   };
+
+   const toggleAnswerSix = () => {
+     toggleDruid();
+     setAnswerSix(!answerSix);
+   };
+
+   const toggleAnswerSeven = () => {
+     toggleDruid();
+     setAnswerSeven(!answerSeven);
+   };
+
+   const toggleAnswerEight = () => {
+     toggleDruid();
+     setAnswerEight(!answerEight);
+   };
+
+   const toggleAnswerNine = () => {
+     toggleDruid();
+     setAnswerNine(!answerNine);
+  };
+  
+  const toggleAnswerTen = () => {
+    toggleDruid();
+    setAnswerTen(!answerTen);
+  };
 
   return isLoading ? (
     <Loading />
@@ -145,7 +205,9 @@ const toggleGoUp = () => {
       </div>
       <div className="glade-body">
         <div className="glade-top">
-          <div className="glade-top-left"></div>
+          <div className="glade-top-left">
+            <div className="glade-upper-wall"></div>
+          </div>
           <div className="glade-top-middle">
             <div className="glade-maze" onClick={toggleGoUp}>
               <ArrowUpward />
@@ -175,7 +237,47 @@ const toggleGoUp = () => {
         </div>
         <div className="glade-middle">
           <div className="glade-middle-left">
-            <div className="unicorn"></div>
+            <div className="druid" onClick={toggleDruid}>
+              <div className="druid-hat"></div>
+              <div className="druid-head">
+                <div className="druid-hair-left"></div>
+                <div className="druid-face">
+                  <div className="druid-hair-top-left"></div>
+                  <div className="druid-hair-top-right"></div>
+                  <div className="druid-eyes">
+                    <div className="druid-eye">
+                      <div className="druid-iris">
+                        <div className="druid-pupil"></div>
+                      </div>
+                    </div>
+                    <div className="druid-eye">
+                      <div className="druid-iris">
+                        <div className="druid-pupil"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="druid-nose"></div>
+                  <div className="druid-mouth"></div>
+                </div>
+                <div className="druid-hair-right"></div>
+              </div>
+              <div className="druid-body">
+                <div className="druid-upper-neck"></div>
+                <div className="druid-neck"></div>
+                <div className="druid-dress">
+                  <div className="druid-shirt"></div>
+                  <div className="druid-pants-div"></div>
+                </div>
+                <div className="druid-legs">
+                  <div className="druid-leg-left">
+                    <div className="druid-foot"></div>
+                  </div>
+                  <div className="druid-leg-right">
+                    <div className="druid-foot"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="glade-middle-middle"></div>
           <div className="glade-middle-right">
@@ -205,7 +307,9 @@ const toggleGoUp = () => {
           </div>
         </div>
         <div className="glade-bottom">
-          <div className="glade-bottom-left"></div>
+          <div className="glade-bottom-left">
+            <div className="glade-lower-wall"></div>
+          </div>
           <div className="glade-bottom-middle"></div>
           <div className="glade-bottom-right"></div>
         </div>
@@ -228,11 +332,200 @@ const toggleGoUp = () => {
           CLOSE
         </Button>
       </Card>
+      <Card className={`${druid ? "component-card" : "component-card-closed"}`}>
+        <Typography variant="h5" color="primary">
+          What do you need to know?
+        </Typography>
+        <List className="component-list">
+          <ListItem onClick={toggleAnswerOne}>Beggar</ListItem>
+          <ListItem onClick={toggleAnswerTwo}>Brigands</ListItem>
+          <ListItem onClick={toggleAnswerThree}>Dragon</ListItem>
+          <ListItem onClick={toggleAnswerFour}>Fire Cloak</ListItem>
+          <ListItem onClick={toggleAnswerFive}>Magic Druid</ListItem>
+          <ListItem onClick={toggleAnswerSix}>Master Druid</ListItem>
+          <ListItem onClick={toggleAnswerSeven}>Druid</ListItem>
+          <ListItem onClick={toggleAnswerEight}>Thieves</ListItem>
+          <ListItem onClick={toggleAnswerNine}>Becoming a Druid</ListItem>
+          <ListItem onClick={toggleAnswerTen}>Quest</ListItem>
+        </List>
+        <Button onClick={toggleDruid} variant="contained" color="primary">
+          Say Goodbye
+        </Button>
+      </Card>
+      <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary">
+          Beggar
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          She keeps an eye on my entrance and signals me if there is a threat to
+          me or her. I feed her and she sleeps in here at night. She must have
+          liked you if she didn't warn me about you.
+        </Typography>
+        <Button onClick={toggleAnswerOne} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary">
+          Brigand
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          How dare you! I am no brigand. I hurt no one unless threatened.
+          Brigands do not care who they hurt or rob.
+        </Typography>
+        <Button onClick={toggleAnswerTwo} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary">
+          Dragon
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          I don't know how to slay the dragon but I do possess the Fire Cloak.
+          It could definitely help.
+        </Typography>
+        <Button onClick={toggleAnswerThree} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary">
+          The Fire Cloak
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          It protects the user from heat and fire. I would only give it to a
+          master druid who has completed a quest.
+        </Typography>
+        <Button onClick={toggleAnswerFour} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerFive ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary">
+          The Magic Druid
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          If a child writes something they wish for on a piece of paper, the
+          Magic Druid grants their wish and leaves what they wished for on the
+          piece of paper.
+        </Typography>
+        <Button onClick={toggleAnswerFive} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerSix ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary">
+          Master Druid
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          A master druid can open locks an ordinary druid can't and are eligible
+          for quests. One must prove themself before I would delcare them a
+          master druid.
+        </Typography>
+        <Button onClick={toggleAnswerSix} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+
+      <Card className={`${answerSeven ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary">
+          Druid
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          I come from a long line of thieves. I was trained young and loved what
+          I did until I saw the poverty of some targets. Once the brigand's
+          arrived in the area everyone got poorer. I couldn't take from those
+          who had so little. My parents died sometime ago. The other thieves
+          left when people had nothing to steal.
+        </Typography>
+        <Button onClick={toggleAnswerSeven} variant="contained" color="primary">
+          NEXT
+        </Button>
+      </Card>
+      <Card className={`${answerEight ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary">
+          Thieves
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          The thieves of this guild have never been violent. Used to be that
+          thieves would rob from anybody but things have changed.
+        </Typography>
+        <Button onClick={toggleAnswerEight} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerNine ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary">
+          Becoming a Druid
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          If you will take on the mantel of Magic Druid. I will dub you a druid,
+          and give you a lock pick and coins. If you grant four wishes without
+          being heard, I will dub you master druid and give you a quest.
+        </Typography>
+        <Button onClick={toggleAnswerNine} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerTen ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary">
+          Quest
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          The quest is two-fold. Bring me the gold the brigand's have stolen so
+          I may distribute it to the poor. Then make sure the Brigand's can
+          pillage no more. Do this and I will give you the Fire Cloak.
+        </Typography>
+        <Button onClick={toggleAnswerTen} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory, logoutUser })(
   Glade
 );

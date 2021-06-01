@@ -82,13 +82,19 @@ function Valley(props) {
         });
       });
     } else if (item === "picture") {
-      axios.post("/api/usePicture").then(res => {
-        props.getInventory(res.data)
-        axios.get("/api/valley").then(res => {
-          setValleyData(res.data[0])
-          setPictureCard(true)
+      if (valleyData.shield_used) {
+        axios.post("/api/usePicture").then(res => {
+          props.getInventory(res.data)
+          axios.get("/api/valley").then(res => {
+            setValleyData(res.data[0])
+            setPictureCard(true)
+          })
         })
-      })
+      } else {
+        setRejectionCard(true)
+      }
+    } else {
+      setRejectionCard(true)
     }
   };
 
@@ -143,13 +149,17 @@ function Valley(props) {
   }
 
   const toggleCoin = () => {
-    axios.post("/api/valleyCoin").then(res => {
-      setValleyData(res.data[0])
-      axios.post("/api/coin").then(res => {
-        props.getUser(res.data)
-        setCoinCard(true)
+    if (!valleyData.shield_used) {
+      setPassRejectionCard(true)
+    } else {
+      axios.post("/api/valleyCoin").then(res => {
+        setValleyData(res.data[0])
+        axios.post("/api/coin").then(res => {
+          props.getUser(res.data)
+          setCoinCard(true)
+        })
       })
-    })
+    }
   }
 
    const toggleCoinTwo = () => {
@@ -276,7 +286,7 @@ function Valley(props) {
             {" "}
             <div
               className={`${
-                valleyData.picture_used && !valleyData.coin_taken
+                !valleyData.coin_taken
                   ? "coin"
                   : "coin-closed"
               }`}
@@ -344,7 +354,7 @@ function Valley(props) {
       </Card>
       <Card
         className={`${
-          trollRejectionCard(true) ? "answer-card" : "answer-card-closed"
+          trollRejectionCard ? "answer-card" : "answer-card-closed"
         }`}
       >
         <Typography
@@ -392,7 +402,7 @@ function Valley(props) {
           color="secondary"
           className="answer-card-description"
         >
-          You hide behind your shield a head towards the bridge. You hear a
+          You hide behind your shield and head towards the bridge. You hear a
           large clang and are knocked to the ground. As you get up you see
           disappointment in the troll's eyes. You are now safe to pass.
         </Typography>
@@ -411,7 +421,7 @@ function Valley(props) {
           color="secondary"
           className="answer-card-description"
         >
-          You pick up the greasy, disgusting strand of troll hair.
+          You pick up the greasy, disgusting strand of purple troll hair.
         </Typography>
         <Button
           onClick={() => setHairCard(false)}
