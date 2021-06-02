@@ -12,49 +12,49 @@ import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ArrowForward from "@material-ui/icons/ArrowForward";
-import ArrowUpward from "@material-ui/icons/ArrowUpward"
+import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import { getInventory } from "../../redux/inventoryReducer";
 
 function Glade(props) {
- const [answerOne, setAnswerOne] = useState(false);
- const [answerTwo, setAnswerTwo] = useState(false);
- const [answerThree, setAnswerThree] = useState(false);
- const [answerFour, setAnswerFour] = useState(false);
+  const [answerOne, setAnswerOne] = useState(false);
+  const [answerTwo, setAnswerTwo] = useState(false);
+  const [answerThree, setAnswerThree] = useState(false);
+  const [answerFour, setAnswerFour] = useState(false);
   const [answerFive, setAnswerFive] = useState(false);
-   const [answerSix, setAnswerSix] = useState(false);
-   const [answerSeven, setAnswerSeven] = useState(false);
-   const [answerEight, setAnswerEight] = useState(false);
-   const [answerNine, setAnswerNine] = useState(false);
-   const [answerTen, setAnswerTen] = useState(false);
+  const [answerSix, setAnswerSix] = useState(false);
+  const [answerSeven, setAnswerSeven] = useState(false);
+  const [answerEight, setAnswerEight] = useState(false);
+  const [answerNine, setAnswerNine] = useState(false);
+  const [answerTen, setAnswerTen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [upCharacter, setUpCharacter] = useState(false)
-  const [rightCharacter, setRightCharacter] = useState(false)
-  const [rightUp, setRightUp] = useState(false)
-  const [rightRight, setRightRight] = useState(false)
-  const [upUp, setUpUp] = useState(false)
-  const [upRight, setUpRight] = useState(false)
-  const [rejectionCard, setRejectionCard] = useState(false)
-  const [gladeData, setGladeData] = useState()
-  const [inventoryOpen, setInventoryOpen] = useState(false)
-  const [firstTimeCard, setFirstTimeCard] = useState(false)
-  const [druid, setDruid] = useState(false)
+  const [upCharacter, setUpCharacter] = useState(false);
+  const [rightCharacter, setRightCharacter] = useState(false);
+  const [rightUp, setRightUp] = useState(false);
+  const [rightRight, setRightRight] = useState(false);
+  const [upUp, setUpUp] = useState(false);
+  const [upRight, setUpRight] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false);
+  const [gladeData, setGladeData] = useState();
+  const [inventoryOpen, setInventoryOpen] = useState(false);
+  const [firstTimeCard, setFirstTimeCard] = useState(false);
+  const [druid, setDruid] = useState(false);
 
- useEffect(() => {
-   axios.get("/api/glade").then((res) => {
-     if (res.data[0].first_time) {
-       setFirstTimeCard(true)
-     }
-     setGladeData(res.data[0]);
+  useEffect(() => {
+    axios.get("/api/glade").then((res) => {
+      if (res.data[0].first_time) {
+        setFirstTimeCard(true);
+      }
+      setGladeData(res.data[0]);
 
-     if (props.user.user.last === "valley") {
-       setRightCharacter(true);
-     } else if (props.user.user.last === "maze") {
-       setUpCharacter(true);
-     }
-     setIsLoading(false);
-   });
- }, []);
-  
+      if (props.user.user.last === "valley") {
+        setRightCharacter(true);
+      } else if (props.user.user.last === "maze") {
+        setUpCharacter(true);
+      }
+      setIsLoading(false);
+    });
+  }, []);
+
   const toggleInventoryOpen = () => setInventoryOpen(!inventoryOpen);
 
   const logout = () => {
@@ -77,7 +77,6 @@ function Glade(props) {
       if (props.location.pathname === "/Tower") {
         axios.post("/api/useFlute").then((res) => {
           setGladeData(res.data[0]);
-          ;
         });
       } else {
         setRejectionCard(true);
@@ -93,15 +92,13 @@ function Glade(props) {
     });
   };
 
-   const toggleUp = () => {
-     axios.post("/api/changeLast", { last: "glade" }).then((res) => {
-       props.getUser(res.data).then(() => {
-         props.history.push("/Maze");
-       });
-     });
-   };
-
-
+  const toggleUp = () => {
+    axios.post("/api/changeLast", { last: "glade" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Maze");
+      });
+    });
+  };
 
   const toggleGoRight = () => {
     if (props.user.user.last === "valley") {
@@ -113,65 +110,65 @@ function Glade(props) {
     }
   };
 
-const toggleGoUp = () => {
-   if (props.user.user.last === "valley") {
-    setRightCharacter(false);
-    setRightUp(true);
-  } else if (props.user.user.last === "maze") {
-    setUpCharacter(false);
-    setUpUp(true);
-  }
+  const toggleGoUp = () => {
+    if (props.user.user.last === "valley") {
+      setRightCharacter(false);
+      setRightUp(true);
+    } else if (props.user.user.last === "maze") {
+      setUpCharacter(false);
+      setUpUp(true);
+    }
   };
-  
+
   const toggleDruid = () => {
-    setDruid(!druid)
-  }
-
-   const toggleAnswerOne = () => {
-     toggleDruid();
-     setAnswerOne(!answerOne);
-   };
-
-   const toggleAnswerTwo = () => {
-     toggleDruid();
-     setAnswerTwo(!answerTwo);
-   };
-
-   const toggleAnswerThree = () => {
-     toggleDruid();
-     setAnswerThree(!answerThree);
-   };
-
-   const toggleAnswerFour = () => {
-     toggleDruid();
-     setAnswerFour(!answerFour);
-   };
-
-   const toggleAnswerFive = () => {
-     toggleDruid();
-     setAnswerFive(!answerFive);
-   };
-
-   const toggleAnswerSix = () => {
-     toggleDruid();
-     setAnswerSix(!answerSix);
-   };
-
-   const toggleAnswerSeven = () => {
-     toggleDruid();
-     setAnswerSeven(!answerSeven);
-   };
-
-   const toggleAnswerEight = () => {
-     toggleDruid();
-     setAnswerEight(!answerEight);
-   };
-
-   const toggleAnswerNine = () => {
-     toggleDruid();
-     setAnswerNine(!answerNine);
+    setDruid(!druid);
   };
-  
+
+  const toggleAnswerOne = () => {
+    toggleDruid();
+    setAnswerOne(!answerOne);
+  };
+
+  const toggleAnswerTwo = () => {
+    toggleDruid();
+    setAnswerTwo(!answerTwo);
+  };
+
+  const toggleAnswerThree = () => {
+    toggleDruid();
+    setAnswerThree(!answerThree);
+  };
+
+  const toggleAnswerFour = () => {
+    toggleDruid();
+    setAnswerFour(!answerFour);
+  };
+
+  const toggleAnswerFive = () => {
+    toggleDruid();
+    setAnswerFive(!answerFive);
+  };
+
+  const toggleAnswerSix = () => {
+    toggleDruid();
+    setAnswerSix(!answerSix);
+  };
+
+  const toggleAnswerSeven = () => {
+    toggleDruid();
+    setAnswerSeven(!answerSeven);
+  };
+
+  const toggleAnswerEight = () => {
+    toggleDruid();
+    setAnswerEight(!answerEight);
+  };
+
+  const toggleAnswerNine = () => {
+    toggleDruid();
+    setAnswerNine(!answerNine);
+  };
+
   const toggleAnswerTen = () => {
     toggleDruid();
     setAnswerTen(!answerTen);
@@ -206,8 +203,12 @@ const toggleGoUp = () => {
       <div className="glade-body">
         <div className="glade-top">
           <div className="glade-top-left">
-            <div className="glade-upper-wall"></div>
+            <div className="glade-upper-wall-div">
+              <div className="glade-upper-wall-top"></div>
+              <div className="glade-upper-wall-front"></div>
+            </div>
           </div>
+
           <div className="glade-top-middle">
             <div className="glade-maze" onClick={toggleGoUp}>
               <ArrowUpward />
@@ -237,49 +238,71 @@ const toggleGoUp = () => {
         </div>
         <div className="glade-middle">
           <div className="glade-middle-left">
-            <div className="druid" onClick={toggleDruid}>
-              <div className="druid-hat"></div>
-              <div className="druid-head">
-                <div className="druid-hair-left"></div>
-                <div className="druid-face">
-                  <div className="druid-hair-top-left"></div>
-                  <div className="druid-hair-top-right"></div>
-                  <div className="druid-eyes">
-                    <div className="druid-eye">
-                      <div className="druid-iris">
-                        <div className="druid-pupil"></div>
+            <div className="glade-middle-wall-div">
+              <div className="glade-middle-wall-top"></div>
+              <div className="glade-middle-wall-front"></div>
+              </div>
+              </div>
+            <div className="glade-middle-middle">
+              <div className="druid" onClick={toggleDruid}>
+                <div className="druid-hat"></div>
+                <div className="druid-head">
+                  <div className="druid-hair-left"></div>
+                  <div className="druid-face">
+                    <div className="druid-hair-top-left"></div>
+                    <div className="druid-hair-top-right"></div>
+                    <div className="druid-eyes">
+                      <div className="druid-eye">
+                        <div className="druid-iris">
+                        </div>
+                      </div>
+                      <div className="druid-eye">
+                        <div className="druid-iris">
+                          <div className="druid-pupil"></div>
+                        </div>
                       </div>
                     </div>
-                    <div className="druid-eye">
-                      <div className="druid-iris">
-                        <div className="druid-pupil"></div>
+                    <div className="druid-nose"></div>
+                    <div className="druid-mouth"></div>
+                  </div>
+                  <div className="druid-hair-right"></div>
+                </div>
+                <div className="druid-body">
+                  <div className="druid-upper-neck"></div>
+                  <div className="druid-neck"></div>
+                  <div className="druid-dress">
+                    <div className="druid-shirt">
+                      <div className="druid-arm">
+                        <div className="driud-staff-div">
+                          <div className="druid-staff-top">
+
+                          </div>
+                          <div className="druid-staff-middle"></div>
+                          <div className="druid-staff-bottom"></div>
+                        </div>
+                        <div className="druid-finger-div">
+                          <div className="druid-finger-one"></div>
+                          <div className="druid-finger-two"></div>
+                          <div className="druid-finger-three"></div>
+                          <div className="druid-finger-four"></div>
+                          <div className="druid-finger-five"></div>
+                        </div>
                       </div>
                     </div>
+                    <div className="druid-pants-div"></div>
                   </div>
-                  <div className="druid-nose"></div>
-                  <div className="druid-mouth"></div>
-                </div>
-                <div className="druid-hair-right"></div>
-              </div>
-              <div className="druid-body">
-                <div className="druid-upper-neck"></div>
-                <div className="druid-neck"></div>
-                <div className="druid-dress">
-                  <div className="druid-shirt"></div>
-                  <div className="druid-pants-div"></div>
-                </div>
-                <div className="druid-legs">
-                  <div className="druid-leg-left">
-                    <div className="druid-foot"></div>
-                  </div>
-                  <div className="druid-leg-right">
-                    <div className="druid-foot"></div>
+                  <div className="druid-legs">
+                    <div className="druid-leg-left">
+                      <div className="druid-foot"></div>
+                    </div>
+                    <div className="druid-leg-right">
+                      <div className="druid-foot"></div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            
           </div>
-          <div className="glade-middle-middle"></div>
           <div className="glade-middle-right">
             <div
               className={`${
@@ -308,7 +331,10 @@ const toggleGoUp = () => {
         </div>
         <div className="glade-bottom">
           <div className="glade-bottom-left">
-            <div className="glade-lower-wall"></div>
+            <div className="glade-lower-wall-div">
+              <div className="glade-lower-wall-top"></div>
+              <div className="glade-lower-wall-front"></div>
+            </div>
           </div>
           <div className="glade-bottom-middle"></div>
           <div className="glade-bottom-right"></div>

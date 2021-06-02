@@ -31,6 +31,8 @@ function Valley(props) {
   const [pictureCard, setPictureCard] = useState(false);
   const [coinCard, setCoinCard] = useState(false);
   const [hairCard, setHairCard] = useState(false);
+  const [mirrorCard, setMirrorCard] = useState(false)
+  const [bridgeRejectionCard, setBridgeRejectionCard] = useState(false)
 
   useEffect(() => {
     axios.get("/api/valley").then((res) => {
@@ -170,7 +172,23 @@ function Valley(props) {
          setCoinCard(true);
        });
      });
-   };
+  };
+  
+  const toggleBridge = () => {
+    if (!valleyData.shield_used) {
+      setPassRejectionCard(true)
+    } else if (valleyData.mirror_taken) {
+      setBridgeRejectionCard(true)
+    } else {
+      axios.post("/api/mirror").then(res => {
+        props.getInventory(res.data)
+        axios.get("/api/valley").then(res => {
+          setValleyData(res.data[0])
+          setMirrorCard(true)
+        })
+})
+    }
+  }
 
   return isLoading ? (
     <Loading />
@@ -253,7 +271,7 @@ function Valley(props) {
               <Character />
             </div>
           </div>
-          <div className="valley-middle-middle"></div>
+          <div className="valley-middle-middle" onClick={toggleBridge}></div>
           <div className="valley-middle-right">
             <div
               className={`${
@@ -285,11 +303,7 @@ function Valley(props) {
           <div className="valley-bottom-left">
             {" "}
             <div
-              className={`${
-                !valleyData.coin_taken
-                  ? "coin"
-                  : "coin-closed"
-              }`}
+              className={`${!valleyData.coin_taken ? "coin" : "coin-closed"}`}
               onClick={toggleCoin}
             ></div>
           </div>
@@ -438,10 +452,46 @@ function Valley(props) {
           color="secondary"
           className="answer-card-description"
         >
-          You show the picture of the goat to the troll. Fear fills his eyes and he flees at an impressive speed. Unfortunately you drop your picture into the mud.
+          You show the picture of the goat to the troll. Fear fills his eyes and
+          he flees at an impressive speed. Unfortunately you drop your picture
+          into the mud.
         </Typography>
         <Button
           onClick={() => setPictureCard(false)}
+          className="forest-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${mirrorCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Under the bridge you find a mirror.
+        </Typography>
+        <Button
+          onClick={() => setMirrorCard(false)}
+          className="forest-card-button"
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${bridgeRejectionCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You find nothing else under the bridge.
+        </Typography>
+        <Button
+          onClick={() => setBridgeRejectionCard(false)}
           className="forest-card-button"
           variant="contained"
           color="primary"

@@ -133,6 +133,7 @@ app.post("/api/rag", inventoryController.rag)
 app.post("/api/pick", inventoryController.pick)
 app.post("/api/cloak", inventoryController.cloak)
 app.post("/api/hair", inventoryController.hair)
+app.post("/api/mirror", inventoryController.mirror)
 
 app.post("/api/manureCleanPermission", controller.manureCleanPermission);
 app.post("/api/caveCoin", controller.caveCoin);
