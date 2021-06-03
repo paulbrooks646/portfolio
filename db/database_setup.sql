@@ -86,4 +86,7 @@ values ($1, false, false, false, false, false, false, false, false, false, false
 insert into valley (user_id, shield_used, picture_used, hair_taken, mirror_taken, coin_taken, coin_two_taken, first_time)
 values ($1, false, false, false, false, false, true);
 
+insert into glade (user_id, use_apple, use_mushroom, use_sulfur, magic_user, speed_received, unicorn_freed, cake_given, coin_taken, first_time)
+values ($1, false, false, false, false, false, false, false, false, true);
+
 

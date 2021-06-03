@@ -157,7 +157,7 @@ function Glade(props) {
   const toggleDruid = () => {
     if (!gladeData.cake_given) {
       setDruidRejectionCard(true)
-    } else if (gladeData.sulfur_used && gladeData.apple_used && gladeData.mushroom_used && !gladeData.magic_user) {
+    } else if (gladeData.use_sulfur && gladeData.use_apple && gladeData.use_mushroom && !gladeData.magic_user) {
       axios.post("/api/magicUser").then(res => {
         setGladeData(res.data[0])
         setMagicUserCard(true)
@@ -308,7 +308,7 @@ function Glade(props) {
           <div className="glade-middle-left">
             <div className="glade-middle-wall-div">
               <div className="glade-middle-wall-top"></div>
-              <div className="glade-middle-wall-front"></div>
+              <div className="glade-middle-wall-front" onClick={() => setDoorRejectionCard(true)}></div>
             </div>
           </div>
           <div className="glade-middle-middle">
@@ -471,8 +471,8 @@ function Glade(props) {
           className="answer-card-description"
         >
           Although humanoid, I am no human. I am a druid, a magical being, and
-          one of the three most powerful creatures in the area. My primary
-          responsibiliys is protection magical creatures.
+          one of the three most powerful beings in the area. My primary
+          responsibility is the protection magical creatures.
         </Typography>
         <Button onClick={toggleAnswerTwo} variant="contained" color="primary">
           CLOSE
@@ -612,9 +612,9 @@ function Glade(props) {
           color="secondary"
           className="answer-card-description"
         >
-          I do not associate with humans. The way they live harms magical
-          creatures. On second thought, if you can unblocked the mountain
-          runoff, I will talk to you. Lack of water is hurtful to humans,
+          I associate not with humans. The way they live harms magical
+          creatures. Yet, if you can unblock the mountain
+          runoff, we may speak. Lack of water is hurtful to humans,
           animals and magical creatures.
         </Typography>
         <Button
@@ -773,7 +773,7 @@ function Glade(props) {
           color="secondary"
           className="answer-card-description"
         >
-          Thank you for bringing me the ingredients I asked for. As promised I
+          Thank you for acquiring the ingredients. As promised I
           will give you the ability to use magic. The orb on her staff glows and
           a small ball of blue energy shoots at you. You feel new power course
           through your veins.

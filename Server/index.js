@@ -60,6 +60,7 @@ app.get("/api/town", reduxController.getTown)
 app.get("/api/alley", reduxController.getAlley)
 app.get("/api/thieves", reduxController.getThieves)
 app.get("/api/valley", reduxController.getValley)
+app.get("/api/glade", reduxController.getGlade)
 
 
 app.post("/api/towerFirst", firstController.towerFirst);
@@ -83,6 +84,7 @@ app.post("/api/townFirst", firstController.townFirst)
 app.post("/api/alleyFirst", firstController.alleyFirst)
 app.post("/api/thievesFirst", firstController.thievesFirst)
 app.post("/api/valleyFirst", firstController.valleyFirst)
+app.post("/api/gladeFirst", firstController.gladeFirst)
 
 app.post("/api/manure", inventoryController.manure);
 app.post("/api/flowers", inventoryController.flowers);
@@ -134,6 +136,7 @@ app.post("/api/pick", inventoryController.pick)
 app.post("/api/cloak", inventoryController.cloak)
 app.post("/api/hair", inventoryController.hair)
 app.post("/api/mirror", inventoryController.mirror)
+app.post("/api/speed", inventoryController.speed)
 
 app.post("/api/manureCleanPermission", controller.manureCleanPermission);
 app.post("/api/caveCoin", controller.caveCoin);
@@ -211,6 +214,11 @@ app.post("/api/useShield", controller.useShield)
 app.post("/api/usePicture", controller.usePicture)
 app.post("/api/valleyCoin", controller.valleyCoin)
 app.post("/api/valleyCoinTwo", controller.valleyCoinTwo)
+app.post("/api/gladeCoin", controller.gladeCoin)
+app.post("/api/magicUser", controller.magicUser)
+app.post("/api/useSulfur", controller.useSulfur)
+app.post("/api/useMushroom", controller.useMushroom)
+app.post("/api/useApple", controller.useApple)
 
 app.use(express.static(__dirname + "/../build"));
 

@@ -13,6 +13,13 @@ module.exports = {
     const valley = await db.valley_first(id);
     res.status(200).send(valley);
   },
+  gladeFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const glade = await db.glade_first(id);
+    res.status(200).send(glade);
+  },
 
   thievesFirst: async (req, res) => {
     const db = req.app.get("db");

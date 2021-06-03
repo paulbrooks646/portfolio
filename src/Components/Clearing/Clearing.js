@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
 import axios from "axios";
 import "./Clearing.scss";
 import Character from "../Character/Character";
@@ -106,14 +106,173 @@ function Clearing(props) {
       </div>
       <div className="clearing-body">
         <div className="clearing-top">
-          <div className="clearing-top-left"></div>
+          <div className="clearing-top-left">
+            <div className="clearing-cottage">
+              <div className="clearing-left"></div>
+              <div className="clearing-cottage-middle">
+                <div className="clearing-chimney-div">
+                  <div className="clearing-smoke"></div>
+                  <div className="clearing-smoke-middle"></div>
+                  <div className="clearing-smoke"></div>
+                  <div className="clearing-chimney"></div>
+                </div>
+                <div className="clearing-short-log"></div>
+                <div className="clearing-medium-log"></div>
+                <div className="clearing-window-div">
+                  <div className="clearing-window-div-side">
+                    <div className="clearing-short-log"></div>
+                    <div className="clearing-short-log"></div>
+                  </div>
+                  <div className="clearing-window">
+                    <div className="clearing-window-row">
+                      <div className="clearing-window-pane"></div>
+                      <div className="clearing-window-line"></div>
+                      <div className="clearing-window-pane"></div>
+                    </div>
+                    <div className="clearing-window-middle"></div>
+                    <div className="clearing-window-row">
+                      <div className="clearing-window-pane"></div>
+                      <div className="clearing-window-line"></div>
+                      <div className="clearing-window-pane"></div>
+                    </div>
+                  </div>
+                  <div className="clearing-window-div-side">
+                    <div className="clearing-short-log"></div>
+                    <div className="clearing-short-log"></div>
+                  </div>
+                </div>
+                <div className="clearing-long-log"></div>
+                <div className="clearing-long-log"></div>
+                <div className="clearing-door-div">
+                  <div className="clearing-door-div-side">
+                    <div className="clearing-short-log"></div>
+                    <div className="clearing-short-log"></div>
+                    <div className="clearing-short-log"></div>
+                  </div>
+                  <div className="clearing-door">
+                    <div className="clearing-door-knob"></div>
+                    <div className="clearing-lock-div">
+                      <div className="clearing-lock-top"></div>
+                      <div className="clearing-lock-bottom"></div>
+                    </div>
+                  </div>
+                  <div className="clearing-door-div-side">
+                    <div className="clearing-short-log"></div>
+                    <div className="clearing-short-log"></div>
+                    <div className="clearing-short-log"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="clearing-right"></div>
+            </div>
+          </div>
           <div className="clearing-top-middle"></div>
           <div className="clearing-top-right"></div>
         </div>
         <div className="clearing-middle">
-          <div className="clearing-middle-left"></div>
-          <div className="clearing-middle-middle"></div>
-          <div className="clearing-middle-right"></div>
+          <div className="clearing-middle-left">
+            <div className="clearing-spike-div">
+              <div className="clearing-spike-top"></div>
+              <div className="clearing-spike-bottom"></div>
+            </div>
+            <div className="clearing-spike-div">
+              <div className="clearing-spike-top"></div>
+              <div className="clearing-spike-bottom"></div>
+            </div>
+            <div className="clearing-spike-div">
+              <div className="clearing-spike-top"></div>
+              <div className="clearing-spike-bottom"></div>
+            </div>
+            <div className="clearing-spike-div">
+              <div className="clearing-spike-top"></div>
+              <div className="clearing-spike-bottom"></div>
+            </div>
+            <div className="clearing-spike-div">
+              <div className="clearing-spike-top"></div>
+              <div className="clearing-spike-bottom"></div>
+            </div>
+            <div className="clearing-spike-div">
+              <div className="clearing-spike-top"></div>
+              <div className="clearing-spike-bottom"></div>
+            </div>
+            <div className="clearing-spike-div">
+              <div className="clearing-spike-top"></div>
+              <div className="clearing-spike-bottom"></div>
+            </div>
+            <div className="clearing-spike-div">
+              <div className="clearing-spike-top"></div>
+              <div className="clearing-spike-bottom"></div>
+            </div>
+            <div className="clearing-spike-div">
+              <div className="clearing-spike-top"></div>
+              <div className="clearing-spike-bottom"></div>
+            </div>
+            <div className="clearing-spike-div">
+              <div className="clearing-spike-top"></div>
+              <div className="clearing-spike-bottom"></div>
+            </div>
+          </div>
+          <div className="clearing-middle-middle">
+            <div className="clearing-gate">
+              <div className="clearing-gate-top">
+                <div className="clearing-gate-bolt"></div>
+                <div className="clearing-gate-bolt"></div>
+              </div>
+              <div className="clearing-gate-middle">
+                <div className="clearing-gate-bar-div">
+                  <div className="clearing-gate-support"></div>
+                  <div className="clearing-gate-support"></div>
+                  </div>
+                  <div className="clearing-gate-handle-div"><div className="clearing-gate-handle"></div></div>
+              </div>
+              <div className="clearing-gate-bottom">
+                <div className="clearing-gate-bolt"></div>
+                <div className="clearing-gate-bolt"></div>
+              </div>
+            </div>
+          </div>
+          <div className="clearing-middle-right">
+            <div className="clearing-spike-div">
+              <div className="clearing-spike-top"></div>
+              <div className="clearing-spike-bottom"></div>
+            </div>
+            <div className="clearing-spike-div">
+              <div className="clearing-spike-top"></div>
+              <div className="clearing-spike-bottom"></div>
+            </div>
+            <div className="clearing-spike-div">
+              <div className="clearing-spike-top"></div>
+              <div className="clearing-spike-bottom"></div>
+            </div>
+            <div className="clearing-spike-div">
+              <div className="clearing-spike-top"></div>
+              <div className="clearing-spike-bottom"></div>
+            </div>
+            <div className="clearing-spike-div">
+              <div className="clearing-spike-top"></div>
+              <div className="clearing-spike-bottom"></div>
+            </div>
+            <div className="clearing-spike-div">
+              <div className="clearing-spike-top"></div>
+              <div className="clearing-spike-bottom"></div>
+            </div>
+            <div className="clearing-spike-div">
+              <div className="clearing-spike-top"></div>
+              <div className="clearing-spike-bottom"></div>
+            </div>
+            <div className="clearing-spike-div">
+              <div className="clearing-spike-top"></div>
+              <div className="clearing-spike-bottom"></div>
+            </div>
+            <div className="clearing-spike-div">
+              <div className="clearing-spike-top"></div>
+              <div className="clearing-spike-bottom"></div>
+            </div>
+            <div className="clearing-spike-div">
+              <div className="clearing-spike-top"></div>
+              <div className="clearing-spike-bottom"></div>
+            </div>
+          </div>
         </div>
         <div className="clearing-bottom">
           <div className="clearing-bottom-left"></div>
@@ -162,6 +321,6 @@ function Clearing(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory, logoutUser })(
   Clearing
 );

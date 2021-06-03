@@ -59,6 +59,15 @@
 
     .glade-top-right {
       @include section(40vw);
+      padding: 25px;
+      @include center(flex-end);
+
+      .glade-grass {
+        height: 10px;
+        width: 10px;
+        cursor: pointer;
+        background-color: green;
+      }
     }
   }
 
@@ -92,6 +101,7 @@
           width: 8%;
           border-right: black solid 3px;
           background-color: sienna;
+          cursor: pointer;
         }
       }
     }

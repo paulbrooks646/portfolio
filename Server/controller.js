@@ -55,12 +55,28 @@ module.exports = {
     res.status(200).send(forest);
   },
 
+  gladeCoin: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const glade = await db.glade_coin(id);
+    res.status(200).send(glade);
+  },
+
   nestCoin: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
 
     const nest = await db.nest_coin(id);
     res.status(200).send(nest);
+  },
+
+  magicUser: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const glade = await db.magic_user(id);
+    res.status(200).send(glade);
   },
 
   useFlute: async (req, res) => {
@@ -563,6 +579,57 @@ module.exports = {
     });
   },
 
+  useApple: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_apple(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  useMushroom: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_mushroom(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
+  useSulfur: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_sulfur(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+
   useShield: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -580,7 +647,7 @@ module.exports = {
     });
   },
 
-   usePicture: async (req, res) => {
+  usePicture: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
 
