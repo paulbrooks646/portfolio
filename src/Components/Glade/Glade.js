@@ -38,6 +38,15 @@ function Glade(props) {
   const [inventoryOpen, setInventoryOpen] = useState(false);
   const [firstTimeCard, setFirstTimeCard] = useState(false);
   const [druid, setDruid] = useState(false);
+  const [coinCard, setCoinCard] = useState(false)
+  const [speedCard, setSpeedCard] = useState(false)
+  const [mushroomCard, setMushroomCard] = useState(false)
+  const [appleCard, setAppleCard] = useState(false)
+  const [sulfurCard, setSulfurCard] = useState(false)
+  const [magicUserCard, setMagicUserCard] = useState(false)
+  const [druidRejectionCard, setDruidRejectionCard] = useState(false)
+  const [grassRejectionCard, setGrassRejectionCard] = useState(false)
+  const [doorRejectionCard, setDoorRejectionCard] = useState(false)
 
   useEffect(() => {
     axios.get("/api/glade").then((res) => {
@@ -54,6 +63,13 @@ function Glade(props) {
       setIsLoading(false);
     });
   }, []);
+
+   const toggleFirst = () => {
+     axios.post("/api/gladeFirst").then((res) => {
+       setGladeData(res.data[0]);
+       setFirstTimeCard(false);
+     });
+   };
 
   const toggleInventoryOpen = () => setInventoryOpen(!inventoryOpen);
 
@@ -141,9 +157,38 @@ function Glade(props) {
   const toggleDruid = () => {
     if (!gladeData.cake_given) {
       setDruidRejectionCard(true)
-    } else if ()
-    setDruid(!druid);
+    } else if (gladeData.sulfur_used && gladeData.apple_used && gladeData.mushroom_used && !gladeData.magic_user) {
+      axios.post("/api/magicUser").then(res => {
+        setGladeData(res.data[0])
+        setMagicUserCard(true)
+      })
+    } else if (gladeData.unicorn_freed && !gladeData.speed_received) {
+      axios.post("/api/speed").then(res => {
+        props.getInventory(res.data)
+        axios.get("/api/glade").then(res => {
+          setGladeData(res.data[0])
+          setSpeedCard(true)
+        })
+      })
+    } else {
+      setDruid(!druid);
+    }
   };
+
+  const toggleCoin = () => {
+    if (!gladeData.coin_taken) {
+     
+      axios.post("/api/gladeCoin").then((res) => {
+        setGladeData(res.data[0]);
+        axios.post("/api/coin").then((res) => {
+          props.getUser(res.data);
+          setCoinCard(true);
+        });
+      });
+    } else {
+      setGrassRejectionCard(true)
+    }
+   };
 
   const toggleAnswerOne = () => {
     toggleDruid();
@@ -255,74 +300,72 @@ function Glade(props) {
               <Character />
             </div>
           </div>
-          <div className="glade-top-right"></div>
+          <div className="glade-top-right">
+            <div className="glade-grass" onClick={toggleCoin}></div>
+          </div>
         </div>
         <div className="glade-middle">
           <div className="glade-middle-left">
             <div className="glade-middle-wall-div">
               <div className="glade-middle-wall-top"></div>
               <div className="glade-middle-wall-front"></div>
-              </div>
-              </div>
-            <div className="glade-middle-middle">
-              <div className="druid" onClick={toggleDruid}>
-                <div className="druid-hat"></div>
-                <div className="druid-head">
-                  <div className="druid-hair-left"></div>
-                  <div className="druid-face">
-                    <div className="druid-hair-top-left"></div>
-                    <div className="druid-hair-top-right"></div>
-                    <div className="druid-eyes">
-                      <div className="druid-eye">
-                        <div className="druid-iris">
-                        </div>
-                      </div>
-                      <div className="druid-eye">
-                        <div className="druid-iris">
-                          <div className="druid-pupil"></div>
-                        </div>
+            </div>
+          </div>
+          <div className="glade-middle-middle">
+            <div className="druid" onClick={toggleDruid}>
+              <div className="druid-hat"></div>
+              <div className="druid-head">
+                <div className="druid-hair-left"></div>
+                <div className="druid-face">
+                  <div className="druid-hair-top-left"></div>
+                  <div className="druid-hair-top-right"></div>
+                  <div className="druid-eyes">
+                    <div className="druid-eye">
+                      <div className="druid-iris"></div>
+                    </div>
+                    <div className="druid-eye">
+                      <div className="druid-iris">
+                        <div className="druid-pupil"></div>
                       </div>
                     </div>
-                    <div className="druid-nose"></div>
-                    <div className="druid-mouth"></div>
                   </div>
-                  <div className="druid-hair-right"></div>
+                  <div className="druid-nose"></div>
+                  <div className="druid-mouth"></div>
                 </div>
-                <div className="druid-body">
-                  <div className="druid-upper-neck"></div>
-                  <div className="druid-neck"></div>
-                  <div className="druid-dress">
-                    <div className="druid-shirt">
-                      <div className="druid-arm">
-                        <div className="driud-staff-div">
-                          <div className="druid-staff-top">
-
-                          </div>
-                          <div className="druid-staff-middle"></div>
-                          <div className="druid-staff-bottom"></div>
-                        </div>
-                        <div className="druid-finger-div">
-                          <div className="druid-finger-one"></div>
-                          <div className="druid-finger-two"></div>
-                          <div className="druid-finger-three"></div>
-                          <div className="druid-finger-four"></div>
-                          <div className="druid-finger-five"></div>
-                        </div>
+                <div className="druid-hair-right"></div>
+              </div>
+              <div className="druid-body">
+                <div className="druid-upper-neck"></div>
+                <div className="druid-neck"></div>
+                <div className="druid-dress">
+                  <div className="druid-shirt">
+                    <div className="druid-arm">
+                      <div className="driud-staff-div">
+                        <div className="druid-staff-top"></div>
+                        <div className="druid-staff-middle"></div>
+                        <div className="druid-staff-bottom"></div>
+                      </div>
+                      <div className="druid-finger-div">
+                        <div className="druid-finger-one"></div>
+                        <div className="druid-finger-two"></div>
+                        <div className="druid-finger-three"></div>
+                        <div className="druid-finger-four"></div>
+                        <div className="druid-finger-five"></div>
                       </div>
                     </div>
-                    <div className="druid-pants-div"></div>
                   </div>
-                  <div className="druid-legs">
-                    <div className="druid-leg-left">
-                      <div className="druid-foot"></div>
-                    </div>
-                    <div className="druid-leg-right">
-                      <div className="druid-foot"></div>
-                    </div>
+                  <div className="druid-pants-div"></div>
+                </div>
+                <div className="druid-legs">
+                  <div className="druid-leg-left">
+                    <div className="druid-foot"></div>
+                  </div>
+                  <div className="druid-leg-right">
+                    <div className="druid-foot"></div>
                   </div>
                 </div>
               </div>
-            
+            </div>
           </div>
           <div className="glade-middle-right">
             <div
@@ -381,58 +424,27 @@ function Glade(props) {
       </Card>
       <Card className={`${druid ? "component-card" : "component-card-closed"}`}>
         <Typography variant="h5" color="primary">
-          What do you need to know?
+          What knowledge do you seek?
         </Typography>
         <List className="component-list">
-          <ListItem onClick={toggleAnswerOne}>Beggar</ListItem>
-          <ListItem onClick={toggleAnswerTwo}>Brigands</ListItem>
-          <ListItem onClick={toggleAnswerThree}>Dragon</ListItem>
-          <ListItem onClick={toggleAnswerFour}>Fire Cloak</ListItem>
-          <ListItem onClick={toggleAnswerFive}>Magic Druid</ListItem>
-          <ListItem onClick={toggleAnswerSix}>Master Druid</ListItem>
-          <ListItem onClick={toggleAnswerSeven}>Druid</ListItem>
-          <ListItem onClick={toggleAnswerEight}>Thieves</ListItem>
-          <ListItem onClick={toggleAnswerNine}>Becoming a Druid</ListItem>
-          <ListItem onClick={toggleAnswerTen}>Quest</ListItem>
+          <ListItem onClick={toggleAnswerOne}>Dragon</ListItem>
+          <ListItem onClick={toggleAnswerTwo}>Druid</ListItem>
+          <ListItem onClick={toggleAnswerThree}>Sanctuary</ListItem>
+          <ListItem onClick={toggleAnswerFour}>Scrolls</ListItem>
+          <ListItem onClick={toggleAnswerFive}>Speed Scroll</ListItem>
+          <ListItem onClick={toggleAnswerSix}>Unicorn</ListItem>
+          <ListItem onClick={toggleAnswerSeven}>Witch</ListItem>
+          <ListItem onClick={toggleAnswerEight}>
+            Powerful Magical Beings
+          </ListItem>
+          <ListItem onClick={toggleAnswerNine}>Becoming a Magic User</ListItem>
+          <ListItem onClick={toggleAnswerTen}>Ingredients</ListItem>
         </List>
         <Button onClick={toggleDruid} variant="contained" color="primary">
           Say Goodbye
         </Button>
       </Card>
       <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary">
-          Beggar
-        </Typography>
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          She keeps an eye on my entrance and signals me if there is a threat to
-          me or her. I feed her and she sleeps in here at night. She must have
-          liked you if she didn't warn me about you.
-        </Typography>
-        <Button onClick={toggleAnswerOne} variant="contained" color="primary">
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary">
-          Brigand
-        </Typography>
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          How dare you! I am no brigand. I hurt no one unless threatened.
-          Brigands do not care who they hurt or rob.
-        </Typography>
-        <Button onClick={toggleAnswerTwo} variant="contained" color="primary">
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
           Dragon
         </Typography>
@@ -441,65 +453,15 @@ function Glade(props) {
           color="secondary"
           className="answer-card-description"
         >
-          I don't know how to slay the dragon but I do possess the Fire Cloak.
-          It could definitely help.
+          The dragon is one of the three most powerful beings in the area. He is
+          very powerful and defeating him is unlikely, especially in his own
+          lair. I do have a speed scroll that might help a little.
         </Typography>
-        <Button onClick={toggleAnswerThree} variant="contained" color="primary">
+        <Button onClick={toggleAnswerOne} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
-      <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary">
-          The Fire Cloak
-        </Typography>
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          It protects the user from heat and fire. I would only give it to a
-          master druid who has completed a quest.
-        </Typography>
-        <Button onClick={toggleAnswerFour} variant="contained" color="primary">
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${answerFive ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary">
-          The Magic Druid
-        </Typography>
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          If a child writes something they wish for on a piece of paper, the
-          Magic Druid grants their wish and leaves what they wished for on the
-          piece of paper.
-        </Typography>
-        <Button onClick={toggleAnswerFive} variant="contained" color="primary">
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${answerSix ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary">
-          Master Druid
-        </Typography>
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          A master druid can open locks an ordinary druid can't and are eligible
-          for quests. One must prove themself before I would delcare them a
-          master druid.
-        </Typography>
-        <Button onClick={toggleAnswerSix} variant="contained" color="primary">
-          CLOSE
-        </Button>
-      </Card>
-
-      <Card className={`${answerSeven ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
           Druid
         </Typography>
@@ -508,11 +470,88 @@ function Glade(props) {
           color="secondary"
           className="answer-card-description"
         >
-          I come from a long line of thieves. I was trained young and loved what
-          I did until I saw the poverty of some targets. Once the brigand's
-          arrived in the area everyone got poorer. I couldn't take from those
-          who had so little. My parents died sometime ago. The other thieves
-          left when people had nothing to steal.
+          Although humanoid, I am no human. I am a druid, a magical being, and
+          one of the three most powerful creatures in the area. My primary
+          responsibiliys is protection magical creatures.
+        </Typography>
+        <Button onClick={toggleAnswerTwo} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary">
+          Sanctuary
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          This is a safe place for magical creatures. Here my power is at its
+          strongest. No humans may enter the sanctuary, no exceptions.
+        </Typography>
+        <Button onClick={toggleAnswerThree} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary">
+          Scroll
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          A scroll is a one time use type of magic. You recite the words of the
+          scroll out loud. The scroll will disappear and the magic will occur.
+          Of course you need to be a magic user to use one.
+        </Typography>
+        <Button onClick={toggleAnswerFour} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerFive ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary">
+          Speed Scroll
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          The speed scroll enhances the casters speed briefly but immensely. It is the only way I know that one could match the Dragon's speed in his home. It is precious. Perhaps if you found the missing unicorn I could give it to you.
+        </Typography>
+        <Button onClick={toggleAnswerFive} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerSix ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary">
+          Unicorn
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Magical creatures are free to leave this sanctuary but lose my protection while they are away. A young unicorn chose to do so and disappeared. I fear she may have been captured by the witch, or worse.
+        </Typography>
+        <Button onClick={toggleAnswerSix} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+
+      <Card className={`${answerSeven ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary">
+          Witch
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          The witch is one of the three most powerful magic beings in the area. She lives in a cottage in the forest past the caves. Her cottage is protected by magical barriers. In her home only her own magic could defeat her.
         </Typography>
         <Button onClick={toggleAnswerSeven} variant="contained" color="primary">
           NEXT
@@ -520,15 +559,14 @@ function Glade(props) {
       </Card>
       <Card className={`${answerEight ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
-          Thieves
+          Powerful Magical Beings
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          The thieves of this guild have never been violent. Used to be that
-          thieves would rob from anybody but things have changed.
+          The destructive dragon, the evil witch, and I are the most powerful magical beings in the area. On neutral ground, we are evenly matched. In our home, the root of our power, we are drastically more powerful.
         </Typography>
         <Button onClick={toggleAnswerEight} variant="contained" color="primary">
           CLOSE
@@ -536,16 +574,14 @@ function Glade(props) {
       </Card>
       <Card className={`${answerNine ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
-          Becoming a Druid
+          Becoming a Magic User
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          If you will take on the mantel of Magic Druid. I will dub you a druid,
-          and give you a lock pick and coins. If you grant four wishes without
-          being heard, I will dub you master druid and give you a quest.
+          Making a human a magic user is highly irregular but as you have helped us, if you gather some ingredients I need to make healing potions I will make an exception.
         </Typography>
         <Button onClick={toggleAnswerNine} variant="contained" color="primary">
           CLOSE
@@ -553,18 +589,200 @@ function Glade(props) {
       </Card>
       <Card className={`${answerTen ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
-          Quest
+          Ingredients
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          The quest is two-fold. Bring me the gold the brigand's have stolen so
-          I may distribute it to the poor. Then make sure the Brigand's can
-          pillage no more. Do this and I will give you the Fire Cloak.
+          I need an apple from the highest tree in the forest, mushroom from the far side of the mountain and some sulfur from the Hydra's bog.
         </Typography>
         <Button onClick={toggleAnswerTen} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${
+          druidRejectionCard ? "answer-card" : "answer-card-closed"
+        }`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          I do not associate with humans. The way they live harms magical
+          creatures. On second thought, if you can unblocked the mountain
+          runoff, I will talk to you. Lack of water is hurtful to humans,
+          animals and magical creatures.
+        </Typography>
+        <Button
+          onClick={() => setDruidRejectionCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${coinCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          In the deep grass you find a shiny gold coin.
+        </Typography>
+        <Button
+          onClick={() => setCoinCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${
+          grassRejectionCard ? "answer-card" : "answer-card-closed"
+        }`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You find nothing else in the deep grass.
+        </Typography>
+        <Button
+          onClick={() => setGrassRejectionCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${appleCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You give the druid the shiny apple.
+        </Typography>
+        <Button
+          onClick={() => setAppleCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${mushroomCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You give the druid the plump mushroom.
+        </Typography>
+        <Button
+          onClick={() => setMushroomCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${sulfurCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You give the druid the stinky sulfur. Good riddance!
+        </Typography>
+        <Button
+          onClick={() => setSulfurCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${speedCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Thank you for freeing the baby unicorn. She told me how you defeated
+          the witch. On behalf of all magical creatures I thank you. Here is the
+          speed scroll as promised, good luck in your quest to slay the dragon.
+        </Typography>
+        <Button
+          onClick={() => setSpeedCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          As you continue along the path you come a cross a tall imposing
+          figure. She glares at you condescendingly. Behind her is a door, you
+          squint your eyes and see a force field as well.
+        </Typography>
+        <Button onClick={toggleFirst} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${
+          doorRejectionCard ? "answer-card" : "answer-card-closed"
+        }`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          No human shall ever enter this sanctuary for magical creatures.
+        </Typography>
+        <Button
+          onClick={() => setDoorRejectionCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${magicUserCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Thank you for bringing me the ingredients I asked for. As promised I
+          will give you the ability to use magic. The orb on her staff glows and
+          a small ball of blue energy shoots at you. You feel new power course
+          through your veins.
+        </Typography>
+        <Button
+          onClick={() => setMagicUserCard(false)}
+          variant="contained"
+          color="primary"
+        >
           CLOSE
         </Button>
       </Card>
