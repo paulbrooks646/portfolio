@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Magic.scss";
@@ -23,9 +23,9 @@ function Magic(props) {
   const [poorCard, setPoorCard] = useState(false);
   const [boughtCard, setBoughtCard] = useState(false);
   const [thanksCard, setThanksCard] = useState(false);
-  const [rejectionCard, setRejectionCard] = useState(false)
-  const [inventoryOpen, setInventoryOpen] = useState(false)
-  const [magicData, setMagicData] = useState()
+  const [rejectionCard, setRejectionCard] = useState(false);
+  const [inventoryOpen, setInventoryOpen] = useState(false);
+  const [magicData, setMagicData] = useState();
 
   useEffect(() => {
     axios.get("/api/magic").then((res) => {
@@ -51,16 +51,7 @@ function Magic(props) {
   });
 
   const toggleItem = (item) => {
-    if (item === "flute") {
-      if (props.location.pathname === "/Tower") {
-        axios.post("/api/useFlute").then((res) => {
-          setMagicData(res.data[0]);
-          ;
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
+    setRejectionCard(true);
   };
 
   const toggleExit = () => {
@@ -247,7 +238,7 @@ function Magic(props) {
     setMagicCard(!magicCard);
   };
 
-  return props.user.user.magic ? (
+  return magicData.magic_user ? (
     <div className="main">
       <div className="nav-main">
         <div className="inventory-div">
@@ -575,6 +566,6 @@ function Magic(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory, logoutUser })(
   Magic
 );

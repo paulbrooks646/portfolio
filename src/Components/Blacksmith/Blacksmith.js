@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Blacksmith.scss";
@@ -23,46 +23,36 @@ function Blacksmith(props) {
   const [poorCard, setPoorCard] = useState(false);
   const [boughtCard, setBoughtCard] = useState(false);
   const [thanksCard, setThanksCard] = useState(false);
-   const [inventoryOpen, setInentoryOpen] = useState(false);
+  const [inventoryOpen, setInentoryOpen] = useState(false);
   const [rejectionCard, setRejectionCard] = useState(false);
   const [blacksmithData, setBlacksmithData] = useState();
-   
-   useEffect(() => {
-     axios.get("/api/blacksmith").then((res) => {
-       setBlacksmithData(res.data[0]);
-     });
-   }, []);
-  
-   const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
 
-   const logout = () => {
-     axios.delete("/api/logout").then(() => {
-       props.logoutUser();
-       props.history.push("/Auth");
-     });
-   };
+  useEffect(() => {
+    axios.get("/api/blacksmith").then((res) => {
+      setBlacksmithData(res.data[0]);
+    });
+  }, []);
 
-   const inventoryList = props.inventory.inventory.map((e, index) => {
-     return (
-       <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
-         {e}
-       </h4>
-     );
-   });
+  const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
 
-   const toggleItem = (item) => {
-     if (item === "flute") {
-       if (props.location.pathname === "/Tower") {
-         axios.post("/api/useFlute").then((res) => {
-           setBlacksmithData(res.data[0]);
-           ;
-         });
-       } else {
-         setRejectionCard(true);
-       }
-     }
-   };
+  const logout = () => {
+    axios.delete("/api/logout").then(() => {
+      props.logoutUser();
+      props.history.push("/Auth");
+    });
+  };
 
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
+
+  const toggleItem = (item) => {
+    setRejectionCard(true);
+  };
 
   const toggleExit = () => {
     setExit(!exit);
@@ -553,4 +543,5 @@ const mapStateToProps = (reduxState) => reduxState;
 export default connect(mapStateToProps, {
   getUser,
   getInventory,
+  logoutUser,
 })(Blacksmith);

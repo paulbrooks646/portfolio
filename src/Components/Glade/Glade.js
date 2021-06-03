@@ -73,15 +73,33 @@ function Glade(props) {
   });
 
   const toggleItem = (item) => {
-    if (item === "flute") {
-      if (props.location.pathname === "/Tower") {
-        axios.post("/api/useFlute").then((res) => {
+    if (item === "sulfur") {
+      axios.post("/api/useSulfur").then((res) => {
+        props.getInventory(res.data)
+        axios.get("/api/glade").then(res => {
           setGladeData(res.data[0]);
+          setSulfurCard(true)
+        })
         });
-      } else {
-        setRejectionCard(true);
+    } else if (item === "mushroom") {
+      axios.post("/api/useMushroom").then(res => {
+        props.getInventory(res.data)
+        axios.get("/api/glade").then(res => {
+          setGladeData(res.data[0])
+          setMushroomCard(true)
+        })
+        })
+    } else if (item === "apple") {
+      axios.post("/api/useApple").then(res => {
+        props.getInventory(res.data)
+        axios.get("/api/glade").then(res => {
+          setGladeData(res.data[0])
+          setAppleCard(true)
+        })
+      })
+    } else {
+      setRejectionCard(true)
       }
-    }
   };
 
   const toggleRight = () => {
@@ -121,6 +139,9 @@ function Glade(props) {
   };
 
   const toggleDruid = () => {
+    if (!gladeData.cake_given) {
+      setDruidRejectionCard(true)
+    } else if ()
     setDruid(!druid);
   };
 
