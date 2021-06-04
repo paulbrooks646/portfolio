@@ -9,7 +9,7 @@
 
     .clearing-top-left {
       @include section(40vw);
-      @include flex(center);
+      @include flex(flex-end);
 
       .clearing-cottage {
         width: 200px;
@@ -43,7 +43,7 @@
 
             .clearing-smoke {
               border-radius: 50%;
-              border-left: solid white 7px;
+              border-left: solid whitesmoke 7px;
               height: 25px;
               width: 25px;
               position: relative;
@@ -52,7 +52,7 @@
 
             .clearing-smoke-middle {
               border-radius: 50%;
-              border-right: solid white 7px;
+              border-right: solid whitesmoke 7px;
               height: 25px;
               width: 25px;
             }
@@ -189,6 +189,387 @@
 
     .clearing-top-right {
       @include section(40vw);
+      @include flex(center);
+
+      .druid {
+        position: relative;
+        top: 165px;
+        .druid-head {
+          display: flex;
+          justify-content: center;
+          position: relative;
+          bottom: 42px;
+
+          .druid-hair-left {
+            height: 32px;
+            width: 25px;
+            border-right: #faf0be solid 10px;
+            position: relative;
+            top: 10px;
+            left: 7px;
+            z-index: 1;
+            border-radius: 0% 0% 50% 0%;
+          }
+
+          .druid-face {
+            height: 42px;
+            width: 42px;
+            background-color: #ffdbac;
+            border-radius: 50%;
+            @include flex(center);
+            border-bottom: black solid 1px;
+
+            .druid-hair-top-left {
+              height: 100px;
+              width: 28px;
+              border-radius: 50%;
+              background-image: linear-gradient(transparent 20%, #faf0be 20%);
+              z-index: 2;
+              transform: rotate(-15deg);
+              position: relative;
+              right: 10px;
+              bottom: 0px;
+            }
+
+            .druid-hair-top-right {
+              height: 100px;
+              width: 28px;
+              border-radius: 50%;
+              background-image: linear-gradient(transparent 20%, #faf0be 20%);
+              transform: rotate(10deg);
+              position: relative;
+              left: 9px;
+              z-index: 2;
+              bottom: 11px;
+            }
+
+            .druid-eyes {
+              width: 80%;
+              @include center(space-evenly);
+              position: relative;
+              bottom: 11px;
+
+              .druid-eye {
+                width: 12px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: white;
+                @include flex(center);
+
+                .druid-iris {
+                  width: 5.5px;
+                  height: 5.5px;
+                  border-radius: 50%;
+                  background-color: rgb(42, 173, 42);
+                  @include flex(center);
+                }
+              }
+            }
+            .druid-nose {
+              height: 18px;
+              width: 7px;
+              @include flex(center);
+              border-left: solid 0.5px;
+              border-right: solid 0.5px;
+              border-bottom: solid 0.5px;
+              border-radius: 0% 0% 50% 50%;
+              position: relative;
+              bottom: 7px;
+            }
+
+            .druid-mouth {
+              height: 20px;
+              width: 18px;
+              border-top: red 3px solid;
+              border-radius: 50%;
+              position: relative;
+              bottom: 3px;
+            }
+          }
+
+          .druid-hair-right {
+            height: 32px;
+            width: 25px;
+            border-radius: 0% 0% 0% 50%;
+            border-left: #faf0be solid 10px;
+            position: relative;
+            top: 10px;
+            right: 7px;
+            z-index: 1;
+          }
+        }
+        .druid-body {
+          @include flex(flex-start);
+
+          .druid-upper-neck {
+            height: 5px;
+            width: 20px;
+            z-index: 5;
+            border-radius: 50%;
+            border-bottom: 1px black solid;
+            position: relative;
+            bottom: 49px;
+          }
+          .druid-neck {
+            height: 15px;
+            width: 20px;
+            background-color: #ffdbac;
+
+            position: relative;
+            bottom: 50px;
+            border-radius: 30% 30% 50% 50%;
+            z-index: 4;
+          }
+
+          .druid-dress {
+            width: 50px;
+            height: 100px;
+            background-color: purple;
+            border-radius: 25% 25% 0% 0%;
+            position: relative;
+            bottom: 62px;
+            z-index: 2;
+            @include center(space-between);
+
+            .druid-arm-left {
+              height: 60px;
+              width: 9px;
+              background-image: linear-gradient(purple 50%, #ffdbac 50%);
+              transform: rotate(15deg);
+              position: relative;
+
+              bottom: 19px;
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-end;
+              align-items: center;
+
+              .druid-finger-div {
+                width: 10px;
+                height: 50px;
+                z-index: 1;
+                position: relative;
+                top: 49px;
+                display: flex;
+                .druid-finger-one {
+                  background-image: linear-gradient(
+                    #ffdbac 50%,
+                    transparent 50%
+                  );
+                  height: 12px;
+                  width: 5px;
+                  z-index: 2;
+                  border-radius: 50%;
+                  position: relative;
+                }
+                .druid-finger-two {
+                  background-image: linear-gradient(
+                    #ffdbac 50%,
+                    transparent 50%
+                  );
+                  height: 12px;
+                  width: 5px;
+                  z-index: 2;
+                  border-radius: 50%;
+                  position: relative;
+                }
+                .druid-finger-three {
+                  background-image: linear-gradient(
+                    #ffdbac 50%,
+                    transparent 50%
+                  );
+                  height: 12px;
+                  width: 5px;
+                  z-index: 2;
+                  border-radius: 50%;
+                  position: relative;
+                }
+
+                .druid-finger-four {
+                  background-image: linear-gradient(
+                    #ffdbac 50%,
+                    transparent 50%
+                  );
+                  height: 12px;
+                  width: 5px;
+                  z-index: 2;
+                  border-radius: 50%;
+                  position: relative;
+                }
+              }
+            }
+            .druid-rope {
+            position: absolute;
+            width: 140%;
+            height: 10px;
+            background-color: sandybrown;
+            z-index: 3;
+            left: -10px;
+            border-radius: 25%;
+            border-left: solid;
+            border-right: solid;
+            }
+
+            .druid-dress-crease {
+              position: absolute;
+              height: 2px;
+              width: 100%;
+              background-color: black;
+              top: 70px;
+
+            }
+
+            .druid-arm-right {
+              height: 60px;
+              width: 9px;
+              background-image: linear-gradient(purple 50%, #ffdbac 50%);
+              transform: rotate(-15deg);
+              position: relative;
+
+              bottom: 19px;
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-end;
+
+              .druid-finger-div {
+                width: 10px;
+                height: 50px;
+                z-index: 1;
+                position: relative;
+                top: 49px;
+                display: flex;
+                .druid-finger-one {
+                  background-image: linear-gradient(
+                    #ffdbac 50%,
+                    transparent 50%
+                  );
+                  height: 12px;
+                  width: 5px;
+                  z-index: 2;
+                  border-radius: 50%;
+                  position: relative;
+                }
+                .druid-finger-two {
+                  background-image: linear-gradient(
+                    #ffdbac 50%,
+                    transparent 50%
+                  );
+                  height: 12px;
+                  width: 5px;
+                  z-index: 2;
+                  border-radius: 50%;
+                  position: relative;
+                }
+                .druid-finger-three {
+                  background-image: linear-gradient(
+                    #ffdbac 50%,
+                    transparent 50%
+                  );
+                  height: 12px;
+                  width: 5px;
+                  z-index: 2;
+                  border-radius: 50%;
+                  position: relative;
+                }
+
+                .druid-finger-four {
+                  background-image: linear-gradient(
+                    #ffdbac 50%,
+                    transparent 50%
+                  );
+                  height: 12px;
+                  width: 5px;
+                  z-index: 2;
+                  border-radius: 50%;
+                  position: relative;
+                }
+              }
+            }
+          }
+
+          .druid-legs {
+            @include center(space-evenly);
+            width: 50px;
+            position: relative;
+            bottom: 60px;
+
+            .druid-leg-left {
+              height: 30px;
+              width: 9px;
+              background-color: #ffdbac;
+
+              @include flex(flex-end);
+              border-radius: 0% 0% 50% 50%;
+
+              .druid-foot {
+                height: 9px;
+                width: 13px;
+                background-color: silver;
+                position: relative;
+                z-index: 1;
+                border-radius: 50% 50% 0% 0%;
+              }
+            }
+
+            .druid-leg-right {
+              height: 30px;
+              width: 9px;
+              background-color: #ffdbac;
+
+              @include flex(flex-end);
+              border-radius: 0% 0% 50% 50%;
+
+              .druid-foot {
+                height: 9px;
+                width: 13px;
+                background-color: silver;
+                position: relative;
+                z-index: 1;
+                border-radius: 50% 50% 0% 0%;
+              }
+            }
+          }
+        }
+      }
+
+      .chair-div {
+        @include flex(flex-start);
+
+        .chair-top-div {
+          width: 60px;
+          height: 60px;
+          @include center(flex-end);
+
+          .chair-top {
+            height: 60px;
+            width: 60px;
+            background-color: chocolate;
+            border: solid;
+          }
+        }
+
+        .chair-seat {
+          width: 100%;
+          height: 15px;
+          background-color: chocolate;
+          border: solid;
+          border-top: solid 0.5px;
+        }
+
+        .chair-leg-div {
+          @include center(space-between);
+          height: 50px;
+          width: 100%;
+
+          .chair-leg {
+            height: 100%;
+            width: 15px;
+            background-color: chocolate;
+            border: solid;
+            border-top: solid 0.5px;
+          }
+        }
+      }
     }
   }
 
@@ -277,7 +658,6 @@
               border-bottom: solid;
               border-left: solid;
               border-right: solid;
-
             }
           }
           .clearing-gate-handle-div {

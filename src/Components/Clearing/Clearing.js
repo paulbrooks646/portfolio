@@ -16,9 +16,9 @@ function Clearing(props) {
   const [downCharacter, setDownCharacter] = useState(false);
   const [downDown, setDownDown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [inventoryOpen, setInventoryOpen] = useState(false)
-  const [rejectionCard, setRejectionCard] = useState(false)
-  const [clearingData, setClearingData] = useState()
+  const [inventoryOpen, setInventoryOpen] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false);
+  const [clearingData, setClearingData] = useState();
 
   useEffect(() => {
     axios.get("/api/clearing").then((res) => {
@@ -51,7 +51,6 @@ function Clearing(props) {
       if (props.location.pathname === "/Tower") {
         axios.post("/api/useFlute").then((res) => {
           setClearingData(res.data[0]);
-          ;
         });
       } else {
         setRejectionCard(true);
@@ -167,7 +166,75 @@ function Clearing(props) {
             </div>
           </div>
           <div className="clearing-top-middle"></div>
-          <div className="clearing-top-right"></div>
+          <div className="clearing-top-right">
+            <div className="druid">
+              <div className="druid-head">
+                <div className="druid-hair-left"></div>
+                <div className="druid-face">
+                  <div className="druid-hair-top-left"></div>
+                  <div className="druid-hair-top-right"></div>
+                  <div className="druid-eyes">
+                    <div className="druid-eye">
+                      <div className="druid-iris"></div>
+                    </div>
+                    <div className="druid-eye">
+                      <div className="druid-iris">
+                        <div className="druid-pupil"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="druid-nose"></div>
+                  <div className="druid-mouth"></div>
+                </div>
+                <div className="druid-hair-right"></div>
+              </div>
+              <div className="druid-body">
+                <div className="druid-upper-neck"></div>
+                <div className="druid-neck"></div>
+                <div className="druid-dress">
+                  <div className="druid-arm-left">
+                    <div className="druid-finger-div">
+                      <div className="druid-finger-one"></div>
+                      <div className="druid-finger-two"></div>
+                      <div className="druid-finger-three"></div>
+                      <div className="druid-finger-four"></div>
+                      <div className="druid-finger-five"></div>
+                    </div>
+                    </div>
+                    <div className="druid-rope"></div>
+                    <div className="druid-dress-crease"></div>
+
+                  <div className="druid-arm-right">
+                    <div className="druid-finger-div">
+                      <div className="druid-finger-one"></div>
+                      <div className="druid-finger-two"></div>
+                      <div className="druid-finger-three"></div>
+                      <div className="druid-finger-four"></div>
+                      <div className="druid-finger-five"></div>
+                    </div>
+                  </div>
+                </div>
+                <div className="druid-legs">
+                  <div className="druid-leg-left">
+                    <div className="druid-foot"></div>
+                  </div>
+                  <div className="druid-leg-right">
+                    <div className="druid-foot"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="chair-div">
+              <div className="chair-top-div">
+                <div className="chair-top"></div>
+              </div>
+              <div className="chair-seat"></div>
+              <div className="chair-leg-div">
+                <div className="chair-leg"></div>
+                <div className="chair-leg"></div>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="clearing-middle">
           <div className="clearing-middle-left">
@@ -222,8 +289,10 @@ function Clearing(props) {
                 <div className="clearing-gate-bar-div">
                   <div className="clearing-gate-support"></div>
                   <div className="clearing-gate-support"></div>
-                  </div>
-                  <div className="clearing-gate-handle-div"><div className="clearing-gate-handle"></div></div>
+                </div>
+                <div className="clearing-gate-handle-div">
+                  <div className="clearing-gate-handle"></div>
+                </div>
               </div>
               <div className="clearing-gate-bottom">
                 <div className="clearing-gate-bolt"></div>
