@@ -15,6 +15,22 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
+  chest: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.chest(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
   hair: (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;

@@ -629,6 +629,70 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
+  useDagger: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_dagger(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+  useInvisibility: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_invisibility(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+  useStrength: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_strength(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+  useSeed: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_seed(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
 
   useShield: async (req, res) => {
     const db = req.app.get("db");

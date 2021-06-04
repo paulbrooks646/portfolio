@@ -7,6 +7,14 @@ module.exports = {
 
     res.status(200).send(stables);
   },
+  getClearing: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const clearing = await db.get_clearing(id);
+
+    res.status(200).send(clearing);
+  },
   getAlley: async (req, res) => {
     const db = req.app.get("db");
 

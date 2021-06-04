@@ -6,6 +6,13 @@ module.exports = {
     const tower = await db.tower_first(id);
     res.status(200).send(tower);
   },
+  clearingFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const clearing = await db.clearing_first(id);
+    res.status(200).send(clearing);
+  },
   valleyFirst: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
