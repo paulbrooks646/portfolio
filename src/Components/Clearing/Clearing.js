@@ -60,7 +60,7 @@ function Clearing(props) {
 
   const toggleItem = (item) => {
     if (item === "seed") {
-      if (!clearingData.dagger_used) {
+      if (!clearingData.dagger_used || !clearingData.chest_taken) {
         setRejectionCard(true)
       } else {
         axios.post("/api/useSeed").then((res) => {

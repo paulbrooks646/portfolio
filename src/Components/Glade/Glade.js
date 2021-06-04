@@ -38,15 +38,15 @@ function Glade(props) {
   const [inventoryOpen, setInventoryOpen] = useState(false);
   const [firstTimeCard, setFirstTimeCard] = useState(false);
   const [druid, setDruid] = useState(false);
-  const [coinCard, setCoinCard] = useState(false)
-  const [speedCard, setSpeedCard] = useState(false)
-  const [mushroomCard, setMushroomCard] = useState(false)
-  const [appleCard, setAppleCard] = useState(false)
-  const [sulfurCard, setSulfurCard] = useState(false)
-  const [magicUserCard, setMagicUserCard] = useState(false)
-  const [druidRejectionCard, setDruidRejectionCard] = useState(false)
-  const [grassRejectionCard, setGrassRejectionCard] = useState(false)
-  const [doorRejectionCard, setDoorRejectionCard] = useState(false)
+  const [coinCard, setCoinCard] = useState(false);
+  const [speedCard, setSpeedCard] = useState(false);
+  const [mushroomCard, setMushroomCard] = useState(false);
+  const [appleCard, setAppleCard] = useState(false);
+  const [sulfurCard, setSulfurCard] = useState(false);
+  const [magicUserCard, setMagicUserCard] = useState(false);
+  const [druidRejectionCard, setDruidRejectionCard] = useState(false);
+  const [grassRejectionCard, setGrassRejectionCard] = useState(false);
+  const [doorRejectionCard, setDoorRejectionCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/glade").then((res) => {
@@ -64,12 +64,12 @@ function Glade(props) {
     });
   }, []);
 
-   const toggleFirst = () => {
-     axios.post("/api/gladeFirst").then((res) => {
-       setGladeData(res.data[0]);
-       setFirstTimeCard(false);
-     });
-   };
+  const toggleFirst = () => {
+    axios.post("/api/gladeFirst").then((res) => {
+      setGladeData(res.data[0]);
+      setFirstTimeCard(false);
+    });
+  };
 
   const toggleInventoryOpen = () => setInventoryOpen(!inventoryOpen);
 
@@ -91,31 +91,31 @@ function Glade(props) {
   const toggleItem = (item) => {
     if (item === "sulfur") {
       axios.post("/api/useSulfur").then((res) => {
-        props.getInventory(res.data)
-        axios.get("/api/glade").then(res => {
+        props.getInventory(res.data);
+        axios.get("/api/glade").then((res) => {
           setGladeData(res.data[0]);
-          setSulfurCard(true)
-        })
+          setSulfurCard(true);
         });
+      });
     } else if (item === "mushroom") {
-      axios.post("/api/useMushroom").then(res => {
-        props.getInventory(res.data)
-        axios.get("/api/glade").then(res => {
-          setGladeData(res.data[0])
-          setMushroomCard(true)
-        })
-        })
+      axios.post("/api/useMushroom").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/glade").then((res) => {
+          setGladeData(res.data[0]);
+          setMushroomCard(true);
+        });
+      });
     } else if (item === "apple") {
-      axios.post("/api/useApple").then(res => {
-        props.getInventory(res.data)
-        axios.get("/api/glade").then(res => {
-          setGladeData(res.data[0])
-          setAppleCard(true)
-        })
-      })
+      axios.post("/api/useApple").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/glade").then((res) => {
+          setGladeData(res.data[0]);
+          setAppleCard(true);
+        });
+      });
     } else {
-      setRejectionCard(true)
-      }
+      setRejectionCard(true);
+    }
   };
 
   const toggleRight = () => {
@@ -156,20 +156,25 @@ function Glade(props) {
 
   const toggleDruid = () => {
     if (!gladeData.cake_given) {
-      setDruidRejectionCard(true)
-    } else if (gladeData.use_sulfur && gladeData.use_apple && gladeData.use_mushroom && !gladeData.magic_user) {
-      axios.post("/api/magicUser").then(res => {
-        setGladeData(res.data[0])
-        setMagicUserCard(true)
-      })
+      setDruidRejectionCard(true);
+    } else if (
+      gladeData.use_sulfur &&
+      gladeData.use_apple &&
+      gladeData.use_mushroom &&
+      !gladeData.magic_user
+    ) {
+      axios.post("/api/magicUser").then((res) => {
+        setGladeData(res.data[0]);
+        setMagicUserCard(true);
+      });
     } else if (gladeData.unicorn_freed && !gladeData.speed_received) {
-      axios.post("/api/speed").then(res => {
-        props.getInventory(res.data)
-        axios.get("/api/glade").then(res => {
-          setGladeData(res.data[0])
-          setSpeedCard(true)
-        })
-      })
+      axios.post("/api/speed").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/glade").then((res) => {
+          setGladeData(res.data[0]);
+          setSpeedCard(true);
+        });
+      });
     } else {
       setDruid(!druid);
     }
@@ -177,7 +182,6 @@ function Glade(props) {
 
   const toggleCoin = () => {
     if (!gladeData.coin_taken) {
-     
       axios.post("/api/gladeCoin").then((res) => {
         setGladeData(res.data[0]);
         axios.post("/api/coin").then((res) => {
@@ -186,9 +190,9 @@ function Glade(props) {
         });
       });
     } else {
-      setGrassRejectionCard(true)
+      setGrassRejectionCard(true);
     }
-   };
+  };
 
   const toggleAnswerOne = () => {
     toggleDruid();
@@ -308,7 +312,10 @@ function Glade(props) {
           <div className="glade-middle-left">
             <div className="glade-middle-wall-div">
               <div className="glade-middle-wall-top"></div>
-              <div className="glade-middle-wall-front" onClick={() => setDoorRejectionCard(true)}></div>
+              <div
+                className="glade-middle-wall-front"
+                onClick={() => setDoorRejectionCard(true)}
+              ></div>
             </div>
           </div>
           <div className="glade-middle-middle">
@@ -453,9 +460,9 @@ function Glade(props) {
           color="secondary"
           className="answer-card-description"
         >
-          The dragon is one of the three most powerful beings in the area. He is
-          very powerful and defeating him is unlikely, especially in his own
-          lair. I do have a speed scroll that might help a little.
+          The dragon is one of the three most powerful beings in the area. He
+          hoards treasure, and has a seed that grows a giant
+          carnivourous plant. My speed scroll could help slay him.
         </Typography>
         <Button onClick={toggleAnswerOne} variant="contained" color="primary">
           CLOSE
@@ -520,7 +527,10 @@ function Glade(props) {
           color="secondary"
           className="answer-card-description"
         >
-          The speed scroll enhances the casters speed briefly but immensely. It is the only way I know that one could match the Dragon's speed in his home. It is precious. Perhaps if you found the missing unicorn I could give it to you.
+          The speed scroll enhances the casters speed briefly but immensely. It
+          is the only way I know that one could match the Dragon's speed in his
+          home. It is precious. Perhaps if you found the missing unicorn I could
+          give it to you.
         </Typography>
         <Button onClick={toggleAnswerFive} variant="contained" color="primary">
           CLOSE
@@ -535,7 +545,9 @@ function Glade(props) {
           color="secondary"
           className="answer-card-description"
         >
-          Magical creatures are free to leave this sanctuary but lose my protection while they are away. A young unicorn chose to do so and disappeared. I fear she may have been captured by the witch, or worse.
+          Magical creatures are free to leave this sanctuary but lose my
+          protection while they are away. A young unicorn chose to do so and
+          disappeared. I fear she may have been captured by the witch, or worse.
         </Typography>
         <Button onClick={toggleAnswerSix} variant="contained" color="primary">
           CLOSE
@@ -551,7 +563,10 @@ function Glade(props) {
           color="secondary"
           className="answer-card-description"
         >
-          The witch is one of the three most powerful magic beings in the area. She lives in a cottage in the forest past the caves. Her cottage is protected by magical barriers. In her home only her own magic could defeat her.
+          The witch is one of the three most powerful magic beings in the area.
+          She lives in a cottage in the forest past the caves. Her cottage is
+          protected by magical barriers. In her home only her own magic could
+          defeat her.
         </Typography>
         <Button onClick={toggleAnswerSeven} variant="contained" color="primary">
           NEXT
@@ -566,7 +581,9 @@ function Glade(props) {
           color="secondary"
           className="answer-card-description"
         >
-          The destructive dragon, the evil witch, and I are the most powerful magical beings in the area. On neutral ground, we are evenly matched. In our home, the root of our power, we are drastically more powerful.
+          The destructive dragon, the evil witch, and I are the most powerful
+          magical beings in the area. On neutral ground, we are evenly matched.
+          In our home, the root of our power, we are drastically more powerful.
         </Typography>
         <Button onClick={toggleAnswerEight} variant="contained" color="primary">
           CLOSE
@@ -581,7 +598,9 @@ function Glade(props) {
           color="secondary"
           className="answer-card-description"
         >
-          Making a human a magic user is highly irregular but as you have helped us, if you gather some ingredients I need to make healing potions I will make an exception.
+          Making a human a magic user is highly irregular but as you have helped
+          us, if you gather some ingredients I need to make healing potions I
+          will make an exception.
         </Typography>
         <Button onClick={toggleAnswerNine} variant="contained" color="primary">
           CLOSE
@@ -596,7 +615,8 @@ function Glade(props) {
           color="secondary"
           className="answer-card-description"
         >
-          I need an apple from the highest tree in the forest, mushroom from the far side of the mountain and some sulfur from the Hydra's bog.
+          I need an apple from the highest tree in the forest, mushroom from the
+          far side of the mountain and some sulfur from the Hydra's bog.
         </Typography>
         <Button onClick={toggleAnswerTen} variant="contained" color="primary">
           CLOSE
@@ -613,9 +633,8 @@ function Glade(props) {
           className="answer-card-description"
         >
           I associate not with humans. The way they live harms magical
-          creatures. Yet, if you can unblock the mountain
-          runoff, we may speak. Lack of water is hurtful to humans,
-          animals and magical creatures.
+          creatures. Yet, if you can unblock the mountain runoff, we may speak.
+          Lack of water is hurtful to humans, animals and magical creatures.
         </Typography>
         <Button
           onClick={() => setDruidRejectionCard(false)}
@@ -773,10 +792,10 @@ function Glade(props) {
           color="secondary"
           className="answer-card-description"
         >
-          Thank you for acquiring the ingredients. As promised I
-          will give you the ability to use magic. The orb on her staff glows and
-          a small ball of blue energy shoots at you. You feel new power course
-          through your veins.
+          Thank you for acquiring the ingredients. As promised I will give you
+          the ability to use magic. The orb on her staff glows and a small ball
+          of blue energy shoots at you. You feel new power course through your
+          veins.
         </Typography>
         <Button
           onClick={() => setMagicUserCard(false)}

@@ -29,7 +29,7 @@
   }
 
   .maze-middle {
-    @include row(20vw);
+    @include row(20vh);
     background-image: url("../../Images/Dirt.png");
 
     .maze-middle-left {
