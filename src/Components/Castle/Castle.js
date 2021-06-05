@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
+import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Castle.scss";
 import Card from "@material-ui/core/Card";
@@ -14,7 +15,6 @@ import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import Character from "../Character/Character";
-import Guard from "../../Images/Guard.png";
 import Loading from "../Loading/Loading";
 
 function Castle(props) {
@@ -51,16 +51,11 @@ function Castle(props) {
   const [notAChance, setNotAChance] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [rejectionCard, setRejectionCard] = useState(false);
-  const [castleData, setCastleData] = useState()
+  const [castleData, setCastleData] = useState();
   const [inventoryOpen, setInentoryOpen] = useState(false);
-  const [castleRejectionCard, setCastleRejectionCard] = useState(false)
-
+  const [castleRejectionCard, setCastleRejectionCard] = useState(false);
 
   useEffect(() => {
-    // if (!props.user.user.newgame) {
-    //   setNewgameCard(false);
-
-    // }
     axios.get("/api/castle").then((res) => {
       setCastleData(res.data[0]);
 
@@ -76,37 +71,37 @@ function Castle(props) {
       setIsLoading(false);
     });
   }, []);
-  
+
   const toggleInventoryOpen = () => setInentoryOpen(!inventoryOpen);
-  
+
   const logout = () => {
     axios.delete("/api/logout").then(() => {
       props.logoutUser();
       props.history.push("/Auth");
     });
-   };
+  };
 
-   const inventoryList = props.inventory.inventory.map((e, index) => {
-     return (
-       <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
-         {e}
-       </h4>
-     );
-   });
+  const inventoryList = props.inventory.inventory.map((e, index) => {
+    return (
+      <h4 key={index} className="nav-list-item" onClick={() => toggleItem(e)}>
+        {e}
+      </h4>
+    );
+  });
 
-   const toggleItem = (item) => {
-     if (item === "flute") {
-       if (props.location.pathname === "/Tower") {
-         axios.post("/api/useFlute").then((res) => {
-           setCastleData(res.data[0]);
-           ;
-         });
-       } else {
-         setRejectionCard(true);
-       }
-     }
-   };
+  const toggleItem = (item) => {
+    if (item === "flute") {
+      if (props.location.pathname === "/Tower") {
+        axios.post("/api/useFlute").then((res) => {
+          setCastleData(res.data[0]);
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    }
+  };
 
+  const toggleDruid = () => {};
 
   const toggleUp = () => {
     if (
@@ -370,12 +365,54 @@ function Castle(props) {
             </div>
           </div>
           <div className="castle-middle-middle">
-            <img
-              src={Guard}
-              alt="palace guard"
-              onClick={toggleGuard}
-              className="guard-image"
-            />
+            <div className="druid" onClick={toggleDruid}>
+              <div className="druid-hat"></div>
+              <div className="druid-head">
+                <div className="druid-hair-left"></div>
+                <div className="druid-face">
+                  <div className="druid-hair-top-left"></div>
+                  <div className="druid-hair-top-right"></div>
+                  <div className="druid-eyes">
+                    <div className="druid-eye">
+                      <div className="druid-iris"></div>
+                    </div>
+                    <div className="druid-eye">
+                      <div className="druid-iris">
+                        <div className="druid-pupil"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="druid-nose"></div>
+                  <div className="druid-mouth"></div>
+                </div>
+                <div className="druid-hair-right"></div>
+              </div>
+              <div className="druid-body">
+                <div className="druid-dress">
+                  <div className="druid-left-arm">
+                    <div className="druid-hand">
+                      <div className="driud-staff-div">
+                        <div className="druid-staff-top"></div>
+                        <div className="druid-staff-middle"></div>
+                        <div className="druid-staff-bottom"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="druid-right-arm">
+                    <div className="druid-hand"></div>
+                  </div>
+                </div>
+                <div className="druid-pants-div"></div>
+                <div className="druid-legs">
+                  <div className="druid-leg-left">
+                    <div className="druid-foot"></div>
+                  </div>
+                  <div className="druid-leg-right">
+                    <div className="druid-foot"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="castle-middle-right">
             <div
@@ -686,4 +723,6 @@ function Castle(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser})(Castle);
+export default connect(mapStateToProps, { getUser, logoutUser, getInventory })(
+  Castle
+);

@@ -3,17 +3,52 @@
 .castle-body {
   .castle-top {
     @include row(35vh);
-    background-image: url("../../Images/CastleTwo.jpg");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
 
     .castle-top-left {
       @include section(40vw);
+      background-color: black;
+      background-image: linear-gradient(335deg, silver 23px, transparent 23px),
+        linear-gradient(155deg, silver 23px, transparent 23px),
+        linear-gradient(335deg, silver 23px, transparent 23px),
+        linear-gradient(155deg, silver 23px, transparent 23px);
+      background-size: 58px 58px;
+      background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
     }
 
     .castle-top-middle {
       @include section(20vw);
       @include flex(flex-start);
+      background-image: linear-gradient(
+        sienna 9%,
+        black 9%,
+        sienna 10%,
+        sienna 19%,
+        black 19%,
+        sienna 20%,
+        sienna 29%,
+        black 29%,
+        sienna 30%,
+        sienna 39%,
+        black 39%,
+        sienna 40%,
+        sienna 49%,
+        black 49%,
+        sienna 50%,
+        sienna 59%,
+        black 59%,
+        sienna 60%,
+        sienna 69%,
+        black 69%,
+        sienna 70%,
+        sienna 79%,
+        black 79%,
+        sienna 80%,
+        sienna 89%,
+        black 89%,
+        sienna 90%,
+        sienna 99%,
+        black 99%
+      );
 
       .castle-throne {
         @include flex(flex-start);
@@ -22,6 +57,13 @@
     }
     .castle-top-right {
       @include section(40vw);
+      background-color: black;
+      background-image: linear-gradient(335deg, silver 23px, transparent 23px),
+        linear-gradient(155deg, silver 23px, transparent 23px),
+        linear-gradient(335deg, silver 23px, transparent 23px),
+        linear-gradient(155deg, silver 23px, transparent 23px);
+      background-size: 58px 58px;
+      background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
     }
   }
 
@@ -44,10 +86,180 @@
       @include section(20vw);
       @include flex(center);
 
-      .guard-image {
-        height: 150px;
-        width: 100px;
+      .druid {
+        @include flex(center);
+        position: relative;
         cursor: pointer;
+
+        .druid-hat {
+          border-radius: 50% 50% 25% 25%;
+          height: 50px;
+          width: 50px;
+          border-top: steelblue 20px solid;
+          border-bottom: steelblue 20px solid;
+          border-left: solid steelblue 10px;
+          border-right: solid steelblue 10px;
+          position: relative;
+          z-index: 3;
+          top: 2px;
+        }
+
+        .druid-head {
+          display: flex;
+          justify-content: center;
+          position: relative;
+          bottom: 42px;
+
+          .druid-face {
+            height: 42px;
+            width: 42px;
+            background-color: #ffdbac;
+            border-radius: 50%;
+            @include flex(center);
+            border-bottom: black solid 1px;
+
+            .druid-eyes {
+              width: 80%;
+              @include center(space-evenly);
+              position: relative;
+              bottom: 2px;
+
+              .druid-eye {
+                width: 12px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: white;
+                @include flex(center);
+
+                .druid-iris {
+                  width: 5.5px;
+                  height: 5.5px;
+                  border-radius: 50%;
+                  background-color: black;
+                  @include flex(center);
+                }
+              }
+            }
+          }
+        }
+
+        .druid-body {
+          @include flex(flex-start);
+          position: relative;
+          bottom: 38px;
+
+          .druid-dress {
+            width: 80px;
+            height: 100px;
+            background-color: steelblue;
+            border-radius: 25% 25% 0% 0%;
+            position: relative;
+            bottom: 2px;
+            z-index: 2;
+            @include flex(flex-start);
+
+            .druid-left-arm {
+              height: 30px;
+              width: 20px;
+              background-color: steelblue;
+              @include flex(center);
+              border: solid green;
+              .druid-hand {
+                height: 10px;
+                width: 30px;
+                background-color: steelblue;
+                border: solid orange;
+                .driud-staff-div {
+                  @include flex(center);
+                  transform: rotate(90deg);
+                  position: relative;
+                  top: 122px;
+                  left: 6px;
+
+                  .druid-staff-top {
+                    height: 25px;
+                    width: 25px;
+                    border-radius: 50%;
+                    background-color: skyblue;
+                    position: relative;
+                    top: 36px;
+                    z-index: 1;
+                  }
+                  .druid-staff-middle {
+                    height: 40px;
+                    width: 40px;
+                    border-radius: 50%;
+                    border-bottom: solid goldenrod 10px;
+                    position: relative;
+                    top: 3px;
+                  }
+
+                  .druid-staff-bottom {
+                    width: 10px;
+                    height: 150px;
+                    background-color: chocolate;
+                  }
+                }
+              }
+            }
+            .druid-right-arm {
+                height: 30px;
+              width: 20px;
+              background-color: steelblue;
+              @include flex(center);
+              border: solid red;
+              .druid-hand {
+                 height: 10px;
+                width: 30px;
+                background-color: steelblue;
+                border: solid purple;
+              }
+            }
+          }
+        }
+
+        .druid-legs {
+          @include center(space-evenly);
+          width: 50px;
+          position: relative;
+          bottom: 80px;
+
+          .druid-leg-left {
+            height: 30px;
+            width: 9px;
+            background-color: #ffdbac;
+
+            @include flex(flex-end);
+            border-radius: 0% 0% 50% 50%;
+
+            .druid-foot {
+              height: 9px;
+              width: 13px;
+              background-color: silver;
+              position: relative;
+              z-index: 1;
+              border-radius: 50% 50% 0% 0%;
+            }
+          }
+
+          .druid-leg-right {
+            height: 30px;
+            width: 9px;
+            background-color: #ffdbac;
+
+            @include flex(flex-end);
+            border-radius: 0% 0% 50% 50%;
+
+            .druid-foot {
+              height: 9px;
+              width: 13px;
+              background-color: silver;
+              position: relative;
+              z-index: 1;
+              border-radius: 50% 50% 0% 0%;
+            }
+          }
+        }
       }
     }
 
