@@ -426,11 +426,11 @@ module.exports = {
     res.status(200).send(stables);
   },
 
-  giveNuts: async (req, res) => {
+  useNuts: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
 
-    db.give_nuts(id).then((inventory) => {
+    db.use_nuts(id).then((inventory) => {
       let newArr = [];
 
       for (let key in inventory[0]) {
@@ -443,11 +443,11 @@ module.exports = {
     });
   },
 
-  giveHat: async (req, res) => {
+  useHat: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
 
-    db.give_hat(id).then((inventory) => {
+    db.use_hat(id).then((inventory) => {
       let newArr = [];
 
       for (let key in inventory[0]) {
@@ -728,13 +728,21 @@ module.exports = {
     });
   },
 
-  showLetter: async (req, res) => {
+  useLetter: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
 
-    db.show_letter(id);
+    db.use_letter(id).then((inventory) => {
+      let newArr = [];
 
-    res.sendStatus(200);
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
   },
 
   placeHome: async (req, res) => {

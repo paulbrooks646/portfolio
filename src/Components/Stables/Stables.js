@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Stables.scss";
@@ -43,13 +43,14 @@ function Stables(props) {
   const [inventoryOpen, setInventoryOpen] = useState(false)
   const [rejectionCard, setRejectionCard] = useState(false)
   const [stablesData, setStablesData] = useState(false)
+  const [firstTimeCard, setFirstTimeCard] = useState(false)
+   const [bottleCard, setBottleCard] = useState(false);
 
   useEffect(() => {
-    // if (!props.user.user.newgame) {
-    //   setNewgameCard(false);
-
-    // }
     axios.get("/api/stables").then((res) => {
+      if (res.data[0].first_time) {
+        setFirstTimeCard(true)
+      }
       setStablesData(res.data[0]);
 
       if (props.user.user.last === "valley") {
@@ -79,16 +80,19 @@ function Stables(props) {
   });
 
   const toggleItem = (item) => {
-    if (item === "flute") {
-      if (props.location.pathname === "/Tower") {
-        axios.post("/api/useFlute").then((res) => {
-          setStablesData(res.data[0]);
-          ;
+    if (item === "bottle") {
+      
+        axios.post("/api/manure").then((res) => {
+          props.getInventory(res.data);
+        });
+        axios.post("/api/manureHasTaken").then((res) => {
+          props.getStables(res.data[0]);
+          setBottleCard(true);
         });
       } else {
         setRejectionCard(true);
       }
-    }
+    
   };
 
   const toggleLeft = () => {
@@ -628,11 +632,28 @@ function Stables(props) {
           CLOSE
         </Button>
       </Card>
+      <Card className={`${bottleCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          You succeed in filling your bottle with smelly, rancid manure.
+          Congratulations?
+        </Typography>
+        <Button
+          onClick={() => setBottleCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory, logoutUser })(
   Stables
 );

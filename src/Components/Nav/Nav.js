@@ -13,11 +13,7 @@ import Button from "@material-ui/core/Button";
 function Nav(props) {
   const [inventoryOpen, setInentoryOpen] = useState(false);
   const [rejectionCard, setRejectionCard] = useState(false);
-  const [nutCard, setNutCard] = useState(false);
-  const [hatCard, setHatCard] = useState(false);
-  const [showLetterCard, setShowLetterCard] = useState(false);
-  const [bottleCard, setBottleCard] = useState(false);
-  const [manureCard, setManureCard] = useState(false);
+ 
   const [fluteCard, setFluteCard] = useState(false);
   const [flowerCard, setFlowerCard] = useState(false);
   const [ribbonCard, setRibbonCard] = useState(false);
@@ -46,19 +42,7 @@ function Nav(props) {
   });
 
   const toggleItem = (item) => {
-    if (item === "bottle") {
-      if (props.location.pathname === "/Stables") {
-        axios.post("/api/manure").then((res) => {
-          props.getInventory(res.data);
-        });
-        axios.post("/api/manureHasTaken").then((res) => {
-          props.getStables(res.data[0]);
-          setBottleCard(true);
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
+   
     if (item === "flute") {
       if (props.location.pathname === "/Tower") {
         axios.post("/api/useFlute").then((res) => {
@@ -130,47 +114,7 @@ function Nav(props) {
         setRejectionCard(true);
       }
     }
-    if (item === "nuts") {
-      if (props.location.pathname === "/Castle") {
-        axios.post("/api/giveNuts").then((res) => {
-          props.getInventory(res.data);
-          axios.post("/api/coin").then((res) => {
-            props.getUser(res.data);
-            axios.get("/api/castle").then((res) => {
-              props.getCastle(res.data[0]);
-              setNutCard(true);
-            });
-          });
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
-    if (item === "hat") {
-      if (props.location.pathname === "/Castle") {
-        axios.post("/api/giveHat").then((res) => {
-          props.getInventory(res.data);
-          axios.get("/api/castle").then((res) => {
-            props.getCastle(res.data[0]);
-            setHatCard(true);
-          });
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
-    if (item === "letter") {
-      if (props.location.pathname === "/Castle") {
-        axios.post("/api/showLetter").then(() => {
-          axios.get("/api/castle").then((res) => {
-            props.getCastle(res.data[0]);
-            setShowLetterCard(true);
-          });
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
+    
   };
 
   return (
@@ -212,58 +156,7 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card className={`${nutCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="secondary"
-          className="answer-card-description"
-        >
-          You give the guard the nuts. In exchange he gives you a coin and is
-          willing to talk to you.
-        </Typography>
-        <Button
-          onClick={() => setNutCard(false)}
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${hatCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="secondary"
-          className="answer-card-description"
-        >
-          Thanks for finding my hat!!!
-        </Typography>
-        <Button
-          onClick={() => setHatCard(false)}
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card
-        className={`${showLetterCard ? "answer-card" : "answer-card-closed"}`}
-      >
-        <Typography
-          variant="h4"
-          color="secondary"
-          className="answer-card-description"
-        >
-          Great! Delivering a letter from the Princess is a legitimate reason to
-          see the King.
-        </Typography>
-        <Button
-          onClick={() => setShowLetterCard(false)}
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
+      
       <Card className={`${bottleCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"

@@ -54,9 +54,17 @@ function Castle(props) {
   const [castleData, setCastleData] = useState();
   const [inventoryOpen, setInentoryOpen] = useState(false);
   const [castleRejectionCard, setCastleRejectionCard] = useState(false);
+  const [letterCard, setLetterCard] = useState(false);
+  const [nutsCard, setNutsCard] = useState(false);
+  const [hatCard, setHatCard] = useState(false);
+  const [firstTimeCard, setFirstTimeCard] = useState(false);
+  
 
   useEffect(() => {
     axios.get("/api/castle").then((res) => {
+      if (res.data[0].first_time) {
+        setFirstTimeCard(true);
+      }
       setCastleData(res.data[0]);
 
       if (props.user.user.last === "town") {
@@ -90,33 +98,56 @@ function Castle(props) {
   });
 
   const toggleItem = (item) => {
-    if (item === "flute") {
-      if (props.location.pathname === "/Tower") {
-        axios.post("/api/useFlute").then((res) => {
-          setCastleData(res.data[0]);
+    if (item === "hat") {
+      console.log("registered hat")
+      if (castleData.nuts_given) {
+        console.log("registered nuts")
+        axios.post("/api/useHat").then((res) => {
+          props.getInventory(res.data);
+          axios.get("/api/castle").then((res) => {
+            setCastleData(res.data[0]);
+            setHatCard(true);
+          });
         });
       } else {
         setRejectionCard(true);
       }
+    } else if (item === "nuts") {
+      axios.post("/api/useNuts").then((res) => {
+        props.getInventory(res.data);
+        axios.post("/api/coin").then(res => {
+        props.getUser(res.data)  
+        axios.get("/api/castle").then((res) => {
+          setCastleData(res.data[0]);
+          setNutsCard(true);
+        })
+        });
+      });
+    } else if (item === "letter") {
+      if (castleData.nuts_given) {
+        axios.post("api/useLetter").then((res) => {
+          props.getInventory(res.data);
+          axios.get("/api/castle").then((res) => {
+            setCastleData(res.data[0]);
+            setLetterCard(true);
+          });
+        })
+      } else {
+        setRejectionCard(true)
+      }
+    } else {
+      setRejectionCard(true);
     }
   };
 
-  const toggleDruid = () => {};
-
   const toggleUp = () => {
-    if (
-      castleData.nuts_given === true &&
-      castleData.hat_given === true &&
-      castleData.letter_given === true
-    ) {
+   
       axios.post("/api/changeLast", { last: "castle" }).then((res) => {
         props.getUser(res.data).then(() => {
           props.history.push("/Throne");
         });
       });
-    } else {
-      setNotAChance(true);
-    }
+    
   };
   const toggleLeft = () => {
     axios.post("/api/changeLast", { last: "castle" }).then((res) => {
@@ -227,18 +258,26 @@ function Castle(props) {
   };
 
   const toggleGoUp = () => {
-    if (props.user.user.last === "town") {
-      setDownUp(true);
-      setDownCharacter(false);
-    } else if (props.user.user.last === "garden") {
-      setLeftCharacter(false);
-      setLeftUp(true);
-    } else if (props.user.user.last === "tower") {
-      setRightCharacter(false);
-      setRightUp(true);
-    } else if (props.user.user.last === "throne") {
-      setUpCharacter(false);
-      setUpUp(true);
+    if (
+      castleData.nuts_given === true &&
+      castleData.hat_given === true &&
+      castleData.letter_given === true
+    ) {
+      if (props.user.user.last === "town") {
+        setDownUp(true);
+        setDownCharacter(false);
+      } else if (props.user.user.last === "garden") {
+        setLeftCharacter(false);
+        setLeftUp(true);
+      } else if (props.user.user.last === "tower") {
+        setRightCharacter(false);
+        setRightUp(true);
+      } else if (props.user.user.last === "throne") {
+        setUpCharacter(false);
+        setUpUp(true);
+      }
+    } else {
+      setNotAChance(true)
     }
   };
 
@@ -256,6 +295,13 @@ function Castle(props) {
       setUpCharacter(false);
       setUpDown(true);
     }
+  };
+
+  const toggleFirst = () => {
+    axios.post("/api/castleFirst").then((res) => {
+      setCastleData(res.data[0]);
+      setFirstTimeCard(false);
+    });
   };
 
   return isLoading ? (
@@ -288,6 +334,7 @@ function Castle(props) {
         <div className="castle-top">
           <div className="castle-top-left"></div>
           <div className="castle-top-middle">
+            <div className="castle-handle"></div>
             <div className="castle-throne" onClick={toggleGoUp}>
               <ArrowUpward />
               <h2>Throne Room</h2>
@@ -365,7 +412,7 @@ function Castle(props) {
             </div>
           </div>
           <div className="castle-middle-middle">
-            <div className="druid" onClick={toggleDruid}>
+            <div className="druid" onClick={toggleGuard}>
               <div className="druid-hat"></div>
               <div className="druid-head">
                 <div className="druid-hair-left"></div>
@@ -388,21 +435,30 @@ function Castle(props) {
                 <div className="druid-hair-right"></div>
               </div>
               <div className="druid-body">
-                <div className="druid-dress">
+                <div className="druid-armor">
                   <div className="druid-left-arm">
-                    <div className="druid-hand">
-                      <div className="driud-staff-div">
-                        <div className="druid-staff-top"></div>
-                        <div className="druid-staff-middle"></div>
-                        <div className="druid-staff-bottom"></div>
+                    <div className="driud-sword-div">
+                      <div className="druid-sword-tip"></div>
+                      <div className="druid-sword-blade"></div>
+                      <div className="druid-sword-hilt"></div>
+                      <div className="druid-sword-handle">
+                        <div className="druid-hand">
+                          <div className="druid-finger"></div>
+                          <div className="druid-finger"></div>
+                          <div className="druid-finger"></div>
+                        </div>
                       </div>
                     </div>
                   </div>
                   <div className="druid-right-arm">
-                    <div className="druid-hand"></div>
+                    <div className="druid-hand">
+                      <div className="druid-finger"></div>
+                      <div className="druid-finger"></div>
+                      <div className="druid-finger"></div>
+                    </div>
                   </div>
                 </div>
-                <div className="druid-pants-div"></div>
+
                 <div className="druid-legs">
                   <div className="druid-leg-left">
                     <div className="druid-foot"></div>
@@ -621,7 +677,7 @@ function Castle(props) {
           color="secondary"
           className="answer-card-description"
         >
-          No one crosses the drawbridge and enters the throne room with out my
+          No one enters the castle without my
           permission.
         </Typography>
         <Button onClick={toggleAnswerSeven} variant="contained" color="primary">
@@ -682,15 +738,13 @@ function Castle(props) {
         </Button>
       </Card>
       <Card className={`${notAChance ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary">
-          NOT A CHANCE!!!
-        </Typography>
+        
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          No one crosses the drawbridge without my permission.
+          Not a chance!!! No one enters without my permission.
         </Typography>
         <Button
           onClick={() => setNotAChance(false)}
@@ -715,6 +769,71 @@ function Castle(props) {
           variant="contained"
           color="primary"
         >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${nutsCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You give the guard the nuts. In exchange he gives you a coin and is
+          willing to talk to you.
+        </Typography>
+        <Button
+          onClick={() => setNutsCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${hatCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Thanks for finding my hat!!!
+        </Typography>
+        <Button
+          onClick={() => setHatCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${letterCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Great! Delivering a letter from the Princess is a legitimate reason to
+          see the King.
+        </Typography>
+        <Button
+          onClick={() => setLetterCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You walk up to a massive castle. There is a very large, grumpy looking
+          guard standing in front of the castle gate.
+        </Typography>
+        <Button onClick={toggleFirst} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>

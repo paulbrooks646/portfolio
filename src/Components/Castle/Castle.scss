@@ -3,52 +3,35 @@
 .castle-body {
   .castle-top {
     @include row(35vh);
-
-    .castle-top-left {
-      @include section(40vw);
-      background-color: black;
-      background-image: linear-gradient(335deg, silver 23px, transparent 23px),
+    background-color: black;
+     background-image: linear-gradient(335deg, silver 23px, transparent 23px),
         linear-gradient(155deg, silver 23px, transparent 23px),
         linear-gradient(335deg, silver 23px, transparent 23px),
         linear-gradient(155deg, silver 23px, transparent 23px);
       background-size: 58px 58px;
       background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+
+    .castle-top-left {
+      @include section(40vw);
     }
 
     .castle-top-middle {
       @include section(20vw);
       @include flex(flex-start);
-      background-image: linear-gradient(
-        sienna 9%,
-        black 9%,
-        sienna 10%,
-        sienna 19%,
-        black 19%,
-        sienna 20%,
-        sienna 29%,
-        black 29%,
-        sienna 30%,
-        sienna 39%,
-        black 39%,
-        sienna 40%,
-        sienna 49%,
-        black 49%,
-        sienna 50%,
-        sienna 59%,
-        black 59%,
-        sienna 60%,
-        sienna 69%,
-        black 69%,
-        sienna 70%,
-        sienna 79%,
-        black 79%,
-        sienna 80%,
-        sienna 89%,
-        black 89%,
-        sienna 90%,
-        sienna 99%,
-        black 99%
-      );
+      background-color: sienna;
+
+      .castle-handle {
+        position: absolute;
+        height: 50px;
+        width: 50px;
+        border-bottom: solid goldenrod 5px;
+        border-left: solid goldenrod 5px;
+        border-right: solid goldenrod 5px;
+        border-radius: 10% 10% 50% 50%;
+        left: 5px;
+        top: 42%;
+      }
+     
 
       .castle-throne {
         @include flex(flex-start);
@@ -57,13 +40,7 @@
     }
     .castle-top-right {
       @include section(40vw);
-      background-color: black;
-      background-image: linear-gradient(335deg, silver 23px, transparent 23px),
-        linear-gradient(155deg, silver 23px, transparent 23px),
-        linear-gradient(335deg, silver 23px, transparent 23px),
-        linear-gradient(155deg, silver 23px, transparent 23px);
-      background-size: 58px 58px;
-      background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+     
     }
   }
 
@@ -84,12 +61,14 @@
 
     .castle-middle-middle {
       @include section(20vw);
-      @include flex(center);
+      @include flex(flex-end);
+
 
       .druid {
         @include flex(center);
         position: relative;
         cursor: pointer;
+        bottom: 100px;
 
         .druid-hat {
           border-radius: 50% 50% 25% 25%;
@@ -148,7 +127,7 @@
           position: relative;
           bottom: 38px;
 
-          .druid-dress {
+          .druid-armor {
             width: 80px;
             height: 100px;
             background-color: steelblue;
@@ -159,109 +138,139 @@
             @include flex(flex-start);
 
             .druid-left-arm {
-              height: 30px;
-              width: 20px;
+              height: 50px;
+              width: 30px;
               background-color: steelblue;
-              @include flex(center);
-              border: solid green;
-              .druid-hand {
-                height: 10px;
-                width: 30px;
-                background-color: steelblue;
-                border: solid orange;
-                .driud-staff-div {
-                  @include flex(center);
-                  transform: rotate(90deg);
+              @include flex(flex-end);
+              position: relative;
+              right: 60px;
+              bottom: 5px;
+              transform: rotate(90deg);
+              border-bottom: solid;
+              border-radius: 0% 0% 25% 25%;
+
+              .driud-sword-div {
+                @include flex(center);
+                transform: rotate(-90deg);
+                position: relative;
+                top: 113px;
+                right: 70px;
+
+                .druid-sword-tip {
+                  height: 19px;
+                  width: 19px;
+                  background-color: gray;
                   position: relative;
-                  top: 122px;
-                  left: 6px;
+                  transform: rotate(-45deg);
+                  z-index: 1;
+                  top: 45px;
+                }
 
-                  .druid-staff-top {
-                    height: 25px;
-                    width: 25px;
-                    border-radius: 50%;
-                    background-color: skyblue;
-                    position: relative;
-                    top: 36px;
-                    z-index: 1;
-                  }
-                  .druid-staff-middle {
-                    height: 40px;
+                .druid-sword-blade {
+                  height: 80px;
+                  width: 25px;
+                  background-color: gray;
+                  position: relative;
+                  top: 37px;
+                }
+                .druid-sword-hilt {
+                  height: 40px;
+                  width: 40px;
+                  border-bottom: solid goldenrod 5px;
+                  position: relative;
+                }
+
+                .druid-sword-handle {
+                  width: 10px;
+                  height: 75px;
+                  background-color: chocolate;
+                  @include flex(center);
+
+                  .druid-hand {
+                    height: 20px;
                     width: 40px;
-                    border-radius: 50%;
-                    border-bottom: solid goldenrod 10px;
-                    position: relative;
-                    top: 3px;
-                  }
+                    border-radius: 25%;
+                    background-color: steelblue;
+                    z-index: 2;
+                    transform: rotate(90deg);
+                    @include center(space-evenly);
+                    
 
-                  .druid-staff-bottom {
-                    width: 10px;
-                    height: 150px;
-                    background-color: chocolate;
+                    .druid-finger {
+                      width: 2px;
+                      height: 100%;
+                      background-color: black;
+                    }
                   }
                 }
               }
             }
             .druid-right-arm {
-                height: 30px;
-              width: 20px;
+              height: 70px;
+              width: 30px;
               background-color: steelblue;
-              @include flex(center);
-              border: solid red;
+              @include flex(flex-end);
+              position: relative;
+              left: 50px;
+              bottom: 41px;
+              transform: rotate(-60deg);
               .druid-hand {
-                 height: 10px;
-                width: 30px;
-                background-color: steelblue;
-                border: solid purple;
+                 height: 20px;
+                    width: 40px;
+                    border-radius: 25%;
+                    background-color: steelblue;
+                    z-index: 2;
+                    
+                    
+              
               }
             }
           }
-        }
+        
 
         .druid-legs {
-          @include center(space-evenly);
-          width: 50px;
+          @include center(space-between);
+          width: 90%;
           position: relative;
-          bottom: 80px;
+          bottom: 2px;
+          z-index: 10;
 
           .druid-leg-left {
-            height: 30px;
-            width: 9px;
-            background-color: #ffdbac;
-
-            @include flex(flex-end);
-            border-radius: 0% 0% 50% 50%;
+             height: 70px;
+              width: 30px;
+              background-color: steelblue;
+              @include flex(flex-end);
 
             .druid-foot {
-              height: 9px;
-              width: 13px;
-              background-color: silver;
+              height: 20px;
+              width: 120%;
+              background-color: steelblue;
               position: relative;
               z-index: 1;
-              border-radius: 50% 50% 0% 0%;
+              border-radius: 5% 5% 0% 0%;
             }
           }
 
           .druid-leg-right {
-            height: 30px;
-            width: 9px;
-            background-color: #ffdbac;
-
-            @include flex(flex-end);
-            border-radius: 0% 0% 50% 50%;
+             height: 70px;
+              width: 30px;
+              background-color: steelblue;
+              @include flex(flex-end);
+              
 
             .druid-foot {
-              height: 9px;
-              width: 13px;
-              background-color: silver;
+             height: 20px;
+              width: 120%;
+              background-color: steelblue;
               position: relative;
               z-index: 1;
-              border-radius: 50% 50% 0% 0%;
+              border-radius: 5% 5% 0% 0%;
             }
           }
         }
       }
     }
+  }
 
     .castle-middle-right {
       @include section(40vw);
