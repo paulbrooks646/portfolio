@@ -64,13 +64,13 @@
       @include flex(flex-end);
 
 
-      .druid {
+      .guard {
         @include flex(center);
         position: relative;
         cursor: pointer;
         bottom: 100px;
 
-        .druid-hat {
+        .guard-hat {
           border-radius: 50% 50% 25% 25%;
           height: 50px;
           width: 50px;
@@ -83,13 +83,13 @@
           top: 2px;
         }
 
-        .druid-head {
+        .guard-head {
           display: flex;
           justify-content: center;
           position: relative;
           bottom: 42px;
 
-          .druid-face {
+          .guard-face {
             height: 42px;
             width: 42px;
             background-color: #ffdbac;
@@ -97,20 +97,20 @@
             @include flex(center);
             border-bottom: black solid 1px;
 
-            .druid-eyes {
+            .guard-eyes {
               width: 80%;
               @include center(space-evenly);
               position: relative;
               bottom: 2px;
 
-              .druid-eye {
+              .guard-eye {
                 width: 12px;
                 height: 10px;
                 border-radius: 50%;
                 background-color: white;
                 @include flex(center);
 
-                .druid-iris {
+                .guard-iris {
                   width: 5.5px;
                   height: 5.5px;
                   border-radius: 50%;
@@ -122,12 +122,12 @@
           }
         }
 
-        .druid-body {
+        .guard-body {
           @include flex(flex-start);
           position: relative;
           bottom: 38px;
 
-          .druid-armor {
+          .guard-armor {
             width: 80px;
             height: 100px;
             background-color: steelblue;
@@ -137,7 +137,7 @@
             z-index: 2;
             @include flex(flex-start);
 
-            .druid-left-arm {
+            .guard-left-arm {
               height: 50px;
               width: 30px;
               background-color: steelblue;
@@ -156,7 +156,7 @@
                 top: 113px;
                 right: 70px;
 
-                .druid-sword-tip {
+                .guard-sword-tip {
                   height: 19px;
                   width: 19px;
                   background-color: gray;
@@ -166,27 +166,27 @@
                   top: 45px;
                 }
 
-                .druid-sword-blade {
+                .guard-sword-blade {
                   height: 80px;
                   width: 25px;
                   background-color: gray;
                   position: relative;
                   top: 37px;
                 }
-                .druid-sword-hilt {
+                .guard-sword-hilt {
                   height: 40px;
                   width: 40px;
                   border-bottom: solid goldenrod 5px;
                   position: relative;
                 }
 
-                .druid-sword-handle {
+                .guard-sword-handle {
                   width: 10px;
                   height: 75px;
                   background-color: chocolate;
                   @include flex(center);
 
-                  .druid-hand {
+                  .guard-hand {
                     height: 20px;
                     width: 40px;
                     border-radius: 25%;
@@ -196,7 +196,7 @@
                     @include center(space-evenly);
                     
 
-                    .druid-finger {
+                    .guard-finger {
                       width: 2px;
                       height: 100%;
                       background-color: black;
@@ -205,7 +205,7 @@
                 }
               }
             }
-            .druid-right-arm {
+            .guard-right-arm {
               height: 70px;
               width: 30px;
               background-color: steelblue;
@@ -214,7 +214,7 @@
               left: 50px;
               bottom: 41px;
               transform: rotate(-60deg);
-              .druid-hand {
+              .guard-hand {
                  height: 20px;
                     width: 40px;
                     border-radius: 25%;
@@ -228,20 +228,20 @@
           }
         
 
-        .druid-legs {
+        .guard-legs {
           @include center(space-between);
           width: 90%;
           position: relative;
           bottom: 2px;
           z-index: 10;
 
-          .druid-leg-left {
+          .guard-leg-left {
              height: 70px;
               width: 30px;
               background-color: steelblue;
               @include flex(flex-end);
 
-            .druid-foot {
+            .guard-foot {
               height: 20px;
               width: 120%;
               background-color: steelblue;
@@ -251,14 +251,14 @@
             }
           }
 
-          .druid-leg-right {
+          .guard-leg-right {
              height: 70px;
               width: 30px;
               background-color: steelblue;
               @include flex(flex-end);
               
 
-            .druid-foot {
+            .guard-foot {
              height: 20px;
               width: 120%;
               background-color: steelblue;

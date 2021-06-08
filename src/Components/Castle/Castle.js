@@ -412,59 +412,59 @@ function Castle(props) {
             </div>
           </div>
           <div className="castle-middle-middle">
-            <div className="druid" onClick={toggleGuard}>
-              <div className="druid-hat"></div>
-              <div className="druid-head">
-                <div className="druid-hair-left"></div>
-                <div className="druid-face">
-                  <div className="druid-hair-top-left"></div>
-                  <div className="druid-hair-top-right"></div>
-                  <div className="druid-eyes">
-                    <div className="druid-eye">
-                      <div className="druid-iris"></div>
+            <div className="guard" onClick={toggleGuard}>
+              <div className="guard-hat"></div>
+              <div className="guard-head">
+                <div className="guard-hair-left"></div>
+                <div className="guard-face">
+                  <div className="guard-hair-top-left"></div>
+                  <div className="guard-hair-top-right"></div>
+                  <div className="guard-eyes">
+                    <div className="guard-eye">
+                      <div className="guard-iris"></div>
                     </div>
-                    <div className="druid-eye">
-                      <div className="druid-iris">
-                        <div className="druid-pupil"></div>
+                    <div className="guard-eye">
+                      <div className="guard-iris">
+                        <div className="guard-pupil"></div>
                       </div>
                     </div>
                   </div>
-                  <div className="druid-nose"></div>
-                  <div className="druid-mouth"></div>
+                  <div className="guard-nose"></div>
+                  <div className="guard-mouth"></div>
                 </div>
-                <div className="druid-hair-right"></div>
+                <div className="guard-hair-right"></div>
               </div>
-              <div className="druid-body">
-                <div className="druid-armor">
-                  <div className="druid-left-arm">
+              <div className="guard-body">
+                <div className="guard-armor">
+                  <div className="guard-left-arm">
                     <div className="driud-sword-div">
-                      <div className="druid-sword-tip"></div>
-                      <div className="druid-sword-blade"></div>
-                      <div className="druid-sword-hilt"></div>
-                      <div className="druid-sword-handle">
-                        <div className="druid-hand">
-                          <div className="druid-finger"></div>
-                          <div className="druid-finger"></div>
-                          <div className="druid-finger"></div>
+                      <div className="guard-sword-tip"></div>
+                      <div className="guard-sword-blade"></div>
+                      <div className="guard-sword-hilt"></div>
+                      <div className="guard-sword-handle">
+                        <div className="guard-hand">
+                          <div className="guard-finger"></div>
+                          <div className="guard-finger"></div>
+                          <div className="guard-finger"></div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="druid-right-arm">
-                    <div className="druid-hand">
-                      <div className="druid-finger"></div>
-                      <div className="druid-finger"></div>
-                      <div className="druid-finger"></div>
+                  <div className="guard-right-arm">
+                    <div className="guard-hand">
+                      <div className="guard-finger"></div>
+                      <div className="guard-finger"></div>
+                      <div className="guard-finger"></div>
                     </div>
                   </div>
                 </div>
 
-                <div className="druid-legs">
-                  <div className="druid-leg-left">
-                    <div className="druid-foot"></div>
+                <div className="guard-legs">
+                  <div className="guard-leg-left">
+                    <div className="guard-foot"></div>
                   </div>
-                  <div className="druid-leg-right">
-                    <div className="druid-foot"></div>
+                  <div className="guard-leg-right">
+                    <div className="guard-foot"></div>
                   </div>
                 </div>
               </div>

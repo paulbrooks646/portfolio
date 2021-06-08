@@ -31,6 +31,7 @@ function Garden(props) {
   const [inventoryOpen, setInventoryOpen] = useState(false);
   const [firstTimeCard, setFirstTimeCard] = useState(false);
   const [manureCard, setManureCard] = useState(false);
+  const [coinCard, setCoinCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/garden").then((res) => {
@@ -142,8 +143,28 @@ function Garden(props) {
     setRightRight(true);
   };
 
-  const toggleRose = () => {};
-  const toggleCoin = () => {};
+  const toggleRose = () => {
+    if (gardenData.manure_given) {
+      axios.post("/api/flowers").then(res => {
+        props.getInventory(res.data)
+        axios.get("/api/garden").then(res => {
+          setGardenData(res.data[0])
+          setFlowerRetrievalCard(true)
+        })
+      })
+    } else {
+      setRejectionCardThree(true)
+    }
+  };
+  const toggleCoin = () => {
+    axios.post("/api/gardenCoin").then(res => {
+      setGardenData(res.data[0])
+      axios.post("/api/coin").then(res => {
+        props.getUser(res.data)
+        setCoinCard(true)
+      })
+    })
+  };
 
   return isLoading ? (
     <Loading />
@@ -595,15 +616,17 @@ function Garden(props) {
           </div>
         </div>
       </div>
-      <Card className={`${gardener ? "component-card" : "component-card-closed"}`}>
+      <Card
+        className={`${gardener ? "component-card" : "component-card-closed"}`}
+      >
         <Typography variant="h5" color="primary">
           What would you like to know about?
         </Typography>
         <List className="component-list">
-          <ListItem onClick={toggleAnswerOne}>The Dragon</ListItem>
-          <ListItem onClick={toggleAnswerTwo}>Faeries</ListItem>
-          <ListItem onClick={toggleAnswerThree}>Flowers</ListItem>
-          <ListItem onClick={toggleAnswerFour}>Magical Creatures</ListItem>
+          <ListItem onClick={toggleAnswerOne}>Flowers</ListItem>
+          <ListItem onClick={toggleAnswerTwo}>Fruits</ListItem>
+          <ListItem onClick={toggleAnswerThree}>The Princess</ListItem>
+          <ListItem onClick={toggleAnswerFour}>Vegetables</ListItem>
         </List>
         <Button onClick={toggleGardener} variant="contained" color="primary">
           Say Goodbye
@@ -611,14 +634,15 @@ function Garden(props) {
       </Card>
       <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
-          The Dragon
+          Flowers
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          Unlike most magical creatures, dragons are destructive.
+          I am well aware the flowers are beautiful. No you may not have any.
+          Only the king may take any. He gives them to the queen and princess.
         </Typography>
         <Button onClick={toggleAnswerOne} variant="contained" color="primary">
           CLOSE
@@ -626,14 +650,15 @@ function Garden(props) {
       </Card>
       <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
-          Fairies
+          Fruits
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          Unlike humans, fairies take care of nature.
+          I know the fruit looks delicious. No you may not have any. They are
+          strictly to feed the royal family.
         </Typography>
         <Button onClick={toggleAnswerTwo} variant="contained" color="primary">
           CLOSE
@@ -641,14 +666,14 @@ function Garden(props) {
       </Card>
       <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
-          The Flowers
+          The Princess
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          I'm warning you. These garden is to look at, not to touch!
+          She loves flowers. As is common she and the king are at odds. The king doesn't get her flowers when they are fighting.
         </Typography>
         <Button onClick={toggleAnswerThree} variant="contained" color="primary">
           CLOSE
@@ -656,15 +681,15 @@ function Garden(props) {
       </Card>
       <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
-          Magical Creatures
+          Vegetables
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          There are many other magical creatures. If you want to meet them go to
-          the magical sanctuary at the glade.
+          I know the vegetables look delicious. No you may not have any. They are
+          strictly to feed the royal family.
         </Typography>
         <Button onClick={toggleAnswerFour} variant="contained" color="primary">
           CLOSE
@@ -747,6 +772,54 @@ function Garden(props) {
           variant="contained"
           color="primary"
         >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${coinCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You pick up the shiny gold coin.
+        </Typography>
+        <Button
+          onClick={() => setCoinCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${manureCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          That gardener sniffs the manure excitedly. My plants need manure. I'll
+          talk to you, give you a coin, and let you pick a rose in exchange.
+        </Typography>
+        <Button
+          onClick={() => setManureCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You enter garden with beautiful flowers and plump fruits and
+          vegetables. A gardener glares at you sternly.
+        </Typography>
+        <Button onClick={toggleFirst} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>

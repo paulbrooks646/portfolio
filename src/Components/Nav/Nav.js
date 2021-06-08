@@ -159,76 +159,8 @@ function Nav(props) {
           CLOSE
         </Button>
       </Card>
-      <Card className={`${manureCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="answer-card-description"
-        >
-          You give the fairy the bottle of manure. "Ooh, this is fresh," she
-          says as she sniffs it excitedly. For this manure I'll give you a coin
-          and just once let you have some flowers.
-        </Typography>
-        <Button
-          onClick={() => setManureCard(false)}
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${fluteCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="answer-card-description"
-        >
-          The weasel dances as you play the flute. Even after you stop the
-          weasel seems calmer than before.
-        </Typography>
-        <Button
-          onClick={() => setFluteCard(false)}
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${flowerCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="answer-card-description"
-        >
-          Flowers for me? How quaint! She tosses a coin to the ground for you.
-          You quickly pick it up. Despite her response she seems to like the
-          flowers.
-        </Typography>
-        <Button
-          onClick={() => setFlowerCard(false)}
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${ribbonCard ? "answer-card" : "answer-card-closed"}`}>
-        <Typography
-          variant="h4"
-          color="primary"
-          className="answer-card-description"
-        >
-          It would seem you have located my ribbon. Here is the letter as
-          promised.
-        </Typography>
-        <Button
-          onClick={() => setRibbonCard(false)}
-          variant="contained"
-          color="primary"
-        >
-          CLOSE
-        </Button>
-      </Card>
+      
+      
     </div>
   );
 }

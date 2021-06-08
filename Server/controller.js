@@ -22,6 +22,20 @@ module.exports = {
     const cave = await db.cave_coin(id);
     res.status(200).send(cave);
   },
+  towerCoin: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const tower = await db.tower_coin(id);
+    res.status(200).send(tower);
+  },
+  gardenCoin: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const garden = await db.garden_coin(id);
+    res.status(200).send(garden);
+  },
 
   valleyCoin: async (req, res) => {
     const db = req.app.get("db");
@@ -83,8 +97,17 @@ module.exports = {
     const db = req.app.get("db");
     const { id } = req.session.user;
 
-    const tower = await db.use_flute(id);
-    res.status(200).send(tower);
+    db.use_flute(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
   },
 
   useIce: (req, res) => {

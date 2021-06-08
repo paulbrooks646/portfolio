@@ -1,54 +1,284 @@
 @import "../mixins";
 
 .tower-body {
+  background-image: url("../../Images/Grass.png");
+  background-size: 100% 100%;
   .tower-top {
-    @include row(55vh);
+    @include row(35vh);
 
     .tower-top-left {
-      @include section(60vw);
+      @include section(40vw);
+      background-color: black;
+      background-image: linear-gradient(335deg, silver 23px, transparent 23px),
+        linear-gradient(155deg, silver 23px, transparent 23px),
+        linear-gradient(335deg, silver 23px, transparent 23px),
+        linear-gradient(155deg, silver 23px, transparent 23px);
+      background-size: 58px 58px;
+      background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
 
-      .tower-top-left-up {
-        height: 35vh;
-        width: 60vw;
-        background-image: url("../../Images/Brick.jpg");
-        background-size: 100% 100%;
-        border-right: solid black 30px;
+      .tower-coin {
       }
+    }
 
-      .tower-top-left-down {
-        width: 100%;
-        height: 20vh;
-        background-image: url("../../Images//Dirt.png");
-        background-size: 100% 100%;
-        @include center(space-between);
-
-        .tower-castle {
-          @include center(flex-start);
-          width: 110px;
-          cursor: pointer;
-        }
-
-        .tower-weasel {
-          height: 100px;
-          width: 100px;
-          cursor: pointer;
-          position: relative;
-          animation-name: weasel;
-          animation-iteration-count: 1;
-          animation-timing-function: linear;
-          animation-direction: normal;
-          animation-duration: 1s;
-          right: 10%;
-        }
-      }
+    .tower-top-middle {
+      @include section(20vw);
     }
 
     .tower-top-right {
       @include section(40vw);
-      background-image: url("../../Images/Tower.jpg");
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
-      background-position: center;
+      @include flex(flex-end);
+    }
+  }
+
+  .tower-middle {
+    @include row(20vh);
+    background-image: url("../../Images/Dirt.png");
+    background-size: 100% 100%;
+
+    .tower-middle-left {
+      @include section(40vw);
+      @include center(flex-start);
+
+      .tower-castle {
+        @include center(flex-start);
+        width: 110px;
+        cursor: pointer;
+      }
+    }
+    .tower-middle-middle {
+      @include section(20vw);
+      .tower-weasel {
+        height: 100px;
+        width: 100px;
+        cursor: pointer;
+        position: relative;
+        animation-name: weasel;
+        animation-iteration-count: 1;
+        animation-timing-function: linear;
+        animation-direction: normal;
+        animation-duration: 1s;
+        right: 10%;
+      }
+    }
+
+    .tower-middle-right {
+      @include section(40vw);
+
+      .princess {
+        @include flex(center);
+        position: relative;
+        cursor: pointer;
+
+        .princess-hat {
+          border-radius: 50% 50% 25% 25%;
+          height: 50px;
+          width: 50px;
+          border: green 4px solid;
+          position: relative;
+          z-index: 3;
+          top: 3px;
+        }
+
+        .princess-head {
+          display: flex;
+          justify-content: center;
+          position: relative;
+          bottom: 42px;
+
+          .princess-hair-left {
+            height: 30px;
+            width: 25px;
+            border-right: #b7410e solid 7px;
+            position: relative;
+            top: 10px;
+            left: 4px;
+            z-index: 1;
+          }
+
+          .princess-face {
+            height: 42px;
+            width: 42px;
+            background-color: #eebb99;
+            border-radius: 50%;
+            @include flex(center);
+            border-bottom: black solid 1px;
+
+            .princess-hair-top-left {
+              height: 100px;
+              width: 28px;
+              border-radius: 50%;
+              background-image: linear-gradient(transparent 20%, #b7410e 20%);
+              z-index: 2;
+              transform: rotate(-35deg);
+              position: relative;
+              right: 12px;
+              bottom: 2px;
+            }
+
+            .princess-hair-top-right {
+              height: 100px;
+              width: 28px;
+              border-radius: 50%;
+              background-image: linear-gradient(transparent 20%, #b7410e 20%);
+              transform: rotate(25deg);
+              position: relative;
+              left: 9px;
+              z-index: 2;
+              bottom: 14px;
+            }
+
+            .princess-eyes {
+              width: 80%;
+              @include center(space-evenly);
+              position: relative;
+              bottom: 11px;
+
+              .princess-eye {
+                width: 13px;
+                height: 11px;
+                border-radius: 50%;
+                background-color: white;
+                @include flex(center);
+
+                .princess-iris {
+                  width: 9px;
+                  height: 7px;
+                  border-radius: 50%;
+                  background-color: #a1caf1;
+                  @include flex(center);
+
+                  .princess-pupil {
+                    height: 2.5px;
+                    width: 3.5px;
+                    border-radius: 50%;
+                    border: black solid 1.8px;
+                  }
+                }
+              }
+            }
+            .princess-nose {
+              height: 18px;
+              width: 8px;
+              @include flex(center);
+              border-left: solid 0.5px;
+              border-right: solid 0.5px;
+              border-bottom: solid 0.5px;
+              border-radius: 0% 0% 50% 50%;
+              position: relative;
+              bottom: 7px;
+            }
+
+            .princess-mouth {
+              height: 20px;
+              width: 18px;
+              border-bottom: red 3px solid;
+              border-radius: 50%;
+              position: relative;
+              bottom: 5px;
+            }
+          }
+
+          .princess-hair-right {
+            height: 30px;
+            width: 25px;
+            border-radius: 0%;
+            border-left: #b7410e solid 7px;
+            position: relative;
+            top: 10px;
+            right: 4px;
+            z-index: 1;
+          }
+        }
+
+        .princess-body {
+          @include flex(flex-start);
+
+          .princess-upper-neck {
+            height: 5px;
+            width: 20px;
+            z-index: 5;
+            border-radius: 50%;
+            border-bottom: 1px black solid;
+            position: relative;
+            bottom: 49px;
+          }
+          .princess-neck {
+            height: 15px;
+            width: 20px;
+            background-color: #eebb99;
+            position: relative;
+            bottom: 50px;
+            border-radius: 30% 30% 50% 50%;
+            z-index: 4;
+          }
+
+          .princess-dress {
+            width: 50px;
+            height: 100px;
+            background-color: green;
+            border-radius: 25% 25% 0% 0%;
+            position: relative;
+            bottom: 62px;
+            z-index: 2;
+            @include flex(flex-start);
+
+            .princess-shirt {
+              width: 30px;
+              height: 60px;
+              background-color: black;
+              border-radius: 50% 50% 0% 0%;
+              z-index: 0;
+            }
+
+            .princess-pants-div {
+              width: 30px;
+              height: 40px;
+              background-color: rgb(132, 132, 179);
+            }
+          }
+
+          .princess-legs {
+            @include center(space-evenly);
+            width: 50px;
+            position: relative;
+            bottom: 62px;
+
+            .princess-leg-left {
+              height: 30px;
+              width: 9px;
+              background-color: #eebb99;
+              @include flex(flex-end);
+              border-radius: 0% 0% 50% 50%;
+
+              .princess-foot {
+                height: 9px;
+                width: 13px;
+                background-color: silver;
+                position: relative;
+                z-index: 1;
+                border-radius: 50% 50% 0% 0%;
+              }
+            }
+
+            .princess-leg-right {
+              height: 30px;
+              width: 9px;
+              background-color: #eebb99;
+              @include flex(flex-end);
+              border-radius: 0% 0% 50% 50%;
+
+              .princess-foot {
+                height: 9px;
+                width: 13px;
+                background-color: silver;
+                position: relative;
+                z-index: 1;
+                border-radius: 50% 50% 0% 0%;
+              }
+            }
+          }
+        }
+      }
     }
   }
 
@@ -57,49 +287,14 @@
 
     .tower-bottom-left {
       @include section(40vw);
-      background-image: url("../../Images/Grass.png");
-      background-size: 100% 100%;
     }
 
     .tower-bottom-middle {
       @include section(20vw);
-
-      .tower-bottom-middle-up {
-        height: 20vh;
-        width: 100%;
-        background-image: url("../../Images/Dirt.png");
-        background-size: 100% 100%;
-      }
-      .tower-bottom-middle-down {
-        height: 15vh;
-        width: 100%;
-        background-image: url("../../Images/Grass.png");
-        background-size: 100% 100%;
-      }
     }
 
     .tower-bottom-right {
       @include section(40vw);
-
-      .tower-bottom-right-up {
-        height: 20vh;
-        width: 100%;
-        background-image: url("../../Images/Dirt.png");
-        background-size: 100% 100%;
-        @include center(center);
-
-        .tower-princess {
-          height: 100px;
-          width: 100px;
-          cursor: pointer;
-        }
-      }
-      .tower-bottom-right-down {
-        height: 15vh;
-        width: 100%;
-        background-image: url("../../Images/Grass.png");
-        background-size: 100% 100%;
-      }
     }
   }
 }

@@ -20,11 +20,11 @@ values ($1, false, false, false, false, true);
 insert into castle (user_id, nuts_given, letter_given, hat_given, first_time)
 values ($1, false, false, false, true);
 
-insert into garden (user_id, manure_given, flowers_taken, first_time)
-values ($1, false, false, true);
+insert into garden (user_id, manure_given, flowers_taken, coin_taken, first_time)
+values ($1, false, false, false, true);
 
-insert into tower (user_id, weasel_soothed, flowers_given, ribbon_given, letter_received, first_time)
-values ($1, false, false, false, false, true);
+insert into tower (user_id, weasel_soothed, flowers_given, ribbon_given, letter_received, coin_taken, first_time)
+values ($1, false, false, false, false, false, true);
 
 insert into cave (user_id, first_time, meat_given, bone_taken, coin_taken, hat_taken)
 values ($1, true, false, false, false, false);

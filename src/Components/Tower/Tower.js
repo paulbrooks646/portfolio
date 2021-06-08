@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Tower.scss";
@@ -27,26 +27,37 @@ function Tower(props) {
   const [answerTwo, setAnswerTwo] = useState(false);
   const [answerThree, setAnswerThree] = useState(false);
   const [answerFour, setAnswerFour] = useState(false);
+  const [answerFive, setAnswerFive] = useState(false);
+  const [answerSix, setAnswerSix] = useState(false);
+  const [answerSeven, setAnswerSeven] = useState(false);
+  const [answerEight, setAnswerEight] = useState(false);
+  const [answerNine, setAnswerNine] = useState(false);
   const [rejectionCardThree, setRejectionCardThree] = useState(false);
   const [firstTime, setFirstTime] = useState(false);
   const [rejectionCardTwo, setRejectionCardTwo] = useState(false);
-  const [inventoryOpen, setInventoryOpen] = useState(false)
-  const [towerData, setTowerData] = useState()
-  const [rejectionCard, setRejectionCard] = useState()
+  const [inventoryOpen, setInventoryOpen] = useState(false);
+  const [towerData, setTowerData] = useState();
+  const [rejectionCard, setRejectionCard] = useState();
+  const [flowerCard, setFlowerCard] = useState(false);
+  const [ribbonCard, setRibbonCard] = useState(false);
+  const [fluteCard, setFluteCard] = useState(false);
+  const [coinCard, setCoinCard] = useState(false);
+  const [coinRejectionCard, setCoinRejectionCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/tower").then((res) => {
-      setTowerData(res.data[0]);
+      if (res.data[0].first_time) setTowerData(res.data[0]);
       setLeftCharacter(true);
       setIsLoading(false);
     });
-    if (props.tower.tower.first_time) {
-      axios.post("/api/towerFirstTime").then((res) => {
-        setTowerData(res.data[0]);
-        setFirstTime(true);
-      });
-    }
   }, []);
+
+  const toggleFirst = () => {
+    axios.post("/api/towerFirst").then((res) => {
+      setTowerData(res.data[0]);
+      setFirstTime(false);
+    });
+  };
 
   const toggleInventoryOpen = () => setInventoryOpen(!inventoryOpen);
 
@@ -67,14 +78,54 @@ function Tower(props) {
 
   const toggleItem = (item) => {
     if (item === "flute") {
-      if (props.location.pathname === "/Tower") {
-        axios.post("/api/useFlute").then((res) => {
+      axios.post("/api/useFlute").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/tower").then((res) => {
           setTowerData(res.data[0]);
-          ;
+          axios.post("/api/coin").then((res) => {
+            props.getUser(res.data);
+            setFluteCard(true);
+          });
+        });
+      });
+    } else if (item === "ribbon") {
+      if (towerData.weasel_soothed) {
+        axios.post("/api/giveRibbon").then((res) => {
+          props.getInventory(res.data);
+          axios.get("/api/tower").then((res) => {
+            setTowerData(res.data[0]);
+            axios.post("/api/coin").then((res) => {
+              props.getUser(res.data);
+              setRibbonCard(true);
+            });
+          });
         });
       } else {
         setRejectionCard(true);
       }
+    } else if (item === "flowers") {
+      if (towerData.weasel_soothed) {
+        axios.post("/api/giveFlowers").then((res) => {
+          props.getInventory(res.data);
+          axios.post("/api/coin").then((res) => {
+            props.getUser(res.data);
+            axios.post("/api/coin").then((res) => {
+              props.getUser(res.data);
+              axios.post("/api/coin").then((res) => {
+                props.getUser(res.data);
+                axios.get("/api/tower").then((res) => {
+                  setTowerData(res.data[0]);
+                  setFlowerCard(true);
+                });
+              });
+            });
+          });
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    } else {
+      setRejectionCard(true);
     }
   };
 
@@ -100,6 +151,24 @@ function Tower(props) {
     }
   };
 
+  const toggleCoin = () => {
+    if (towerData.weasel_soothed) {
+      if (!towerData.coin_taken) {
+        axios.post("/api/towerCoin").then((res) => {
+          setTowerData(res.data[0]);
+          axios.post("/api/coin").then((res) => {
+            props.getUser(res.data);
+            setCoinCard(true);
+          });
+        });
+      } else {
+        setCoinRejectionCard(true);
+      }
+    } else {
+      setRejectionCardTwo(true);
+    }
+  };
+
   const toggleAnswerOne = () => {
     togglePrincess();
     setAnswerOne(!answerOne);
@@ -120,10 +189,35 @@ function Tower(props) {
     setAnswerFour(!answerFour);
   };
 
+  const toggleAnswerFive = () => {
+    togglePrincess();
+    setAnswerFive(!answerFive);
+  };
+
+  const toggleAnswerSix = () => {
+    togglePrincess();
+    setAnswerSix(!answerSix);
+  };
+
+  const toggleAnswerSeven = () => {
+    togglePrincess();
+    setAnswerSeven(!answerSeven);
+  };
+
+  const toggleAnswerEight = () => {
+    togglePrincess();
+    setAnswerEight(!answerEight);
+  };
+
+  const toggleAnswerNine = () => {
+    togglePrincess();
+    setAnswerNine(!answerNine);
+  };
+
   const toggleRejectionCard = () => {
-    if (!props.tower.tower.weasel_soothed) {
+    if (!towerData.weasel_soothed) {
       setRejectionCardTwo(true);
-    } else if (props.tower.tower.flowers_given === true) {
+    } else if (towerData.flowers_given === true) {
       setPrincess(true);
     } else {
       setRejectionCardThree(true);
@@ -163,55 +257,146 @@ function Tower(props) {
       </div>
       <div className="tower-body">
         <div className="tower-top">
-          <div className="tower-top-left">
-            <div className="tower-top-left-up"></div>
-            <div className="tower-top-left-down">
-              <div className="tower-castle" onClick={toggleGoLeft}>
-                <ArrowBack />
-                <h2>Castle</h2>
-              </div>
-              <div
-                className={`${
-                  leftCharacter ? "character-left" : "character-left-closed"
-                }`}
-              >
-                <Character />
-              </div>
-              <div
-                className={`${leftLeft ? "left-left" : "left-left-closed"}`}
-                onAnimationEnd={toggleLeft}
-              >
-                <Character />
-              </div>
-              <img
-                src={Weasel}
-                className="tower-weasel"
-                onClick={toggleWeasel}
-                alt="weasel"
-              />
-            </div>
-          </div>
-
+          <div className="tower-top-left"></div>
+          <div className="tower-top-middle"></div>
           <div className="tower-top-right"></div>
         </div>
-
+        <div className="tower-middle">
+          <div className="tower-middle-left">
+            <div className="tower-castle" onClick={toggleGoLeft}>
+              <ArrowBack />
+              <h2>Castle</h2>
+            </div>
+            <div
+              className={`${
+                leftCharacter ? "character-left" : "character-left-closed"
+              }`}
+            >
+              <Character />
+            </div>
+            <div
+              className={`${leftLeft ? "left-left" : "left-left-closed"}`}
+              onAnimationEnd={toggleLeft}
+            >
+              <Character />
+            </div>
+          </div>
+          <div className="tower-middle-middle">
+            <div className="weasel" onClick="toggleWeasel">
+              <div className="weasel-head">
+                <div className="weasel-ear"></div>
+                <div className="weasel-face">
+                  <div
+                    className={`${
+                      towerData.weasel_soothed
+                        ? "weasel-eyes"
+                        : "weasel-eyes-closed"
+                    }`}
+                  ></div>
+                  <div
+                    className={`${
+                      !towerData.weasel_soothed
+                        ? "weasel-crazy-eyes"
+                        : "weasel-crazy-eyes-closed"
+                    }`}
+                  ></div>
+                  <div className="weasel-nose-div">
+                    <div className="weasel-nose"></div>
+                    <div className="weasel-whisker-div">
+                      <div className="weasel-whisker-one"></div>
+                      <div className="weasel whisker-two"></div>
+                      <div className="weasel-whisker-three"></div>
+                      <div className="weasel-whisker-four"></div>
+                    </div>
+                  </div>
+                  <div
+                    className={`${
+                      towerData.weasel_soothed
+                        ? "weasel-mouth"
+                        : "weasel-mouth-closed"
+                    }`}
+                  ></div>
+                  <div
+                    className={`${
+                      !towerData.weasel_soothed
+                        ? "weasel-crazy-mouth"
+                        : "weasel-crazy-mouth-closed"
+                    }`}
+                  >
+                    <div className="weasel-crazy-mouth-top">
+                      <div className="weasel-tooth"></div>
+                        <div className="weasel-tooth"></div>
+                        <div className="weasel-tooth"></div>
+                        <div className="weasel-tooth"></div>
+                    </div>
+                    <div className="weasel-crazy-mouth-bottom">
+                      <div className="weasel-tooth"></div>
+                        <div className="weasel-tooth"></div>
+                        <div className="weasel-tooth"></div>
+                        <div className="weasel-tooth"></div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <div className="weasel-neck"></div>
+                <div className="weasel-body">
+                  <div className="weasel-tummy"></div>
+                  <div className="weasel-limb-div">
+                    <div className="weasel-paw"></div>
+                    <div className="weasel-foot"></div>
+                  </div>
+                </div>
+                <div className="weasel-tail"></div>
+            </div>
+          </div>
+          <div className="tower-middle-right">
+            <div className="princess" onClick={togglePrincess}>
+              <div className="princess-hat"></div>
+              <div className="princess-head">
+                <div className="princess-hair-left"></div>
+                <div className="princess-face">
+                  <div className="princess-hair-top-left"></div>
+                  <div className="princess-hair-top-right"></div>
+                  <div className="princess-eyes">
+                    <div className="princess-eye">
+                      <div className="princess-iris">
+                        <div className="princess-pupil"></div>
+                      </div>
+                    </div>
+                    <div className="princess-eye">
+                      <div className="princess-iris">
+                        <div className="princess-pupil"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="princess-nose"></div>
+                  <div className="princess-mouth"></div>
+                </div>
+                <div className="princess-hair-right"></div>
+              </div>
+              <div className="princess-body">
+                <div className="princess-upper-neck"></div>
+                <div className="princess-neck"></div>
+                <div className="princess-dress">
+                  <div className="princess-shirt"></div>
+                  <div className="princess-pants-div"></div>
+                </div>
+                <div className="princess-legs">
+                  <div className="princess-leg-left">
+                    <div className="princess-foot"></div>
+                  </div>
+                  <div className="princess-leg-right">
+                    <div className="princess-foot"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="tower-bottom">
           <div className="tower-bottom-left"></div>
-          <div className="tower-bottom-middle">
-            <div className="tower-bottom-middle-up"></div>
-            <div className="tower-bottom-middle-down"></div>
-          </div>
-          <div className="tower-bottom-right">
-            <div className="tower-bottom-right-up">
-              <img
-                src={Princess}
-                className="tower-princess"
-                alt="princess"
-                onClick={toggleRejectionCard}
-              />
-            </div>
-            <div className="tower-bottom-right-down"></div>
-          </div>
+          <div className="tower-bottom-middle"></div>
+          <div className="tower-bottom-right"></div>
         </div>
       </div>
       <Card
@@ -221,10 +406,15 @@ function Tower(props) {
           What knowledge shall I bestow upon you?
         </Typography>
         <List className="component-list">
-          <ListItem onClick={toggleAnswerOne}>The King</ListItem>
-          <ListItem onClick={toggleAnswerTwo}>The Ribbon</ListItem>
-          <ListItem onClick={toggleAnswerThree}>The Tower</ListItem>
-          <ListItem onClick={toggleAnswerFour}>The Weasel</ListItem>
+          <ListItem onClick={toggleAnswerOne}>Argument</ListItem>
+          <ListItem onClick={toggleAnswerTwo}>Brigands</ListItem>
+          <ListItem onClick={toggleAnswerThree}>Gardener</ListItem>
+          <ListItem onClick={toggleAnswerFour}>King</ListItem>
+          <ListItem onClick={toggleAnswerFive}>Queen</ListItem>
+          <ListItem onClick={toggleAnswerSix}>Ribbon</ListItem>
+          <ListItem onClick={toggleAnswerSeven}>Taxes</ListItem>
+          <ListItem onClick={toggleAnswerEight}>Tower</ListItem>
+          <ListItem onClick={toggleAnswerNine}>Weasel</ListItem>
         </List>
         <Button onClick={togglePrincess} variant="contained" color="primary">
           Say Goodbye
@@ -232,7 +422,55 @@ function Tower(props) {
       </Card>
       <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
-          The King
+          Argument
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          The king proposed a decrease to my allowance. The nerve.
+        </Typography>
+        <Button onClick={toggleAnswerOne} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary">
+          Brigands
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Inconsiderate thugs. If it wasn't for them, the coins my father is
+          using to stop them could be spent on me.
+        </Typography>
+        <Button onClick={toggleAnswerTwo} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary">
+          Gardener
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          That audacious woman. Forbidding me from taking flowers. I don't care
+          if it is by the king's order. When I am queen, she'll be the first to
+          go.
+        </Typography>
+        <Button onClick={toggleAnswerThree} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary">
+          King
         </Typography>
         <Typography
           variant="h6"
@@ -243,11 +481,27 @@ function Tower(props) {
           your ignorance to speak with him. I will present you with a letter to
           be delivered to the King if you find my lost ribbon.
         </Typography>
-        <Button onClick={toggleAnswerOne} variant="contained" color="primary">
+        <Button onClick={toggleAnswerFour} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
-      <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${answerFive ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary">
+          Queen
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          It has been rough since she's been gone. The coins the king is
+          investing in finding her could have been spent on me.
+        </Typography>
+        <Button onClick={toggleAnswerFive} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerSix ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
           Ribbon
         </Typography>
@@ -260,13 +514,29 @@ function Tower(props) {
           and stole my favorite ribbon from the line where my servants had hung
           it to dry. Such carelessness is peeving.
         </Typography>
-        <Button onClick={toggleAnswerTwo} variant="contained" color="primary">
+        <Button onClick={toggleAnswerSix} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
-      <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${answerSeven ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
-          The Tower
+          Taxes
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Decrease taxes? No way! How dare people complain about lack of food.
+          They should feel honored to give me their coins.
+        </Typography>
+        <Button onClick={toggleAnswerSeven} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerEight ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary">
+          Tower
         </Typography>
         <Typography
           variant="h6"
@@ -277,13 +547,13 @@ function Tower(props) {
           mature, intelligent young lady I am. I also come here to escape
           associating with boorish people like yourself.
         </Typography>
-        <Button onClick={toggleAnswerThree} variant="contained" color="primary">
+        <Button onClick={toggleAnswerEight} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
-      <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
+      <Card className={`${answerNine ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
-          The Weasel
+          Weasel
         </Typography>
         <Typography
           variant="h6"
@@ -292,7 +562,7 @@ function Tower(props) {
         >
           Pop is far more intelligent and loyal than you will ever be.
         </Typography>
-        <Button onClick={toggleAnswerFour} variant="contained" color="primary">
+        <Button onClick={toggleAnswerNine} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
@@ -378,11 +648,7 @@ function Tower(props) {
           darts at you. You back away. You'll have to figure out how to get past
           the weasel if you want to go any further.
         </Typography>
-        <Button
-          onClick={() => setFirstTime(false)}
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleFirst} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
@@ -404,11 +670,100 @@ function Tower(props) {
           CLOSE
         </Button>
       </Card>
+      <Card className={`${fluteCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          The weasel dances as you play the flute. He now seems calmer. "I'll
+          have that flute," says the princess. Fortunately she tosses a coin on
+          the ground. You quickly pick it up.
+        </Typography>
+        <Button
+          onClick={() => setFluteCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${flowerCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          Flowers for me? How quaint! She tosses three coins on the ground. You
+          quickly pick them up. Despite her response she seems to like the
+          flowers.
+        </Typography>
+        <Button
+          onClick={() => setFlowerCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${ribbonCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          It would seem you have located my ribbon. She tosses a letter and a
+          coin on the ground. You quickly pick them up.
+        </Typography>
+        <Button
+          onClick={() => setRibbonCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${
+          coinRejectionCard ? "answer-card" : "answer-card-closed"
+        }`}
+      >
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          You find nothing else in the hole.
+        </Typography>
+        <Button
+          onClick={() => setCoinRejectionCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${coinCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          Yay! You find a coin hidden in the hole in the wall.
+        </Typography>
+        <Button
+          onClick={() => setCoinCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory, logoutUser })(
   Tower
 );

@@ -6,6 +6,13 @@ module.exports = {
     const tower = await db.tower_first(id);
     res.status(200).send(tower);
   },
+  gardenFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const garden = await db.garden_first(id);
+    res.status(200).send(garden);
+  },
   castleFirst: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;

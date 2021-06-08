@@ -89,6 +89,7 @@ app.post("/api/gladeFirst", firstController.gladeFirst)
 app.post("/api/clearingFirst", firstController.clearingFirst)
 app.post("/api/castleFirst", firstController.castleFirst)
 app.post("/api/stablesFirst", firstController.stablesFirst)
+app.post("/api/gardenFirst", firstController.gardenFirst)
 
 app.post("/api/manure", inventoryController.manure);
 app.post("/api/flowers", inventoryController.flowers);
@@ -146,6 +147,8 @@ app.post("/api/chest", inventoryController.chest)
 app.post("/api/manureCleanPermission", controller.manureCleanPermission);
 app.post("/api/caveCoin", controller.caveCoin);
 app.post("/api/nestCoin", controller.nestCoin);
+app.post("/api/gardenCoin", controller.gardenCoin)
+app.post("/api/towerCoin", controller.towerCoin)
 app.post("/api/useFlute", controller.useFlute);
 app.post("/api/useRope", controller.useRope);
 app.post("/api/useProtection", controller.useProtection);
