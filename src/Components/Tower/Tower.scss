@@ -47,17 +47,236 @@
     }
     .tower-middle-middle {
       @include section(20vw);
-      .tower-weasel {
-        height: 100px;
-        width: 100px;
-        cursor: pointer;
+      @include flex(center);
+      .weasel {
+        @include center(flex-start);
         position: relative;
         animation-name: weasel;
         animation-iteration-count: 1;
         animation-timing-function: linear;
         animation-direction: normal;
         animation-duration: 1s;
-        right: 10%;
+
+        .weasel-head {
+          @include flex(center);
+          .weasel-ear {
+            border-radius: 50%;
+            height: 20px;
+            width: 20px;
+            background-image: linear-gradient(sienna 50%, transparent 50%);
+            position: relative;
+            top: 10px;
+            @include flex(center);
+
+            .weasel-inner-ear {
+               border-radius: 50%;
+            height: 15px;
+            width: 15px;
+            background-image: linear-gradient(tan 50%, transparent 50%);
+            }
+          }
+          .weasel-face {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 60px;
+            height: 30px;
+            background-color: sienna;
+            border-radius: 50%;
+            .weasel-eyes {
+              border-radius: 50%;
+              height: 10px;
+              width: 10px;
+              background-color: black;
+               position: relative;
+              left: 10px;
+              top: 5px;
+            }
+            .weasel-eyes-closed {
+              display: none;
+            }
+            .weasel-crazy-eyes {
+               border-radius: 50%;
+              height: 6px;
+              width: 6px;
+              background-color: rgb(201, 42, 42);
+              position: relative;
+              left: 17px;
+              top: 2px;
+             
+            }
+            .weasel-crazy-eyes-closed {
+              display: none;
+            }
+            .weasel-nose-div {
+              @include center(center);
+              position: relative;
+              right: 4px;
+              .weasel-nose {
+                 border-radius: 50%;
+              height: 5px;
+              width: 5px;
+              background-color: pink;
+              position: relative;
+                
+              }
+              .weasel-whisker-div {
+                @include flex(space-evenly);
+                height: 12px;
+                position: relative;
+                left: 2px;
+
+                .weasel-whisker-one {
+                  width: 10px;
+                  height: .5px;
+                  background-color: black;
+                  transform: rotate(-10deg);
+                  position: relative;
+                }
+               
+                .weasel-whisker-two {
+                   width: 10px;
+                  height: .5px;
+                  background-color: black;
+                  transform: rotate(0deg);
+                   position: relative;
+                }
+                .weasel-whisker-three {
+                   width: 10px;
+                  height: .5px;
+                  background-color: black;
+                  transform: rotate(10deg);
+                   position: relative;
+
+                }
+              }
+            }
+            .weasel-mouth {
+               width: 12px;
+              height: 1.5px;
+              background-color: pink;
+              position: relative;
+              left: 4px;
+              top: 5px;
+
+            }
+            .weasel-mouth-closed {
+              display: none;
+            }
+            .weasel-crazy-mouth {
+              height: 8px;
+              width: 15px;
+              background-color: black;
+              border-top: pink solid 1px;
+              border-right: pink solid 1px;
+              border-bottom: pink solid 1px;
+              border-radius: 0% 50% 50% 0%;
+              position: relative;
+              left: 4px;
+              transform: rotate(-10deg);
+
+             
+              .weasel-crazy-mouth-top {
+                width: 100%;
+                height: 50%;
+                @include center(space-evenly);
+                .weasel-tooth {
+                  height: 5px;
+                  width: 5px;
+                  background-image: linear-gradient(45deg, transparent 50%, white 50%);
+                  transform: rotate(135deg);
+                  position: relative;
+                  bottom: 2.5px;
+                }
+              }
+              .weasel-crazy-mouth-bottom {
+                 width: 100%;
+                height: 50%;
+                @include center(space-evenly);
+                .weasel-tooth {
+                   height: 5px;
+                  width: 5px;
+                  background-image: linear-gradient(45deg, transparent 50%, white 50%);
+                  transform: rotate(-45deg);
+                  position: relative;
+                  top: 2.5px;
+                }
+              }
+            }
+            .weasel-crazy-mouth-closed {
+              display: none;
+            }
+          }
+        }
+        .weasel-neck {
+          height: 20px;
+          width: 10px;
+          background-color: sienna;
+          position: relative;
+          top: 10px;
+          right: 5px;
+
+        }
+        .weasel-body {
+          height: 40px;
+          width: 80px;
+          background-color: sienna;
+          position: relative;
+          top: 10px;
+          border-radius: 50%;
+          right: 15px;
+          @include flex(center);
+          .weasel-tummy {
+ height: 40px;
+          width: 80px;
+          background-image: linear-gradient(0deg, tan 20%, transparent 20%);
+          position: relative;
+          border-radius: 50%;
+          top: 9px;
+          z-index: 1;
+          
+          }
+          .weasel-limb-div {
+            @include center(space-between);
+            width: 100%;
+            top: 10px;
+            
+            .weasel-paw {
+              width: 25px;
+              height: 10px;
+              background-color: sienna;
+              border-radius: 50% 50% 25% 25%;
+              position: relative;
+              bottom: 8px;
+              right: 15px;
+              transform: rotate(-45deg);
+
+            }
+            .weasel-foot {
+              width: 25px;
+              height: 10px;
+              background-color: sienna;
+              border-radius: 25% 0% 25% 25%;
+              position: relative;
+              bottom: 5px;
+              left: 2px;
+              transform: rotate(-40deg);
+
+            }
+          }
+        }
+        .weasel-tail {
+          width: 60px;
+          height: 25px;
+          border-bottom: sienna 12px solid;
+          border-right: sienna 10px solid;
+          border-radius: 0% 0% 50% 0%;
+          position: relative;
+          right: 25px;
+          top: 20px;
+          transform: scaleY(-1);
+
+        }
       }
     }
 

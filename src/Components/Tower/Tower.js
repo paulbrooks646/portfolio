@@ -12,8 +12,6 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import Character from "../Character/Character";
-import Weasel from "../../Images/Weasel.png";
-import Princess from "../../Images/Princess.png";
 import Loading from "../Loading/Loading";
 
 function Tower(props) {
@@ -36,7 +34,7 @@ function Tower(props) {
   const [firstTime, setFirstTime] = useState(false);
   const [rejectionCardTwo, setRejectionCardTwo] = useState(false);
   const [inventoryOpen, setInventoryOpen] = useState(false);
-  const [towerData, setTowerData] = useState();
+  const [towerData, setTowerData] = useState({});
   const [rejectionCard, setRejectionCard] = useState();
   const [flowerCard, setFlowerCard] = useState(false);
   const [ribbonCard, setRibbonCard] = useState(false);
@@ -284,7 +282,7 @@ function Tower(props) {
           <div className="tower-middle-middle">
             <div className="weasel" onClick="toggleWeasel">
               <div className="weasel-head">
-                <div className="weasel-ear"></div>
+                <div className="weasel-ear"><div className="weasel-inner-ear"></div></div>
                 <div className="weasel-face">
                   <div
                     className={`${
@@ -304,9 +302,8 @@ function Tower(props) {
                     <div className="weasel-nose"></div>
                     <div className="weasel-whisker-div">
                       <div className="weasel-whisker-one"></div>
-                      <div className="weasel whisker-two"></div>
+                      <div className="weasel-whisker-two"></div>
                       <div className="weasel-whisker-three"></div>
-                      <div className="weasel-whisker-four"></div>
                     </div>
                   </div>
                   <div
