@@ -1,52 +1,1077 @@
 @import "../mixins";
 
-  .garden-body {
+.garden-body {
+  background-image: url("../../Images/Grass.png");
+  background-size: 100% 100%;
 
-    .garden-top {
-      @include row(35vh);
-      background-image: url("../../Images/Garden.jpg");
-      background-size: 100% 100%;
-      cursor: pointer;
-    }
+  .garden-top {
+    @include row(35vh);
 
-    .garden-middle {
-      @include row(20vh);
-      background-image: url("../../Images/Dirt.png");
-      background-size: 100% 100%;
-      border-left: solid pink 20px;
+    .garden-top-left {
+      @include section(40vw);
+      @include flex(center);
 
-      .garden-middle-left {
-        @include section(10vw);
-      }
+      .watermelon-plot {
+        background-color: #9b7653;
+        height: 80%;
+        width: 80%;
+        border-radius: 25%;
+        @include flex(space-evenly);
+        cursor: pointer;
 
-      .garden-middle-middle {
-        @include section(50vw);
-        @include flex(center);
-
-        .garden-fairy {
-          height: 150px;
-          width: 100px;
-          cursor: pointer;
-        }
-      }
-
-      .garden-middle-right {
-        @include section(40vw);
-        @include center(flex-end);
-
-        .garden-castle {
+        .watermelon-top-row {
           @include center(space-evenly);
-          width: 110px;
-          cursor: pointer;
+          height: 50%;
+          width: 100%;
+
+          .watermelon {
+            width: 100px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: green;
+            transform: rotate(-45deg);
+          }
+        }
+        .watermelon-bottom-row {
+          @include center(space-evenly);
+          height: 50%;
+          width: 100%;
+          .watermelon {
+            width: 100px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: green;
+            transform: rotate(-45deg);
+          }
         }
       }
     }
 
-    .garden-bottom {
-      @include row(35vh);
-      background-image: url("../../Images/Garden.jpg");
-      background-size: 100% 100%;
-      cursor: pointer;
+    .garden-top-middle {
+      @include section(20vw);
+      @include flex(center);
+
+      .pea-plot {
+        background-color: #9b7653;
+        height: 80%;
+        width: 80%;
+        border-radius: 25%;
+        @include flex(space-evenly);
+        cursor: pointer;
+
+        .pea-top-row {
+          @include center(space-evenly);
+          height: 50%;
+          width: 100%;
+
+          .pea {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            border-right: solid 10px #739122;
+            transform: rotate(-45deg);
+          }
+        }
+
+        .pea-bottom-row {
+          @include center(space-evenly);
+          height: 50%;
+          width: 100%;
+
+          .pea {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            border-right: solid 10px #739122;
+            transform: rotate(-45deg);
+          }
+        }
+      }
+    }
+
+    .garden-top-right {
+      @include section(40vw);
+      @include flex(center);
+
+      .carrot-plot {
+        background-color: #9b7653;
+        height: 80%;
+        width: 80%;
+        border-radius: 25%;
+        @include flex(space-evenly);
+        cursor: pointer;
+
+        .carrot-top-row {
+          height: 50%;
+          width: 100%;
+          @include center(space-evenly);
+
+          .carrot {
+            height: 35px;
+            width: 35px;
+            background-color: rgb(238, 162, 20);
+            border-radius: 50%;
+            @include flex(center);
+
+            .carrot-leaf-one {
+              width: 40px;
+              height: 15px;
+              background-color: #739122;
+              border-radius: 50%;
+              transform: rotate(45deg);
+              position: relative;
+              right: 14px;
+            }
+
+            .carrot-leaf-two {
+              width: 40px;
+              height: 15px;
+              background-color: #739122;
+              border-radius: 50%;
+              transform: rotate(-45deg);
+              position: relative;
+              bottom: 9px;
+              left: 14px;
+            }
+            .carrot-leaf-three {
+              width: 40px;
+              height: 15px;
+              background-color: #739122;
+              border-radius: 50%;
+              transform: rotate(-45deg);
+              position: relative;
+              top: 10px;
+              right: 14px;
+            }
+
+            .carrot-leaf-four {
+              width: 40px;
+              height: 15px;
+              background-color: #739122;
+              border-radius: 50%;
+              transform: rotate(45deg);
+              position: relative;
+              left: 14px;
+            }
+          }
+        }
+
+        .carrot-bottom-row {
+          height: 50%;
+          width: 100%;
+          @include center(space-evenly);
+
+          .carrot {
+            height: 35px;
+            width: 35px;
+            background-color: rgb(238, 162, 20);
+            border-radius: 50%;
+            @include flex(center);
+
+            .carrot-leaf-one {
+              width: 40px;
+              height: 15px;
+              background-color: #739122;
+              border-radius: 50%;
+              transform: rotate(45deg);
+              position: relative;
+              right: 14px;
+            }
+
+            .carrot-leaf-two {
+              width: 40px;
+              height: 15px;
+              background-color: #739122;
+              border-radius: 50%;
+              transform: rotate(-45deg);
+              position: relative;
+              bottom: 9px;
+              left: 14px;
+            }
+            .carrot-leaf-three {
+              width: 40px;
+              height: 15px;
+              background-color: #739122;
+              border-radius: 50%;
+              transform: rotate(-45deg);
+              position: relative;
+              top: 10px;
+              right: 14px;
+            }
+
+            .carrot-leaf-four {
+              width: 40px;
+              height: 15px;
+              background-color: #739122;
+              border-radius: 50%;
+              transform: rotate(45deg);
+              position: relative;
+              left: 14px;
+            }
+          }
+        }
+      }
     }
   }
-   
+
+  .garden-middle {
+    @include row(20vh);
+
+    .garden-middle-left {
+      @include section(40vw);
+      @include flex(center);
+
+      .rose-plot {
+        background-color: #9b7653;
+        height: 80%;
+        width: 80%;
+        border-radius: 25%;
+        @include flex(space-evenly);
+
+        .rose-top-row {
+          @include center(space-evenly);
+          height: 50%;
+          width: 100%;
+          position: relative;
+          bottom: 10px;
+          .rose-div {
+            @include flex(center);
+
+            .rose {
+              background-image: linear-gradient(
+                0deg,
+                magenta 50%,
+                transparent 50%
+              );
+              height: 50px;
+              width: 40px;
+              border-radius: 50%;
+            }
+            .rose-stem {
+              width: 5px;
+              height: 20px;
+              background-color: #739122;
+            }
+          }
+        }
+        .rose-bottom-row {
+          @include center(space-evenly);
+          height: 50%;
+          width: 100%;
+          position: relative;
+          bottom: 10px;
+
+          .rose-div {
+            @include flex(center);
+
+            .rose {
+              background-image: linear-gradient(
+                0deg,
+                magenta 50%,
+                transparent 50%
+              );
+              height: 50px;
+              width: 40px;
+              border-radius: 50%;
+            }
+            .rose-stem {
+              width: 5px;
+              height: 20px;
+              background-color: #739122;
+            }
+          }
+          .special-rose-div {
+            @include flex(center);
+            cursor: pointer;
+
+            .rose {
+              background-image: linear-gradient(
+                0deg,
+                magenta 50%,
+                transparent 50%
+              );
+              height: 50px;
+              width: 40px;
+              border-radius: 50%;
+            }
+            .rose-stem {
+              width: 5px;
+              height: 20px;
+              background-color: #739122;
+            }
+          }
+          .rose-closed {
+            display: none;
+          }
+          .coin {
+            background-color: gold;
+            border-radius: 50%;
+            height: 10px;
+            width: 10px;
+            cursor: pointer;
+          }
+
+          .coin-closed {
+            display: none;
+          }
+        }
+      }
+    }
+
+    .garden-middle-middle {
+      @include section(20vw);
+      @include flex(center);
+      background-image: url("../../Images/Dirt.png");
+      background-size: 100% 100%;
+
+      .gardener {
+        @include flex(center);
+        position: relative;
+        cursor: pointer;
+
+        .gardener-head {
+          display: flex;
+          justify-content: center;
+          position: relative;
+          bottom: 26px;
+
+          .gardener-hair-left {
+            height: 60px;
+            width: 25px;
+            border-left: brown solid 10px;
+            position: relative;
+            top: 6px;
+            left: 21px;
+            z-index: 1;
+            border-radius: 50% 0% 0% 0%;
+            transform: rotate(-10deg);
+          }
+
+          .gardener-face {
+            height: 42px;
+            width: 42px;
+            background-color: #eebb99;
+            border-radius: 50%;
+            @include flex(center);
+            border-bottom: black solid 1px;
+
+            .gardener-hair-top-left {
+              height: 30px;
+              width: 30px;
+              border-top: brown solid 10px;
+              z-index: 2;
+              transform: rotate(-20deg);
+              position: relative;
+              right: 9px;
+              top: 1.5px;
+              border-radius: 50%;
+            }
+
+            .gardener-hair-top-right {
+              height: 30px;
+              width: 30px;
+              border-top: brown solid 10px;
+              transform: rotate(20deg);
+              position: relative;
+              left: 10px;
+              z-index: 2;
+              bottom: 10.5px;
+              border-radius: 50%;
+            }
+
+            .gardener-eyes {
+              width: 80%;
+              @include center(space-evenly);
+              position: relative;
+              bottom: 11px;
+
+              .gardener-eye {
+                width: 12px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: white;
+                @include flex(center);
+
+                .gardener-iris {
+                  width: 7px;
+                  height: 6px;
+                  border-radius: 50%;
+                  background-color: brown;
+                  @include flex(center);
+                }
+              }
+            }
+            .gardener-nose {
+              height: 18px;
+              width: 5px;
+              @include flex(center);
+              border-left: solid 0.5px;
+              border-right: solid 0.5px;
+              border-bottom: solid 0.5px;
+              border-radius: 0% 0% 50% 50%;
+              position: relative;
+              bottom: 7px;
+            }
+
+            .gardener-mouth {
+              height: 20px;
+              width: 18px;
+              border-bottom: red 3px solid;
+              border-radius: 50%;
+              position: relative;
+              bottom: 5px;
+            }
+          }
+
+          .gardener-hair-right {
+            height: 60px;
+            width: 25px;
+            border-radius: 0%;
+            border-right: brown solid 10px;
+            position: relative;
+            top: 6px;
+            right: 21px;
+            z-index: 1;
+            border-radius: 0% 50% 0% 0%;
+             transform: rotate(10deg);
+          }
+        }
+
+        .gardener-body {
+          @include flex(flex-start);
+
+          .gardener-upper-neck {
+            height: 5px;
+            width: 20px;
+            z-index: 5;
+            border-radius: 50%;
+            border-bottom: 1px black solid;
+            position: relative;
+            bottom: 49px;
+          }
+          .gardener-neck {
+            height: 15px;
+            width: 20px;
+            background-color: #eebb99;
+            position: relative;
+            bottom: 50px;
+            border-radius: 30% 30% 50% 50%;
+            z-index: 4;
+          }
+
+          .gardener-dress {
+            width: 50px;
+            height: 90px;
+            background-color: #9b7653;
+            border-radius: 25% 25% 0% 0%;
+            position: relative;
+            bottom: 62px;
+            z-index: 2;
+            @include flex(flex-start);
+
+            .gardener-shirt {
+              width: 100%;
+              height: 54px;
+              border-radius: 50% 50% 0% 0%;
+              z-index: 0;
+            }
+
+            .gardener-pants-div {
+              width: 100%;
+              height: 45px;
+              background-color: black;
+            }
+          }
+
+          .gardener-legs {
+            @include center(space-between);
+            width: 50px;
+            position: relative;
+            bottom: 62px;
+
+            .gardener-leg-left {
+              height: 30px;
+              width: 13px;
+              background-color: black;
+              @include flex(flex-end);
+              border-radius: 0% 0% 50% 50%;
+              bottom: 5px;
+              z-index: 3;
+
+              .gardener-foot {
+                height: 11px;
+                width: 15px;
+                background-color: #9b7653;
+                position: relative;
+                z-index: 1;
+                border-radius: 50% 50% 0% 0%;
+              }
+            }
+
+            .gardener-leg-right {
+              height: 30px;
+              width: 13px;
+              background-color: black;
+              @include flex(flex-end);
+              border-radius: 0% 0% 50% 50%;
+              bottom: 5px;
+              z-index: 3;
+
+              .gardener-foot {
+                height: 11px;
+                width: 15px;
+                background-color: #9b7653;
+                position: relative;
+                z-index: 1;
+                border-radius: 50% 50% 0% 0%;
+              }
+            }
+          }
+        }
+         .gardener-left-arm {
+          position: absolute;
+          height: 60px;
+          width: 15px;
+          background-color: #9b7653;
+          z-index: 7
+          ;
+          bottom: 125px;
+          transform: rotate(45deg);
+          right: 70px;
+          display: flex;
+          justify-content: center;
+          align-items: flex-end;
+
+          .gardener-left-hand {
+            background-color: #eebb99;
+            width: 100%;
+            height: 15px;
+            position: relative;
+            top: 10px;
+            border-radius: 0% 0% 25% 25%;
+          }
+        }
+        .gardener-right-arm {
+          position: absolute;
+          height: 60px;
+          width: 15px;
+          background-color: #9b7653;
+          z-index: 7;
+           bottom: 125px;
+          transform: rotate(-45deg);
+          left: 70px;
+          display: flex;
+          justify-content: center;
+          align-items: flex-end;
+
+          .gardener-right-hand {
+            background-color: #eebb99;
+            width: 100%;
+            height: 15px;
+            position: relative;
+            top: 10px;
+            border-radius: 0% 0% 25% 25%;
+          }
+        }
+      }
+    }
+
+    .garden-middle-right {
+      @include section(40vw);
+      @include center(flex-end);
+      background-image: url("../../Images/Dirt.png");
+      background-size: 100% 100%;
+
+      .garden-castle {
+        @include center(space-evenly);
+        width: 110px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .garden-bottom {
+    @include row(35vh);
+
+    .garden-bottom-left {
+      @include section(40vw);
+      @include flex(center);
+
+      .daisy-plot {
+        height: 80%;
+        width: 80%;
+        background-color: #9b7653;
+        @include flex(space-evenly);
+        border-radius: 25%;
+        cursor: pointer;
+
+        .daisy-top-row {
+          height: 50%;
+          width: 100%;
+          @include center(space-evenly);
+
+          .daisy-div {
+            @include flex(center);
+
+            .daisy {
+              @include flex(center);
+              height: 20px;
+              width: 20px;
+              border-radius: 50%;
+              background-color: #ffff99;
+
+              .daisy-petal-one {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(white 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                bottom: 3px;
+              }
+              .daisy-petal-two {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(white 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(-60deg);
+                right: 11px;
+              }
+
+              .daisy-petal-three {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(white 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(60deg);
+                left: 11px;
+              }
+
+              .daisy-petal-four {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(white 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(-150deg);
+                right: 9px;
+                top: 4px;
+              }
+
+              .daisy-petal-five {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(white 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(150deg);
+                left: 9px;
+                top: 4px;
+              }
+            }
+            .daisy-stem {
+              height: 35px;
+              width: 5px;
+              background-color: #739122;
+            }
+          }
+        }
+
+        .daisy-bottom-row {
+          height: 50%;
+          width: 100%;
+          @include center(space-evenly);
+
+          .daisy-div {
+            @include flex(center);
+
+            .daisy {
+              @include flex(center);
+              height: 20px;
+              width: 20px;
+              border-radius: 50%;
+              background-color: #ffff99;
+
+              .daisy-petal-one {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(white 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                bottom: 3px;
+              }
+              .daisy-petal-two {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(white 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(-60deg);
+                right: 11px;
+              }
+
+              .daisy-petal-three {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(white 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(60deg);
+                left: 11px;
+              }
+
+              .daisy-petal-four {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(white 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(-150deg);
+                right: 9px;
+                top: 4px;
+              }
+
+              .daisy-petal-five {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(white 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(150deg);
+                left: 9px;
+                top: 4px;
+              }
+            }
+            .daisy-stem {
+              height: 35px;
+              width: 5px;
+              background-color: #739122;
+            }
+          }
+        }
+       
+      }
+    }
+
+    .garden-bottom-middle {
+      @include section(20vw);
+      @include flex(center);
+
+      .purple-plot {
+        height: 80%;
+        width: 80%;
+        background-color: #9b7653;
+        @include flex(space-evenly);
+        border-radius: 25%;
+        cursor: pointer;
+
+        .purple-top-row {
+          height: 50%;
+          width: 100%;
+          @include center(space-evenly);
+
+          .purple-div {
+            @include flex(center);
+
+            .purple {
+              @include flex(center);
+              height: 20px;
+              width: 20px;
+              border-radius: 50%;
+              background-color: pink;
+
+              .purple-petal-one {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(purple 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                bottom: 2px;
+              }
+              .purple-petal-two {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(purple 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(-60deg);
+                right: 10px;
+              }
+
+              .purple-petal-three {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(purple 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(60deg);
+                left: 10px;
+              }
+
+              .purple-petal-four {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(purple 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(-150deg);
+                right: 9px;
+                top: 4px;
+              }
+
+              .purple-petal-five {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(purple 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(150deg);
+                left: 9px;
+                top: 4px;
+              }
+            }
+            .purple-stem {
+              height: 35px;
+              width: 5px;
+              background-color: #739122;
+            }
+          }
+        }
+
+        .purple-bottom-row {
+          height: 50%;
+          width: 100%;
+          @include center(space-evenly);
+
+          .purple-div {
+            @include flex(center);
+
+            .purple {
+              @include flex(center);
+              height: 20px;
+              width: 20px;
+              border-radius: 50%;
+              background-color: pink;
+
+              .purple-petal-one {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(purple 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                bottom: 2px;
+              }
+              .purple-petal-two {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(purple 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(-60deg);
+                right: 10px;
+              }
+
+              .purple-petal-three {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(purple 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(60deg);
+                left: 10px;
+              }
+
+              .purple-petal-four {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(purple 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(-150deg);
+                right: 9px;
+                top: 4px;
+              }
+
+              .purple-petal-five {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(purple 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(150deg);
+                left: 9px;
+                top: 4px;
+              }
+            }
+            .purple-stem {
+              height: 35px;
+              width: 5px;
+              background-color: #739122;
+            }
+          }
+        }
+      }
+    }
+
+    .garden-bottom-right {
+      @include section(40vw);
+      @include flex(center);
+
+      .sun-plot {
+        height: 80%;
+        width: 80%;
+        background-color: #9b7653;
+        @include flex(space-evenly);
+        border-radius: 25%;
+        cursor: pointer;
+
+        .sun-top-row {
+          height: 50%;
+          width: 100%;
+          @include center(space-evenly);
+
+          .sun-div {
+            @include flex(center);
+
+            .sun {
+              @include flex(center);
+              height: 20px;
+              width: 20px;
+              border-radius: 50%;
+              background-color: white;
+
+              .sun-petal-one {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(orange 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                bottom: 2px;
+              }
+              .sun-petal-two {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(orange 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(-60deg);
+                right: 10px;
+              }
+
+              .sun-petal-three {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(orange 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(60deg);
+                left: 10px;
+              }
+
+              .sun-petal-four {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(orange 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(-150deg);
+                right: 9px;
+                top: 4px;
+              }
+
+              .sun-petal-five {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(orange 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(150deg);
+                left: 9px;
+                top: 4px;
+              }
+            }
+            .sun-stem {
+              height: 35px;
+              width: 5px;
+              background-color: #739122;
+            }
+          }
+        }
+
+        .sun-bottom-row {
+          height: 50%;
+          width: 100%;
+          @include center(space-evenly);
+
+          .sun-div {
+            @include flex(center);
+
+            .sun {
+              @include flex(center);
+              height: 20px;
+              width: 20px;
+              border-radius: 50%;
+              background-color: white;
+
+              .sun-petal-one {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(orange 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                bottom: 2px;
+              }
+              .sun-petal-two {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(orange 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(-60deg);
+                right: 10px;
+              }
+
+              .sun-petal-three {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(orange 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(60deg);
+                left: 10px;
+              }
+
+              .sun-petal-four {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(orange 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(-150deg);
+                right: 9px;
+                top: 4px;
+              }
+
+              .sun-petal-five {
+                height: 25px;
+                width: 12px;
+                background-image: linear-gradient(orange 50%, transparent 50%);
+                border-radius: 50%;
+                position: absolute;
+                transform: rotate(150deg);
+                left: 9px;
+                top: 4px;
+              }
+            }
+            .sun-stem {
+              height: 35px;
+              width: 5px;
+              background-color: #739122;
+            }
+          }
+        }
+      }
+    }
+  }
+}

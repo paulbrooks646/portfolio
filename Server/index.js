@@ -88,6 +88,7 @@ app.post("/api/valleyFirst", firstController.valleyFirst)
 app.post("/api/gladeFirst", firstController.gladeFirst)
 app.post("/api/clearingFirst", firstController.clearingFirst)
 app.post("/api/castleFirst", firstController.castleFirst)
+app.post("/api/stablesFirst", firstController.stablesFirst)
 
 app.post("/api/manure", inventoryController.manure);
 app.post("/api/flowers", inventoryController.flowers);
@@ -160,7 +161,6 @@ app.post("/api/giveRibbon", controller.giveRibbon);
 app.post("/api/useLetter", controller.useLetter);
 app.post("/api/manureGiven", controller.manureGiven);
 app.post("/api/manureHasCleaned", controller.manureHasCleaned);
-app.post("/api/manureHasTaken", controller.manureHasTaken);
 app.post("/api/placeHome", controller.placeHome);
 app.post("/api/castGrow", controller.castGrow);
 app.post("/api/removeGrow", controller.removeGrow);

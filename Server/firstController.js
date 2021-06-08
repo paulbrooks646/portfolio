@@ -13,6 +13,13 @@ module.exports = {
     const castle = await db.castle_first(id);
     res.status(200).send(castle);
   },
+  stablesFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const stables = await db.stables_first(id);
+    res.status(200).send(stables);
+  },
   clearingFirst: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;

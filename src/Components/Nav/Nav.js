@@ -98,22 +98,7 @@ function Nav(props) {
         setRejectionCard(true);
       }
     }
-    if (item === "manure") {
-      if (props.location.pathname === "/Garden") {
-        axios.post("/api/manureGiven").then((res) => {
-          props.getInventory(res.data);
-          axios.get("/api/garden").then((res) => {
-            props.getGarden(res.data[0]);
-            axios.post("/api/coin").then((res) => {
-              props.getUser(res.data);
-              setManureCard(true);
-            });
-          });
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    }
+   
     
   };
 

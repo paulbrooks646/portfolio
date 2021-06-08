@@ -62,6 +62,13 @@ function Stables(props) {
     });
   }, []);
 
+   const toggleFirst = () => {
+     axios.post("/api/stablesFirst").then((res) => {
+       setStablesData(res.data[0]);
+       setFirstTimeCard(false);
+     });
+   };
+
   const toggleInventoryOpen = () => setInventoryOpen(!inventoryOpen);
 
   const logout = () => {
@@ -85,8 +92,8 @@ function Stables(props) {
         axios.post("/api/manure").then((res) => {
           props.getInventory(res.data);
         });
-        axios.post("/api/manureHasTaken").then((res) => {
-          props.getStables(res.data[0]);
+        axios.get("/api/stables").then((res) => {
+          setStablesData(res.data[0]);
           setBottleCard(true);
         });
       } else {
@@ -190,7 +197,13 @@ function Stables(props) {
       });
       axios.post("/api/coin").then((res) => {
         props.getUser(res.data);
-        setManureCleaned(!manureCleaned);
+        axios.post("/api/coin").then(res => {
+          props.getUser(res.data)
+          axios.post("/api/coin").then(res => {
+            props.getUser(res.data)
+            setManureCleaned(!manureCleaned);
+          })
+        })
       });
     } else {
       toggleGoodReason();
@@ -420,8 +433,8 @@ function Stables(props) {
           color="secondary"
           className="answer-card-description"
         >
-          I don't have a lot of work these days but I suppose I could give you a
-          coin if you put all the little dung pieces into the manure pile.
+          I don't have a lot of work these days but I suppose I could give you three
+          coins if you put all the little dung pieces into the manure pile.
         </Typography>
         <Typography
           variant="h6"
@@ -643,6 +656,22 @@ function Stables(props) {
         </Typography>
         <Button
           onClick={() => setBottleCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="primary"
+          className="answer-card-description"
+        >
+          As you leave town the nasty smell of manure fills your nostrils. Not surprisingly, shortly after you come to a ranch. The rancher tips his hat when he sees you.
+        </Typography>
+        <Button
+          onClick={toggleFirst}
           variant="contained"
           color="primary"
         >

@@ -418,14 +418,6 @@ module.exports = {
     });
   },
 
-  manureHasTaken: async (req, res) => {
-    const db = req.app.get("db");
-    const { id } = req.session.user;
-
-    const stables = await db.manure_has_taken(id);
-    res.status(200).send(stables);
-  },
-
   useNuts: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
 import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Garden.scss";
@@ -13,31 +13,42 @@ import ListItem from "@material-ui/core/ListItem";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import Character from "../Character/Character";
 import Loading from "../Loading/Loading";
-import Fairy from "../../Images/Fairy.png";
 
 function Garden(props) {
   const [rightCharacter, setRightCharacter] = useState(false);
   const [rightRight, setRightRight] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [fairy, setFairy] = useState(false);
+  const [gardener, setGardener] = useState(false);
   const [answerOne, setAnswerOne] = useState(false);
   const [answerTwo, setAnswerTwo] = useState(false);
   const [answerThree, setAnswerThree] = useState(false);
   const [answerFour, setAnswerFour] = useState(false);
   const [rejectionCard, setRejectionCard] = useState(false);
   const [rejectionCardTwo, setRejectionCardTwo] = useState(false);
-  const [rejectionCardThree, setRejectionCardThree] = useState(false)
+  const [rejectionCardThree, setRejectionCardThree] = useState(false);
   const [flowerRetrievalCard, setFlowerRetrievalCard] = useState(false);
-  const [gardenData, setGardenData] = useState()
-  const [inventoryOpen, setInventoryOpen] = useState(false)
+  const [gardenData, setGardenData] = useState({});
+  const [inventoryOpen, setInventoryOpen] = useState(false);
+  const [firstTimeCard, setFirstTimeCard] = useState(false);
+  const [manureCard, setManureCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/garden").then((res) => {
+      if (res.data[0].first_time) {
+        setFirstTimeCard(true);
+      }
       setGardenData(res.data[0]);
       setRightCharacter(true);
       setIsLoading(false);
     });
   }, []);
+
+  const toggleFirst = () => {
+    axios.post("/api/gardenFirst").then((res) => {
+      setGardenData(res.data[0]);
+      setFirstTimeCard(false);
+    });
+  };
 
   const toggleInventoryOpen = () => setInventoryOpen(!inventoryOpen);
 
@@ -57,15 +68,19 @@ function Garden(props) {
   });
 
   const toggleItem = (item) => {
-    if (item === "flute") {
-      if (props.location.pathname === "/Tower") {
-        axios.post("/api/useFlute").then((res) => {
+    if (item === "manure") {
+      axios.post("/api/manureGiven").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/garden").then((res) => {
           setGardenData(res.data[0]);
-          ;
+          axios.post("/api/coin").then((res) => {
+            props.getUser(res.data);
+            setManureCard(true);
+          });
         });
-      } else {
-        setRejectionCard(true);
-      }
+      });
+    } else {
+      setRejectionCard(true);
     }
   };
 
@@ -77,31 +92,31 @@ function Garden(props) {
     });
   };
 
-  const toggleFairy = () => {
+  const toggleGardener = () => {
     if (gardenData.manure_given === true) {
-      setFairy(!fairy);
+      setGardener(!gardener);
     } else {
       setRejectionCardTwo(true);
     }
   };
 
   const toggleAnswerOne = () => {
-    toggleFairy();
+    toggleGardener();
     setAnswerOne(!answerOne);
   };
 
   const toggleAnswerTwo = () => {
-    toggleFairy();
+    toggleGardener();
     setAnswerTwo(!answerTwo);
   };
 
   const toggleAnswerThree = () => {
-    toggleFairy();
+    toggleGardener();
     setAnswerThree(!answerThree);
   };
 
   const toggleAnswerFour = () => {
-    toggleFairy();
+    toggleGardener();
     setAnswerFour(!answerFour);
   };
 
@@ -126,6 +141,9 @@ function Garden(props) {
     setRightCharacter(false);
     setRightRight(true);
   };
+
+  const toggleRose = () => {};
+  const toggleCoin = () => {};
 
   return isLoading ? (
     <Loading />
@@ -155,19 +173,191 @@ function Garden(props) {
       </div>
       <div className="garden-body">
         <div className="garden-top" onClick={toggleRejectionCard}>
-          <div className="garden-top-left"></div>
-          <div className="garden-top-middle"></div>
-          <div className="garden-top-right"></div>
+          <div className="garden-top-left">
+            <div
+              className="watermelon-plot"
+              onClick={() => setRejectionCardThree(true)}
+            >
+              <div className="watermelon-top-row">
+                <div className="watermelon"></div>
+                <div className="watermelon"></div>
+                <div className="watermelon"></div>
+              </div>
+              <div className="watermelon-bottom-row">
+                <div className="watermelon"></div>
+                <div className="watermelon"></div>
+                <div className="watermelon"></div>
+              </div>
+            </div>
+          </div>
+          <div className="garden-top-middle">
+            <div
+              className="pea-plot"
+              onClick={() => setRejectionCardThree(true)}
+            >
+              <div className="pea-top-row">
+                <div className="pea"></div>
+                <div className="pea"></div>
+                <div className="pea"></div>
+              </div>
+              <div className="pea-bottom-row">
+                <div className="pea"></div>
+                <div className="pea"></div>
+                <div className="pea"></div>
+              </div>
+            </div>
+          </div>
+          <div className="garden-top-right">
+            <div
+              className="carrot-plot"
+              onClick={() => setRejectionCardThree(true)}
+            >
+              <div className="carrot-top-row">
+                <div className="carrot-div">
+                  <div className="carrot">
+                    <div className="carrot-leaf-one"></div>
+                    <div className="carrot-leaf-two"></div>
+                    <div className="carrot-leaf-three"></div>
+                    <div className="carrot-leaf-four"></div>
+                  </div>
+                </div>
+                <div className="carrot-div">
+                  <div className="carrot">
+                    <div className="carrot-leaf-one"></div>
+                    <div className="carrot-leaf-two"></div>
+                    <div className="carrot-leaf-three"></div>
+                    <div className="carrot-leaf-four"></div>
+                  </div>
+                </div>
+                <div className="carrot-div">
+                  <div className="carrot">
+                    <div className="carrot-leaf-one"></div>
+                    <div className="carrot-leaf-two"></div>
+                    <div className="carrot-leaf-three"></div>
+                    <div className="carrot-leaf-four"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="carrot-bottom-row">
+                <div className="carrot-div">
+                  <div className="carrot">
+                    <div className="carrot-leaf-one"></div>
+                    <div className="carrot-leaf-two"></div>
+                    <div className="carrot-leaf-three"></div>
+                    <div className="carrot-leaf-four"></div>
+                  </div>
+                </div>
+                <div className="carrot-div">
+                  <div className="carrot">
+                    <div className="carrot-leaf-one"></div>
+                    <div className="carrot-leaf-two"></div>
+                    <div className="carrot-leaf-three"></div>
+                    <div className="carrot-leaf-four"></div>
+                  </div>
+                </div>
+                <div className="carrot-div">
+                  <div className="carrot">
+                    <div className="carrot-leaf-one"></div>
+                    <div className="carrot-leaf-two"></div>
+                    <div className="carrot-leaf-three"></div>
+                    <div className="carrot-leaf-four"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="garden-middle">
-          <div className="garden-middle-left"></div>
+          <div className="garden-middle-left">
+            <div className="rose-plot">
+              <div className="rose-top-row">
+                <div className="rose-div">
+                  <div className="rose"></div>
+                  <div className="rose-stem"></div>
+                </div>
+                <div className="rose-div">
+                  <div className="rose"></div>
+                  <div className="rose-stem"></div>
+                </div>
+                <div className="rose-div">
+                  <div className="rose"></div>
+                  <div className="rose-stem"></div>
+                </div>
+              </div>
+              <div className="rose-bottom-row">
+                <div className="rose-div">
+                  <div className="rose"></div>
+                  <div className="rose-stem"></div>
+                </div>
+                <div
+                  className={`${
+                    !gardenData.flowers_taken
+                      ? "special-rose-div"
+                      : "rose-div-closed"
+                  }`}
+                  onClick={toggleRose}
+                >
+                  <div className="rose"></div>
+                  <div className="rose-stem"></div>
+                </div>
+                <div
+                  className={`${
+                    gardenData.flowers_taken && !gardenData.coin_taken
+                      ? "coin"
+                      : "coin-closed"
+                  }`}
+                  onClick={toggleCoin}
+                ></div>
+                <div className="rose-div">
+                  <div className="rose"></div>
+                  <div className="rose-stem"></div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="garden-middle-middle">
-            <img
-              src={Fairy}
-              className="garden-fairy"
-              alt="fairy"
-              onClick={toggleFairy}
-            />
+            <div className="gardener" onClick={toggleGardener}>
+              <div className="gardener-head">
+                <div className="gardener-hair-left"></div>
+                <div className="gardener-face">
+                  <div className="gardener-hair-top-left"></div>
+                  <div className="gardener-hair-top-right"></div>
+                  <div className="gardener-eyes">
+                    <div className="gardener-eye">
+                      <div className="gardener-iris"></div>
+                    </div>
+                    <div className="gardener-eye">
+                      <div className="gardener-iris"></div>
+                    </div>
+                  </div>
+                  <div className="gardener-nose"></div>
+                  <div className="gardener-mouth"></div>
+                </div>
+                <div className="gardener-hair-right"></div>
+              </div>
+              <div className="gardener-body">
+                <div className="gardener-upper-neck"></div>
+                <div className="gardener-neck"></div>
+                <div className="gardener-dress">
+                  <div className="gardener-shirt"></div>
+                  <div className="gardener-pants-div"></div>
+                </div>
+                <div className="gardener-legs">
+                  <div className="gardener-leg-left">
+                    <div className="gardener-foot"></div>
+                  </div>
+                  <div className="gardener-leg-right">
+                    <div className="gardener-foot"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="gardener-left-arm">
+                <div className="gardener-left-hand"></div>
+              </div>
+              <div className="gardener-right-arm">
+                <div className="gardener-right-hand"></div>
+              </div>
+            </div>
           </div>
           <div className="garden-middle-right">
             <div
@@ -190,12 +380,222 @@ function Garden(props) {
           </div>
         </div>
         <div className="garden-bottom" onClick={toggleRejectionCard}>
-          <div className="garden-bottom-left"></div>
-          <div className="garden-bottom-middle"></div>
-          <div className="garden-bottom-right"></div>
+          <div className="garden-bottom-left">
+            <div
+              className="daisy-plot"
+              onClick={() => setRejectionCardThree(true)}
+            >
+              <div className="daisy-top-row">
+                <div className="daisy-div">
+                  <div className="daisy">
+                    <div className="daisy-petal-one"></div>
+                    <div className="daisy-petal-two"></div>
+                    <div className="daisy-petal-three"></div>
+                    <div className="daisy-petal-four"></div>
+                    <div className="daisy-petal-five"></div>
+                  </div>
+                  <div className="daisy-stem"></div>
+                </div>
+                <div className="daisy-div">
+                  <div className="daisy">
+                    <div className="daisy-petal-one"></div>
+                    <div className="daisy-petal-two"></div>
+                    <div className="daisy-petal-three"></div>
+                    <div className="daisy-petal-four"></div>
+                    <div className="daisy-petal-five"></div>
+                  </div>
+                  <div className="daisy-stem"></div>
+                </div>
+                <div className="daisy-div">
+                  <div className="daisy">
+                    <div className="daisy-petal-one"></div>
+                    <div className="daisy-petal-two"></div>
+                    <div className="daisy-petal-three"></div>
+                    <div className="daisy-petal-four"></div>
+                    <div className="daisy-petal-five"></div>
+                  </div>
+                  <div className="daisy-stem"></div>
+                </div>
+              </div>
+              <div className="daisy-bottom-row">
+                <div className="daisy-div">
+                  <div className="daisy">
+                    <div className="daisy-petal-one"></div>
+                    <div className="daisy-petal-two"></div>
+                    <div className="daisy-petal-three"></div>
+                    <div className="daisy-petal-four"></div>
+                    <div className="daisy-petal-five"></div>
+                  </div>
+                  <div className="daisy-stem"></div>
+                </div>
+                <div className="daisy-div">
+                  <div className="daisy">
+                    <div className="daisy-petal-one"></div>
+                    <div className="daisy-petal-two"></div>
+                    <div className="daisy-petal-three"></div>
+                    <div className="daisy-petal-four"></div>
+                    <div className="daisy-petal-five"></div>
+                  </div>
+                  <div className="daisy-stem"></div>
+                </div>
+                <div className="daisy-div">
+                  <div className="daisy">
+                    <div className="daisy-petal-one"></div>
+                    <div className="daisy-petal-two"></div>
+                    <div className="daisy-petal-three"></div>
+                    <div className="daisy-petal-four"></div>
+                    <div className="daisy-petal-five"></div>
+                  </div>
+                  <div className="daisy-stem"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="garden-bottom-middle">
+            <div
+              className="purple-plot"
+              onClick={() => setRejectionCardThree(true)}
+            >
+              <div className="purple-top-row">
+                <div className="purple-div">
+                  <div className="purple">
+                    <div className="purple-petal-one"></div>
+                    <div className="purple-petal-two"></div>
+                    <div className="purple-petal-three"></div>
+                    <div className="purple-petal-four"></div>
+                    <div className="purple-petal-five"></div>
+                  </div>
+                  <div className="purple-stem"></div>
+                </div>
+                <div className="purple-div">
+                  <div className="purple">
+                    <div className="purple-petal-one"></div>
+                    <div className="purple-petal-two"></div>
+                    <div className="purple-petal-three"></div>
+                    <div className="purple-petal-four"></div>
+                    <div className="purple-petal-five"></div>
+                  </div>
+                  <div className="purple-stem"></div>
+                </div>
+                <div className="purple-div">
+                  <div className="purple">
+                    <div className="purple-petal-one"></div>
+                    <div className="purple-petal-two"></div>
+                    <div className="purple-petal-three"></div>
+                    <div className="purple-petal-four"></div>
+                    <div className="purple-petal-five"></div>
+                  </div>
+                  <div className="purple-stem"></div>
+                </div>
+              </div>
+              <div className="purple-bottom-row">
+                <div className="purple-div">
+                  <div className="purple">
+                    <div className="purple-petal-one"></div>
+                    <div className="purple-petal-two"></div>
+                    <div className="purple-petal-three"></div>
+                    <div className="purple-petal-four"></div>
+                    <div className="purple-petal-five"></div>
+                  </div>
+                  <div className="purple-stem"></div>
+                </div>
+                <div className="purple-div">
+                  <div className="purple">
+                    <div className="purple-petal-one"></div>
+                    <div className="purple-petal-two"></div>
+                    <div className="purple-petal-three"></div>
+                    <div className="purple-petal-four"></div>
+                    <div className="purple-petal-five"></div>
+                  </div>
+                  <div className="purple-stem"></div>
+                </div>
+                <div className="purple-div">
+                  <div className="purple">
+                    <div className="purple-petal-one"></div>
+                    <div className="purple-petal-two"></div>
+                    <div className="purple-petal-three"></div>
+                    <div className="purple-petal-four"></div>
+                    <div className="purple-petal-five"></div>
+                  </div>
+                  <div className="purple-stem"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="garden-bottom-right">
+            <div
+              className="sun-plot"
+              onClick={() => setRejectionCardThree(true)}
+            >
+              <div className="sun-top-row">
+                <div className="sun-div">
+                  <div className="sun">
+                    <div className="sun-petal-one"></div>
+                    <div className="sun-petal-two"></div>
+                    <div className="sun-petal-three"></div>
+                    <div className="sun-petal-four"></div>
+                    <div className="sun-petal-five"></div>
+                  </div>
+                  <div className="sun-stem"></div>
+                </div>
+                <div className="sun-div">
+                  <div className="sun">
+                    <div className="sun-petal-one"></div>
+                    <div className="sun-petal-two"></div>
+                    <div className="sun-petal-three"></div>
+                    <div className="sun-petal-four"></div>
+                    <div className="sun-petal-five"></div>
+                  </div>
+                  <div className="sun-stem"></div>
+                </div>
+                <div className="sun-div">
+                  <div className="sun">
+                    <div className="sun-petal-one"></div>
+                    <div className="sun-petal-two"></div>
+                    <div className="sun-petal-three"></div>
+                    <div className="sun-petal-four"></div>
+                    <div className="sun-petal-five"></div>
+                  </div>
+                  <div className="sun-stem"></div>
+                </div>
+              </div>
+              <div className="sun-bottom-row">
+                <div className="sun-div">
+                  <div className="sun">
+                    <div className="sun-petal-one"></div>
+                    <div className="sun-petal-two"></div>
+                    <div className="sun-petal-three"></div>
+                    <div className="sun-petal-four"></div>
+                    <div className="sun-petal-five"></div>
+                  </div>
+                  <div className="sun-stem"></div>
+                </div>
+                <div className="sun-div">
+                  <div className="sun">
+                    <div className="sun-petal-one"></div>
+                    <div className="sun-petal-two"></div>
+                    <div className="sun-petal-three"></div>
+                    <div className="sun-petal-four"></div>
+                    <div className="sun-petal-five"></div>
+                  </div>
+                  <div className="sun-stem"></div>
+                </div>
+                <div className="sun-div">
+                  <div className="sun">
+                    <div className="sun-petal-one"></div>
+                    <div className="sun-petal-two"></div>
+                    <div className="sun-petal-three"></div>
+                    <div className="sun-petal-four"></div>
+                    <div className="sun-petal-five"></div>
+                  </div>
+                  <div className="sun-stem"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <Card className={`${fairy ? "component-card" : "component-card-closed"}`}>
+      <Card className={`${gardener ? "component-card" : "component-card-closed"}`}>
         <Typography variant="h5" color="primary">
           What would you like to know about?
         </Typography>
@@ -205,7 +605,7 @@ function Garden(props) {
           <ListItem onClick={toggleAnswerThree}>Flowers</ListItem>
           <ListItem onClick={toggleAnswerFour}>Magical Creatures</ListItem>
         </List>
-        <Button onClick={toggleFairy} variant="contained" color="primary">
+        <Button onClick={toggleGardener} variant="contained" color="primary">
           Say Goodbye
         </Button>
       </Card>
@@ -248,7 +648,7 @@ function Garden(props) {
           color="secondary"
           className="answer-card-description"
         >
-          I'm warning you. These flowers are to look at, not to touch!
+          I'm warning you. These garden is to look at, not to touch!
         </Typography>
         <Button onClick={toggleAnswerThree} variant="contained" color="primary">
           CLOSE
@@ -263,8 +663,8 @@ function Garden(props) {
           color="secondary"
           className="answer-card-description"
         >
-          There are many magical creatures. If you want to meet more of them go
-          to the magical glade.
+          There are many other magical creatures. If you want to meet them go to
+          the magical sanctuary at the glade.
         </Typography>
         <Button onClick={toggleAnswerFour} variant="contained" color="primary">
           CLOSE
@@ -280,7 +680,7 @@ function Garden(props) {
           color="secondary"
           className="answer-card-description"
         >
-          Don't touch the flowers!!!
+          Don't touch anything!!!
         </Typography>
         <Button
           onClick={() => setRejectionCardThree(false)}
@@ -321,7 +721,7 @@ function Garden(props) {
           className="answer-card-description"
         >
           You quickly pick the most beautiful flowers you can find before the
-          fairy changes her mind.
+          gardener changes her mind.
         </Typography>
         <Button
           onClick={() => setFlowerRetrievalCard(false)}
@@ -355,6 +755,6 @@ function Garden(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory, logoutUser })(
   Garden
 );
