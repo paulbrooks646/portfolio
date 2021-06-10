@@ -255,9 +255,18 @@ function Tower(props) {
       </div>
       <div className="tower-body">
         <div className="tower-top">
-          <div className="tower-top-left"></div>
+          <div className="tower-top-left">
+            <div className="tower-coin" onClick={toggleCoin}></div>
+          </div>
           <div className="tower-top-middle"></div>
-          <div className="tower-top-right"></div>
+          <div className="tower-top-right">
+            <div className="tower-tower">
+              <div className="tower-window"></div>
+              <div className="tower-door">
+                <div className="tower-door-knob"></div>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="tower-middle">
           <div className="tower-middle-left">
@@ -282,7 +291,9 @@ function Tower(props) {
           <div className="tower-middle-middle">
             <div className="weasel" onClick="toggleWeasel">
               <div className="weasel-head">
-                <div className="weasel-ear"><div className="weasel-inner-ear"></div></div>
+                <div className="weasel-ear">
+                  <div className="weasel-inner-ear"></div>
+                </div>
                 <div className="weasel-face">
                   <div
                     className={`${
@@ -322,28 +333,28 @@ function Tower(props) {
                   >
                     <div className="weasel-crazy-mouth-top">
                       <div className="weasel-tooth"></div>
-                        <div className="weasel-tooth"></div>
-                        <div className="weasel-tooth"></div>
-                        <div className="weasel-tooth"></div>
+                      <div className="weasel-tooth"></div>
+                      <div className="weasel-tooth"></div>
+                      <div className="weasel-tooth"></div>
                     </div>
                     <div className="weasel-crazy-mouth-bottom">
                       <div className="weasel-tooth"></div>
-                        <div className="weasel-tooth"></div>
-                        <div className="weasel-tooth"></div>
-                        <div className="weasel-tooth"></div>
+                      <div className="weasel-tooth"></div>
+                      <div className="weasel-tooth"></div>
+                      <div className="weasel-tooth"></div>
                     </div>
                   </div>
                 </div>
+              </div>
+              <div className="weasel-neck"></div>
+              <div className="weasel-body">
+                <div className="weasel-tummy"></div>
+                <div className="weasel-limb-div">
+                  <div className="weasel-paw"></div>
+                  <div className="weasel-foot"></div>
                 </div>
-                <div className="weasel-neck"></div>
-                <div className="weasel-body">
-                  <div className="weasel-tummy"></div>
-                  <div className="weasel-limb-div">
-                    <div className="weasel-paw"></div>
-                    <div className="weasel-foot"></div>
-                  </div>
-                </div>
-                <div className="weasel-tail"></div>
+              </div>
+              <div className="weasel-tail"></div>
             </div>
           </div>
           <div className="tower-middle-right">
@@ -375,8 +386,24 @@ function Tower(props) {
                 <div className="princess-upper-neck"></div>
                 <div className="princess-neck"></div>
                 <div className="princess-dress">
-                  <div className="princess-shirt"></div>
-                  <div className="princess-pants-div"></div>
+                  <div className="princess-arm-left">
+                    <div className="princess-hand-left">
+                      <div className="princess-finger-one"></div>
+                      <div className="princess-finger-two"></div>
+                      <div className="princess-finger-three"></div>
+                      <div className="princess-finger-four"></div>
+                      <div className="princess-finger-five"></div>
+                    </div>
+                  </div>
+                  <div className="princess-arm-right">
+                    <div className="princess-hand-left">
+                      <div className="princess-finger-one"></div>
+                      <div className="princess-finger-two"></div>
+                      <div className="princess-finger-three"></div>
+                      <div className="princess-finger-four"></div>
+                      <div className="princess-finger-five"></div>
+                    </div>
+                  </div>
                 </div>
                 <div className="princess-legs">
                   <div className="princess-leg-left">

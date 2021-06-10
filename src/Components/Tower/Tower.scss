@@ -15,8 +15,17 @@
         linear-gradient(155deg, silver 23px, transparent 23px);
       background-size: 58px 58px;
       background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+      border-right: solid black 7px;
+      @include center(flex-end);
 
       .tower-coin {
+        height: 30px;
+        width: 5px;
+        background-color: black;
+        position: relative;
+        right: 11px;
+        bottom: 1px;
+        cursor: pointer;
       }
     }
 
@@ -27,6 +36,38 @@
     .tower-top-right {
       @include section(40vw);
       @include flex(flex-end);
+
+      .tower-tower {
+        height: 100%;
+        width: 50%;
+        background-color: black;
+        background-image: linear-gradient(335deg, silver 23px, transparent 23px),
+          linear-gradient(155deg, silver 23px, transparent 23px),
+          linear-gradient(335deg, silver 23px, transparent 23px),
+          linear-gradient(155deg, silver 23px, transparent 23px);
+        background-size: 58px 58px;
+        background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+        @include flex(flex-end);
+        border-left: solid 4px black;
+        border-right: solid 4px black;
+
+        .tower-door {
+          height: 225px;
+          width: 125px;
+          background-color: sienna;
+          @include center(flex-start);
+          border: solid black 2px;
+
+          .tower-door-knob {
+            height: 25px;
+            width: 25px;
+            background-color: black;
+            border-radius: 50%;
+            position: relative;
+            left: 10px;
+          }
+        }
+      }
     }
   }
 
@@ -56,9 +97,11 @@
         animation-timing-function: linear;
         animation-direction: normal;
         animation-duration: 1s;
+        cursor: pointer;
 
         .weasel-head {
           @include flex(center);
+
           .weasel-ear {
             border-radius: 50%;
             height: 20px;
@@ -69,10 +112,10 @@
             @include flex(center);
 
             .weasel-inner-ear {
-               border-radius: 50%;
-            height: 15px;
-            width: 15px;
-            background-image: linear-gradient(tan 50%, transparent 50%);
+              border-radius: 50%;
+              height: 15px;
+              width: 15px;
+              background-image: linear-gradient(tan 50%, transparent 50%);
             }
           }
           .weasel-face {
@@ -88,7 +131,7 @@
               height: 10px;
               width: 10px;
               background-color: black;
-               position: relative;
+              position: relative;
               left: 10px;
               top: 5px;
             }
@@ -96,14 +139,13 @@
               display: none;
             }
             .weasel-crazy-eyes {
-               border-radius: 50%;
+              border-radius: 50%;
               height: 6px;
               width: 6px;
               background-color: rgb(201, 42, 42);
               position: relative;
               left: 17px;
               top: 2px;
-             
             }
             .weasel-crazy-eyes-closed {
               display: none;
@@ -113,12 +155,11 @@
               position: relative;
               right: 4px;
               .weasel-nose {
-                 border-radius: 50%;
-              height: 5px;
-              width: 5px;
-              background-color: pink;
-              position: relative;
-                
+                border-radius: 50%;
+                height: 5px;
+                width: 5px;
+                background-color: pink;
+                position: relative;
               }
               .weasel-whisker-div {
                 @include flex(space-evenly);
@@ -128,37 +169,35 @@
 
                 .weasel-whisker-one {
                   width: 10px;
-                  height: .5px;
+                  height: 0.5px;
                   background-color: black;
                   transform: rotate(-10deg);
                   position: relative;
                 }
-               
+
                 .weasel-whisker-two {
-                   width: 10px;
-                  height: .5px;
+                  width: 10px;
+                  height: 0.5px;
                   background-color: black;
                   transform: rotate(0deg);
-                   position: relative;
+                  position: relative;
                 }
                 .weasel-whisker-three {
-                   width: 10px;
-                  height: .5px;
+                  width: 10px;
+                  height: 0.5px;
                   background-color: black;
                   transform: rotate(10deg);
-                   position: relative;
-
+                  position: relative;
                 }
               }
             }
             .weasel-mouth {
-               width: 12px;
+              width: 12px;
               height: 1.5px;
               background-color: pink;
               position: relative;
               left: 4px;
               top: 5px;
-
             }
             .weasel-mouth-closed {
               display: none;
@@ -175,7 +214,6 @@
               left: 4px;
               transform: rotate(-10deg);
 
-             
               .weasel-crazy-mouth-top {
                 width: 100%;
                 height: 50%;
@@ -183,20 +221,28 @@
                 .weasel-tooth {
                   height: 5px;
                   width: 5px;
-                  background-image: linear-gradient(45deg, transparent 50%, white 50%);
+                  background-image: linear-gradient(
+                    45deg,
+                    transparent 50%,
+                    white 50%
+                  );
                   transform: rotate(135deg);
                   position: relative;
                   bottom: 2.5px;
                 }
               }
               .weasel-crazy-mouth-bottom {
-                 width: 100%;
+                width: 100%;
                 height: 50%;
                 @include center(space-evenly);
                 .weasel-tooth {
-                   height: 5px;
+                  height: 5px;
                   width: 5px;
-                  background-image: linear-gradient(45deg, transparent 50%, white 50%);
+                  background-image: linear-gradient(
+                    45deg,
+                    transparent 50%,
+                    white 50%
+                  );
                   transform: rotate(-45deg);
                   position: relative;
                   top: 2.5px;
@@ -215,7 +261,6 @@
           position: relative;
           top: 10px;
           right: 5px;
-
         }
         .weasel-body {
           height: 40px;
@@ -227,20 +272,19 @@
           right: 15px;
           @include flex(center);
           .weasel-tummy {
- height: 40px;
-          width: 80px;
-          background-image: linear-gradient(0deg, tan 20%, transparent 20%);
-          position: relative;
-          border-radius: 50%;
-          top: 9px;
-          z-index: 1;
-          
+            height: 40px;
+            width: 80px;
+            background-image: linear-gradient(0deg, tan 20%, transparent 20%);
+            position: relative;
+            border-radius: 50%;
+            top: 9px;
+            z-index: 1;
           }
           .weasel-limb-div {
             @include center(space-between);
             width: 100%;
             top: 10px;
-            
+
             .weasel-paw {
               width: 25px;
               height: 10px;
@@ -250,7 +294,6 @@
               bottom: 8px;
               right: 15px;
               transform: rotate(-45deg);
-
             }
             .weasel-foot {
               width: 25px;
@@ -261,7 +304,6 @@
               bottom: 5px;
               left: 2px;
               transform: rotate(-40deg);
-
             }
           }
         }
@@ -269,13 +311,12 @@
           width: 60px;
           height: 25px;
           border-bottom: sienna 12px solid;
-          border-right: sienna 10px solid;
-          border-radius: 0% 0% 50% 0%;
+          border-right: sienna 12px solid;
+          border-radius: 0% 50% 50% 0%;
           position: relative;
           right: 25px;
           top: 20px;
           transform: scaleY(-1);
-
         }
       }
     }
@@ -286,13 +327,16 @@
       .princess {
         @include flex(center);
         position: relative;
+        bottom: 40px;
         cursor: pointer;
 
         .princess-hat {
           border-radius: 50% 50% 25% 25%;
-          height: 50px;
+          height: 80px;
           width: 50px;
-          border: green 4px solid;
+          border-top: #fbf6d9 12px solid;
+          border-left: #fbf6d9 8px solid;
+          border-right: #fbf6d9 8px solid;
           position: relative;
           z-index: 3;
           top: 3px;
@@ -302,16 +346,16 @@
           display: flex;
           justify-content: center;
           position: relative;
-          bottom: 42px;
+          bottom: 68px;
 
           .princess-hair-left {
-            height: 30px;
-            width: 25px;
-            border-right: #b7410e solid 7px;
+            height: 5px;
+            width: 21px;
             position: relative;
-            top: 10px;
-            left: 4px;
-            z-index: 1;
+            left: 21px;
+            z-index: 5;
+            background-color: gold;
+            border-radius: 50% 0% 0% 0%;
           }
 
           .princess-face {
@@ -323,34 +367,40 @@
             border-bottom: black solid 1px;
 
             .princess-hair-top-left {
-              height: 100px;
-              width: 28px;
-              border-radius: 50%;
-              background-image: linear-gradient(transparent 20%, #b7410e 20%);
-              z-index: 2;
-              transform: rotate(-35deg);
-              position: relative;
-              right: 12px;
-              bottom: 2px;
+              height: 10px;
+              width: 10px;
+              background-image: linear-gradient(
+                45deg,
+                transparent 50%,
+                gold 50%
+              );
+              position: absolute;
+              left: 8px;
+              transform: rotate(-45deg);
+              bottom: 36px;
+              z-index: 3;
             }
 
             .princess-hair-top-right {
-              height: 100px;
-              width: 28px;
-              border-radius: 50%;
-              background-image: linear-gradient(transparent 20%, #b7410e 20%);
-              transform: rotate(25deg);
-              position: relative;
-              left: 9px;
-              z-index: 2;
-              bottom: 14px;
+              height: 10px;
+              width: 10px;
+              background-image: linear-gradient(
+                45deg,
+                transparent 50%,
+                gold 50%
+              );
+              position: absolute;
+              right: 8px;
+              transform: rotate(-45deg);
+              z-index: 3;
+              bottom: 36px;
             }
 
             .princess-eyes {
               width: 80%;
               @include center(space-evenly);
               position: relative;
-              bottom: 11px;
+              top: 5px;
 
               .princess-eye {
                 width: 13px;
@@ -376,41 +426,42 @@
               }
             }
             .princess-nose {
-              height: 18px;
-              width: 8px;
+              height: 6px;
+              width: 6px;
               @include flex(center);
               border-left: solid 0.5px;
               border-right: solid 0.5px;
               border-bottom: solid 0.5px;
               border-radius: 0% 0% 50% 50%;
               position: relative;
-              bottom: 7px;
+              top: 8px;
             }
 
             .princess-mouth {
               height: 20px;
               width: 18px;
-              border-bottom: red 3px solid;
-              border-radius: 50%;
+              border-bottom: magenta 3px solid;
+              border-radius: 35%;
               position: relative;
-              bottom: 5px;
+              bottom: 2px;
             }
           }
 
           .princess-hair-right {
-            height: 30px;
-            width: 25px;
-            border-radius: 0%;
-            border-left: #b7410e solid 7px;
+            height: 5px;
+            width: 21px;
             position: relative;
-            top: 10px;
-            right: 4px;
-            z-index: 1;
+            right: 21px;
+            z-index: 5;
+            background-color: gold;
+            border-radius: 0% 50% 0% 0%;
           }
         }
 
         .princess-body {
           @include flex(flex-start);
+          position: relative;
+          bottom: 25px;
 
           .princess-upper-neck {
             height: 5px;
@@ -434,25 +485,151 @@
           .princess-dress {
             width: 50px;
             height: 100px;
-            background-color: green;
+            background-color: magenta;
             border-radius: 25% 25% 0% 0%;
             position: relative;
             bottom: 62px;
             z-index: 2;
             @include flex(flex-start);
 
-            .princess-shirt {
-              width: 30px;
-              height: 60px;
-              background-color: black;
-              border-radius: 50% 50% 0% 0%;
-              z-index: 0;
-            }
+            .princess-arm-left {
+              height: 30px;
+              width: 10px;
+              background-image: linear-gradient(magenta 60%, #eebb99 60%);
+              position: relative;
+              right: 25px;
+              transform: rotate(30deg);
+              @include flex(flex-end);
 
-            .princess-pants-div {
-              width: 30px;
-              height: 40px;
-              background-color: rgb(132, 132, 179);
+              .princess-hand-left {
+                width: 15px;
+                height: 10px;
+                background-color: purple;
+                border-radius: 50%;
+                position: relative;
+                top: 10px;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: flex-end;
+
+                .princess-finger-one {
+                  height: 6px;
+                  width: 4px;
+                  background-color: purple;
+                  position: relative;
+                  top: 0px;
+                  right: 4px;
+                  transform: rotate(35deg);
+                }
+
+                .princess-finger-two {
+                  height: 5px;
+                  width: 3px;
+                  background-color: purple;
+                  position: relative;
+                  top: 4px;
+                  right: 4px;
+                  transform: rotate(25deg);
+                }
+
+                .princess-finger-three {
+                  height: 5px;
+                  width: 3px;
+                  background-color: purple;
+                  position: relative;
+                  top: 4px;
+                  right: 3px;
+                }
+
+                .princess-finger-four {
+                  height: 5px;
+                  width: 3px;
+                  background-color: purple;
+                  position: relative;
+                  top: 4px;
+                  right: 1px;
+                }
+
+                .princess-finger-five {
+                  height: 5px;
+                  width: 3px;
+                  background-color: purple;
+                  position: relative;
+                  top: 1px;
+                  left: 2px;
+                  transform: rotate(-25deg);
+                }
+              }
+            }
+            .princess-arm-right {
+              height: 30px;
+              width: 10px;
+              background-image: linear-gradient(magenta 60%, #eebb99 60%);
+              position: relative;
+              left: 25px;
+              bottom: 25px;
+              transform: scaleX(-1) rotate(30deg);
+              @include flex(flex-end);
+
+              .princess-hand-left {
+                width: 15px;
+                height: 10px;
+                background-color: purple;
+                border-radius: 50%;
+                position: relative;
+                top: 10px;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: flex-end;
+
+                .princess-finger-one {
+                  height: 6px;
+                  width: 4px;
+                  background-color: purple;
+                  position: relative;
+                  top: 0px;
+                  right: 3px;
+                  transform: rotate(35deg);
+                }
+
+                .princess-finger-two {
+                  height: 5px;
+                  width: 3px;
+                  background-color: purple;
+                  position: relative;
+                  top: 4px;
+                  right: 4px;
+                  transform: rotate(25deg);
+                }
+
+                .princess-finger-three {
+                  height: 5px;
+                  width: 3px;
+                  background-color: purple;
+                  position: relative;
+                  top: 4px;
+                  right: 3px;
+                }
+
+                .princess-finger-four {
+                  height: 5px;
+                  width: 3px;
+                  background-color: purple;
+                  position: relative;
+                  top: 4px;
+                  right: 1px;
+                }
+
+                .princess-finger-five {
+                  height: 5px;
+                  width: 3px;
+                  background-color: purple;
+                  position: relative;
+                  top: 1px;
+                  left: 2px;
+                  transform: rotate(-25deg);
+                }
+              }
             }
           }
 
@@ -472,7 +649,7 @@
               .princess-foot {
                 height: 9px;
                 width: 13px;
-                background-color: silver;
+                background-color: purple;
                 position: relative;
                 z-index: 1;
                 border-radius: 50% 50% 0% 0%;
@@ -489,7 +666,7 @@
               .princess-foot {
                 height: 9px;
                 width: 13px;
-                background-color: silver;
+                background-color: purple;
                 position: relative;
                 z-index: 1;
                 border-radius: 50% 50% 0% 0%;
