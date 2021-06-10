@@ -30,9 +30,9 @@ function Tower(props) {
   const [answerSeven, setAnswerSeven] = useState(false);
   const [answerEight, setAnswerEight] = useState(false);
   const [answerNine, setAnswerNine] = useState(false);
-  const [rejectionCardThree, setRejectionCardThree] = useState(false);
+  const [princessRejectionCard, setPrincessRejectionCard] = useState(false);
   const [firstTime, setFirstTime] = useState(false);
-  const [rejectionCardTwo, setRejectionCardTwo] = useState(false);
+  const [weaselRejectionCard, setWeaselRejectionCard] = useState(false);
   const [inventoryOpen, setInventoryOpen] = useState(false);
   const [towerData, setTowerData] = useState({});
   const [rejectionCard, setRejectionCard] = useState();
@@ -44,7 +44,10 @@ function Tower(props) {
 
   useEffect(() => {
     axios.get("/api/tower").then((res) => {
-      if (res.data[0].first_time) setTowerData(res.data[0]);
+      if (res.data[0].first_time) {
+        setFirstTime(true);
+      }
+      setTowerData(res.data[0]);
       setLeftCharacter(true);
       setIsLoading(false);
     });
@@ -87,7 +90,7 @@ function Tower(props) {
         });
       });
     } else if (item === "ribbon") {
-      if (towerData.weasel_soothed) {
+      if (towerData.weasel_soothed && towerData.flowers_given) {
         axios.post("/api/giveRibbon").then((res) => {
           props.getInventory(res.data);
           axios.get("/api/tower").then((res) => {
@@ -136,13 +139,17 @@ function Tower(props) {
   };
 
   const togglePrincess = () => {
-    if (!props.tower.tower.weasel_soothed) {
+    if (!towerData.weasel_soothed) {
+      setWeaselRejectionCard(true)
+    } else if (!towerData.flowers_given) {
+      setPrincessRejectionCard(true)
+    } else {
+      setPrincess(!princess);
     }
-    setPrincess(!princess);
   };
 
   const toggleWeasel = () => {
-    if (props.tower.tower.weasel_soothed) {
+    if (towerData.weasel_soothed) {
       setWeaselPurr(true);
     } else {
       setWeaselHiss(true);
@@ -163,7 +170,7 @@ function Tower(props) {
         setCoinRejectionCard(true);
       }
     } else {
-      setRejectionCardTwo(true);
+      setWeaselRejectionCard(true);
     }
   };
 
@@ -210,16 +217,6 @@ function Tower(props) {
   const toggleAnswerNine = () => {
     togglePrincess();
     setAnswerNine(!answerNine);
-  };
-
-  const toggleRejectionCard = () => {
-    if (!towerData.weasel_soothed) {
-      setRejectionCardTwo(true);
-    } else if (towerData.flowers_given === true) {
-      setPrincess(true);
-    } else {
-      setRejectionCardThree(true);
-    }
   };
 
   const toggleGoLeft = () => {
@@ -289,7 +286,7 @@ function Tower(props) {
             </div>
           </div>
           <div className="tower-middle-middle">
-            <div className="weasel" onClick="toggleWeasel">
+            <div className="weasel" onClick={toggleWeasel}>
               <div className="weasel-head">
                 <div className="weasel-ear">
                   <div className="weasel-inner-ear"></div>
@@ -592,7 +589,7 @@ function Tower(props) {
       </Card>
       <Card
         className={`${
-          rejectionCardThree ? "answer-card" : "answer-card-closed"
+          princessRejectionCard ? "answer-card" : "answer-card-closed"
         }`}
       >
         <Typography
@@ -603,7 +600,7 @@ function Tower(props) {
           How droll! The peasant thinks I would talk to him.
         </Typography>
         <Button
-          onClick={() => setRejectionCardThree(false)}
+          onClick={() => setPrincessRejectionCard(false)}
           variant="contained"
           color="primary"
         >
@@ -611,18 +608,19 @@ function Tower(props) {
         </Button>
       </Card>
       <Card
-        className={`${rejectionCardTwo ? "answer-card" : "answer-card-closed"}`}
+        className={`${
+          weaselRejectionCard ? "answer-card" : "answer-card-closed"
+        }`}
       >
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          You should figure out how to deal with that weasel before you even
-          think about talking to the princess
+          You need to figure out how to deal with that weasel before you think about doing that.
         </Typography>
         <Button
-          onClick={() => setRejectionCardTwo(false)}
+          onClick={() => setWeaselRejectionCard(false)}
           variant="contained"
           color="primary"
         >
