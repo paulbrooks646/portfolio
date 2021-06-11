@@ -1,43 +1,43 @@
 import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
-import {getInventory} from "../../redux/inventoryReducer"
+import { getUser, logoutUser } from "../../redux/userReducer";
+import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Throne.scss";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
-import Character from "../Character/Character"
+import Character from "../Character/Character";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Loading from "../Loading/Loading"
+import Loading from "../Loading/Loading";
+import House from "../House/House"
 
 function Throne(props) {
-
-   const [isLoading, setIsLoading] = useState(false);
-   const [answerOne, setAnswerOne] = useState(false);
-   const [answerTwo, setAnswerTwo] = useState(false);
-   const [answerThree, setAnswerThree] = useState(false);
-   const [answerFour, setAnswerFour] = useState(false);
-   const [rejectionCard, setRejectionCard] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [answerOne, setAnswerOne] = useState(false);
+  const [answerTwo, setAnswerTwo] = useState(false);
+  const [answerThree, setAnswerThree] = useState(false);
+  const [answerFour, setAnswerFour] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false);
   const [firstTime, setFirstTime] = useState(false);
-   const [downCharacter, setDownCharacter] = useState(false);
+  const [downCharacter, setDownCharacter] = useState(false);
   const [downDown, setDownDown] = useState(false);
-  const [inventoryOpen, setInventoryOpen] = useState(false)
-  const [throneData, setThroneData] = useState()
-  
-   useEffect(() => {
-     axios.get("/api/clearing").then((res) => {
-       setThroneData(res.data[0]);
+  const [inventoryOpen, setInventoryOpen] = useState(false);
+  const [throneData, setThroneData] = useState();
 
-       setDownCharacter(true);
+  useEffect(() => {
+    axios.get("/api/clearing").then((res) => {
+      setThroneData(res.data[0]);
 
-       setIsLoading(false);
-     });
-   }, []);
-  
+      setDownCharacter(true);
+
+      setIsLoading(false);
+    });
+  }, []);
+
   const toggleInventoryOpen = () => setInventoryOpen(!inventoryOpen);
 
   const logout = () => {
@@ -60,7 +60,6 @@ function Throne(props) {
       if (props.location.pathname === "/Tower") {
         axios.post("/api/useFlute").then((res) => {
           setThroneData(res.data[0]);
-          ;
         });
       } else {
         setRejectionCard(true);
@@ -76,10 +75,10 @@ function Throne(props) {
     });
   };
 
-   const toggleGoDown = () => {
-     setDownDown(true);
-     setDownCharacter(false);
-   };
+  const toggleGoDown = () => {
+    setDownDown(true);
+    setDownCharacter(false);
+  };
 
   return (
     <div className="main">
@@ -106,8 +105,73 @@ function Throne(props) {
         </button>
       </div>
       <div className="throne-body">
-        <div className="throne-top"></div>
-
+        <House />
+        <div className="throne-top">
+          <div className="throne-top-left">
+            <div className="princess-hat"></div>
+            <div className="princess-head">
+              <div className="princess-hair-left"></div>
+              <div className="princess-face">
+                <div className="princess-hair-top-left"></div>
+                <div className="princess-hair-top-right"></div>
+                <div className="princess-eyes">
+                  <div className="princess-eye">
+                    <div className="princess-iris">
+                      <div className="princess-pupil"></div>
+                    </div>
+                  </div>
+                  <div className="princess-eye">
+                    <div className="princess-iris">
+                      <div className="princess-pupil"></div>
+                    </div>
+                  </div>
+                </div>
+                <div className="princess-nose"></div>
+                <div className="princess-mouth"></div>
+              </div>
+              <div className="princess-hair-right"></div>
+            </div>
+            <div className="princess-body">
+              <div className="princess-upper-neck"></div>
+              <div className="princess-neck"></div>
+              <div className="princess-dress">
+                <div className="princess-arm-left">
+                  <div className="princess-hand-left">
+                    <div className="princess-finger-one"></div>
+                    <div className="princess-finger-two"></div>
+                    <div className="princess-finger-three"></div>
+                    <div className="princess-finger-four"></div>
+                    <div className="princess-finger-five"></div>
+                  </div>
+                </div>
+                <div className="princess-arm-right">
+                  <div className="princess-hand-left">
+                    <div className="princess-finger-one"></div>
+                    <div className="princess-finger-two"></div>
+                    <div className="princess-finger-three"></div>
+                    <div className="princess-finger-four"></div>
+                    <div className="princess-finger-five"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="princess-legs">
+                <div className="princess-leg-left">
+                  <div className="princess-foot"></div>
+                </div>
+                <div className="princess-leg-right">
+                  <div className="princess-foot"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="throne-top-middle"></div>
+          <div className="throne-top-right"></div>
+        </div>
+        <div className="throne-middle">
+          <div className="throne-middle-left"></div>
+          <div className="throne-middle-middle"></div>
+          <div className="throne-middle-right"></div>
+        </div>
         <div className="throne-bottom">
           <div className="throne-bottom-left"></div>
           <div className="throne-bottom-middle">
@@ -155,4 +219,6 @@ function Throne(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory })(Throne);
+export default connect(mapStateToProps, { getUser, getInventory, logoutUser })(
+  Throne
+);
