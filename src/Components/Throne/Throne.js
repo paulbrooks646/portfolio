@@ -13,7 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Loading from "../Loading/Loading";
-import House from "../House/House"
+import House from "../House/House";
 
 function Throne(props) {
   const [isLoading, setIsLoading] = useState(false);
@@ -164,8 +164,51 @@ function Throne(props) {
               </div>
             </div>
           </div>
-          <div className="throne-top-middle"></div>
-          <div className="throne-top-right"></div>
+          <div className="throne-top-middle">
+            <div className="throne-seat-div">
+              <div className="throne-seat-top">
+                <div className="throne-seat-top-left"></div>
+                <div className="throne-seat-top-middle"></div>
+                <div className="throne-seat-top-right"></div>
+              </div>
+              <div className="throne-seat-middle">
+                <div className="throne-seat-middle-left"></div>
+                <div className="throne-seat-middle-middle"></div>
+                <div className="throne-seat-middle-right"></div>
+              </div>
+              <div className="throne-seat-middle-two">
+                <div className="throne-seat-middle-left-two"></div>
+                <div className="throne-seat-middle-middle-two"></div>
+                <div className="throne-seat-middle-right-two"></div>
+              </div>
+              <div className="throne-seat-bottom">
+                <div className="throne-seat-bottom-left"></div>
+                <div className="throne-seat-bottom-right"></div>
+              </div>
+            </div>
+            <div className="throne-step-top"></div>
+            <div className="throne-step-middle"></div>
+            <div className="throne-step-bottom"></div>
+          </div>
+          <div className="throne-top-right">
+            <div className="axe-div">
+              <div className="axe-head">
+                <div className="axe-head-left"></div>
+                <div className="axe-head-middle">
+                  <div className="axe-tip"></div>
+                  <div className="axe-head-handle"></div>
+                </div>
+                <div className="axe-head-right"></div>
+              </div>
+              <div className="axe-handle-top"></div>
+              <div className="axe-handle-bottom">
+                <div className="axe-handle-line"></div>
+                <div className="axe-handle-line"></div>
+                <div className="axe-handle-line"></div>
+                <div className="axe-handle-line"></div>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="throne-middle">
           <div className="throne-middle-left"></div>

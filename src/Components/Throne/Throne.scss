@@ -1,393 +1,536 @@
 @import "../mixins";
 
+.throne-top {
+  @include row(35vh);
+  @include center(space-evenly);
+  position: absolute;
+  top: 10vh;
+  left: 0px;
+  background-color: #faf9f6;
 
+  .throne-top-left {
+    height: 150px;
+    width: 150px;
+    border: gold solid 5px;
+    background-color: crimson;
+    @include flex(flex-start);
 
-  .throne-top {
-    @include row(35vh);
-    @include center(space-evenly);
-    position: absolute;
-    top: 10vh;
-    left: 0px;
-    background-color: #FAF9F6;
+    .princess-hat {
+      border-radius: 50% 50% 25% 25%;
+      height: 80px;
+      width: 50px;
+      border-top: #fbf6d9 12px solid;
+      border-left: #fbf6d9 8px solid;
+      border-right: #fbf6d9 8px solid;
+      position: absolute;
+      z-index: 3;
+      top: 31px;
+    }
 
-    
+    .princess-head {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      top: 38px;
 
-    .throne-top-left {
-       height: 150px;
-       width: 150px;
-       border: gold solid 5px;
-       background-color: gray;
-       @include flex(flex-start);
+      .princess-hair-left {
+        height: 5px;
+        width: 21px;
+        position: relative;
+        left: 21px;
+        z-index: 5;
+        background-color: gold;
+        border-radius: 50% 0% 0% 0%;
+      }
 
-       .princess-hat {
-          border-radius: 50% 50% 25% 25%;
-          height: 80px;
-          width: 50px;
-          border-top: #fbf6d9 12px solid;
-          border-left: #fbf6d9 8px solid;
-          border-right: #fbf6d9 8px solid;
+      .princess-face {
+        height: 42px;
+        width: 42px;
+        background-color: #eebb99;
+        border-radius: 50%;
+        @include flex(center);
+        border-bottom: black solid 1px;
+
+        .princess-hair-top-left {
+          height: 10px;
+          width: 10px;
+          background-image: linear-gradient(45deg, transparent 50%, gold 50%);
           position: absolute;
+          left: 8px;
+          transform: rotate(-45deg);
+          bottom: 36px;
           z-index: 3;
-          top: 31px;
         }
 
-        .princess-head {
-          display: flex;
-          justify-content: center;
+        .princess-hair-top-right {
+          height: 10px;
+          width: 10px;
+          background-image: linear-gradient(45deg, transparent 50%, gold 50%);
+          position: absolute;
+          right: 8px;
+          transform: rotate(-45deg);
+          z-index: 3;
+          bottom: 36px;
+        }
+
+        .princess-eyes {
+          width: 80%;
+          @include center(space-evenly);
           position: relative;
-          top: 38px;
+          top: 5px;
 
-          .princess-hair-left {
-            height: 5px;
-            width: 21px;
-            position: relative;
-            left: 21px;
-            z-index: 5;
-            background-color: gold;
-            border-radius: 50% 0% 0% 0%;
-          }
-
-          .princess-face {
-            height: 42px;
-            width: 42px;
-            background-color: #eebb99;
+          .princess-eye {
+            width: 13px;
+            height: 11px;
             border-radius: 50%;
+            background-color: white;
             @include flex(center);
-            border-bottom: black solid 1px;
 
-            .princess-hair-top-left {
-              height: 10px;
-              width: 10px;
-              background-image: linear-gradient(
-                45deg,
-                transparent 50%,
-                gold 50%
-              );
-              position: absolute;
-              left: 8px;
-              transform: rotate(-45deg);
-              bottom: 36px;
-              z-index: 3;
-            }
-
-            .princess-hair-top-right {
-              height: 10px;
-              width: 10px;
-              background-image: linear-gradient(
-                45deg,
-                transparent 50%,
-                gold 50%
-              );
-              position: absolute;
-              right: 8px;
-              transform: rotate(-45deg);
-              z-index: 3;
-              bottom: 36px;
-            }
-
-            .princess-eyes {
-              width: 80%;
-              @include center(space-evenly);
-              position: relative;
-              top: 5px;
-
-              .princess-eye {
-                width: 13px;
-                height: 11px;
-                border-radius: 50%;
-                background-color: white;
-                @include flex(center);
-
-                .princess-iris {
-                  width: 9px;
-                  height: 7px;
-                  border-radius: 50%;
-                  background-color: #a1caf1;
-                  @include flex(center);
-
-                  .princess-pupil {
-                    height: 2.5px;
-                    width: 3.5px;
-                    border-radius: 50%;
-                    border: black solid 1.8px;
-                  }
-                }
-              }
-            }
-            .princess-nose {
-              height: 6px;
-              width: 6px;
+            .princess-iris {
+              width: 9px;
+              height: 7px;
+              border-radius: 50%;
+              background-color: #a1caf1;
               @include flex(center);
-              border-left: solid 0.5px;
-              border-right: solid 0.5px;
-              border-bottom: solid 0.5px;
-              border-radius: 0% 0% 50% 50%;
-              position: relative;
-              top: 8px;
-            }
 
-            .princess-mouth {
-              height: 20px;
-              width: 18px;
-              border-bottom: magenta 3px solid;
-              border-radius: 35%;
-              position: relative;
-              bottom: 2px;
+              .princess-pupil {
+                height: 2.5px;
+                width: 3.5px;
+                border-radius: 50%;
+                border: black solid 1.8px;
+              }
             }
-          }
-
-          .princess-hair-right {
-            height: 5px;
-            width: 21px;
-            position: relative;
-            right: 21px;
-            z-index: 5;
-            background-color: gold;
-            border-radius: 0% 50% 0% 0%;
           }
         }
-         .princess-body {
-          @include flex(flex-start);
+        .princess-nose {
+          height: 6px;
+          width: 6px;
+          @include flex(center);
+          border-left: solid 0.5px;
+          border-right: solid 0.5px;
+          border-bottom: solid 0.5px;
+          border-radius: 0% 0% 50% 50%;
           position: relative;
-        
-
-          .princess-upper-neck {
-            height: 5px;
-            width: 20px;
-            z-index: 5;
-            border-radius: 50%;
-            border-bottom: 1px black solid;
-            position: relative;
-            top: 32px;
-          }
-          .princess-neck {
-            height: 15px;
-            width: 20px;
-            background-color: #eebb99;
-            position: relative;
-            top: 33px;
-            border-radius: 30% 30% 50% 50%;
-            z-index: 4;
-          }
-
-          .princess-dress {
-            width: 30px;
-            height: 60px;
-            background-color: aquamarine;
-            border-radius: 25% 25% 0% 0%;
-            position: relative;
-            top: 18px;
-            z-index: 2;
-            @include flex(flex-start);
-
-            .princess-arm-left {
-              height: 25px;
-              width: 10px;
-              background-image: linear-gradient(aquamarine 60%, #eebb99 60%);
-              position: relative;
-              right: 15px;
-              top: 6px;
-              transform: rotate(30deg);
-              @include flex(flex-end);
-
-              .princess-hand-left {
-                width: 12px;
-                height: 10px;
-                background-color: pink;
-                border-radius: 50%;
-                position: relative;
-                top: 9px;
-                display: flex;
-                justify-content: space-evenly;
-                align-items: flex-end;
-
-                .princess-finger-one {
-                  height: 6px;
-                  width: 4px;
-                  background-color: pink;
-                  position: relative;
-                  top: 0px;
-                  right: 3px;
-                  transform: rotate(35deg);
-                }
-
-                .princess-finger-two {
-                  height: 5px;
-                  width: 3px;
-                  background-color: pink;
-                  position: relative;
-                  top: 3px;
-                  right: 4px;
-                  transform: rotate(25deg);
-                }
-
-                .princess-finger-three {
-                  height: 5px;
-                  width: 3px;
-                  background-color: pink;
-                  position: relative;
-                  top: 4px;
-                  right: 3px;
-                }
-
-                .princess-finger-four {
-                  height: 5px;
-                  width: 3px;
-                  background-color: pink;
-                  position: relative;
-                  top: 4px;
-                  right: 1px;
-                }
-
-                .princess-finger-five {
-                  height: 5px;
-                  width: 3px;
-                  background-color: pink;
-                  position: relative;
-                  top: -1px;
-                  left: 1px;
-                  transform: rotate(-25deg);
-                }
-              }
-            }
-            .princess-arm-right {
-              height: 25px;
-              width: 8px;
-              background-image: linear-gradient(aquamarine 60%, #eebb99 60%);
-              position: relative;
-              left: 14px;
-              bottom: 21px;
-              transform: scaleX(-1) rotate(30deg);
-              @include flex(flex-end);
-
-              .princess-hand-left {
-                width: 12px;
-                height: 10px;
-                background-color: pink;
-                border-radius: 50%;
-                position: relative;
-                top: 9px;
-                display: flex;
-                justify-content: space-evenly;
-                align-items: flex-end;
-
-                .princess-finger-one {
-                  height: 6px;
-                  width: 4px;
-                  background-color: pink;
-                  position: relative;
-                  top: -1px;
-                  right: 2px;
-                  transform: rotate(40deg);
-                }
-
-                .princess-finger-two {
-                  height: 5px;
-                  width: 3px;
-                  background-color: pink;
-                  position: relative;
-                  top: 3px;
-                  right: 4px;
-                  transform: rotate(25deg);
-                }
-
-                .princess-finger-three {
-                  height: 5px;
-                  width: 3px;
-                  background-color: pink;
-                  position: relative;
-                  top: 4px;
-                  right: 3px;
-                }
-
-                .princess-finger-four {
-                  height: 5px;
-                  width: 3px;
-                  background-color: pink;
-                  position: relative;
-                  top: 4px;
-                  right: 1px;
-                }
-
-                .princess-finger-five {
-                  height: 5px;
-                  width: 3px;
-                  background-color: pink;
-                  position: relative;
-                  top: 1px;
-                  left: 1px;
-                  transform: rotate(-25deg);
-                }
-              }
-            }
-          }
-
-          
+          top: 8px;
         }
+
+        .princess-mouth {
+          height: 20px;
+          width: 18px;
+          border-bottom: magenta 3px solid;
+          border-radius: 35%;
+          position: relative;
+          bottom: 2px;
+        }
+      }
+
+      .princess-hair-right {
+        height: 5px;
+        width: 21px;
+        position: relative;
+        right: 21px;
+        z-index: 5;
+        background-color: gold;
+        border-radius: 0% 50% 0% 0%;
+      }
     }
-    .throne-top-middle {
-      @include section(20vw);
-    }
-    .throne-top-right {
-         height: 150px;
-       width: 150px;
-       border: gold solid 5px;
-       background-color: white;
+    .princess-body {
+      @include flex(flex-start);
+      position: relative;
+
+      .princess-upper-neck {
+        height: 5px;
+        width: 20px;
+        z-index: 5;
+        border-radius: 50%;
+        border-bottom: 1px black solid;
+        position: relative;
+        top: 32px;
+      }
+      .princess-neck {
+        height: 15px;
+        width: 20px;
+        background-color: #eebb99;
+        position: relative;
+        top: 33px;
+        border-radius: 30% 30% 50% 50%;
+        z-index: 4;
+      }
+
+      .princess-dress {
+        width: 30px;
+        height: 60px;
+        background-color: aquamarine;
+        border-radius: 25% 25% 0% 0%;
+        position: relative;
+        top: 18px;
+        z-index: 2;
+        @include flex(flex-start);
+
+        .princess-arm-left {
+          height: 25px;
+          width: 10px;
+          background-image: linear-gradient(aquamarine 60%, #eebb99 60%);
+          position: relative;
+          right: 15px;
+          top: 6px;
+          transform: rotate(30deg);
+          @include flex(flex-end);
+
+          .princess-hand-left {
+            width: 12px;
+            height: 10px;
+            background-color: pink;
+            border-radius: 50%;
+            position: relative;
+            top: 9px;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: flex-end;
+
+            .princess-finger-one {
+              height: 6px;
+              width: 4px;
+              background-color: pink;
+              position: relative;
+              top: 0px;
+              right: 3px;
+              transform: rotate(35deg);
+            }
+
+            .princess-finger-two {
+              height: 5px;
+              width: 3px;
+              background-color: pink;
+              position: relative;
+              top: 3px;
+              right: 4px;
+              transform: rotate(25deg);
+            }
+
+            .princess-finger-three {
+              height: 5px;
+              width: 3px;
+              background-color: pink;
+              position: relative;
+              top: 4px;
+              right: 3px;
+            }
+
+            .princess-finger-four {
+              height: 5px;
+              width: 3px;
+              background-color: pink;
+              position: relative;
+              top: 4px;
+              right: 1px;
+            }
+
+            .princess-finger-five {
+              height: 5px;
+              width: 3px;
+              background-color: pink;
+              position: relative;
+              top: -1px;
+              left: 1px;
+              transform: rotate(-25deg);
+            }
+          }
+        }
+        .princess-arm-right {
+          height: 25px;
+          width: 8px;
+          background-image: linear-gradient(aquamarine 60%, #eebb99 60%);
+          position: relative;
+          left: 14px;
+          bottom: 21px;
+          transform: scaleX(-1) rotate(30deg);
+          @include flex(flex-end);
+
+          .princess-hand-left {
+            width: 12px;
+            height: 10px;
+            background-color: pink;
+            border-radius: 50%;
+            position: relative;
+            top: 9px;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: flex-end;
+
+            .princess-finger-one {
+              height: 6px;
+              width: 4px;
+              background-color: pink;
+              position: relative;
+              top: -1px;
+              right: 2px;
+              transform: rotate(40deg);
+            }
+
+            .princess-finger-two {
+              height: 5px;
+              width: 3px;
+              background-color: pink;
+              position: relative;
+              top: 3px;
+              right: 4px;
+              transform: rotate(25deg);
+            }
+
+            .princess-finger-three {
+              height: 5px;
+              width: 3px;
+              background-color: pink;
+              position: relative;
+              top: 4px;
+              right: 3px;
+            }
+
+            .princess-finger-four {
+              height: 5px;
+              width: 3px;
+              background-color: pink;
+              position: relative;
+              top: 4px;
+              right: 1px;
+            }
+
+            .princess-finger-five {
+              height: 5px;
+              width: 3px;
+              background-color: pink;
+              position: relative;
+              top: 1px;
+              left: 1px;
+              transform: rotate(-25deg);
+            }
+          }
+        }
+      }
     }
   }
+  .throne-top-middle {
+    @include section(20vw);
+    @include flex(flex-end);
+
+    .throne-seat-div {
+      @include flex(center);
+      transform: scale(1.75);
+
+      .throne-seat-top {
+        display: flex;
+        align-items: flex-end;
+        
+
+        .throne-seat-top-left {
+          height: 70px;
+          width: 10px;
+          background-color: gold;
+          border-bottom: solid .5px;
+
+        }
+        .throne-seat-top-middle {
+          width: 40px;
+          height: 60px;
+          background-color: crimson;
+          border-bottom: solid .5px;
+      
+        }
+         .throne-seat-top-right {
+          height: 70px;
+          width: 10px;
+          background-color: gold;
+          border-bottom: solid .5px;
+          
+        }
+      }
+      .throne-seat-middle {
+        display: flex;
+        
+        .throne-seat-middle-left {
+          width: 20px;
+          height: 10px;
+          background-color: gold;
+          border-bottom: solid .5px;
+          border-radius: 50% 0% 0% 50%;
+        }
+        .throne-seat-middle-middle {
+          width: 40px;
+          height: 10px;
+          background-color: crimson;
+          border-bottom: solid .5px;
+        }
+        .throne-seat-middle-right {
+          width: 20px;
+          height: 10px;
+          background-color: gold;
+          border-bottom: solid .5px;
+          border-radius: 0% 50% 50% 0%;
+        }
+      }
+      // .throne-seat-middle-two {
+      //   display: flex;
+        
+      //   .throne-seat-middle-left-two {
+      //     width: 10px;
+      //     height: 10px;
+      //     background-color: gold;
+      //     border-bottom: solid;
+      //   }
+      //   .throne-seat-middle-middle-two {
+      //     width: 40px;
+      //     height: 10px;
+      //     background-color: crimson;
+      //     border-bottom: solid;
+      //   }
+      //   .throne-seat-middle-right-two {
+      //     width: 10px;
+      //     height: 10px;
+      //     background-color: gold;
+      //     border-bottom: solid;
+      //   }
+      // }
+      .throne-seat-bottom {
+        display: flex;
+        justify-content: space-between;
+        width: 60px;
+
+        .throne-seat-bottom-left {
+          height: 50px;
+          width: 15px;
+          background-color: gold;
+          border-radius: 0% 0% 25% 25%;
+        }
+        .throne-seat-bottom-right {
+          height: 50px;
+          width: 15px;
+          background-color: gold;
+          border-radius: 0% 0% 25% 25%;
+        }
+      }
+    }
+  }
+  .throne-top-right {
+    height: 150px;
+    width: 150px;
+    border: gold solid 5px;
+    background-color: crimson;
+
+    .axe-div {
+      @include flex(center);
+      transform: rotate(45deg);
+      position: relative;
+      top: 10px;
+      right: 5px;
+
+      .axe-head {
+        @include center(center);
+        position: relative;
+        top: 6px;
+
+        .axe-head-left {
+          height: 40px;
+          width: 40px;
+          background-image: linear-gradient(45deg, gray 50%, transparent 50%);
+          transform: rotate(-135deg);
+        }
+        .axe-head-middle {
+          @include flex(flex-start);
+          .axe-tip {
+            height: 12px;
+            width: 12px;
+            background-image: linear-gradient(45deg, gray 50%, transparent 50%);
+            transform: rotate(135deg);
+            position: relative;
+            top: 6px;
+          }
+          .axe-head-handle {
+            height: 20px;
+            width: 15px;
+            background-color: gray;
+          }
+        }
+        .axe-head-right {
+          height: 40px;
+          width: 40px;
+          background-image: linear-gradient(45deg, gray 50%, transparent 50%);
+          transform: rotate(45deg);
+        }
+      }
+
+      .axe-handle-top {
+        background-color: sienna;
+        height: 50px;
+        width: 10px;
+      }
+
+      .axe-handle-bottom {
+        background-color: tan;
+        height: 40px;
+        width: 12px;
+        @include flex(space-evenly);
+
+        .axe-handle-line {
+          height: 2px;
+          width: 100%;
+          background-color: black;
+        }
+      }
+    }
+  }
+}
 .throne-middle {
   @include row(20vh);
   position: absolute;
-    top: 45vh;
-    left: 0px;
+  top: 45vh;
+  left: 0px;
 
   .throne-middle-left {
     @include section(40vw);
-   background-color: crimson;
+    background-color: crimson;
     border-top: solid gold 5px;
     border-bottom: solid gold 5px;
   }
 
   .throne-middle-middle {
-     background-color: crimson;
-     
-     
-     border-top: solid gold 5px;
-      @include section(20vw);
+    background-color: crimson;
+
+    border-top: solid gold 5px;
+    @include section(20vw);
   }
 
   .throne-middle-right {
- @include section(40vw);
- border-top: solid gold 5px;
+    @include section(40vw);
+    border-top: solid gold 5px;
     border-bottom: solid gold 5px;
     background-color: crimson;
   }
 }
-  .throne-bottom {
-    @include row(35vh);
-    position: absolute;
-    left: 0px;
-    bottom: 0px;
+.throne-bottom {
+  @include row(35vh);
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
 
-    .throne-bottom-left {
-      @include section(40vw);
-    }
+  .throne-bottom-left {
+    @include section(40vw);
+  }
 
-    .throne-bottom-middle {
-      @include section(20vw);
-      @include flex(flex-end);
-      background-color: crimson;
-       border-right: solid gold 5px;
-     border-left: solid gold 5px;
+  .throne-bottom-middle {
+    @include section(20vw);
+    @include flex(flex-end);
+    background-color: crimson;
+    border-right: solid gold 5px;
+    border-left: solid gold 5px;
 
-      .throne-castle {
-        @include flex(flex-start);
-        cursor: pointer;
-      }
-    }
-
-    .throne-bottom-right {
-      @include section(40vw);
+    .throne-castle {
+      @include flex(flex-start);
+      cursor: pointer;
     }
   }
 
+  .throne-bottom-right {
+    @include section(40vw);
+  }
+}
