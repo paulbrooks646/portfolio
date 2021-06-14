@@ -38,7 +38,6 @@ function Throne(props) {
   const [throneRejectionCard, setThroneRejectionCard] = useState(false);
   const [hairCard, setHairCard] = useState(false);
   const [scalesCard, setScalesCard] = useState(false);
-  const [queenCard, setQueenCard] = useState(false);
   const [gemCard, setGemCard] = useState(false);
   const [axeCard, setAxeCard] = useState(false);
 
@@ -62,15 +61,16 @@ function Throne(props) {
 
   const toggleKing = () => {
     if (!throneData.gem_used) {
-      setCommonerRejectionCard(true)
-    } if (throneData.queen_freed && !throneData.axe_received) {
-      axios.post("/api/axe").then(res => {
-        props.getInventory(res.data)
-        axios.get("/api/throne").then(res => {
-          setThroneData(res.data[0])
-          setAxeCard(true)
-        })
-      })
+      setCommonerRejectionCard(true);
+    }
+    if (throneData.queen_freed && !throneData.axe_received) {
+      axios.post("/api/axe").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/throne").then((res) => {
+          setThroneData(res.data[0]);
+          setAxeCard(true);
+        });
+      });
     } else {
       setKing(!king);
     }
@@ -216,7 +216,10 @@ function Throne(props) {
       <div className="throne-body">
         <House />
         <div className="throne-top">
-          <div className="throne-top-left" onClick={() => setPaintingCard(true)}>
+          <div
+            className="throne-top-left"
+            onClick={() => setPaintingCard(true)}
+          >
             <div className="princess-hat"></div>
             <div className="princess-head">
               <div className="princess-hair-left"></div>
@@ -274,7 +277,10 @@ function Throne(props) {
             </div>
           </div>
           <div className="throne-top-middle">
-            <div className="throne-seat-div" onClick={() => setThroneRejectionCard(true)}>
+            <div
+              className="throne-seat-div"
+              onClick={() => setThroneRejectionCard(true)}
+            >
               <div className="throne-seat-top">
                 <div className="throne-seat-top-left"></div>
                 <div className="throne-seat-top-middle"></div>
@@ -436,15 +442,15 @@ function Throne(props) {
           What would you like to know about?
         </Typography>
         <List className="component-list">
-          <ListItem onClick={toggleAnswerOne}>The Dragon</ListItem>
-          <ListItem onClick={toggleAnswerNine}>Favor</ListItem>
-          <ListItem onClick={toggleAnswerTwo}>The Garden</ListItem>
-          <ListItem onClick={toggleAnswerThree}>The King</ListItem>
-          <ListItem onClick={toggleAnswerFour}>Permission</ListItem>
-          <ListItem onClick={toggleAnswerFive}>The Princess</ListItem>
-          <ListItem onClick={toggleAnswerSix}>The Tower</ListItem>
-          <ListItem onClick={toggleAnswerSeven}>The Throne Room</ListItem>
-          <ListItem onClick={toggleAnswerEight}>The Ultimate Axe</ListItem>
+          <ListItem onClick={toggleAnswerOne}>Champion</ListItem>
+          <ListItem onClick={toggleAnswerTwo}>Dragon</ListItem>
+          <ListItem onClick={toggleAnswerThree}>Hydra</ListItem>
+          <ListItem onClick={toggleAnswerFour}>Knight</ListItem>
+          <ListItem onClick={toggleAnswerFive}>Maze</ListItem>
+          <ListItem onClick={toggleAnswerSix}>Queen</ListItem>
+          <ListItem onClick={toggleAnswerSeven}>Taxes</ListItem>
+          <ListItem onClick={toggleAnswerEight}>Trolls</ListItem>
+          <ListItem onClick={toggleAnswerNine}>The Ultimate Axe</ListItem>
         </List>
         <Button onClick={toggleKing} variant="contained" color="primary">
           Say Goodbye
@@ -452,15 +458,15 @@ function Throne(props) {
       </Card>
       <Card className={`${answerOne ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
-          The Dragon
+          Champion
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          You want to slay the dragon? Don't be a fool! It is said that only the
-          Ultimate Axe is sharp enough to penetrate its scales.
+          I have decreed that any knight who slays the hydra will be named my
+          champion.
         </Typography>
         <Button onClick={toggleAnswerOne} variant="contained" color="primary">
           CLOSE
@@ -468,16 +474,15 @@ function Throne(props) {
       </Card>
       <Card className={`${answerTwo ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
-          The Garden
+          Dragon
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          A beautiful place to look at. I tried to get a flower for my wife once
-          but the royal gardener wouldn't let me. She is very protective of her
-          garden.
+          I do not know how to slay the dragon, many have died trying. I do
+          possess the ultimate axe, which may help.
         </Typography>
         <Button onClick={toggleAnswerTwo} variant="contained" color="primary">
           CLOSE
@@ -485,16 +490,16 @@ function Throne(props) {
       </Card>
       <Card className={`${answerThree ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
-          The King
+          Hydra
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          The king doesn't like to be disturbed. He has been particularly
-          irritable since he and the princess got into an argument and the
-          princess took up residence in the tower.
+          Hydra's are near impossible to kill. If you cut one, it grows
+          stronger. There is one in the bog. Brings some scales to prove it is
+          dead.
         </Typography>
         <Button onClick={toggleAnswerThree} variant="contained" color="primary">
           CLOSE
@@ -502,15 +507,15 @@ function Throne(props) {
       </Card>
       <Card className={`${answerFour ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
-          Permission
+          Knight
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          I'll tell you what if can convince me you have a legitimate reason to
-          see the King and do me a favor I will let you pass.
+          I will make you a knight if you can rid our land of the troll
+          terrorizing the valley. Bring a strand of its hair to prove it's gone.
         </Typography>
         <Button onClick={toggleAnswerFour} variant="contained" color="primary">
           CLOSE
@@ -518,16 +523,15 @@ function Throne(props) {
       </Card>
       <Card className={`${answerFive ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
-          The Princess
+          Maze
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          The Princess is very tempermental. Sometimes she is as warm as a
-          summer day. Other times she is as frigid as winter. She is currently
-          living in the tower.
+          Many have disappeared in the maze. One man may have solved it but he
+          is injured and delirious. He lives somewhere in town.
         </Typography>
         <Button onClick={toggleAnswerFive} variant="contained" color="primary">
           CLOSE
@@ -535,15 +539,15 @@ function Throne(props) {
       </Card>
       <Card className={`${answerSix ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
-          The Tower
+          Queen
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          If you go there be careful. The princess doesn't want to disturbed.
-          Her vicious pet weasel is attacking anyone who goes there.
+          My beloved queen has disappeared. Even my bravest knights have failed
+          to find her.
         </Typography>
         <Button onClick={toggleAnswerSix} variant="contained" color="primary">
           CLOSE
@@ -551,20 +555,36 @@ function Throne(props) {
       </Card>
       <Card className={`${answerSeven ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
-          The Throne Room
+          Taxes
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          No one enters the castle without my permission.
+          I will not lower taxes until my queen is found.
         </Typography>
         <Button onClick={toggleAnswerSeven} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>
       <Card className={`${answerEight ? "answer-card" : "answer-card-closed"}`}>
+        <Typography variant="h4" color="primary">
+          Trolls
+        </Typography>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Trolls are tough. The have strong arms and can throw very accurately.
+          It is possible to scare a troll if you can figure out how.
+        </Typography>
+        <Button onClick={toggleAnswerEight} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${answerNine ? "answer-card" : "answer-card-closed"}`}>
         <Typography variant="h4" color="primary">
           The Ultimate Axe
         </Typography>
@@ -573,25 +593,8 @@ function Throne(props) {
           color="secondary"
           className="answer-card-description"
         >
-          The Ultimate Axe is said to be the sharpest most powerful weapon ever
-          created. It is in the King's posession and I can't imagine he will
-          ever part with it.
-        </Typography>
-        <Button onClick={toggleAnswerEight} variant="contained" color="primary">
-          CLOSE
-        </Button>
-      </Card>
-      <Card className={`${answerNine ? "answer-card" : "answer-card-closed"}`}>
-        <Typography variant="h4" color="primary">
-          Favor
-        </Typography>
-        <Typography
-          variant="h6"
-          color="secondary"
-          className="answer-card-description"
-        >
-          While I was hunting in the forest I lost my favorite hat. If you find
-          it for me, I would be very grateful.
+          I could not part with our most prized family heirloom. I suppose if my
+          champion returned my queen to me I would.
         </Typography>
         <Button onClick={toggleAnswerNine} variant="contained" color="primary">
           CLOSE
@@ -605,10 +608,135 @@ function Throne(props) {
           color="secondary"
           className="answer-card-description"
         >
-          You walk up to a massive castle. There is a very large, grumpy looking
-          guard standing in front of the castle gate.
+          You enter a beautiful throne room. The carpet, paintings and the
+          actual throne are emaculate. The king is more imppressive still.
         </Typography>
         <Button onClick={toggleFirst} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${
+          commonerRejectionCard ? "answer-card" : "answer-card-closed"
+        }`}
+      >
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Letter or no letter, I do not speak to commoners. If you are no
+          commoner bring me a valuable gem to prove it.
+        </Typography>
+        <Button
+          onClick={() => setCommonerRejectionCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${paintingCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          There would be dire consequences if you tried to steal one if the
+          King's paintings.
+        </Typography>
+        <Button
+          onClick={() => setPaintingCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${
+          throneRejectionCard ? "answer-card" : "answer-card-closed"
+        }`}
+      >
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          No one sits on the throne except the king!
+        </Typography>
+        <Button
+          onClick={() => setThroneRejectionCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${gemCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          Aah! I suppose you are not as common as you seem.
+        </Typography>
+        <Button
+          onClick={() => setGemCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${hairCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          So, you have rid us of the troll. I hereby declare you a knight.
+        </Typography>
+        <Button
+          onClick={() => setHairCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${scalesCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          So, you have slain the hydra. Very impressive indeed. I hereby declare
+          you my champion.
+        </Typography>
+        <Button
+          onClick={() => setScalesCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${axeCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You have returned my queen to me, I cannot thank you enough. Here is the ultimate axe as promised. Go forth and slay the dragon.
+        </Typography>
+        <Button
+          onClick={() => setAxeCard(false)}
+          variant="contained"
+          color="primary"
+        >
           CLOSE
         </Button>
       </Card>
