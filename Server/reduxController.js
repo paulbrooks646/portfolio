@@ -7,6 +7,14 @@ module.exports = {
 
     res.status(200).send(stables);
   },
+  getThrone: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const throne = await db.get_throne(id);
+
+    res.status(200).send(throne);
+  },
   getClearing: async (req, res) => {
     const db = req.app.get("db");
 

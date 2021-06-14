@@ -89,4 +89,7 @@ values ($1, false, false, false, false, false, true);
 insert into glade (user_id, use_apple, use_mushroom, use_sulfur, magic_user, speed_received, unicorn_freed, cake_given, coin_taken, first_time)
 values ($1, false, false, false, false, false, false, false, false, true);
 
+insert into throne (user_id, gem_used, hair_used, scales_used, queen_freed, axe_received, first_time)
+values ($1, false, false, false, false, false, true);
+
 

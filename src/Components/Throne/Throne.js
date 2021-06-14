@@ -31,7 +31,7 @@ function Throne(props) {
   const [downCharacter, setDownCharacter] = useState(false);
   const [downDown, setDownDown] = useState(false);
   const [inventoryOpen, setInventoryOpen] = useState(false);
-  const [throneData, setThroneData] = useState();
+  const [throneData, setThroneData] = useState({});
   const [king, setKing] = useState(false);
   const [commonerRejectionCard, setCommonerRejectionCard] = useState(false);
   const [paintingCard, setPaintingCard] = useState(false);
@@ -63,7 +63,7 @@ function Throne(props) {
     if (!throneData.gem_used) {
       setCommonerRejectionCard(true);
     }
-    if (throneData.queen_freed && !throneData.axe_received) {
+     else if (throneData.queen_freed && !throneData.axe_received) {
       axios.post("/api/axe").then((res) => {
         props.getInventory(res.data);
         axios.get("/api/throne").then((res) => {
@@ -123,6 +123,8 @@ function Throne(props) {
             setScalesCard(true);
           });
         });
+      } else {
+        setRejectionCard(true)
       }
     } else {
       setRejectionCard(true);

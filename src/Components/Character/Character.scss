@@ -2,7 +2,7 @@
 
 .character {
   @include flex(flex-start);
-  z-index: 1;
+  z-index: 9;
 
   .hair {
     width: 55px;

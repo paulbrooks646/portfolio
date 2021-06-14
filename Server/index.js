@@ -62,6 +62,7 @@ app.get("/api/thieves", reduxController.getThieves)
 app.get("/api/valley", reduxController.getValley)
 app.get("/api/glade", reduxController.getGlade)
 app.get("/api/clearing", reduxController.getClearing)
+app.get("/api/throne", reduxController.getThrone)
 
 
 app.post("/api/towerFirst", firstController.towerFirst);
@@ -90,6 +91,7 @@ app.post("/api/clearingFirst", firstController.clearingFirst)
 app.post("/api/castleFirst", firstController.castleFirst)
 app.post("/api/stablesFirst", firstController.stablesFirst)
 app.post("/api/gardenFirst", firstController.gardenFirst)
+app.post("/api/throneFirst", firstController.throneFirst)
 
 app.post("/api/manure", inventoryController.manure);
 app.post("/api/flowers", inventoryController.flowers);
@@ -143,6 +145,7 @@ app.post("/api/hair", inventoryController.hair)
 app.post("/api/mirror", inventoryController.mirror)
 app.post("/api/speed", inventoryController.speed)
 app.post("/api/chest", inventoryController.chest)
+app.post("/api/axe", inventoryController.axe)
 
 app.post("/api/manureCleanPermission", controller.manureCleanPermission);
 app.post("/api/caveCoin", controller.caveCoin);
@@ -230,6 +233,9 @@ app.post("/api/useDagger", controller.useDagger)
 app.post("/api/useStrength", controller.useStrength)
 app.post("/api/useInvisibility", controller.useInvisibility)
 app.post("/api/useSeed", controller.useSeed)
+app.post("/api/useGem", controller.useGem)
+app.post("/api/useHair", controller.useHair)
+app.post("/api/useScales", controller.useScales)
 
 app.use(express.static(__dirname + "/../build"));
 
