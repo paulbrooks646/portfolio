@@ -14,6 +14,7 @@
     border: gold solid 5px;
     background-color: crimson;
     @include flex(flex-start);
+    cursor: pointer;
 
     .princess-hat {
       border-radius: 50% 50% 25% 25%;
@@ -316,99 +317,95 @@
 
     .throne-seat-div {
       @include flex(center);
-      transform: scale(1.75);
+      transform: scale(1.5);
+      position: relative;
+      bottom: 30px;
+      cursor: pointer;
 
       .throne-seat-top {
         display: flex;
         align-items: flex-end;
-        
 
         .throne-seat-top-left {
           height: 70px;
           width: 10px;
           background-color: gold;
-          border-bottom: solid .5px;
-
+          border-bottom: solid 0.5px;
         }
         .throne-seat-top-middle {
           width: 40px;
           height: 60px;
           background-color: crimson;
-          border-bottom: solid .5px;
-      
+          border-bottom: solid 0.5px;
         }
-         .throne-seat-top-right {
+        .throne-seat-top-right {
           height: 70px;
           width: 10px;
           background-color: gold;
-          border-bottom: solid .5px;
-          
+          border-bottom: solid 0.5px;
         }
       }
       .throne-seat-middle {
         display: flex;
-        
+
         .throne-seat-middle-left {
           width: 20px;
           height: 10px;
           background-color: gold;
-          border-bottom: solid .5px;
+          border-bottom: solid 0.5px;
           border-radius: 50% 0% 0% 50%;
         }
         .throne-seat-middle-middle {
           width: 40px;
           height: 10px;
           background-color: crimson;
-          border-bottom: solid .5px;
+          border-bottom: solid 0.5px;
         }
         .throne-seat-middle-right {
           width: 20px;
           height: 10px;
           background-color: gold;
-          border-bottom: solid .5px;
+          border-bottom: solid 0.5px;
           border-radius: 0% 50% 50% 0%;
         }
       }
-      // .throne-seat-middle-two {
-      //   display: flex;
-        
-      //   .throne-seat-middle-left-two {
-      //     width: 10px;
-      //     height: 10px;
-      //     background-color: gold;
-      //     border-bottom: solid;
-      //   }
-      //   .throne-seat-middle-middle-two {
-      //     width: 40px;
-      //     height: 10px;
-      //     background-color: crimson;
-      //     border-bottom: solid;
-      //   }
-      //   .throne-seat-middle-right-two {
-      //     width: 10px;
-      //     height: 10px;
-      //     background-color: gold;
-      //     border-bottom: solid;
-      //   }
-      // }
+
       .throne-seat-bottom {
         display: flex;
         justify-content: space-between;
         width: 60px;
 
         .throne-seat-bottom-left {
-          height: 50px;
+          height: 40px;
           width: 15px;
           background-color: gold;
           border-radius: 0% 0% 25% 25%;
         }
         .throne-seat-bottom-right {
-          height: 50px;
+          height: 40px;
           width: 15px;
           background-color: gold;
           border-radius: 0% 0% 25% 25%;
         }
       }
+    }
+    .throne-step-top {
+      width: 50%;
+      height: 20px;
+      border: solid 0.5px;
+      background-color: sienna;
+    }
+    .throne-step-middle {
+      width: 75%;
+      height: 30px;
+      border: solid 0.5px;
+      background-color: sienna;
+    }
+    .throne-step-bottom {
+      width: 100%;
+      height: 40px;
+      border: solid 0.5px;
+      background-color: sienna;
     }
   }
   .throne-top-right {
@@ -416,6 +413,7 @@
     width: 150px;
     border: gold solid 5px;
     background-color: crimson;
+    cursor: pointer;
 
     .axe-div {
       @include flex(center);
@@ -466,7 +464,7 @@
       }
 
       .axe-handle-bottom {
-        background-color: tan;
+        background-color: chocolate;
         height: 40px;
         width: 12px;
         @include flex(space-evenly);
@@ -481,7 +479,7 @@
   }
 }
 .throne-middle {
-  @include row(20vh);
+  @include row(27.5vh);
   position: absolute;
   top: 45vh;
   left: 0px;
@@ -495,9 +493,377 @@
 
   .throne-middle-middle {
     background-color: crimson;
-
     border-top: solid gold 5px;
     @include section(20vw);
+    @include flex(flex-end);
+
+    .throne-king {
+      position: relative;
+      @include flex(flex-end);
+      height: 100%;
+      width: 100%;
+      cursor: pointer;
+      bottom: 50%;
+
+      .throne-king-cape {
+        position: absolute;
+        top: 80px;
+        height: 150px;
+        width: 150px;
+        background-image: linear-gradient(45deg, purple 50%, transparent 50%);
+        transform: rotate(135deg);
+        border-radius: 25%;
+      }
+
+      .throne-crown {
+        @include flex(center);
+        position: absolute;
+        top: 10px;
+        z-index: 5;
+
+        .throne-crown-top-div {
+          @include center(space-between);
+          width: 45px;
+
+          .throne-crown-top {
+            width: 5px;
+            height: 10px;
+            background-color: gold;
+          }
+        }
+        .throne-crown-bottom {
+          width: 45px;
+          height: 10px;
+          background-color: gold;
+          border-radius: 0% 0% 15% 15%;
+        }
+      }
+
+      .princess-hat {
+        border-radius: 45% 45% 0% 0%;
+        height: 25px;
+        width: 47px;
+        border: black solid 15px;
+        border-right: solid black 5px;
+         border-left: solid black 5px;
+        border-bottom: none;
+        position: relative;
+        z-index: 3;
+        top: 20px;
+
+      }
+
+      .princess-head {
+        display: flex;
+        justify-content: center;
+        position: relative;
+
+        // .princess-hair-left {
+        //   height: 5px;
+        //   width: 21px;
+        //   position: relative;
+        //   left: 21px;
+        //   z-index: 5;
+        //   background-color: gold;
+        //   border-radius: 50% 0% 0% 0%;
+        // }
+
+        .princess-face {
+          height: 40px;
+          width: 40px;
+          background-color: #e0ac69;
+          border-radius: 35% 35% 25% 25%;
+          @include flex(center);
+          border-bottom: black solid 1px;
+          position: relative;
+
+          // .princess-hair-top-left {
+          //   height: 10px;
+          //   width: 10px;
+          //   background-image: linear-gradient(45deg, transparent 50%, gold 50%);
+          //   position: absolute;
+          //   left: 8px;
+          //   transform: rotate(-45deg);
+          //   bottom: 36px;
+          //   z-index: 3;
+          // }
+
+          // .princess-hair-top-right {
+          //   height: 10px;
+          //   width: 10px;
+          //   background-image: linear-gradient(45deg, transparent 50%, gold 50%);
+          //   position: absolute;
+          //   right: 8px;
+          //   transform: rotate(-45deg);
+          //   z-index: 3;
+          //   bottom: 36px;
+          // }
+
+          .princess-eyes {
+            width: 100%;
+            @include center(space-evenly);
+            position: relative;
+            top: 8px;
+
+            .princess-eye {
+              width: 11px;
+              height: 9px;
+              border-radius: 50%;
+              background-color: white;
+              @include flex(center);
+
+              .princess-iris {
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background-color: black;
+                @include flex(center);
+
+                // .princess-pupil {
+                //   height: 2.5px;
+                //   width: 3.5px;
+                //   border-radius: 50%;
+                //   border: black solid 1.8px;
+                // }
+              }
+            }
+          }
+          .princess-nose {
+            height: 4px;
+            width: 10px;
+            @include flex(center);
+            border-left: solid 0.5px;
+            border-right: solid 0.5px;
+            border-bottom: solid 0.5px;
+            border-radius: 0% 0% 50% 50%;
+            position: relative;
+            top: 11px;
+          }
+
+          .princess-mouth {
+            height: 20px;
+            width: 23px;
+            border-bottom: red 1px solid;
+            position: relative;
+            border-radius: 5%;
+            bottom: 4px;
+          }
+        }
+
+        // .princess-hair-right {
+        //   height: 5px;
+        //   width: 21px;
+        //   position: relative;
+        //   right: 21px;
+        //   z-index: 5;
+        //   background-color: gold;
+        //   border-radius: 0% 50% 0% 0%;
+        // }
+      }
+
+      .princess-body {
+        @include flex(flex-start);
+        position: relative;
+
+       
+        .princess-neck {
+          height: 5px;
+          width: 30px;
+          background-color: silver;
+          position: relative;
+          z-index: 4;
+        }
+
+        .princess-dress {
+          width: 60px;
+          height: 100px;
+          background-image: linear-gradient(silver 74%, black 74%, black 75%, silver 75%);
+          border-radius: 25% 25% 0% 0%;
+          position: relative;
+          z-index: 2;
+          @include flex(flex-start);
+
+          .princess-arm-left {
+            height: 70px;
+            width: 15px;
+            background-image: linear-gradient(silver 70%, chocolate 70%);
+            position: relative;
+            right: 38px;
+            top: 5px;
+            transform: rotate(45deg);
+            @include flex(flex-end);
+
+            .princess-hand-left {
+              width: 17px;
+              height: 10px;
+              background-color: chocolate;
+              border-radius: 50%;
+              position: relative;
+              top: 9px;
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-end;
+              border-top: solid .5px;
+
+              .princess-finger-one {
+                height: 6px;
+                width: 4px;
+                background-color: chocolate;
+                position: relative;
+                top: 3px;
+              }
+
+              .princess-finger-two {
+                height: 5px;
+                width: 3px;
+                background-color: chocolate;
+                position: relative;
+               border-left: solid .5px;
+               top: 3px;
+              }
+
+              .princess-finger-three {
+                height: 5px;
+                width: 3px;
+                background-color: chocolate;
+                position: relative;
+               border-left: solid .5px;
+               top: 3px;
+              }
+
+              .princess-finger-four {
+                height: 5px;
+                width: 3px;
+                background-color: chocolate;
+                border-left: solid .5px;
+                top: 3px;
+                position: relative;
+              }
+
+              .princess-finger-five {
+                height: 5px;
+                width: 3px;
+                background-color: chocolate;
+                position: relative;
+                border-left: solid .5px;
+                top: 3px;
+              }
+            }
+          }
+          .princess-arm-right {
+             height: 70px;
+            width: 15px;
+            background-image: linear-gradient(silver 70%, chocolate 70%);
+            position: relative;
+            left: 38px;
+            transform: rotate(-45deg);
+            @include flex(flex-end);
+            bottom: 45px;
+
+            .princess-hand-left {
+              width: 17px;
+              height: 10px;
+              background-color: chocolate;
+              border-radius: 50%;
+              position: relative;
+              top: 8px;
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-end;
+              border-top: solid .5px;
+
+              .princess-finger-one {
+                height: 6px;
+                width: 4px;
+                background-color: chocolate;
+                position: relative;
+                border-right: solid .1px;
+                 top: 3px;
+              }
+
+              .princess-finger-two {
+                height: 5px;
+                width: 3px;
+                background-color: chocolate;
+                position: relative;
+                 border-right: solid .1px;
+                   top: 3px;
+              }
+
+              .princess-finger-three {
+                height: 5px;
+                width: 3px;
+                background-color: chocolate;
+                 border-right: solid .1px;
+                  position: relative;
+                   top: 3px;
+              }
+
+              .princess-finger-four {
+                height: 5px;
+                width: 3px;
+                background-color: chocolate;
+                border-right: solid .1px;
+                position: relative;
+                  top: 3px;
+              }
+
+              .princess-finger-five {
+                height: 5px;
+                width: 3px;
+                background-color: chocolate;
+                position: relative;
+                 top: 3px;
+              }
+            }
+          }
+        }
+
+        .princess-legs {
+          @include center(space-between);
+          width: 60px;
+          position: relative;
+          bottom: 0px;
+
+          .princess-leg-left {
+            height: 40px;
+            width: 15px;
+            background-color: silver;
+            @include flex(flex-end);
+            border-radius: 0% 0% 50% 50%;
+
+            .princess-foot {
+               height: 12px;
+              width: 18px;
+              background-color: silver;
+              position: relative;
+              z-index: 1;
+              border-radius: 25% 25% 0% 0%;
+              border: solid .5px;
+            }
+          }
+
+          .princess-leg-right {
+            height: 40px;
+            width: 15px;
+            background-color: silver;
+            @include flex(flex-end);
+            border-radius: 0% 0% 50% 50%;
+            
+
+            .princess-foot {
+              height: 12px;
+              width: 18px;
+              background-color: silver;
+              position: relative;
+              z-index: 1;
+              border-radius: 25% 25% 0% 0%;
+              border: solid .5px;
+            }
+          }
+        }
+      }
+    }
   }
 
   .throne-middle-right {
@@ -508,7 +874,7 @@
   }
 }
 .throne-bottom {
-  @include row(35vh);
+  @include row(27.5vh);
   position: absolute;
   left: 0px;
   bottom: 0px;
