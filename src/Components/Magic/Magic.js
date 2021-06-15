@@ -25,7 +25,7 @@ function Magic(props) {
   const [thanksCard, setThanksCard] = useState(false);
   const [rejectionCard, setRejectionCard] = useState(false);
   const [inventoryOpen, setInventoryOpen] = useState(false);
-  const [magicData, setMagicData] = useState();
+  const [magicData, setMagicData] = useState({});
 
   useEffect(() => {
     axios.get("/api/magic").then((res) => {

@@ -10,9 +10,9 @@ values ($1, false, false, false, false, false, false);
 insert into store (user_id, shoes_bought, rope_bought, flute_bought, bottle_bought, oil_bought, wood_bought)
 values ($1, false, false, false, false, false, false);
 
-insert into inventory (user_id, flute, bottle, rope, meat, cake, ribbon, flowers, manure, dagger, sword, shield, nuts, letter, hat, bone, feather, potatoes, candy, cheese, shoes, oil, wood, armor, knife, bow, fire, ice, heal, strength, open, protection, seed, axe, cloak, speed, levitation, invisibility, pick, glasses, rag, chest, scales, pod, apple, sulfur, blanket, mirror, hair, picture, charcoal, rock, gem, home, grow, train, mushroom)
+insert into inventory (user_id, flute, bottle, rope, meat, cake, ribbon, flowers, manure, dagger, sword, shield, nuts, letter, hat, bone, feather, potatoes, candy, cheese, shoes, oil, wood, armor, knife, bow, fire, ice, heal, strength, open, protection, seed, axe, cloak, speed, levitation, invisibility, pick, glasses, rag, chest, scales, pod, apple, sulfur, blanket, mirror, hair, picture, charcoal, rock, gem, home, grow, toy, mushroom)
 
-values ($1, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
+values ($1, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
 
 insert into stables (user_id, clean_permission, has_cleaned, take_permission, has_taken, first_time)
 values ($1, false, false, false, false, true);
@@ -44,7 +44,7 @@ values ($1, false, false, true);
 insert into forest (user_id, coin_taken, apple_gotten, first_time)
 values ($1, false, false, true);
 
-insert into cabin (user_id, mushroom_taken, knife_given, wood_given, potatoes_given, train_received, first_time)
+insert into cabin (user_id, mushroom_taken, knife_given, wood_given, potatoes_given, toy_received, first_time)
 values ($1, false, false, false, false, false, true);
 
 insert into dragon (user_id, ice_used, charcoal_taken, seed_taken, cloak_used, armor_used, speed_used, axe_used, dragon_killed, grow_taken, coin_taken, first_time)
@@ -84,12 +84,15 @@ insert into thieves (user_id, rag_used, candy_used, toy_used, shoes_used, blanke
 values ($1, false, false, false, false, false, false, false, false, false, false, false, true);
 
 insert into valley (user_id, shield_used, picture_used, hair_taken, mirror_taken, coin_taken, coin_two_taken, first_time)
-values ($1, false, false, false, false, false, true);
+values ($1, false, false, false, false, false, false, true);
 
 insert into glade (user_id, use_apple, use_mushroom, use_sulfur, magic_user, speed_received, unicorn_freed, cake_given, coin_taken, first_time)
 values ($1, false, false, false, false, false, false, false, false, true);
 
 insert into throne (user_id, gem_used, hair_used, scales_used, queen_freed, axe_received, first_time)
+values ($1, false, false, false, false, false, true);
+
+insert into clearing (user_id, dagger_used, strength_used, invisibility_used, seed_used, chest_taken, first_time)
 values ($1, false, false, false, false, false, true);
 
 

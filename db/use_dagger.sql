@@ -11,4 +11,4 @@ set dagger = false
 where user_id = $1;
 
 select * from inventory
-where user_id = $1
+where user_id = $1;

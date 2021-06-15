@@ -21,10 +21,8 @@ module.exports = {
     req.session.user = {
       id: newUser[0].id,
       name: newUser[0].name,
-
       coins: newUser[0].coins,
-
-      last: newUser[0].last,
+      last: "home",
     };
     res.status(200).send(req.session.user);
   },

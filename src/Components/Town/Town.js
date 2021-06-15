@@ -52,9 +52,9 @@ function Town(props) {
   const [PickRejectionCard, setPickRejectionCard] = useState(false);
   const [unlockCard, setUnlockCard] = useState(false);
   const [oilRejectionCard, setOilRejectionCard] = useState(false);
-  const [rejectionCard, setRejectionCard] = useState(false)
-  const [oilCard, setOilCard] = useState(false)
-  const [townData, setTownData] = useState(false)
+  const [rejectionCard, setRejectionCard] = useState(false);
+  const [oilCard, setOilCard] = useState(false);
+  const [townData, setTownData] = useState(false);
 
   useEffect(() => {
     axios.get("/api/town").then((res) => {
@@ -76,12 +76,12 @@ function Town(props) {
     });
   }, []);
 
-   const toggleFirst = () => {
-     axios.post("/api/townFirst").then((res) => {
-       setTownData(res.data[0]);
-       setFirstTimeCard(false);
-     });
-   };
+  const toggleFirst = () => {
+    axios.post("/api/townFirst").then((res) => {
+      setTownData(res.data[0]);
+      setFirstTimeCard(false);
+    });
+  };
 
   const toggleRight = () => {
     axios.post("/api/changeLast", { last: "town" }).then((res) => {
@@ -190,7 +190,7 @@ function Town(props) {
       setPickRejectionCard(true);
     } else if (!townData.lock_four) {
       axios.post("/api/houseFourLock").then((res) => {
-      setTownData(res.data[0]);
+        setTownData(res.data[0]);
         setUnlockCard(true);
       });
     } else {
@@ -281,21 +281,17 @@ function Town(props) {
 
   const toggleItem = (item) => {
     if (item === "oil") {
-      if (props.location.pathname === "/Town") {
-        axios.post("/api/useOil").then((res) => {
-          props.getInventory(res.data);
-        });
-        axios.post("/api/manureHasTaken").then((res) => {
+      axios.post("/api/useOil").then((res) => {
+        props.getInventory(res.data);
+        axios.get("/api/town").then((res) => {
           setTownData(res.data[0]);
           setOilCard(true);
         });
-      } else {
-        setRejectionCard(true);
-      }
+      });
     } else {
-      setRejectionCard(true)
+      setRejectionCard(true);
     }
-  }
+  };
 
   return isLoading ? (
     <Loading />
@@ -662,7 +658,8 @@ function Town(props) {
           color="secondary"
           className="answer-card-description"
         >
-          You apply oil liberally to the lock. It should now be easier to unlock.
+          You apply oil liberally to the lock. It should now be easier to
+          unlock.
         </Typography>
         <Button
           onClick={() => setOilCard(false)}
