@@ -417,12 +417,62 @@ function Dashboard(props) {
             </div>
           </div>
           <div className="dashboard-top-right">
-            <img
-              src={Oldman}
-              alt="Old man"
-              className="dashboard-old-man"
-              onClick={toggleOldmanCard}
-            />
+            <div className="dashboard-old-man" onClick={toggleOldmanCard}>
+              <div className="dashboard-old-man-hat">
+                <div className="dashboard-old-man-hat-top"></div>
+                <div className="dashboard-old-man-hat-bottom"></div>
+              </div>
+              <div className="dashboard-old-man-head">
+                <div className="dashboard-old-man-hair-left"></div>
+                <div className="dashboard-old-man-face">
+                  <div className="dashboard-old-man-eyes">
+                    <div className="dashboard-old-man-eye">
+                      <div className="dashboard-old-man-iris">
+                        <div className="dashboard-old-man-pupil"></div>
+                      </div>
+                    </div>
+                    <div className="dashboard-old-man-eye">
+                      <div className="dashboard-old-man-iris">
+                        <div className="dashboard-old-man-pupil"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="dashboard-old-man-nose-div">
+                    <div className="dashboard-old-man-left-ear"></div>
+                    <div className="dashboard-old-man-nose"></div>
+                    <div className="dashboard-old-man-right-ear"></div>
+                  </div>
+                  <div className="dashboard-old-man-mouth"></div>
+                </div>
+                <div className="dashboard-old-man-hair-right"></div>
+              </div>
+              <div className="dashboard-old-man-neck"></div>
+              <div className="dashboard-old-man-shirt">
+                <div className="dashboard-old-man-left-arm">
+                  <div className="dashboard-old-man-hand">
+                    <div className="dashboard-old-man-finger-line"></div>
+                    <div className="dashboard-old-man-finger-line"></div>
+                    <div className="dashboard-old-man-finger-line"></div>
+                  </div>
+                </div>
+                <div className="dashboard-old-man-right-arm">
+                  <div className="dashboard-old-man-hand">
+                    <div className="dashboard-old-man-finger-line"></div>
+                    <div className="dashboard-old-man-finger-line"></div>
+                    <div className="dashboard-old-man-finger-line"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="dashboard-old-man-pants"></div>
+              <div className="dashboard-old-man-leg-div">
+                <div className="dashboard-old-man-leg">
+                  <div className="dashboard-old-man-shoe"></div>
+                </div>
+                <div className="dashboard-old-man-leg">
+                  <div className="dashboard-old-man-shoe"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div className="dashboard-middle">
@@ -753,16 +803,16 @@ function Dashboard(props) {
         }`}
       >
         <Typography variant="h4" color="primary">
-          As you read the scroll it disappears. The home grows until it is the perfect size for you!
+          As you read the scroll it disappears. The home grows until it is the
+          perfect size for you!
         </Typography>
         <Typography
           variant="h6"
           color="secondary"
           className="answer-card-description"
         >
-          Not only have you slain the dragon, you have a beautiful new
-          home. You are free to start the peaceful life you long
-          for. You win! Right?
+          Not only have you slain the dragon, you have a beautiful new home. You
+          are free to start the peaceful life you long for. You win! Right?
         </Typography>
         <Button onClick={toggleGrowCard} variant="contained" color="primary">
           CLOSE
