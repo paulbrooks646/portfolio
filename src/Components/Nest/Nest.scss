@@ -42,6 +42,8 @@
       .coin-div {
         width: 33%;
         @include center(center);
+        position: absolute;
+        left: 0px;
 
         .nest-coin {
           background-color: gold;
@@ -59,6 +61,8 @@
       .ribbon-div {
         width: 33%;
         @include center(center);
+        position: absolute;
+        left: 33%;
 
         .nest-ribbon {
           width: 70px;
@@ -76,6 +80,8 @@
       .feather-div {
         width: 33%;
         @include center(center);
+        position: absolute;
+        right: 0px;
 
         .nest-feather {
           background-image: url("../../Images//Feather.png");
