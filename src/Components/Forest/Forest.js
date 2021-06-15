@@ -269,12 +269,62 @@ function Forest(props) {
             </div>
           </div>
           <div className="forest-middle-middle">
-            <img
-              src={Elf}
-              onClick={toggleRanger}
-              className="forest-ranger"
-              alt="forest ranger"
-            />
+            <div className="forest-ranger" onClick={toggleRanger}>
+              <div className="forest-ranger-hat">
+                <div className="forest-ranger-hat-top"></div>
+                <div className="forest-ranger-hat-bottom"></div>
+              </div>
+              <div className="forest-ranger-head">
+                <div className="forest-ranger-hair-left"></div>
+                <div className="forest-ranger-face">
+                  <div className="forest-ranger-eyes">
+                    <div className="forest-ranger-eye">
+                      <div className="forest-ranger-iris">
+                        <div className="forest-ranger-pupil"></div>
+                      </div>
+                    </div>
+                    <div className="forest-ranger-eye">
+                      <div className="forest-ranger-iris">
+                        <div className="forest-ranger-pupil"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="forest-ranger-nose-div">
+                    <div className="forest-ranger-left-ear"></div>
+                    <div className="forest-ranger-nose"></div>
+                    <div className="forest-ranger-right-ear"></div>
+                  </div>
+                  <div className="forest-ranger-mouth"></div>
+                </div>
+                <div className="forest-ranger-hair-right"></div>
+              </div>
+              <div className="forest-ranger-neck"></div>
+              <div className="forest-ranger-shirt">
+                <div className="forest-ranger-left-arm">
+                  <div className="forest-ranger-hand">
+                    <div className="forest-ranger-finger-line"></div>
+                    <div className="forest-ranger-finger-line"></div>
+                    <div className="forest-ranger-finger-line"></div>
+                  </div>
+                </div>
+                <div className="forest-ranger-right-arm">
+                  <div className="forest-ranger-hand">
+                    <div className="forest-ranger-finger-line"></div>
+                    <div className="forest-ranger-finger-line"></div>
+                    <div className="forest-ranger-finger-line"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="forest-ranger-pants"></div>
+              <div className="forest-ranger-leg-div">
+                <div className="forest-ranger-leg">
+                  <div className="forest-ranger-shoe"></div>
+                </div>
+                <div className="forest-ranger-leg">
+                  <div className="forest-ranger-shoe"></div>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="forest-middle-right">
             <div

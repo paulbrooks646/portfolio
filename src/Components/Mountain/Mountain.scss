@@ -27,15 +27,203 @@
       @include section(20vw);
       @include flex(flex-start);
 
-      .mountaineer {
-        background-image: url("../../Images//Mountaineer.png");
-        background-size: 100% 100%;
-        height: 150px;
-        width: 100px;
-        z-index: 1;
-        position: relative;
-        bottom: 100px;
+      .mountain-mountaineer {
+        @include flex(center);
         cursor: pointer;
+        position: relative;
+        bottom: 80px;
+        .mountain-mountaineer-hat {
+          @include flex(center);
+          position: relative;
+          top: 25px;
+          z-index: 2;
+          .mountain-mountaineer-hat-top {
+            height: 40px;
+            width: 40px;
+            background-image: linear-gradient(orangered 60%, transparent 60%);
+            border-radius: 50%;
+            position: relative;
+            top: 35px;
+          }
+        }
+        .mountain-mountaineer-head {
+          position: relative;
+          top: 20px;
+          @include center(center);
+
+          .mountain-mountaineer-hair-left {
+            height: 20px;
+            width: 8px;
+            background-color: orangered;
+            position: relative;
+            left: 8px;
+            top: 2px;
+            z-index: 1;
+          }
+          .mountain-mountaineer-face {
+            height: 55px;
+            width: 40px;
+            border-radius: 50%;
+            background-color: peachpuff;
+            @include flex(space-evenly);
+
+            .mountain-mountaineer-eyes {
+              @include center(space-evenly);
+              width: 100%;
+              position: relative;
+              top: 16px;
+
+              .mountain-mountaineer-eye {
+                height: 8px;
+                width: 8px;
+                background-color: white;
+                border-radius: 50%;
+                @include flex(center);
+
+                .mountain-mountaineer-pupil {
+                  height: 4px;
+                  width: 4px;
+                  background-color: black;
+                  border-radius: 50%;
+                }
+              }
+            }
+
+            .mountain-mountaineer-nose-div {
+              @include center(space-between);
+              position: relative;
+              top: 8px;
+              width: 100%;
+
+              .mountain-mountaineer-nose {
+                border: solid 0.5px;
+                border-top: none;
+                width: 10px;
+                height: 6px;
+                border-radius: 25% 25% 50% 50%;
+              }
+            }
+
+            .mountain-mountaineer-mouth {
+              width: 17px;
+              height: 10px;
+              border-top: solid .5px rgb(209, 96, 96);
+              position: relative;
+              top: 2px;
+              border-radius: 50%;
+            }
+          }
+          .mountain-mountaineer-hair-right {
+            height: 20px;
+            width: 8px;
+            background-color: orangered;
+            position: relative;
+            right: 8px;
+            top: 2px;
+          }
+        }
+        .mountain-mountaineer-neck {
+          width: 40px;
+          height: 25px;
+          border-radius: 0% 0% 50% 50%;
+          border-bottom: solid orangered 20px;
+          border-left: solid orangered 8px;
+          border-right: solid orangered 8px;
+          position: relative;
+          top: 5px;
+          z-index: 2;
+        }
+        .mountain-mountaineer-shirt {
+          height: 60px;
+          width: 40px;
+          background-color: #dcdcdc;
+          position: relative;
+          bottom: 4px;
+          border-radius: 40% 40% 0% 0%;
+          @include center(space-between);
+
+          .mountain-mountaineer-left-arm {
+            background-color: #dcdcdc;
+            width: 10px;
+            height: 50px;
+            transform: rotate(30deg);
+            position: relative;
+            right: 8px;
+            @include flex(flex-end);
+
+            .mountain-mountaineer-hand {
+              width: 15px;
+              height: 20px;
+              border-radius: 25%;
+              @include center(space-evenly);
+              align-items: flex-end;
+              background-color: gray;
+              position: relative;
+              top: 10px;
+
+              .mountain-mountaineer-finger-line {
+                height: 50%;
+                width: 0.5px;
+                background-color: black;
+              }
+            }
+          }
+          .mountain-mountaineer-right-arm {
+            background-color: #dcdcdc;
+            width: 10px;
+            height: 50px;
+            transform: rotate(-30deg);
+            position: relative;
+            left: 8px;
+            @include flex(flex-end);
+
+            .mountain-mountaineer-hand {
+              width: 15px;
+              height: 20px;
+              @include center(space-evenly);
+              align-items: flex-end;
+              background-color: gray;
+              position: relative;
+              top: 10px;
+              border-radius: 25%;
+
+              .mountain-mountaineer-finger-line {
+                height: 50%;
+                width: 0.5px;
+
+                background-color: black;
+              }
+            }
+          }
+        }
+        .mountain-mountaineer-pants {
+          background-color: #dcdcdc;
+          height: 20px;
+          width: 40px;
+          position: relative;
+          bottom: 5px;
+          border-top: solid .5px;
+        }
+        .mountain-mountaineer-leg-div {
+          width: 40px;
+          @include center(space-between);
+          position: relative;
+          bottom: 5px;
+
+          .mountain-mountaineer-leg {
+            height: 45px;
+            width: 15px;
+            background-color: #dcdcdc;
+            @include flex(flex-end);
+
+            .mountain-mountaineer-shoe {
+              width: 20px;
+              height: 10px;
+              background-color: gray;
+              border-radius: 25% 25% 0% 0%;
+            }
+          }
+        }
       }
     }
 

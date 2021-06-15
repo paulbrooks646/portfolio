@@ -261,7 +261,62 @@ function Mountain(props) {
             </div>
           </div>
           <div className="mountain-middle-middle">
-            <div className="mountaineer" onClick={toggleMountaineer}></div>
+            <div className="mountain-mountaineer" onClick={toggleMountaineer}>
+              <div className="mountain-mountaineer-hat">
+                <div className="mountain-mountaineer-hat-top"></div>
+                <div className="mountain-mountaineer-hat-bottom"></div>
+              </div>
+              <div className="mountain-mountaineer-head">
+                <div className="mountain-mountaineer-hair-left"></div>
+                <div className="mountain-mountaineer-face">
+                  <div className="mountain-mountaineer-eyes">
+                    <div className="mountain-mountaineer-eye">
+                      <div className="mountain-mountaineer-iris">
+                        <div className="mountain-mountaineer-pupil"></div>
+                      </div>
+                    </div>
+                    <div className="mountain-mountaineer-eye">
+                      <div className="mountain-mountaineer-iris">
+                        <div className="mountain-mountaineer-pupil"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mountain-mountaineer-nose-div">
+                    <div className="mountain-mountaineer-left-ear"></div>
+                    <div className="mountain-mountaineer-nose"></div>
+                    <div className="mountain-mountaineer-right-ear"></div>
+                  </div>
+                  <div className="mountain-mountaineer-mouth"></div>
+                </div>
+                <div className="mountain-mountaineer-hair-right"></div>
+              </div>
+              <div className="mountain-mountaineer-neck"></div>
+              <div className="mountain-mountaineer-shirt">
+                <div className="mountain-mountaineer-left-arm">
+                  <div className="mountain-mountaineer-hand">
+                    <div className="mountain-mountaineer-finger-line"></div>
+                    <div className="mountain-mountaineer-finger-line"></div>
+                    <div className="mountain-mountaineer-finger-line"></div>
+                  </div>
+                </div>
+                <div className="mountain-mountaineer-right-arm">
+                  <div className="mountain-mountaineer-hand">
+                    <div className="mountain-mountaineer-finger-line"></div>
+                    <div className="mountain-mountaineer-finger-line"></div>
+                    <div className="mountain-mountaineer-finger-line"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="mountain-mountaineer-pants"></div>
+              <div className="mountain-mountaineer-leg-div">
+                <div className="mountain-mountaineer-leg">
+                  <div className="mountain-mountaineer-shoe"></div>
+                </div>
+                <div className="mountain-mountaineer-leg">
+                  <div className="mountain-mountaineer-shoe"></div>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="mountain-middle-right">
             <div

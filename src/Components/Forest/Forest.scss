@@ -50,11 +50,237 @@
       @include section(20vw);
       @include flex(flex-end);
 
-      .forest-ranger {
-        height: 150px;
-        width: 100px;
-        transform: scaleX(-1);
+     .forest-ranger {
+        @include flex(center);
         cursor: pointer;
+        position:  relative;
+        top: 20px;
+        .forest-ranger-hat {
+          @include flex(center);
+          position: relative;
+          top: 20px;
+          z-index: 2;
+          .forest-ranger-hat-top {
+            height: 35px;
+            width: 35px;
+            background-image: linear-gradient(45deg, #4f7942 50%, transparent 50%);
+            position: relative;
+            top: 18px;
+            transform: rotate(135deg);
+          }
+          .forest-ranger-hat-bottom {
+            width: 50px;
+            height: 2px;
+            background-color: #4f7942;
+          }
+        }
+        .forest-ranger-head {
+          @include center(center);
+
+          .forest-ranger-hair-left {
+            height: 15px;
+            width: 5px;
+            background-color: chocolate;
+            position: relative;
+            left: 4px;
+            bottom: 5px;
+            z-index: 1;
+          }
+          .forest-ranger-face {
+            height: 60px;
+            width: 40px;
+            border-radius: 50%;
+            background-color: #f1c27d;
+            @include flex(space-evenly);
+
+            .forest-ranger-eyes {
+              @include center(space-evenly);
+              width: 90%;
+              position: relative;
+              top: 13px;
+
+              .forest-ranger-eye {
+                height: 8px;
+                width: 15px;
+                background-color: white;
+                border-radius: 50%;
+                @include flex(center);
+
+                .forest-ranger-iris {
+                  height: 6px;
+                  width: 6px;
+                  background-color: green;
+                  border-radius: 50%;
+                  @include flex(center);
+
+                  .forest-ranger-pupil {
+                    height: 2.5px;
+                    width: 2.5px;
+                    background-color: black;
+                    border-radius: 50%;
+                  }
+                }
+              }
+            }
+
+            .forest-ranger-nose-div {
+              @include center(space-between);
+              position: relative;
+              top: 6px;
+              width: 100%;
+
+              .forest-ranger-left-ear {
+                border: solid 0.5px;
+                border-right: none;
+                background-color: #f1c27d;
+                height: 10px;
+                width: 5px;
+                border-radius: 50%;
+                position: relative;
+                right: 3px;
+                transform: rotate(-5deg);
+              }
+
+              .forest-ranger-nose {
+                border: solid 0.5px;
+                border-top: none;
+                width: 7px;
+                height: 4.5px;
+                border-radius: 5% 5% 40% 40%;
+              }
+              .forest-ranger-right-ear {
+                border: solid 0.5px;
+                border-left: none;
+                background-color: #f1c27d;
+                height: 10px;
+                width: 5px;
+                border-radius: 50%;
+                position: relative;
+                left: 3px;
+                transform: rotate(5deg);
+              }
+            }
+
+            .forest-ranger-mouth {
+              width: 17px;
+              height: 5px;
+              border-bottom: .75px solid rgb(214, 59, 59);
+              position: relative;
+              bottom: 2px;
+              border-radius: 50%;
+            }
+          }
+          .forest-ranger-hair-right {
+            height: 15px;
+            width: 5px;
+            background-color: chocolate;
+            position: relative;
+            right: 4px;
+            bottom: 5px;
+          }
+        }
+        .forest-ranger-neck {
+          width: 15px;
+          height: 5px;
+          background-color: #f1c27d;
+          position: relative;
+          bottom: 3px;
+        }
+        .forest-ranger-shirt {
+          height: 60px;
+          width: 40px;
+          background-color: #4f7942;
+          position: relative;
+          bottom: 4px;
+          border-radius: 40% 40% 0% 0%;
+          @include center(space-between);
+
+          .forest-ranger-left-arm {
+            background-image: linear-gradient(#4f7942 80%, #f1c27d 80%);
+            width: 10px;
+            height: 50px;
+            transform: rotate(30deg);
+            position: relative;
+            right: 8px;
+            @include flex(flex-end);
+
+            .forest-ranger-hand {
+              width: 15px;
+              height: 10px;
+              border-radius: 25%;
+              @include center(space-evenly);
+              align-items: flex-end;
+              background-color: #f1c27d;
+               position: relative;
+              top: 5px;
+
+
+              .forest-ranger-finger-line {
+                height: 50%;
+                width: .5px;
+                background-color: black;
+              }
+            }
+          }
+          .forest-ranger-right-arm {
+            background-image: linear-gradient(#4f7942 80%, #f1c27d 80%);
+            width: 10px;
+            height: 50px;
+            transform: rotate(-30deg);
+            position: relative;
+            left: 8px;
+             @include flex(flex-end);
+
+              .forest-ranger-hand {
+              width: 15px;
+              height: 10px;
+              @include center(space-evenly);
+              align-items: flex-end;
+              background-color: #f1c27d;
+              position: relative;
+              top: 5px;
+              border-radius: 25%;
+
+              .forest-ranger-finger-line {
+                height: 50%;
+                width: .5px;
+
+                background-color: black;
+              }
+            }
+          }
+        }
+        .forest-ranger-pants {
+          background-color: #4f7942;
+          height: 20px;
+          width: 40px;
+          position: relative;
+          bottom: 5px;
+          border-top: solid;
+
+          
+        }
+        .forest-ranger-leg-div {
+          width: 40px;
+          @include center(space-between);
+          position: relative;
+          bottom: 5px;
+
+          .forest-ranger-leg {
+            height: 45px;
+            width: 15px;
+            background-color: #4f7942;
+            @include flex(flex-end);
+
+            .forest-ranger-shoe {
+              width: 20px;
+              height: 10px;
+              background-color: black;
+              border-radius: 25% 25% 0% 0%;
+            }
+          }
+
+        }
       }
     }
 
