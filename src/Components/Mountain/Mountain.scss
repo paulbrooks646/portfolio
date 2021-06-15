@@ -6,8 +6,46 @@
 
   .mountain-top {
     @include row(35vh);
-    background-image: url("../../Images/Mountain.png");
-    background-size: 100% 100%;
+    background-color: skyblue;
+    border-bottom: solid black 2px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    
+
+    .mountain-top-left {
+      height: 250px;
+      width: 250px;
+      background-image: linear-gradient(45deg, transparent 50%, brown 50% 75%, white 75%);
+      transform: rotate(-45deg);
+      position: relative;
+    top: 125px;
+     border-top: solid .5px;
+    border-right: solid .5px;
+    z-index: 1;
+    }
+
+    .mountain-top-middle {
+      height: 350px;
+      width: 350px;
+      background-image: linear-gradient(45deg, transparent 50%, brown 50% 75%, white 75%);
+      transform: rotate(-45deg);
+      position: relative;
+    top: 175px;
+
+    }
+
+    .mountain-top-right {
+       height: 250px;
+      width: 250px;
+      background-image: linear-gradient(45deg, transparent 50%, brown 50% 75%, white 75%);
+      transform: rotate(-45deg);
+      position: relative;
+    top: 125px;
+    border-top: solid .5px;
+    border-right: solid .5px;
+    }
+    
   }
 
   .mountain-middle {
@@ -40,26 +78,21 @@
           .mountain-mountaineer-hat-top {
             height: 40px;
             width: 40px;
-            background-image: linear-gradient(orangered 60%, transparent 60%);
-            border-radius: 50%;
+            
+            border-radius: 50% 50% 0% 0%;
             position: relative;
-            top: 35px;
+            top: 50px;
+            border-top: orangered solid 17px;
+            border-left: orangered solid 6px;
+            border-right: orangered solid 6px;
           }
         }
         .mountain-mountaineer-head {
           position: relative;
-          top: 20px;
+          top: 40px;
           @include center(center);
 
-          .mountain-mountaineer-hair-left {
-            height: 20px;
-            width: 8px;
-            background-color: orangered;
-            position: relative;
-            left: 8px;
-            top: 2px;
-            z-index: 1;
-          }
+          
           .mountain-mountaineer-face {
             height: 55px;
             width: 40px;
@@ -69,20 +102,21 @@
 
             .mountain-mountaineer-eyes {
               @include center(space-evenly);
-              width: 100%;
+              width: 90%;
               position: relative;
-              top: 16px;
+              top: 8px;
 
               .mountain-mountaineer-eye {
-                height: 8px;
-                width: 8px;
+                height: 9px;
+                width: 12px;
                 background-color: white;
                 border-radius: 50%;
                 @include flex(center);
+                border-top: solid orangered;
 
                 .mountain-mountaineer-pupil {
-                  height: 4px;
-                  width: 4px;
+                  height: 5px;
+                  width: 5px;
                   background-color: black;
                   border-radius: 50%;
                 }
@@ -92,7 +126,7 @@
             .mountain-mountaineer-nose-div {
               @include center(space-between);
               position: relative;
-              top: 8px;
+              top: 4px;
               width: 100%;
 
               .mountain-mountaineer-nose {
@@ -109,26 +143,19 @@
               height: 10px;
               border-top: solid .5px rgb(209, 96, 96);
               position: relative;
-              top: 2px;
+              top: 1px;
               border-radius: 50%;
             }
           }
-          .mountain-mountaineer-hair-right {
-            height: 20px;
-            width: 8px;
-            background-color: orangered;
-            position: relative;
-            right: 8px;
-            top: 2px;
-          }
+         
         }
         .mountain-mountaineer-neck {
           width: 40px;
-          height: 25px;
+          height: 40px;
           border-radius: 0% 0% 50% 50%;
-          border-bottom: solid orangered 20px;
-          border-left: solid orangered 8px;
-          border-right: solid orangered 8px;
+          border-bottom: solid orangered 17px;
+          border-left: solid orangered 6px;
+          border-right: solid orangered 6px;
           position: relative;
           top: 5px;
           z-index: 2;
