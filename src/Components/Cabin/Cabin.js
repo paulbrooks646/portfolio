@@ -208,7 +208,12 @@ function Cabin(props) {
       <div className="cabin-body">
         <div className="cabin-top">
           <div className="cabin-top-left">
-            <div className="pine-tree"></div>
+            <div className="pine-tree">
+              <div className="pine-tree-top"></div>
+              <div className="pine-tree-middle"></div>
+              <div className="pine-tree-bottom"></div>
+              <div className="pine-tree-trunk"></div>
+            </div>
           </div>
           <div className="cabin-top-middle">
             <div className="cabin-home" onClick={toggleGoUp}>
@@ -230,16 +235,83 @@ function Cabin(props) {
             </div>
           </div>
           <div className="cabin-top-right">
-            <div className="pine-tree"></div>
+            <div className="pine-tree">
+              <div className="pine-tree-top"></div>
+              <div className="pine-tree-middle"></div>
+              <div className="pine-tree-bottom"></div>
+              <div className="pine-tree-trunk"></div>
+            </div>
           </div>
         </div>
         <div className="cabin-middle">
           <div className="cabin-middle-left">
-            <div className="cabin-cabin"></div>
+            <div className="cabin-cottage">
+              <div className="cabin-left"></div>
+              <div className="cabin-cottage-middle">
+                <div className="cabin-chimney-div">
+                  <div className="cabin-smoke"></div>
+                  <div className="cabin-smoke-middle"></div>
+                  <div className="cabin-smoke"></div>
+                  <div className="cabin-chimney"></div>
+                </div>
+                <div className="cabin-short-log"></div>
+                <div className="cabin-medium-log"></div>
+                <div className="cabin-window-div">
+                  <div className="cabin-window-div-side">
+                    <div className="cabin-short-log"></div>
+                    <div className="cabin-short-log"></div>
+                  </div>
+                  <div className="cabin-window">
+                    <div className="cabin-window-row">
+                      <div className="cabin-window-pane"></div>
+                      <div className="cabin-window-line"></div>
+                      <div className="cabin-window-pane"></div>
+                    </div>
+                    <div className="cabin-window-middle"></div>
+                    <div className="cabin-window-row">
+                      <div className="cabin-window-pane"></div>
+                      <div className="cabin-window-line"></div>
+                      <div className="cabin-window-pane"></div>
+                    </div>
+                  </div>
+                  <div className="cabin-window-div-side">
+                    <div className="cabin-short-log"></div>
+                    <div className="cabin-short-log"></div>
+                  </div>
+                </div>
+                <div className="cabin-long-log"></div>
+                <div className="cabin-long-log"></div>
+                <div className="cabin-door-div">
+                  <div className="cabin-door-div-side">
+                    <div className="cabin-short-log"></div>
+                    <div className="cabin-short-log"></div>
+                    <div className="cabin-short-log"></div>
+                  </div>
+                  <div className="cabin-door">
+                    <div className="cabin-door-knob"></div>
+                    <div className="cabin-lock-div">
+                      <div className="cabin-lock-top"></div>
+                      <div className="cabin-lock-bottom"></div>
+                    </div>
+                  </div>
+                  <div className="cabin-door-div-side">
+                    <div className="cabin-short-log"></div>
+                    <div className="cabin-short-log"></div>
+                    <div className="cabin-short-log"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="cabin-right"></div>
+            </div>
           </div>
           <div className="cabin-middle-middle"></div>
           <div className="cabin-middle-right">
-            <div className="pine-tree"></div>
+            <div className="pine-tree">
+              <div className="pine-tree-top"></div>
+              <div className="pine-tree-middle"></div>
+              <div className="pine-tree-bottom"></div>
+              <div className="pine-tree-trunk"></div>
+            </div>
           </div>
         </div>
         <div className="cabin-bottom">
@@ -253,7 +325,15 @@ function Cabin(props) {
                 !cabinData.mushroom_taken ? "mushroom" : "mushroom-closed"
               }`}
               onClick={toggleMushroom}
-            ></div>
+            >
+              <div className="mushroom-top">
+                <div className="mushroom-speckle-one"></div>
+                <div className="mushroom-speckle-two"></div>
+                <div className="mushroom-speckle-three"></div>
+                <div className="mushroom-speckle-four"></div>
+              </div>
+              <div className="mushroom-stem"></div>
+            </div>
           </div>
         </div>
       </div>
