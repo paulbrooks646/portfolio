@@ -37,7 +37,7 @@
       @include flex(center);
       @include section(40vw);
 
-     .cabin-cottage {
+      .cabin-cottage {
         width: 200px;
         border: blue;
         display: flex;
@@ -204,7 +204,6 @@
           position: relative;
           right: 50px;
           bottom: 40px;
-         
         }
       }
     }
@@ -231,11 +230,385 @@
       background-size: 100% 100%;
 
       .woodsman {
-        background-image: url("../../Images/Woodsman.png");
-        background-size: 100% 100%;
-        height: 120px;
-        width: 150px;
+        position: relative;
+        top: 75px;
         cursor: pointer;
+
+        .woodsman-head {
+          display: flex;
+          justify-content: center;
+          position: relative;
+          bottom: 42px;
+
+          .woodsman-hair-left {
+            height: 16px;
+            width: 25px;
+            border-bottom: gray solid 10px;
+            border-left: gray solid 10px;
+            position: relative;
+            top: 24px;
+            left: 25px;
+            z-index: 6;
+            border-radius: 25% 0% 0% 50%;
+          }
+
+          .woodsman-face {
+            height: 42px;
+            width: 42px;
+            background-color: #ffdbac;
+            border-radius: 50%;
+            @include flex(center);
+            border-bottom: black solid 1px;
+
+            .woodsman-hair-top-left {
+              height: 5px;
+              width: 12px;
+              border-radius: 25%;
+              background-color: gray;
+              z-index: 2;
+              transform: rotate(-10deg);
+              position: relative;
+              right: 9px;
+              top: 8px;
+            }
+
+            .woodsman-hair-top-right {
+              height: 5px;
+              width: 12px;
+              border-radius: 25%;
+              background-color: gray;
+              transform: rotate(10deg);
+              position: relative;
+              left: 9px;
+              top: 3px;
+              z-index: 2;
+            }
+
+            .woodsman-eyes {
+              width: 80%;
+              @include center(space-evenly);
+              position: relative;
+              top: 4px;
+
+              .woodsman-eye {
+                width: 12px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: white;
+                @include flex(center);
+
+                .woodsman-iris {
+                  width: 5.5px;
+                  height: 5.5px;
+                  border-radius: 50%;
+                  background-color: sienna;
+                  @include flex(center);
+                }
+              }
+            }
+            .woodsman-nose {
+              height: 5px;
+              width: 7px;
+              @include flex(center);
+              border-left: solid 0.5px;
+              border-right: solid 0.5px;
+              border-bottom: solid 0.5px;
+              border-radius: 0% 0% 50% 50%;
+              position: relative;
+              top: 4px;
+            }
+
+            .woodsman-mouth {
+              height: 20px;
+              width: 18px;
+              border-bottom: solid 0.5px;
+              position: relative;
+              bottom: 11px;
+            }
+          }
+
+          .woodsman-hair-right {
+            height: 16px;
+            width: 25px;
+            border-radius: 0% 25% 50% 0%;
+            border-bottom: gray solid 10px;
+            border-right: gray solid 10px;
+            position: relative;
+            top: 24px;
+            right: 25px;
+            z-index: 6;
+          }
+        }
+        .woodsman-body {
+          @include flex(flex-start);
+
+          // .woodsman-upper-neck {
+          //   height: 5px;
+          //   width: 20px;
+          //   z-index: 5;
+          //   border-radius: 50%;
+          //   border-bottom: 1px black solid;
+          //   position: relative;
+          //   bottom: 49px;
+          // }
+          // .woodsman-neck {
+          //   height: 15px;
+          //   width: 20px;
+          //   background-color: #ffdbac;
+
+          //   position: relative;
+          //   bottom: 50px;
+          //   border-radius: 30% 30% 50% 50%;
+          //   z-index: 4;
+          // }
+
+          .woodsman-dress {
+            width: 50px;
+            height: 90px;
+            background-color: sienna;
+            border-radius: 25% 25% 0% 0%;
+            position: relative;
+            bottom: 43px;
+            z-index: 2;
+            @include center(space-between);
+
+            .woodsman-arm-left {
+              height: 40px;
+              width: 12px;
+              background-color: sienna;
+              transform: rotate(-105deg);
+              position: relative;
+              bottom: 20px;
+              left: 11px;
+              @include flex(center);
+              border: solid 0.5px;
+              border-top: solid 4px;
+              border-radius: 50% 50% 0% 0%;
+
+              .woodsman-finger-div {
+                width: 16px;
+                height: 15px;
+                z-index: 7;
+                position: relative;
+                top: 25px;
+                display: flex;
+                justify-content: space-between;
+                border-top: solid .5px;
+              
+                .woodsman-finger-one {
+                  background-color: #ffdbac;
+                  height: 12px;
+                  width: 4px;
+                  border-radius: 0% 0% 0% 50%;
+                  position: relative;
+                   z-index: 7;
+                }
+                .woodsman-finger-two {
+                  background-color: #ffdbac;
+                  height: 12px;
+                  width: 4px;
+                   z-index: 7;
+                  border-radius: 0%;
+                  position: relative;
+                  border-left: solid .5;
+                }
+                .woodsman-finger-three {
+                  background-color: #ffdbac;
+                  height: 12px;
+                  width: 5px;
+                  z-index: 7;
+                  border-radius: 0%;
+                  position: relative;
+                  border-left: solid .5;
+                }
+
+                .woodsman-finger-four {
+                  background-color: #ffdbac;
+                  height: 12px;
+                  width: 5px;
+                  z-index: 7;
+                  border-radius: 0%;
+                  position: relative;
+                  border-radius: 0% 0% 50% 0%;
+                }
+              }
+            }
+            // .woodsman-rope {
+            //   position: absolute;
+            //   width: 100%;
+            //   height: 5px;
+            //   background-color: black;
+            //   z-index: 3;
+            //   border-radius: 5%;
+            //   top: 60px;
+            //   border-left: solid;
+            //   border-right: solid;
+            //   display: flex;
+            //   justify-content: space-evenly;
+            //   cursor: pointer;
+
+            //   .woodsman-rope-line {
+            //     height: 100%;
+            //     width: 1px;
+            //     background-color: gold;
+            //   }
+            // }
+
+            .woodsman-dress-crease {
+              position: absolute;
+              height: 2px;
+              width: 100%;
+              background-color: black;
+              top: 65px;
+            }
+
+            .woodsman-arm-right {
+              height: 40px;
+              width: 12px;
+              background-color: sienna;
+              transform: rotate(105deg);
+              position: relative;
+              bottom: 19px;
+              right: 11px;
+              @include flex(center);
+              border: solid 0.5px;
+              border-top: solid 4px;
+              border-radius: 50% 50% 0% 0%;
+
+              .woodsman-finger-div {
+                width: 16px;
+                height: 15px;
+                position: relative;
+                top: 25px;
+                display: flex;
+                justify-content: space-between;
+                border-top: solid .5px;
+                .woodsman-finger-one {
+                  background-color: #ffdbac;
+                  height: 12px;
+                  width: 4px;
+                  z-index: 2;
+                  border-radius: 0% 0% 0% 50%;
+                  position: relative;
+                }
+                .woodsman-finger-two {
+                  background-color: #ffdbac;
+                  height: 12px;
+                  width: 4px;
+                  z-index: 2;
+                  position: relative;
+                  border-right: solid 0.5;
+                }
+                .woodsman-finger-three {
+                  background-color: #ffdbac;
+                  height: 12px;
+                  width: 4px;
+                  z-index: 2;
+                  position: relative;
+                  border-right: solid 0.5;
+                }
+
+                .woodsman-finger-four {
+                  background-color: #ffdbac;
+                  height: 12px;
+                  width: 4px;
+                  z-index: 2;
+                  border-radius: 0% 0% 50% 0%;
+                  position: relative;
+                }
+              }
+            }
+          }
+
+          .woodsman-legs {
+            @include center(space-between);
+            width: 60px;
+            position: relative;
+            bottom: 50px;
+            z-index: 4;
+
+            .woodsman-leg-left {
+              height: 40px;
+              width: 20px;
+              background-color: sienna;
+              @include flex(flex-end);
+              border-radius: 50% 50% 0% 0%;
+              border-top: solid .5px;
+              position: relative;
+              bottom: 5px;
+
+              .woodsman-foot {
+                height: 9px;
+                width: 25px;
+                background-color: black;
+                position: relative;
+                z-index: 1;
+                border-radius: 50% 50% 0% 0%;
+              }
+            }
+
+            .woodsman-leg-right {
+              height: 40px;
+              width: 20px;
+              background-color: sienna;
+              @include flex(flex-end);
+              border-radius: 50% 50% 0% 0%;
+              border-top: .5px solid;
+              position: relative;
+              bottom: 5px;
+
+              .woodsman-foot {
+                height: 12px;
+                width: 25px;
+                background-color: black;
+                position: relative;
+                z-index: 1;
+                border-radius: 50% 50% 0% 0%;
+              }
+            }
+          }
+        }
+      }
+
+      .chair-div {
+        @include flex(flex-start);
+        position: relative;
+        bottom: 80px;
+
+        .chair-top-div {
+          width: 60px;
+          height: 60px;
+          @include center(flex-end);
+
+          .chair-top {
+            height: 60px;
+            width: 60px;
+            background-color: chocolate;
+            border: solid;
+          }
+        }
+
+        .chair-seat {
+          width: 100%;
+          height: 15px;
+          background-color: chocolate;
+          border: solid;
+          border-top: solid 0.5px;
+        }
+
+        .chair-leg-div {
+          @include center(space-between);
+          height: 50px;
+          width: 100%;
+
+          .chair-leg {
+            height: 100%;
+            width: 15px;
+            background-color: chocolate;
+            border: solid;
+            border-top: solid 0.5px;
+          }
+        }
       }
     }
 

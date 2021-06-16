@@ -316,7 +316,83 @@ function Cabin(props) {
         </div>
         <div className="cabin-bottom">
           <div className="cabin-bottom-left">
-            <div className="woodsman" onClick={toggleOldMan}></div>
+            <div
+              className="woodsman"
+              onClick={toggleOldMan}
+            >
+              <div className="woodsman-head">
+                <div className="woodsman-hair-left"></div>
+                <div className="woodsman-face">
+                  <div className="woodsman-hair-top-left"></div>
+                  <div className="woodsman-hair-top-right"></div>
+                  <div className="woodsman-eyes">
+                    <div className="woodsman-eye">
+                      <div className="woodsman-iris"></div>
+                    </div>
+                    <div className="woodsman-eye">
+                      <div className="woodsman-iris">
+                        <div className="woodsman-pupil"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="woodsman-nose"></div>
+                  <div className="woodsman-mouth"></div>
+                </div>
+                <div className="woodsman-hair-right"></div>
+              </div>
+              <div className="woodsman-body">
+                <div className="woodsman-upper-neck"></div>
+                <div className="woodsman-neck"></div>
+                <div className="woodsman-dress">
+                  <div className="woodsman-arm-left">
+                    <div className="woodsman-finger-div">
+                      <div className="woodsman-finger-one"></div>
+                      <div className="woodsman-finger-two"></div>
+                      <div className="woodsman-finger-three"></div>
+                      <div className="woodsman-finger-four"></div>
+                      <div className="woodsman-finger-five"></div>
+                    </div>
+                  </div>
+                  <div className="woodsman-rope">
+                    <div className="woodsman-rope-line"></div>
+                    <div className="woodsman-rope-line"></div>
+                    <div className="woodsman-rope-line"></div>
+                    <div className="woodsman-rope-line"></div>
+                    <div className="woodsman-rope-line"></div>
+                    <div className="woodsman-rope-line"></div>
+                  </div>
+                  <div className="woodsman-dress-crease"></div>
+
+                  <div className="woodsman-arm-right">
+                    <div className="woodsman-finger-div">
+                      <div className="woodsman-finger-one"></div>
+                      <div className="woodsman-finger-two"></div>
+                      <div className="woodsman-finger-three"></div>
+                      <div className="woodsman-finger-four"></div>
+                      <div className="woodsman-finger-five"></div>
+                    </div>
+                  </div>
+                </div>
+                <div className="woodsman-legs">
+                  <div className="woodsman-leg-left">
+                    <div className="woodsman-foot"></div>
+                  </div>
+                  <div className="woodsman-leg-right">
+                    <div className="woodsman-foot"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="chair-div">
+              <div className="chair-top-div">
+                <div className="chair-top"></div>
+              </div>
+              <div className="chair-seat"></div>
+              <div className="chair-leg-div">
+                <div className="chair-leg"></div>
+                <div className="chair-leg"></div>
+              </div>
+            </div>
           </div>
           <div className="cabin-bottom-middle"></div>
           <div className="cabin-bottom-right">
