@@ -44,7 +44,6 @@ function Forest(props) {
   const [inventoryOpen, setInventoryOpen] = useState(false);
   const [forestData, setForestData] = useState(false);
   const [bowCard, setBowCard] = useState(false);
-  
 
   useEffect(() => {
     axios.get("/api/forest").then((res) => {
@@ -233,8 +232,44 @@ function Forest(props) {
       </div>
       <div className="forest-body">
         <div className="forest-top">
+          <div className="forest-tree">
+            <div className="forest-tree-top">
+              <div className="forest-tree-leaf-one"></div>
+              <div className="forest-tree-leaf-two"></div>
+              <div className="forest-tree-leaf-three"></div>
+              <div className="forest-tree-leaf-four"></div>
+              <div className="forest-tree-leaf-five"></div>
+            </div>
+            <div className="forest-tree-trunk"></div>
+          </div>
+          <div className="forest-bush">
+            <div className="forest-bush-leaf-one"></div>
+            <div className="forest-bush-leaf-two"></div>
+            <div className="forest-bush-leaf-three"></div>
+            <div className="forest-bush-leaf-four"></div>
+            <div className="forest-bush-leaf-five"></div>
+          </div>
           <div className="trunk" onClick={tree}></div>
-          <div className="hole" onClick={hole}></div>
+          <div className="forest-bush">
+            <div className="forest-bush-leaf-one"></div>
+            <div className="forest-bush-leaf-two"></div>
+            <div className="forest-bush-leaf-three"></div>
+            <div className="forest-bush-leaf-four"></div>
+            <div className="forest-bush-leaf-five"></div>
+          </div>
+
+          <div className="forest-tree">
+            <div className="forest-tree-top">
+              <div className="forest-tree-leaf-one"></div>
+              <div className="forest-tree-leaf-two"></div>
+              <div className="forest-tree-leaf-three"></div>
+              <div className="forest-tree-leaf-four"></div>
+              <div className="forest-tree-leaf-five"></div>
+            </div>
+            <div className="forest-tree-trunk">
+              <div className="hole" onClick={hole}></div>
+            </div>
+          </div>
         </div>
         <div className="forest-middle">
           <div className="forest-middle-left">
@@ -360,7 +395,25 @@ function Forest(props) {
           </div>
         </div>
         <div className="forest-bottom">
-          <div className="forest-bottom-left"></div>
+          <div className="forest-bottom-left">
+            <div className="forest-bush">
+              <div className="forest-bush-leaf-one"></div>
+              <div className="forest-bush-leaf-two"></div>
+              <div className="forest-bush-leaf-three"></div>
+              <div className="forest-bush-leaf-four"></div>
+              <div className="forest-bush-leaf-five"></div>
+            </div>
+            <div className="forest-tree">
+              <div className="forest-tree-top">
+                <div className="forest-tree-leaf-one"></div>
+                <div className="forest-tree-leaf-two"></div>
+                <div className="forest-tree-leaf-three"></div>
+                <div className="forest-tree-leaf-four"></div>
+                <div className="forest-tree-leaf-five"></div>
+              </div>
+              <div className="forest-tree-trunk"></div>
+            </div>
+          </div>
           <div className="forest-bottom-middle">
             <div
               className={`${
@@ -392,7 +445,25 @@ function Forest(props) {
               <ArrowDownward />
             </div>
           </div>
-          <div className="forest-bottom-right"></div>
+          <div className="forest-bottom-right">
+            <div className="forest-tree">
+              <div className="forest-tree-top">
+                <div className="forest-tree-leaf-one"></div>
+                <div className="forest-tree-leaf-two"></div>
+                <div className="forest-tree-leaf-three"></div>
+                <div className="forest-tree-leaf-four"></div>
+                <div className="forest-tree-leaf-five"></div>
+              </div>
+              <div className="forest-tree-trunk"></div>
+            </div>
+            <div className="forest-bush">
+              <div className="forest-bush-leaf-one"></div>
+              <div className="forest-bush-leaf-two"></div>
+              <div className="forest-bush-leaf-three"></div>
+              <div className="forest-bush-leaf-four"></div>
+              <div className="forest-bush-leaf-five"></div>
+            </div>
+          </div>
         </div>
       </div>
       <Card

@@ -6,30 +6,152 @@
 
   .forest-top {
     @include row(35vh);
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: flex-end;
-    background-image: url("../../Images/Forest.png");
-    background-size: 100% 100%;
     position: relative;
+    background-color: skyblue;
+    border-bottom: solid 5px;
 
-    .trunk {
-      background-image: url("../../Images/Trunk.png");
-      background-size: 100% 100%;
-      height: 100%;
-      width: 10%;
-      z-index: 2;
-      cursor: pointer;
+    .forest-tree {
+      position: relative;
+      top: 1px;
       @include flex(flex-end);
+
+      .forest-tree-top {
+        height: 15vh;
+        width: 15vw;
+        background-color: forestgreen;
+        border-radius: 50% 50% 25% 25%;
+        position: relative;
+        .forest-tree-leaf-one {
+          height: 75%;
+          width: 50%;
+          background-color: forestgreen;
+          border-radius: 50%;
+          position: absolute;
+          bottom: -1vh;
+          left: -4vh;
+        }
+        .forest-tree-leaf-two {
+          height: 75%;
+          width: 50%;
+          background-color: forestgreen;
+          border-radius: 50%;
+          position: absolute;
+          top: -20%;
+          left: -4vh;
+        }
+        .forest-tree-leaf-three {
+          height: 75%;
+          width: 50%;
+          background-color: forestgreen;
+          border-radius: 50%;
+          position: absolute;
+          top: -40%;
+          left: 25%;
+        }
+        .forest-tree-leaf-four {
+          height: 75%;
+          width: 50%;
+          background-color: forestgreen;
+          border-radius: 50%;
+          position: absolute;
+          top: -20%;
+          right: -4vh;
+        }
+        .forest-tree-leaf-five {
+          height: 75%;
+          width: 50%;
+          background-color: forestgreen;
+          border-radius: 50%;
+          position: absolute;
+          bottom: -1vh;
+          right: -4vh;
+        }
+      }
+      .forest-tree-trunk {
+        height: 17.5vh;
+        width: 7.5vw;
+        background-color: sienna;
+
+        .hole {
+          width: 4%;
+          height: 1%;
+          background-color: black;
+          cursor: pointer;
+          z-index: 3;
+          position: absolute;
+          border-radius: 50% 50% 0% 0%;
+          bottom: 0px;
+          left: 49%;
+        }
+      }
     }
 
-    .hole {
-      width: 6%;
-      height: 6%;
+    .forest-bush {
+      height: 10vh;
+      width: 10vw;
+      background-color: forestgreen;
+      border-radius: 50% 50% 25% 25%;
+      position: relative;
+      top: 1px;
+      .forest-bush-leaf-one {
+        height: 75%;
+        width: 50%;
+        background-color: forestgreen;
+        border-radius: 50% 50% 0% 25%;
+        position: absolute;
+        bottom: 0vh;
+        left: -2vh;
+      }
+      .forest-bush-leaf-two {
+        height: 75%;
+        width: 50%;
+        background-color: forestgreen;
+        border-radius: 50%;
+        position: absolute;
+        top: -25%;
+        left: -10%;
+        transform: rotate(-30deg);
+      }
+      .forest-bush-leaf-three {
+        height: 75%;
+        width: 50%;
+        background-color: forestgreen;
+        border-radius: 50%;
+        position: absolute;
+        top: -35%;
+        left: 25%;
+      }
+      .forest-bush-leaf-four {
+        height: 75%;
+        width: 50%;
+        background-color: forestgreen;
+        border-radius: 50%;
+        position: absolute;
+        top: -25%;
+        right: -10%;
+        transform: rotate(30deg);
+      }
+      .forest-bush-leaf-five {
+        height: 75%;
+        width: 50%;
+        background-color: forestgreen;
+        border-radius: 50% 50% 25% 0%;
+        position: absolute;
+        bottom: 0vh;
+        right: -2vh;
+      }
+    }
+
+    .trunk {
+      background-color: chocolate;
+      height: 101%;
+      width: 10%;
+      position: relative;
+      top: 1px;
+      z-index: 2;
       cursor: pointer;
-      z-index: 3;
-      position: absolute;
-      left: 11%;
-      bottom: 15%;
     }
   }
 
@@ -50,10 +172,10 @@
       @include section(20vw);
       @include flex(flex-end);
 
-     .forest-ranger {
+      .forest-ranger {
         @include flex(center);
         cursor: pointer;
-        position:  relative;
+        position: relative;
         top: 20px;
         .forest-ranger-hat {
           @include flex(center);
@@ -63,7 +185,11 @@
           .forest-ranger-hat-top {
             height: 35px;
             width: 35px;
-            background-image: linear-gradient(45deg, #4f7942 50%, transparent 50%);
+            background-image: linear-gradient(
+              45deg,
+              #4f7942 50%,
+              transparent 50%
+            );
             position: relative;
             top: 18px;
             transform: rotate(135deg);
@@ -164,7 +290,7 @@
             .forest-ranger-mouth {
               width: 17px;
               height: 5px;
-              border-bottom: .75px solid rgb(214, 59, 59);
+              border-bottom: 0.75px solid rgb(214, 59, 59);
               position: relative;
               bottom: 2px;
               border-radius: 50%;
@@ -211,13 +337,12 @@
               @include center(space-evenly);
               align-items: flex-end;
               background-color: #f1c27d;
-               position: relative;
+              position: relative;
               top: 5px;
-
 
               .forest-ranger-finger-line {
                 height: 50%;
-                width: .5px;
+                width: 0.5px;
                 background-color: black;
               }
             }
@@ -229,9 +354,9 @@
             transform: rotate(-30deg);
             position: relative;
             left: 8px;
-             @include flex(flex-end);
+            @include flex(flex-end);
 
-              .forest-ranger-hand {
+            .forest-ranger-hand {
               width: 15px;
               height: 10px;
               @include center(space-evenly);
@@ -243,7 +368,7 @@
 
               .forest-ranger-finger-line {
                 height: 50%;
-                width: .5px;
+                width: 0.5px;
 
                 background-color: black;
               }
@@ -257,8 +382,6 @@
           position: relative;
           bottom: 5px;
           border-top: solid;
-
-          
         }
         .forest-ranger-leg-div {
           width: 40px;
@@ -279,7 +402,6 @@
               border-radius: 25% 25% 0% 0%;
             }
           }
-
         }
       }
     }
@@ -299,9 +421,133 @@
     @include row(35vh);
 
     .forest-bottom-left {
-      background-image: url("../../Images/Forest.jpg");
+      background-image: url("../../Images/Grass.png");
       background-size: 100% 100%;
       @include section(40vw);
+      display: flex;
+      justify-content: space-evenly;
+      align-items: flex-end;
+
+      .forest-tree {
+        position: relative;
+        top: 1px;
+        @include flex(flex-end);
+
+        .forest-tree-top {
+          height: 15vh;
+          width: 15vw;
+          background-color: forestgreen;
+          border-radius: 50% 50% 25% 25%;
+          position: relative;
+          
+          .forest-tree-leaf-one {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50%;
+            position: absolute;
+            bottom: -1vh;
+            left: -4vh;
+          }
+          .forest-tree-leaf-two {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50%;
+            position: absolute;
+            top: -20%;
+            left: -4vh;
+          }
+          .forest-tree-leaf-three {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50%;
+            position: absolute;
+            top: -40%;
+            left: 25%;
+          }
+          .forest-tree-leaf-four {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50%;
+            position: absolute;
+            top: -20%;
+            right: -4vh;
+          }
+          .forest-tree-leaf-five {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50%;
+            position: absolute;
+            bottom: -1vh;
+            right: -4vh;
+          }
+        }
+        .forest-tree-trunk {
+          height: 17.5vh;
+          width: 7.5vw;
+          background-color: sienna;
+        }}
+        .forest-bush {
+          height: 10vh;
+          width: 10vw;
+          background-color: forestgreen;
+          border-radius: 50% 50% 25% 25%;
+          position: relative;
+          bottom: 25%;
+          border-bottom: solid brown 1px;
+          .forest-bush-leaf-one {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50% 50% 0% 25%;
+            position: absolute;
+            bottom: 0vh;
+            left: -2vh;
+          }
+          .forest-bush-leaf-two {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50%;
+            position: absolute;
+            top: -25%;
+            left: -10%;
+            transform: rotate(-30deg);
+          }
+          .forest-bush-leaf-three {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50%;
+            position: absolute;
+            top: -35%;
+            left: 25%;
+          }
+          .forest-bush-leaf-four {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50%;
+            position: absolute;
+            top: -25%;
+            right: -10%;
+            transform: rotate(30deg);
+          }
+          .forest-bush-leaf-five {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50% 50% 25% 0%;
+            position: absolute;
+            bottom: 0vh;
+            right: -2vh;
+          }
+        }
+      
     }
 
     .forest-bottom-middle {
@@ -315,9 +561,132 @@
     }
 
     .forest-bottom-right {
-      background-image: url("../../Images/Forest.jpg");
+      background-image: url("../../Images/Grass.png");
       background-size: 100% 100%;
       @include section(40vw);
+      display: flex;
+      justify-content: space-evenly;
+      align-items: flex-end;
+
+      .forest-tree {
+        position: relative;
+        top: 1px;
+        @include flex(flex-end);
+
+        .forest-tree-top {
+          height: 15vh;
+          width: 15vw;
+          background-color: forestgreen;
+          border-radius: 50% 50% 25% 25%;
+          position: relative;
+          .forest-tree-leaf-one {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50%;
+            position: absolute;
+            bottom: -1vh;
+            left: -4vh;
+          }
+          .forest-tree-leaf-two {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50%;
+            position: absolute;
+            top: -20%;
+            left: -4vh;
+          }
+          .forest-tree-leaf-three {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50%;
+            position: absolute;
+            top: -40%;
+            left: 25%;
+          }
+          .forest-tree-leaf-four {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50%;
+            position: absolute;
+            top: -20%;
+            right: -4vh;
+          }
+          .forest-tree-leaf-five {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50%;
+            position: absolute;
+            bottom: -1vh;
+            right: -4vh;
+          }
+        }
+        .forest-tree-trunk {
+          height: 17.5vh;
+          width: 7.5vw;
+          background-color: sienna;
+        }}
+        .forest-bush {
+          height: 10vh;
+          width: 10vw;
+          background-color: forestgreen;
+          border-radius: 50% 50% 25% 25%;
+          position: relative;
+          bottom: 25%;
+          border-bottom: solid brown 1px;
+          .forest-bush-leaf-one {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50% 50% 0% 25%;
+            position: absolute;
+            bottom: 0vh;
+            left: -2vh;
+          }
+          .forest-bush-leaf-two {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50%;
+            position: absolute;
+            top: -25%;
+            left: -10%;
+            transform: rotate(-30deg);
+          }
+          .forest-bush-leaf-three {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50%;
+            position: absolute;
+            top: -35%;
+            left: 25%;
+          }
+          .forest-bush-leaf-four {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50%;
+            position: absolute;
+            top: -25%;
+            right: -10%;
+            transform: rotate(30deg);
+          }
+          .forest-bush-leaf-five {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50% 50% 25% 0%;
+            position: absolute;
+            bottom: 0vh;
+            right: -2vh;
+          
+        }
+      }
     }
   }
 }
