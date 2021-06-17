@@ -291,8 +291,8 @@
               top: 4px;
 
               .woodsman-eye {
-                width: 12px;
-                height: 10px;
+                width: 15px;
+                height: 8px;
                 border-radius: 50%;
                 background-color: white;
                 @include flex(center);
@@ -341,26 +341,6 @@
         }
         .woodsman-body {
           @include flex(flex-start);
-
-          // .woodsman-upper-neck {
-          //   height: 5px;
-          //   width: 20px;
-          //   z-index: 5;
-          //   border-radius: 50%;
-          //   border-bottom: 1px black solid;
-          //   position: relative;
-          //   bottom: 49px;
-          // }
-          // .woodsman-neck {
-          //   height: 15px;
-          //   width: 20px;
-          //   background-color: #ffdbac;
-
-          //   position: relative;
-          //   bottom: 50px;
-          //   border-radius: 30% 30% 50% 50%;
-          //   z-index: 4;
-          // }
 
           .woodsman-dress {
             width: 50px;
@@ -433,26 +413,6 @@
                 }
               }
             }
-            // .woodsman-rope {
-            //   position: absolute;
-            //   width: 100%;
-            //   height: 5px;
-            //   background-color: black;
-            //   z-index: 3;
-            //   border-radius: 5%;
-            //   top: 60px;
-            //   border-left: solid;
-            //   border-right: solid;
-            //   display: flex;
-            //   justify-content: space-evenly;
-            //   cursor: pointer;
-
-            //   .woodsman-rope-line {
-            //     height: 100%;
-            //     width: 1px;
-            //     background-color: gold;
-            //   }
-            // }
 
             .woodsman-dress-crease {
               position: absolute;

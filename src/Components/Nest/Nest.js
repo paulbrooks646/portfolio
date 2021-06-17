@@ -175,6 +175,56 @@ function Nest(props) {
         </div>
         <div className="nest-middle">
           <div className="nest-middle-left">
+            <div className="nest-twig-div">
+              <div className="nest-twig-horizontal">
+                <div className="nest-twig-one"></div>
+                <div className="nest-twig-two"></div>
+                <div className="nest-twig-three"></div>
+                <div className="nest-twig-four"></div>
+                <div className="nest-twig-five"></div>
+                <div className="nest-twig-six"></div>
+                <div className="nest-twig-seven"></div>
+                <div className="nest-twig-eight"></div>
+                <div className="nest-twig-nine"></div>
+                <div className="nest-twig-ten"></div>
+              </div>
+              <div className="nest-twig-vertical">
+                <div className="nest-twig-eleven"></div>
+                <div className="nest-twig-twelve"></div>
+                <div className="nest-twig-thirteen"></div>
+                <div className="nest-twig-fourteen"></div>
+                <div className="nest-twig-fifteen"></div>
+                <div className="nest-twig-sixteen"></div>
+                <div className="nest-twig-seventeen"></div>
+                <div className="nest-twig-eighteen"></div>
+                <div className="nest-twig-nineteen"></div>
+                <div className="nest-twig-twenty"></div>
+              </div>
+              <div className="nest-twig-diagonal">
+                <div className="nest-twig-eleven"></div>
+                <div className="nest-twig-twelve"></div>
+                <div className="nest-twig-thirteen"></div>
+                <div className="nest-twig-fourteen"></div>
+                <div className="nest-twig-fifteen"></div>
+                <div className="nest-twig-sixteen"></div>
+                <div className="nest-twig-seventeen"></div>
+                <div className="nest-twig-eighteen"></div>
+                <div className="nest-twig-nineteen"></div>
+                <div className="nest-twig-twenty"></div>
+              </div>
+              <div className="nest-twig-diagonal-two">
+                <div className="nest-twig-eleven"></div>
+                <div className="nest-twig-twelve"></div>
+                <div className="nest-twig-thirteen"></div>
+                <div className="nest-twig-fourteen"></div>
+                <div className="nest-twig-fifteen"></div>
+                <div className="nest-twig-sixteen"></div>
+                <div className="nest-twig-seventeen"></div>
+                <div className="nest-twig-eighteen"></div>
+                <div className="nest-twig-nineteen"></div>
+                <div className="nest-twig-twenty"></div>
+              </div>
+            </div>
             <div className="feather-div">
               <div
                 className={`${

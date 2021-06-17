@@ -35,8 +35,7 @@ function Mountain(props) {
   const [leftRight, setLeftRight] = useState(false);
   const [leftDown, setLeftDown] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [firstTimeCard, setFirstTimeCard] = useState(false
-  );
+  const [firstTimeCard, setFirstTimeCard] = useState(false);
   const [rockCard, setRockCard] = useState(false);
   const [coinCard, setCoinCard] = useState(false);
   const [mountainData, setMountainData] = useState();

@@ -34,10 +34,367 @@
     position: relative;
 
     .nest-middle-left {
-      background-image: url("../../Images/Nest.png");
+      background-image: url("../../Images/Snow.png");
       @include section(40vw);
-      @include center(flex-start);
+      @include center(center);
       background-size: 100% 100%;
+
+      .nest-twig-div {
+        border: solid 10px sienna;
+        width: 90%;
+        height: 90%;
+        border-radius: 50%;
+        position: relative;
+        @include center(space-evenly);
+        background-color: sienna;
+        z-index: 2;
+
+        .nest-twig-horizontal {
+          @include flex(space-evenly);
+          position: absolute;
+          height: 100%;
+          width: 100%;
+
+          .nest-twig-one {
+            width: 76%;
+            height: 7%;
+            background-color: chocolate;
+            border-radius: 50% 50% 0% 0%;
+            border: solid 0.5px;
+          }
+          .nest-twig-two {
+            width: 94%;
+            height: 7%;
+            background-color: chocolate;
+            border-radius: 50% 50% 0% 0%;
+            border: solid 0.5px;
+          }
+          .nest-twig-three {
+            width: 103%;
+            height: 7%;
+            background-color: chocolate;
+            border-radius: 50% 50% 0% 0%;
+            border: solid 0.5px;
+          }
+          .nest-twig-four {
+            width: 110%;
+            height: 7%;
+            background-color: chocolate;
+            border-radius: 50% 50% 0% 0%;
+            border: solid 0.5px;
+          }
+          .nest-twig-five {
+            width: 110%;
+            height: 7%;
+            background-color: chocolate;
+            border: solid 0.5px;
+          }
+          .nest-twig-six {
+            width: 110%;
+            height: 7%;
+            background-color: chocolate;
+            border: solid 0.5px;
+          }
+          .nest-twig-seven {
+            width: 110%;
+            height: 7%;
+            background-color: chocolate;
+            border-radius: 0% 0% 50% 50%;
+            border: solid 0.5px;
+          }
+          .nest-twig-eight {
+            width: 103%;
+            height: 7%;
+            background-color: chocolate;
+            border-radius: 0% 0% 50% 50%;
+            border: solid 0.5px;
+          }
+          .nest-twig-nine {
+            width: 93%;
+            height: 7%;
+            background-color: chocolate;
+            border-radius: 0% 0% 50% 50%;
+            border: solid 0.5px;
+          }
+          .nest-twig-ten {
+            width: 71%;
+            height: 7%;
+            background-color: chocolate;
+            border-radius: 0% 0% 50% 50%;
+            border: solid 0.5px;
+          }
+        }
+        .nest-twig-vertical {
+          @include center(space-evenly);
+          position: absolute;
+          height: 100%;
+          width: 100%;
+
+          .nest-twig-eleven {
+            background-color: chocolate;
+            width: 1%;
+            height: 79%;
+            border: solid 0.5px;
+          }
+          .nest-twig-twelve {
+            background-color: chocolate;
+            width: 1%;
+            height: 99%;
+            border: solid .5px;
+          }
+          .nest-twig-thirteen {
+            background-color: chocolate;
+            width: 1%;
+            height: 110%;
+            border: solid .5px;
+          }
+          .nest-twig-fourteen {
+            background-color: chocolate;
+            width: 1%;
+            height: 110%;
+            border: solid .5px;
+          }
+          .nest-twig-fifteen {
+            background-color: chocolate;
+            width: 1%;
+            height: 110%;
+            border: solid .5px;
+          }
+          .nest-twig-sixteen {
+            background-color: chocolate;
+            width: 1%;
+            height: 110%;
+            border: solid .5px;
+          }
+          .nest-twig-seventeen {
+            background-color: chocolate;
+            width: 1%;
+            height: 110%;
+            border: solid .5px;
+          }
+          .nest-twig-eighteen {
+            background-color: chocolate;
+            width: 1%;
+            height: 110%;
+            border: solid .5px;
+          }
+          .nest-twig-nineteen {
+            background-color: chocolate;
+            width: 1%;
+            height: 99%;
+            border: solid .5px;
+          }
+          .nest-twig-twenty {
+            background-color: chocolate;
+            width: 1%;
+            height: 79%;
+            border: solid .5px;
+          }
+        }
+        .nest-twig-diagonal {
+          @include center(space-evenly);
+          position: absolute;
+          height: 100%;
+          width: 100%;
+
+          .nest-twig-eleven {
+            background-color: chocolate;
+            width: 1%;
+            height: 97%;
+            transform: rotate(45deg);
+            position: relative;
+            bottom: 11%;
+            border: solid .5px;
+          }
+          .nest-twig-twelve {
+            background-color: chocolate;
+            width: 1%;
+            height: 130%;
+            transform: rotate(45deg);
+            position: relative;
+            bottom: 5%;
+            border: solid .5px;
+          }
+          .nest-twig-thirteen {
+            background-color: chocolate;
+            width: 1%;
+            height: 150%;
+            transform: rotate(45deg);
+            position: relative;
+            bottom: 5%;
+            border: solid .5px;
+          }
+          .nest-twig-fourteen {
+            background-color: chocolate;
+            width: 1%;
+            height: 160%;
+            transform: rotate(45deg);
+            position: relative;
+            bottom: 5%;
+            border: solid .5px;
+          }
+          .nest-twig-fifteen {
+            background-color: chocolate;
+            width: 1%;
+            height: 165%;
+            transform: rotate(45deg);
+            position: relative;
+            bottom: 3%;
+            border: solid .5px;
+          }
+          .nest-twig-sixteen {
+            background-color: chocolate;
+            width: 1%;
+            height: 168%;
+            transform: rotate(45deg);
+            border: solid .5px;
+          }
+          .nest-twig-seventeen {
+            background-color: chocolate;
+            width: 1%;
+            height: 165%;
+            transform: rotate(45deg);
+            position: relative;
+            top: 2%;
+            border: solid .5px;
+          }
+          .nest-twig-eighteen {
+            background-color: chocolate;
+            width: 1%;
+            height: 150%;
+            transform: rotate(45deg);
+            position: relative;
+            top: 5%;
+            border: solid .5px;
+          }
+          .nest-twig-nineteen {
+            background-color: chocolate;
+            width: 1%;
+            height: 135%;
+            transform: rotate(45deg);
+            position: relative;
+            top: 7%;
+            border: solid .5px;
+          }
+          .nest-twig-twenty {
+            background-color: chocolate;
+            width: 1%;
+            height: 104%;
+            transform: rotate(45deg);
+            position: relative;
+            top: 9%;
+            border: solid .5px;
+          }
+        }
+        .nest-twig-diagonal-two {
+          @include center(space-evenly);
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          border-radius: 50%;
+          transform: scaleX(-1);
+          border: solid black 4px;
+
+          .nest-twig-eleven {
+            background-color: chocolate;
+            width: 1%;
+            height: 97%;
+            transform: rotate(45deg);
+            position: relative;
+            bottom: 8%;
+            border-radius: 50% 0% 0% 0%;
+            border: solid .5px;
+          }
+          .nest-twig-twelve {
+            background-color: chocolate;
+            width: 1%;
+            height: 128%;
+            transform: rotate(45deg);
+            position: relative;
+            bottom: 7%;
+            border-radius: 50% 0% 0% 0%;
+            border: solid .5px;
+          }
+          .nest-twig-thirteen {
+            background-color: chocolate;
+            width: 1%;
+            height: 143%;
+            transform: rotate(45deg);
+            position: relative;
+            bottom: 6%;
+            border-radius: 50% 0% 0% 0%;
+            border: solid .5px;
+          }
+          .nest-twig-fourteen {
+            background-color: chocolate;
+            width: 1%;
+            height: 153%;
+            transform: rotate(45deg);
+            position: relative;
+            bottom: 3%;
+            border-radius: 50% 0% 0% 0%;
+            border: solid .5px;
+          }
+          .nest-twig-fifteen {
+            background-color: chocolate;
+            width: 1%;
+            height: 155%;
+            transform: rotate(45deg);
+            position: relative;
+            bottom: 1%;
+            border-radius: 50% 0% 0% 0%;
+            border: solid .5px;
+          }
+          .nest-twig-sixteen {
+            background-color: chocolate;
+            width: 1%;
+            height: 155%;
+            transform: rotate(45deg);
+            border-radius: 50% 0% 0% 0%;
+            border: solid .5px;
+          }
+          .nest-twig-seventeen {
+            background-color: chocolate;
+            width: 1%;
+            height: 152%;
+            transform: rotate(45deg);
+            position: relative;
+            top: 2%;
+            border-radius: 50% 0% 0% 0%;
+            border: solid .5px;
+          }
+          .nest-twig-eighteen {
+            background-color: chocolate;
+            width: 1%;
+            height: 142%;
+            transform: rotate(45deg);
+            position: relative;
+            top: 3%;
+            border-radius: 50% 0% 0% 0%;
+            border: solid .5px;
+          }
+          .nest-twig-nineteen {
+            background-color: chocolate;
+            width: 1%;
+            height: 129%;
+            transform: rotate(45deg);
+            position: relative;
+            top: 6%;
+            border-radius: 50% 0% 50% 0%;
+            border: solid .5px;
+          }
+          .nest-twig-twenty {
+            background-color: chocolate;
+            width: 1%;
+            height: 98%;
+            transform: rotate(45deg);
+            position: relative;
+            top: 8%;
+            border-radius: 50% 0% 50% 0%;
+            border: solid .5px;
+          }
+        }
+      }
 
       .coin-div {
         width: 33%;

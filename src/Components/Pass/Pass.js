@@ -217,17 +217,27 @@ function Pass(props) {
         </div>
         <div className="pass-middle">
           <div className="pass-middle-left"></div>
-          <div className="pass-middle-middle">
+          <div
+            className={`${
+              !passData.cake_given
+                ? "pass-middle-middle"
+                : "pass-middle-middle-closed"
+            }`}
+          >
             <div
               className={`${
                 !passData.cake_given ? "pass-ogre" : "pass-ogre-closed"
               }`}
               onClick={() => setOgre(true)}
-            ></div>
+            >
+              <div className="ogre-cover"></div>
+            </div>
             <div
               className={`${ogreAnimation ? "ogre-two" : "ogre-two-closed"}`}
               onAnimationEnd={toggleOgreAnimationEnd}
-            ></div>
+            >
+              <div className="ogre-cover"></div>
+            </div>
             <div
               className={`${
                 passData.cake_given &&
@@ -296,9 +306,7 @@ function Pass(props) {
         </div>
       </div>
       <Card
-        className={`${
-          firstTimeCard ? "answer-card" : "answer-card-closed"
-        }`}
+        className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}
       >
         <Typography
           variant="h6"
@@ -351,13 +359,7 @@ function Pass(props) {
           CLOSE
         </Button>
       </Card>
-      <Card
-        className={`${
-          cakeCard
-            ? "answer-card"
-            : "answer-card-closed"
-        }`}
-      >
+      <Card className={`${cakeCard ? "answer-card" : "answer-card-closed"}`}>
         <Typography
           variant="h4"
           color="primary"
