@@ -1,20 +1,144 @@
 @import "../mixins";
 
 .cave-body {
-    background-image: url("../../Images/Dirt.png");
-    background-size: 100% 100%;
+  background-image: url("../../Images/Grass.png");
+  background-size: 100% 100%;
 
   .cave-top {
     @include row(35vh);
 
     .cave-top-left {
-      background-image: url("../../Images/Forest2.png");
       @include section(40vw);
-      background-size: 100% 100%;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: flex-end;
+
+      .forest-bush {
+        height: 10vh;
+        width: 10vw;
+        background-color: forestgreen;
+        border-radius: 50% 50% 25% 25%;
+        position: relative;
+        bottom: 25%;
+        border-bottom: solid brown 1px;
+        .forest-bush-leaf-one {
+          height: 75%;
+          width: 50%;
+          background-color: forestgreen;
+          border-radius: 50% 50% 0% 25%;
+          position: absolute;
+          bottom: 0vh;
+          left: -2vh;
+        }
+        .forest-bush-leaf-two {
+          height: 75%;
+          width: 50%;
+          background-color: forestgreen;
+          border-radius: 50%;
+          position: absolute;
+          top: -25%;
+          left: -10%;
+          transform: rotate(-30deg);
+        }
+        .forest-bush-leaf-three {
+          height: 75%;
+          width: 50%;
+          background-color: forestgreen;
+          border-radius: 50%;
+          position: absolute;
+          top: -35%;
+          left: 25%;
+        }
+        .forest-bush-leaf-four {
+          height: 75%;
+          width: 50%;
+          background-color: forestgreen;
+          border-radius: 50%;
+          position: absolute;
+          top: -25%;
+          right: -10%;
+          transform: rotate(30deg);
+        }
+        .forest-bush-leaf-five {
+          height: 75%;
+          width: 50%;
+          background-color: forestgreen;
+          border-radius: 50% 50% 25% 0%;
+          position: absolute;
+          bottom: 0vh;
+          right: -2vh;
+        }
+      }
+
+      .forest-tree {
+        position: relative;
+        top: 1px;
+        @include flex(flex-end);
+
+        .forest-tree-top {
+          height: 15vh;
+          width: 15vw;
+          background-color: forestgreen;
+          border-radius: 50% 50% 25% 25%;
+          position: relative;
+          .forest-tree-leaf-one {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50%;
+            position: absolute;
+            bottom: -1vh;
+            left: -4vh;
+          }
+          .forest-tree-leaf-two {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50%;
+            position: absolute;
+            top: -20%;
+            left: -4vh;
+          }
+          .forest-tree-leaf-three {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50%;
+            position: absolute;
+            top: -40%;
+            left: 25%;
+          }
+          .forest-tree-leaf-four {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50%;
+            position: absolute;
+            top: -20%;
+            right: -4vh;
+          }
+          .forest-tree-leaf-five {
+            height: 75%;
+            width: 50%;
+            background-color: forestgreen;
+            border-radius: 50%;
+            position: absolute;
+            bottom: -1vh;
+            right: -4vh;
+          }
+        }
+        .forest-tree-trunk {
+          height: 17.5vh;
+          width: 7.5vw;
+          background-color: sienna;
+        }
+      }
     }
 
     .cave-top-middle {
       @include section(20vw);
+      background-image: url("../../Images/Dirt.png");
+      background-size: 100% 100%;
 
       .cave-forest {
         @include flex(flex-start);
@@ -23,28 +147,106 @@
     }
 
     .cave-top-right {
-      background-image: url("../../Images/Forest2.png");
       @include section(40vw);
-      background-size: 100% 100%;
+      background-color: #8b4513;
+      border-radius: 50% 50% 0% 0%;
+      border: solid;
+      border-bottom: none;
     }
   }
 
   .cave-middle {
     @include row(20vh);
-    background-image: url("../../Images/Grass.png");
-    background-size: 100% 100%;
 
     .cave-middle-left {
       @include section(40vw);
+      @include flex(flex-end);
+
+      .forest-bush {
+        height: 10vh;
+        width: 10vw;
+        background-color: forestgreen;
+        border-radius: 50% 50% 25% 25%;
+        position: relative;
+        bottom: 25%;
+        border-bottom: solid brown 1px;
+        .forest-bush-leaf-one {
+          height: 75%;
+          width: 50%;
+          background-color: forestgreen;
+          border-radius: 50% 50% 0% 25%;
+          position: absolute;
+          bottom: 0vh;
+          left: -2vh;
+        }
+        .forest-bush-leaf-two {
+          height: 75%;
+          width: 50%;
+          background-color: forestgreen;
+          border-radius: 50%;
+          position: absolute;
+          top: -25%;
+          left: -10%;
+          transform: rotate(-30deg);
+        }
+        .forest-bush-leaf-three {
+          height: 75%;
+          width: 50%;
+          background-color: forestgreen;
+          border-radius: 50%;
+          position: absolute;
+          top: -35%;
+          left: 25%;
+        }
+        .forest-bush-leaf-four {
+          height: 75%;
+          width: 50%;
+          background-color: forestgreen;
+          border-radius: 50%;
+          position: absolute;
+          top: -25%;
+          right: -10%;
+          transform: rotate(30deg);
+        }
+        .forest-bush-leaf-five {
+          height: 75%;
+          width: 50%;
+          background-color: forestgreen;
+          border-radius: 50% 50% 25% 0%;
+          position: absolute;
+          bottom: 0vh;
+          right: -2vh;
+        }
+      }
     }
 
     .cave-middle-middle {
       @include section(20vw);
       background-image: url("../../Images/Dirt.png");
+      background-size: 100% 100%;
+      @include flex(center);
+
+      .cave-wolf {
+        background-image: url("../../Images/wolf.gif");
+        height: 200px;
+        width: 200px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        position: relative;
+        bottom: 30px;
+        cursor: pointer;
+      }
+
+      .cave-wolf-closed {
+        display: none;
+      }
     }
 
     .cave-middle-right {
       @include section(40vw);
+      background-color: #8b4513;
+      border-left: solid;
+      border-right: solid;
     }
   }
 
@@ -52,8 +254,6 @@
     @include row(35vh);
 
     .cave-bottom-left {
-      background-image: url("../../Images//Grass.png");
-      background-size: 100% 100%;
       @include section(40vw);
       @include center(space-evenly);
 
@@ -73,10 +273,54 @@
       }
 
       .meat {
-        background-image: url("../../Images//Meat.png");
-        background-size: 100% 100%;
-        height: 50px;
-        width: 50px;
+        .meat-main {
+          @include center(center);
+
+          .meat-bone {
+             height: 15px;
+            width: 20px;
+            background-color: white;
+            border: solid 0.5px;
+            position: relative;
+            .meat-bone-edge-one {
+              height: 15px;
+              width: 15px;
+              border-radius: 50%;
+              background-color: white;
+              position: absolute;
+              right: 15px;
+              top: 5px;
+            }
+            .meat-bone-edge-two {
+              height: 15px;
+              width: 15px;
+              border-radius: 50%;
+              background-color: white;
+              position: absolute;
+              right: 15px;
+              bottom: 5px;
+            }
+          }
+          .meat-exterior {
+            width: 50px;
+            height: 40px;
+            background-color: brown;
+            border-radius: 35% 0% 0% 35%;
+            position: relative;
+            right: 1px;
+            @include center(flex-end);
+
+            .meat-interior {
+              height: 110%;
+              width: 25px;
+              border-radius: 50%;
+              background-image: radial-gradient(white 15%, pink 15%, pink 60%, brown 60%);
+              position: absolute;
+              left: 40px;
+              
+            }
+          }
+        }
       }
 
       .meat-closed {
@@ -87,26 +331,46 @@
     .cave-bottom-middle {
       @include section(20vw);
       @include flex(flex-end);
+      background-image: url("../../Images/Dirt.png");
+      background-size: 100% 100%;
 
-      .cave-wolf {
-        background-image: url("../../Images/wolf.gif");
-        height: 200px;
-        width: 200px;
-        background-repeat: no-repeat;
-        background-size: contain;
-        position: relative;
-        bottom: 30px;
+      .cave-cottage {
+        @include flex(flex-start);
         cursor: pointer;
       }
+    }
 
-      .cave-wolf-closed {
-        display: none;
+    .cave-bottom-right {
+      background-image: url("../../Images/Dirt.png");
+      background-size: 100% 100%;
+      @include section(40vw);
+      display: flex;
+      justify-content: center;
+      position: relative;
+
+      .cave-exterior {
+        width: 100%;
+        height: 100%;
+        background-color: #8b4513;
+        border-radius: 50% 50% 0% 0%;
+        position: relative;
+        bottom: 90%;
+        @include flex(flex-end);
+        border: solid;
+
+        .cave-interior {
+          width: 85%;
+          height: 90%;
+          background-color: black;
+          border-radius: 50% 50% 0% 0%;
+        }
       }
-
       .coin-div {
-        height: 10px;
-        width: 10px;
-        margin-bottom: 10px;
+        height: 100%;
+        width: 33%;
+        left: 0px;
+        @include flex(center);
+        position: absolute;
 
         .coin {
           background-color: gold;
@@ -122,16 +386,58 @@
       }
 
       .bone-div {
-        height: 30px;
-        width: 50px;
-        margin-bottom: 10px;
+        height: 100%;
+        width: 33%;
+        @include flex(center);
+        position: absolute;
+        right: 33%;
 
         .bone {
-          background-image: url("../../Images//Bone.png");
-          background-size: 100% 100%;
-          height: 30px;
-          width: 50px;
           cursor: pointer;
+          .bone-main {
+            height: 20px;
+            width: 50px;
+            background-color: white;
+            border: solid 0.5px;
+            position: relative;
+
+            .bone-edge-one {
+              height: 20px;
+              width: 20px;
+              border-radius: 50%;
+              background-color: white;
+              position: absolute;
+              right: 35px;
+              top: 5px;
+            }
+            .bone-edge-two {
+              height: 20px;
+              width: 20px;
+              border-radius: 50%;
+              background-color: white;
+              position: absolute;
+              right: 35px;
+              bottom: 5px;
+            }
+            .bone-edge-three {
+              height: 20px;
+              width: 20px;
+              border-radius: 50%;
+              background-color: white;
+              position: absolute;
+              left: 35px;
+              top: 5px;
+            }
+            .bone-edge-four {
+              height: 20px;
+              width: 20px;
+              border-radius: 50%;
+              background-color: white;
+              position: absolute;
+               left: 35px;
+              bottom: 5px;
+            }
+          }
         }
 
         .bone-closed {
@@ -139,31 +445,98 @@
         }
       }
       .hat-div {
-        height: 50px;
-        width: 50px;
-        margin-bottom: 10px;
+        height: 100%;
+        width: 33%;
+        right: 0px;
+        @include flex(center);
+        position: absolute;
 
         .hat {
-          background-image: url("../../Images/Hat.png");
-          background-size: 100% 100%;
-          height: 50px;
-          width: 50px;
           cursor: pointer;
+          .cave-hat-main {
+            @include flex(center);
+
+            .feather-main {
+              height: 30px;
+              width: 12.5px;
+              border-radius: 50%;
+              border: solid 0.5;
+              background-color: crimson;
+              @include center(space-evenly);
+              transform: rotate(45deg);
+              position: relative;
+              top: 16px;
+              left: 25px;
+
+              .feather-left {
+                width: 49%;
+                height: 100%;
+                @include flex(space-evenly);
+
+                .feather-line {
+                  width: 100%;
+                  height: 1px;
+                  background-color: black;
+                  transform: rotate(15deg);
+                }
+              }
+              .feather-middle {
+                height: 100%;
+                width: 2px;
+                background-color: black;
+              }
+              .feather-right {
+                width: 49%;
+                height: 100%;
+                @include flex(space-evenly);
+
+                .feather-line {
+                  width: 100%;
+                  height: 1px;
+                  background-color: black;
+                  transform: rotate(-15deg);
+                }
+              }
+            }
+            .feather-bottom {
+              height: 8px;
+              width: 3px;
+              background-color: black;
+              transform: rotate(45deg);
+              position: relative;
+              top: 10px;
+              left: 14px;
+            }
+
+            .hat-top {
+              background-image: linear-gradient(
+                45deg,
+                transparent 50%,
+                teal 50%
+              );
+              height: 25px;
+              width: 25px;
+              transform: rotate(-45deg);
+              z-index: 1;
+              border-top: solid 0.5px;
+              border-right: solid 0.5px;
+            }
+            .hat-bottom {
+              height: 25px;
+              width: 50px;
+              border-radius: 50% 50% 0% 0%;
+              background-color: teal;
+              position: relative;
+              bottom: 15px;
+              border: solid 0.5px;
+              border-top: none;
+            }
+          }
         }
         .hat-closed {
           display: none;
         }
       }
-      .cave-cottage {
-        @include flex(flex-start);
-        cursor: pointer;
-      }
-    }
-
-    .cave-bottom-right {
-      background-image: url("../../Images/Cave.png");
-      background-size: 100% 100%;
-      @include section(40vw);
     }
   }
 }

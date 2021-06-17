@@ -210,7 +210,25 @@ function Cave(props) {
       </div>
       <div className="cave-body">
         <div className="cave-top">
-          <div className="cave-top-left"></div>
+          <div className="cave-top-left">
+            <div className="forest-bush">
+              <div className="forest-bush-leaf-one"></div>
+              <div className="forest-bush-leaf-two"></div>
+              <div className="forest-bush-leaf-three"></div>
+              <div className="forest-bush-leaf-four"></div>
+              <div className="forest-bush-leaf-five"></div>
+            </div>
+            <div className="forest-tree">
+              <div className="forest-tree-top">
+                <div className="forest-tree-leaf-one"></div>
+                <div className="forest-tree-leaf-two"></div>
+                <div className="forest-tree-leaf-three"></div>
+                <div className="forest-tree-leaf-four"></div>
+                <div className="forest-tree-leaf-five"></div>
+              </div>
+              <div className="forest-tree-trunk"></div>
+            </div>
+          </div>
           <div className="cave-top-middle">
             <div className="cave-forest" onClick={toggleGoUp}>
               <ArrowUpward />
@@ -239,8 +257,23 @@ function Cave(props) {
           <div className="cave-top-right"></div>
         </div>
         <div className="cave-middle">
-          <div className="cave-middle-left"></div>
-          <div className="cave-middle-middle"></div>
+          <div className="cave-middle-left">
+            <div className="forest-bush">
+              <div className="forest-bush-leaf-one"></div>
+              <div className="forest-bush-leaf-two"></div>
+              <div className="forest-bush-leaf-three"></div>
+              <div className="forest-bush-leaf-four"></div>
+              <div className="forest-bush-leaf-five"></div>
+            </div>
+          </div>
+          <div className="cave-middle-middle">
+            <div
+              className={`${
+                !caveData.meat_given ? "cave-wolf" : "cave-wolf-closed"
+              }`}
+              onClick={toggleWolfCard}
+            ></div>
+          </div>
           <div className="cave-middle-right"></div>
         </div>
         <div className="cave-bottom">
@@ -251,35 +284,19 @@ function Cave(props) {
               }`}
               onClick={toggleWolfCard}
             ></div>
-            <div
-              className={`${caveData.meat_given ? "meat" : "meat-closed"}`}
-            ></div>
+            <div className={`${caveData.meat_given ? "meat" : "meat-closed"}`}>
+              <div className="meat-main">
+                <div className="meat-bone">
+                  <div className="meat-bone-edge-one"></div>
+                  <div className="meat-bone-edge-two"></div>
+                </div>
+                <div className="meat-exterior">
+                  <div className="meat-interior"></div>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="cave-bottom-middle">
-            <div
-              className={`${
-                !caveData.meat_given ? "cave-wolf" : "cave-wolf-closed"
-              }`}
-              onClick={toggleWolfCard}
-            ></div>
-            <div className="coin-div">
-              <div
-                className={`${!caveData.coin_taken ? "coin" : "coin-closed"}`}
-                onClick={toggleCoin}
-              ></div>
-            </div>
-            <div className="bone-div">
-              <div
-                className={`${!caveData.bone_taken ? "bone" : "bone-closed"}`}
-                onClick={toggleBone}
-              ></div>
-            </div>
-            <div className="hat-div">
-              <div
-                className={`${!caveData.hat_taken ? "hat" : "hat-closed"}`}
-                onClick={toggleHat}
-              ></div>
-            </div>
             <div
               className={`${
                 downCharacter ? "character-down" : "character-down-closed"
@@ -304,7 +321,59 @@ function Cave(props) {
               <ArrowDownward />
             </div>
           </div>
-          <div className="cave-bottom-right"></div>
+          <div className="cave-bottom-right">
+            <div className="cave-exterior">
+              <div className=" cave-interior"></div>
+            </div>
+            <div className="coin-div">
+              <div
+                className={`${!caveData.coin_taken ? "coin" : "coin-closed"}`}
+                onClick={toggleCoin}
+              ></div>
+            </div>
+            <div className="bone-div">
+              <div
+                className={`${!caveData.bone_taken ? "bone" : "bone-closed"}`}
+                onClick={toggleBone}
+              >
+                <div className="bone-main">
+                  <div className="bone-edge-one"></div>
+                  <div className="bone-edge-two"></div>
+                  <div className="bone-edge-three"></div>
+                  <div className="bone-edge-four"></div>
+                </div>
+              </div>
+            </div>
+            <div className="hat-div">
+              <div
+                className={`${!caveData.hat_taken ? "hat" : "hat-closed"}`}
+                onClick={toggleHat}
+              >
+                <div className="cave-hat-main">
+                  <div className="feather-main">
+                    <div className="feather-left">
+                      <div className="feather-line"></div>
+                      <div className="feather-line"></div>
+                      <div className="feather-line"></div>
+                      <div className="feather-line"></div>
+                      <div className="feather-line"></div>
+                    </div>
+                    <div className="feather-middle"></div>
+                    <div className="feather-right">
+                      <div className="feather-line"></div>
+                      <div className="feather-line"></div>
+                      <div className="feather-line"></div>
+                      <div className="feather-line"></div>
+                      <div className="feather-line"></div>
+                    </div>
+                  </div>
+                  <div className="feather-bottom"></div>
+                  <div className="hat-top"></div>
+                  <div className="hat-bottom"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <Card className={`${wolfCard ? "answer-card" : "answer-card-closed"}`}>

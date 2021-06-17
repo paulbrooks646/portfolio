@@ -250,8 +250,8 @@ function Nest(props) {
                     <div className="feather-line"></div>
                     <div className="feather-line"></div>
                   </div>
-                  </div>
-                  <div className="feather-bottom"></div>
+                </div>
+                <div className="feather-bottom"></div>
               </div>
             </div>
             <div className="coin-div">
