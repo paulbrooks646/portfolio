@@ -233,7 +233,26 @@ function Nest(props) {
                     : "nest-feather"
                 }`}
                 onClick={toggleFeather}
-              ></div>
+              >
+                <div className="feather-main">
+                  <div className="feather-left">
+                    <div className="feather-line"></div>
+                    <div className="feather-line"></div>
+                    <div className="feather-line"></div>
+                    <div className="feather-line"></div>
+                    <div className="feather-line"></div>
+                  </div>
+                  <div className="feather-middle"></div>
+                  <div className="feather-right">
+                    <div className="feather-line"></div>
+                    <div className="feather-line"></div>
+                    <div className="feather-line"></div>
+                    <div className="feather-line"></div>
+                    <div className="feather-line"></div>
+                  </div>
+                  </div>
+                  <div className="feather-bottom"></div>
+              </div>
             </div>
             <div className="coin-div">
               <div

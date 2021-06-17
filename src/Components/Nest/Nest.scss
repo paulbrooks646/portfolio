@@ -47,7 +47,6 @@
         position: relative;
         @include center(space-evenly);
         background-color: sienna;
-        z-index: 2;
 
         .nest-twig-horizontal {
           @include flex(space-evenly);
@@ -423,10 +422,12 @@
 
         .nest-ribbon {
           width: 70px;
-          height: 8px;
-          background-color: aqua;
+          height: 28px;
+          border-top: solid aqua 7px;
+          border-left: solid aqua 7px;
+           border-right: solid aqua 7px;
           cursor: pointer;
-          border-radius: 30px 170px;
+          border-radius: 50% 15% 30% 0%;
         }
 
         .nest-ribbon-closed {
@@ -436,16 +437,60 @@
 
       .feather-div {
         width: 33%;
-        @include center(center);
+        @include center(flex-start);
         position: absolute;
         right: 0px;
 
         .nest-feather {
-          background-image: url("../../Images//Feather.png");
-          background-size: 100% 100%;
-          height: 40px;
-          width: 30px;
+          width: 100%;
+          @include flex(center);
+          position: relative;
+          right: 20px;
           cursor: pointer;
+         
+          .feather-main {
+            height: 60px;
+            width: 25px;
+            border-radius: 50%;
+            border: solid;
+            background-color: goldenrod;
+            @include center(space-evenly);
+
+            .feather-left {
+              width: 49%;
+              height: 100%;
+              @include flex(space-evenly);
+
+              .feather-line {
+                width: 100%;
+                height: 2px;
+                background-color: black;
+                transform: rotate(15deg);
+              }
+            }
+            .feather-middle {
+              height: 100%;
+              width: 2px;
+              background-color: black;
+            }
+             .feather-right {
+              width: 49%;
+              height: 100%;
+              @include flex(space-evenly);
+
+              .feather-line {
+                width: 100%;
+                height: 2px;
+                background-color: black;
+                transform: rotate(-15deg);
+              }
+            }
+          }
+          .feather-bottom {
+            height: 10px;
+            width: 5px;
+            background-color: black;
+          }
         }
 
         .nest-feather-closed {
