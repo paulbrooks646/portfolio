@@ -273,9 +273,20 @@ function Cottage(props) {
         </button>
       </div>
       <div className="cottage-body">
-        <div className="cottage-left"></div>
-        <div className="cottage-middle">
-          <div className="cottage-middle-top">
+        <div className="cottage-top">
+          <div className="cottage-top-left">
+            <div className="creepy-tree">
+              <div className="creepy-tree-branch-one"></div>
+              <div className="creepy-tree-branch-two"></div>
+              <div className="creepy-tree-branch-three"></div>
+              <div className="creepy-tree-branch-four"></div>
+              <div className="creepy-tree-branch-five"></div>
+              <div className="creepy-trunk-top"></div>
+              <div className="creepy-trunk-middle"></div>
+              <div className="creepy-trunk-bottom"></div>
+            </div>
+          </div>
+          <div className="cottage-top-middle">
             <div className="cottage-home" onClick={toggleGoUp}>
               <ArrowUpward />
               <h2>Cave</h2>
@@ -294,13 +305,40 @@ function Cottage(props) {
               <Character />
             </div>
           </div>
-          <div className="cottage-middle-middle">
+          <div className="cottage-top-right">
+            <div className="creepy-tree">
+              <div className="creepy-tree-branch-one"></div>
+              <div className="creepy-tree-branch-two"></div>
+              <div className="creepy-tree-branch-three"></div>
+              <div className="creepy-tree-branch-four"></div>
+              <div className="creepy-tree-branch-five"></div>
+              <div className="creepy-trunk-top"></div>
+              <div className="creepy-trunk-middle"></div>
+              <div className="creepy-trunk-bottom"></div>
+            </div>
+          </div>
+        </div>
+        <div className="cottage-middle">
+          <div className="cottage-middle-left">
             <div
               className={`${
                 !cottageData.protection_used ? "lasers" : "lasers-closed"
               }`}
               onClick={() => setLaserCard(true)}
             ></div>
+            <div
+              className={`${
+                !cottageData.purse_taken ? "pouch" : "pouch-closed"
+              }`}
+              onClick={togglePurse}
+            >
+              <div className="pouch-main">
+                <div className="pouch-top"></div>
+                <div className="pouch-rope-one"></div>
+                <div className="pouch-rope-two"></div>
+                <div className="pouch-bottom"></div>
+              </div>
+            </div>
             <div className="pod-div">
               <div
                 className={`${
@@ -309,7 +347,24 @@ function Cottage(props) {
                     : "dahsboard-pod-closed"
                 }`}
                 onClick={togglePod}
-              ></div>
+              >
+                <div className="pod-top">
+                  <div className="pod-top-top">
+                    <div className="pod-speckle"></div>
+                    <div className="pod-speckle"></div>
+                  </div>
+                  <div className="pod-top-middle">
+                    <div className="pod-speckle"></div>
+                    <div className="pod-speckle"></div>
+                    <div className="pod-speckle"></div>
+                  </div>
+                  <div className="pod-top-right">
+                    <div className="pod-speckle"></div>
+                    <div className="pod-speckle"></div>
+                  </div>
+                </div>
+                <div className="pod-bottom"></div>
+              </div>
               <div
                 className={`${
                   !cottageData.coin_taken && cottageData.pod_taken
@@ -319,34 +374,25 @@ function Cottage(props) {
                 onClick={toggleCoin}
               ></div>
             </div>
+          </div>
+          <div className="cottage-middle-middle">
             <div
               className={`${
-                !cottageData.fire_used ? "brambles" : "brambles-closed"
+                !cottageData.protection_used ? "lasers" : "lasers-closed"
               }`}
-              onClick={toggleBrambles}
+              onClick={() => setLaserCard(true)}
             ></div>
           </div>
-          <div className="cottage-middle-bottom">
-            <div
-              className={`${
-                !cottageData.purse_taken ? "pouch" : "pouch-closed"
-              }`}
-              onClick={togglePurse}
-            ></div>
-          </div>
-        </div>
-        <div className="cottage-right">
-          <div className="cottage-right-top"></div>
-          <div className="cottage-right-middle">
+          <div className="cottage-middle-right">
             <div className="creepy-cottage">
               <div className="creepy-left"></div>
-                <div className="creepy-middle">
-                  <div className="creepy-chimney-div">
-                    <div className="creepy-smoke"></div>
-                    <div className="creepy-smoke-middle"></div>
-                    <div className="creepy-smoke"></div>
-                    <div className="creepy-chimney"></div>
-                  </div>
+              <div className="creepy-middle">
+                <div className="creepy-chimney-div">
+                  <div className="creepy-smoke"></div>
+                  <div className="creepy-smoke-middle"></div>
+                  <div className="creepy-smoke"></div>
+                  <div className="creepy-chimney"></div>
+                </div>
                 <div className="creepy-short-log"></div>
                 <div className="creepy-medium-log"></div>
                 <div className="creepy-window-div">
@@ -381,11 +427,11 @@ function Cottage(props) {
                     <div className="creepy-short-log"></div>
                   </div>
                   <div className="creepy-door">
-                      <div className="creepy-door-knob"></div>
-                      <div className="creepy-lock-div">
-                        <div className="creepy-lock-top"></div>
-                        <div className="creepy-lock-bottom"></div>
-                      </div>
+                    <div className="creepy-door-knob"></div>
+                    <div className="creepy-lock-div">
+                      <div className="creepy-lock-top"></div>
+                      <div className="creepy-lock-bottom"></div>
+                    </div>
                   </div>
                   <div className="creepy-door-div-side">
                     <div className="creepy-short-log"></div>
@@ -397,10 +443,9 @@ function Cottage(props) {
               <div className="creepy-right"></div>
             </div>
           </div>
-          <div className="cottage-right-bottom">
-            <div className="arrow-div">
-              <ArrowUpward id="arrow-up" onClick={toggleHouseFive} />
-            </div>
+        </div>
+        <div className="cottage-bottom">
+          <div className="cottage-bottom-left">
             <div className="scroll-div">
               <div className="inner-scroll-div">
                 <div
@@ -408,7 +453,10 @@ function Cottage(props) {
                     !cottageData.levitation_taken ? "scroll" : "scroll-closed"
                   }`}
                   onClick={toggleLevitation}
-                ></div>
+                >
+                  <div className="scroll-top"></div>
+                  <div className="scroll-bottom"></div>
+                </div>
               </div>
               <div className="inner-scroll-div">
                 <div
@@ -416,8 +464,95 @@ function Cottage(props) {
                     !cottageData.invisibility_taken ? "scroll" : "scroll-closed"
                   }`}
                   onClick={toggleInvisibility}
-                ></div>
+                >
+                  <div className="scroll-top"></div>
+                  <div className="scroll-bottom"></div>
+                </div>
               </div>
+            </div>
+          </div>
+          <div className="cottage-bottom-middle">
+            <div
+              className={`${
+                !cottageData.fire_used ? "brambles" : "brambles-closed"
+              }`}
+              onClick={toggleBrambles}
+            >
+              <div className="bramble-one">
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+              </div>
+              <div className="bramble-two">
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+              </div>
+              <div className="bramble-three">
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+              </div>
+              <div className="bramble-four">
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+              </div>
+              <div className="bramble-five">
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+              </div>
+              <div className="bramble-six">
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+              </div>
+              <div className="bramble-seven">
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+              </div>
+              <div className="bramble-eight">
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+              </div>
+              <div className="bramble-nine">
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+              </div>
+              <div className="bramble-ten">
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+                <div className="bramble-thorn"></div>
+              </div>
+            </div>
+          </div>
+          <div className="cottage-bottom-right">
+            <div className="arrow-div">
+              <ArrowUpward id="arrow-up" onClick={toggleHouseFive} />
             </div>
           </div>
         </div>

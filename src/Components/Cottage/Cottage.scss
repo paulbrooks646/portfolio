@@ -2,40 +2,58 @@
 
 .cottage-body {
   background-image: url("../../Images/Dirt.png");
-  display: flex;
 
-  .cottage-left {
-    height: 90vh;
-    width: 40vw;
-    
-  }
+  .cottage-top {
+    @include row(35vh);
 
-  .cottage-middle {
-    width: 20vw;
-    height: 90vh;
-    @include flex(flex-start);
-
-    .cottage-middle-top {
-      width: 100%;
-      height: 35vh;
+    .cottage-top-left {
+      @include section(40vw);
+    }
+    .cottage-top-middle {
+      @include section(20vw);
 
       .cottage-home {
         @include flex(flex-start);
         cursor: pointer;
       }
     }
+    .cottage-top-right {
+      @include section(40vw);
+    }
+  }
 
-    .cottage-middle-middle {
-      height: 35vh;
-      width: 100%;
-      @include flex(space-between);
+  .cottage-middle {
+    @include row(35vh);
+
+    .cottage-middle-left {
+      @include section(40vw);
+      border-left: solid 5px red;
+      display: flex;
+      flex-direction: column;
 
       .lasers {
-        background-image: url("../../Images/Lasers.jpg");
-        background-size: 100% 100%;
+        background-image: linear-gradient(
+          red 5%,
+          transparent 5%,
+          transparent 20%,
+          red 20%,
+          red 25%,
+          transparent 25%,
+          transparent 40%,
+          red 40%,
+          red 45%,
+          transparent 45%,
+          transparent 60%,
+          red 60%,
+          red 65%,
+          transparent 65%,
+          transparent 80%,
+          red 80%,
+          red 85%,
+          transparent 85%
+        );
         width: 100%;
         height: 100px;
-        transform: skewY(180deg);
         cursor: pointer;
       }
 
@@ -43,10 +61,21 @@
         display: none;
       }
 
+      .pouch {
+        background-image: url("../../Images//Pouch.jpg");
+        background-size: 100% 100%;
+        height: 35px;
+        width: 35px;
+        cursor: pointer;
+      }
+
+      .pouch-closed {
+        display: none;
+      }
       .pod-div {
-        height: 100%;
-        width: 33%;
-        @include flex(center);
+        height: 50%;
+        width: 100%;
+        @include center(flex-end);
 
         .dashboard-pod {
           height: 50%;
@@ -72,61 +101,53 @@
           display: none;
         }
       }
+    }
 
-      .brambles {
-        background-image: url("../../Images/Brambles.jpg");
-        background-size: 100% 100%;
+    .cottage-middle-middle {
+      @include section(20vw);
+      border-right: solid red 5px;
+      display: flex;
+      flex-direction: column;
+
+      .lasers {
+        background-image: linear-gradient(
+          red 5%,
+          transparent 5%,
+          transparent 20%,
+          red 20%,
+          red 25%,
+          transparent 25%,
+          transparent 40%,
+          red 40%,
+          red 45%,
+          transparent 45%,
+          transparent 60%,
+          red 60%,
+          red 65%,
+          transparent 65%,
+          transparent 80%,
+          red 80%,
+          red 85%,
+          transparent 85%
+        );
         width: 100%;
         height: 100px;
-        transform: skewY(180deg);
         cursor: pointer;
       }
 
-      .brambles-closed {
+      .lasers-closed {
         display: none;
       }
     }
 
-    .cottage-middle-bottom {
-      height: 20vh;
-      width: 100%;
-      @include flex(center);
-
-      .pouch {
-        background-image: url("../../Images//Pouch.jpg");
-        background-size: 100% 100%;
-        height: 35px;
-        width: 35px;
-        cursor: pointer;
-      }
-
-      .pouch-closed {
-        display: none;
-      }
-    }
-  }
-
-  .cottage-right {
-    height: 90vh;
-    width: 40vw;
-
-    .cottage-right-top {
-      width: 100%;
-      height: 35vh;
-     
-    }
-
-    .cottage-right-middle {
-      width: 100%;
-      height: 35vh;
+    .cottage-middle-right {
+      @include section(40vw);
       @include flex(center);
       border-left: solid black 30px;
       border-top: solid black 20px;
       border-right: solid black 30px;
-      border-radius: 25% 25% 45% 45%;
 
       .creepy-cottage {
-      
         display: flex;
         position: relative;
 
@@ -294,34 +315,24 @@
         }
       }
     }
+  }
 
-    .cottage-right-bottom {
-      width: 100%;
-      height: 20vh;
-      @include center(center);
+  .cottage-bottom {
+    @include row(20vh);
+    border-bottom: solid 5px red;
 
-      .arrow-div {
-        height: 100%;
-        width: 66%;
-        display: flex;
-        justify-content: flex-end;
-        padding-right: 10%;
+    .cottage-bottom-left {
+      @include section(40vw);
+      border-left: solid 5px red;
 
-        #arrow-up {
-          color: red;
-          width: 50px;
-          height: 50px;
-          cursor: pointer;
-        }
-      }
       .scroll-div {
         height: 100%;
-        width: 33%;
-        @include flex(space-evenly);
+        width: 100%;
+        @include center(space-evenly);
 
         .inner-scroll-div {
           height: 50%;
-          width: 100%;
+          width: 50%;
           @include flex(center);
 
           .scroll {
@@ -335,6 +346,44 @@
           .scroll-closed {
             display: none;
           }
+        }
+      }
+    }
+
+    .cottage-bottom-middle {
+      @include section(20vw);
+      @include flex(center);
+
+      .brambles {
+        background-image: url("../../Images/Brambles.jpg");
+        background-size: 100% 100%;
+        width: 100%;
+        height: 100px;
+        transform: skewY(180deg);
+        cursor: pointer;
+      }
+
+      .brambles-closed {
+        display: none;
+      }
+    }
+
+    .cottage-bottom-right {
+      @include section(40vw);
+      @include center(center);
+      border-right: solid 5px red;
+
+      .arrow-div {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        #arrow-up {
+          color: red;
+          width: 50px;
+          height: 50px;
+          cursor: pointer;
         }
       }
     }
