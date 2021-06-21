@@ -276,14 +276,17 @@ function Cottage(props) {
         <div className="cottage-top">
           <div className="cottage-top-left">
             <div className="creepy-tree">
-              <div className="creepy-tree-branch-one"></div>
-              <div className="creepy-tree-branch-two"></div>
-              <div className="creepy-tree-branch-three"></div>
-              <div className="creepy-tree-branch-four"></div>
-              <div className="creepy-tree-branch-five"></div>
-              <div className="creepy-trunk-top"></div>
-              <div className="creepy-trunk-middle"></div>
-              <div className="creepy-trunk-bottom"></div>
+              <div className="creepy-trunk-top">
+                <div className="creepy-tree-branch-one"></div>
+                <div className="creepy-tree-branch-two"></div>
+              </div>
+              <div className="creepy-trunk-middle">
+                <div className="creepy-tree-branch-three"></div>
+                <div className="creepy-tree-branch-four"></div>
+              </div>
+              <div className="creepy-trunk-bottom">
+                <div className="creepy-tree-branch-five"></div>
+              </div>
             </div>
           </div>
           <div className="cottage-top-middle">
@@ -307,14 +310,17 @@ function Cottage(props) {
           </div>
           <div className="cottage-top-right">
             <div className="creepy-tree">
-              <div className="creepy-tree-branch-one"></div>
-              <div className="creepy-tree-branch-two"></div>
-              <div className="creepy-tree-branch-three"></div>
-              <div className="creepy-tree-branch-four"></div>
-              <div className="creepy-tree-branch-five"></div>
-              <div className="creepy-trunk-top"></div>
-              <div className="creepy-trunk-middle"></div>
-              <div className="creepy-trunk-bottom"></div>
+              <div className="creepy-trunk-top">
+                <div className="creepy-tree-branch-one"></div>
+                <div className="creepy-tree-branch-two"></div>
+              </div>
+              <div className="creepy-trunk-middle">
+                <div className="creepy-tree-branch-three"></div>
+                <div className="creepy-tree-branch-four"></div>
+              </div>
+              <div className="creepy-trunk-bottom">
+                <div className="creepy-tree-branch-five"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -326,13 +332,13 @@ function Cottage(props) {
               }`}
               onClick={() => setLaserCard(true)}
             ></div>
-            <div
-              className={`${
-                !cottageData.purse_taken ? "pouch" : "pouch-closed"
-              }`}
-              onClick={togglePurse}
-            >
-              <div className="pouch-main">
+            <div className="pouch-main">
+              <div
+                className={`${
+                  !cottageData.purse_taken ? "pouch" : "pouch-closed"
+                }`}
+                onClick={togglePurse}
+              >
                 <div className="pouch-top"></div>
                 <div className="pouch-rope-one"></div>
                 <div className="pouch-rope-two"></div>
@@ -358,7 +364,7 @@ function Cottage(props) {
                     <div className="pod-speckle"></div>
                     <div className="pod-speckle"></div>
                   </div>
-                  <div className="pod-top-right">
+                  <div className="pod-top-bottom">
                     <div className="pod-speckle"></div>
                     <div className="pod-speckle"></div>
                   </div>
