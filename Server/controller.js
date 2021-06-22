@@ -22,6 +22,27 @@ module.exports = {
     const cave = await db.cave_coin(id);
     res.status(200).send(cave);
   },
+  mazeCoin: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const maze = await db.maze_coin(id);
+    res.status(200).send(maze);
+  },
+  marketCoin: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const market = await db.market_coin(id);
+    res.status(200).send(market);
+  },
+  marketCoinTwo: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const market = await db.market_coin_two(id);
+    res.status(200).send(market);
+  },
   towerCoin: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;
@@ -149,6 +170,22 @@ module.exports = {
     const { id } = req.session.user;
 
     db.use_chest(id).then((inventory) => {
+      let newArr = [];
+
+      for (let key in inventory[0]) {
+        if (inventory[0][key] === true) {
+          newArr.push(key);
+        }
+      }
+
+      res.status(200).send(newArr);
+    });
+  },
+  useFeather: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    db.use_feather(id).then((inventory) => {
       let newArr = [];
 
       for (let key in inventory[0]) {

@@ -50,8 +50,8 @@ values ($1, false, false, false, false, false, true);
 insert into dragon (user_id, ice_used, charcoal_taken, seed_taken, cloak_used, armor_used, speed_used, axe_used, dragon_killed, grow_taken, coin_taken, first_time)
 values ($1, false, false, false, false, false, false, false, false, false, false, true);
 
-insert into cottage (user_id, protection_used, fire_used, coin_taken, purse_taken, open_used, levitation_taken, invisibility_taken, door_unlocked, pod_taken, master_thief, first_time)
-values ($1, false, false, false, false, false, false, false, false, false, false, true);
+insert into cottage (user_id, protection_used, fire_used, coin_taken, purse_taken, open_used, feather_used, levitation_taken, invisibility_taken, door_unlocked, pod_taken, master_thief, first_time)
+values ($1, false, false, false, false, false, false, false, false, false, false, false, true);
 
 insert into swamp (user_id, goblin_scared, goblin_gone, items_taken, first_time)
 values ($1, false, false, false, true);
@@ -94,5 +94,11 @@ values ($1, false, false, false, false, false, true);
 
 insert into clearing (user_id, dagger_used, strength_used, invisibility_used, seed_used, chest_taken, first_time)
 values ($1, false, false, false, false, false, true);
+
+insert into maze (user_id, coin_taken, first_time)
+values ($1, false, true);
+
+insert into market (user_id, coin_taken, coin_two_taken, first_time)
+values ($1, false, false, true);
 
 

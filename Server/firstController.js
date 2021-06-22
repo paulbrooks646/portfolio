@@ -6,6 +6,20 @@ module.exports = {
     const tower = await db.tower_first(id);
     res.status(200).send(tower);
   },
+  mazeFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const maze = await db.maze_first(id);
+    res.status(200).send(maze);
+  },
+  marketFirst: async (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.session.user;
+
+    const market = await db.market_first(id);
+    res.status(200).send(market);
+  },
   throneFirst: async (req, res) => {
     const db = req.app.get("db");
     const { id } = req.session.user;

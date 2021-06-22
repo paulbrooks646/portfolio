@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/userReducer";
+import { getUser, logoutUser } from "../../redux/userReducer";
 import axios from "axios";
 import "./Maze.scss";
 import Character from "../Character/Character";
@@ -41,13 +41,15 @@ function Maze(props) {
   const [mazeData, setMazeData] = useState()
   const [rejectionCard, setRejectionCard] = useState(false)
   const [inventoryOpen, setInventoryOpen] = useState(false)
+  const [firstTimeCard, setFirstTimeCard] = useState(false)
+  const [grassRejectionCard, setGrassRejectionCard] = useState(false)
+  const [coinCard, setCoinCard] = useState(false)
 
   useEffect(() => {
-    // if (!props.user.user.newgame) {
-    //   setNewgameCard(false);
-
-    // }
-    axios.get("/api/nest").then((res) => {
+    axios.get("/api/maze").then((res) => {
+      if (res.data[0].first_time) {
+        setFirstTimeCard(true)
+      }
       setMazeData(res.data[0]);
 
       if (props.user.user.last === "glade" || props.user.user.last === "up") {
@@ -80,17 +82,22 @@ function Maze(props) {
     );
   });
 
-  const toggleItem = (item) => {
-    if (item === "flute") {
-      if (props.location.pathname === "/Tower") {
-        axios.post("/api/useFlute").then((res) => {
-          setMazeData(res.data[0]);
-          ;
+  const toggleCoin = () => {
+    if (!mazeData.coin_taken) {
+      axios.post("/api/mazeCoin").then((res) => {
+        setMazeData(res.data[0]);
+        axios.post("/api/coin").then((res) => {
+          props.getUser(res.data);
+          setCoinCard(true);
         });
-      } else {
-        setRejectionCard(true);
-      }
+      });
+    } else {
+      setGrassRejectionCard(true);
     }
+  };
+
+  const toggleItem = (item) => {
+    setRejectionCard(true)
   };
 
   const toggleRight = () => {
@@ -375,7 +382,9 @@ function Maze(props) {
           </div>
         </div>
         <div className="maze-bottom">
-          <div className="maze-bottom-left"></div>
+          <div className="maze-bottom-left">
+            <div className="glade-grass" onClick={toggleCoin}></div>
+          </div>
           <div className="maze-bottom-middle">
             <div
               className={`${
@@ -434,11 +443,61 @@ function Maze(props) {
           CLOSE
         </Button>
       </Card>
+      <Card className={`${coinCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          In the deep grass you find a shiny gold coin.
+        </Typography>
+        <Button
+          onClick={() => setCoinCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${
+          grassRejectionCard ? "answer-card" : "answer-card-closed"
+        }`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You find nothing else in the deep grass.
+        </Typography>
+        <Button
+          onClick={() => setGrassRejectionCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card
+        className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You wander into the maze. Everything looks the same in every direction. You have no idea where to go.
+        </Typography>
+        <Button onClick={toggleFirst} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory })(
+export default connect(mapStateToProps, { getUser, getInventory, logoutUser })(
   Maze
 );

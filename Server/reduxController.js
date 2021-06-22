@@ -7,6 +7,22 @@ module.exports = {
 
     res.status(200).send(stables);
   },
+  getMaze: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const maze = await db.get_maze(id);
+
+    res.status(200).send(maze);
+  },
+  getMarket: async (req, res) => {
+    const db = req.app.get("db");
+
+    const { id } = req.session.user;
+    const market = await db.get_market(id);
+
+    res.status(200).send(market);
+  },
   getThrone: async (req, res) => {
     const db = req.app.get("db");
 
