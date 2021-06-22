@@ -15,7 +15,6 @@ import ArrowBack from "@material-ui/icons/ArrowBack";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import Character from "../Character/Character";
-import Oldman from "../../Images/Oldman.jpg";
 import Loading from "../Loading/Loading";
 
 function Dashboard(props) {
@@ -513,29 +512,141 @@ function Dashboard(props) {
               <Character />
             </div>
           </div>
-          <div
-            className={`${
-              burnt && !dashboardData.home_placed
-                ? "burned-house"
-                : "burned-house-closed"
-            }`}
-          ></div>
-          <div
-            className={`${
-              house || (dashboardData.grow_used && dashboardData.home_placed)
-                ? "house"
-                : "house-closed"
-            }`}
-          ></div>
-          <div
-            className={`${
-              (miniHome || dashboardData.home_placed) &&
-              !dashboardData.grow_used
-                ? "mini-house"
-                : "mini-house-closed"
-            }`}
-          ></div>
-
+          <div className="dashboard-middle-middle">
+            <div
+              className={`${
+                burnt && !dashboardData.home_placed
+                  ? "burned-house"
+                  : "burned-house-closed"
+              }`}
+            ></div>
+            <div
+              className={`${
+                house || (dashboardData.grow_used && dashboardData.home_placed)
+                  ? "house"
+                  : "house-closed"
+              }`}
+            >
+              <div className="cabin-left"></div>
+              <div className="cabin-cottage-middle">
+                <div className="cabin-chimney-div">
+                  <div className="cabin-smoke"></div>
+                  <div className="cabin-smoke-middle"></div>
+                  <div className="cabin-smoke"></div>
+                  <div className="cabin-chimney"></div>
+                </div>
+                <div className="cabin-short-log"></div>
+                <div className="cabin-medium-log"></div>
+                <div className="cabin-window-div">
+                  <div className="cabin-window-div-side">
+                    <div className="cabin-short-log"></div>
+                    <div className="cabin-short-log"></div>
+                  </div>
+                  <div className="cabin-window">
+                    <div className="cabin-window-row">
+                      <div className="cabin-window-pane"></div>
+                      <div className="cabin-window-line"></div>
+                      <div className="cabin-window-pane"></div>
+                    </div>
+                    <div className="cabin-window-middle"></div>
+                    <div className="cabin-window-row">
+                      <div className="cabin-window-pane"></div>
+                      <div className="cabin-window-line"></div>
+                      <div className="cabin-window-pane"></div>
+                    </div>
+                  </div>
+                  <div className="cabin-window-div-side">
+                    <div className="cabin-short-log"></div>
+                    <div className="cabin-short-log"></div>
+                  </div>
+                </div>
+                <div className="cabin-long-log"></div>
+                <div className="cabin-long-log"></div>
+                <div className="cabin-door-div">
+                  <div className="cabin-door-div-side">
+                    <div className="cabin-short-log"></div>
+                    <div className="cabin-short-log"></div>
+                    <div className="cabin-short-log"></div>
+                  </div>
+                  <div className="cabin-door">
+                    <div className="cabin-door-knob"></div>
+                    <div className="cabin-lock-div">
+                      <div className="cabin-lock-top"></div>
+                      <div className="cabin-lock-bottom"></div>
+                    </div>
+                  </div>
+                  <div className="cabin-door-div-side">
+                    <div className="cabin-short-log"></div>
+                    <div className="cabin-short-log"></div>
+                    <div className="cabin-short-log"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="cabin-right"></div>
+            </div>
+            <div
+              className={`${
+                (miniHome || dashboardData.home_placed) &&
+                !dashboardData.grow_used
+                  ? "mini-house"
+                  : "mini-house-closed"
+              }`}
+            >
+              <div className="houseFive-left-mini"></div>
+              <div className="houseFive-middle-mini">
+                <div className="houseFive-chimney-div">
+                  <div className="houseFive-chimney"></div>
+                </div>
+                <div className="houseFive-short-log"></div>
+                <div className="houseFive-medium-log"></div>
+                <div className="houseFive-window-div">
+                  <div className="houseFive-window-div-side">
+                    <div className="houseFive-short-log"></div>
+                    <div className="houseFive-short-log"></div>
+                  </div>
+                  <div className="houseFive-window">
+                    <div className="houseFive-window-row">
+                      <div className="houseFive-window-pane"></div>
+                      <div className="houseFive-window-line"></div>
+                      <div className="houseFive-window-pane"></div>
+                    </div>
+                    <div className="houseFive-window-middle"></div>
+                    <div className="houseFive-window-row">
+                      <div className="houseFive-window-pane"></div>
+                      <div className="houseFive-window-line"></div>
+                      <div className="houseFive-window-pane"></div>
+                    </div>
+                  </div>
+                  <div className="houseFive-window-div-side">
+                    <div className="houseFive-short-log"></div>
+                    <div className="houseFive-short-log"></div>
+                  </div>
+                </div>
+                <div className="houseFive-long-log"></div>
+                <div className="houseFive-long-log"></div>
+                <div className="houseFive-door-div">
+                  <div className="houseFive-door-div-side">
+                    <div className="houseFive-short-log"></div>
+                    <div className="houseFive-short-log"></div>
+                    <div className="houseFive-short-log"></div>
+                  </div>
+                  <div className="houseFive-door-mini">
+                    <div className="houseFive-door-knob-mini"></div>
+                    <div className="houseFive-lock-div">
+                      <div className="houseFive-lock-top"></div>
+                      <div className="houseFive-lock-bottom"></div>
+                    </div>
+                  </div>
+                  <div className="houseFive-door-div-side">
+                    <div className="houseFive-short-log"></div>
+                    <div className="houseFive-short-log"></div>
+                    <div className="houseFive-short-log"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="houseFive-right-mini"></div>
+            </div>
+          </div>
           <div className="dashboard-middle-right">
             <div
               className={`${
@@ -660,7 +771,63 @@ function Dashboard(props) {
             <div
               className={`${maiden ? "maiden" : "maiden-closed"}`}
               onAnimationEnd={toggleMaiden}
-            ></div>
+            >
+              <div className="maiden-hat"></div>
+              <div className="maiden-head">
+                <div className="maiden-hair-left"></div>
+                <div className="maiden-face">
+                  <div className="maiden-hair-top-left"></div>
+                  <div className="maiden-hair-top-right"></div>
+                  <div className="maiden-eyes">
+                    <div className="maiden-eye">
+                      <div className="maiden-iris">
+                        <div className="maiden-pupil"></div>
+                      </div>
+                    </div>
+                    <div className="maiden-eye">
+                      <div className="maiden-iris">
+                        <div className="maiden-pupil"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="maiden-nose"></div>
+                  <div className="maiden-mouth"></div>
+                </div>
+                <div className="maiden-hair-right"></div>
+              </div>
+              <div className="maiden-body">
+                <div className="maiden-upper-neck"></div>
+                <div className="maiden-neck"></div>
+                <div className="maiden-dress">
+                  <div className="maiden-arm-left">
+                    <div className="maiden-hand-left">
+                      <div className="maiden-finger-one"></div>
+                      <div className="maiden-finger-two"></div>
+                      <div className="maiden-finger-three"></div>
+                      <div className="maiden-finger-four"></div>
+                      <div className="maiden-finger-five"></div>
+                    </div>
+                  </div>
+                  <div className="maiden-arm-right">
+                    <div className="maiden-hand-left">
+                      <div className="maiden-finger-one"></div>
+                      <div className="maiden-finger-two"></div>
+                      <div className="maiden-finger-three"></div>
+                      <div className="maiden-finger-four"></div>
+                      <div className="maiden-finger-five"></div>
+                    </div>
+                  </div>
+                </div>
+                <div className="maiden-legs">
+                  <div className="maiden-leg-left">
+                    <div className="maiden-foot"></div>
+                  </div>
+                  <div className="maiden-leg-right">
+                    <div className="maiden-foot"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="dashboard-bottom-right"></div>
         </div>

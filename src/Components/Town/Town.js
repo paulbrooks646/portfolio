@@ -16,6 +16,7 @@ import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import House from "../../Images/House.jpg";
 import Character from "../Character/Character";
 import Farmer from "../../Images/Farmer.png";
+import Casa from "../../Images/Casa/Casa"
 import axios from "axios";
 import Loading from "../Loading/Loading";
 
@@ -322,7 +323,7 @@ function Town(props) {
       <div className="town-body">
         <div className="town-top">
           <div className="town-top-left">
-            <img src={House} alt="house" className="town-house" />
+            <Casa />
             <ArrowUpward id="up-arrow" onClick={toggleHouseOne} />
           </div>
           <div className="town-top-middle">
@@ -369,7 +370,7 @@ function Town(props) {
             />
           </div>
           <div className="town-top-right">
-            <img src={House} alt="house" className="town-house" />
+            <Casa />
             <ArrowUpward id="up-arrow" onClick={toggleHouseTwo} />
           </div>
         </div>
@@ -452,7 +453,7 @@ function Town(props) {
         </div>
         <div className="town-bottom">
           <div className="town-bottom-left">
-            <img src={House} alt="house" className="town-house" />
+            <Casa />
             <ArrowUpward id="up-arrow" onClick={toggleHouseThree} />
           </div>
           <div className="town-bottom-middle">
@@ -493,7 +494,7 @@ function Town(props) {
             </div>
           </div>
           <div className="town-bottom-right">
-            <img src={House} alt="house" className="town-house" />
+            <Casa />
             <ArrowUpward id="up-arrow" onClick={toggleHouseFour} />
           </div>
         </div>

@@ -191,13 +191,12 @@
               @include center(space-evenly);
               align-items: flex-end;
               background-color: peachpuff;
-               position: relative;
+              position: relative;
               top: 5px;
-
 
               .dashboard-old-man-finger-line {
                 height: 50%;
-                width: .5px;
+                width: 0.5px;
                 background-color: black;
               }
             }
@@ -209,9 +208,9 @@
             transform: rotate(-30deg);
             position: relative;
             left: 8px;
-             @include flex(flex-end);
+            @include flex(flex-end);
 
-              .dashboard-old-man-hand {
+            .dashboard-old-man-hand {
               width: 15px;
               height: 10px;
               @include center(space-evenly);
@@ -223,7 +222,7 @@
 
               .dashboard-old-man-finger-line {
                 height: 50%;
-                width: .5px;
+                width: 0.5px;
 
                 background-color: black;
               }
@@ -231,13 +230,11 @@
           }
         }
         .dashboard-old-man-pants {
-          background-color: brown;
+          background-color: sienna;
           height: 20px;
           width: 40px;
           position: relative;
           bottom: 5px;
-
-          
         }
         .dashboard-old-man-leg-div {
           width: 40px;
@@ -248,7 +245,7 @@
           .dashboard-old-man-leg {
             height: 45px;
             width: 15px;
-            background-color: brown;
+            background-color: sienna;
             @include flex(flex-end);
 
             .dashboard-old-man-shoe {
@@ -258,7 +255,6 @@
               border-radius: 25% 25% 0% 0%;
             }
           }
-
         }
       }
     }
@@ -280,32 +276,353 @@
       }
     }
 
-    .burned-house {
-      background-image: url("../../Images/Cinders.png");
-      background-size: 100% 100%;
+    .dashboard-middle-middle {
       @include section(20vw);
-    }
+      @include flex(center);
 
-    .burned-house-closed {
-      display: none;
-    }
+      .burned-house {
+        background-color: black;
+        background-image: radial-gradient(
+            red,
+            rgba(255, 0, 0, 0.2) 2px,
+            transparent 40px
+          ),
+          radial-gradient(red, rgba(255, 0, 0, 0.15) 1px, transparent 30px),
+          radial-gradient(red, rgba(255, 0, 0, 0.1) 2px, transparent 40px),
+          radial-gradient(
+            rgba(255, 0, 0, 0.4),
+            rgba(255, 0, 0, 0.1) 2px,
+            transparent 30px
+          );
+        background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
 
-    .house {
-      background-image: url("../../Images/House.jpg");
-      background-size: 100% 100%;
-      @include section(20vw);
-    }
+        @include section(20vw);
+        border-radius: 25%;
+      }
 
-    .house-closed {
-      display: none;
-    }
+      .burned-house-closed {
+        display: none;
+      }
 
-    .mini-house {
-      background-image: url("../../Images/House.jpg");
-      background-size: 50px 50px;
-      background-position: center center;
-      background-repeat: no-repeat;
-      @include section(20vw);
+      .house {
+        width: 200px;
+        display: flex;
+        position: relative;
+
+        .cabin-left {
+          width: 25px;
+          height: 125px;
+          background-color: sienna;
+          transform: rotate(50deg);
+          position: relative;
+          left: 50px;
+          bottom: 45px;
+          z-index: 1;
+        }
+
+        .cabin-cottage-middle {
+          position: relative;
+          width: 150px;
+          @include flex(flex-start);
+
+          .cabin-chimney-div {
+            position: absolute;
+            top: -85px;
+            left: 115px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .cabin-smoke {
+              border-radius: 50%;
+              border-left: solid gray 7px;
+              height: 25px;
+              width: 25px;
+              position: relative;
+              left: 9px;
+            }
+
+            .cabin-smoke-middle {
+              border-radius: 50%;
+              border-right: solid gray 7px;
+              height: 25px;
+              width: 25px;
+            }
+
+            .cabin-chimney {
+              background-color: sienna;
+              height: 50px;
+              width: 25px;
+              border-radius: 0% 0% 0% 50%;
+            }
+          }
+
+          .cabin-short-log {
+            background-color: sienna;
+            width: 50px;
+            height: 20px;
+            border: solid;
+          }
+          .cabin-medium-log {
+            background-color: sienna;
+            width: 75px;
+            height: 20px;
+            border: solid;
+          }
+
+          .cabin-window-div {
+            width: 150px;
+            height: 40px;
+            display: flex;
+            .cabin-window-div-side {
+              width: 50px;
+              height: 40px;
+            }
+            .cabin-window {
+              width: 50px;
+              height: 40px;
+
+              .cabin-window-row {
+                display: flex;
+                width: 100%;
+                height: 18px;
+                .cabin-window-pane {
+                  height: 100%;
+                  width: 23px;
+                  background-color: white;
+                }
+                .cabin-window-line {
+                  height: 100%;
+                  width: 4px;
+                  background-color: gray;
+                }
+              }
+              .cabin-window-middle {
+                width: 50px;
+                height: 4px;
+                background-color: gray;
+              }
+            }
+          }
+
+          .cabin-long-log {
+            height: 20px;
+            width: 150px;
+            background-color: sienna;
+            border: solid;
+          }
+
+          .cabin-door-div {
+            display: flex;
+            height: 60px;
+            width: 150px;
+            .cabin-door-div-side {
+              height: 60px;
+              width: 50px;
+            }
+            .cabin-door {
+              height: 60px;
+              width: 50px;
+              background-color: sienna;
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              justify-content: center;
+              border: solid;
+
+              .cabin-door-knob {
+                background-color: black;
+                border-radius: 50%;
+                position: relative;
+                left: 5px;
+                height: 10px;
+                width: 10px;
+              }
+              .cabin-lock-div {
+                @include flex(center);
+                height: 10px;
+                width: 10px;
+                left: 5px;
+
+                .cabin-lock-top {
+                  background-color: black;
+                  border-radius: 50%;
+                  height: 3px;
+                  width: 3px;
+                }
+
+                .cabin-lock-bottom {
+                  background-color: black;
+                  height: 4px;
+                  width: 1px;
+                  position: relative;
+                  bottom: 2px;
+                }
+              }
+            }
+          }
+        }
+        .cabin-right {
+          width: 25px;
+          height: 125px;
+          background-color: sienna;
+          transform: rotate(-48deg);
+          position: relative;
+          right: 50px;
+          bottom: 45px;
+        }
+      }
+
+      .house-closed {
+        display: none;
+      }
+
+      .mini-house {
+        width: 200px;
+        display: flex;
+        justify-content: center;
+        position: relative;
+
+        .houseFive-left-mini {
+          width: 5px;
+          height: 25px;
+          background-color: sienna;
+          transform: rotate(50deg);
+          position: relative;
+          left: 10px;
+          bottom: 8px;
+          z-index: 1;
+        }
+
+        .houseFive-middle-mini {
+          position: relative;
+          width: 30px;
+          @include flex(flex-start);
+
+          .houseFive-chimney-div {
+            position: absolute;
+            top: -2px;
+            left: 23px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .houseFive-chimney {
+              background-color: sienna;
+              height: 10px;
+              width: 5px;
+              border-radius: 0% 0% 0% 50%;
+            }
+          }
+
+          .houseFive-short-log {
+            background-color: sienna;
+            width: 10px;
+            height: 4px;
+            border: solid 0.1px;
+          }
+          .houseFive-medium-log {
+            background-color: sienna;
+            width: 15px;
+            height: 4px;
+            border: solid 0.1px;
+          }
+
+          .houseFive-window-div {
+            width: 30px;
+            height: 8px;
+            display: flex;
+            .houseFive-window-div-side {
+              width: 10px;
+              height: 8px;
+            }
+            .houseFive-window {
+              width: 10px;
+              height: 8px;
+
+              .houseFive-window-row {
+                display: flex;
+                width: 10px;
+                height: 4px;
+
+                .houseFive-window-pane {
+                  height: 100%;
+                  width: 5px;
+                  height: 4px;
+                  background-color: white;
+                  border: solid 0.1px;
+                }
+              }
+            }
+          }
+
+          .houseFive-long-log {
+            height: 4px;
+            width: 30px;
+            background-color: sienna;
+            border: solid 0.1px;
+          }
+
+          .houseFive-door-div {
+            display: flex;
+            height: 12px;
+            width: 30px;
+            .houseFive-door-div-side {
+              height: 12px;
+              width: 10px;
+            }
+            .houseFive-door-mini {
+              height: 12px;
+              width: 10px;
+              background-color: sienna;
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              justify-content: center;
+              border: solid 0.1px;
+
+              .houseFive-door-knob-mini {
+                background-color: gold;
+                border-radius: 50%;
+                position: relative;
+                left: 1px;
+                height: 2px;
+                width: 2px;
+              }
+              .houseFive-lock-div {
+                @include flex(center);
+                height: 2px;
+                width: 2px;
+                left: 1px;
+
+                .houseFive-lock-top {
+                  background-color: black;
+                  border-radius: 50%;
+                  height: 1px;
+                  width: 1px;
+                }
+
+                .houseFive-lock-bottom {
+                  background-color: black;
+                  height: 1px;
+                  width: 1px;
+                  position: relative;
+                  bottom: 0.4px;
+                }
+              }
+            }
+          }
+        }
+        .houseFive-right-mini {
+          width: 5px;
+          height: 25px;
+          background-color: sienna;
+          transform: rotate(-48deg);
+          position: relative;
+          right: 10px;
+          bottom: 8px;
+        }
+      }
     }
 
     .dashboard-middle-right {
@@ -456,10 +773,7 @@
       }
 
       .maiden {
-        background-image: url("../../Images/Maiden.png");
-        background-size: 100% 100%;
-        height: 150px;
-        width: 100px;
+        @include flex(center);
         top: 20vh;
         left: 40%;
         position: absolute;
@@ -469,6 +783,322 @@
         animation-direction: normal;
         animation-fill-mode: forwards;
         animation-timing-function: linear;
+
+        .maiden-hat {
+          border-radius: 50% 50% 25% 25%;
+          height: 50px;
+          width: 50px;
+          border-top: peru 12px solid;
+          border-left: peru 8px solid;
+          border-right: peru 8px solid;
+          position: relative;
+          z-index: 3;
+          top: 3px;
+        }
+
+        .maiden-head {
+          display: flex;
+          justify-content: center;
+          position: relative;
+          bottom: 38px;
+
+          .maiden-hair-left {
+            height: 5px;
+            width: 21px;
+            position: relative;
+            left: 21px;
+            z-index: 5;
+            background-color: turquoise;
+            border-radius: 50% 0% 0% 0%;
+          }
+
+          .maiden-face {
+            height: 42px;
+            width: 42px;
+            background-color: #eebb99;
+            border-radius: 50%;
+            @include flex(center);
+            border-bottom: black solid 1px;
+
+            .maiden-eyes {
+              width: 80%;
+              @include center(space-evenly);
+              position: relative;
+              top: 0px;
+
+              .maiden-eye {
+                width: 13px;
+                height: 11px;
+                border-radius: 50%;
+                background-color: white;
+                @include flex(center);
+
+                .maiden-iris {
+                  width: 9px;
+                  height: 7px;
+                  border-radius: 50%;
+                  background-color: turquoise;
+                  @include flex(center);
+
+                  .maiden-pupil {
+                    height: 2.5px;
+                    width: 3.5px;
+                    border-radius: 50%;
+                    border: black solid 1.8px;
+                  }
+                }
+              }
+            }
+            .maiden-nose {
+              height: 6px;
+              width: 6px;
+              @include flex(center);
+              border-left: solid 0.5px;
+              border-right: solid 0.5px;
+              border-bottom: solid 0.5px;
+              border-radius: 0% 0% 50% 50%;
+              position: relative;
+              top: 3px;
+            }
+
+            .maiden-mouth {
+              height: 2px;
+              width: 18px;
+              background-color: red;
+              border-radius: 50%;
+              position: relative;
+              top: 6px;
+            }
+          }
+
+          .maiden-hair-right {
+            height: 5px;
+            width: 21px;
+            position: relative;
+            right: 21px;
+            z-index: 5;
+            background-color: turquoise;
+            border-radius: 0% 50% 0% 0%;
+          }
+        }
+
+        .maiden-body {
+          @include flex(flex-start);
+          position: relative;
+          top: 5px;
+
+          .maiden-upper-neck {
+            height: 5px;
+            width: 20px;
+            z-index: 5;
+            border-radius: 50%;
+            border-bottom: 1px black solid;
+            position: relative;
+            bottom: 49px;
+          }
+          .maiden-neck {
+            height: 15px;
+            width: 20px;
+            background-color: #eebb99;
+            position: relative;
+            bottom: 50px;
+            border-radius: 30% 30% 50% 50%;
+            z-index: 4;
+          }
+
+          .maiden-dress {
+            width: 35px;
+            height: 80px;
+            background-color: turquoise;
+            border-radius: 25% 25% 0% 0%;
+            position: relative;
+            bottom: 62px;
+            z-index: 2;
+            @include flex(flex-start);
+
+            .maiden-arm-left {
+              height: 30px;
+              width: 10px;
+              background-image: linear-gradient(turquoise 60%, #eebb99 60%);
+              position: relative;
+              right: 20px;
+              top: 4px;
+              transform: rotate(40deg);
+              @include flex(flex-end);
+
+              .maiden-hand-left {
+                width: 15px;
+                height: 10px;
+                background-color: #eebb99;
+                border-radius: 50%;
+                position: relative;
+                top: 10px;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: flex-end;
+
+                .maiden-finger-one {
+                  height: 6px;
+                  width: 4px;
+                  background-color: #eebb99;
+                  position: relative;
+                  top: 1px;
+                  right: 3px;
+                  transform: rotate(35deg);
+                }
+
+                .maiden-finger-two {
+                  height: 5px;
+                  width: 3px;
+                  background-color: #eebb99;
+                  position: relative;
+                  top: 4px;
+                  right: 4px;
+                  transform: rotate(25deg);
+                }
+
+                .maiden-finger-three {
+                  height: 5px;
+                  width: 3px;
+                  background-color: #eebb99;
+                  position: relative;
+                  top: 4px;
+                  right: 3px;
+                }
+
+                .maiden-finger-four {
+                  height: 5px;
+                  width: 3px;
+                  background-color: #eebb99;
+                  position: relative;
+                  top: 4px;
+                  right: 1px;
+                }
+
+                .maiden-finger-five {
+                  height: 5px;
+                  width: 3px;
+                  background-color: #eebb99;
+                  position: relative;
+                  top: 1px;
+                  left: 2px;
+                  transform: rotate(-25deg);
+                }
+              }
+            }
+            .maiden-arm-right {
+              height: 30px;
+              width: 10px;
+              background-image: linear-gradient(turquoise 60%, #eebb99 60%);
+              position: relative;
+              left: 20px;
+              bottom: 21px;
+              transform: scaleX(-1) rotate(30deg);
+              @include flex(flex-end);
+
+              .maiden-hand-left {
+                width: 15px;
+                height: 10px;
+                background-color: #eebb99;
+                border-radius: 50%;
+                position: relative;
+                top: 10px;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: flex-end;
+
+                .maiden-finger-one {
+                  height: 6px;
+                  width: 4px;
+                  background-color: #eebb99;
+                  position: relative;
+                  top: 0px;
+                  right: 3px;
+                  transform: rotate(35deg);
+                }
+
+                .maiden-finger-two {
+                  height: 5px;
+                  width: 3px;
+                  background-color: #eebb99;
+                  position: relative;
+                  top: 4px;
+                  right: 4px;
+                  transform: rotate(25deg);
+                }
+
+                .maiden-finger-three {
+                  height: 5px;
+                  width: 3px;
+                  background-color: #eebb99;
+                  position: relative;
+                  top: 4px;
+                  right: 3px;
+                }
+
+                .maiden-finger-four {
+                  height: 5px;
+                  width: 3px;
+                  background-color: #eebb99;
+                  position: relative;
+                  top: 4px;
+                  right: 1px;
+                }
+
+                .maiden-finger-five {
+                  height: 5px;
+                  width: 3px;
+                  background-color: #eebb99;
+                  position: relative;
+                  top: 1px;
+                  left: 2px;
+                  transform: rotate(-25deg);
+                }
+              }
+            }
+          }
+
+          .maiden-legs {
+            @include center(space-evenly);
+            width: 50px;
+            position: relative;
+            bottom: 62px;
+
+            .maiden-leg-left {
+              height: 30px;
+              width: 9px;
+              background-color: #eebb99;
+              @include flex(flex-end);
+              border-radius: 0% 0% 50% 50%;
+
+              .maiden-foot {
+                height: 9px;
+                width: 13px;
+                background-color: turquoise;
+                position: relative;
+                z-index: 1;
+                border-radius: 50% 50% 0% 0%;
+              }
+            }
+
+            .maiden-leg-right {
+              height: 30px;
+              width: 9px;
+              background-color: #eebb99;
+              @include flex(flex-end);
+              border-radius: 0% 0% 50% 50%;
+
+              .maiden-foot {
+                height: 9px;
+                width: 13px;
+                background-color: turquoise;
+                position: relative;
+                z-index: 1;
+                border-radius: 50% 50% 0% 0%;
+              }
+            }
+          }
+        }
       }
 
       .maiden-closed {
