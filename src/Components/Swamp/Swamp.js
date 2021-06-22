@@ -176,7 +176,54 @@ function Swamp(props) {
       </div>
       <div className="swamp-body">
         <div className="swamp-top">
-          <div className="log" onClick={toggleLog}></div>
+          <div className="creepy-tree">
+            <div className="creepy-trunk-top">
+              <div className="creepy-tree-branch-one"></div>
+              <div className="creepy-tree-branch-two"></div>
+            </div>
+            <div className="creepy-trunk-middle">
+              <div className="creepy-tree-branch-three"></div>
+              <div className="creepy-tree-branch-four"></div>
+            </div>
+            <div className="creepy-trunk-bottom">
+              <div className="creepy-tree-branch-five"></div>
+            </div>
+          </div>
+          <div className="creepy-tree">
+            <div className="creepy-trunk-top">
+              <div className="creepy-tree-branch-one"></div>
+              <div className="creepy-tree-branch-two"></div>
+            </div>
+            <div className="creepy-trunk-middle">
+              <div className="creepy-tree-branch-three"></div>
+              <div className="creepy-tree-branch-four"></div>
+            </div>
+            <div className="creepy-trunk-bottom">
+              <div className="creepy-tree-branch-five"></div>
+            </div>
+          </div>
+          <div className="creepy-tree">
+            <div className="creepy-trunk-top">
+              <div className="creepy-tree-branch-one"></div>
+              <div className="creepy-tree-branch-two"></div>
+            </div>
+            <div className="creepy-trunk-middle">
+              <div className="creepy-tree-branch-three"></div>
+              <div className="creepy-tree-branch-four"></div>
+            </div>
+            <div className="creepy-trunk-bottom">
+              <div className="creepy-tree-branch-five"></div>
+            </div>
+          </div>
+          <div className="log" onClick={toggleLog}>
+            <div className="log-hole"></div>
+            <div className="log-line"></div>
+            <div className="log-line"></div>
+            <div className="log-line"></div>
+            <div className="log-line"></div>
+            <div className="log-line"></div>
+            <div className="log-line"></div>
+          </div>
         </div>
         <div className="swamp-middle">
           <div className="swamp-middle-left">
@@ -210,7 +257,9 @@ function Swamp(props) {
                 !swampData.goblin_scared ? "goblin" : "goblin-closed"
               }`}
               onClick={() => setGoblinRejectionCard(true)}
-            ></div>
+            >
+              <div className="goblin-cover"></div>
+            </div>
             <div
               className={`${
                 swampData.goblin_scared && !swampData.goblin_gone
@@ -218,7 +267,9 @@ function Swamp(props) {
                   : "goblin-moving-closed"
               }`}
               onAnimationEnd={toggleAnimationEnd}
-            ></div>
+            >
+              <div className="goblin-cover"></div>
+            </div>
           </div>
           <div className="swamp-middle-right">
             <div
@@ -248,9 +299,45 @@ function Swamp(props) {
           </div>
         </div>
         <div className="swamp-bottom">
-          <div className="swamp-bottom-left"></div>
-          <div className="swamp-bottom-middle"></div>
-          <div className="swamp-bottom-right"></div>
+          <div className="creepy-tree">
+            <div className="creepy-trunk-top">
+              <div className="creepy-tree-branch-one"></div>
+              <div className="creepy-tree-branch-two"></div>
+            </div>
+            <div className="creepy-trunk-middle">
+              <div className="creepy-tree-branch-three"></div>
+              <div className="creepy-tree-branch-four"></div>
+            </div>
+            <div className="creepy-trunk-bottom">
+              <div className="creepy-tree-branch-five"></div>
+            </div>
+          </div>
+          <div className="creepy-tree">
+            <div className="creepy-trunk-top">
+              <div className="creepy-tree-branch-one"></div>
+              <div className="creepy-tree-branch-two"></div>
+            </div>
+            <div className="creepy-trunk-middle">
+              <div className="creepy-tree-branch-three"></div>
+              <div className="creepy-tree-branch-four"></div>
+            </div>
+            <div className="creepy-trunk-bottom">
+              <div className="creepy-tree-branch-five"></div>
+            </div>
+          </div>
+          <div className="creepy-tree">
+            <div className="creepy-trunk-top">
+              <div className="creepy-tree-branch-one"></div>
+              <div className="creepy-tree-branch-two"></div>
+            </div>
+            <div className="creepy-trunk-middle">
+              <div className="creepy-tree-branch-three"></div>
+              <div className="creepy-tree-branch-four"></div>
+            </div>
+            <div className="creepy-trunk-bottom">
+              <div className="creepy-tree-branch-five"></div>
+            </div>
+          </div>
         </div>
       </div>
       <Card

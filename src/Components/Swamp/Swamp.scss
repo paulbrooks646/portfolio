@@ -1,33 +1,143 @@
 @import "../mixins";
 
 .swamp-body {
-  background-image: url("../../Images//Dirt.png");
-  background-size: 100% 100%;
+  background-image: linear-gradient(90deg, aqua 0%, #306030 50%, black 100%);
 
   .swamp-top {
     @include row(35vh);
-    background-image: url("../../Images/Swamp.png");
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
 
-    .log {
-      background-image: url("../../Images/Log.jpg");
-      background-size: 100% 100%;
-      width: 25%;
-      height: 20%;
-      z-index: 1;
-      cursor: pointer;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    background-image: linear-gradient(90deg, aqua 0%, #306030 50%, black 100%);
+
+    .creepy-tree {
+      @include flex(center);
+      height: 100%;
+      width: 100%;
+      position: relative;
+    }
+    .creepy-trunk-top {
+      height: 40%;
+      width: 75px;
+      border-radius: 25% 25% 0% 0%;
+      border-right: rgb(28, 36, 36) solid 20px;
+      position: relative;
+      top: 20px;
+      @include flex(center);
+      transform: rotate(30deg);
+
+      .creepy-tree-branch-one {
+        height: 50px;
+        width: 150%;
+        border-bottom: solid 10px rgb(28, 36, 36);
+        border-right: solid 10px rgb(28, 36, 36);
+        border-radius: 50% 0% 45% 50%;
+        transform: rotate(20deg);
+        position: relative;
+        top: 20px;
+        left: 15px;
+      }
+      .creepy-tree-branch-two {
+        height: 50px;
+        width: 200%;
+        border-bottom: rgb(28, 36, 36) solid 10px;
+        border-radius: 35%;
+        position: relative;
+        left: 35px;
+        transform: rotate(-30deg);
+      }
+    }
+    .creepy-trunk-middle {
+      height: 40%;
+      width: 75px;
+      border-left: rgb(28, 36, 36) solid 25px;
+      border-radius: 0%;
+      position: relative;
+      left: 30px;
+      top: 15px;
+      @include flex(center);
+
+      .creepy-tree-branch-three {
+        height: 50px;
+        width: 50%;
+        border-bottom: solid 10px rgb(28, 36, 36);
+        border-radius: 25% 25% 25% 25%;
+        position: relative;
+        left: 20px;
+        top: 30px;
+        transform: rotate(80deg);
+      }
+      .creepy-tree-branch-four {
+        height: 50px;
+        width: 150%;
+        border-bottom: rgb(28, 36, 36) solid 15px;
+        border-radius: 25%;
+        position: relative;
+        bottom: 15px;
+        right: 10px;
+        transform: rotate(-25deg);
+      }
+    }
+    .creepy-trunk-bottom {
+      height: 40%;
+      width: 75px;
+      border-right: rgb(28, 36, 36) solid 35px;
+      border-radius: 50% 50% 0% 0%;
+      @include flex(center);
+
+      .creepy-tree-branch-five {
+        height: 50px;
+        width: 200%;
+        border-bottom: solid 20px rgb(28, 36, 36);
+        border-radius: 35%;
+        transform: rotate(50deg);
+        position: relative;
+        bottom: 40px;
+        left: 20px;
+      }
     }
 
+    .log {
+      @include flex(space-evenly);
+      width: 200px;
+      height: 50px;
+      background-color: sienna;
+      position: absolute;
+      border-radius: 15%;
+      border-left: solid chocolate 5px;
+      border-right: solid chocolate 5px;
+      right: 20%;
+      top: 40%;
+      z-index: 1;
+      cursor: pointer;
+
+      .log-hole {
+        position: absolute;
+        border-radius: 50%;
+        height: 25px;
+        width: 25px;
+        background-color: black;
+        left: 25%;
+        border: solid chocolate 3px;
+      }
+
+      .log-line {
+        width: 100%;
+        height: 1px;
+        background-color: black;
+      }
+    }
   }
 
   .swamp-middle {
     @include row(20vh);
-   
+
     .swamp-middle-left {
       @include section(40vw);
       @include center(flex-start);
+      background-image: url("../../Images/Dirt.png");
+      border-radius: 0% 50% 50% 0%;
 
       .swamp-forest {
         @include center(space-evenly);
@@ -52,6 +162,15 @@
         bottom: 20px;
         left: 0px;
         cursor: pointer;
+
+        .goblin-cover {
+          height: 21px;
+          width: 40px;
+          background-image: linear-gradient(90deg, black 0%, #306030 100%);
+          position: absolute;
+          bottom: 4px;
+          right: 80px;
+        }
       }
 
       .goblin-closed {
@@ -75,6 +194,15 @@
         animation-fill-mode: forwards;
         animation-duration: 2s;
         animation-timing-function: linear;
+
+         .goblin-cover {
+          height: 21px;
+          width: 40px;
+          background-image: linear-gradient(90deg, black 0%, #306030 100%);
+          position: absolute;
+          bottom: 4px;
+          right: 80px;
+        }
       }
 
       .goblin-moving-closed {
@@ -85,6 +213,8 @@
     .swamp-middle-right {
       @include section(40vw);
       @include center(flex-end);
+      background-image: url("../../Images/Dirt.png");
+      border-radius: 50% 0% 0% 50%;
 
       .swamp-bog {
         @include center(space-evenly);
@@ -97,7 +227,98 @@
 
   .swamp-bottom {
     @include row(35vh);
-    background-image: url("../../Images/Swamp.png");
+    @include row(35vh);
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    background-image: linear-gradient(90deg, aqua 0%, #306030 50%, black 100%);
+    .creepy-tree {
+      @include flex(center);
+      height: 100%;
+      width: 100%;
+      position: relative;
+    }
+    .creepy-trunk-top {
+      height: 40%;
+      width: 75px;
+      border-radius: 25% 25% 0% 0%;
+      border-right: rgb(28, 36, 36) solid 20px;
+      position: relative;
+      top: 20px;
+      @include flex(center);
+      transform: rotate(30deg);
+
+      .creepy-tree-branch-one {
+        height: 50px;
+        width: 150%;
+        border-bottom: solid 10px rgb(28, 36, 36);
+        border-right: solid 10px rgb(28, 36, 36);
+        border-radius: 50% 0% 45% 50%;
+        transform: rotate(20deg);
+        position: relative;
+        top: 20px;
+        left: 15px;
+      }
+      .creepy-tree-branch-two {
+        height: 50px;
+        width: 200%;
+        border-bottom: rgb(28, 36, 36) solid 10px;
+        border-radius: 35%;
+        position: relative;
+        left: 35px;
+        transform: rotate(-30deg);
+      }
+    }
+    .creepy-trunk-middle {
+      height: 40%;
+      width: 75px;
+      border-left: rgb(28, 36, 36) solid 25px;
+      border-radius: 0%;
+      position: relative;
+      left: 30px;
+      top: 15px;
+      @include flex(center);
+
+      .creepy-tree-branch-three {
+        height: 50px;
+        width: 50%;
+        border-bottom: solid 10px rgb(28, 36, 36);
+        border-radius: 25% 25% 25% 25%;
+        position: relative;
+        left: 20px;
+        top: 30px;
+        transform: rotate(80deg);
+      }
+      .creepy-tree-branch-four {
+        height: 50px;
+        width: 150%;
+        border-bottom: rgb(28, 36, 36) solid 15px;
+        border-radius: 25%;
+        position: relative;
+        bottom: 15px;
+        right: 10px;
+        transform: rotate(-25deg);
+      }
+    }
+    .creepy-trunk-bottom {
+      height: 40%;
+      width: 75px;
+      border-right: rgb(28, 36, 36) solid 35px;
+      border-radius: 50% 50% 0% 0%;
+      @include flex(center);
+
+      .creepy-tree-branch-five {
+        height: 50px;
+        width: 200%;
+        border-bottom: solid 20px rgb(28, 36, 36);
+        border-radius: 35%;
+        transform: rotate(50deg);
+        position: relative;
+        bottom: 40px;
+        left: 20px;
+      }
+    }
   }
 }
 

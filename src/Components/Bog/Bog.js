@@ -26,7 +26,7 @@ function Bog(props) {
   const [inventoryOpen, setInentoryOpen] = useState(false);
   const [rejectionCard, setRejectionCard] = useState(false);
   const [podCard, setPodCard] = useState(false);
-  const [exploding, setExploding] = useState(false)
+  const [exploding, setExploding] = useState(false);
 
   useEffect(() => {
     axios.get("/api/bog").then((res) => {
@@ -178,7 +178,47 @@ function Bog(props) {
         </button>
       </div>
       <div className="bog-body">
-        <div className="bog-top"></div>
+        <div className="bog-top">
+          <div className="creepy-tree">
+            <div className="creepy-trunk-top">
+              <div className="creepy-tree-branch-one"></div>
+              <div className="creepy-tree-branch-two"></div>
+            </div>
+            <div className="creepy-trunk-middle">
+              <div className="creepy-tree-branch-three"></div>
+              <div className="creepy-tree-branch-four"></div>
+            </div>
+            <div className="creepy-trunk-bottom">
+              <div className="creepy-tree-branch-five"></div>
+            </div>
+          </div>
+          <div className="creepy-tree">
+            <div className="creepy-trunk-top">
+              <div className="creepy-tree-branch-one"></div>
+              <div className="creepy-tree-branch-two"></div>
+            </div>
+            <div className="creepy-trunk-middle">
+              <div className="creepy-tree-branch-three"></div>
+              <div className="creepy-tree-branch-four"></div>
+            </div>
+            <div className="creepy-trunk-bottom">
+              <div className="creepy-tree-branch-five"></div>
+            </div>
+          </div>
+          <div className="creepy-tree">
+            <div className="creepy-trunk-top">
+              <div className="creepy-tree-branch-one"></div>
+              <div className="creepy-tree-branch-two"></div>
+            </div>
+            <div className="creepy-trunk-middle">
+              <div className="creepy-tree-branch-three"></div>
+              <div className="creepy-tree-branch-four"></div>
+            </div>
+            <div className="creepy-trunk-bottom">
+              <div className="creepy-tree-branch-five"></div>
+            </div>
+          </div>
+        </div>
         <div className="bog-middle">
           <div className="bog-middle-left">
             <div className="bog-swamp" onClick={toggleGoLeft}>
@@ -198,7 +238,23 @@ function Bog(props) {
                     : "pod-closed"
                 }`}
                 onAnimationEnd={togglePodAnimation}
-              ></div>
+              >
+                <div className="pod-top">
+                  <div className="pod-top-top">
+                    <div className="pod-speckle"></div>
+                    <div className="pod-speckle"></div>
+                  </div>
+                  <div className="pod-top-middle">
+                    <div className="pod-speckle"></div>
+                    <div className="pod-speckle"></div>
+                    <div className="pod-speckle"></div>
+                  </div>
+                  <div className="pod-top-bottom">
+                    <div className="pod-speckle"></div>
+                    <div className="pod-speckle"></div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div
               className={`${leftLeft ? "left-left" : "left-left-closed"}`}
@@ -207,17 +263,14 @@ function Bog(props) {
               <Character />
             </div>
           </div>
+          <div className="bog-middle-middle"></div>
           <div className="bog-middle-right">
             <div
               className={`${!bogData.hydra_dead ? "hydra" : "hydra-closed"}`}
               onClick={toggleHydra}
             ></div>
             <div
-              className={`${
-                exploding
-                  ? "explosion"
-                  : "explosion-closed"
-              }`}
+              className={`${exploding ? "explosion" : "explosion-closed"}`}
               onAnimationEnd={toggleExplosion}
             ></div>
             <div
@@ -239,16 +292,49 @@ function Bog(props) {
           </div>
         </div>
         <div className="bog-bottom">
-          <div className="bog-bottom-left">
-            <div
-              className={`${
-                !bogData.sulfur_taken ? "sulfur" : "sulfur-closed"
-              }`}
-              onClick={toggleSulfur}
-            ></div>
+          <div className="creepy-tree">
+            <div className="creepy-trunk-top">
+              <div className="creepy-tree-branch-one"></div>
+              <div className="creepy-tree-branch-two"></div>
+            </div>
+            <div className="creepy-trunk-middle">
+              <div className="creepy-tree-branch-three"></div>
+              <div className="creepy-tree-branch-four"></div>
+            </div>
+            <div className="creepy-trunk-bottom">
+              <div className="creepy-tree-branch-five"></div>
+            </div>
           </div>
-          <div className="bog-bottom-middle"></div>
-          <div className="bog-bottom-right"></div>
+          <div className="creepy-tree">
+            <div className="creepy-trunk-top">
+              <div className="creepy-tree-branch-one"></div>
+              <div className="creepy-tree-branch-two"></div>
+            </div>
+            <div className="creepy-trunk-middle">
+              <div className="creepy-tree-branch-three"></div>
+              <div className="creepy-tree-branch-four"></div>
+            </div>
+            <div className="creepy-trunk-bottom">
+              <div className="creepy-tree-branch-five"></div>
+            </div>
+          </div>
+          <div className="creepy-tree">
+            <div className="creepy-trunk-top">
+              <div className="creepy-tree-branch-one"></div>
+              <div className="creepy-tree-branch-two"></div>
+            </div>
+            <div className="creepy-trunk-middle">
+              <div className="creepy-tree-branch-three"></div>
+              <div className="creepy-tree-branch-four"></div>
+            </div>
+            <div className="creepy-trunk-bottom">
+              <div className="creepy-tree-branch-five"></div>
+            </div>
+          </div>
+          <div
+            className={`${!bogData.sulfur_taken ? "sulfur" : "sulfur-closed"}`}
+            onClick={toggleSulfur}
+          ></div>
         </div>
       </div>
       <Card

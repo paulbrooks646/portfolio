@@ -1,8 +1,16 @@
 @import "../mixins";
 
 .dragon-body {
-  background-image: url("../../Images/Cinders.png");
-  background-size: 100% 100%;
+
+background-color:black;
+background-image:
+radial-gradient(red, rgba(255,0,0,.2) 2px, transparent 40px),
+radial-gradient(red, rgba(255,0,0,.15) 1px, transparent 30px),
+radial-gradient(red, rgba(255,0,0,.1) 2px, transparent 40px),
+radial-gradient(rgba(255,0,0,.4), rgba(255,0,0,.1) 2px, transparent 30px);
+background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+
   .dragon-top {
     @include row(35vh);
 
@@ -23,9 +31,9 @@
           @include flex(center);
 
           .seed {
-            background-image: url("../../Images/Seed.jpg");
-            background-size: 100% 100%;
-            height: 50px;
+            border-radius: 25% 50% 50% 25%;
+            background-image: linear-gradient(peru, chocolate, sienna, saddlebrown);
+            height: 40px;
             width: 50px;
             cursor: pointer;
           }
@@ -73,6 +81,7 @@
 
     .dragon-top-middle {
       background-image: url("../../Images/Dirt.png");
+      background-size: 100% 100%;
       @include section(20vw);
       @include flex(flex-start);
 
@@ -96,6 +105,7 @@
 
     .dragon-middle-middle {
       background-image: url("../../Images/Dirt.png");
+      background-size: 100% 100%;
       @include section(20vw);
     }
 
@@ -113,10 +123,11 @@
 
     .dragon-bottom-middle {
       background-image: url("../../Images/Dirt.png");
+      background-size: 100% 100%;
       @include section(20vw);
-
       @include flex(flex-end);
-      border-bottom: solid black 40px;
+      border-radius: 0% 0% 50% 50%;
+     
 
       .dragon {
         background-image: url("../../Images/dragon.gif");

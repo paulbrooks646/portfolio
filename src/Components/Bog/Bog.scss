@@ -2,22 +2,126 @@
 
 .bog-body {
   height: 90vh;
-  width: 100vw;
+  background: radial-gradient(
+      circle at 100% 50%,
+      transparent 20%,
+      #306030 21%,
+      #306030 34%,
+      transparent 35%,
+      transparent
+    ),
+    radial-gradient(
+        circle at 0% 50%,
+        transparent 20%,
+        #306030 21%,
+        #306030 34%,
+        transparent 35%,
+        transparent
+      )
+      0 -50px;
+  background-color: black;
+  background-size: 75px 100px;
 
   .bog-top {
     @include row(35vh);
-    background-image: url("../../Images/Bog.jpg");
-    background-size: 100% 100%;
+
+    .creepy-tree {
+      @include flex(center);
+      height: 100%;
+      width: 100%;
+      position: relative;
+    }
+    .creepy-trunk-top {
+      height: 40%;
+      width: 75px;
+      border-radius: 25% 25% 0% 0%;
+      border-right: rgb(28, 36, 36) solid 20px;
+      position: relative;
+      top: 20px;
+      @include flex(center);
+      transform: rotate(30deg);
+
+      .creepy-tree-branch-one {
+        height: 50px;
+        width: 150%;
+        border-bottom: solid 10px rgb(28, 36, 36);
+        border-right: solid 10px rgb(28, 36, 36);
+        border-radius: 50% 0% 45% 50%;
+        transform: rotate(20deg);
+        position: relative;
+        top: 20px;
+        left: 15px;
+      }
+      .creepy-tree-branch-two {
+        height: 50px;
+        width: 200%;
+        border-bottom: rgb(28, 36, 36) solid 10px;
+        border-radius: 35%;
+        position: relative;
+        left: 35px;
+        transform: rotate(-30deg);
+      }
+    }
+    .creepy-trunk-middle {
+      height: 40%;
+      width: 75px;
+      border-left: rgb(28, 36, 36) solid 25px;
+      border-radius: 0%;
+      position: relative;
+      left: 30px;
+      top: 15px;
+      @include flex(center);
+
+      .creepy-tree-branch-three {
+        height: 50px;
+        width: 50%;
+        border-bottom: solid 10px rgb(28, 36, 36);
+        border-radius: 25% 25% 25% 25%;
+        position: relative;
+        left: 20px;
+        top: 30px;
+        transform: rotate(80deg);
+      }
+      .creepy-tree-branch-four {
+        height: 50px;
+        width: 150%;
+        border-bottom: rgb(28, 36, 36) solid 15px;
+        border-radius: 25%;
+        position: relative;
+        bottom: 15px;
+        right: 10px;
+        transform: rotate(-25deg);
+      }
+    }
+    .creepy-trunk-bottom {
+      height: 40%;
+      width: 75px;
+      border-right: rgb(28, 36, 36) solid 35px;
+      border-radius: 50% 50% 0% 0%;
+      @include flex(center);
+
+      .creepy-tree-branch-five {
+        height: 50px;
+        width: 200%;
+        border-bottom: solid 20px rgb(28, 36, 36);
+        border-radius: 35%;
+        transform: rotate(50deg);
+        position: relative;
+        bottom: 40px;
+        left: 20px;
+      }
+    }
   }
 
   .bog-middle {
     @include row(20vh);
-    background-image: url("../../Images/Dirt.png");
-    background-size: 100% 100%;
 
     .bog-middle-left {
-      @include section(50vw);
+      @include section(40vw);
       @include center(flex-start);
+      background-image: url("../../Images/Dirt.png");
+      background-size: 100% 100%;
+      border-radius: 0% 50% 50% 0%;
 
       .bog-swamp {
         @include center(flex-start);
@@ -25,9 +129,15 @@
       }
     }
 
+    .bog-middle-middle {
+      @include section(20vw);
+    }
+
     .bog-middle-right {
-      @include section(50vw);
+      @include section(40vw);
       @include center(flex-end);
+
+      border-radius: 50% 0% 0% 50%;
 
       .hydra {
         background-image: url("../../Images/Hydra.gif");
@@ -65,11 +175,24 @@
       }
 
       .scales {
-        height: 50px;
-        width: 50px;
-        border-radius: 25%;
-        background-image: url("../../Images/Scales.jpg");
-        background-size: 100% 100%;
+        height: 55px;
+        width: 40px;
+        border-radius: 40%;
+        background: radial-gradient(
+              circle at 0% 50%,
+              rgba(96, 16, 48, 0) 9px,
+              black 10px,
+              rgba(96, 16, 48, 0) 11px
+            )
+            0px 10px,
+          radial-gradient(
+            at 100% 100%,
+            rgba(96, 16, 48, 0) 9px,
+            black 10px,
+            rgba(96, 16, 48, 0) 11px
+          ),
+          #4169E1;
+        background-size: 20px 20px;
         cursor: pointer;
       }
 
@@ -89,8 +212,6 @@
           height: 10px;
           width: 10px;
         }
-
-        
       }
 
       .coins-closed {
@@ -101,44 +222,114 @@
 
   .bog-bottom {
     @include row(35vh);
-    background-image: url("../../Images/Grass.png");
-    background-size: 100% 100%;
+    position: relative;
 
-    .bog-bottom-left {
-      @include section(40vw);
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-start;
-      padding: 20px;
+    .creepy-tree {
+      @include flex(center);
+      height: 100%;
+      width: 100%;
+      position: relative;
+    }
+    .creepy-trunk-top {
+      height: 40%;
+      width: 75px;
+      border-radius: 25% 25% 0% 0%;
+      border-right: rgb(28, 36, 36) solid 20px;
+      position: relative;
+      top: 20px;
+      @include flex(center);
+      transform: rotate(30deg);
 
-      .sulfur {
-        background-image: url("../../Images/Sulfur.jpg");
-        background-size: 100% 100%;
+      .creepy-tree-branch-one {
         height: 50px;
-        width: 50px;
-        cursor: pointer;
+        width: 150%;
+        border-bottom: solid 10px rgb(28, 36, 36);
+        border-right: solid 10px rgb(28, 36, 36);
+        border-radius: 50% 0% 45% 50%;
+        transform: rotate(20deg);
+        position: relative;
+        top: 20px;
+        left: 15px;
       }
+      .creepy-tree-branch-two {
+        height: 50px;
+        width: 200%;
+        border-bottom: rgb(28, 36, 36) solid 10px;
+        border-radius: 35%;
+        position: relative;
+        left: 35px;
+        transform: rotate(-30deg);
+      }
+    }
+    .creepy-trunk-middle {
+      height: 40%;
+      width: 75px;
+      border-left: rgb(28, 36, 36) solid 25px;
+      border-radius: 0%;
+      position: relative;
+      left: 30px;
+      top: 15px;
+      @include flex(center);
 
-      .sulfur-closed {
-        display: none;
+      .creepy-tree-branch-three {
+        height: 50px;
+        width: 50%;
+        border-bottom: solid 10px rgb(28, 36, 36);
+        border-radius: 25% 25% 25% 25%;
+        position: relative;
+        left: 20px;
+        top: 30px;
+        transform: rotate(80deg);
+      }
+      .creepy-tree-branch-four {
+        height: 50px;
+        width: 150%;
+        border-bottom: rgb(28, 36, 36) solid 15px;
+        border-radius: 25%;
+        position: relative;
+        bottom: 15px;
+        right: 10px;
+        transform: rotate(-25deg);
+      }
+    }
+    .creepy-trunk-bottom {
+      height: 40%;
+      width: 75px;
+      border-right: rgb(28, 36, 36) solid 35px;
+      border-radius: 50% 50% 0% 0%;
+      @include flex(center);
+
+      .creepy-tree-branch-five {
+        height: 50px;
+        width: 200%;
+        border-bottom: solid 20px rgb(28, 36, 36);
+        border-radius: 35%;
+        transform: rotate(50deg);
+        position: relative;
+        bottom: 40px;
+        left: 20px;
       }
     }
 
-    .bog-bottom-middle {
-      @include section(20vw);
+    .sulfur {
+      background-image: linear-gradient(45deg, transparent 50%, #cccc00 50%);
+      height: 40px;
+      width: 40px;
+      border-radius: 25%;
+      cursor: pointer;
+      position: absolute;
+      transform: rotate(-45deg);
+      left: 25px;
+      top: 25px;
     }
 
-    .bog-bottom-right {
-      @include section(40vw);
+    .sulfur-closed {
+      display: none;
     }
   }
 }
 
 .pod {
-  border-radius: 50%;
-  height: 25px;
-  width: 25px;
-  background-color: lime;
   position: absolute;
   bottom: 60px;
   left: 40px;
@@ -149,6 +340,47 @@
   animation-iteration-count: 1;
   animation-direction: normal;
   animation-fill-mode: forwards;
+
+  .pod-top {
+    @include flex(space-evenly);
+    height: 40px;
+    width: 55px;
+    background-color: #568203;
+    border-radius: 50%;
+    border: solid yellowgreen 4px;
+    position: relative;
+    top: 7px;
+    right: 8px;
+    animation-name: throb;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+
+    .pod-speckle {
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+      background-color: #21421e;
+    }
+
+    .pod-top-top {
+      @include center(space-evenly);
+      width: 100%;
+      height: 25%;
+    }
+
+    .pod-top-middle {
+      @include center(space-evenly);
+      width: 100%;
+      height: 25%;
+    }
+
+    .pod-top-bottom {
+      @include center(space-evenly);
+      width: 100%;
+      height: 25%;
+    }
+  }
 }
 
 .pod-closed {
@@ -179,7 +411,6 @@
   99% {
     bottom: 60px;
     left: 75vw;
-    background-color: lime;
   }
 
   100% {
