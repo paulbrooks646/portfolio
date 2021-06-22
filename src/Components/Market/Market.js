@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import { connect } from "react-redux";
 import { getUser, logoutUser } from "../../redux/userReducer";
-import {getInventory} from "../../redux/inventoryReducer"
+import { getInventory } from "../../redux/inventoryReducer";
 import axios from "axios";
 import "./Market.scss";
 import ArrowForward from "@material-ui/icons/ArrowForward";
@@ -12,28 +12,35 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Casa from "../../Images/Casa/Casa";
 import Loading from "../Loading/Loading";
-import Character from "../Character/Character"
+import Character from "../Character/Character";
 
 function Market(props) {
- const [isLoading, setIsLoading] = useState(true);
- const [rightLeft, setRightLeft] = useState(false);
- const [leftLeft, setLeftLeft] = useState(false);
- const [rightRight, setRightRight] = useState(false);
- const [leftRight, setLeftRight] = useState(false);
- const [leftCharacter, setLeftCharacter] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [rightLeft, setRightLeft] = useState(false);
+  const [leftLeft, setLeftLeft] = useState(false);
+  const [rightRight, setRightRight] = useState(false);
+  const [leftRight, setLeftRight] = useState(false);
+  const [leftCharacter, setLeftCharacter] = useState(false);
   const [rightCharacter, setRightCharacter] = useState(false);
-  const [inventoryOpen, setInventoryOpen] = useState(false)
-  const [rejectionCard, setRejectionCard] = useState(false)
-  
+  const [inventoryOpen, setInventoryOpen] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false);
+  const [marketData, setMarketData] = useState({});
+  const [firstTimeCard, setFirstTimeCard] = useState(false);
+  const [coinCard, setCoinCard] = useState(false);
+
   useEffect(() => {
-    
+    axios.get("/api/market").then((res) => {
+      if (res.data[0].first_time) {
+        setFirstTimeCard(true);
+      }
+      setMarketData(res.data[0]);
       if (props.user.user.last === "town") {
         setLeftCharacter(true);
       } else if (props.user.user.last === "alley") {
         setRightCharacter(true);
       }
       setIsLoading(false);
-    
+    });
   }, []);
 
   const toggleInventoryOpen = () => setInventoryOpen(!inventoryOpen);
@@ -53,10 +60,6 @@ function Market(props) {
     );
   });
 
-  const toggleItem = (item) => {
-    setRejectionCard(true)
-  };
-
   const toggleRight = () => {
     axios.post("/api/changeLast", { last: "market" }).then((res) => {
       props.getUser(res.data).then(() => {
@@ -66,11 +69,11 @@ function Market(props) {
   };
 
   const toggleLeft = () => {
-   axios.post("/api/changeLast", { last: "market" }).then((res) => {
-     props.getUser(res.data).then(() => {
-       props.history.push("/Town");
-     });
-   });
+    axios.post("/api/changeLast", { last: "market" }).then((res) => {
+      props.getUser(res.data).then(() => {
+        props.history.push("/Town");
+      });
+    });
   };
   const toggleBlack = () => {
     props.history.push("/Blacksmith");
@@ -108,6 +111,37 @@ function Market(props) {
     }
   };
 
+  const toggleFirst = () => {
+    axios.post("/api/marketFirst").then((res) => {
+      setMarketData(res.data[0]);
+      setFirstTimeCard(false);
+    });
+  };
+
+  const toggleCoin = () => {
+    axios.post("/api/marketCoin").then((res) => {
+      setMarketData(res.data[0]);
+      axios.post("/api/coin").then((res) => {
+        props.getUser(res.data);
+        setCoinCard(true);
+      });
+    });
+  };
+
+  const toggleCoinTwo = () => {
+    axios.post("/api/marketCoinTwo").then((res) => {
+      setMarketData(res.data[0]);
+      axios.post("/api/coin").then((res) => {
+        props.getUser(res.data);
+        setCoinCard(true);
+      });
+    });
+  };
+
+  const toggleItem = (item) => {
+    setRejectionCard(true);
+  };
+
   return isLoading ? (
     <Loading />
   ) : (
@@ -136,6 +170,10 @@ function Market(props) {
       </div>
       <div className="market-body">
         <div className="market-top">
+          <div
+            className={!marketData.coin_taken ? "sky-coin" : "sky-coin-closed"}
+            onClick={toggleCoin}
+          ></div>
           <div className="blacksmith-div" onClick={toggleBlack}>
             <Casa />
             <h2 className="store-sign">Blacksmith</h2>
@@ -180,7 +218,14 @@ function Market(props) {
               <Character />
             </div>
           </div>
-          <div className="market-middle-middle"></div>
+          <div className="market-middle-middle">
+            <div
+              className={
+                !marketData.coin_two_taken ? "dirt-coin" : "dirt-coin-closed"
+              }
+              onClick={toggleCoinTwo}
+            ></div>
+          </div>
           <div className="market-middle-right">
             <div
               className={`${
@@ -228,9 +273,43 @@ function Market(props) {
           CLOSE
         </Button>
       </Card>
+      <Card className={`${coinCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          You find a shiny gold coin.
+        </Typography>
+        <Button
+          onClick={() => setCoinCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+
+      <Card
+        className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}
+      >
+        <Typography
+          variant="h4"
+          color="secondary"
+          className="answer-card-description"
+        >
+          The market is surprisingly quiet. I guess its hard for people to buy anything
+          if they don't have coins.
+        </Typography>
+        <Button onClick={toggleFirst} variant="contained" color="primary">
+          CLOSE
+        </Button>
+      </Card>
     </div>
   );
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getUser, getInventory, logoutUser})(Market);
+export default connect(mapStateToProps, { getUser, getInventory, logoutUser })(
+  Market
+);

@@ -36,6 +36,8 @@ function Cottage(props) {
   const [protectionCard, setProtectionCard] = useState(false);
   const [fireCard, setFireCard] = useState(false);
   const [openCard, setOpenCard] = useState(false);
+  const [takePodRejectionCard, setTakePodRejectionCard] = useState(false);
+  const [featherCard, setFeatherCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/cottage").then((res) => {
@@ -94,6 +96,18 @@ function Cottage(props) {
           axios.get("/api/cottage").then((res) => {
             setCottageData(res.data[0]);
             setOpenCard(true);
+          });
+        });
+      } else {
+        setRejectionCard(true);
+      }
+    } else if (item === "feather") {
+      if (cottageData.protection_used) {
+        axios.post("/api/useFeather").then((res) => {
+          props.getInventory(res.data);
+          axios.get("/api/cottage").then((res) => {
+            setCottageData(res.data[0]);
+            setFeatherCard(true);
           });
         });
       } else {
@@ -182,6 +196,8 @@ function Cottage(props) {
   const togglePod = () => {
     if (!cottageData.protection_used) {
       setLaserRejectionCard(true);
+    } else if (!cottageData.feather_used) {
+      setTakePodRejectionCard(true);
     } else {
       axios.post("/api/pod").then((res) => {
         props.getInventory(res.data);

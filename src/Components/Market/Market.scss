@@ -6,7 +6,22 @@
     display: flex;
     align-items: flex-end;
     justify-content: space-evenly;
+    position: relative;
     background-color: skyblue;
+
+    .sky-coin {
+      position: absolute;
+      bottom: 0px;
+      height: 10px;
+      width: 10px;
+      border-radius: 50% 50% 0% 0%;
+      cursor: pointer;
+      background-color: rgba(127, 255, 212, .3);
+    }
+
+    .sky-coin-closed {
+      display: none;
+    }
 
     .store-sign {
       position: absolute;
@@ -56,6 +71,19 @@
 
     .market-middle-middle {
       @include section(20vw);
+      @include flex(center);
+
+      .dirt-coin {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+        background-color: rgba(134, 134, 134, .7);
+      }
+
+      .dirt-coin-closed {
+        display: none
+      }
     }
 
     .market-middle-right {
