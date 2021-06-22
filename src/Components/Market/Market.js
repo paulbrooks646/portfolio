@@ -10,10 +10,7 @@ import ArrowBack from "@material-ui/icons/ArrowBack";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Blacksmith from "../../Images/Blacksmith.jpg";
-import Store from "../../Images/General.jpg";
-import Magic from "../../Images/MagicOutside.png";
-import Grocer from "../../Images/Grocer.png";
+import Casa from "../../Images/Casa/Casa";
 import Loading from "../Loading/Loading";
 import Character from "../Character/Character"
 
@@ -139,9 +136,23 @@ function Market(props) {
       </div>
       <div className="market-body">
         <div className="market-top">
-          <div className="market-top-left"></div>
-          <div className="market-top-middle"></div>
-          <div className="market-top-right"></div>
+          <div className="blacksmith-div" onClick={toggleBlack}>
+            <Casa />
+            <h2 className="store-sign">Blacksmith</h2>
+          </div>
+          <div className="magic-store-div" onClick={toggleMagic}>
+            <Casa />
+            <h2 className="store-sign">Magic Shop</h2>
+          </div>
+          <div className="grocer-div" onClick={toggleGrocer}>
+            <Casa />
+            <h2 className="store-sign">Grocer</h2>
+          </div>
+
+          <div className="store-div" onClick={toggleGeneral}>
+            <Casa />
+            <h2 className="store-sign">General Store</h2>
+          </div>
         </div>
         <div className="market-middle">
           <div className="market-middle-left">
@@ -197,29 +208,7 @@ function Market(props) {
             </div>
           </div>
         </div>
-        <div className="market-bottom">
-          <div className="blacksmith-div" onClick={toggleBlack}>
-            <img
-              src={Blacksmith}
-              alt="Blacksmith Shop"
-              className="market-blacksmith"
-            />
-            <h2>Blacksmith</h2>
-          </div>
-          <div className="magic-store-div" onClick={toggleMagic}>
-            <img src={Magic} alt="magic store" className="market-magic" />
-            <h2>Magic Shop</h2>
-          </div>
-          <div className="grocer-div" onClick={toggleGrocer}>
-            <img src={Grocer} className="market-grocer" alt="grocer" />
-            <h2>Grocer</h2>
-          </div>
-
-          <div className="store-div" onClick={toggleGeneral}>
-            <img src={Store} alt="general store" className="market-store" />
-            <h2>General Store</h2>
-          </div>
-        </div>
+        <div className="market-bottom"></div>
       </div>
       <Card
         className={`${rejectionCard ? "answer-card" : "answer-card-closed"}`}

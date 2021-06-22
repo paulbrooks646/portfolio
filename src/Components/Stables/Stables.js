@@ -12,9 +12,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import ArrowBack from "@material-ui/icons/ArrowBack";
-import Horse from "../../Images/Horse.jpg";
-import Stable from "../../Images/Stables.jpg";
-import Cowboy from "../../Images/Cowboy.jpg";
+import Casa from "../../Images/Casa/Casa";
 import Loading from "../Loading/Loading";
 import Character from "../Character/Character";
 
@@ -40,16 +38,16 @@ function Stables(props) {
   const [bottleNeeded, setBottleNeeded] = useState(false);
   const [needPermission, setNeedPermission] = useState(false);
   const [alreadyTaken, setAlreadyTaken] = useState(false);
-  const [inventoryOpen, setInventoryOpen] = useState(false)
-  const [rejectionCard, setRejectionCard] = useState(false)
-  const [stablesData, setStablesData] = useState(false)
-  const [firstTimeCard, setFirstTimeCard] = useState(false)
-   const [bottleCard, setBottleCard] = useState(false);
+  const [inventoryOpen, setInventoryOpen] = useState(false);
+  const [rejectionCard, setRejectionCard] = useState(false);
+  const [stablesData, setStablesData] = useState(false);
+  const [firstTimeCard, setFirstTimeCard] = useState(false);
+  const [bottleCard, setBottleCard] = useState(false);
 
   useEffect(() => {
     axios.get("/api/stables").then((res) => {
       if (res.data[0].first_time) {
-        setFirstTimeCard(true)
+        setFirstTimeCard(true);
       }
       setStablesData(res.data[0]);
 
@@ -62,12 +60,12 @@ function Stables(props) {
     });
   }, []);
 
-   const toggleFirst = () => {
-     axios.post("/api/stablesFirst").then((res) => {
-       setStablesData(res.data[0]);
-       setFirstTimeCard(false);
-     });
-   };
+  const toggleFirst = () => {
+    axios.post("/api/stablesFirst").then((res) => {
+      setStablesData(res.data[0]);
+      setFirstTimeCard(false);
+    });
+  };
 
   const toggleInventoryOpen = () => setInventoryOpen(!inventoryOpen);
 
@@ -88,18 +86,16 @@ function Stables(props) {
 
   const toggleItem = (item) => {
     if (item === "bottle") {
-      
-        axios.post("/api/manure").then((res) => {
-          props.getInventory(res.data);
-        });
-        axios.get("/api/stables").then((res) => {
-          setStablesData(res.data[0]);
-          setBottleCard(true);
-        });
-      } else {
-        setRejectionCard(true);
-      }
-    
+      axios.post("/api/manure").then((res) => {
+        props.getInventory(res.data);
+      });
+      axios.get("/api/stables").then((res) => {
+        setStablesData(res.data[0]);
+        setBottleCard(true);
+      });
+    } else {
+      setRejectionCard(true);
+    }
   };
 
   const toggleLeft = () => {
@@ -197,13 +193,13 @@ function Stables(props) {
       });
       axios.post("/api/coin").then((res) => {
         props.getUser(res.data);
-        axios.post("/api/coin").then(res => {
-          props.getUser(res.data)
-          axios.post("/api/coin").then(res => {
-            props.getUser(res.data)
+        axios.post("/api/coin").then((res) => {
+          props.getUser(res.data);
+          axios.post("/api/coin").then((res) => {
+            props.getUser(res.data);
             setManureCleaned(!manureCleaned);
-          })
-        })
+          });
+        });
       });
     } else {
       toggleGoodReason();
@@ -257,23 +253,68 @@ function Stables(props) {
       <div className="stables-body">
         <div className="stables-top">
           <div className="stables-top-left">
-            <img
-              src={Horse}
-              alt="horse"
-              className="stables-horse"
-              onClick={toggleHorseCard}
-            />
+           
           </div>
           <div className="stables-top-middle">
-            <img
-              src={Cowboy}
-              alt="cowboy"
-              className="stables-cowboy"
-              onClick={toggleOldmanCard}
-            />
+            <div className="dashboard-old-man" onClick={toggleOldmanCard}>
+              <div className="dashboard-old-man-hat">
+                <div className="dashboard-old-man-hat-top"></div>
+                <div className="dashboard-old-man-hat-bottom"></div>
+              </div>
+              <div className="dashboard-old-man-head">
+                <div className="dashboard-old-man-hair-left"></div>
+                <div className="dashboard-old-man-face">
+                  <div className="dashboard-old-man-eyes">
+                    <div className="dashboard-old-man-eye">
+                      <div className="dashboard-old-man-iris">
+                        <div className="dashboard-old-man-pupil"></div>
+                      </div>
+                    </div>
+                    <div className="dashboard-old-man-eye">
+                      <div className="dashboard-old-man-iris">
+                        <div className="dashboard-old-man-pupil"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="dashboard-old-man-nose-div">
+                    <div className="dashboard-old-man-left-ear"></div>
+                    <div className="dashboard-old-man-nose"></div>
+                    <div className="dashboard-old-man-right-ear"></div>
+                  </div>
+                  <div className="dashboard-old-man-mouth"></div>
+                </div>
+                <div className="dashboard-old-man-hair-right"></div>
+              </div>
+              <div className="dashboard-old-man-neck"></div>
+              <div className="dashboard-old-man-shirt">
+                <div className="dashboard-old-man-left-arm">
+                  <div className="dashboard-old-man-hand">
+                    <div className="dashboard-old-man-finger-line"></div>
+                    <div className="dashboard-old-man-finger-line"></div>
+                    <div className="dashboard-old-man-finger-line"></div>
+                  </div>
+                </div>
+                <div className="dashboard-old-man-right-arm">
+                  <div className="dashboard-old-man-hand">
+                    <div className="dashboard-old-man-finger-line"></div>
+                    <div className="dashboard-old-man-finger-line"></div>
+                    <div className="dashboard-old-man-finger-line"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="dashboard-old-man-pants"></div>
+              <div className="dashboard-old-man-leg-div">
+                <div className="dashboard-old-man-leg">
+                  <div className="dashboard-old-man-shoe"></div>
+                </div>
+                <div className="dashboard-old-man-leg">
+                  <div className="dashboard-old-man-shoe"></div>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="stables-top-right">
-            <img src={Stable} alt="stables" className="stables-stables" />
+            <Casa />
           </div>
         </div>
         <div className="stables-middle">
@@ -355,6 +396,36 @@ function Stables(props) {
           </div>
           <div className="stables-bottom-middle"></div>
           <div className="stables-bottom-right">
+            <div className="fly-div">
+              <div className="fly">
+                <div className="fly-wing-left"></div>
+                <div className="fly-body">
+                  <div className="fly-eye-div">
+                    <div className="fly-eye">
+                      <div className="fly-pupil"></div>
+                    </div>
+                    <div className="fly-eye">
+                      <div className="fly-pupil"></div>
+                    </div>
+                  </div>
+                </div>
+                <div className="fly-wing-right"></div>
+              </div>
+              <div className="fly">
+                <div className="fly-wing-left"></div>
+                <div className="fly-body">
+                  <div className="fly-eye-div">
+                    <div className="fly-eye">
+                      <div className="fly-pupil"></div>
+                    </div>
+                    <div className="fly-eye">
+                      <div className="fly-pupil"></div>
+                    </div>
+                  </div>
+                </div>
+                <div className="fly-wing-right"></div>
+              </div>
+            </div>
             <div className="manure-mound" onClick={manureMound}></div>
           </div>
         </div>
@@ -433,8 +504,9 @@ function Stables(props) {
           color="secondary"
           className="answer-card-description"
         >
-          I don't have a lot of work these days but I suppose I could give you three
-          coins if you put all the little dung pieces into the manure pile.
+          I don't have a lot of work these days but I suppose I could give you
+          three coins if you put all the little dung pieces into the manure
+          pile.
         </Typography>
         <Typography
           variant="h6"
@@ -662,19 +734,19 @@ function Stables(props) {
           CLOSE
         </Button>
       </Card>
-      <Card className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}>
+      <Card
+        className={`${firstTimeCard ? "answer-card" : "answer-card-closed"}`}
+      >
         <Typography
           variant="h4"
           color="primary"
           className="answer-card-description"
         >
-          As you leave town the nasty smell of manure fills your nostrils. Not surprisingly, shortly after you come to a ranch. The rancher tips his hat when he sees you.
+          As you leave town the nasty smell of manure fills your nostrils. Not
+          surprisingly, shortly after you come to a ranch. The rancher tips his
+          hat when he sees you.
         </Typography>
-        <Button
-          onClick={toggleFirst}
-          variant="contained"
-          color="primary"
-        >
+        <Button onClick={toggleFirst} variant="contained" color="primary">
           CLOSE
         </Button>
       </Card>

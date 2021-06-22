@@ -3,15 +3,45 @@
 .market-body {
   .market-top {
     @include row(35vh);
-    background-image: url("../../Images/Market.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100% 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-evenly;
+    background-color: skyblue;
+
+    .store-sign {
+      position: absolute;
+      width: 80%;
+      text-align: center;
+      background-color: white;
+      border: solid black 2px;
+      z-index: 1;
+      bottom: -36px;
+    }
+
+    .blacksmith-div {
+      @include flex(flex-start);
+      cursor: pointer;
+    }
+
+    .magic-store-div {
+      cursor: pointer;
+      @include flex(flex-start);
+    }
+
+    .grocer-div {
+      cursor: pointer;
+      @include flex(flex-start);
+    }
+
+    .store-div {
+      cursor: pointer;
+      @include flex(flex-start);
+    }
   }
 
   .market-middle {
     @include row(20vh);
-    background-image: url("../../Images//Dirt.png");
+    background-image: url("../../Images/Dirt.png");
     background-size: 100% 100%;
 
     .market-middle-left {
@@ -43,47 +73,7 @@
   .market-bottom {
     @include row(35vh);
     @include center(space-evenly);
-    background-image: url("../../Images/Grass.png");
+    background-image: url("../../Images//Grass.png");
     background-size: 100% 100%;
-
-    .blacksmith-div {
-      @include flex(flex-start);
-      cursor: pointer;
-
-      .market-blacksmith {
-        height: 200px;
-        width: 200px;
-      }
-    }
-
-    .magic-store-div {
-      cursor: pointer;
-      @include flex(flex-start);
-
-      .market-magic {
-        height: 200px;
-        width: 200px;
-      }
-    }
-
-    .grocer-div {
-      cursor: pointer;
-      @include flex(flex-start);
-
-      .market-grocer {
-        height: 200px;
-        width: 200px;
-      }
-    }
-
-    .store-div {
-      cursor: pointer;
-      @include flex(flex-start);
-
-      .market-store {
-        height: 200px;
-        width: 200px;
-      }
-    }
   }
 }

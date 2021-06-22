@@ -27,11 +27,7 @@
         cursor: pointer;
       }
 
-      .town-farmer {
-        height: 150px;
-        width: 120px;
-        cursor: pointer;
-      }
+       
     }
 
     .town-top-right {
@@ -65,6 +61,238 @@
 
     .town-middle-middle {
       @include section(20vw);
+
+      .dashboard-old-man {
+        @include flex(flex-end);
+        cursor: pointer;
+       position: relative;
+       bottom: 50px;
+        .dashboard-old-man-hat {
+          @include flex(flex-start);
+          position: relative;
+          z-index: 2;
+          .dashboard-old-man-hat-top {
+            height: 50px;
+            width: 50px;
+            background-image: linear-gradient(black 50%, transparent 50%);
+            border-radius: 50%;
+            position: relative;
+          }
+          .dashboard-old-man-hat-bottom {
+            width: 75px;
+            height: 50px;
+            border-radius: 40%;
+            border-bottom: black solid 7px;
+            position: relative;
+            bottom: 70px;
+          }
+        }
+        .dashboard-old-man-head {
+          @include center(center);
+          position: relative;
+          bottom: 90px;
+
+          .dashboard-old-man-hair-left {
+            height: 10px;
+            width: 5px;
+            background-color: slategray;
+            position: relative;
+            left: 4px;
+            bottom: 7px;
+            z-index: 1;
+          }
+          .dashboard-old-man-face {
+            height: 60px;
+            width: 40px;
+            border-radius: 50%;
+            background-color: #DEB887;
+            @include flex(space-evenly);
+
+            .dashboard-old-man-eyes {
+              @include center(space-evenly);
+              width: 100%;
+              position: relative;
+              top: 10px;
+
+              .dashboard-old-man-eye {
+                height: 9px;
+                width: 14px;
+                background-color: white;
+                border-radius: 50%;
+                @include flex(center);
+
+                .dashboard-old-man-iris {
+                  height: 4px;
+                  width: 4px;
+                  background-color: black;
+                  border-radius: 50%;
+                  @include flex(center);
+
+                  .dashboard-old-man-pupil {
+                    height: 2.5px;
+                    width: 2.5px;
+                    background-color: black;
+                    border-radius: 50%;
+                  }
+                }
+              }
+            }
+
+            .dashboard-old-man-nose-div {
+              @include center(space-between);
+              position: relative;
+              top: 2px;
+              width: 100%;
+
+              .dashboard-old-man-left-ear {
+                border: solid 0.5px;
+                border-right: none;
+                background-color: #DEB887;;
+                height: 10px;
+                width: 5px;
+                border-radius: 50%;
+                position: relative;
+                right: 3px;
+                transform: rotate(-5deg);
+              }
+
+              .dashboard-old-man-nose {
+                border: solid 0.5px;
+                border-top: none;
+                width: 10px;
+                height: 7px;
+                border-radius: 15% 15% 50% 50%;
+              }
+              .dashboard-old-man-right-ear {
+                border: solid 0.5px;
+                border-left: none;
+                background-color: #DEB887;;
+                height: 10px;
+                width: 5px;
+                border-radius: 50%;
+                position: relative;
+                left: 3px;
+                transform: rotate(5deg);
+              }
+            }
+
+            .dashboard-old-man-mouth {
+              width: 17px;
+              height: 1px;
+              background-color: black;
+              position: relative;
+              bottom: 2px;
+              border-radius: 50%;
+            }
+          }
+          .dashboard-old-man-hair-right {
+            height: 10px;
+            width: 5px;
+            background-color: slategray;
+            position: relative;
+            right: 4px;
+            bottom: 8px;
+          }
+        }
+        .dashboard-old-man-neck {
+          width: 15px;
+          height: 5px;
+          background-color: #DEB887;
+          position: relative;
+          bottom: 93px;
+        }
+        .dashboard-old-man-shirt {
+          height: 60px;
+          width: 40px;
+          background-color: black;
+          position: relative;
+          bottom: 94px;
+          border-radius: 40% 40% 0% 0%;
+          @include center(space-between);
+
+          .dashboard-old-man-left-arm {
+            background-image: linear-gradient(black 80%, #DEB887 80%);
+            width: 10px;
+            height: 50px;
+            transform: rotate(30deg);
+            position: relative;
+            right: 8px;
+            @include flex(flex-end);
+
+            .dashboard-old-man-hand {
+              width: 15px;
+              height: 10px;
+              border-radius: 25%;
+              @include center(space-evenly);
+              align-items: flex-end;
+              background-color: #DEB887;;
+              position: relative;
+              top: 5px;
+
+              .dashboard-old-man-finger-line {
+                height: 50%;
+                width: 0.5px;
+                background-color: black;
+              }
+            }
+          }
+          .dashboard-old-man-right-arm {
+            background-image: linear-gradient(black 80%, #DEB887 80%);
+            width: 10px;
+            height: 50px;
+            transform: rotate(-30deg);
+            position: relative;
+            left: 8px;
+            @include flex(flex-end);
+
+            .dashboard-old-man-hand {
+              width: 15px;
+              height: 10px;
+              @include center(space-evenly);
+              align-items: flex-end;
+              background-color: #DEB887;;
+              position: relative;
+              top: 5px;
+              border-radius: 25%;
+
+              .dashboard-old-man-finger-line {
+                height: 50%;
+                width: 0.5px;
+
+                background-color: black;
+              }
+            }
+          }
+        }
+        .dashboard-old-man-pants {
+          background-color: black;
+          height: 20px;
+          width: 40px;
+          position: relative;
+          bottom: 95px;
+          border-top: silver solid 3px;
+        }
+        .dashboard-old-man-leg-div {
+          width: 40px;
+          @include center(space-between);
+          position: relative;
+          bottom: 95px;
+
+          .dashboard-old-man-leg {
+            height: 45px;
+            width: 15px;
+            background-color: black;
+            @include flex(flex-end);
+
+            .dashboard-old-man-shoe {
+              width: 20px;
+              height: 10px;
+              background-color: brown;
+              border-radius: 25% 25% 0% 0%;
+            }
+          }
+        }
+      }
     }
 
     .town-middle-right {

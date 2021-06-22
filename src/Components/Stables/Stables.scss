@@ -22,10 +22,234 @@
       @include section(20vw);
       @include center(center);
 
-      .stables-cowboy {
-        height: 150px;
-        width: 100px;
+      .dashboard-old-man {
+        @include flex(center);
         cursor: pointer;
+        position: relative;
+        bottom: 50px;
+        .dashboard-old-man-hat {
+          @include flex(center);
+          position: relative;
+          top: 20px;
+          z-index: 2;
+          .dashboard-old-man-hat-top {
+            height: 50px;
+            width: 50px;
+            background-image: linear-gradient(brown 50%, transparent 50%);
+            border-radius: 50%;
+            position: relative;
+            top: 70px;
+          }
+          .dashboard-old-man-hat-bottom {
+            width: 90px;
+            height: 50px;
+            border-radius: 30%;
+            border-bottom: brown solid 7px;
+          }
+        }
+        .dashboard-old-man-head {
+          @include center(center);
+
+          .dashboard-old-man-hair-left {
+            height: 10px;
+            width: 5px;
+            background-color: black;
+            position: relative;
+            left: 4px;
+            bottom: 7px;
+            z-index: 1;
+          }
+          .dashboard-old-man-face {
+            height: 60px;
+            width: 40px;
+            border-radius: 50%;
+            background-color: rgb(223, 166, 117);
+            @include flex(space-evenly);
+
+            .dashboard-old-man-eyes {
+              @include center(space-evenly);
+              width: 100%;
+              position: relative;
+              top: 10px;
+
+              .dashboard-old-man-eye {
+                height: 9px;
+                width: 14px;
+                background-color: white;
+                border-radius: 50%;
+                @include flex(center);
+
+                .dashboard-old-man-iris {
+                  height: 4px;
+                  width: 4px;
+                  background-color: black;
+                  border-radius: 50%;
+                  @include flex(center);
+
+                  .dashboard-old-man-pupil {
+                    height: 2.5px;
+                    width: 2.5px;
+                    background-color: black;
+                    border-radius: 50%;
+                  }
+                }
+              }
+            }
+
+            .dashboard-old-man-nose-div {
+              @include center(space-between);
+              position: relative;
+              top: 2px;
+              width: 100%;
+
+              .dashboard-old-man-left-ear {
+                border: solid 0.5px;
+                border-right: none;
+                background-color: rgb(223, 166, 117);
+                height: 10px;
+                width: 5px;
+                border-radius: 50%;
+                position: relative;
+                right: 3px;
+                transform: rotate(-5deg);
+              }
+
+              .dashboard-old-man-nose {
+                border: solid 0.5px;
+                border-top: none;
+                width: 10px;
+                height: 7px;
+                border-radius: 15% 15% 50% 50%;
+              }
+              .dashboard-old-man-right-ear {
+                border: solid 0.5px;
+                border-left: none;
+                background-color: rgb(223, 166, 117);
+                height: 10px;
+                width: 5px;
+                border-radius: 50%;
+                position: relative;
+                left: 3px;
+                transform: rotate(5deg);
+              }
+            }
+
+            .dashboard-old-man-mouth {
+              width: 17px;
+              height: 1px;
+              background-color: black;
+              position: relative;
+              bottom: 2px;
+              border-radius: 50%;
+            }
+          }
+          .dashboard-old-man-hair-right {
+            height: 10px;
+            width: 5px;
+            background-color: black;
+            position: relative;
+            right: 4px;
+            bottom: 8px;
+          }
+        }
+        .dashboard-old-man-neck {
+          width: 15px;
+          height: 5px;
+          background-color: rgb(223, 166, 117);
+          position: relative;
+          bottom: 3px;
+        }
+        .dashboard-old-man-shirt {
+          height: 60px;
+          width: 40px;
+          background-color: brown;
+          position: relative;
+          bottom: 4px;
+          border-radius: 40% 40% 0% 0%;
+          @include center(space-between);
+
+          .dashboard-old-man-left-arm {
+            background-image: linear-gradient(brown 80%, rgb(223, 166, 117) 80%);
+            width: 10px;
+            height: 50px;
+            transform: rotate(30deg);
+            position: relative;
+            right: 8px;
+            @include flex(flex-end);
+
+            .dashboard-old-man-hand {
+              width: 15px;
+              height: 10px;
+              border-radius: 25%;
+              @include center(space-evenly);
+              align-items: flex-end;
+              background-color: rgb(223, 166, 117);
+              position: relative;
+              top: 5px;
+
+              .dashboard-old-man-finger-line {
+                height: 50%;
+                width: 0.5px;
+                background-color: black;
+              }
+            }
+          }
+          .dashboard-old-man-right-arm {
+            background-image: linear-gradient(brown 80%, rgb(223, 166, 117) 80%);
+            width: 10px;
+            height: 50px;
+            transform: rotate(-30deg);
+            position: relative;
+            left: 8px;
+            @include flex(flex-end);
+
+            .dashboard-old-man-hand {
+              width: 15px;
+              height: 10px;
+              @include center(space-evenly);
+              align-items: flex-end;
+              background-color: rgb(223, 166, 117);
+              position: relative;
+              top: 5px;
+              border-radius: 25%;
+
+              .dashboard-old-man-finger-line {
+                height: 50%;
+                width: 0.5px;
+
+                background-color: black;
+              }
+            }
+          }
+        }
+        .dashboard-old-man-pants {
+          background-color: brown;
+          height: 20px;
+          width: 40px;
+          position: relative;
+          bottom: 5px;
+          border-top: black solid 3px;
+        }
+        .dashboard-old-man-leg-div {
+          width: 40px;
+          @include center(space-between);
+          position: relative;
+          bottom: 5px;
+
+          .dashboard-old-man-leg {
+            height: 45px;
+            width: 15px;
+            background-color: brown;
+            @include flex(flex-end);
+
+            .dashboard-old-man-shoe {
+              width: 20px;
+              height: 10px;
+              background-color: black;
+              border-radius: 25% 25% 0% 0%;
+            }
+          }
+        }
       }
     }
 
@@ -93,10 +317,11 @@
           @include center(space-evenly);
 
           .manure {
-            height: 20px;
-            width: 20px;
-            border-radius: 50%;
-            background-color: brown;
+            height: 30px;
+            width: 30px;
+            border-radius: 25%;
+            background-image: linear-gradient(45deg, transparent 50%, sienna 50%);
+            transform: rotate(-45deg);
           }
         }
 
@@ -104,10 +329,11 @@
           @include center(space-evenly);
 
           .manure {
-            height: 20px;
-            width: 20px;
-            border-radius: 50%;
-            background-color: brown;
+            height: 30px;
+            width: 30px;
+            border-radius: 25%;
+            background-image: linear-gradient(45deg, transparent 50%, sienna 50%);
+            transform: rotate(-45deg);
           }
         }
 
@@ -115,10 +341,11 @@
           @include center(space-evenly);
 
           .manure {
-            height: 20px;
-            width: 20px;
-            border-radius: 50%;
-            background-color: brown;
+            height: 30px;
+            width: 30px;
+             border-radius: 25%;
+            background-image: linear-gradient(45deg, transparent 50%, sienna 50%);
+            transform: rotate(-45deg);
           }
         }
       }
@@ -130,14 +357,70 @@
 
     .stables-bottom-right {
       @include section(40vw);
-      @include center(center);
+      @include flex(space-evenly);
+      
+
+      .fly-div {
+        @include center(space-evenly);
+        position: absolute;
+        width: 100%;
+        top: 75px;
+
+        .fly {
+          @include center(center);
+          .fly-wing-left {
+            height: 10px;
+            width: 15px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50% 0% 0% 50%;
+          }
+
+          .fly-body {
+            height: 30px;
+            width: 25px;
+            border-radius: 50%;
+            background-color: black;
+            @include flex(flex-end);
+
+            .fly-eye-div {
+              @include center(space-evenly);
+              position: relative;
+              bottom: 5px;
+
+              .fly-eye {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: white;
+                @include flex(center);
+                .fly-pupil {
+                  width: 5px;
+                  height: 5px;
+                  border-radius: 50%;
+                  background-color: black;
+                }
+              }
+            }
+          }
+
+          .fly-wing-right {
+            height: 10px;
+            width: 15px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 0% 50% 50% 00%;
+          }
+        }
+      }
 
       .manure-mound {
+        background-image: linear-gradient(45deg, transparent 50%, sienna 50%);
         height: 200px;
         width: 200px;
-        border-radius: 50%;
-        background-color: brown;
+        border-radius: 25%;
         cursor: pointer;
+        transform: rotate(-45deg);
+        position: relative;
+        top: 100px;
       }
     }
   }

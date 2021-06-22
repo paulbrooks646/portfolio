@@ -16,7 +16,7 @@ import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import House from "../../Images/House.jpg";
 import Character from "../Character/Character";
 import Farmer from "../../Images/Farmer.png";
-import Casa from "../../Images/Casa/Casa"
+import Casa from "../../Images/Casa/Casa";
 import axios from "axios";
 import Loading from "../Loading/Loading";
 
@@ -362,12 +362,6 @@ function Town(props) {
             >
               <Character />
             </div>
-            <img
-              src={Farmer}
-              alt="irritated farmer"
-              className="town-farmer"
-              onClick={toggleOldmanCard}
-            />
           </div>
           <div className="town-top-right">
             <Casa />
@@ -412,7 +406,64 @@ function Town(props) {
               <Character />
             </div>
           </div>
-          <div className="town-middle-middle"></div>
+          <div className="town-middle-middle">
+            <div className="dashboard-old-man" onClick={toggleOldmanCard}>
+              <div className="dashboard-old-man-hat">
+                <div className="dashboard-old-man-hat-top"></div>
+                <div className="dashboard-old-man-hat-bottom"></div>
+              </div>
+              <div className="dashboard-old-man-head">
+                <div className="dashboard-old-man-hair-left"></div>
+                <div className="dashboard-old-man-face">
+                  <div className="dashboard-old-man-eyes">
+                    <div className="dashboard-old-man-eye">
+                      <div className="dashboard-old-man-iris">
+                        <div className="dashboard-old-man-pupil"></div>
+                      </div>
+                    </div>
+                    <div className="dashboard-old-man-eye">
+                      <div className="dashboard-old-man-iris">
+                        <div className="dashboard-old-man-pupil"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="dashboard-old-man-nose-div">
+                    <div className="dashboard-old-man-left-ear"></div>
+                    <div className="dashboard-old-man-nose"></div>
+                    <div className="dashboard-old-man-right-ear"></div>
+                  </div>
+                  <div className="dashboard-old-man-mouth"></div>
+                </div>
+                <div className="dashboard-old-man-hair-right"></div>
+              </div>
+              <div className="dashboard-old-man-neck"></div>
+              <div className="dashboard-old-man-shirt">
+                <div className="dashboard-old-man-left-arm">
+                  <div className="dashboard-old-man-hand">
+                    <div className="dashboard-old-man-finger-line"></div>
+                    <div className="dashboard-old-man-finger-line"></div>
+                    <div className="dashboard-old-man-finger-line"></div>
+                  </div>
+                </div>
+                <div className="dashboard-old-man-right-arm">
+                  <div className="dashboard-old-man-hand">
+                    <div className="dashboard-old-man-finger-line"></div>
+                    <div className="dashboard-old-man-finger-line"></div>
+                    <div className="dashboard-old-man-finger-line"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="dashboard-old-man-pants"></div>
+              <div className="dashboard-old-man-leg-div">
+                <div className="dashboard-old-man-leg">
+                  <div className="dashboard-old-man-shoe"></div>
+                </div>
+                <div className="dashboard-old-man-leg">
+                  <div className="dashboard-old-man-shoe"></div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="town-middle-right">
             <div
               className={`${
