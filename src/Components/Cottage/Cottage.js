@@ -157,10 +157,6 @@ function Cottage(props) {
   const togglePurse = () => {
     if (!cottageData.protection_used) {
       setLaserRejectionCard(true);
-    } else if (!cottageData.pod_taken) {
-      setPodRejectionCard(true);
-    } else if (!cottageData.fire_used) {
-      setBramblesRejectionCard(true);
     } else {
       axios.post("/api/coin").then((res) => {
         props.getUser(res.data);
@@ -189,6 +185,7 @@ function Cottage(props) {
       props.getUser(res.data);
       axios.post("/api/cottageCoin").then((res) => {
         setCottageData(res.data[0]);
+        setCoinCard(true)
       });
     });
   };
@@ -214,8 +211,6 @@ function Cottage(props) {
       setLaserRejectionCard(true);
     } else if (!cottageData.pod_taken) {
       setPodRejectionCard(true);
-    } else if (!cottageData.fire_used) {
-      setBramblesRejectionCard(true);
     } else {
       axios.post("/api/levitation").then((res) => {
         props.getInventory(res.data);
@@ -242,8 +237,6 @@ function Cottage(props) {
       setLaserRejectionCard(true);
     } else if (!cottageData.pod_taken) {
       setPodRejectionCard(true);
-    } else if (!cottageData.fire_used) {
-      setBramblesRejectionCard(true);
     } else {
       axios.post("/api/invisibility").then((res) => {
         props.getInventory(res.data);
@@ -720,6 +713,38 @@ function Cottage(props) {
         </Typography>
         <Button
           onClick={() => setPurseCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${featherCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          As you tickle the pod with the feather, its throbbing slows down a little.
+        </Typography>
+        <Button
+          onClick={() => setFeatherCard(false)}
+          variant="contained"
+          color="primary"
+        >
+          CLOSE
+        </Button>
+      </Card>
+      <Card className={`${takePodRejectionCard ? "answer-card" : "answer-card-closed"}`}>
+        <Typography
+          variant="h6"
+          color="secondary"
+          className="answer-card-description"
+        >
+          The pod is throbbing so intensely, you are pretty sure it would explode upon touch. For all you know it would explode if you tried to walk by. You better find a way to calm it down.
+        </Typography>
+        <Button
+          onClick={() => setTakePodRejectionCard(false)}
           variant="contained"
           color="primary"
         >
