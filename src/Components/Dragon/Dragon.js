@@ -301,7 +301,10 @@ function Dragon(props) {
                 !dragonData.grow_taken ? "scroll" : "scroll-closed"
               }`}
               onClick={toggleScroll}
-            ></div>
+            >
+              <div className="scroll-top"></div>
+              <div className="scroll-bottom"></div>
+            </div>
           </div>
           <div className="dragon-bottom-right"></div>
         </div>
@@ -586,8 +589,8 @@ function Dragon(props) {
           color="primary"
           className="answer-card-description"
         >
-          As you read the scroll it disappears. A small segment of coals turns slightly
-          blue.
+          As you read the scroll it disappears. A small segment of coals turns
+          slightly blue.
         </Typography>
         <Button
           onClick={() => setIceCard(false)}
