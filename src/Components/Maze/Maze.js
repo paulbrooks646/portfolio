@@ -169,6 +169,7 @@ function Maze(props) {
   const toggleFirst = () => {
     axios.post("/api/mazeFirst").then((res) => {
       setMazeData(res.data[0]);
+      setFirstTimeCard(false)
     });
   };
 
