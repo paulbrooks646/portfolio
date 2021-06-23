@@ -20,14 +20,12 @@
       background-image: url("../../Images//Dirt.png");
       background-size: 100% 100%;
       @include section(20vw);
-      @include flex(space-between);
+      @include flex(flex-start);
 
       .town-castle {
         @include flex(flex-start);
         cursor: pointer;
       }
-
-       
     }
 
     .town-top-right {
@@ -65,8 +63,8 @@
       .dashboard-old-man {
         @include flex(flex-end);
         cursor: pointer;
-       position: relative;
-       bottom: 50px;
+        position: relative;
+        bottom: 50px;
         .dashboard-old-man-hat {
           @include flex(flex-start);
           position: relative;
@@ -105,7 +103,7 @@
             height: 60px;
             width: 40px;
             border-radius: 50%;
-            background-color: #DEB887;
+            background-color: #deb887;
             @include flex(space-evenly);
 
             .dashboard-old-man-eyes {
@@ -147,7 +145,7 @@
               .dashboard-old-man-left-ear {
                 border: solid 0.5px;
                 border-right: none;
-                background-color: #DEB887;;
+                background-color: #deb887;
                 height: 10px;
                 width: 5px;
                 border-radius: 50%;
@@ -166,7 +164,7 @@
               .dashboard-old-man-right-ear {
                 border: solid 0.5px;
                 border-left: none;
-                background-color: #DEB887;;
+                background-color: #deb887;
                 height: 10px;
                 width: 5px;
                 border-radius: 50%;
@@ -197,7 +195,7 @@
         .dashboard-old-man-neck {
           width: 15px;
           height: 5px;
-          background-color: #DEB887;
+          background-color: #deb887;
           position: relative;
           bottom: 93px;
         }
@@ -211,7 +209,7 @@
           @include center(space-between);
 
           .dashboard-old-man-left-arm {
-            background-image: linear-gradient(black 80%, #DEB887 80%);
+            background-image: linear-gradient(black 80%, #deb887 80%);
             width: 10px;
             height: 50px;
             transform: rotate(30deg);
@@ -225,7 +223,7 @@
               border-radius: 25%;
               @include center(space-evenly);
               align-items: flex-end;
-              background-color: #DEB887;;
+              background-color: #deb887;
               position: relative;
               top: 5px;
 
@@ -237,7 +235,7 @@
             }
           }
           .dashboard-old-man-right-arm {
-            background-image: linear-gradient(black 80%, #DEB887 80%);
+            background-image: linear-gradient(black 80%, #deb887 80%);
             width: 10px;
             height: 50px;
             transform: rotate(-30deg);
@@ -250,7 +248,7 @@
               height: 10px;
               @include center(space-evenly);
               align-items: flex-end;
-              background-color: #DEB887;;
+              background-color: #deb887;
               position: relative;
               top: 5px;
               border-radius: 25%;

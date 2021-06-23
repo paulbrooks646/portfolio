@@ -425,3 +425,8 @@
     }
   }
 }
+
+.component-card-button-div {
+  @include center(space-evenly);
+  width: 100%;
+}

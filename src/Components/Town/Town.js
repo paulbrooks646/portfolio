@@ -199,8 +199,8 @@ function Town(props) {
 
   const toggleGoLeft = () => {
     if (props.user.user.last === "home") {
-      setDownLeft(true);
       setDownCharacter(false);
+      setDownLeft(true);
     } else if (props.user.user.last === "stables") {
       setLeftCharacter(false);
       setLeftLeft(true);
@@ -215,8 +215,8 @@ function Town(props) {
 
   const toggleGoRight = () => {
     if (props.user.user.last === "home") {
-      setDownRight(true);
       setDownCharacter(false);
+      setDownRight(true);
     } else if (props.user.user.last === "stables") {
       setLeftCharacter(false);
       setLeftRight(true);
@@ -231,8 +231,8 @@ function Town(props) {
 
   const toggleGoUp = () => {
     if (props.user.user.last === "home") {
-      setDownUp(true);
       setDownCharacter(false);
+      setDownUp(true);
     } else if (props.user.user.last === "stables") {
       setLeftCharacter(false);
       setLeftUp(true);
@@ -247,8 +247,8 @@ function Town(props) {
 
   const toggleGoDown = () => {
     if (props.user.user.last === "home") {
-      setDownDown(true);
       setDownCharacter(false);
+      setDownDown(true);
     } else if (props.user.user.last === "stables") {
       setLeftCharacter(false);
       setLeftDown(true);

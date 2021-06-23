@@ -303,6 +303,7 @@
           .rose-closed {
             display: none;
           }
+
           .coin {
             background-color: gold;
             border-radius: 50%;
@@ -433,7 +434,7 @@
             right: 21px;
             z-index: 1;
             border-radius: 0% 50% 0% 0%;
-             transform: rotate(10deg);
+            transform: rotate(10deg);
           }
         }
 
@@ -528,13 +529,12 @@
             }
           }
         }
-         .gardener-left-arm {
+        .gardener-left-arm {
           position: absolute;
           height: 60px;
           width: 15px;
           background-color: #9b7653;
-          z-index: 7
-          ;
+          z-index: 7;
           bottom: 125px;
           transform: rotate(45deg);
           right: 70px;
@@ -557,7 +557,7 @@
           width: 15px;
           background-color: #9b7653;
           z-index: 7;
-           bottom: 125px;
+          bottom: 125px;
           transform: rotate(-45deg);
           left: 70px;
           display: flex;
@@ -750,7 +750,6 @@
             }
           }
         }
-       
       }
     }
 
