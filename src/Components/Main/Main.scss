@@ -2,130 +2,148 @@
 
 .portfolio-main {
   text-align: center;
-  background-color: #282c34;
+  background-color: rgb(46, 46, 46);
+
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
+  @include flex(flex-start);
 
   .portfolio-introduction {
-    height: 15%;
-    @include flex(center);
+    @include center(space-evenly);
+    background-color: rgb(46, 46, 46);
+    height: 40vh;
 
-    .portfolio-title {
-      font-size: 50px;
-      color: white;
+    .title-div {
+      width: 40%;
+      @include flex(center);
+      height: 80%;
+
+      #main-title {
+        // color: rgba(255, 255, 0, 0.692);
+        height: 35%;
+        @include flex(flex-end);
+      }
+
+      .portfolio-contact {
+        @include flex(space-evenly);
+        position: relative;
+        width: 100%;
+        height: 65%;
+
+        .portfolio-contact-top {
+          @include center(space-evenly);
+          width: 100%;
+        }
+
+        .portfolio-contact-bottom {
+          @include center(space-evenly);
+          width: 100%;
+        }
+      }
     }
+    .portfolio-description-div {
+      width: 40%;
+      @include center(center);
+      border: solid white;
+      height: 80%;
 
-    .portfolio-subtitle {
-      font-size: 25px;
-      color: white;
+      .portfolio-picture-div {
+        @include flex(center);
+        width: 40%;
+        
+
+        .portfolio-picture {
+          height: 250px;
+          width: 200px;
+          border-radius: 50%;
+          background-image: url("../../Images/thumbnail.jpg");
+          background-size: 100%;
+          
+        }
+      }
+      .about-me-div {
+        width: 50%;
+        text-align: center;
+        #portfolio-description {
+        }
+      }
     }
-  }
-
-  .portfolio-h3 {
-    color: red;
-    font-size: 20px;
   }
 
   .portfolio-projects-div {
-    height: 37vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+    height: 55vh;
+    width: 50vw;
+    @include flex(space-evenly);
 
     .portfolio-projects {
       display: flex;
       justify-content: space-evenly;
+      width: 100%;
+      height: 45%;
 
-      .disneyland {
-        background-image: url("../../Images/Disneyland.png");
-        height: 250px;
-        width: 20%;
-        background-size: cover;
-        background-repeat: no-repeat;
-        border-radius: 5%;
-        background-position: center center;
-        position: relative;
-        display: flex;
-        justify-content: center;
-      }
+      .project-link {
+        @include flex(space-evenly);
+        width: 225px;
+        height: 100%;
 
-      .simpsons {
-        background-image: url("../../Images/Simpsons.png");
-        height: 250px;
-        width: 20%;
-        background-size: cover;
-        background-repeat: no-repeat;
-        border-radius: 5%;
-        background-position: center center;
-        position: relative;
-        display: flex;
-        justify-content: center;
-      }
+        #disneyland {
+          background-image: url("../../Images/Disneyland.png");
+          background-size: 100% 100%;
+          height: 225px;
+          width: 225px;
+          border-radius: 20%;
+          position: relative;
+        }
 
-      .css {
-        background-image: url("../../Images/CSS.png");
-        height: 250px;
-        width: 20%;
-        background-size: cover;
-        background-repeat: no-repeat;
-        border-radius: 5%;
-        background-position: center center;
-        position: relative;
-        display: flex;
-        justify-content: center;
-      }
+        #simpsons {
+          background-image: url("../../Images/Simpsons.png");
+          background-size: 100% 100%;
+          height: 225px;
+          width: 225px;
+          border-radius: 20%;
+          position: relative;
+        }
 
-      .codepound {
-        background-image: url("../../Images/Codepound.png");
-        height: 250px;
-        width: 20%;
-        background-size: cover;
-        background-repeat: no-repeat;
-        border-radius: 5%;
-        background-position: center center;
-        position: relative;
-        display: flex;
-        justify-content: center;
+        #css {
+          background-image: url("../../Images/CSS.png");
+          background-size: 100% 100%;
+         height: 225px;
+          width: 225px;
+          border-radius: 20%;
+          position: relative;
+        }
       }
     }
-  }
-
-  .melvins-div {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    top: 55px;
-    
-    .melvins {
-      background-image: url("../../Images/Castle.png");
-      height: 150px;
-      width: 150px;
-      background-size: cover;
-      background-repeat: no-repeat;
-      border-radius: 5%;
-      background-position: center center;
-      position: relative;
+    .melvins-div {
       display: flex;
-      justify-content: center;
+      justify-content: space-evenly;
+      width: 100%;
+      height: 45%;
+
+      .project-link {
+          @include flex(space-evenly);
+        width: 225px;
+        height: 100%;
+
+        #codepound {
+          background-image: url("../../Images/Codepound.png");
+          background-size: 100% 100%;
+          height: 225px;
+          width: 225px;
+          border-radius: 20%;
+          position: relative;
+        }
+        #melvins {
+          background-image: url("../../Images/Castle.png");
+          background-size: 100% 100%;
+          height: 225px;
+          width: 225px;
+          border-radius: 20%;
+          position: relative;
+        }
+      }
     }
   }
 
-  .portfolio-contact {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    position: relative;
-    top: 120px;
-
-    .portfolio-h4 {
-      color: white;
-    }
-  }
-
-  h5 {
-    color: white;
-    position: absolute;
-    bottom: -50px;
-  }
 }
