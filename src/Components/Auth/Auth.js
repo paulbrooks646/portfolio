@@ -67,7 +67,7 @@ function Auth(props) {
   return (
     <div className="auth-main">
       <Typography variant="h2" align="center" className="auth-title">
-        Quest
+        Melvin's Quest
       </Typography>
       <div className={`${account ? "login-card" : "login-card-closed"}`}>
         <Card variant="outlined" className="auth-card">

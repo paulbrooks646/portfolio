@@ -96,7 +96,7 @@ export default function Main() {
           <Link to="/Auth" className="project-link">
             <Card id="melvins"></Card>
             <Typography variant="h6" color="primary">
-              Quest
+              Melvin's Quest
             </Typography>
           </Link>
         </div>
